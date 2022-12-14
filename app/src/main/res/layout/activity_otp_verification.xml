@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Landing.OtpVerificationActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_25"
+            android:layout_marginRight="@dimen/margin_25">
+
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/progress_lay"
+                android:layout_width="@dimen/margin_125"
+                android:layout_height="@dimen/margin_125"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_100">
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="false"
+                    android:background="@drawable/circle_shape"
+                    android:progressDrawable="@drawable/circle_progress_bar"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/progress_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/worksanssemibold"
+                    android:text="60"
+                    android:textColor="@color/red"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_size22"/>
+
+            </RelativeLayout>
+
+            <!--<ImageView
+                android:id="@+id/img_top"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_below="@+id/rel_back"
+                android:layout_marginTop="@dimen/margin_40"
+                android:src="@drawable/otp">
+
+            </ImageView>-->
+
+
+
+            <TextView
+                android:id="@+id/txt_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_otp"
+                android:layout_below="@+id/progress_lay"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_size25"
+                android:layout_marginTop="@dimen/margin_30"/>
+
+            <RelativeLayout
+                android:id="@+id/text_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_welcome">
+
+            <TextView
+                android:id="@+id/txt_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/enter_4_digit_otp_sent_to"
+                android:fontFamily="@font/worksansregular"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14" />
+
+                <TextView
+                    android:id="@+id/mobile_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_below="@id/txt_desc"
+                    android:text="@string/_9096503372"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size14" />
+
+         </RelativeLayout>
+
+            <in.aabhasjindal.otptextview.OtpTextView
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_lay"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_centerHorizontal="true"
+                app:bar_enabled="true"
+                app:bar_height="2dp"
+                app:height="50dp"
+                app:length="6"
+                app:otp_text_size="24dp"
+                app:width="45dp" />
+
+
+            <LinearLayout
+                android:id="@+id/lin_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_below="@+id/otp_view">
+
+                <Button
+                    android:id="@+id/btn_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_48"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/worksansbold"
+                    android:background="@drawable/con_btn"
+                    android:textSize="@dimen/text_size14"
+                    android:text="@string/next"/>
+
+            </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_below="@id/lin_btn">
+
+            <TextView
+                android:id="@+id/otp_not_receive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size13"
+                android:text="@string/didn_t_receive_thr_otp"/>
+
+            <TextView
+                android:id="@+id/btn_resend_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksanssemibold"
+                android:textSize="@dimen/text_size13"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/resend_color"
+                android:text="@string/resend_code"/>
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

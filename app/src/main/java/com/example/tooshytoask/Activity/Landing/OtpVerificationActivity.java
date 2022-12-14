@@ -1,0 +1,279 @@
+package com.example.tooshytoask.Activity.Landing;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Activity.Home.HomeActivity;
+import com.example.tooshytoask.AuthModels.OtpAuthModel;
+import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.SignInResponse;
+import com.example.tooshytoask.R;
+
+import java.util.Random;
+
+import in.aabhasjindal.otptextview.OTPListener;
+import in.aabhasjindal.otptextview.OtpTextView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
+public class OtpVerificationActivity extends AppCompatActivity implements View.OnClickListener {
+
+    String phone = "", user_otp = "";
+    TextView btn_resend_otp, progress_text;
+    Button btn_submit;
+    OtpTextView otpTextView;
+    Context context;
+    Random generator;
+    RelativeLayout rel_back;
+    SPManager spManager;
+    ProgressBar progress_circular;
+    int i;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_otp_verification);
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        context = OtpVerificationActivity.this;
+        spManager = new SPManager(context);
+        generator = new Random();
+        i = 60;
+
+        phone = getIntent().getStringExtra("phone");
+
+        btn_submit = (Button) findViewById(R.id.btn_submit);
+        btn_submit.setOnClickListener(this);
+        btn_resend_otp = (TextView) findViewById(R.id.btn_resend_otp);
+        btn_resend_otp.setOnClickListener(this);
+        progress_text = findViewById(R.id.progress_text);
+        progress_text.setOnClickListener(this);
+        rel_back = (RelativeLayout) findViewById(R.id.rel_back);
+        rel_back.setOnClickListener(this);
+        progress_circular = findViewById(R.id.progress_circular);
+        progress_circular.setProgress(60);
+        progress_circular.setSecondaryProgress(60);
+
+
+        otpTextView = (OtpTextView) findViewById(R.id.otp_view);
+        otpTextView.setOtpListener(new OTPListener() {
+            @Override
+            public void onInteractionListener() {
+
+            }
+
+            @Override
+            public void onOTPComplete(String otp) {
+                user_otp = otp;
+
+            }
+        });
+        countDownTimer();
+    }
+
+    private void countDownTimer() {
+        //Handler handler = new Handler();
+        /*handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (i=>60){
+                    btn_resend_otp.setClickable(false);
+                    //btn_resend_otp.setText(value);
+                    progress_text.setText(""+i);
+                    progress_circular.setProgress(i);
+                    i++;
+                    handler.removeCallbacks(this, 1000);
+
+                } else {
+                    handler.removeCallbacks(this);
+                }
+            }
+        },1000);*/
+
+        new CountDownTimer(60000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                String value = " " + millisUntilFinished / 1000;
+                    btn_resend_otp.setClickable(false);
+                    //btn_resend_otp.setText(value);
+                    progress_text.setText(value);
+                    progress_circular.setProgress(60);
+
+                    //++i;
+                    //progress_circular.postDelayed((Runnable) context, 10000);
+                    //handler.postDelayed((Runnable) context, 1000);
+
+                }
+            @Override
+            public void onFinish() {
+
+                btn_resend_otp.setText(getResources().getString(R.string.resend_otp));
+                btn_resend_otp.setClickable(true);
+                otpTextView.setOTP("");
+                btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.red));
+                //btn_resend_otp.setTextColor(context.getResources().getColor(R.color.black));
+                //OtpNumber="";
+                user_otp = "";
+
+                //Toast.makeText(context,"finish",Toast.LENGTH_SHORT).show();
+
+            }
+        }.start();
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == btn_submit.getId()) {
+
+            Intent intent = new Intent(context, SignUpActivity.class);
+            startActivity(intent);
+
+            /*if (user_otp.equals("")) {
+
+                Toast.makeText(context, "OTP is required", Toast.LENGTH_SHORT).show();
+
+            }
+            else {
+                verifyOTP();
+
+            }*/
+
+        } else if (id == btn_resend_otp.getId()) {
+            //sendOtpApi();
+        } else if (id == rel_back.getId()) {
+            finish();
+        }
+
+    }
+
+    private void sendOtpApi() {
+        //phone = String.valueOf(generator.nextInt(900000) + 100000);
+
+
+        OtpAuthModel model=new OtpAuthModel();
+        model.setPhone(phone);
+        //model.setOtp(user_otp);
+
+        WebServiceModel.getRestApi().sendOtp(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SignInResponse>() {
+                    @Override
+                    public void onNext(SignInResponse signInResponse) {
+
+                        String msg = signInResponse.getMsg();
+
+                        if (msg.equals("OTP Send Successfully.")) {
+
+                            countDownTimer();
+                            Toast.makeText(context, msg,  Toast.LENGTH_SHORT).show();
+
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void verifyOTP() {
+        OtpAuthModel model=new OtpAuthModel();
+        model.setPhone(phone);
+        model.setOtp(user_otp);
+
+
+        WebServiceModel.getRestApi().sendOtp(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SignInResponse>() {
+                    @Override
+                    public void onNext(SignInResponse signInResponse) {
+
+                        String msg = signInResponse.getMsg();
+                        Log.v("--------------",signInResponse.toString());
+
+                        if (msg.equalsIgnoreCase("User not exits.")) {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                            //Open OTP Screen
+                            Intent intent = new Intent(context, SignUpActivity.class);
+                            intent.putExtra("phone", phone);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        } else if(msg.equalsIgnoreCase("Please enter valid OTP."))
+                        {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }else if (signInResponse.getUser_id().length() > 1) {
+                            //open home screen
+
+                            spManager.setFirstName(signInResponse.getFirst_name());
+                            spManager.setLastName(signInResponse.getLast_name());
+                            spManager.setEmail(signInResponse.getEmail());
+                            spManager.setAge(signInResponse.getAge());
+                            spManager.setGender(signInResponse.getGender());
+                            spManager.setPhone(signInResponse.getPhone());
+                            spManager.setUserId(signInResponse.getUser_id());
+                            spManager.setTstaLoginStatus("true");
+                            spManager.setUserPhoto(signInResponse.getProfile_pic());
+
+
+                            Intent intent = new Intent(context, HomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+}

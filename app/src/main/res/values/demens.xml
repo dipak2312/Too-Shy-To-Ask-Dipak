@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">51dp</dimen>
+
+
+    <dimen name="dp_150">150.0dp</dimen>
+    <dimen name="default_text_size">16.0sp</dimen>
+    <dimen name="text_size5">5.0sp</dimen>
+    <dimen name="text_size6">6.0sp</dimen>
+    <dimen name="text_size7">7.0sp</dimen>
+    <dimen name="text_size8">8.0sp</dimen>
+    <dimen name="text_size9">9.0sp</dimen>
+    <dimen name="text_size10">10.0sp</dimen>
+    <dimen name="text_size11">11.0sp</dimen>
+    <dimen name="text_size12">12.0sp</dimen>
+    <dimen name="text_size13">13.0sp</dimen>
+    <dimen name="text_size14">14.0sp</dimen>
+    <dimen name="text_size15">15.0sp</dimen>
+    <dimen name="text_size16">16.0sp</dimen>
+    <dimen name="text_size17">17.5sp</dimen>
+    <dimen name="text_size18">18.0sp</dimen>
+    <dimen name="text_size20">20.0sp</dimen>
+    <dimen name="text_size22">22.0sp</dimen>
+    <dimen name="text_size24">24.0sp</dimen>
+    <dimen name="text_size26">26.0sp</dimen>
+    <dimen name="text_size28">28.0sp</dimen>
+    <dimen name="text_size30">30.0sp</dimen>
+    <dimen name="text_size25">25.0sp</dimen>
+    <dimen name="text_size72">72.0sp</dimen>
+    <dimen name="welcome_screen_default_padding">16.0dp</dimen>
+    <dimen name="padding_2">2.0dp</dimen>
+    <dimen name="padding_5">5.0dp</dimen>
+    <dimen name="padding_12">12.0dp</dimen>
+    <dimen name="padding_15">15.0dp</dimen>
+    <dimen name="padding_10">10.0dp</dimen>
+    <dimen name="padding_20">20.0dp</dimen>
+    <dimen name="padding_25">25.0dp</dimen>
+    <dimen name="padding_30">30.0dp</dimen>
+    <dimen name="padding_8">8.0dp</dimen>
+    <dimen name="editText_default_padding">10.0dp</dimen>
+    <dimen name="margin_5">5.0dp</dimen>
+    <dimen name="margin_8">8.0dp</dimen>
+    <dimen name="margin_6">6.0dp</dimen>
+    <dimen name="margin_20">20.0dp</dimen>
+    <dimen name="margin_18">18.0dp</dimen>
+    <dimen name="margin_17">17.0dp</dimen>
+    <dimen name="margin_22">22.0dp</dimen>
+    <dimen name="margin_25">25.0dp</dimen>
+    <dimen name="margin_16">16.0dp</dimen>
+    <dimen name="margin_30">30.0dp</dimen>
+    <dimen name="margin_33">33.0dp</dimen>
+    <dimen name="margin_40">40.0dp</dimen>
+    <dimen name="margin_45">45.0dp</dimen>
+    <dimen name="margin_48">48.0dp</dimen>
+    <dimen name="margin_44">44.0dp</dimen>
+    <dimen name="margin_90">90.0dp</dimen>
+    <dimen name="margin_100">100.0dp</dimen>
+    <dimen name="margin_125">125.0dp</dimen>
+    <dimen name="margin_80">80.0dp</dimen>
+    <dimen name="margin_172">172.0dp</dimen>
+    <dimen name="margin_160">160.0dp</dimen>
+    <dimen name="margin_35">35.0dp</dimen>
+    <dimen name="margin_15">15.0dp</dimen>
+    <dimen name="margin_10">10.0dp</dimen>
+    <dimen name="margin_12">12.0dp</dimen>
+    <dimen name="margin_14">14.0dp</dimen>
+    <dimen name="margin_3">3.0dp</dimen>
+    <dimen name="ed_height">44.0dp</dimen>
+    <dimen name="margin_50">50.0dp</dimen>
+    <dimen name="margin_55">55.0dp</dimen>
+    <dimen name="margin_60">60.0dp</dimen>
+    <dimen name="margin_65">65.0dp</dimen>
+    <dimen name="margin_70">70.0dp</dimen>
+    <dimen name="margin_75">75.0dp</dimen>
+    <dimen name="cir_tv">45.0dp</dimen>
+    <dimen name="wel_button">150.0dp</dimen>
+    <dimen name="dash_ds_hiegt">50.0dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

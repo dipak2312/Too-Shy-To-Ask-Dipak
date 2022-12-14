@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.Landing.SignInActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_15">
+
+            <ImageView
+                android:id="@+id/img_top"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="@dimen/margin_70"
+                android:src="@drawable/create_account"/>
+
+            <TextView
+                android:id="@+id/txt_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_top"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/margin_40"
+                android:fontFamily="@font/worksansregular"
+                android:text="@string/create_your_account"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size24" />
+
+            <TextView
+                android:id="@+id/txt_signin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_welcome"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:fontFamily="@font/worksansregular"
+                android:text="@string/login_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14" />
+
+        <RelativeLayout
+            android:id="@+id/mobile_lay"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@drawable/view_background"
+            android:layout_below="@id/txt_signin"
+            android:layout_marginTop="@dimen/margin_30" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_65"
+                android:background="@drawable/background">
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number"
+                android:fontFamily="@font/worksanssemibold"
+                android:textColor="@color/orange"
+                android:paddingStart="@dimen/margin_15"
+                android:textSize="@dimen/text_size12"
+                android:paddingEnd="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"/>
+
+
+                <EditText
+                    android:id="@+id/etMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_48"
+                    android:hint="@string/_10_digit_mobile_number"
+                    android:layout_below="@+id/phone"
+                    android:paddingStart="@dimen/margin_15"
+                    android:fontFamily="@font/worksansregular"
+                    android:maxLength="10"
+                    android:paddingEnd="@dimen/margin_10"
+                    android:textColorHighlight="@color/teal_200"
+                    android:importantForAutofill="yes"
+                    android:background="@android:color/transparent"
+                    android:textSize="@dimen/text_size15"
+                    android:inputType="number"/>
+
+            </RelativeLayout>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/contiune"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:layout_below="@+id/mobile_lay"
+                android:layout_marginTop="@dimen/margin_30">
+
+                <Button
+                    android:id="@+id/btn_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_48"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/worksansbold"
+                    android:text="@string/continue_btn"
+                    android:background="@drawable/con_btn"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size14" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contiune">
+
+                <TextView
+                    android:id="@+id/tsta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:textSize="@dimen/text_size13"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/text_red"
+                    android:text="@string/by_singing_in_you_agree_to_tsta_s"
+                    android:layout_centerHorizontal="true"/>
+
+                <LinearLayout
+                    android:id="@+id/terms_conditions_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_below="@id/tsta">
+
+                <TextView
+                    android:id="@+id/terms_conditions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size13"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:fontFamily="@font/worksansmedium"
+                    android:textColor="@color/red"
+                    android:text="@string/terms_and_conditions"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size13"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:layout_marginStart="@dimen/margin_3"
+                        android:layout_marginEnd="@dimen/margin_3"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/text_red"
+                        android:text="@string/and"/>
+
+                    <TextView
+                        android:id="@+id/privacy_policy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size13"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:fontFamily="@font/worksansmedium"
+                        android:textColor="@color/red"
+                        android:text="@string/privacy_policy"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/or"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/terms_conditions_lay"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/text_size15"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:textColor="@color/black"
+                    android:text="@string/or"/>
+
+                <TextView
+                    android:id="@+id/guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/or"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/text_size15"
+                    android:fontFamily="@font/worksanssemibolditalic"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:textColor="@color/red"
+                    android:text="@string/continue_as_guest"/>
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
