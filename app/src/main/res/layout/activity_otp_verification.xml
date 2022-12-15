@@ -5,20 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activity.Landing.OtpVerificationActivity">
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/margin_25"
-            android:layout_marginRight="@dimen/margin_25">
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20">
 
 
             <RelativeLayout
@@ -36,19 +30,21 @@
 
             <RelativeLayout
                 android:id="@+id/progress_lay"
-                android:layout_width="@dimen/margin_125"
-                android:layout_height="@dimen/margin_125"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_100"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_100">
 
-                <ProgressBar
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
                     android:id="@+id/progress_circular"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:indeterminate="false"
-                    android:background="@drawable/circle_shape"
-                    android:progressDrawable="@drawable/circle_progress_bar"
-                    android:textAlignment="center" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:cpb_background_progressbar_color="@color/resend_color"
+                    app:cpb_background_progressbar_width="@dimen/margin_10"
+                    app:cpb_progress_direction="to_right"
+                    app:cpb_progressbar_color="@color/progressbar_color"
+                    app:cpb_progressbar_width="@dimen/margin_10" />
 
                 <TextView
                     android:id="@+id/progress_text"
@@ -56,10 +52,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/worksanssemibold"
-                    android:text="60"
-                    android:textColor="@color/red"
                     android:gravity="center"
-                    android:textSize="@dimen/text_size22"/>
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size20" />
 
             </RelativeLayout>
 
@@ -111,14 +107,38 @@
                     android:layout_marginTop="@dimen/margin_5"
                     android:layout_below="@id/txt_desc"
                     android:text="@string/_9096503372"
-                    android:fontFamily="@font/worksansregular"
+                    android:fontFamily="@font/worksanssemibold"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size14" />
 
          </RelativeLayout>
 
-            <in.aabhasjindal.otptextview.OtpTextView
+            <com.chaos.view.PinView
+                android:id="@+id/otp_view"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_lay"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_30"
+                android:inputType="number"
+                android:itemBackground="@color/grey"
+                android:cursorVisible="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size16"
+                android:fontFamily="@font/worksansbold"
+                app:hideLineWhenFilled="false"
+                app:itemCount="4"
+                app:itemHeight="@dimen/margin_48"
+                android:password="false"
+                app:itemRadius="5dp"
+                app:itemSpacing="@dimen/margin_20"
+                app:itemWidth="@dimen/margin_48"
+                app:lineColor="@color/red"
+                app:lineWidth="1dp"/>
+
+            <!--<in.aabhasjindal.otptextview.OtpTextView
                 android:id="@+id/otp_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +150,7 @@
                 app:height="50dp"
                 app:length="6"
                 app:otp_text_size="24dp"
-                app:width="45dp" />
+                app:width="45dp" />-->
 
 
             <LinearLayout
@@ -181,6 +201,5 @@
         </RelativeLayout>
 
         </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

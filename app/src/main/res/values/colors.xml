@@ -11,6 +11,8 @@
     <color name="red">#FC797D</color>
     <color name="text_red">#7B7B7B</color>
     <color name="resend_color">#FEE5E4</color>
+    <color name="progressbar_color">#FD8A79</color>
+    <color name="grey">#DCD9D9</color>
 
 
     <color name="tsta_setting_fent">#16bac2</color>

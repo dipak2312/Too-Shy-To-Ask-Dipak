@@ -3,10 +3,17 @@ package com.example.tooshytoask.Activity.Landing;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
+import android.text.method.PasswordTransformationMethod;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -16,15 +23,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
+import com.chaos.view.PinView;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.R;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
-import java.util.Random;
 
 import in.aabhasjindal.otptextview.OTPListener;
 import in.aabhasjindal.otptextview.OtpTextView;
@@ -37,13 +46,11 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     String phone = "", user_otp = "";
     TextView btn_resend_otp, progress_text;
     Button btn_submit;
-    OtpTextView otpTextView;
+    PinView otpTextView;
     Context context;
-    Random generator;
     RelativeLayout rel_back;
     SPManager spManager;
-    ProgressBar progress_circular;
-    int i;
+    CircularProgressBar progress_circular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +61,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
         context = OtpVerificationActivity.this;
         spManager = new SPManager(context);
-        generator = new Random();
-        i = 60;
 
         phone = getIntent().getStringExtra("phone");
 
@@ -68,11 +73,12 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         rel_back = (RelativeLayout) findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         progress_circular = findViewById(R.id.progress_circular);
-        progress_circular.setProgress(60);
-        progress_circular.setSecondaryProgress(60);
+        progressBar();
 
+        otpTextView = findViewById(R.id.otp_view);
+        pinView();
 
-        otpTextView = (OtpTextView) findViewById(R.id.otp_view);
+       /* otpTextView = (OtpTextView) findViewById(R.id.otp_view);
         otpTextView.setOtpListener(new OTPListener() {
             @Override
             public void onInteractionListener() {
@@ -84,42 +90,66 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 user_otp = otp;
 
             }
-        });
+        });*/
         countDownTimer();
     }
 
-    private void countDownTimer() {
-        //Handler handler = new Handler();
-        /*handler.postDelayed(new Runnable() {
+    private void pinView() {
+
+        otpTextView.setTextColor(
+                ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
+        otpTextView.setTextColor(
+                ResourcesCompat.getColorStateList(getResources(), R.color.black, getTheme()));
+        otpTextView.setLineColor(
+                ResourcesCompat.getColor(getResources(), R.color.red, getTheme()));
+        otpTextView.setLineColor(
+                ResourcesCompat.getColorStateList(getResources(), R.color.line_colors, getTheme()));
+        otpTextView.setAnimationEnable(false);// start animation when adding text
+
+        otpTextView.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public void run() {
-                if (i=>60){
-                    btn_resend_otp.setClickable(false);
-                    //btn_resend_otp.setText(value);
-                    progress_text.setText(""+i);
-                    progress_circular.setProgress(i);
-                    i++;
-                    handler.removeCallbacks(this, 1000);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                } else {
-                    handler.removeCallbacks(this);
-                }
             }
-        },1000);*/
 
-        new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        otpTextView.setAnimationEnable(true);
+        otpTextView.setItemBackground(getResources().getDrawable(R.drawable.pin_border));
+        otpTextView.setItemBackgroundResources(R.drawable.pin_border);
+        otpTextView.setHideLineWhenFilled(false);
+
+        otpTextView.setTransformationMethod(new PasswordTransformationMethod());
+    }
+
+    private void progressBar() {
+        progress_circular.setProgress(0f);
+        progress_circular.setProgressMax(60f);
+        progress_circular.setProgressWithAnimation( 60f, 10000L);
+    }
+
+    private void countDownTimer() {
+
+
+        new CountDownTimer(10000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 String value = " " + millisUntilFinished / 1000;
                     btn_resend_otp.setClickable(false);
-                    //btn_resend_otp.setText(value);
+                    btn_resend_otp.setText("RESEND IN"+ millisUntilFinished / 1000);
+                    btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.resend_color));
                     progress_text.setText(value);
-                    progress_circular.setProgress(60);
-
-                    //++i;
-                    //progress_circular.postDelayed((Runnable) context, 10000);
-                    //handler.postDelayed((Runnable) context, 1000);
+                    progress_text.setVisibility(View.VISIBLE);
 
                 }
             @Override
@@ -127,13 +157,10 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                 btn_resend_otp.setText(getResources().getString(R.string.resend_otp));
                 btn_resend_otp.setClickable(true);
-                otpTextView.setOTP("");
+                otpTextView.setText("");
                 btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.red));
-                //btn_resend_otp.setTextColor(context.getResources().getColor(R.color.black));
-                //OtpNumber="";
+                progress_text.setVisibility(View.GONE);
                 user_otp = "";
-
-                //Toast.makeText(context,"finish",Toast.LENGTH_SHORT).show();
 
             }
         }.start();
@@ -159,7 +186,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
             }*/
 
         } else if (id == btn_resend_otp.getId()) {
-            //sendOtpApi();
+            progressBar();
+            countDownTimer();
         } else if (id == rel_back.getId()) {
             finish();
         }
