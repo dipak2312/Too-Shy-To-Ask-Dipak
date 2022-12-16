@@ -1,22 +1,14 @@
 package com.example.tooshytoask.Activity.Landing;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
-import android.text.method.PasswordTransformationMethod;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,9 +26,6 @@ import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
-
-import in.aabhasjindal.otptextview.OTPListener;
-import in.aabhasjindal.otptextview.OtpTextView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -51,8 +40,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     RelativeLayout rel_back;
     SPManager spManager;
     CircularProgressBar progress_circular;
-    public static final int resend_color = -16777216;
-    public static final int progressbar_color = -16776961;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
