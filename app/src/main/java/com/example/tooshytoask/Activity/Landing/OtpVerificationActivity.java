@@ -51,6 +51,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     RelativeLayout rel_back;
     SPManager spManager;
     CircularProgressBar progress_circular;
+    public static final int resend_color = -16777216;
+    public static final int progressbar_color = -16776961;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +137,12 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         progress_circular.setProgress(0f);
         progress_circular.setProgressMax(60f);
         progress_circular.setProgressWithAnimation( 60f, 10000L);
+        progress_circular.setProgressBarColor(Color.GRAY);
+        progress_circular.setProgressBarColorStart(Color.RED);
+        progress_circular.setProgressBarColorEnd(Color.RED);
+        progress_circular.setBackgroundProgressBarColor(Color.GRAY);
+        progress_circular.setBackgroundProgressBarColorStart(Color.GRAY);
+        progress_circular.setBackgroundProgressBarColorEnd(Color.GRAY);
     }
 
     private void countDownTimer() {
@@ -160,6 +168,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 otpTextView.setText("");
                 btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.red));
                 progress_text.setVisibility(View.GONE);
+                progress_circular.setProgressBarColor(Color.GRAY);
+                progress_circular.setProgressBarColorStart(Color.GRAY);
+                progress_circular.setProgressBarColorEnd(Color.GRAY);
                 user_otp = "";
 
             }
