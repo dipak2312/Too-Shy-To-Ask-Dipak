@@ -138,11 +138,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         progress_circular.setProgressMax(60f);
         progress_circular.setProgressWithAnimation( 60f, 10000L);
         progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
-        progress_circular.setProgressBarColorStart(ContextCompat.getColor(context, R.color.progressbar_color));
-        progress_circular.setProgressBarColorEnd(ContextCompat.getColor(context, R.color.progressbar_color));
         progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
-        progress_circular.setBackgroundProgressBarColorStart(ContextCompat.getColor(context, R.color.resend_color));
-        progress_circular.setBackgroundProgressBarColorEnd(ContextCompat.getColor(context, R.color.resend_color));
     }
 
     private void countDownTimer() {
@@ -169,8 +165,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.red));
                 progress_text.setVisibility(View.GONE);
                 progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
-                progress_circular.setProgressBarColorStart(ContextCompat.getColor(context, R.color.resend_color));
-                progress_circular.setProgressBarColorEnd(ContextCompat.getColor(context, R.color.resend_color));
                 user_otp = "";
 
             }
