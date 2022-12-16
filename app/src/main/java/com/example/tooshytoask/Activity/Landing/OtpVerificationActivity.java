@@ -130,19 +130,19 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         otpTextView.setItemBackgroundResources(R.drawable.pin_border);
         otpTextView.setHideLineWhenFilled(false);
 
-        otpTextView.setTransformationMethod(new PasswordTransformationMethod());
+        //otpTextView.setTransformationMethod(new PasswordTransformationMethod());
     }
 
     private void progressBar() {
         progress_circular.setProgress(0f);
         progress_circular.setProgressMax(60f);
         progress_circular.setProgressWithAnimation( 60f, 10000L);
-        progress_circular.setProgressBarColor(Color.GRAY);
-        progress_circular.setProgressBarColorStart(Color.RED);
-        progress_circular.setProgressBarColorEnd(Color.RED);
-        progress_circular.setBackgroundProgressBarColor(Color.GRAY);
-        progress_circular.setBackgroundProgressBarColorStart(Color.GRAY);
-        progress_circular.setBackgroundProgressBarColorEnd(Color.GRAY);
+        progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
+        progress_circular.setProgressBarColorStart(ContextCompat.getColor(context, R.color.progressbar_color));
+        progress_circular.setProgressBarColorEnd(ContextCompat.getColor(context, R.color.progressbar_color));
+        progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
+        progress_circular.setBackgroundProgressBarColorStart(ContextCompat.getColor(context, R.color.resend_color));
+        progress_circular.setBackgroundProgressBarColorEnd(ContextCompat.getColor(context, R.color.resend_color));
     }
 
     private void countDownTimer() {
@@ -168,9 +168,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 otpTextView.setText("");
                 btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.red));
                 progress_text.setVisibility(View.GONE);
-                progress_circular.setProgressBarColor(Color.GRAY);
-                progress_circular.setProgressBarColorStart(Color.GRAY);
-                progress_circular.setProgressBarColorEnd(Color.GRAY);
+                progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
+                progress_circular.setProgressBarColorStart(ContextCompat.getColor(context, R.color.resend_color));
+                progress_circular.setProgressBarColorEnd(ContextCompat.getColor(context, R.color.resend_color));
                 user_otp = "";
 
             }
