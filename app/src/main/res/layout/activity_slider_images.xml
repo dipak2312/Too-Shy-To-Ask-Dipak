@@ -9,11 +9,43 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/margin_80"
-        android:paddingEnd="@dimen/margin_80">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_100">
 
     </androidx.viewpager2.widget.ViewPager2>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:fontFamily="@font/worksansregular"
+        android:layout_below="@id/view_pager_img"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_dec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/view_pager_headline"
+        android:fontFamily="@font/worksansregular"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/indicator_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_125"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </LinearLayout>
 
 </RelativeLayout>

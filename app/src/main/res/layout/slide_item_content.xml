@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_slide"
+    <TextView
+        android:id="@+id/view_pager_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:riv_corner_radius="@dimen/margin_12"
-        android:src="@drawable/welcome"/>
-
-    <!--<TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
+        android:text="Hi"
         android:fontFamily="@font/worksansregular"
-        android:layout_below="@id/img_slide"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/text_size25"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/margin_50"/>
 
     <TextView
+        android:id="@+id/view_pager_dec"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:text=""
         android:fontFamily="@font/worksansregular"
-        android:layout_below="@id/title"
+        android:layout_below="@id/view_pager_title"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:textSize="@dimen/text_size15"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/margin_20"/>-->
+        android:layout_marginTop="@dimen/margin_20"/>
 
 </RelativeLayout>

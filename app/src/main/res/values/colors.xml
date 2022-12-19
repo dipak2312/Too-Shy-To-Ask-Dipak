@@ -16,4 +16,8 @@
 
 
     <color name="tsta_setting_fent">#16bac2</color>
+
+    /indicator color
+    <color name="inactive">#767676</color>
+    <color name="active">#FC797D</color>
 </resources>

@@ -26,5 +26,17 @@
     <string name="user">User</string>
     <string name="parent">Parent</string>
 
+    //Headings
+    <string name="heading_one">Nunc at elementum</string>
+    <string name="heading_two">Nunc at elementum</string>
+    <string name="heading_three">Nunc at elementum</string>
+    <string name="heading_fourth">Nunc at elementum</string>
+
+    //Description
+    <string name="desc_one">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</string>
+    <string name="desc_two">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</string>
+    <string name="desc_three">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</string>
+    <string name="desc_fourth">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</string>
+
 
 </resources>

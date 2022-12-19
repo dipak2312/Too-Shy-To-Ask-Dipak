@@ -1,13 +1,17 @@
 package com.example.tooshytoask.Adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tooshytoask.Models.SliderItem;
+import com.example.tooshytoask.Models.SliderText;
+import com.example.tooshytoask.R;
 import com.example.tooshytoask.databinding.SlideItemImgBinding;
 
 import java.util.List;
@@ -25,16 +29,17 @@ public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.
     @NonNull
     @Override
     public SliderImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        SlideItemImgBinding binding = SlideItemImgBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
-        return new ViewHolder(binding);
+        //SlideItemImgBinding binding = SlideItemImgBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.slide_item_img,parent,false));
+        //return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SliderImageAdapter.ViewHolder holder, int position) {
-        holder.binding.imgSlide.setImageResource(sliderItems.get(position).getImage());
-        if (position == sliderItems.size() - 2){
+        holder.setImage(sliderItems.get(position));
+        /*if (position == sliderItems.size() - 2){
             viewPager2.post(sliderRunnable);
-        }
+        }*/
 
     }
 
@@ -44,27 +49,26 @@ public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        SlideItemImgBinding binding;
+        ImageView img_slide;
 
-        public ViewHolder(@NonNull SlideItemImgBinding slideItemImgBinding) {
-            super(slideItemImgBinding.getRoot());
-            binding = slideItemImgBinding;
-            //binding.imgSlide;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            img_slide = itemView.findViewById(R.id.img_slide);
 
         }
 
-        /*void setImage(SliderItem sliderItem){
+        void setImage(SliderItem sliderItem){
 
             //if we want to use Glide and set image from API we can set here
-            imgSlide.setImageResource(sliderItem.getImage());
-        }*/
+            img_slide.setImageResource(sliderItem.getImage());
+        }
     }
 
-    private Runnable sliderRunnable = new Runnable() {
+    /*private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
             sliderItems.addAll(sliderItems);
             notifyDataSetChanged();
         }
-    };
+    };*/
 }
