@@ -8,7 +8,7 @@
         android:id="@+id/view_pager_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi"
+        android:text=""
         android:fontFamily="@font/worksansregular"
         android:gravity="center"
         android:layout_centerHorizontal="true"

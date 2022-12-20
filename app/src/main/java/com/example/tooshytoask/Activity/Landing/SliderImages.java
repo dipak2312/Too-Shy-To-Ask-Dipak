@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CancellationSignal;
@@ -13,6 +14,9 @@ import android.os.Handler;
 import android.view.ScrollCaptureCallback;
 import android.view.ScrollCaptureSession;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,23 +26,25 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SliderItem;
 import com.example.tooshytoask.Models.SliderText;
 import com.example.tooshytoask.R;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class SliderImages extends AppCompatActivity {
+public class SliderImages extends AppCompatActivity implements View.OnClickListener {
     //ActivitySliderImagesBinding binding;
     SliderImageAdapter adapter;
     SliderTextAdapter adapter2;
     List<SliderItem> sliderItems;
     List<SliderText> sliderText;
-    ViewPager2 viewPager2, viewPager3, viewPager4;
-    LinearLayout mBarLayout;
+    ViewPager2 viewPager2, viewPager3;
+    TextView skip_btn;
+    ImageButton next_btn;
+    DotsIndicator mBarLayout;
+    LinearLayout lin_content, lin_content1, lin_content2, lin_content3;
     Handler handler = new Handler();
     TextView[] bars;
-    TextView[] headline;
-    TextView dec, heading;
     Context context;
     SPManager spManager;
 
@@ -52,13 +58,16 @@ public class SliderImages extends AppCompatActivity {
         spManager = new SPManager(context);
 
         viewPager2 = findViewById(R.id.view_pager_img);
-        viewPager3= findViewById(R.id.view_pager_headline);
-        mBarLayout = (LinearLayout) findViewById(R.id.indicator_layout);
-
-
-        //adapter = new SliderImageAdapter();
-
-
+        //viewPager3= findViewById(R.id.view_pager_headline);
+        mBarLayout = findViewById(R.id.indicator_layout);
+        lin_content = findViewById(R.id.lin_content);
+        lin_content1 = findViewById(R.id.lin_content1);
+        lin_content2 = findViewById(R.id.lin_content2);
+        lin_content3 = findViewById(R.id.lin_content3);
+        next_btn = findViewById(R.id.next_btn);
+        next_btn.setOnClickListener(this);
+        skip_btn = findViewById(R.id.skip_btn);
+        skip_btn.setOnClickListener(this);
 
         //setting slider ViewPager Adapter
         sliderItems = new ArrayList<>();
@@ -67,49 +76,97 @@ public class SliderImages extends AppCompatActivity {
         sliderItems.add(new SliderItem(R.drawable.welcome));
         adapter = new SliderImageAdapter(sliderItems, viewPager2);
         viewPager2.setAdapter(adapter);
+        //mBarLayout.setViewPager2(viewPager2);
         viewPager2.setClipChildren(false);
         viewPager2.setClipToPadding(false);
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_ALWAYS);
 
-        sliderText = new ArrayList<>();
+        /*sliderText = new ArrayList<>();
         sliderText.add(new SliderText("Nunc at elementum","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod."));
         sliderText.add(new SliderText("Nunc at elementum","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod."));
         sliderText.add(new SliderText("Nunc at elementum","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod."));
         adapter2 = new SliderTextAdapter(sliderText, viewPager3);
-        viewPager3.setAdapter(adapter2);
+        viewPager3.setAdapter(adapter2);*/
 
-       /* viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        //mBarLayout.setViewPager2(viewPager3);
+
+        //viewPager2.addView(viewPager3);
+
+
+        AddView();
+        //setUpindicator(0);
+    }
+
+    private void AddView() {
+        //adapter=new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new SliderImageAdapter(sliderItems, viewPager2);
+        viewPager2.setAdapter(adapter);
+
+
+        mBarLayout.setViewPager2(viewPager2);
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (getitem(0) < 1) {
+                    lin_content1.setVisibility(View.VISIBLE);
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                    lin_content.startAnimation(animation);
+                    lin_content2.setVisibility(View.GONE);
+                    lin_content3.setVisibility(View.GONE);
+
+                } else if (getitem(0) < 2) {
+                    lin_content2.setVisibility(View.VISIBLE);
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                    lin_content.startAnimation(animation);
+                    lin_content1.setVisibility(View.GONE);
+                    lin_content3.setVisibility(View.GONE);
+                } else if (getitem(0) < 3) {
+                    lin_content3.setVisibility(View.VISIBLE);
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                    lin_content.startAnimation(animation);
+                    lin_content1.setVisibility(View.GONE);
+                    lin_content2.setVisibility(View.GONE);
+
+
+                }
+
+            }
+
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                handler.removeCallbacks(sliderRunnable);
-                //handler.postDelayed(sliderRunnable, 2000);
             }
-        });*/
 
-        setUpindicator(0);
-        scroll();
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+
     }
 
-    public void setUpindicator(int position){
+    public void setUpindicator(int position) {
 
         bars = new TextView[3];
+        //mBarLayout.setViewPager2(viewPager2);
         mBarLayout.removeAllViews();
 
-        for (int i = 0 ; i < bars.length ; i++){
+        for (int i = 0; i < bars.length; i++) {
 
             bars[i] = new TextView(this);
             bars[i].setText("|");
-            bars[i].setTextSize(3,8);
+            bars[i].setTextSize(10);
             bars[i].setWidth(20);
-            bars[i].setTextColor(getResources().getColor(R.color.inactive,getApplicationContext().getTheme()));
+            bars[i].setTextColor(getResources().getColor(R.color.inactive, getApplicationContext().getTheme()));
             mBarLayout.addView(bars[i]);
 
         }
 
-        bars[position].setTextColor(getResources().getColor(R.color.active,getApplicationContext().getTheme()));
-        bars[position].setTextSize(3,14);
+        bars[position].setTextColor(getResources().getColor(R.color.active, getApplicationContext().getTheme()));
+        bars[position].setTextSize(20);
         bars[position].setWidth(20);
 
     }
@@ -132,28 +189,21 @@ public class SliderImages extends AppCompatActivity {
         return viewPager2.getCurrentItem() + i;
     }
 
-    public void scroll(){
-        ScrollCaptureCallback scrollCaptureCallback = new ScrollCaptureCallback() {
-            @Override
-            public void onScrollCaptureSearch(@NonNull CancellationSignal cancellationSignal, @NonNull Consumer<Rect> consumer) {
 
-            }
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == next_btn.getId()) {
+            viewPager2.setCurrentItem(getitem(1), true);
+        } else {
+            Intent intent = new Intent(context, SignInActivity.class);
+            startActivity(intent);
+            finish();
+        } if (id == skip_btn.getId()){
+            Intent intent = new Intent(context, SignInActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        }
 
-            @Override
-            public void onScrollCaptureStart(@NonNull ScrollCaptureSession scrollCaptureSession, @NonNull CancellationSignal cancellationSignal, @NonNull Runnable runnable) {
-                    viewPager3.setCurrentItem(getitem(-1),true);
-            }
-
-            @Override
-            public void onScrollCaptureImageRequest(@NonNull ScrollCaptureSession scrollCaptureSession, @NonNull CancellationSignal cancellationSignal, @NonNull Rect rect, @NonNull Consumer<Rect> consumer) {
-
-            }
-
-            @Override
-            public void onScrollCaptureEnd(@NonNull Runnable runnable) {
-
-            }
-        };
     }
-
-}

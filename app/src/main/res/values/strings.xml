@@ -28,15 +28,13 @@
 
     //Headings
     <string name="heading_one">Nunc at elementum</string>
-    <string name="heading_two">Nunc at elementum</string>
-    <string name="heading_three">Nunc at elementum</string>
-    <string name="heading_fourth">Nunc at elementum</string>
+    <string name="heading_two">Sagar</string>
+    <string name="heading_three">Dipak</string>
 
     //Description
     <string name="desc_one">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</string>
-    <string name="desc_two">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</string>
-    <string name="desc_three">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</string>
-    <string name="desc_fourth">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</string>
+    <string name="desc_two">how are you guys</string>
+    <string name="desc_three">where are you from</string>
 
 
 </resources>

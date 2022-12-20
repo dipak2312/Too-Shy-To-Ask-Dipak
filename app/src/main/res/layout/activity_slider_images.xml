@@ -16,17 +16,118 @@
 
     </androidx.viewpager2.widget.ViewPager2>
 
-    <androidx.viewpager2.widget.ViewPager2
+    <LinearLayout
+        android:id="@+id/lin_content"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_pager_img"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+
+
+    <LinearLayout
+        android:id="@+id/lin_content1"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size25"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="@string/heading_one"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc_one"
+            android:gravity="center"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_20"
+            android:textSize="@dimen/text_size15"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_content2"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_below="@id/view_pager_img"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size25"
+            android:textColor="@color/black"
+            android:text="@string/heading_two"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc_two"
+            android:gravity="center"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_20"
+            android:textSize="@dimen/text_size15"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_content3"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_pager_img"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size25"
+            android:textColor="@color/black"
+            android:text="@string/heading_three"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc_three"
+            android:gravity="center"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_20"
+            android:textSize="@dimen/text_size15"/>
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <!--<androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:clickable="false"
         android:fontFamily="@font/worksansregular"
         android:layout_below="@id/view_pager_img"
         android:layout_marginTop="@dimen/margin_20"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"/>-->
 
-    <androidx.viewpager2.widget.ViewPager2
+    <!--<androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_dec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,9 +135,56 @@
         android:layout_below="@id/view_pager_headline"
         android:fontFamily="@font/worksansregular"
         android:layout_marginTop="@dimen/margin_20"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"/>-->
 
-    <LinearLayout
+
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/indicator_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="@color/inactive"
+        app:dotsCornerRadius="5dp"
+        app:dotsSize="@dimen/margin_8"
+        app:dotsSpacing="2dp"
+        app:dotsWidthFactor="3"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_125"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:selectedDotColor="@color/active"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_45"
+        android:layout_marginStart="@dimen/margin_35"
+        android:layout_marginEnd="@dimen/margin_25">
+        
+        <TextView
+            android:id="@+id/skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKIP"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/worksansbold"
+            android:textSize="@dimen/text_size12"
+            android:textColor="#A2A2A2"/>
+
+
+        <ImageButton
+            android:id="@+id/next_btn"
+            android:layout_width="@dimen/margin_40"
+            android:layout_height="@dimen/margin_40"
+            android:background="@drawable/circle_button"
+            android:src="@drawable/arrow_right"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <!--<LinearLayout
         android:id="@+id/indicator_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,8 +192,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_125"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"/>-->
 
-    </LinearLayout>
 
 </RelativeLayout>

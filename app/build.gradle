@@ -79,5 +79,8 @@ dependencies {
     implementation 'com.github.OzcanAlasalvar:DatePicker:1.0.4'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    //implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
+    implementation 'com.tbuonomo:dotsindicator:4.3'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
     //implementation 'id.zelory:compressor:2.1.0'
 }
