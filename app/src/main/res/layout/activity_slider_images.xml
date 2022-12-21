@@ -9,14 +9,16 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_100">
 
     </androidx.viewpager2.widget.ViewPager2>
 
-    <LinearLayout
+
+
+    <!--<LinearLayout
         android:id="@+id/lin_content"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
@@ -28,6 +30,7 @@
     <LinearLayout
         android:id="@+id/lin_content1"
         android:layout_width="260dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -114,7 +117,7 @@
             android:textSize="@dimen/text_size15"/>
 
     </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 
     <!--<androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager_headline"
@@ -145,9 +148,9 @@
         android:layout_height="wrap_content"
         app:dotsColor="@color/inactive"
         app:dotsCornerRadius="5dp"
-        app:dotsSize="@dimen/margin_8"
-        app:dotsSpacing="2dp"
-        app:dotsWidthFactor="3"
+        app:dotsSize="@dimen/margin_6"
+        app:dotsSpacing="3dp"
+        app:dotsWidthFactor="2.5"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin_125"

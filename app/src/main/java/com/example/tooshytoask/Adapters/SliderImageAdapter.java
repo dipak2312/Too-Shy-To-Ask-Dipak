@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tooshytoask.Models.SliderItem;
-import com.example.tooshytoask.Models.SliderText;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.databinding.SlideItemImgBinding;
 
 import java.util.List;
 

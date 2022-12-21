@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.SplashScreenFragment.FirstSplashFragment">
+
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size25"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/margin_20"/>
+
+    <TextView
+        android:id="@+id/txt_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heading"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size15"
+        android:paddingStart="@dimen/margin_50"
+        android:paddingEnd="@dimen/margin_50"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/margin_20"/>
+
+</RelativeLayout>
