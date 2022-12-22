@@ -1,37 +1,32 @@
 package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.tooshytoask.Adapters.SliderImageAdapter;
+import com.example.tooshytoask.Adapters.ViewPager2Adapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SliderItem;
 import com.example.tooshytoask.R;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SliderImages extends AppCompatActivity implements View.OnClickListener {
     //ActivitySliderImagesBinding binding;
-    SliderImageAdapter adapter;
-    List<SliderItem> sliderItems;
+    ViewPager2Adapter adapter;
+    //List<SliderItem> sliderItems;
     ViewPager2 viewPager2;
     TextView skip_btn;
     ImageButton next_btn;
     DotsIndicator mBarLayout;
-    LinearLayout lin_content, lin_content1, lin_content2, lin_content3;
+    //LinearLayout lin_content, lin_content1, lin_content2, lin_content3;
     Context context;
     SPManager spManager;
 
@@ -54,26 +49,28 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
         next_btn.setOnClickListener(this);
         skip_btn = findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
+        /*adapter = new ViewPagerAdapter(adapter);
+        viewPager2.setAdapter(adapter);*/
 
         //setting slider ViewPager Adapter
-        sliderItems = new ArrayList<>();
+       /* sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItem(R.drawable.welcome));
         sliderItems.add(new SliderItem(R.drawable.create_account));
         sliderItems.add(new SliderItem(R.drawable.welcome));
-        adapter = new SliderImageAdapter(sliderItems, viewPager2);
-        viewPager2.setAdapter(adapter);
+        //adapter = new SliderImageAdapter(sliderItems, viewPager2);
+        //viewPager2.setAdapter(adapter);
         viewPager2.setClipChildren(false);
         viewPager2.setClipToPadding(false);
         viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_ALWAYS);
+        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_ALWAYS);*/
 
         AddView();
     }
 
     private void AddView() {
-        adapter = new SliderImageAdapter(sliderItems, viewPager2);
+        adapter = new ViewPager2Adapter(this);
         viewPager2.setAdapter(adapter);
-        mBarLayout.setViewPager2(viewPager2);
+        //mBarLayout.setViewPager2(viewPager2);
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

@@ -18,17 +18,17 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.R;
 
 public class SecondSplashFragment extends Fragment {
-    ImageView img1;
+    ImageView img2;
     Context context;
     TextView heading, txt_desc;
 
-    @SuppressLint("CheckResult")
+    @SuppressLint({ "ResourceType"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second_splash, container, false);
 
-        img1 = view.findViewById(R.id.img1);
+        img2 = view.findViewById(R.id.img2);
         heading = view.findViewById(R.id.heading);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
         heading.startAnimation(animation);
@@ -39,7 +39,7 @@ public class SecondSplashFragment extends Fragment {
         context = getActivity();
 
 
-        Glide.with(context).load(R.drawable.welcome).into(img1);
+        Glide.with(context).load(R.drawable.create_account).into(img2);
         Glide.with(context).load(R.string.heading_two);
         Glide.with(context).load(R.string.desc_two);
 

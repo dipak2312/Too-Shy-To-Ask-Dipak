@@ -1,21 +1,31 @@
 package com.example.tooshytoask.Adapters;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.tooshytoask.Models.SliderItem;
-import com.example.tooshytoask.R;
+public class ViewPager2Adapter extends FragmentStateAdapter {
 
-import java.util.List;
+    public ViewPager2Adapter(@NonNull FragmentActivity fragmentActivity) {
+        super(fragmentActivity);
 
-public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.ViewHolder>{
-    List<SliderItem> sliderItems;
+
+
+    }
+
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+
+    return null;
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+    /*List<SliderItem> sliderItems;
     ViewPager2 viewPager2;
 
 
@@ -35,9 +45,9 @@ public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.
     @Override
     public void onBindViewHolder(@NonNull SliderImageAdapter.ViewHolder holder, int position) {
         holder.setImage(sliderItems.get(position));
-        /*if (position == sliderItems.size() - 2){
+        *//*if (position == sliderItems.size() - 2){
             viewPager2.post(sliderRunnable);
-        }*/
+        }*//*
 
     }
 
@@ -62,7 +72,7 @@ public class SliderImageAdapter extends RecyclerView.Adapter<SliderImageAdapter.
         }
     }
 
-    /*private Runnable sliderRunnable = new Runnable() {
+    *//*private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
             sliderItems.addAll(sliderItems);
