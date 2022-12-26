@@ -3,6 +3,7 @@ package com.example.tooshytoask.Activity.Landing;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -107,6 +108,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if (id == edit_age.getId()) {
             openDatePicker();
         } else if (id == btn_next.getId()) {
+            Intent intent = new Intent(context, InfoCardCategoryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             /*if (edit_first_name.getText().toString().trim().equals("")) {
                 edit_first_name.requestFocus();
                 edit_first_name.setError("First Name is required");

@@ -1,5 +1,4 @@
 package com.example.tooshytoask.Activity.Landing;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.tsta_splash));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = SplashScreenActivity.this;
         spManager=new SPManager(context);
@@ -92,7 +92,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void checkPreviousActivityStatus() {
         Completable.complete()
-                .delay(1, TimeUnit.SECONDS)
+                .delay(2, TimeUnit.SECONDS)
                 .doOnComplete(() -> {
                     //Do your stuff here
 

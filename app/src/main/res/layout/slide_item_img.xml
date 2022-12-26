@@ -13,7 +13,7 @@
         app:riv_corner_radius="@dimen/margin_12"
         android:src="@drawable/welcome"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +35,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/text_size15"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/margin_20"/>
+        android:layout_marginTop="@dimen/margin_20"/>-->
 
 </RelativeLayout>

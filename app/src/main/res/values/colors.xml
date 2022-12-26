@@ -8,16 +8,23 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FD8879</color>
-    <color name="red">#FC797D</color>
+    <color name="purple">#AC1479</color>
+    <color name="dot_inactive">#767676</color>
+    <color name="skip">#A2A2A2</color>
     <color name="text_red">#7B7B7B</color>
-    <color name="resend_color">#FEE5E4</color>
-    <color name="progressbar_color">#FD8A79</color>
+    <color name="resend_color">#FFD6F1</color>
+    <color name="progressbar_color">#AC1479</color>
     <color name="grey">#DCD9D9</color>
+    <color name="tsta_splash">#3B30BD</color>
 
 
     <color name="tsta_setting_fent">#16bac2</color>
 
     /indicator color
     <color name="inactive">#767676</color>
-    <color name="active">#FC797D</color>
+    <color name="active">#AC1479</color>
+
+    //gender border
+    <color name="gender_inactive">#2B2B2B</color>
+    <color name="gender_active">#AC1479</color>
 </resources>

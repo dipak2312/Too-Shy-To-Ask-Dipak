@@ -90,7 +90,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         otpTextView.setTextColor(
                 ResourcesCompat.getColorStateList(getResources(), R.color.black, getTheme()));
         otpTextView.setLineColor(
-                ResourcesCompat.getColor(getResources(), R.color.red, getTheme()));
+                ResourcesCompat.getColor(getResources(), R.color.purple, getTheme()));
         otpTextView.setLineColor(
                 ResourcesCompat.getColorStateList(getResources(), R.color.line_colors, getTheme()));
         otpTextView.setAnimationEnable(false);// start animation when adding text
@@ -149,7 +149,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 btn_resend_otp.setText(getResources().getString(R.string.resend_otp));
                 btn_resend_otp.setClickable(true);
                 otpTextView.setText("");
-                btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.red));
+                btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.purple));
                 progress_text.setVisibility(View.GONE);
                 progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
                 user_otp = "";

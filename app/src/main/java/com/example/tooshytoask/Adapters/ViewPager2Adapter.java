@@ -1,53 +1,47 @@
 package com.example.tooshytoask.Adapters;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
-public class ViewPager2Adapter extends FragmentStateAdapter {
+import com.example.tooshytoask.Models.SliderItem;
+import com.example.tooshytoask.R;
 
-    public ViewPager2Adapter(@NonNull FragmentActivity fragmentActivity) {
-        super(fragmentActivity);
+import java.util.List;
 
+public class ViewPager2Adapter extends RecyclerView.Adapter<ViewPager2Adapter.ViewHolder> {
 
-
-    }
-
-    @NonNull
-    @Override
-    public Fragment createFragment(int position) {
-
-    return null;
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-    /*List<SliderItem> sliderItems;
+    List<SliderItem> sliderItems;
     ViewPager2 viewPager2;
 
 
-    public SliderImageAdapter(List<SliderItem> sliderItems, ViewPager2 viewPager2) {
+    public ViewPager2Adapter(List<SliderItem> sliderItems, ViewPager2 viewPager2) {
         this.sliderItems = sliderItems;
         this.viewPager2 = viewPager2;
     }
 
     @NonNull
     @Override
-    public SliderImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewPager2Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //SlideItemImgBinding binding = SlideItemImgBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.slide_item_img,parent,false));
         //return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SliderImageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewPager2Adapter.ViewHolder holder, int position) {
         holder.setImage(sliderItems.get(position));
-        *//*if (position == sliderItems.size() - 2){
+        if (position == sliderItems.size() - 2){
             viewPager2.post(sliderRunnable);
-        }*//*
+        }
 
     }
 
@@ -72,11 +66,11 @@ public class ViewPager2Adapter extends FragmentStateAdapter {
         }
     }
 
-    *//*private Runnable sliderRunnable = new Runnable() {
+    private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
             sliderItems.addAll(sliderItems);
             notifyDataSetChanged();
         }
-    };*/
+    };
 }

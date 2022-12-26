@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Landing.InfoCardCategoryActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Info Card"
+                android:textColor="@color/black"
+                android:fontFamily="@font/worksansmedium"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/text_size18"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar_completed"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_5"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_30"
+        android:progress="40"
+        android:progressDrawable="@drawable/progress_bar_missed"
+        android:layout_below="@+id/rel_top_bar"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:layout_marginRight="@dimen/margin_15"
+        android:layout_below="@id/progressbar_completed"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_20">
+
+    <TextView
+        android:id="@+id/cate_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your categories that represent what you want to see"
+        android:textColor="@color/black"
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size14"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_recy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cate_title"
+        android:layout_marginTop="@dimen/margin_20"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_40"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:layout_marginRight="@dimen/margin_15">
+
+        <TextView
+            android:id="@+id/skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKIP"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/worksansbold"
+            android:textSize="@dimen/text_size12"
+            android:textColor="@color/skip"/>
+
+
+        <ImageButton
+            android:id="@+id/next_btn"
+            android:layout_width="@dimen/margin_40"
+            android:layout_height="@dimen/margin_40"
+            android:background="@drawable/circle_button"
+            android:src="@drawable/arrow_right"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:layout_marginRight="@dimen/margin_15"
+        android:layout_below="@id/progressbar_completed"
+        android:layout_marginTop="@dimen/margin_20">
+
+        <TextView
+            android:id="@+id/avatar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose your Avatar"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size14"/>
+
+        <LinearLayout
+            android:id="@+id/lin_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avatar_title"
+            android:layout_marginTop="@dimen/margin_20"
+            android:weightSum="4">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar1"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar2"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar3"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar4"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_lay2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lin_lay"
+            android:layout_marginTop="@dimen/margin_20"
+            android:weightSum="4">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar5"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar6"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar7"
+                android:layout_weight="1"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar8"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or choose from your phone gallery"
+            android:layout_below="@id/lin_lay2"
+            android:layout_marginTop="@dimen/margin_40"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansitalic"
+            android:textSize="@dimen/text_size12"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gallery"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_40"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:src="@drawable/camara"/>
+
+            <ImageView
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:src="@drawable/files"
+                android:layout_marginStart="@dimen/margin_60"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_40"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:layout_marginRight="@dimen/margin_15">
+
+        <TextView
+            android:id="@+id/skip_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKIP"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/worksansbold"
+            android:textSize="@dimen/text_size12"
+            android:textColor="@color/skip"/>
+
+
+        <ImageButton
+            android:id="@+id/next_btn2"
+            android:layout_width="@dimen/margin_40"
+            android:layout_height="@dimen/margin_40"
+            android:background="@drawable/circle_button"
+            android:src="@drawable/arrow_right"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
