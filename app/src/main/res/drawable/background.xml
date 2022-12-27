@@ -4,7 +4,7 @@
     <solid android:color="#F6F6F6"/>
 
     <stroke android:dashWidth="1dp"
-        android:color="@color/red"/>
+        android:color="@color/purple"/>
 
     <corners
         android:radius="@dimen/margin_5" />
