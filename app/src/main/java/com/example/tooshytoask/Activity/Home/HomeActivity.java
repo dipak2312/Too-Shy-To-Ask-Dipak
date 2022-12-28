@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_home:
                 // Action to perform when Home Menu item is selected.
-                pushFragment(new FourFragment());
+                pushFragment(new HomeFragment());
                 break;
             case R.id.action_ask_expert:
                 // Action to perform when Bag Menu item is selected.

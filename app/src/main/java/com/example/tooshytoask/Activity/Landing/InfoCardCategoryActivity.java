@@ -8,9 +8,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 
 import com.example.tooshytoask.Adapters.CategoryAdapter;
+import com.example.tooshytoask.Adapters.InfoCardAdapter;
+import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
@@ -19,12 +23,11 @@ import java.util.ArrayList;
 
 public class InfoCardCategoryActivity extends AppCompatActivity {
     Context context;
-    ArrayList<CategoryItem>categoryItems;
     SPManager spManager;
-    RecyclerView category_recy, recyclerView;
-    CategoryAdapter adapter;
     ProgressBar progressbar_completed;
     double progrss_value;
+    InfoCardAdapter adapter;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,57 +37,37 @@ public class InfoCardCategoryActivity extends AppCompatActivity {
         context = InfoCardCategoryActivity.this;
         spManager = new SPManager(context);
         progressbar_completed = findViewById(R.id.progressbar_completed);
+        viewPager = findViewById(R.id.viewPager);
 
-        recyclerView = findViewById(R.id.category_recy);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, true));
+        AddView();
 
-        /*GridLayoutManager layout = new GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false);
-        category_recy.setLayoutManager(layout);*/
-        categoryItems = new ArrayList<>();
-
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Relationship"));
-        categoryItems.add(new CategoryItem(R.drawable.sexuality,"Sex & Sexuality"));
-        categoryItems.add(new CategoryItem(R.drawable.reproduction,"Reproduction"));
-
-        //category_recy.setAdapter(adapter);
-        recyclerView.setAdapter(new CategoryAdapter(categoryItems));
     }
 
-    /*public void init() {
-        adapter = new CategoryAdapter(categoryItems);
-        txt_count.setText(getResources().getString(R.string.page_count_total, 0 + 1, adapter.getCount()));
+    private void AddView() {
+        adapter =new InfoCardAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
 
-        progrss_value=(double)1/adapter.getCount()*100;
-        progressbar_completed.setProgress((int) progrss_value);
-        category_recy.setAdapter(adapter);
-        category_recy.setOnTouchListener((view, motionEvent) -> true);
-        category_recy.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
 
             }
 
             @Override
             public void onPageSelected(int position) {
-                txt_count.setText(
-                        getResources().getString(R.string.page_count_total, position + 1,
-                                pagerAdapter.getCount()));
-
-                int value=position+1;
-                progrss_value=(double)value/pagerAdapter.getCount()*100;
-                progressbar_completed.setProgress((int) progrss_value);
-
 
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
 
-
             }
         });
 
+    }
 
-    }*/
+    private int getitem(int i) {
+
+        return viewPager.getCurrentItem() + i;
+    }
 }

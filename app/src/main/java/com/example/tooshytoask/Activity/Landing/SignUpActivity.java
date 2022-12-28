@@ -17,7 +17,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
@@ -47,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = SignUpActivity.this;
         spManager = new SPManager(context);
 
@@ -109,26 +113,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             openDatePicker();
         } else if (id == btn_next.getId()) {
             Intent intent = new Intent(context, InfoCardCategoryActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            /*if (edit_first_name.getText().toString().trim().equals("")) {
-                edit_first_name.requestFocus();
-                edit_first_name.setError("First Name is required");
-            } else if (edit_last_name.getText().toString().trim().equals("")) {
-                edit_last_name.requestFocus();
-                edit_last_name.setError("Last Name is required");
-            } else if (edit_email_id.getText().toString().trim().equals("")) {
-                edit_email_id.requestFocus();
-                edit_email_id.setError("Email is required");
-            }*/ /*else if (!MyValidator.isValidEmail(edit_email_id.getText().toString().trim())) {
-                edit_email_id.requestFocus();
-                edit_email_id.setError("Please enter valid email id");
-            }*/ /*else if (rel_edit_age.getText().toString().trim().equals("")) {
-                rel_edit_age.requestFocus();
-                rel_edit_age.setError("Please select your Date Of Birth");
-            }*/
 
+            /*Fragment fragment = new HomeFragment();
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            fm.add(R.id.rootLay, fragment).commit();*/
         }
             }
 

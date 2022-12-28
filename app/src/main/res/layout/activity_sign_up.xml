@@ -8,6 +8,14 @@
     android:background="@color/white"
     tools:context=".Activity.Landing.SignUpActivity">
 
+    <FrameLayout
+        android:id="@+id/rootLay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </FrameLayout>
+
     <RelativeLayout
         android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"

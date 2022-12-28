@@ -56,7 +56,20 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_30"
         android:progress="40"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
         android:progressDrawable="@drawable/progress_bar_missed"
         android:layout_below="@+id/rel_top_bar"/>
+    
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressbar_completed"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20">
+
+    </androidx.viewpager.widget.ViewPager>
 
 </RelativeLayout>

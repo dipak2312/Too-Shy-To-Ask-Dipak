@@ -1,9 +1,7 @@
 package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.tooshytoask.Adapters.SlideImageAdapter;
-import com.example.tooshytoask.Adapters.ViewPager2Adapter;
+import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SliderItem;
 import com.example.tooshytoask.R;
@@ -27,11 +25,11 @@ import java.util.List;
 
 public class SliderImages extends AppCompatActivity implements View.OnClickListener {
     //ActivitySliderImagesBinding binding;
-    //SlideImageAdapter adapter2;
-    ViewPager2Adapter adapter;
+    ViewPagerAdapter adapter;
     List<SliderItem> sliderItems;
-    ViewPager2 viewPager2;
+    ViewPager viewPager;
     TextView skip_btn;
+    Button started;
     ImageButton next_btn;
     DotsIndicator mBarLayout;
     LinearLayout lin_content, lin_content1, lin_content2, lin_content3;
@@ -47,7 +45,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
         context = SliderImages.this;
         spManager = new SPManager(context);
 
-        viewPager2 = findViewById(R.id.view_pager_img);
+        viewPager = findViewById(R.id.view_pager_img);
         mBarLayout = findViewById(R.id.indicator_layout);
         lin_content = findViewById(R.id.lin_content);
         lin_content1 = findViewById(R.id.lin_content1);
@@ -57,51 +55,54 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
         next_btn.setOnClickListener(this);
         skip_btn = findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
+        started = findViewById(R.id.started);
+        started.setOnClickListener(this);
+
 
         //setting slider ViewPager Adapter
-        sliderItems = new ArrayList<>();
+        /*sliderItems = new ArrayList<>();
         sliderItems.add(new SliderItem(R.drawable.welcome));
         sliderItems.add(new SliderItem(R.drawable.create_account));
         sliderItems.add(new SliderItem(R.drawable.welcome));
-        adapter = new ViewPager2Adapter(sliderItems, viewPager2);
-        viewPager2.setAdapter(adapter);
-        viewPager2.setClipChildren(false);
-        viewPager2.setClipToPadding(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+        adapter = new ViewPagerAdapter();
+        viewPager.setAdapter(adapter);
+        viewPager.setClipChildren(false);
+        viewPager.setClipToPadding(false);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);*/
 
         AddView();
     }
 
     private void AddView() {
-        adapter = new ViewPager2Adapter(sliderItems, viewPager2);
-        viewPager2.setAdapter(adapter);
-        mBarLayout.setViewPager2(viewPager2);
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        mBarLayout.setViewPager(viewPager);
 
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 
                  if (getitem(0) < 1) {
-                    lin_content1.setVisibility(View.VISIBLE);
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-                    lin_content.startAnimation(animation);
-                    lin_content2.setVisibility(View.GONE);
-                    lin_content3.setVisibility(View.GONE);
+
+                     skip_btn.setVisibility(View.VISIBLE);
+                     next_btn.setVisibility(View.VISIBLE);
+                     started.setVisibility(View.GONE);
 
                 } else if (getitem(0) < 2) {
-                    lin_content2.setVisibility(View.VISIBLE);
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-                    lin_content.startAnimation(animation);
-                    lin_content1.setVisibility(View.GONE);
-                    lin_content3.setVisibility(View.GONE);
+
+                     skip_btn.setVisibility(View.VISIBLE);
+                     next_btn.setVisibility(View.VISIBLE);
+                     started.setVisibility(View.GONE);
+
                 } else if (getitem(0) < 3) {
-                    lin_content3.setVisibility(View.VISIBLE);
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-                    lin_content.startAnimation(animation);
-                    lin_content1.setVisibility(View.GONE);
-                    lin_content2.setVisibility(View.GONE);
+
+                     started.setVisibility(View.VISIBLE);
+                     Animation alpha = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                     started.startAnimation(alpha);
+                     skip_btn.setVisibility(View.GONE);
+                     next_btn.setVisibility(View.GONE);
+
 
                 }
 
@@ -109,12 +110,11 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                super.onPageSelected(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                super.onPageScrollStateChanged(state);
+
             }
         });
 
@@ -122,7 +122,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
 
     private int getitem(int i) {
 
-        return viewPager2.getCurrentItem() + i;
+        return viewPager.getCurrentItem() + i;
     }
 
 
@@ -130,15 +130,15 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         int id = view.getId();
         if (id == next_btn.getId()) {
-            viewPager2.setCurrentItem(getitem(1), true);
-        } else {
-            Intent intent = new Intent(context, LanguageActivity.class);
-            startActivity(intent);
-            finish();
+            viewPager.setCurrentItem(getitem(1), true);
+        } else if (id == started.getId()){
+            adapter = new ViewPagerAdapter(getSupportFragmentManager());
+            viewPager.setAdapter(adapter);
+
         } if (id == skip_btn.getId()){
             Intent intent = new Intent(context, LanguageActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
         }
         }
 

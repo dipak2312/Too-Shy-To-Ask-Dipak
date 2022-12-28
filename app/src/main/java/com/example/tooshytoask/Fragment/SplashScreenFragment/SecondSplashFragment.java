@@ -30,11 +30,11 @@ public class SecondSplashFragment extends Fragment {
 
         img2 = view.findViewById(R.id.img2);
         heading = view.findViewById(R.id.heading);
-        Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
-        heading.startAnimation(animation);
+        //Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
+        //heading.startAnimation(animation);
         txt_desc = view.findViewById(R.id.txt_desc);
-        Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
-        txt_desc.startAnimation(anim);
+        //Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+        //txt_desc.startAnimation(anim);
 
         context = getActivity();
 

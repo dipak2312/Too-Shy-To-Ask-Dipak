@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/img2"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true">
 
@@ -25,6 +25,7 @@
         android:fontFamily="@font/worksansregular"
         android:textSize="@dimen/text_size25"
         android:textColor="@color/black"
+        android:text="@string/heading_two"
         android:layout_marginTop="@dimen/margin_20"/>
 
     <TextView
@@ -39,6 +40,7 @@
         android:paddingStart="@dimen/margin_50"
         android:paddingEnd="@dimen/margin_50"
         android:textColor="@color/black"
+        android:text="@string/desc_two"
         android:layout_marginTop="@dimen/margin_20"/>
 
 </RelativeLayout>

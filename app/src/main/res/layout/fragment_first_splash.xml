@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.SplashScreenFragment.FirstSplashFragment">
 
-
     <ImageView
         android:id="@+id/img1"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true">
 
@@ -25,7 +24,8 @@
         android:fontFamily="@font/worksansregular"
         android:textSize="@dimen/text_size25"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/margin_20"/>
+        android:layout_marginTop="@dimen/margin_20"
+        android:text="@string/heading_one"/>
 
     <TextView
         android:id="@+id/txt_desc"
@@ -39,6 +39,7 @@
         android:paddingStart="@dimen/margin_50"
         android:paddingEnd="@dimen/margin_50"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/margin_20"/>
+        android:layout_marginTop="@dimen/margin_20"
+        android:text="@string/desc_one"/>
 
 </RelativeLayout>
