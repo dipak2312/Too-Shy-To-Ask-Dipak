@@ -93,7 +93,8 @@
                     android:fontFamily="@font/worksansregular"
                     android:maxLength="10"
                     android:paddingEnd="@dimen/margin_10"
-                    android:textColorHighlight="@color/teal_200"
+                    android:autofillHints="phone"
+                    android:textColor="@color/black"
                     android:importantForAutofill="yes"
                     android:background="@android:color/transparent"
                     android:textSize="@dimen/text_size15"
@@ -207,14 +208,7 @@
 
             </RelativeLayout>
 
-
-
-
-
-
-
         </RelativeLayout>
-
 
     </androidx.core.widget.NestedScrollView>
 

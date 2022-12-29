@@ -15,6 +15,18 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+    <style name="roundeimageview" parent="">
+        <item name="android:shape">rectangle</item>
+        <item name="android:radius">360dp</item>
+        <item name="color">@color/resend_color</item>
+    </style>
+
+    <style name="radiusimageview" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/margin_10</item>
+        <item name="color">@color/resend_color</item>
+    </style>
+
     <style name="BottomNavigationView" parent="TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10dp</item>
     </style>

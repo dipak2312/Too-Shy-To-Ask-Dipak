@@ -1,6 +1,5 @@
 package com.example.tooshytoask.Activity.Landing;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
-import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.R;
@@ -31,7 +29,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     Context context;
     Button btn_signin;
     CustomProgressDialog dialog;
-    Dialog dialog1;
     TextView guest_login;
 
     @Override
@@ -41,12 +38,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = SignInActivity.this;
 
-        btn_signin = (Button) findViewById(R.id.btn_signin);
+        btn_signin = findViewById(R.id.btn_signin);
         btn_signin.setOnClickListener(this);
         guest_login = findViewById(R.id.guest_login);
         guest_login.setOnClickListener(this);
 
-        etMobile = (EditText) findViewById(R.id.etMobile);
+        etMobile = findViewById(R.id.etMobile);
 
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
@@ -61,6 +58,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if (id == btn_signin.getId()) {
 
             Intent intent = new Intent(context, OtpVerificationActivity.class);
+            intent.putExtra("phone", etMobile.getText().toString().trim());
             startActivity(intent);
 
             /*if (etMobile.getText().toString().trim().equals("")) {

@@ -36,8 +36,46 @@
     <string name="desc_one">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</string>
     <string name="desc_two">how are you guys</string>
     <string name="desc_three">where are you from</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    //Language
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_your_preferred_language">Choose your preferred Language</string>
+    <string name="your_feeds_will_be_served_basis_on_your_selection">Your feeds will be served basis on your selection</string>
+    <string name="english">English</string>
+    <string name="hindi">Hindi</string>
+    <string name="marathi">Marathi</string>
+
+    //SliderActivity
+    <string name="skip">SKIP</string>
+    <string name="get_started">Get Started</string>
+
+    //SignUpActivity
+    <string name="info_card">Info Card</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="select_your_dob">Select your DOB</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+
+    //setting
+    <string name="terms_conditions_support"><![CDATA[Terms & Conditions | Support]]></string>
+    <string name="_2022_all_right_reserved_powered_by_hats_off">© 2022 All Right Reserved Powered by Hats-Off</string>
+    <string name="version_10_01">Version 10.01</string>
+    <string name="too_shy_to_ask">Too Shy To Ask</string>
+    <string name="log_out">Log Out</string>
+    <string name="refer_friends">Refer Friends</string>
+    <string name="select_language">Select Language</string>
+    <string name="feedback">Feedback</string>
+    <string name="help">Help</string>
+    <string name="faq">Frequently Asked Questions</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="notification_settings">Notification Settings</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

@@ -26,13 +26,11 @@ import java.util.List;
 public class SliderImages extends AppCompatActivity implements View.OnClickListener {
     //ActivitySliderImagesBinding binding;
     ViewPagerAdapter adapter;
-    List<SliderItem> sliderItems;
     ViewPager viewPager;
     TextView skip_btn;
     Button started;
     ImageButton next_btn;
     DotsIndicator mBarLayout;
-    LinearLayout lin_content, lin_content1, lin_content2, lin_content3;
     Context context;
     SPManager spManager;
 
@@ -47,29 +45,13 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
 
         viewPager = findViewById(R.id.view_pager_img);
         mBarLayout = findViewById(R.id.indicator_layout);
-        lin_content = findViewById(R.id.lin_content);
-        lin_content1 = findViewById(R.id.lin_content1);
-        lin_content2 = findViewById(R.id.lin_content2);
-        lin_content3 = findViewById(R.id.lin_content3);
+
         next_btn = findViewById(R.id.next_btn);
         next_btn.setOnClickListener(this);
         skip_btn = findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
         started = findViewById(R.id.started);
         started.setOnClickListener(this);
-
-
-        //setting slider ViewPager Adapter
-        /*sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItem(R.drawable.welcome));
-        sliderItems.add(new SliderItem(R.drawable.create_account));
-        sliderItems.add(new SliderItem(R.drawable.welcome));
-        adapter = new ViewPagerAdapter();
-        viewPager.setAdapter(adapter);
-        viewPager.setClipChildren(false);
-        viewPager.setClipToPadding(false);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);*/
 
         AddView();
     }
@@ -103,9 +85,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
                      skip_btn.setVisibility(View.GONE);
                      next_btn.setVisibility(View.GONE);
 
-
                 }
-
             }
 
             @Override

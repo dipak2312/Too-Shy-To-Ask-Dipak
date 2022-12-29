@@ -43,6 +43,7 @@
     <dimen name="padding_8">8.0dp</dimen>
     <dimen name="editText_default_padding">10.0dp</dimen>
     <dimen name="margin_5">5.0dp</dimen>
+    <dimen name="margin_2">2.0dp</dimen>
     <dimen name="margin_8">8.0dp</dimen>
     <dimen name="margin_6">6.0dp</dimen>
     <dimen name="margin_20">20.0dp</dimen>
@@ -58,7 +59,9 @@
     <dimen name="margin_48">48.0dp</dimen>
     <dimen name="margin_44">44.0dp</dimen>
     <dimen name="margin_90">90.0dp</dimen>
+    <dimen name="margin_91">91.0dp</dimen>
     <dimen name="margin_100">100.0dp</dimen>
+    <dimen name="margin_101">101.0dp</dimen>
     <dimen name="margin_125">125.0dp</dimen>
     <dimen name="margin_120">120.0dp</dimen>
     <dimen name="margin_150">150.0dp</dimen>
@@ -82,7 +85,7 @@
     <dimen name="margin_75">75.0dp</dimen>
     <dimen name="cir_tv">45.0dp</dimen>
     <dimen name="wel_button">150.0dp</dimen>
-    <dimen name="dash_ds_hiegt">50.0dp</dimen>
+    <dimen name="dash_ds_height">50.0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
 </resources>

@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ import io.reactivex.schedulers.Schedulers;
 public class OtpVerificationActivity extends AppCompatActivity implements View.OnClickListener {
 
     String phone = "", user_otp = "";
-    TextView btn_resend_otp, progress_text;
+    TextView btn_resend_otp, progress_text, mobile_no;
     Button btn_submit;
     PinView otpTextView;
     Context context;
@@ -51,16 +52,21 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         context = OtpVerificationActivity.this;
         spManager = new SPManager(context);
 
-        phone = getIntent().getStringExtra("phone");
+        //phone = getIntent().getStringExtra("phone");
 
-        btn_submit = (Button) findViewById(R.id.btn_submit);
+        btn_submit = findViewById(R.id.btn_submit);
         btn_submit.setOnClickListener(this);
-        btn_resend_otp = (TextView) findViewById(R.id.btn_resend_otp);
+        btn_resend_otp = findViewById(R.id.btn_resend_otp);
         btn_resend_otp.setOnClickListener(this);
         progress_text = findViewById(R.id.progress_text);
         progress_text.setOnClickListener(this);
-        rel_back = (RelativeLayout) findViewById(R.id.rel_back);
+        rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
+        mobile_no = findViewById(R.id.mobile_no);
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("phone");
+        mobile_no.setText(str);
+
         progress_circular = findViewById(R.id.progress_circular);
         progressBar();
 
@@ -141,6 +147,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.resend_color));
                     progress_text.setText(value);
                     progress_text.setVisibility(View.VISIBLE);
+                    progress_circular.setVisibility(View.VISIBLE);
 
                 }
             @Override
@@ -151,7 +158,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 otpTextView.setText("");
                 btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.purple));
                 progress_text.setVisibility(View.GONE);
-                progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
+                progress_circular.setVisibility(View.GONE);
+                //progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
                 user_otp = "";
 
             }
