@@ -76,6 +76,7 @@
     <string name="notification_settings">Notification Settings</string>
     <string name="update_profile">Update Profile</string>
     <string name="profile">Profile</string>
+    <string name="notifications">Notifications</string>
 
 
 </resources>

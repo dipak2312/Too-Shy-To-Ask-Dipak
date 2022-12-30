@@ -61,8 +61,10 @@
     <dimen name="margin_90">90.0dp</dimen>
     <dimen name="margin_91">91.0dp</dimen>
     <dimen name="margin_100">100.0dp</dimen>
+    <dimen name="margin_110">110.0dp</dimen>
     <dimen name="margin_101">101.0dp</dimen>
     <dimen name="margin_125">125.0dp</dimen>
+    <dimen name="margin_130">130.0dp</dimen>
     <dimen name="margin_120">120.0dp</dimen>
     <dimen name="margin_150">150.0dp</dimen>
     <dimen name="margin_140">140.0dp</dimen>

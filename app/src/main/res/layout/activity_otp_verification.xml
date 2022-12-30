@@ -30,15 +30,22 @@
 
             <RelativeLayout
                 android:id="@+id/progress_lay"
-                android:layout_width="@dimen/margin_100"
-                android:layout_height="@dimen/margin_100"
+                android:layout_width="@dimen/margin_125"
+                android:layout_height="@dimen/margin_125"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_100">
 
-                <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                    android:id="@+id/progress_circular"
+                <ImageView
+                    android:id="@+id/otp_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:src="@drawable/otp_img"
+                    android:visibility="gone"/>
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="@dimen/margin_100"
+                    android:layout_height="@dimen/margin_100"
                     android:layout_centerInParent="true"
                     app:cpb_background_progressbar_width="@dimen/margin_10"
                     app:cpb_progress_direction="to_right"

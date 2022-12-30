@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     String phone = "", user_otp = "";
     TextView btn_resend_otp, progress_text, mobile_no;
     Button btn_submit;
+    ImageView otp_img;
     PinView otpTextView;
     Context context;
     RelativeLayout rel_back;
@@ -62,6 +64,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         progress_text.setOnClickListener(this);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
+        otp_img = findViewById(R.id.otp_img);
         mobile_no = findViewById(R.id.mobile_no);
         Intent intent = getIntent();
         String str = intent.getStringExtra("phone");
@@ -148,6 +151,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     progress_text.setText(value);
                     progress_text.setVisibility(View.VISIBLE);
                     progress_circular.setVisibility(View.VISIBLE);
+                    otp_img.setVisibility(View.GONE);
 
                 }
             @Override
@@ -159,7 +163,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.purple));
                 progress_text.setVisibility(View.GONE);
                 progress_circular.setVisibility(View.GONE);
-                //progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
+                otp_img.setVisibility(View.VISIBLE);
                 user_otp = "";
 
             }
