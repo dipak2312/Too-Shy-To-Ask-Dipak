@@ -24,8 +24,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     packagingOptions {
@@ -79,9 +79,10 @@ dependencies {
     implementation 'com.github.OzcanAlasalvar:DatePicker:1.0.4'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
-    //implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
     implementation 'com.tbuonomo:dotsindicator:4.3'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
-    //implementation 'id.zelory:compressor:2.1.0'
+    //implementation 'com.github.thekhaeng:pushdown-anim-click:1.1.1'
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

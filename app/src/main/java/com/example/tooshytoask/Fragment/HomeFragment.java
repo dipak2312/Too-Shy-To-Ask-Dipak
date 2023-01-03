@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = getActivity();
         spManager = new SPManager(context);
         recy_status = view.findViewById(R.id.recy_status);

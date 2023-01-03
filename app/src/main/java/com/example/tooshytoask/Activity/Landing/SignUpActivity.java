@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -54,10 +55,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         context = SignUpActivity.this;
         spManager = new SPManager(context);
 
-        /*BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.parent_user_popup);
-        //bottomSheetDialog.setCancelable(false);
-        bottomSheetDialog.show();*/
+        bottomSheetDialog.setCancelable(false);
+
+        LinearLayout user = bottomSheetDialog.findViewById(R.id.user);
+        LinearLayout parent = bottomSheetDialog.findViewById(R.id.parent);
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bottomSheetDialog.dismiss();
+
+            }
+        });
+
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        bottomSheetDialog.show();
 
         edit_first_name = findViewById(R.id.edit_first_name);
         edit_last_name = findViewById(R.id.edit_last_name);
