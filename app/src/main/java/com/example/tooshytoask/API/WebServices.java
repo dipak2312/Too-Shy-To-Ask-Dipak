@@ -11,12 +11,13 @@ import retrofit2.http.POST;
 
 public interface WebServices {
 
+
     @Headers("Content-Type: application/json")
-    @POST("web_services/login_with_otp.php")
+    @POST("apis/send_otp")
     Observable<SignInResponse> signIn(@Body SignInAuthModel model);
 
     @Headers("Content-Type: application/json")
-    @POST("web_services/login_with_otp.php")
+    @POST("apis/send_otp")
     Observable<SignInResponse> sendOtp(@Body OtpAuthModel model);
 
 }

@@ -109,6 +109,40 @@
 
         </RelativeLayout>
 
+     <LinearLayout
+         android:id="@+id/recommended_blogs_lay"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/rel_recy_status"
+         android:orientation="vertical"
+         android:layout_marginTop="@dimen/margin_20"
+         android:layout_marginStart="@dimen/margin_20">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Recommended"
+           android:fontFamily="@font/worksansregular"
+           android:textSize="@dimen/text_size18"
+           android:textColor="@color/black"/>
+
+         <RelativeLayout
+             android:id="@+id/rel_recy_recommended_blogs"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/margin_15">
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/recy_recommended_blogs"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+         </androidx.recyclerview.widget.RecyclerView>
+
+         </RelativeLayout>
+
+     </LinearLayout>
+
     </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
