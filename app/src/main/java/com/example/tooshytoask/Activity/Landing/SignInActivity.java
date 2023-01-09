@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Priority;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
@@ -18,6 +19,12 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -57,24 +64,20 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         if (id == btn_signin.getId()) {
 
-            Intent intent = new Intent(context, OtpVerificationActivity.class);
+            /*Intent intent = new Intent(context, OtpVerificationActivity.class);
             intent.putExtra("phone", etMobile.getText().toString().trim());
-            startActivity(intent);
+            startActivity(intent);*/
 
-            /*if (etMobile.getText().toString().trim().equals("")) {
+            if (etMobile.getText().toString().trim().equals("")) {
                 etMobile.requestFocus();
                 etMobile.setError("Mobile number id is required");
-            }*/ } else if (id == guest_login.getId()){
-            Intent intent = new Intent(context, HomeActivity.class);
-            startActivity(intent);
-        }
-        else {
-                //loginWithOTP();
+            } else {
+                loginWithOTP();
             }
-
-
-
+        }
     }
+
+
 
     private void loginWithOTP() {
 
@@ -82,8 +85,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         dialog.show("");
 
         SignInAuthModel signinmodel = new SignInAuthModel();
-        signinmodel.setMobile_no (etMobile.getText().toString().replace("+91","").trim());
-        //signinmodel.setDevice_type("android");
+        signinmodel.setMobile_no (etMobile.getText().toString().replace("+91 ", "").trim());
 
 
         WebServiceModel.getRestApi().signIn(signinmodel)
@@ -92,29 +94,25 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 .subscribe(new DisposableObserver<SignInResponse>() {
                     @Override
                     public void onNext(SignInResponse signinResponse) {
-                        //CourseEnrolledResponse commentResponse = new Gson().fromJson(signinResponse.toString(), CourseEnrolledResponse.class);
                         String msg = signinResponse.getMsg();
-                        if (msg.equals("OTP Send Successfully.")) {
+                        if (msg.equals("OTP Send Successfully")) {
                             //Open OTP Screen
                             Intent intent = new Intent(context, OtpVerificationActivity.class);
                             intent.putExtra("phone", etMobile.getText().toString().trim());
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivityForResult(intent, 1);
-                        } else if (msg.equalsIgnoreCase("User not exits.")) {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, SignUpActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
+                            //startActivity(intent);
+                            //finish();
                         } else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         }
+                        dialog.dismiss("");
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         //Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
-
+                        dialog.dismiss("");
                     }
 
                     @Override

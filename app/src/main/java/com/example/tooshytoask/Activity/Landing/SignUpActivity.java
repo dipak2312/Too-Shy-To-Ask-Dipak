@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         context = SignUpActivity.this;
         spManager = new SPManager(context);
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        /*BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.parent_user_popup);
         bottomSheetDialog.setCancelable(false);
 
@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        bottomSheetDialog.show();
+        bottomSheetDialog.show();*/
 
         edit_first_name = findViewById(R.id.edit_first_name);
         edit_last_name = findViewById(R.id.edit_last_name);

@@ -1,33 +1,42 @@
 package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.example.tooshytoask.Adapters.CategoryAdapter;
+import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Adapters.InfoCardAdapter;
 import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
-public class InfoCardCategoryActivity extends AppCompatActivity {
+public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
     Context context;
     SPManager spManager;
     ProgressBar progressbar_completed;
     double progrss_value;
     InfoCardAdapter adapter;
     ViewPager viewPager;
+    RelativeLayout rel_back;
+    ImageButton next_btn;
+    TextView skip_btn;
+    private boolean enabled;
+    String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +46,14 @@ public class InfoCardCategoryActivity extends AppCompatActivity {
         context = InfoCardCategoryActivity.this;
         spManager = new SPManager(context);
         progressbar_completed = findViewById(R.id.progressbar_completed);
+        next_btn = findViewById(R.id.next_btn);
+        next_btn.setOnClickListener(this);
+        skip_btn = findViewById(R.id.skip_btn);
+        skip_btn.setOnClickListener(this);
         viewPager = findViewById(R.id.viewPager);
+        viewPager.setOnTouchListener(this);
+        rel_back = findViewById(R.id.rel_back);
+        rel_back.setOnClickListener(this);
 
         AddView();
 
@@ -47,14 +63,38 @@ public class InfoCardCategoryActivity extends AppCompatActivity {
         adapter =new InfoCardAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
+        progrss_value=(double)1/InfoCardAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT*25;
+        progressbar_completed.setProgress((int) progrss_value);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (getitem(0) < 1) {
+
+                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
+                } else if (getitem(0) < 2) {
+
+                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
+                } else if (getitem(0) < 3) {
+
+                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
+                } else if (getitem(0) < 4) {
+
+                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
+                }
 
             }
 
             @Override
             public void onPageSelected(int position) {
+
+                int value=position+1;
+                progrss_value=(double)value/InfoCardAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT*25;
+                progressbar_completed.setProgress((int) progrss_value);
 
             }
 
@@ -69,5 +109,29 @@ public class InfoCardCategoryActivity extends AppCompatActivity {
     private int getitem(int i) {
 
         return viewPager.getCurrentItem() + i;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        return true;
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == rel_back.getId()) {
+            Intent intent = new Intent(context, SignUpActivity.class);
+            startActivity(intent);
+        }
+        else if (id == next_btn.getId()) {
+            viewPager.setCurrentItem(getitem(1), true);
+        }
+
+        else if (id == skip_btn.getId()){
+            viewPager.setCurrentItem(getitem(1), true);
+        }
     }
 }

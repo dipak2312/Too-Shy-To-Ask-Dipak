@@ -2,22 +2,23 @@ package com.example.tooshytoask.AuthModels;
 
 public class OtpAuthModel {
 
-    private String phone;
-    private String otp;
+    private String mobile_no;
+    private String otp_no;
 
-    public String getPhone() {
-        return phone;
+
+    public String getMobile_no() {
+        return mobile_no;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMobile_no(String mobile_no) {
+        this.mobile_no = mobile_no;
     }
 
-    public String getOtp() {
-        return otp;
+    public String getOtp_no() {
+        return otp_no;
     }
 
-    public void setOtp(String otp) {
-        this.otp = otp;
+    public void setOtp_no(String otp_no) {
+        this.otp_no = otp_no;
     }
 }

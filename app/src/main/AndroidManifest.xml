@@ -20,6 +20,34 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".Activity.Setting.UpdateProfile.UpdateAvatarActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.Setting.UpdateProfile.UpdatePersonalInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.Setting.UpdateProfile.UpdateHealthActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.Setting.UpdateProfile.UpdateInterestActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.Setting.HelpActivity"
             android:exported="false">
             <meta-data
@@ -69,13 +97,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.Landing.OtpVerificationActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -89,8 +120,8 @@
         </activity>
         <activity
             android:name=".Activity.Landing.SignInActivity"
-            android:exported="true">
-
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
