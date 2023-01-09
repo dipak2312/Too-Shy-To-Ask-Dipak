@@ -68,6 +68,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             intent.putExtra("phone", etMobile.getText().toString().trim());
             startActivity(intent);*/
 
+            //Intent intent = new Intent(context, OtpVerificationActivity.class);
+
             if (etMobile.getText().toString().trim().equals("")) {
                 etMobile.requestFocus();
                 etMobile.setError("Mobile number id is required");
