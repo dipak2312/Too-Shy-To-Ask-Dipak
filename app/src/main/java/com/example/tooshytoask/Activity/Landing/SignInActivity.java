@@ -97,7 +97,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onNext(SignInResponse signinResponse) {
                         String msg = signinResponse.getMsg();
-                        if (msg.equals("OTP Send Successfully")) {
+                        if (msg.equals("OTP Send Successfully.")) {
                             //Open OTP Screen
                             Intent intent = new Intent(context, OtpVerificationActivity.class);
                             intent.putExtra("phone", etMobile.getText().toString().trim());

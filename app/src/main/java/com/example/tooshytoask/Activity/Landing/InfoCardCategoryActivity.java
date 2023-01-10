@@ -6,26 +6,19 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Adapters.InfoCardAdapter;
-import com.example.tooshytoask.Adapters.ViewPagerAdapter;
+import com.example.tooshytoask.Interface.CategoryListener;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 
-import java.util.ArrayList;
-
-public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
+public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, CategoryListener {
     Context context;
     SPManager spManager;
     ProgressBar progressbar_completed;
@@ -133,5 +126,21 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         else if (id == skip_btn.getId()){
             viewPager.setCurrentItem(getitem(1), true);
         }
+    }
+
+    @Override
+    public void onSelectedCategory(Boolean isSelected) {
+        if (isSelected){
+            next_btn.setVisibility(View.VISIBLE);
+            //next_btn.setBackgroundResource(R.drawable.circle_button_active);
+        } else {
+            next_btn.setVisibility(View.GONE);
+            //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+        }
+    }
+
+    @Override
+    public void onDisSelectedCategory(Boolean disSelected) {
+
     }
 }

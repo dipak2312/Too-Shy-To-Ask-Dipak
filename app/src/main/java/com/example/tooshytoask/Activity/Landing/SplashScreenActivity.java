@@ -1,11 +1,19 @@
 package com.example.tooshytoask.Activity.Landing;
+import static android.content.ContentValues.TAG;
+
+import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -14,6 +22,14 @@ import androidx.core.content.ContextCompat;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +43,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     SPManager spManager;
     Context context;
     BiometricManager biometricManager;
+    private final int UPDATE_CODE = 22;
+    AppUpdateManager appUpdateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +56,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);
         //openFingerPrint();
+        checkUpdate();
         checkPreviousActivityStatus();
 
 
@@ -88,6 +107,74 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .build();
 
         biometricPrompt.authenticate(promptInfo);
+    }
+
+    private void checkUpdate(){
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(context);
+
+        Task<AppUpdateInfo> task = appUpdateManager.getAppUpdateInfo();
+        task.addOnSuccessListener((AppUpdateInfo appUpdateInfo) -> {
+
+            if (appUpdateInfo.updateAvailability()== UpdateAvailability.UPDATE_AVAILABLE &&
+                    appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)){
+                try
+                {
+                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, IMMEDIATE,
+                            SplashScreenActivity.this,UPDATE_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "OnSuccess: "+ e.toString());
+                }
+            }
+        });
+        appUpdateManager.registerListener(listener);
+    }
+    InstallStateUpdatedListener listener = installState -> {
+        if (installState.installStatus() == InstallStatus.DOWNLOADED){
+            popup();
+        }
+    };
+
+    @Override
+    protected void onStop() {
+        if (appUpdateManager!=null) appUpdateManager.unregisterListener(listener);
+        super.onStop();
+    }
+
+    private void popup() {
+
+        Snackbar snackbar = Snackbar.make(
+                findViewById(android.R.id.content),
+                "App update almost done",
+                Snackbar.LENGTH_INDEFINITE
+        );
+
+        snackbar.setAction("Reload", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                appUpdateManager.completeUpdate();
+            }
+        });
+        snackbar.setTextColor(Color.parseColor("#FF0000"));
+        snackbar.show();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null) return;
+
+        if (requestCode == UPDATE_CODE){
+            Toast.makeText(context, "Downloading Start", Toast.LENGTH_SHORT).show();
+
+            if (requestCode == RESULT_OK){
+                Log.d(TAG, "onActivityResult: Update flow failed" + resultCode);
+
+            }
+        }
     }
 
     private void checkPreviousActivityStatus() {

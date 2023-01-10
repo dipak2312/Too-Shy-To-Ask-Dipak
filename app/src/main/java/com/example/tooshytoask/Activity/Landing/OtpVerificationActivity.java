@@ -69,9 +69,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         rel_back.setOnClickListener(this);
         otp_img = findViewById(R.id.otp_img);
         mobile_no = findViewById(R.id.mobile_no);
-        /*Intent intent = getIntent();
+        Intent intent = getIntent();
         String str = intent.getStringExtra("phone");
-        mobile_no.setText(str);*/
+        mobile_no.setText(str);
 
         progress_circular = findViewById(R.id.progress_circular);
         progressBar();
@@ -122,9 +122,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().length()==4){
 
-                }
+
 
             }
 
@@ -200,13 +199,15 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 Toast.makeText(context, "OTP is required", Toast.LENGTH_SHORT).show();
 
             } else if (id == btn_resend_otp.getId()) {
-                sendOtpApi();
-                progressBar();
+
                 countDownTimer();
             } else if (id == rel_back.getId()) {
                 Intent intent = new Intent(context, SignInActivity.class);
                 startActivity(intent);
                 finish();
+            } else if (id == btn_resend_otp.getId()) {
+                //sendOtpApi();
+                progressBar();
             }
             else {
                 verifyOTP();
