@@ -16,9 +16,10 @@ import android.widget.TextView;
 import com.example.tooshytoask.Adapters.InfoCardAdapter;
 import com.example.tooshytoask.Interface.CategoryListener;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Interface.ClickListener;
 import com.example.tooshytoask.R;
 
-public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, CategoryListener {
+public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, CategoryListener, ClickListener {
     Context context;
     SPManager spManager;
     ProgressBar progressbar_completed;
@@ -29,7 +30,8 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
     ImageButton next_btn;
     TextView skip_btn;
     private boolean enabled;
-    String status;
+    String status="", myPosition = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +143,11 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
 
     @Override
     public void onDisSelectedCategory(Boolean disSelected) {
+
+    }
+
+    @Override
+    public void onClick() {
 
     }
 }

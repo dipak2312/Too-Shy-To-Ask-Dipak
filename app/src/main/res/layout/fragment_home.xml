@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".Fragment.HomeFragment">
-
-
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"
@@ -38,32 +36,36 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_35"
+                android:layout_height="@dimen/margin_40"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/margin_20"
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:id="@+id/search"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_25"
                     android:src="@drawable/search"/>
 
                 <ImageView
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:id="@+id/notification"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_25"
                     android:layout_marginStart="@dimen/margin_15"
                     android:src="@drawable/notification"/>
 
                 <ImageView
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:id="@+id/select_Language"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_25"
                     android:layout_marginStart="@dimen/margin_15"
                     android:src="@drawable/language_icon"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:id="@+id/update_profile"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_25"
                     android:layout_marginStart="@dimen/margin_15"
                     android:src="@drawable/avatar1"/>
 
@@ -108,13 +110,37 @@
     </androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_150"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/rel_recy_status"
+                android:layout_marginTop="@dimen/margin_20">
+
+            </androidx.viewpager.widget.ViewPager>
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/indicator_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:dotsColor="@color/home_banner_inactive"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="@dimen/margin_6"
+                app:dotsSpacing="3dp"
+                app:dotsWidthFactor="2.5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_150"
+                android:layout_below="@id/rel_recy_status"
+                app:selectedDotColor="@color/active" />
 
      <LinearLayout
          android:id="@+id/recommended_blogs_lay"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_below="@id/rel_recy_status"
+         android:layout_below="@+id/view_pager_img"
          android:orientation="vertical"
+         android:visibility="gone"
          android:layout_marginTop="@dimen/margin_20"
          android:layout_marginStart="@dimen/margin_20">
 
@@ -158,6 +184,7 @@
                 android:id="@+id/recently_blogs_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@id/game_banner"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/margin_20"

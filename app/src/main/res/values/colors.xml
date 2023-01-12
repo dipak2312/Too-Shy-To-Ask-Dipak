@@ -23,9 +23,14 @@
 
     /indicator color
     <color name="inactive">#767676</color>
+    <color name="home_banner_inactive">#C9C9C9</color>
     <color name="active">#AC1479</color>
 
     //gender border
     <color name="gender_inactive">#2B2B2B</color>
     <color name="gender_active">#AC1479</color>
+
+    //story
+    <color name="story_progress_background">#12AC9D</color>
+    <color name="story_progress">#D3E1E3</color>
 </resources>

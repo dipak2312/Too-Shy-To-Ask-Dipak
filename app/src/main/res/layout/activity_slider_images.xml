@@ -56,7 +56,7 @@
             android:gravity="center"
             android:text="@string/get_started"
             android:fontFamily="@font/worksansbold"
-            android:background="@drawable/con_btn"
+            android:background="@drawable/active_con_btn"
             android:textSize="@dimen/text_size14"
             android:textColor="@color/white"
             android:layout_centerInParent="true"/>

@@ -137,9 +137,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         otp_view.setItemBackground(getResources().getDrawable(R.drawable.pin_border));
         otp_view.setItemBackgroundResources(R.drawable.pin_border);
         otp_view.setHideLineWhenFilled(false);
-        otp_view.setPasswordHidden(false);
+        //otp_view.setPasswordHidden(false);
 
-        otp_view.setTransformationMethod(new PasswordTransformationMethod());
+        //otp_view.setTransformationMethod(new PasswordTransformationMethod());
     }
 
 
@@ -194,11 +194,11 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
            /* Intent intent = new Intent(context, SignUpActivity.class);
             startActivity(intent);*/
 
-            if (user_otp.equals("")) {
+            /*if (user_otp.equals("")) {
 
                 Toast.makeText(context, "OTP is required", Toast.LENGTH_SHORT).show();
 
-            } else if (id == btn_resend_otp.getId()) {
+            } else */if (id == btn_resend_otp.getId()) {
 
                 countDownTimer();
             } else if (id == rel_back.getId()) {
@@ -206,7 +206,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 startActivity(intent);
                 finish();
             } else if (id == btn_resend_otp.getId()) {
-                //sendOtpApi();
+                sendOtpApi();
                 progressBar();
             }
             else {
@@ -235,7 +235,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                         String msg = signInResponse.getMsg();
 
-                        if (msg.equals("OTP Send Successfully.")) {
+                        if (msg.equals("OTP Send Successfully")) {
 
                             countDownTimer();
                             Toast.makeText(context, msg,  Toast.LENGTH_SHORT).show();
@@ -280,7 +280,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                         String msg = otpInResponse.getMsg();
                         Log.v("--------------",otpInResponse.toString());
 
-                        if (msg.equalsIgnoreCase("User not exits")) {
+                        if (msg.equalsIgnoreCase("User not exits.")) {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                             //Open OTP Screen
                             Intent intent = new Intent(context, SignUpActivity.class);
@@ -288,15 +288,17 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                        } else if(msg.equalsIgnoreCase("Please enter valid OTP"))
+                        } else if(msg.equalsIgnoreCase("Please enter valid OTP."))
                         {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }else if (otpInResponse.getUser_id().length() > 1) {
+                        } else if(msg.equalsIgnoreCase("Your OTP Expired."))
+                        {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        } else if (otpInResponse.getUser_id().length() > 1) {
                             //open home screen
 
                             spManager.setFirstName(otpInResponse.getFirst_name());
                             spManager.setLastName(otpInResponse.getLast_name());
-                            spManager.setEmail(otpInResponse.getEmail());
                             spManager.setAge(otpInResponse.getDob());
                             spManager.setGender(otpInResponse.getGender());
                             spManager.setPhone(otpInResponse.getPhone());

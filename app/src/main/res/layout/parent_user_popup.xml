@@ -37,12 +37,14 @@
             android:gravity="center">
 
         <ImageView
+            android:id="@+id/user_icon"
             android:layout_width="@dimen/margin_20"
             android:layout_height="@dimen/margin_20"
             android:src="@drawable/account_active"
             android:layout_marginEnd="@dimen/margin_10"/>
         
         <TextView
+            android:id="@+id/user_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/user"
@@ -64,12 +66,14 @@
         android:background="@drawable/user_border">
 
         <ImageView
+            android:id="@+id/parent_icon"
             android:layout_width="@dimen/margin_20"
             android:layout_height="@dimen/margin_20"
             android:src="@drawable/family_inactive"
             android:layout_marginEnd="@dimen/margin_10"/>
 
         <TextView
+            android:id="@+id/parent_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/parent"
@@ -98,7 +102,7 @@
                 android:layout_height="@dimen/margin_48"
                 android:textColor="@color/white"
                 android:fontFamily="@font/worksansbold"
-                android:background="@drawable/con_btn"
+                android:background="@drawable/active_con_btn"
                 android:textSize="@dimen/text_size14"
                 android:text="@string/next"/>
 

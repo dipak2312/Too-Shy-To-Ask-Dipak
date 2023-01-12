@@ -14,11 +14,11 @@ public interface WebServices {
     //web_services/login_with_otp.php
 
     @Headers("Content-Type: application/json")
-    @POST("web_services/login_with_otp.php")
+    @POST("api/send_otp")
     Observable<SignInResponse> signIn(@Body SignInAuthModel model);
 
     @Headers("Content-Type: application/json")
-    @POST("apis/verify_otp")
+    @POST("api/verify_otp")
     Observable<OtpInResponse> sendOtp(@Body OtpAuthModel model);
 
 }

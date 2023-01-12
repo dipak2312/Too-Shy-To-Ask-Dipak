@@ -21,9 +21,31 @@ public class SPManager {
     public static final String USERPROFILE = "profile";
     public static final String TSTALOGINSTATUS="tstaloginstatus";
     public static final String LANGUAGE="language";
+    public static final String USER="user";
 
 
-    String firstName,lastName,Email,Gender,Age,Phone,tstaLoginStatus,userId,userPhoto,language;
+    String firstName;
+    String lastName;
+    String Email;
+    String Gender;
+    String Age;
+    String Phone;
+    String tstaLoginStatus;
+    String userId;
+    String userPhoto;
+    String language;
+    String user;
+
+
+    public String getUser() {
+        user = pref.getString(USER, "");
+        return user;
+    }
+
+    public void setUser(String user) {
+        editor.putString(USER, user);
+        editor.commit();
+    }
 
     public SPManager(Context context) {
         this.context = context;

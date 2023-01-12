@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Priority;
@@ -63,19 +64,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         int id = view.getId();
 
         if (id == btn_signin.getId()) {
-
-            /*Intent intent = new Intent(context, OtpVerificationActivity.class);
-            intent.putExtra("phone", etMobile.getText().toString().trim());
-            startActivity(intent);*/
-
-            //Intent intent = new Intent(context, OtpVerificationActivity.class);
-
-            if (etMobile.getText().toString().trim().equals("")) {
-                etMobile.requestFocus();
-                etMobile.setError("Mobile number id is required");
-            } else {
                 loginWithOTP();
-            }
+        } else if (id == guest_login.getId()) {
+            Intent intent = new Intent(context, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -83,29 +76,25 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private void loginWithOTP() {
 
-        dialog.dismiss("");
         dialog.show("");
 
         SignInAuthModel signinmodel = new SignInAuthModel();
-        signinmodel.setMobile_no (etMobile.getText().toString().replace("+91 ", "").trim());
-
+        signinmodel.setMobile_no (etMobile.getText().toString().trim());
 
         WebServiceModel.getRestApi().signIn(signinmodel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<SignInResponse>() {
                     @Override
-                    public void onNext(SignInResponse signinResponse) {
-                        String msg = signinResponse.getMsg();
-                        if (msg.equals("OTP Send Successfully.")) {
-                            //Open OTP Screen
+                    public void onNext(SignInResponse signInResponse) {
+                        String msg = signInResponse.getMsg();
+                        if (msg.equals("OTP Send Successfully")){
                             Intent intent = new Intent(context, OtpVerificationActivity.class);
                             intent.putExtra("phone", etMobile.getText().toString().trim());
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivityForResult(intent, 1);
-                            //startActivity(intent);
-                            //finish();
-                        } else {
+                        }
+                        else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss("");
@@ -113,7 +102,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                     @Override
                     public void onError(Throwable e) {
-                        //Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "The mobile no field is required.", Toast.LENGTH_SHORT).show();
                         dialog.dismiss("");
                     }
 
@@ -121,7 +110,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete() {
 
                     }
-
                 });
     }
 }

@@ -118,7 +118,7 @@
                     android:includeFontPadding="false"
                     android:fontFamily="@font/worksansbold"
                     android:text="@string/continue_btn"
-                    android:background="@drawable/con_btn"
+                    android:background="@drawable/active_con_btn"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size14" />
 

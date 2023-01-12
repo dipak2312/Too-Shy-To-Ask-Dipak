@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.tooshytoask.Activity.Setting.NotificationsActivity;
 import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
@@ -55,30 +57,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         context = SignUpActivity.this;
         spManager = new SPManager(context);
 
-        /*BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.parent_user_popup);
-        bottomSheetDialog.setCancelable(false);
-
-        LinearLayout user = bottomSheetDialog.findViewById(R.id.user);
-        LinearLayout parent = bottomSheetDialog.findViewById(R.id.parent);
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                bottomSheetDialog.dismiss();
-
-            }
-        });
-
-        parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                bottomSheetDialog.dismiss();
-            }
-        });
-
-        bottomSheetDialog.show();*/
+        userPopup();
 
         edit_first_name = findViewById(R.id.edit_first_name);
         edit_last_name = findViewById(R.id.edit_last_name);
@@ -173,5 +152,70 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         return true;
+    }
+
+    private void userPopup(){
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.parent_user_popup);
+        //bottomSheetDialog.setCancelable(false);
+
+        LinearLayout user = bottomSheetDialog.findViewById(R.id.user);
+        LinearLayout parent = bottomSheetDialog.findViewById(R.id.parent);
+        Button btn_submit = bottomSheetDialog.findViewById(R.id.btn_submit);
+        ImageView user_icon = bottomSheetDialog.findViewById(R.id.user_icon);
+        ImageView parent_icon = bottomSheetDialog.findViewById(R.id.parent_icon);
+        TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
+        TextView parent_text = bottomSheetDialog.findViewById(R.id.parent_text);
+
+        //String selectValue=spManager.getLanguage();
+
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                user.setBackgroundResource(R.drawable.gender_border_active);
+                user_icon.setImageResource(R.drawable.account_inactive);
+                user_text.setTextColor(ContextCompat.getColor(context, R.color.white));
+                parent.setBackgroundResource(R.drawable.gender_border_inactive);
+                parent_icon.setImageResource(R.drawable.family_inactive);
+                parent_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+
+            }
+        });
+
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parent.setBackgroundResource(R.drawable.gender_border_active);
+                parent_icon.setImageResource(R.drawable.family_active);
+                parent_text.setTextColor(ContextCompat.getColor(context, R.color.white));
+                user.setBackgroundResource(R.drawable.gender_border_inactive);
+                user_icon.setImageResource(R.drawable.account_active);
+                user_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+
+
+            }
+        });
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                spManager.setUser("true");
+
+                Intent intent = new Intent(context, SignUpActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+                bottomSheetDialog.dismiss();
+
+            }
+        });
+
+        bottomSheetDialog.show();
+
     }
 }

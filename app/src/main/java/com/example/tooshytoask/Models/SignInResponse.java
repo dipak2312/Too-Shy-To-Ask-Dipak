@@ -4,6 +4,8 @@ public class SignInResponse {
 
     private String msg;
     private String code;
+    private String errors;
+
 
 
     public String getMsg() {
@@ -23,4 +25,11 @@ public class SignInResponse {
     }
 
 
+    public String getErrors() {
+        return errors;
+    }
+
+    public void setErrors(String errors) {
+        this.errors = errors;
+    }
 }

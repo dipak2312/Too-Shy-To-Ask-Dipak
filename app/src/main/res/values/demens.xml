@@ -44,6 +44,7 @@
     <dimen name="editText_default_padding">10.0dp</dimen>
     <dimen name="margin_5">5.0dp</dimen>
     <dimen name="margin_2">2.0dp</dimen>
+    <dimen name="margin_1">1.0dp</dimen>
     <dimen name="margin_8">8.0dp</dimen>
     <dimen name="margin_6">6.0dp</dimen>
     <dimen name="margin_20">20.0dp</dimen>

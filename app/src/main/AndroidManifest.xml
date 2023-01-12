@@ -19,6 +19,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
+
+        <activity
+            android:name=".Activity.Story.StoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Activity.Blogs.AllBlogsActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Activity.Setting.UpdateProfile.UpdateAvatarActivity"
             android:exported="false">
@@ -78,8 +94,6 @@
         <activity
             android:name=".Activity.Landing.InfoCardCategoryActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -94,12 +108,12 @@
         <activity
             android:name=".Activity.Home.HomeActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -124,8 +138,6 @@
             android:name=".Activity.Landing.SignInActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

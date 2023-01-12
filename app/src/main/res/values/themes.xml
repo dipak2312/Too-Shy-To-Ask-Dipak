@@ -23,7 +23,8 @@
 
     <style name="radiusimageview" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/margin_10</item>
+        <item name="cornerSizeTopLeft">@dimen/margin_10</item>
+        <item name="cornerSizeTopRight">@dimen/margin_10</item>
         <item name="color">@color/resend_color</item>
     </style>
 

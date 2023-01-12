@@ -362,7 +362,7 @@
         android:includeFontPadding="false"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:background="@drawable/con_btn"
+        android:background="@drawable/active_con_btn"
         android:layout_marginBottom="@dimen/margin_30"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
