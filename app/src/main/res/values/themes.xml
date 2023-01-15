@@ -21,10 +21,16 @@
         <item name="color">@color/resend_color</item>
     </style>
 
+    <style name="radiusimage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/margin_5</item>
+        <item name="color">@color/resend_color</item>
+    </style>
+
     <style name="radiusimageview" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/margin_10</item>
-        <item name="cornerSizeTopRight">@dimen/margin_10</item>
+        <item name="cornerSizeTopLeft">@dimen/margin_5</item>
+        <item name="cornerSizeTopRight">@dimen/margin_5</item>
         <item name="color">@color/resend_color</item>
     </style>
 

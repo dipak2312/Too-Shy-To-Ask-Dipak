@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_marginStart="@dimen/margin_20"
+    android:layout_marginEnd="@dimen/margin_20"
+    tools:context=".Activity.Landing.LanguageActivity">
+
+    <LinearLayout
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/margin_80">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_your_preferred_language"
+            android:layout_marginTop="@dimen/margin_60"
+            android:textSize="@dimen/text_size24"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansregular"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_feeds_will_be_served_basis_on_your_selection"
+            android:layout_marginTop="@dimen/margin_15"
+            android:textSize="@dimen/text_size15"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansregular"/>
+
+    </LinearLayout>
+
+
+        <RadioGroup
+            android:id="@+id/radioGrp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lin_title"
+            android:layout_marginTop="@dimen/margin_20"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/eng_lang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:buttonTint="@color/purple"
+                android:checked="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size15"
+                android:fontFamily="@font/worksanssemibold"
+                android:layoutDirection="rtl"
+                android:text="@string/english"
+                android:onClick="radioButtobClickEvent"/>
+
+            <RadioButton
+                android:id="@+id/hindi_lang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:buttonTint="@color/purple"
+                android:checked="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size15"
+                android:fontFamily="@font/worksanssemibold"
+                android:layoutDirection="rtl"
+                android:onClick="radioButtobClickEvent"
+                android:text="@string/hindi"/>
+
+            <RadioButton
+                android:id="@+id/marathi_lang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:buttonTint="@color/purple"
+                android:checked="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size15"
+                android:layoutDirection="rtl"
+                android:fontFamily="@font/worksanssemibold"
+                android:onClick="radioButtobClickEvent"
+                android:text="@string/marathi"/>
+
+        </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginTop="@dimen/margin_40"
+        android:includeFontPadding="false"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@drawable/active_con_btn"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size14" />
+
+</RelativeLayout>

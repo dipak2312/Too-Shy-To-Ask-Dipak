@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Setting.UpdateProfile.UpdateInterestActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansregular"
+                android:text="Update your Interests"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top_bar"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/category_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_40">
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:includeFontPadding="false"
+            android:text="UPDATE"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansbold"
+            android:background="@drawable/active_con_btn"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

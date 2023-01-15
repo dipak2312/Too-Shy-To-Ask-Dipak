@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Search.SearchActivity">
+
+
+        <RelativeLayout
+            android:id="@+id/search_lay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_30"
+            android:background="@drawable/language_background_active">
+
+            <ImageView
+                android:id="@+id/img_search"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20"
+                android:src="@drawable/search">
+
+            </ImageView>
+
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_toEndOf="@+id/img_search"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:layout_marginRight="@dimen/margin_12"
+                android:fontFamily="@font/worksansregular"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:imeOptions="actionSearch"
+                android:hint="Search..."
+                android:textColorHint="@color/black"
+                android:textSize="@dimen/text_size12" />
+
+
+            </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/txt_empty_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Oops ! No products found."
+        android:textColor="@color/black"
+        android:alpha="0.8"
+        android:visibility="gone"
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size16">
+
+    </TextView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_lay"
+        android:layout_margin="@dimen/margin_20">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_search"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+</RelativeLayout>
+
+</RelativeLayout>

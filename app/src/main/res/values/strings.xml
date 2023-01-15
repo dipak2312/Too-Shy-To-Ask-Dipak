@@ -78,5 +78,10 @@
     <string name="profile">Profile</string>
     <string name="notifications">Notifications</string>
 
+    //language button name
+    <string name="चुनें">चुनें</string>
+    <string name="निवडा">निवडा</string>
+    <string name="select">Select</string>
+
 
 </resources>

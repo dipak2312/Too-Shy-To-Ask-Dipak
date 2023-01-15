@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/status_lay"
+        android:layout_width="@dimen/margin_70"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_5"
+        android:background="@drawable/status_background">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/status_img"
+        android:layout_width="@dimen/margin_70"
+        android:layout_height="@dimen/margin_75"
+        android:background="@drawable/status_background"
+        android:padding="@dimen/margin_3"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/status1"
+        app:shapeAppearanceOverlay="@style/radiusimage"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/status_title"
+        android:layout_width="@dimen/margin_70"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginStart="@dimen/margin_2"
+        android:layout_marginEnd="@dimen/margin_2"
+        android:text="Reproduction"
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size10"
+        android:textColor="@color/black"
+        android:layout_below="@id/status_lay"/>
+
+</RelativeLayout>

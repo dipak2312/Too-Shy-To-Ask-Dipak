@@ -10,13 +10,13 @@
     <RelativeLayout
         android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_70"
+        android:layout_height="@dimen/margin_60"
         android:background="@drawable/infocard_shadow"
         android:elevation="@dimen/margin_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_70"
+            android:layout_height="@dimen/margin_60"
             android:background="@color/white">
 
             <RelativeLayout
@@ -44,21 +44,21 @@
 
                 <ImageView
                     android:id="@+id/search"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
                     android:src="@drawable/search"/>
 
                 <ImageView
                     android:id="@+id/notification"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
                     android:layout_marginStart="@dimen/margin_15"
                     android:src="@drawable/notification"/>
 
                 <ImageView
                     android:id="@+id/select_Language"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
                     android:layout_marginStart="@dimen/margin_15"
                     android:src="@drawable/language_icon"/>
 
@@ -87,7 +87,7 @@
                android:id="@+id/story_txt"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Your daily Insights"
+               android:text="Your Daily Insights"
                android:layout_marginTop="@dimen/margin_20"
                android:fontFamily="@font/worksansregular"
                android:textColor="@color/black"
@@ -110,15 +110,26 @@
     </androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>
-            <androidx.viewpager.widget.ViewPager
+
+            <RelativeLayout
+                android:id="@+id/rel_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_below="@id/rel_recy_status">
+
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager_img"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_150"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/rel_recy_status"
+                android:paddingEnd="@dimen/margin_20"
+
                 android:layout_marginTop="@dimen/margin_20">
 
-            </androidx.viewpager.widget.ViewPager>
+            </androidx.viewpager2.widget.ViewPager2>
+
+            </RelativeLayout>
 
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                 android:id="@+id/indicator_layout"
@@ -127,20 +138,19 @@
                 app:dotsColor="@color/home_banner_inactive"
                 app:dotsCornerRadius="8dp"
                 app:dotsSize="@dimen/margin_6"
+                android:layout_below="@+id/rel_view_pager"
                 app:dotsSpacing="3dp"
-                app:dotsWidthFactor="2.5"
+                app:dotsWidthFactor="1"
+                android:layout_marginTop="@dimen/margin_5"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/margin_150"
-                android:layout_below="@id/rel_recy_status"
                 app:selectedDotColor="@color/active" />
 
      <LinearLayout
          android:id="@+id/recommended_blogs_lay"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_below="@+id/view_pager_img"
+         android:layout_below="@+id/indicator_layout"
          android:orientation="vertical"
-         android:visibility="gone"
          android:layout_marginTop="@dimen/margin_20"
          android:layout_marginStart="@dimen/margin_20">
 
@@ -184,7 +194,6 @@
                 android:id="@+id/recently_blogs_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:layout_below="@id/game_banner"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/margin_20"
@@ -202,6 +211,7 @@
                     android:id="@+id/rel_recy_recently_blogs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_15">
 
                     <androidx.recyclerview.widget.RecyclerView

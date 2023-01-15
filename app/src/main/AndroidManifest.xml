@@ -19,7 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
-
+        <activity
+            android:name=".Activity.Search.SearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Activity.Story.StoryActivity"
             android:exported="false">
@@ -27,7 +33,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".Activity.Blogs.AllBlogsActivity"
             android:exported="false">

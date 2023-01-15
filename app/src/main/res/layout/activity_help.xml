@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activity.Setting.HelpActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/help"
+                android:textColor="@color/black"
+                android:fontFamily="@font/worksansmedium"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/text_size18"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/help_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select category"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_20"
+        android:fontFamily="@font/worksansregular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size14"
+        android:layout_marginStart="@dimen/margin_20"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_help_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/help_title"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/help_category_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_65"
+        android:background="@drawable/infocard_shadow"
+        android:layout_below="@id/rel_help_category"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:elevation="@dimen/margin_5">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_65"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/help_background">
+
+
+            <ImageView
+                android:id="@+id/help_img"
+                android:layout_width="@dimen/margin_35"
+                android:layout_height="@dimen/margin_35"
+                android:layout_marginStart="@dimen/margin_10"
+                android:src="@drawable/need_help"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10"
+                android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/help_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Need help from the expert?"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansregular"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/help_support_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get instant help from our customer support team"
+                    android:textSize="@dimen/text_size10"
+                    android:fontFamily="@font/worksanslight"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    </RelativeLayout>

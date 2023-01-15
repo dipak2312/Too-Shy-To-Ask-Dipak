@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Setting.UpdateProfile.UpdateHealthActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansregular"
+                android:text="Update your Health Issues"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15">
+
+        <TextView
+            android:id="@+id/health_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you have any health issues"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/health_issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/health_title"
+            android:layout_marginTop="@dimen/margin_15">
+
+            <Button
+                android:id="@+id/yes_btn"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_45"
+                android:text="Yes"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14"
+                android:background="@drawable/gender_border_inactive"/>
+
+            <Button
+                android:id="@+id/no_btn"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_45"
+                android:layout_marginStart="@dimen/margin_15"
+                android:background="@drawable/gender_border_inactive"
+                android:text="No"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/health"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/health_issue"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/margin_20">
+
+        <TextView
+            android:id="@+id/issue_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you have any health issues"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/issue_title"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_15">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/throid_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40"
+                    android:text="Throid"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/worksansregular"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_20"
+                    android:textSize="@dimen/text_size14"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:background="@drawable/health_inactive"/>
+
+                <TextView
+                    android:id="@+id/mental_health_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40"
+                    android:text="Mental Health"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_20"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:background="@drawable/health_inactive"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/painful_periods_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40"
+                    android:text="Painful Periods"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_20"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:background="@drawable/health_inactive"/>
+
+                <TextView
+                    android:id="@+id/irregular_periods_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_20"
+                    android:text="Irregular Periods"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:background="@drawable/health_inactive"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/pcos_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_20"
+                    android:text="PCOS/PCOD"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:background="@drawable/health_inactive"/>
+
+                <TextView
+                    android:id="@+id/fibroids_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_40"
+                    android:paddingEnd="@dimen/margin_20"
+                    android:paddingStart="@dimen/margin_20"
+                    android:text="Fibroids"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:background="@drawable/health_inactive"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </RelativeLayout>
+
+        <!--<androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/health_recy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/issue_title"
+            android:layout_marginTop="@dimen/margin_20">
+
+        </androidx.recyclerview.widget.RecyclerView>-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_40">
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:includeFontPadding="false"
+            android:text="UPDATE"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansbold"
+            android:background="@drawable/active_con_btn"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
