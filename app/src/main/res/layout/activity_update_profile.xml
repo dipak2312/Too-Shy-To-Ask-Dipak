@@ -5,17 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/profile_lay"
     android:background="@color/transparent"
     tools:context=".Activity.Setting.UpdateProfileActivity">
 
-    <!--<FrameLayout
-        android:id="@+id/interestLay"
+    <FrameLayout
+        android:id="@+id/profile_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    </FrameLayout>-->
+    </FrameLayout>
 
 
     <RelativeLayout
@@ -38,6 +37,7 @@
                 android:layout_marginStart="@dimen/margin_20">
 
                 <ImageView
+                    android:id="@+id/back_btn"
                     android:layout_width="@dimen/margin_20"
                     android:layout_height="@dimen/margin_20"
                     android:layout_centerVertical="true"
@@ -57,10 +57,16 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/interestLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollIndicators="end"
+        android:scrollbarSize="@dimen/margin_3"
+        android:scrollbarThumbVertical="@color/purple"
+        android:layout_marginEnd="@dimen/margin_2"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true"
         android:layout_below="@+id/rel_top_bar"
         android:layout_marginTop="@dimen/margin_2">
 
@@ -522,7 +528,7 @@
 
         </RelativeLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 
 </RelativeLayout>

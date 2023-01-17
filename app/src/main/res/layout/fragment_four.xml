@@ -9,6 +9,7 @@
     tools:context=".Fragment.InfoCard.FourFragment">
 
     <LinearLayout
+        android:id="@+id/lin_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -174,143 +175,15 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="@drawable/view_background"
-            android:layout_marginTop="@dimen/margin_20">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_65"
-                android:background="@drawable/background">
-
-                <TextView
-                    android:id="@+id/country"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Country"
-                    android:textColor="@color/purple"
-                    android:layout_marginStart="@dimen/margin_15"
-                    android:textSize="@dimen/text_size12"
-                    android:layout_marginTop="@dimen/margin_8"
-                    android:fontFamily="@font/worksanslight"/>
-
-                <Spinner
-                    android:id="@+id/spinner_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_35"
-                    android:layout_below="@id/country"
-                    android:layout_centerVertical="true"
-                    android:spinnerMode="dropdown"
-                    android:layout_marginTop="@dimen/margin_3"
-                    android:layout_marginBottom="@dimen/margin_8"
-                    android:fontFamily="@font/worksansmedium"
-                    android:background="@drawable/border"
-                    android:textSize="@dimen/text_size16"/>
-
-                <!--<EditText
-                    android:id="@+id/edit_country"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_35"
-                    android:layout_below="@id/country"
-                    android:autofillHints="emailAddress"
-                    android:layout_marginTop="@dimen/margin_3"
-                    android:layout_marginBottom="@dimen/margin_8"
-                    android:fontFamily="@font/worksansmedium"
-                    android:background="@drawable/border"
-                    android:inputType="textWebEmailAddress"
-                    android:layout_marginStart="@dimen/margin_15"
-                    android:textSize="@dimen/text_size16" />-->
-
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="@drawable/view_background"
-            android:layout_marginTop="@dimen/margin_20">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_65"
-                android:background="@drawable/background">
-
-                <TextView
-                    android:id="@+id/state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="State"
-                    android:textColor="@color/purple"
-                    android:layout_marginStart="@dimen/margin_15"
-                    android:textSize="@dimen/text_size12"
-                    android:layout_marginTop="@dimen/margin_8"
-                    android:fontFamily="@font/worksanslight"/>
-
-                <EditText
-                    android:id="@+id/edit_state"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_35"
-                    android:layout_below="@id/state"
-                    android:layout_marginTop="@dimen/margin_3"
-                    android:layout_marginBottom="@dimen/margin_8"
-                    android:fontFamily="@font/worksansmedium"
-                    android:background="@drawable/border"
-                    android:inputType="textWebEmailAddress"
-                    android:layout_marginStart="@dimen/margin_15"
-                    android:textSize="@dimen/text_size16" />
-
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="@drawable/view_background"
-            android:layout_marginTop="@dimen/margin_20">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_65"
-                android:background="@drawable/background">
-
-                <TextView
-                    android:id="@+id/city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="City"
-                    android:textColor="@color/purple"
-                    android:layout_marginStart="@dimen/margin_15"
-                    android:textSize="@dimen/text_size12"
-                    android:layout_marginTop="@dimen/margin_8"
-                    android:fontFamily="@font/worksanslight"/>
-
-                <EditText
-                    android:id="@+id/edit_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_35"
-                    android:layout_below="@id/city"
-                    android:autofillHints="emailAddress"
-                    android:layout_marginTop="@dimen/margin_3"
-                    android:layout_marginBottom="@dimen/margin_8"
-                    android:fontFamily="@font/worksansmedium"
-                    android:background="@drawable/border"
-                    android:inputType="textWebEmailAddress"
-                    android:layout_marginStart="@dimen/margin_15"
-                    android:textSize="@dimen/text_size16" />
-
-            </RelativeLayout>
-        </RelativeLayout>
 
 
     </LinearLayout>
 
-    <!--<RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/margin_20"
         android:layout_marginBottom="@dimen/margin_40">
 
         <TextView
@@ -328,10 +201,10 @@
             android:id="@+id/next_btn"
             android:layout_width="@dimen/margin_40"
             android:layout_height="@dimen/margin_40"
-            android:background="@drawable/circle_button"
+            android:background="@drawable/circle_button_active"
             android:src="@drawable/arrow_right"
             android:layout_alignParentEnd="true"/>
 
-    </RelativeLayout>-->
+    </RelativeLayout>
 
 </RelativeLayout>

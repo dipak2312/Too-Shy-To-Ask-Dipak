@@ -117,8 +117,10 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
 
         } if (id == skip_btn.getId()){
             Intent intent = new Intent(context, LanguageActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            //finish();
+            finish();
         }
         }
 

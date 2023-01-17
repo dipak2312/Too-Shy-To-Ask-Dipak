@@ -11,26 +11,27 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Interface.CategoryListener;
-import com.example.tooshytoask.Interface.ClickListener;
+import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
-public class OneFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, CategoryListener, ClickListener {
+public class OneFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnClickListner, ClickListener {
     Context context;
     SPManager spManager;
     RecyclerView recyclerView, category_recy;
     CategoryAdapter adapter;
-    ArrayList<CategoryItem> categoryItems;
+    ArrayList<CategoryItem> categoryItem;
     TextView skip_btn;
-    Button next_btn;
+    ImageButton next_btn;
+    ClickListener clickListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,38 +41,57 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         context = getActivity();
         spManager = new SPManager(context);
-        //next_btn = view.findViewById(R.id.next_btn);
-        //next_btn.setOnClickListener(this);
+        next_btn = view.findViewById(R.id.btnNext);
+        next_btn.setOnClickListener(this);
         skip_btn = view.findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
+        clickListener=(ClickListener)context;
+        clickListener.onClick(false);
 
         recyclerView = view.findViewById(R.id.category_recy);
         recyclerView.setOnTouchListener(this);
 
         recyclerView.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        categoryItems = new ArrayList<>();
+        categoryItem = new ArrayList<>();
 
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Relationships"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Sex & Sexuality"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Reproduction"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Mental Health"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Education"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Sexual Assault"));
+        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Relationships",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sex & Sexuality",false));
+        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Reproduction",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Mental Health",false));
+        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Education",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));
 
-        recyclerView.setAdapter(new CategoryAdapter(categoryItems));
+        recyclerView.setAdapter(new CategoryAdapter(categoryItem,this, clickListener));
 
     return view;
     }
 
     @Override
     public void onClick(View view) {
-        /*int id = view.getId();
+        int id = view.getId();
 
-        if (id == recyclerView.getId()){
-            next_btn.setBackgroundResource(R.drawable.circle_button_active);
-        }*/
+        if (id == skip_btn.getId()){
+            clickListener.onClick(true);
+        }
 
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        for(int i=0;i<categoryItem.size();i++)
+        {
+            myvalue.add(categoryItem.get(i).getSelected());
+        }
+        boolean ans = myvalue.contains(true);
+
+        if(ans)
+        {
+            clickListener.onClick(true);
+
+
+        }else
+        {
+            clickListener.onClick(false);
+        }
 
     }
 
@@ -82,24 +102,32 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     }
 
     @Override
-    public void onSelectedCategory(Boolean isSelected) {
-        if (isSelected){
-            next_btn.setVisibility(View.VISIBLE);
-            //next_btn.setBackgroundResource(R.drawable.circle_button_active);
-        } else {
-            next_btn.setVisibility(View.GONE);
-            //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+    public void onClickData(int position, int id) {
+
+
+      ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        for(int i=0;i<categoryItem.size();i++)
+        {
+            myvalue.add(categoryItem.get(i).getSelected());
         }
+
+        boolean ans = myvalue.contains(true);
+
+        if(ans)
+        {
+            next_btn.setBackgroundResource(R.drawable.circle_button_active);
+
+
+        }else
+        {
+            next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+        }
+
     }
 
     @Override
-    public void onDisSelectedCategory(Boolean disSelected) {
-
-
-    }
-
-    @Override
-    public void onClick() {
+    public void onClick(Boolean status) {
 
     }
 }

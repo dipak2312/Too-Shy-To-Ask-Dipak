@@ -57,110 +57,142 @@
         android:layout_marginTop="@dimen/margin_15">
 
         <LinearLayout
-            android:id="@+id/lin_lay"
+            android:id="@+id/lin_avtar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_15"
             android:weightSum="4">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img1"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar1"
-                android:layout_weight="1"/>
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img2"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar2"
-                android:layout_weight="1"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar1"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/profile_popup"/>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img3"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar3"
-                android:layout_weight="1"/>
+            </RelativeLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img4"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar4"
-                android:layout_weight="1"/>
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar2"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar2"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar3"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar3"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar4"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar4"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lin_lay2"
+            android:id="@+id/lin_avtar1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lin_lay"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_below="@id/lin_avtar"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_15"
             android:weightSum="4">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img5"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar5"
-                android:layout_weight="1"/>
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img6"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar5"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar5"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar6"
-                android:layout_weight="1"/>
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img7"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar6"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar6"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar7"
-                android:layout_weight="1"/>
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img8"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar7"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar7"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="@dimen/margin_60"
-                android:src="@drawable/avatar8"
-                android:layout_weight="1"/>
+                android:layout_height="@dimen/margin_70"
+                android:layout_weight="1"
+                android:background="@drawable/circle_inactive_background">
 
-        </LinearLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar8"
+                    android:layout_width="@dimen/margin_70"
+                    android:layout_height="@dimen/margin_70"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/avatar8"/>
 
-        <TextView
-            android:id="@+id/gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Or choose from your phone gallery"
-            android:layout_below="@id/lin_lay2"
-            android:layout_marginTop="@dimen/margin_40"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/black"
-            android:fontFamily="@font/worksansitalic"
-            android:textSize="@dimen/text_size12"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/gallery"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/margin_40"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="@dimen/margin_20"
-                android:layout_height="@dimen/margin_20"
-                android:src="@drawable/camara"/>
-
-            <ImageView
-                android:layout_width="@dimen/margin_20"
-                android:layout_height="@dimen/margin_20"
-                android:src="@drawable/files"
-                android:layout_marginStart="@dimen/margin_60"/>
+            </RelativeLayout>
 
         </LinearLayout>
 

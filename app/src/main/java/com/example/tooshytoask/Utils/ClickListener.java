@@ -1,6 +1,6 @@
-package com.example.tooshytoask.Interface;
+package com.example.tooshytoask.Utils;
 
 public interface ClickListener {
-      void onClick(int position,int id);
+      void onClick(Boolean status);
 
 }

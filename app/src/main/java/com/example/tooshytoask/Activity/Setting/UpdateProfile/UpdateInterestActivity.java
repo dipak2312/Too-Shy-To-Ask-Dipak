@@ -14,19 +14,27 @@ import android.widget.TextView;
 
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
+import com.example.tooshytoask.Adapters.UpdateCategoryAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.ClickListener;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
-public class UpdateInterestActivity extends AppCompatActivity implements View.OnClickListener{
+public class UpdateInterestActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
-    RecyclerView recyclerView, category_recy;
-    CategoryAdapter adapter;
-    ArrayList<CategoryItem> categoryItems;
+    RecyclerView category_recy;
+    UpdateCategoryAdapter adapter;
+    ArrayList<CategoryItem> categoryItem;
     RelativeLayout rel_back;
+    CustomProgressDialog dialog;
+    Button update_btn;
+    ClickListener clickListener;
+    OnClickListner onclicklistener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +43,27 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = UpdateInterestActivity.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
+        /*clickListener=(ClickListener)context;
+        clickListener.onClick(false);*/
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
-        recyclerView = findViewById(R.id.category_recy);
+        update_btn = findViewById(R.id.update_btn);
+        update_btn.setOnClickListener(this);
+        category_recy = findViewById(R.id.category_recy);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
+        category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        categoryItems = new ArrayList<>();
+        categoryItem = new ArrayList<>();
 
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Relationships"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Sex & Sexuality"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Reproduction"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Mental Health"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Education"));
-        categoryItems.add(new CategoryItem(R.drawable.relationships,"Sexual Assault"));
+        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Relationships",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sex & Sexuality",false));
+        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Reproduction",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Mental Health",false));
+        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Education",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));
 
-        recyclerView.setAdapter(new CategoryAdapter(categoryItems));
+        category_recy.setAdapter(new UpdateCategoryAdapter(categoryItem,onclicklistener, clickListener));
     }
 
     @Override
@@ -60,8 +73,62 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         if (id == rel_back.getId()){
 
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            //clickListener.onClick(true);
         }
+        if (id == update_btn.getId()){
+
+            Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            dialog.show("");
+            dialog.dismiss("");
+        }
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        for(int i=0;i<categoryItem.size();i++)
+        {
+            myvalue.add(categoryItem.get(i).getSelected());
+        }
+        boolean ans = myvalue.contains(true);
+
+        if(ans)
+        {
+            clickListener.onClick(true);
+
+
+        }else
+        {
+            clickListener.onClick(false);
+        }*/
+
 
     }
+
+    @Override
+    public void onClickData(int position, int id) {
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        for(int i=0;i<categoryItem.size();i++)
+        {
+            myvalue.add(categoryItem.get(i).getSelected());
+        }
+
+        boolean ans = myvalue.contains(true);
+
+        if(ans)
+        {
+            update_btn.setBackgroundResource(R.drawable.circle_button_active);
+
+
+        }else
+        {
+            update_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+        }*/
+    }
+
+
 }

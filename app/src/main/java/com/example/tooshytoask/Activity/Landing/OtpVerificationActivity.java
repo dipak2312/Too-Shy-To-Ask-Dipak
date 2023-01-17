@@ -117,7 +117,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                user_otp = "";
             }
 
             @Override
@@ -147,7 +147,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     private void progressBar() {
         progress_circular.setProgress(0f);
         progress_circular.setProgressMax(60f);
-        progress_circular.setProgressWithAnimation( 60f, 10000L);
+        progress_circular.setProgressWithAnimation( 60f, 60000L);
         progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
         progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
     }
@@ -155,7 +155,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     private void countDownTimer() {
 
 
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(60000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -166,6 +166,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     progress_text.setText(value);
                     progress_text.setVisibility(View.VISIBLE);
                     progress_circular.setVisibility(View.VISIBLE);
+                   // progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
+                    progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
                     otp_img.setVisibility(View.GONE);
 
                 }
@@ -191,8 +193,12 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
         if (id == btn_submit.getId()) {
 
-           /* Intent intent = new Intent(context, SignUpActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(context, SignUpActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
 
             /*if (user_otp.equals("")) {
 
@@ -202,19 +208,21 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                 countDownTimer();
             } else if (id == rel_back.getId()) {
-                Intent intent = new Intent(context, SignInActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(context, SignInActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
                 finish();
-            } else if (id == btn_resend_otp.getId()) {
+            } /*else if (id == btn_resend_otp.getId()) {
                 sendOtpApi();
                 progressBar();
-            }
+            }*/
             else {
-                verifyOTP();
+                //verifyOTP();
 
             }
 
-        }
+
 
     }
 

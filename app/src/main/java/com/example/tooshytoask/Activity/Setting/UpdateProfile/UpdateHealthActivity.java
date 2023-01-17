@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.Setting.UpdateProfile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -13,20 +14,23 @@ import android.widget.RelativeLayout;
 
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.HealthAdapter;
+import com.example.tooshytoask.Adapters.UpdateHealthAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.HealthIssues;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
-public class UpdateHealthActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateHealthActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
     RecyclerView health_recy, recyclerView;
     ArrayList<HealthIssues> healthIssues;
-    HealthAdapter adapter;
+    UpdateHealthAdapter adapter;
     RelativeLayout rel_back, health;
-    Button yes_btn, no_btn, next_btn;
+    Button yes_btn, no_btn, update_btn2;
+    OnClickListner onclicklistener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +45,24 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         yes_btn.setOnClickListener(this);
         no_btn = findViewById(R.id.no_btn);
         no_btn.setOnClickListener(this);
-        next_btn = findViewById(R.id.next_btn);
-        next_btn.setOnClickListener(this);
+        update_btn2 = findViewById(R.id.update_btn2);
+        update_btn2.setOnClickListener(this);
         health = findViewById(R.id.health);
         health.setOnClickListener(this);
 
-         /*recyclerView = view.findViewById(R.id.health_recy);
-        recyclerView.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
+        health_recy = findViewById(R.id.health_recy);
+        health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
 
         healthIssues = new ArrayList<>();
 
-        healthIssues.add(new HealthIssues("Throid","Mental Health"));
-        healthIssues.add(new HealthIssues("Painful Periods","Irregular Periods"));
-        healthIssues.add(new HealthIssues("PCOS/PCOD", "Fibroids"));
+        healthIssues.add(new HealthIssues("Throid", false));
+        healthIssues.add(new HealthIssues("Painful Periods", false));
+        healthIssues.add(new HealthIssues("Mental Health", false));
+        healthIssues.add(new HealthIssues("Irregular Periods", false));
+        healthIssues.add(new HealthIssues("Fibroids", false));
+        healthIssues.add(new HealthIssues("PCOS/PCOD", false));
 
-        recyclerView.setAdapter(new HealthAdapter(healthIssues));*/
+        health_recy.setAdapter(new UpdateHealthAdapter(healthIssues,onclicklistener, context));
     }
 
     @Override
@@ -63,12 +70,15 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         int id = view.getId();
 
          if (id == rel_back.getId()){
-
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             startActivity(intent);
-        } else if (id == yes_btn.getId()){
+        }
+         else if (id == update_btn2.getId()){
+             Intent intent = new Intent(context, UpdateProfileActivity.class);
+             startActivity(intent);
+         }
+         else if (id == yes_btn.getId()){
              health.setVisibility(View.VISIBLE);
-             next_btn.setVisibility(View.VISIBLE);
              yes_btn.setBackgroundResource(R.drawable.gender_border_active);
              yes_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
              no_btn.setBackgroundResource(R.drawable.gender_border_inactive);
@@ -76,12 +86,16 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
          } else if (id == no_btn.getId()){
              health.setVisibility(View.GONE);
-             next_btn.setVisibility(View.VISIBLE);
              no_btn.setBackgroundResource(R.drawable.gender_border_active);
              no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
              yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
              yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
 
          }
+    }
+
+    @Override
+    public void onClickData(int position, int id) {
+
     }
 }

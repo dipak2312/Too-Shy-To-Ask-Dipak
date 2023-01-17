@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_48"
                 android:buttonTint="@color/purple"
-                android:checked="false"
+                android:checked="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size15"
                 android:fontFamily="@font/worksanssemibold"

@@ -2,6 +2,7 @@ package com.example.tooshytoask.Fragment.InfoCard;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,22 +11,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Activity.Landing.SignUpActivity;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.ClickListener;
+import com.example.tooshytoask.Utils.OnClickListner;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class FourFragment extends Fragment implements View.OnClickListener{
+public class FourFragment extends Fragment implements View.OnClickListener, OnClickListner {
     Context context;
     SPManager spManager;
     Spinner spinner_country, spinner_blood;
+    TextView skip_btn;
+    ImageButton next_btn;
+    ClickListener clickListener;
+    EditText etHeight,etWeight,edit_state,edit_city,edit_country;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,13 +46,18 @@ public class FourFragment extends Fragment implements View.OnClickListener{
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         context = getActivity();
         spManager = new SPManager(context);
+        skip_btn = view.findViewById(R.id.skip_btn);
+        skip_btn.setOnClickListener(this);
+        next_btn = view.findViewById(R.id.next_btn);
+        next_btn.setOnClickListener(this);
+        clickListener=(ClickListener)context;
+        clickListener.onClick(false);
 
-
-        spinner_country = view.findViewById(R.id.spinner_country);
+        //spinner_country = view.findViewById(R.id.spinner_country);
         spinner_blood = view.findViewById(R.id.spinner_blood);
 
 
-        OpenAllCountry();
+        //OpenAllCountry();
         OpenBloodGrp();
 
         return view;
@@ -50,9 +67,25 @@ public class FourFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == spinner_country.getId()){
-            OpenAllCountry();
-        }  else if (id == spinner_blood.getId()){
+        if (id == skip_btn.getId()){
+            clickListener.onClick(true);
+            Intent intent = new Intent(context, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if (id == next_btn.getId()){
+            clickListener.onClick(true);
+            Intent intent = new Intent(context, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+
+       /* else if (id == spinner_country.getId()){
+            //OpenAllCountry();
+        }*/  else if (id == spinner_blood.getId()){
             OpenBloodGrp();
         }
 
@@ -77,6 +110,25 @@ public class FourFragment extends Fragment implements View.OnClickListener{
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
         spinner_blood.setAdapter(countryAdapter);
+
+    }
+
+    @Override
+    public void onClickData(int position, int id) {
+
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        boolean ans = myvalue.contains(true);
+
+        if(ans)
+        {
+            next_btn.setBackgroundResource(R.drawable.circle_button_active);
+
+
+        }else
+        {
+            next_btn.setBackgroundResource(R.drawable.circle_button_active);
+        }
 
     }
 }

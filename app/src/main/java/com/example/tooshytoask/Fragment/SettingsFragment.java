@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,11 +19,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
+import com.example.tooshytoask.Activity.Search.SearchActivity;
 import com.example.tooshytoask.Activity.Setting.HelpActivity;
 import com.example.tooshytoask.Activity.Setting.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
@@ -29,12 +34,18 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.Locale;
+
 public class SettingsFragment extends Fragment implements View.OnClickListener{
     ImageView profile_image;
     RelativeLayout update_profile, notification_setting, bookmarks, faq, help,
             feedback, select_Language, refer_friends, logout;
     Context context;
     SPManager spManager;
+    RadioButton eng_lang, hindi_lang, marathi_lang;
+    BottomSheetDialog bottomSheetDialog;
+    Button btn_select;
+    ImageView back_arrow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,38 +84,84 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
         if (id == update_profile.getId()) {
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         else if (id == notification_setting.getId()) {
             Intent intent = new Intent(context, NotificationsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         else if (id == bookmarks.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
+            Intent intent = new Intent(context, BookmarkActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         else if (id == feedback.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);*/
         }
         else if (id == faq.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            startActivity(intent);
+           /* Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);*/
         }
         else if (id == select_Language.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            startActivity(intent);
+            openLanguagePopup();
         }
         else if (id == refer_friends.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);*/
         }
         else if (id == logout.getId()) {
             LogOut();
         }
         else if (id == help.getId()) {
-            Intent intent = new Intent(context, HelpActivity.class);
-            startActivity(intent);
+           /* Intent intent = new Intent(context, HelpActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);*/
+        }
+        else if(id==eng_lang.getId())
+        {
+            setLocale("en");
+            btn_select.setText(R.string.select);
+            eng_lang.setBackgroundResource(R.drawable.language_background_active);
+            hindi_lang.setBackgroundResource(R.drawable.language_background);
+            marathi_lang.setBackgroundResource(R.drawable.language_background);
+        }
+        else if(id==hindi_lang.getId())
+        {
+            setLocale("hi");
+            btn_select.setText(R.string.चुनें);
+            hindi_lang.setBackgroundResource(R.drawable.language_background_active);
+            eng_lang.setBackgroundResource(R.drawable.language_background);
+            marathi_lang.setBackgroundResource(R.drawable.language_background);
+        }
+        else if(id==marathi_lang.getId())
+        {
+            setLocale("mr");
+            btn_select.setText(R.string.निवडा);
+            marathi_lang.setBackgroundResource(R.drawable.language_background_active);
+            eng_lang.setBackgroundResource(R.drawable.language_background);
+            hindi_lang.setBackgroundResource(R.drawable.language_background);
+        }
+        else if(id==btn_select.getId())
+        {
+            bottomSheetDialog.dismiss();
+            refreshFragment();
+        }
+        else if(id==back_arrow.getId())
+        {
+            bottomSheetDialog.dismiss();
         }
 
     }
@@ -142,6 +199,72 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         });
 
         dialog.show();
+
+    }
+
+    public void openLanguagePopup()
+    {
+
+        bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.select_language_view);
+        bottomSheetDialog.setCancelable(false);
+
+        eng_lang=bottomSheetDialog.findViewById(R.id.eng_lang);
+        eng_lang.setOnClickListener(this);
+        hindi_lang=bottomSheetDialog.findViewById(R.id.hindi_lang);
+        hindi_lang.setOnClickListener(this);
+        marathi_lang=bottomSheetDialog.findViewById(R.id.marathi_lang);
+        marathi_lang.setOnClickListener(this);
+        back_arrow = bottomSheetDialog.findViewById(R.id.back_arrow);
+        back_arrow.setOnClickListener(this);
+        btn_select = bottomSheetDialog.findViewById(R.id.btn_select);
+        btn_select.setOnClickListener(this);
+
+
+        String selectValue=spManager.getLanguage();
+
+        if(selectValue.equals("en"))
+        {
+
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(context.getResources().getColor(R.color.black));
+        }
+        else if(selectValue.equals("hi"))
+        {
+
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(context.getResources().getColor(R.color.black));
+
+        }
+        else if(selectValue.equals("mr"))
+        {
+
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(context.getResources().getColor(R.color.black));
+
+        }
+
+        bottomSheetDialog.show();
+    }
+
+    public void refreshFragment()
+    {
+        SettingsFragment fragment1=new SettingsFragment();
+        FragmentTransaction ft=getFragmentManager().beginTransaction();
+        ft.replace(R.id.rootLayout,fragment1);
+        ft.commit();
+    }
+
+    private void setLocale(String lang) {
+
+        Locale locale=new Locale(lang);
+        Locale.setDefault(locale);
+
+        Configuration config=new Configuration();
+        config.locale=locale;
+        getActivity().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
+        spManager.setLanguage(lang);
+
 
     }
     }

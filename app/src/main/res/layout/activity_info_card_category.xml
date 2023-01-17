@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Landing.InfoCardCategoryActivity">
 
+    <FrameLayout
+        android:id="@+id/infoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </FrameLayout>
+
     <RelativeLayout
         android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"

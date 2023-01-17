@@ -2,7 +2,6 @@ package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +11,13 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.tooshytoask.Adapters.InfoCardAdapter;
-import com.example.tooshytoask.Interface.CategoryListener;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Interface.ClickListener;
+import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.R;
+import java.util.Stack;
 
-public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, CategoryListener, ClickListener {
+public class InfoCardCategoryActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, ClickListener{
     Context context;
     SPManager spManager;
     ProgressBar progressbar_completed;
@@ -29,8 +27,7 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
     RelativeLayout rel_back;
     ImageButton next_btn;
     TextView skip_btn;
-    private boolean enabled;
-    String status="", myPosition = "";
+    ClickListener clickListener;
 
 
     @Override
@@ -49,6 +46,8 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         viewPager.setOnTouchListener(this);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
+        clickListener=(ClickListener)context;
+        clickListener.onClick(false);
 
         AddView();
 
@@ -64,21 +63,21 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
                 if (getitem(0) < 1) {
 
-                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
 
                 } else if (getitem(0) < 2) {
 
-                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
 
                 } else if (getitem(0) < 3) {
 
-                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+
 
                 } else if (getitem(0) < 4) {
 
-                    //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
 
                 }
 
@@ -98,8 +97,14 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
 
             }
         });
-
     }
+
+    @Override
+    public void onBackPressed() {
+
+        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+
+    };
 
     private int getitem(int i) {
 
@@ -118,36 +123,33 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         int id = view.getId();
 
         if (id == rel_back.getId()) {
-            Intent intent = new Intent(context, SignUpActivity.class);
-            startActivity(intent);
+            viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+           /* Intent intent = new Intent(context, SignUpActivity.class);
+            startActivity(intent);*/
         }
-        else if (id == next_btn.getId()) {
+        /*else if (id == next_btn.getId()) {
             viewPager.setCurrentItem(getitem(1), true);
         }
 
         else if (id == skip_btn.getId()){
             viewPager.setCurrentItem(getitem(1), true);
-        }
+        }*/
     }
+
+
 
     @Override
-    public void onSelectedCategory(Boolean isSelected) {
-        if (isSelected){
-            next_btn.setVisibility(View.VISIBLE);
-            //next_btn.setBackgroundResource(R.drawable.circle_button_active);
-        } else {
-            next_btn.setVisibility(View.GONE);
-            //next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
-    }
+    public void onClick(Boolean status) {
 
-    @Override
-    public void onDisSelectedCategory(Boolean disSelected) {
+      if(status)
+      {
+          viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+
+      }else
+      {
+
+      }
 
     }
 
-    @Override
-    public void onClick() {
-
-    }
 }

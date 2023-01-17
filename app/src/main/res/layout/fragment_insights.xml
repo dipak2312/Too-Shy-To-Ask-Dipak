@@ -74,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rel_top_bar"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/margin_10">
 
         <RelativeLayout

@@ -66,10 +66,12 @@
             android:layout_marginTop="@dimen/margin_20"/>
 
         <LinearLayout
+            android:id="@+id/health_issues_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/issue_title"
             android:orientation="vertical"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/margin_15">
 
         <LinearLayout
@@ -190,18 +192,19 @@
 
         </LinearLayout>
 
-        <!--<androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/health_recy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_below="@id/issue_title"
             android:layout_marginTop="@dimen/margin_20">
 
-        </androidx.recyclerview.widget.RecyclerView>-->
+        </androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 
-    <!--<RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -222,10 +225,10 @@
             android:id="@+id/next_btn"
             android:layout_width="@dimen/margin_40"
             android:layout_height="@dimen/margin_40"
-            android:background="@drawable/circle_button"
+            android:background="@drawable/circle_button_inactive"
             android:src="@drawable/arrow_right"
             android:layout_alignParentEnd="true"/>
 
-    </RelativeLayout>-->
+    </RelativeLayout>
 
 </RelativeLayout>

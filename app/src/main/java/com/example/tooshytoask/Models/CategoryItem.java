@@ -4,24 +4,19 @@ public class CategoryItem {
     int cate_img;
     String category_title;
     public Boolean isSelected = false;
-    public Boolean disSelected = false;
-    public Boolean onClick = true;
 
-   /* public Boolean getSelected() {
+    public CategoryItem(int cate_img, String category_title,Boolean selected) {
+        this.cate_img = cate_img;
+        this.category_title = category_title;
+        this.isSelected=selected;
+    }
+
+    public Boolean getSelected() {
         return isSelected;
     }
 
     public void setSelected(Boolean selected) {
         isSelected = selected;
-    }
-
-    public CategoryItem(Boolean isSelected) {
-        this.isSelected = isSelected;
-    }*/
-
-    public CategoryItem(int cate_img, String category_title) {
-        this.cate_img = cate_img;
-        this.category_title = category_title;
     }
 
     public int getCate_img() {

@@ -22,11 +22,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/worksansmedium"
                     android:text="@string/profile"
                     android:textColor="@color/black"
-                    android:fontFamily="@font/worksansmedium"
-                    android:layout_centerInParent="true"
-                    android:textSize="@dimen/text_size18"/>
+                    android:textSize="@dimen/text_size18" />
 
                 </RelativeLayout>
 
@@ -98,6 +98,12 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollIndicators="end"
+        android:scrollbarSize="@dimen/margin_3"
+        android:scrollbarThumbVertical="@color/purple"
+        android:layout_marginEnd="@dimen/margin_2"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true"
         android:layout_below="@+id/profile">
 
         <LinearLayout

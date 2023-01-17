@@ -26,6 +26,7 @@ import com.example.tooshytoask.Activity.Setting.NotificationsActivity;
 import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
@@ -35,7 +36,7 @@ import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 
 import java.util.Calendar;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, ClickListener{
     int year, month, day;
     RelativeLayout rel_back;
     String select_birtct_date = "", encodedImage = "";
@@ -46,8 +47,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     EditText edit_first_name, edit_last_name, edit_email_id;
     TextView edit_age;
     private DatePickerPopup datePickerPopup;
-
-
+    BottomSheetDialog bottomSheetDialog;
+    Button btn_submit;
+    ClickListener clickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         context = SignUpActivity.this;
         spManager = new SPManager(context);
 
+        clickListener=(ClickListener)context;
+        clickListener.onClick(false);
         userPopup();
 
         edit_first_name = findViewById(R.id.edit_first_name);
@@ -107,17 +111,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if (id == rel_back.getId()) {
+            Intent intent = new Intent(context, OtpVerificationActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             finish();
 
         } else if (id == edit_age.getId()) {
             openDatePicker();
         } else if (id == btn_next.getId()) {
             Intent intent = new Intent(context, InfoCardCategoryActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-
-            /*Fragment fragment = new HomeFragment();
-            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
-            fm.add(R.id.rootLay, fragment).commit();*/
+            finish();
         }
             }
 
@@ -156,13 +163,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void userPopup(){
 
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.parent_user_popup);
-        //bottomSheetDialog.setCancelable(false);
+
+        bottomSheetDialog.setCancelable(false);
 
         LinearLayout user = bottomSheetDialog.findViewById(R.id.user);
         LinearLayout parent = bottomSheetDialog.findViewById(R.id.parent);
-        Button btn_submit = bottomSheetDialog.findViewById(R.id.btn_submit);
+        btn_submit = bottomSheetDialog.findViewById(R.id.btn_submit);
+        btn_submit.setOnClickListener(this);
         ImageView user_icon = bottomSheetDialog.findViewById(R.id.user_icon);
         ImageView parent_icon = bottomSheetDialog.findViewById(R.id.parent_icon);
         TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
@@ -180,6 +189,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 parent.setBackgroundResource(R.drawable.gender_border_inactive);
                 parent_icon.setImageResource(R.drawable.family_inactive);
                 parent_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                clickListener.onClick(true);
 
 
             }
@@ -194,28 +204,36 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 user.setBackgroundResource(R.drawable.gender_border_inactive);
                 user_icon.setImageResource(R.drawable.account_active);
                 user_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                clickListener.onClick(true);
 
 
             }
         });
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                spManager.setUser("true");
 
-                Intent intent = new Intent(context, SignUpActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-
-                bottomSheetDialog.dismiss();
-
-            }
-        });
 
         bottomSheetDialog.show();
+
+    }
+
+    @Override
+    public void onClick(Boolean status) {
+
+        if(status)
+        {
+            btn_submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    spManager.setUser("true");
+                    bottomSheetDialog.dismiss();
+
+                }
+            });
+
+        }else
+        {
+
+        }
 
     }
 }

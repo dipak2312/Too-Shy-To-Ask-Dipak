@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 super.onPageSelected(position);
                 if (getitem(0) < sliderBannerItems.size()) {
 
-                    mBarLayout.setViewPager2(viewPager2);
+                   // mBarLayout.setViewPager2(viewPager2);
 
                 }
                 handler.removeCallbacks(sliderRunnable);

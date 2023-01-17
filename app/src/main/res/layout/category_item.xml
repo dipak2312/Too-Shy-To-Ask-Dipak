@@ -12,9 +12,9 @@
 
         <ImageView
             android:id="@+id/cate_img"
-            android:layout_width="@dimen/margin_80"
-            android:layout_height="@dimen/margin_80"
-            android:padding="@dimen/margin_2"
+            android:layout_width="@dimen/margin_90"
+            android:layout_height="@dimen/margin_90"
+            android:padding="@dimen/margin_5"
             android:src="@drawable/education_inactive"/>
 
 

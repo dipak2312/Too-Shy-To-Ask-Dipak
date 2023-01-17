@@ -9,20 +9,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class UpdateCategoryAdapter extends RecyclerView.Adapter<UpdateCategoryAdapter.ViewHolder> {
     ArrayList<CategoryItem> categoryItem;
     OnClickListner onclicklistener;
     ClickListener clickListener;
 
-    public CategoryAdapter(ArrayList<CategoryItem> categoryItem,OnClickListner onclicklistener, ClickListener clickListener){
+    public UpdateCategoryAdapter(ArrayList<CategoryItem> categoryItem, OnClickListner onclicklistener, ClickListener clickListener){
         this.categoryItem = categoryItem;
         this.onclicklistener=onclicklistener;
         this.clickListener = clickListener;
@@ -30,13 +29,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @NonNull
     @Override
-    public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UpdateCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UpdateCategoryAdapter.ViewHolder holder, int position) {
         holder.CategoryItem(categoryItem.get(position),position);
 
     }
@@ -88,14 +87,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                        cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
                        categoryItem.setSelected(false);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position,1);
+                       //onclicklistener.onClickData(position,1);
 
 
                    }else {
                        cate_img.setBackgroundResource(R.drawable.circle_active_background);
                        categoryItem.setSelected(true);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position,1);
+                       //onclicklistener.onClickData(position,1);
 
                    }
 

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TooShyToAsk</string>
     <string name="page_count_total">%d/%d</string>
+    <string name="app_images_folderName">TSTA</string>
 
 
     //Landing
@@ -29,13 +30,13 @@
 
     //Headings
     <string name="heading_one">Nunc at elementum</string>
-    <string name="heading_two">Sagar</string>
-    <string name="heading_three">Dipak</string>
+    <string name="heading_two">Empowering our girls, our responsibility!</string>
+    <string name="heading_three">“The Too Shy to Ask” App a boon for the young teenager !</string>
 
     //Description
     <string name="desc_one">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</string>
-    <string name="desc_two">how are you guys</string>
-    <string name="desc_three">where are you from</string>
+    <string name="desc_two">Today there are many new developments in the management of fibroids. </string>
+    <string name="desc_three">India has the largest number of young people as compared to anywhere else in the world.</string>
 
     //Language
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activity.Setting.UpdateProfile.UpdateInterestActivity">
 
     <RelativeLayout
@@ -74,7 +75,7 @@
         android:layout_marginBottom="@dimen/margin_40">
 
         <Button
-            android:id="@+id/next_btn"
+            android:id="@+id/update_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_48"
             android:includeFontPadding="false"

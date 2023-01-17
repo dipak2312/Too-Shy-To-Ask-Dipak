@@ -14,9 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateAvatarActivity;
@@ -36,14 +38,12 @@ import java.util.Calendar;
 
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
     RelativeLayout update_interest, update_personal_info, update_health, profile_lay;
-    FrameLayout interestLay;
     SPManager spManager;
-    EditText etMobile;
     TextView edit_age, change_avatar;
     Button btn_next, male, female, other;
     Context context;
-    Button btn_signin;
     int year, month, day;
+    ImageView back_btn;
     private DatePickerPopup datePickerPopup;
 
     @Override
@@ -59,7 +59,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         update_personal_info.setOnClickListener(this);
         update_health = findViewById(R.id.update_health);
         update_health.setOnClickListener(this);
-        profile_lay = findViewById(R.id.profile_lay);
         edit_age = findViewById(R.id.edit_age);
         edit_age.setOnClickListener(this);
         change_avatar = findViewById(R.id.change_avatar);
@@ -70,6 +69,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
+        btn_next = findViewById(R.id.btn_next);
+        btn_next.setOnClickListener(this);
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(this);
 
         Calendar now = Calendar.getInstance();
         year = now.get(Calendar.YEAR);
@@ -158,6 +161,20 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         }
         else if (id == edit_age.getId()) {
             openDatePicker();
+        }
+        else if (id == back_btn.getId()) {
+            Intent intent = new Intent(context, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+        else if (id == btn_next.getId()) {
+            Intent intent = new Intent(context, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         }
 
     }
