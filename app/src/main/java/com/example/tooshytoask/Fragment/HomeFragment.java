@@ -1,17 +1,14 @@
 package com.example.tooshytoask.Fragment;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -24,28 +21,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.tooshytoask.Activity.Landing.SignUpActivity;
 import com.example.tooshytoask.Activity.Search.SearchActivity;
-import com.example.tooshytoask.Activity.Setting.NotificationsActivity;
+import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
-import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.RecentlyBlogAdapter;
 import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
 import com.example.tooshytoask.Adapters.SliderBannerAdapter;
 import com.example.tooshytoask.Adapters.StatusAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.BlogItems;
 import com.example.tooshytoask.Models.RecentlyBlogItems;
 import com.example.tooshytoask.Models.RecommendedBlogItems;
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.Models.StatusItem;
 import com.example.tooshytoask.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
@@ -69,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     ImageView search, notification, select_Language;
     RadioButton eng_lang, hindi_lang, marathi_lang;
     Button btn_select;
-    ImageView back_arrow;
+    RelativeLayout back_arrow;
     ViewPager2 viewPager2;
     Handler handler = new Handler();
     DotsIndicator mBarLayout;
@@ -321,6 +316,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         getActivity().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
         spManager.setLanguage(lang);
 
+    }
+    public void getFcmToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
 
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        //sendToken(token);
+
+
+                    }
+                });
     }
 }

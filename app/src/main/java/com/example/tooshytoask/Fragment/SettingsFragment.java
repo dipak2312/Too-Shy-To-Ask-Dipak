@@ -2,33 +2,26 @@ package com.example.tooshytoask.Fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
-import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
-import com.example.tooshytoask.Activity.Search.SearchActivity;
-import com.example.tooshytoask.Activity.Setting.HelpActivity;
-import com.example.tooshytoask.Activity.Setting.NotificationsActivity;
+import com.example.tooshytoask.Activity.Help.HelpActivity;
+import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
@@ -45,7 +38,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     RadioButton eng_lang, hindi_lang, marathi_lang;
     BottomSheetDialog bottomSheetDialog;
     Button btn_select;
-    ImageView back_arrow;
+    RelativeLayout back_arrow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,10 +118,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             LogOut();
         }
         else if (id == help.getId()) {
-           /* Intent intent = new Intent(context, HelpActivity.class);
+            Intent intent = new Intent(context, HelpActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);*/
+            startActivity(intent);
         }
         else if(id==eng_lang.getId())
         {

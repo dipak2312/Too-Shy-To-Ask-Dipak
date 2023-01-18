@@ -6,9 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_marginStart="@dimen/margin_20"
-    android:layout_marginEnd="@dimen/margin_20"
     tools:context=".Activity.Landing.LanguageActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
 
     <LinearLayout
         android:id="@+id/lin_title"
@@ -70,7 +75,7 @@
                 android:fontFamily="@font/worksanssemibold"
                 android:layoutDirection="rtl"
                 android:onClick="radioButtobClickEvent"
-                android:text="@string/hindi"/>
+                android:text="हिंदी"/>
 
             <RadioButton
                 android:id="@+id/marathi_lang"
@@ -83,7 +88,7 @@
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/worksanssemibold"
                 android:onClick="radioButtobClickEvent"
-                android:text="@string/marathi"/>
+                android:text="मराठी"/>
 
         </RadioGroup>
 
@@ -101,5 +106,7 @@
         android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size14" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

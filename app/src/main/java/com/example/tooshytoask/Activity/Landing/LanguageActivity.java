@@ -73,6 +73,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.eng_lang:
                 if(isChecked){
+                    btn_next.setText(R.string.select);
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -80,6 +81,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.hindi_lang:
                 if(isChecked){
+                    btn_next.setText(R.string.चुनें);
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -87,6 +89,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.marathi_lang:
                 if(isChecked){
+                    btn_next.setText(R.string.निवडा);
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));

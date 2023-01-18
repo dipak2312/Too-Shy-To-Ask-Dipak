@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Help.HelpActivity2">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:scrollIndicators="end"
+        android:scrollbarSize="@dimen/margin_3"
+        android:scrollbarThumbVertical="@color/purple"
+        android:layout_marginEnd="@dimen/margin_2"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true"
+        android:layout_marginTop="@dimen/margin_20">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/help_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login /Sign Up"
+        android:fontFamily="@font/worksansregular"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size14"
+        android:layout_marginStart="@dimen/margin_20"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_using_tsta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/help_title"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/using_tsta_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+        <TextView
+            android:id="@+id/content_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Content Related"
+            android:layout_below="@id/rel_using_tsta"
+            android:layout_marginTop="@dimen/margin_15"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14"
+            android:layout_marginStart="@dimen/margin_20"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_content_related"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content_title"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/content_related_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_content_related"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_30"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Didn't find the answer?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size16"
+                android:fontFamily="@font/worksansregular"/>
+
+            <Button
+                android:id="@+id/btn_signin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/worksansbold"
+                android:text="CONTACT US"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/active_con_btn"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size14" />
+
+        </LinearLayout>
+
+</RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

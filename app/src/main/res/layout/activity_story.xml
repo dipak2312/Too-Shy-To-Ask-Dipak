@@ -57,7 +57,7 @@
     <RelativeLayout
         android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/margin_30"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:layout_below="@id/story_progress_bar"
@@ -66,20 +66,28 @@
     <TextView
         android:id="@+id/story_title"
         android:layout_width="@dimen/margin_250"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/margin_30"
         android:text="Duis egestas dui ipsum, eleifend"
         android:fontFamily="@font/worksansmedium"
         android:alpha="0.7"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size18"
         android:singleLine="true"/>
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/back_img"
+            android:layout_width="@dimen/margin_30"
+            android:layout_height="@dimen/margin_30"
+            android:gravity="center"
+            android:layout_alignParentEnd="true">
+
+        <ImageView
             android:layout_width="@dimen/margin_20"
             android:layout_height="@dimen/margin_20"
-            android:layout_alignParentEnd="true"
             android:src="@drawable/back_arrow"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

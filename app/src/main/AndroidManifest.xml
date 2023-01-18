@@ -19,6 +19,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
+
+        <activity
+            android:name=".Activity.Help.Help3Activity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.Notification.ManageNotificationActivity"
+            android:exported="true">
+            <service
+                android:name=".MessagingService"
+                android:exported="false">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                </intent-filter>
+            </service>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.Help.HelpActivity2"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Activity.Bookmark.BookmarkActivity"
             android:exported="true">
@@ -76,14 +105,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.HelpActivity"
+            android:name=".Activity.Help.HelpActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.NotificationsActivity"
+            android:name=".Activity.Notification.NotificationsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -92,7 +121,6 @@
         <activity
             android:name=".Activity.Setting.UpdateProfileActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -107,8 +135,6 @@
         <activity
             android:name=".Activity.Landing.InfoCardCategoryActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -123,6 +149,11 @@
         <activity
             android:name=".Activity.Home.HomeActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -140,7 +171,6 @@
         <activity
             android:name=".Activity.Landing.SignUpActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -156,11 +186,6 @@
         <activity
             android:name=".Activity.Landing.SplashScreenActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

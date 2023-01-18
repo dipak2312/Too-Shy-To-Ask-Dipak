@@ -37,13 +37,12 @@ import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 import java.util.Calendar;
 
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
-    RelativeLayout update_interest, update_personal_info, update_health, profile_lay;
+    RelativeLayout update_interest, update_personal_info, update_health, rel_back;
     SPManager spManager;
     TextView edit_age, change_avatar;
     Button btn_next, male, female, other;
     Context context;
     int year, month, day;
-    ImageView back_btn;
     private DatePickerPopup datePickerPopup;
 
     @Override
@@ -59,6 +58,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         update_personal_info.setOnClickListener(this);
         update_health = findViewById(R.id.update_health);
         update_health.setOnClickListener(this);
+        rel_back = findViewById(R.id.rel_back);
+        rel_back.setOnClickListener(this);
         edit_age = findViewById(R.id.edit_age);
         edit_age.setOnClickListener(this);
         change_avatar = findViewById(R.id.change_avatar);
@@ -71,8 +72,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         other.setOnTouchListener(this);
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
-        back_btn = findViewById(R.id.back_btn);
-        back_btn.setOnClickListener(this);
 
         Calendar now = Calendar.getInstance();
         year = now.get(Calendar.YEAR);
@@ -162,18 +161,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         else if (id == edit_age.getId()) {
             openDatePicker();
         }
-        else if (id == back_btn.getId()) {
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+        else if (id == btn_next.getId()) {
             finish();
         }
-        else if (id == btn_next.getId()) {
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+        else if (id == rel_back.getId()){
             finish();
         }
 

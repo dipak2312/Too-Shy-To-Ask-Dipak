@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Help.Help3Activity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/linear_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/topic_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/worksansmedium"/>
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/worksanslight"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linear_lay"
+                android:layout_marginTop="@dimen/margin_40">
+
+              <TextView
+                  android:id="@+id/helpful_topic"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="Was this topic helpful?"
+                  android:textSize="@dimen/text_size15"
+                  android:textColor="@color/black"
+                  android:gravity="center"
+                  android:fontFamily="@font/worksansmedium"/>
+
+                <LinearLayout
+                    android:id="@+id/yes_no_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/helpful_topic"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_15">
+
+                    <Button
+                        android:id="@+id/male"
+                        android:layout_width="@dimen/margin_100"
+                        android:layout_height="@dimen/margin_45"
+                        android:text="Yes"
+                        android:clickable="true"
+                        android:fontFamily="@font/worksansregular"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:textSize="@dimen/text_size14"
+                        android:background="@drawable/gender_border_inactive"
+                        android:textColor="@color/black"
+                        android:textAllCaps="false"/>
+
+                    <Button
+                        android:id="@+id/female"
+                        android:layout_width="@dimen/margin_100"
+                        android:layout_height="@dimen/margin_45"
+                        android:text="No"
+                        android:clickable="true"
+                        android:fontFamily="@font/worksansregular"
+                        android:textSize="@dimen/text_size14"
+                        android:layout_marginEnd="@dimen/margin_5"
+                        android:background="@drawable/gender_border_inactive"
+                        android:textColor="@color/black"
+                        android:textAllCaps="false"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/thanku_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thank You Got It"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_below="@id/yes_no_lay"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:textSize="@dimen/text_size15"
+                    android:fontFamily="@font/worksansmedium"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/thanku_msg"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_marginBottom="@dimen/margin_30"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/margin_60">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Didn't find the answer?"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16"
+                        android:fontFamily="@font/worksansregular"/>
+
+                    <Button
+                        android:id="@+id/btn_signin"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_48"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/worksansbold"
+                        android:text="CONTACT US"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/active_con_btn"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size14" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

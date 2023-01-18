@@ -47,7 +47,7 @@
     <string name="marathi">Marathi</string>
 
     //SliderActivity
-    <string name="skip">SKIP</string>
+    <string name="skip">Skip</string>
     <string name="get_started">Get Started</string>
 
     //SignUpActivity
@@ -83,6 +83,7 @@
     <string name="चुनें">चुनें</string>
     <string name="निवडा">निवडा</string>
     <string name="select">Select</string>
+    <string name="manage_notifications">Manage Notifications</string>
 
 
 </resources>

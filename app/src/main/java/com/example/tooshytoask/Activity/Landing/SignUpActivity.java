@@ -1,15 +1,11 @@
 package com.example.tooshytoask.Activity.Landing;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,17 +15,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.tooshytoask.Activity.Setting.NotificationsActivity;
-import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
