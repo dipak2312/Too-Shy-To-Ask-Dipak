@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.HealthAdapter;
+import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.HealthIssues;
 import com.example.tooshytoask.R;
@@ -29,7 +31,7 @@ import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
-public class ThreeFragment extends Fragment implements View.OnClickListener, OnClickListner {
+public class ThreeFragment extends Fragment implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
     RecyclerView health_recy, recyclerView;
@@ -64,7 +66,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         health_recy = view.findViewById(R.id.health_recy);
         health_recy.setOnClickListener(this);
 
-        health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
+        //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
 
         healthIssues = new ArrayList<>();
 
@@ -75,6 +77,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         healthIssues.add(new HealthIssues("Fibroids", false));
         healthIssues.add(new HealthIssues("PCOS/PCOD", false));
 
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        health_recy.setLayoutManager(linearLayoutManager1);
 
         health_recy.setAdapter(new HealthAdapter(healthIssues, this, context));
 
@@ -89,6 +93,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         if (id == skip_btn.getId()){
             clickListener.onClick(true);
+        } else if (id == next_btn.getId()){
+            clickListener.onClick(true);
         }
 
         if (id == yes_btn.getId()){
@@ -99,8 +105,9 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
             no_btn.setBackgroundResource(R.drawable.gender_border_inactive);
             no_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
 
+        }
 
-        } else if (id == no_btn.getId()){
+        else if (id == no_btn.getId()){
             health_recy.setVisibility(View.GONE);
             next_btn.setBackgroundResource(R.drawable.circle_button_active);
             no_btn.setBackgroundResource(R.drawable.gender_border_active);
@@ -108,7 +115,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
             yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
             yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
 
-        } else {
+        }
+        else {
             ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
             for (int i = 0; i < healthIssues.size(); i++) {
                 myvalue.add(healthIssues.get(i).getSelected());
@@ -119,7 +127,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
                 clickListener.onClick(true);
 
 
-            } else {
+            } {
                 clickListener.onClick(false);
             }
         }
@@ -146,6 +154,11 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
         }
+        if (id == no_btn.getId()){
+
+
+        }
 
     }
+
 }

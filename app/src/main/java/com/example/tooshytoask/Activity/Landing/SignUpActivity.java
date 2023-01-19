@@ -52,11 +52,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
-        userPopup();
-
-        edit_first_name = findViewById(R.id.edit_first_name);
-        edit_last_name = findViewById(R.id.edit_last_name);
-        edit_email_id = findViewById(R.id.edit_email_id);
         edit_age = findViewById(R.id.edit_age);
         edit_age.setOnClickListener(this);
         btn_next = findViewById(R.id.btn_next);
@@ -67,6 +62,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
+        userPopup();
+
+        /*edit_first_name = findViewById(R.id.edit_first_name);
+        edit_last_name = findViewById(R.id.edit_last_name);
+        edit_email_id = findViewById(R.id.edit_email_id);*/
 
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
@@ -180,6 +180,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 parent.setBackgroundResource(R.drawable.gender_border_inactive);
                 parent_icon.setImageResource(R.drawable.family_inactive);
                 parent_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                btn_submit.setBackgroundResource(R.drawable.active_con_btn);
+                btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
 
 
@@ -195,6 +197,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 user.setBackgroundResource(R.drawable.gender_border_inactive);
                 user_icon.setImageResource(R.drawable.account_active);
                 user_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                btn_submit.setBackgroundResource(R.drawable.active_con_btn);
+                btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
 
 

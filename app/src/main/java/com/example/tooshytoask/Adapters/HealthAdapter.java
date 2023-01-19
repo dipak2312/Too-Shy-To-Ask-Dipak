@@ -61,7 +61,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
 
             if (healthIssues.isSelected){
                 health_btn.setBackgroundResource(R.drawable.health_active);
-                health_btn.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                health_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
             }else {
                 health_btn.setBackgroundResource(R.drawable.health_inactive);
                 health_btn.setTextColor(ContextCompat.getColor(context, R.color.black));

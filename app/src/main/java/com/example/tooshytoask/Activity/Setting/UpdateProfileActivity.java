@@ -40,7 +40,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     RelativeLayout update_interest, update_personal_info, update_health, rel_back;
     SPManager spManager;
     TextView edit_age, change_avatar;
-    Button btn_next, male, female, other;
+    Button update_pro, male, female, other;
     Context context;
     int year, month, day;
     private DatePickerPopup datePickerPopup;
@@ -70,8 +70,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
-        btn_next = findViewById(R.id.btn_next);
-        btn_next.setOnClickListener(this);
+        update_pro = findViewById(R.id.update_pro);
+        update_pro.setOnClickListener(this);
 
         Calendar now = Calendar.getInstance();
         year = now.get(Calendar.YEAR);
@@ -161,10 +161,14 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         else if (id == edit_age.getId()) {
             openDatePicker();
         }
-        else if (id == btn_next.getId()) {
+        else if (id == update_pro.getId()) {
+            Intent intent = new Intent(context, UpdateProfileActivity.class);
+            startActivity(intent);
             finish();
         }
         else if (id == rel_back.getId()){
+            Intent intent = new Intent(context, HomeActivity.class);
+            startActivity(intent);
             finish();
         }
 

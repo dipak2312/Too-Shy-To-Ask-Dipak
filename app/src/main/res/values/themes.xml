@@ -15,6 +15,10 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+    <style name="TextInputLayoutHintText">
+        <item name="android:textSize">@dimen/text_size12</item>
+    </style>
+
     <style name="roundeimageview" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/margin_30</item>

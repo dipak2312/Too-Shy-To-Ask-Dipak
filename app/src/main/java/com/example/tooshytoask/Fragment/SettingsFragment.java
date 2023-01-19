@@ -43,7 +43,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         context = getActivity();
         spManager = new SPManager(context);
@@ -109,10 +108,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             openLanguagePopup();
         }
         else if (id == refer_friends.getId()) {
-            /*Intent intent = new Intent(context, UpdateProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);*/
+            shareTheApp();
         }
         else if (id == logout.getId()) {
             LogOut();
@@ -156,6 +152,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         {
             bottomSheetDialog.dismiss();
         }
+
+    }
+
+    public void shareTheApp()
+    {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        String shareBody = "https://play.google.com/store/apps/details?id=" + context.getPackageName();
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Too Shy To Ask App");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
     }
 

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.tooshytoask.Adapters.Help2Adapter;
@@ -28,6 +29,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
     ArrayList<Help2Item>help2Item;
     ArrayList<Help3Item>help3Item;
     RelativeLayout rel_back;
+    Button contact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,8 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         using_tsta_recy = findViewById(R.id.using_tsta_recy);
+        contact = findViewById(R.id.contact);
+        contact.setOnClickListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         using_tsta_recy.setLayoutManager(linearLayoutManager);
@@ -78,6 +82,13 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
 
         if (id == rel_back.getId()){
             Intent intent = new Intent(context, HelpActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+        else  if (id == contact.getId()){
+            Intent intent = new Intent(context, ContactUsActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

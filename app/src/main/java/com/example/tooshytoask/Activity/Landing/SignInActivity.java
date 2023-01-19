@@ -20,6 +20,7 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -33,7 +34,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
     SPManager spManager;
-    EditText etMobile;
+    TextInputEditText etMobile;
     Context context;
     Button btn_signin;
     CustomProgressDialog dialog;

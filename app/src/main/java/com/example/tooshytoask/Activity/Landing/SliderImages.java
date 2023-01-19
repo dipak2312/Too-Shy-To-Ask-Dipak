@@ -80,8 +80,8 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
                 } else if (getitem(0) < 3) {
 
                      started.setVisibility(View.VISIBLE);
-                     Animation alpha = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-                     started.startAnimation(alpha);
+                     /*Animation alpha = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+                     started.startAnimation(alpha);*/
                      skip_btn.setVisibility(View.GONE);
                      next_btn.setVisibility(View.GONE);
 

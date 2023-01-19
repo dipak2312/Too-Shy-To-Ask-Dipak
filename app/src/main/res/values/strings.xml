@@ -9,7 +9,6 @@
     <string name="todo">TODO</string>
     <string name="create_your_account">Create your Account</string>
     <string name="login_text">Please Login to access your account</string>
-    <string name="phone_number">Phone Number</string>
     <string name="_10_digit_mobile_number">10 Digit Mobile Number</string>
     <string name="by_singing_in_you_agree_to_tsta_s">By singing in, you agree to TSTA\'s</string>
     <string name="terms_and_conditions">Terms and conditions</string>
@@ -50,18 +49,6 @@
     <string name="skip">Skip</string>
     <string name="get_started">Get Started</string>
 
-    //SignUpActivity
-    <string name="info_card">Info Card</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
-    <string name="email">Email</string>
-    <string name="date_of_birth">Date of Birth</string>
-    <string name="select_your_dob">Select your DOB</string>
-    <string name="gender">Gender</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="other">Other</string>
-
     //setting
     <string name="terms_conditions_support"><![CDATA[Terms & Conditions | Support]]></string>
     <string name="_2022_all_right_reserved_powered_by_hats_off">© 2022 All Right Reserved Powered by Hats-Off</string>
@@ -84,6 +71,51 @@
     <string name="निवडा">निवडा</string>
     <string name="select">Select</string>
     <string name="manage_notifications">Manage Notifications</string>
+
+    //SignUpActivity
+    <string name="info_card">Info Card</string>
+    <string name="first_name">
+        <font size="38">First Name</font></string>
+    <string name="last_name">
+        <font size="38">Last Name</font></string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="select_your_dob">Select your DOB</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+    <string name="country">
+        <font size="38">Country</font>
+    </string>
+    <string name="state">
+        <font size="38">State</font>
+    </string>
+    <string name="city">
+        <font size="38">City</font>
+    </string>
+
+    //contact
+    <string name="email">
+        <font size="38">Email</font>
+    </string>
+    <string name="subject">
+        <font size="38">Subject</font>
+    </string>
+    <string name="description">
+        <font size="38">Description</font>
+    </string>
+
+    <string name="phone_number">
+        <font size="38">Phone Number</font>
+    </string>
+
+    <string name="height">
+        <font size="38">Height</font>
+    </string>
+
+    <string name="weight">
+        <font size="38">Weight</font>
+    </string>
 
 
 </resources>

@@ -165,10 +165,10 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.resend_color));
                     progress_text.setText(value);
                     progress_text.setVisibility(View.VISIBLE);
-                    progress_circular.setVisibility(View.VISIBLE);
+                    //progress_circular.setVisibility(View.VISIBLE);
                    // progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
                     progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
-                    otp_img.setVisibility(View.GONE);
+                    //otp_img.setVisibility(View.GONE);
 
                 }
             @Override

@@ -3,6 +3,7 @@ package com.example.tooshytoask.Activity.Setting.UpdateProfile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -51,7 +52,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         health.setOnClickListener(this);
 
         health_recy = findViewById(R.id.health_recy);
-        health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
+        //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
 
         healthIssues = new ArrayList<>();
 
@@ -61,6 +62,10 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         healthIssues.add(new HealthIssues("Irregular Periods", false));
         healthIssues.add(new HealthIssues("Fibroids", false));
         healthIssues.add(new HealthIssues("PCOS/PCOD", false));
+
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        health_recy.setLayoutManager(linearLayoutManager1);
+
 
         health_recy.setAdapter(new UpdateHealthAdapter(healthIssues,onclicklistener, context));
     }

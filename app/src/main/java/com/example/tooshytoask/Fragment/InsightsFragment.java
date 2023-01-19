@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
 import com.example.tooshytoask.Adapters.BlogAdapter;
+import com.example.tooshytoask.Adapters.HighlightBlogAdapter;
 import com.example.tooshytoask.Adapters.StatusAdapter;
 import com.example.tooshytoask.Adapters.StoreHouseAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.BlogItems;
+import com.example.tooshytoask.Models.HighlightBlogItems;
 import com.example.tooshytoask.Models.StoreHouseItems;
 import com.example.tooshytoask.R;
 
@@ -27,11 +29,13 @@ import java.util.ArrayList;
 public class InsightsFragment extends Fragment implements View.OnClickListener{
     Context context;
     SPManager spManager;
-    RecyclerView recy_storehouse, recy_blogs;
+    RecyclerView recy_storehouse, recy_blogs, recy_highlight_blogs;
     ArrayList<BlogItems>blogItems;
     ArrayList<StoreHouseItems>storeHouseItems;
+    ArrayList<HighlightBlogItems>highlightBlogItem;
     StoreHouseAdapter adapter;
-    BlogAdapter adapter2;
+    HighlightBlogAdapter highlightBlogAdapter;
+    BlogAdapter blogAdapter;
     TextView see_all;
 
     @Override
@@ -71,8 +75,22 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_blogs.setLayoutManager(linearLayoutManager1);
 
-        adapter2 = new BlogAdapter(context ,blogItems);
-        recy_blogs.setAdapter(adapter2);
+        blogAdapter = new BlogAdapter(context ,blogItems);
+        recy_blogs.setAdapter(blogAdapter);
+
+        recy_highlight_blogs = view.findViewById(R.id.recy_highlight_blogs);
+        highlightBlogItem = new ArrayList<>();
+
+        highlightBlogItem.add(new HighlightBlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic..."));
+        highlightBlogItem.add(new HighlightBlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling..."));
+        highlightBlogItem.add(new HighlightBlogItems(R.drawable.blog3, R.drawable.save, "Obesity – much more than a cosmetic..."));
+        highlightBlogItem.add(new HighlightBlogItems(R.drawable.blog2, R.drawable.save, "Dominance Of Partner – Controlling..."));
+
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recy_highlight_blogs.setLayoutManager(linearLayoutManager2);
+
+        highlightBlogAdapter = new HighlightBlogAdapter(context ,highlightBlogItem);
+        recy_highlight_blogs.setAdapter(highlightBlogAdapter);
 
         return view;
     }

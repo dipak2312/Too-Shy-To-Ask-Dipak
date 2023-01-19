@@ -31,6 +31,8 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = HelpActivity.this;
         spManager = new SPManager(context);
+        rel_back = findViewById(R.id.rel_back);
+        rel_back.setOnClickListener(this);
         help_category_recy = findViewById(R.id.help_category_recy);
         help_category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 

@@ -57,7 +57,41 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size14" />
 
-        <RelativeLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobile_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:layout_marginTop="@dimen/margin_20"
+                android:background="@drawable/background"
+                android:fontFamily="@font/worksanslight"
+                android:gravity="top"
+                android:layout_below="@id/txt_signin"
+                android:hint="@string/phone_number"
+                android:paddingStart="@dimen/padding_15"
+                android:paddingTop="@dimen/margin_5"
+                android:paddingEnd="@dimen/padding_15"
+                android:textColorHint="@color/teal_700"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                app:hintTextColor="@color/purple"
+                app:placeholderText="Enter Your Mobile Number"
+                app:placeholderTextColor="#a2a2a2">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_37"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:inputType="number"
+                    android:paddingTop="@dimen/margin_3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<RelativeLayout
             android:id="@+id/mobile_lay"
             android:layout_width="match_parent"
             android:layout_height="66dp"
@@ -101,7 +135,7 @@
                     android:inputType="number"/>
 
             </RelativeLayout>
-            </RelativeLayout>
+            </RelativeLayout>-->
 
 
             <RelativeLayout

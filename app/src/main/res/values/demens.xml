@@ -64,6 +64,7 @@
     <dimen name="margin_91">91.0dp</dimen>
     <dimen name="margin_100">100.0dp</dimen>
     <dimen name="margin_110">110.0dp</dimen>
+    <dimen name="margin_115">115.0dp</dimen>
     <dimen name="margin_101">101.0dp</dimen>
     <dimen name="margin_125">125.0dp</dimen>
     <dimen name="margin_130">130.0dp</dimen>
@@ -80,6 +81,7 @@
     <dimen name="margin_219">218.0dp</dimen>
     <dimen name="margin_165">165.0dp</dimen>
     <dimen name="margin_35">35.0dp</dimen>
+    <dimen name="margin_37">37.0dp</dimen>
     <dimen name="margin_15">15.0dp</dimen>
     <dimen name="margin_10">10.0dp</dimen>
     <dimen name="margin_12">12.0dp</dimen>
@@ -91,6 +93,8 @@
     <dimen name="margin_55">55.0dp</dimen>
     <dimen name="margin_60">60.0dp</dimen>
     <dimen name="margin_65">65.0dp</dimen>
+    <dimen name="margin_63">63.0dp</dimen>
+    <dimen name="margin_62">62.0dp</dimen>
     <dimen name="margin_70">70.0dp</dimen>
     <dimen name="margin_75">75.0dp</dimen>
     <dimen name="cir_tv">45.0dp</dimen>

@@ -121,209 +121,180 @@
                 android:layout_marginEnd="@dimen/margin_20"
                 app:boxStrokeWidth="0dp">
 
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/first_name_field"
                     android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:background="@drawable/view_background">
+                    android:layout_height="@dimen/margin_55"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:hint="@string/first_name"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_5"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:textColorHint="@color/teal_700"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple"
+                    app:placeholderText="Enter Your First Name"
+                    app:placeholderTextColor="#a2a2a2">
 
-                    <RelativeLayout
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_65"
-                        android:background="@drawable/background">
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="textPersonName"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
 
-                        <TextView
-                            android:id="@+id/first_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/first_name"
-                            android:textColor="@color/purple"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size12"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:fontFamily="@font/worksanslight"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edit_first_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/margin_35"
-                            android:layout_below="@id/first_txt"
-                            android:layout_marginTop="@dimen/margin_3"
-                            android:autofillHints="name"
-                            android:layout_marginBottom="@dimen/margin_8"
-                            android:fontFamily="@font/worksansmedium"
-                            android:inputType="textPersonName"
-                            android:background="@drawable/border"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size16" />
-
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/last_name_field"
                     android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:background="@drawable/view_background"
-                    android:layout_marginTop="@dimen/margin_15">
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:hint="@string/last_name"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_5"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:textColorHint="@color/teal_700"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple"
+                    app:placeholderText="Enter Your Last Name"
+                    app:placeholderTextColor="#a2a2a2">
 
-                    <RelativeLayout
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_surname"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_65"
-                        android:background="@drawable/background">
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="textPersonName"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
 
-                        <TextView
-                            android:id="@+id/last_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/last_name"
-                            android:textColor="@color/purple"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size12"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:fontFamily="@font/worksanslight"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edit_last_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/margin_35"
-                            android:layout_below="@id/last_txt"
-                            android:autofillHints="name"
-                            android:layout_marginTop="@dimen/margin_3"
-                            android:layout_marginBottom="@dimen/margin_8"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:fontFamily="@font/worksansmedium"
-                            android:background="@drawable/border"
-                            android:inputType="textPersonName"
-                            android:textSize="@dimen/text_size16" />
-
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mobile_lay"
                     android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:background="@drawable/view_background"
-                    android:layout_marginTop="@dimen/margin_15">
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:hint="@string/phone_number"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_5"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:textColorHint="@color/teal_700"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple"
+                    app:placeholderText="Enter Your Mobile Number"
+                    app:placeholderTextColor="#a2a2a2">
 
-                    <RelativeLayout
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMobile"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_65"
-                        android:background="@drawable/background">
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="number"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
 
-                        <TextView
-                            android:id="@+id/mobile_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Phone Number"
-                            android:textColor="@color/purple"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size12"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:fontFamily="@font/worksanslight"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/edit_mobile_no"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/margin_35"
-                            android:layout_below="@id/mobile_no"
-                            android:autofillHints="phone"
-                            android:layout_marginTop="@dimen/margin_3"
-                            android:layout_marginBottom="@dimen/margin_8"
-                            android:fontFamily="@font/worksansmedium"
-                            android:background="@drawable/border"
-                            android:inputType="number"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size16" />
-
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_enter"
                     android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:background="@drawable/view_background"
-                    android:layout_marginTop="@dimen/margin_15">
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:hint="@string/email"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_5"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:textColorHint="@color/teal_700"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple"
+                    app:placeholderText="Enter Your Email"
+                    app:placeholderTextColor="#a2a2a2">
 
-                    <RelativeLayout
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_email_enter"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_65"
-                        android:background="@drawable/background">
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="textEmailAddress"
+                        android:paddingTop="@dimen/margin_5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
 
-                        <TextView
-                            android:id="@+id/email_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/email"
-                            android:textColor="@color/purple"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size12"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:fontFamily="@font/worksanslight"/>
-
-                        <EditText
-                            android:id="@+id/edit_email_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/margin_35"
-                            android:layout_below="@id/email_txt"
-                            android:autofillHints="emailAddress"
-                            android:layout_marginTop="@dimen/margin_3"
-                            android:layout_marginBottom="@dimen/margin_8"
-                            android:fontFamily="@font/worksansmedium"
-                            android:background="@drawable/border"
-                            android:inputType="textWebEmailAddress"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size16" />
-
-                    </RelativeLayout>
-                </RelativeLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="66dp"
-                    android:background="@drawable/view_background"
-                    android:layout_marginTop="@dimen/margin_15">
+                    android:layout_height="@dimen/margin_55"
+                    android:background="@drawable/background"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_20">
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/dob_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_of_birth"
+                        android:textColor="@color/purple"
+                        android:layout_marginStart="@dimen/margin_15"
+                        android:textSize="@dimen/text_size12"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:fontFamily="@font/worksansmedium"/>
+
+                    <TextView
+                        android:id="@+id/edit_age"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_65"
-                        android:background="@drawable/background"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/dob_txt"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/select_your_dob"
+                        android:textColorHint="@color/teal_700"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="@dimen/margin_1"
+                        android:layout_marginBottom="@dimen/margin_8"
+                        android:fontFamily="@font/worksansmedium"
+                        android:background="@drawable/border"
+                        android:layout_marginStart="@dimen/margin_15"
+                        android:textSize="@dimen/text_size14" />
 
-                        <TextView
-                            android:id="@+id/dob_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/date_of_birth"
-                            android:textColor="@color/purple"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size12"
-                            android:layout_marginTop="@dimen/margin_8"
-                            android:fontFamily="@font/worksanslight"/>
+                    <ImageView
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:src="@drawable/calendar"/>
 
-                        <TextView
-                            android:id="@+id/edit_age"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/dob_txt"
-                            android:clickable="true"
-                            android:gravity="center_vertical"
-                            android:hint="@string/select_your_dob"
-                            android:textColor="@color/black"
-                            android:layout_marginTop="@dimen/margin_3"
-                            android:layout_marginBottom="@dimen/margin_8"
-                            android:fontFamily="@font/worksansmedium"
-                            android:background="@drawable/border"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:textSize="@dimen/text_size16" />
-
-                        <ImageView
-                            android:layout_width="@dimen/margin_25"
-                            android:layout_height="@dimen/margin_25"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="@dimen/margin_10"
-                            android:src="@drawable/calendar"/>
-
-                    </RelativeLayout>
                 </RelativeLayout>
 
             <TextView
@@ -509,7 +480,7 @@
                 </RelativeLayout>
 
                 <Button
-                    android:id="@+id/btn_next"
+                    android:id="@+id/update_pro"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_50"
                     android:layout_marginTop="@dimen/margin_40"

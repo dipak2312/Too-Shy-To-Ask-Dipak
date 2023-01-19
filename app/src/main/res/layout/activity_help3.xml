@@ -148,13 +148,18 @@
                     android:textSize="@dimen/text_size15"
                     android:fontFamily="@font/worksansmedium"/>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/related_topic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_below="@id/thanku_msg"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/thanku_msg"
+                    android:layout_below="@+id/related_topic"
                     android:gravity="center"
-                    android:layout_marginStart="@dimen/margin_20"
-                    android:layout_marginEnd="@dimen/margin_20"
                     android:layout_marginBottom="@dimen/margin_30"
                     android:orientation="vertical"
                     android:layout_marginTop="@dimen/margin_60">
@@ -168,7 +173,7 @@
                         android:fontFamily="@font/worksansregular"/>
 
                     <Button
-                        android:id="@+id/btn_signin"
+                        android:id="@+id/contact_us"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_48"
                         android:includeFontPadding="false"

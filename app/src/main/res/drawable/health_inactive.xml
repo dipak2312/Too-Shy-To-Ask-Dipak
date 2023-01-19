@@ -4,6 +4,6 @@
         android:color="@color/gender_inactive"/>
 
     <corners
-        android:radius="5dp" />
+        android:radius="20dp" />
 
 </shape>

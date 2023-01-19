@@ -74,7 +74,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rel_top_bar"
-        android:visibility="gone"
         android:layout_marginTop="@dimen/margin_10">
 
         <RelativeLayout
@@ -152,6 +151,53 @@
                     android:layout_marginStart="@dimen/margin_20"/>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/highlight_blog"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_25"
+                android:layout_below="@id/recy_blog_lay"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:text="Highlights"
+                    android:textSize="@dimen/text_size18"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/see_all1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_alignParentEnd="true"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:fontFamily="@font/worksansitalic"
+                    android:textSize="@dimen/text_size12"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:textColor="@color/purple"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recy_highlight_blog_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/highlight_blog"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_highlight_blogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"/>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 

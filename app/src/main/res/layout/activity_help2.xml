@@ -139,7 +139,7 @@
                 android:fontFamily="@font/worksansregular"/>
 
             <Button
-                android:id="@+id/btn_signin"
+                android:id="@+id/contact"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_48"
                 android:includeFontPadding="false"
