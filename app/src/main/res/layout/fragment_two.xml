@@ -11,12 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <LinearLayout
             android:id="@+id/lin_avtar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/avatar_title"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/margin_15"
             android:weightSum="4">
 
@@ -87,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/lin_avtar"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/margin_15"
             android:weightSum="4">
 
@@ -152,48 +156,6 @@
 
         </LinearLayout>
 
-        <!--<LinearLayout
-            android:id="@+id/lin_avtar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lin_avtar"
-            android:layout_marginTop="@dimen/margin_15"
-            android:weightSum="4">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar5"
-                android:layout_width="@dimen/margin_40"
-                android:layout_height="@dimen/margin_65"
-                android:padding="@dimen/margin_5"
-                android:src="@drawable/avatar5"
-                android:layout_weight="1"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar6"
-                android:layout_width="@dimen/margin_40"
-                android:layout_height="@dimen/margin_65"
-                android:padding="@dimen/margin_5"
-                android:src="@drawable/avatar6"
-                android:layout_weight="1"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar7"
-                android:layout_width="@dimen/margin_40"
-                android:layout_height="@dimen/margin_65"
-                android:padding="@dimen/margin_5"
-                android:src="@drawable/avatar7"
-                android:layout_weight="1"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar8"
-                android:layout_width="@dimen/margin_40"
-                android:layout_height="@dimen/margin_65"
-                android:padding="@dimen/margin_5"
-                android:src="@drawable/avatar8"
-                android:layout_weight="1"/>
-
-        </LinearLayout>-->
-
         <TextView
             android:id="@+id/avatar_title"
             android:layout_width="wrap_content"
@@ -207,8 +169,7 @@
             android:id="@+id/profile_recy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_below="@id/image_id"
+            android:layout_below="@+id/avatar_title"
             android:layout_marginTop="@dimen/margin_15">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -219,7 +180,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Or choose from your phone gallery"
-            android:layout_below="@id/lin_avtar1"
+            android:layout_below="@id/profile_recy"
             android:layout_marginTop="@dimen/margin_40"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"

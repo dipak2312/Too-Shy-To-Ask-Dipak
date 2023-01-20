@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
-        userPopup();
+        //userPopup();
 
         /*edit_first_name = findViewById(R.id.edit_first_name);
         edit_last_name = findViewById(R.id.edit_last_name);

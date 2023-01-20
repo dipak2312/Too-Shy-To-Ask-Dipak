@@ -45,6 +45,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         next_btn.setOnClickListener(this);
         skip_btn = view.findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
+
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
 

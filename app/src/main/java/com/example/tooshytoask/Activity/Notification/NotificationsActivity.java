@@ -1,18 +1,20 @@
 package com.example.tooshytoask.Activity.Notification;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+//import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
@@ -23,6 +25,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     SPManager spManager;
     CustomProgressDialog dialog;
     RelativeLayout rel_back;
+    Toolbar toolbar;
     ImageView clear_all_notification, settings;
 
     @Override
@@ -37,24 +40,40 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         rel_back.setOnClickListener(this);
         settings = findViewById(R.id.settings);
         settings.setOnClickListener(this);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        setTitle("");
         /*clear_all_notification = findViewById(R.id.clear_all_notification);
         clear_all_notification.setOnClickListener(this);*/
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel =
                     new NotificationChannel("MyNotification", "PushNotification", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
-        }
+        }*/
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.notification_menu, menu);
+        getMenuInflater().inflate(R.menu.notification_menu, menu);
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.notification_clear:
+                Toast.makeText(getApplicationContext(),"Clear All Notification",Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public void onClick(View view) {

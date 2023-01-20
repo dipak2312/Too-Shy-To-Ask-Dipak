@@ -37,6 +37,7 @@ import com.example.tooshytoask.Models.RecommendedBlogItems;
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.Models.StatusItem;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -139,12 +140,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         sliderBannerItems = new ArrayList<>();
         sliderBannerItems.add(new SliderBannerItem(R.drawable.banner1));
         sliderBannerItems.add(new SliderBannerItem(R.drawable.banner2));
+        sliderBannerItems.add(new SliderBannerItem(R.drawable.banner1));
+        sliderBannerItems.add(new SliderBannerItem(R.drawable.banner2));
         adapter4 = new SliderBannerAdapter(sliderBannerItems, viewPager2);
         viewPager2.setAdapter(adapter4);
-        viewPager2.setClipChildren(false);
-        viewPager2.setClipToPadding(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+        mBarLayout.setViewPager2(viewPager2);
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(8));
@@ -171,14 +171,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                 }
                 handler.removeCallbacks(sliderRunnable);
-                handler.postDelayed(sliderRunnable, 5000);
+                handler.postDelayed(sliderRunnable, 3000);
             }
         });
 
         return view;
     }
 
-    private Runnable sliderRunnable = new Runnable() {
+    public Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
             viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
@@ -188,6 +188,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private int getitem(int i) {
 
         return viewPager2.getCurrentItem() + i;
+
     }
 
     @Override

@@ -15,6 +15,11 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
+    <style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="TextInputLayoutHintText">
         <item name="android:textSize">@dimen/text_size12</item>
     </style>
@@ -27,14 +32,15 @@
 
     <style name="radiusimage" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/margin_5</item>
+        <item name="cornerSize">@dimen/margin_7</item>
+        <item name="android:shadowColor">@color/purple</item>
         <item name="color">@color/resend_color</item>
     </style>
 
     <style name="radiusimageview" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">@dimen/margin_5</item>
-        <item name="cornerSizeTopRight">@dimen/margin_5</item>
+        <item name="cornerSizeTopLeft">@dimen/margin_7</item>
+        <item name="cornerSizeTopRight">@dimen/margin_7</item>
         <item name="color">@color/resend_color</item>
     </style>
 

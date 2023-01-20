@@ -44,13 +44,13 @@
                 android:textSize="@dimen/text_size18"/>
 
             <ImageView
-                android:id="@+id/settings"
-                android:layout_width="@dimen/margin_15"
-                android:layout_height="@dimen/margin_15"
+                android:id="@+id/bookmark_blog"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/margin_20"
-                android:src="@drawable/bookmark"/>
+                android:src="@drawable/bookmark_img"/>
 
         </RelativeLayout>
     </RelativeLayout>
@@ -62,6 +62,11 @@
         android:layout_below="@id/rel_top_bar">
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_20"
@@ -106,12 +111,16 @@
         </RelativeLayout>
         </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/blog_recy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/selection_button_rl"
-        android:layout_marginTop="@dimen/margin_15"/>
+        </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/blog_recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/categories"
+                android:layout_marginStart="@dimen/margin_15"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_15"/>
 
         </RelativeLayout>
 

@@ -8,13 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.tooshytoask.Fragment.InfoCard.FourFragment;
 import com.example.tooshytoask.Fragment.InfoCard.OneFragment;
 import com.example.tooshytoask.Fragment.InfoCard.ThreeFragment;
 import com.example.tooshytoask.Fragment.InfoCard.TwoFragment;
-import com.example.tooshytoask.R;
 
 public class InfoCardAdapter extends FragmentPagerAdapter implements View.OnClickListener {
     TextView skip_btn;
@@ -46,8 +44,8 @@ public class InfoCardAdapter extends FragmentPagerAdapter implements View.OnClic
         }
         else if(position==3){
 
-            FourFragment third=new FourFragment();
-            return third;
+            FourFragment forth=new FourFragment();
+            return forth;
         }
         return null;
     }

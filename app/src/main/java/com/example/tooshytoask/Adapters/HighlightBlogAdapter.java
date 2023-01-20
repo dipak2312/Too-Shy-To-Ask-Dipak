@@ -29,7 +29,7 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
     @NonNull
     @Override
     public HighlightBlogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recently_blog_items,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_items_view,parent,false);
         return new ViewHolder(view);
     }
 

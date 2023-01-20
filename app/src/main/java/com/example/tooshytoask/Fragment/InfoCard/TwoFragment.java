@@ -204,9 +204,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
             avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
         }
-        else if (id == next_btn2.getId()){
-            clickListener.onClick(true);
-        }
+
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
@@ -232,6 +230,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             if(status)
             {
                 ImagePickUtilsCamera.selectImage(context);
+
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
             else
@@ -243,6 +242,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             if(status)
             {
                 ImagePickUtilsFile.selectImage(context);
+
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
             else

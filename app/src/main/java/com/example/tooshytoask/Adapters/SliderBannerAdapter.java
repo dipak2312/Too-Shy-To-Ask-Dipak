@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
    @Override
    public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
    holder.setImage(sliderBannerItems.get(position));
-   if (position == sliderBannerItems.size() - 2){
+   if (position == sliderBannerItems.size()){
       viewPager2.post(sliderRunnable);
    }
    }
@@ -57,11 +58,12 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
       }
    }
 
-   private Runnable sliderRunnable = new Runnable() {
+   public Runnable sliderRunnable = new Runnable() {
       @Override
       public void run() {
          sliderBannerItems.addAll(sliderBannerItems);
          notifyDataSetChanged();
+
       }
    };
 }

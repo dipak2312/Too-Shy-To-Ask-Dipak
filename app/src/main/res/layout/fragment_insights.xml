@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".Fragment.InsightsFragment">
 
@@ -198,6 +198,211 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/event_blog"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_25"
+                android:layout_below="@id/recy_highlight_blog_lay"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:text="Event"
+                    android:textSize="@dimen/text_size18"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/see_all2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_alignParentEnd="true"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:fontFamily="@font/worksansitalic"
+                    android:textSize="@dimen/text_size12"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:textColor="@color/purple"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recy_event_blog_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_blog"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_event_blogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"/>
+
+            </RelativeLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/game_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/game_banner"
+                android:layout_below="@id/recy_event_blog_lay"
+                app:shapeAppearanceOverlay="@style/radiusimage"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_15"/>
+
+            <RelativeLayout
+                android:id="@+id/just_added_blog"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_25"
+                android:layout_below="@id/game_banner"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:text="Just added"
+                    android:textSize="@dimen/text_size18"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/see_all3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_alignParentEnd="true"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:fontFamily="@font/worksansitalic"
+                    android:textSize="@dimen/text_size12"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:textColor="@color/purple"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/recy_just_blog_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/just_added_blog"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_just_added_blogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"/>
+
+            </RelativeLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/take_a_quiz_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/take_a_quiz"
+                android:layout_below="@id/recy_just_blog_lay"
+                app:shapeAppearanceOverlay="@style/radiusimage"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_15"/>
+
+            <RelativeLayout
+                android:id="@+id/courses_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_25"
+                android:layout_below="@id/take_a_quiz_banner"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:text="Courses"
+                    android:textSize="@dimen/text_size18"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/see_all4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_alignParentEnd="true"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:fontFamily="@font/worksansitalic"
+                    android:textSize="@dimen/text_size12"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:textColor="@color/purple"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/courses_rel_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/courses_lay"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_courses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/video_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_25"
+                android:layout_below="@id/courses_rel_lay"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:text="Video Gallery"
+                    android:textSize="@dimen/text_size18"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/see_all6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_alignParentEnd="true"
+                    android:text="See All"
+                    android:gravity="center"
+                    android:fontFamily="@font/worksansitalic"
+                    android:textSize="@dimen/text_size12"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:textColor="@color/purple"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/video_rel_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/video_lay"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_video_gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

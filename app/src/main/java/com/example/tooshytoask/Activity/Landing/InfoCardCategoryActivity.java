@@ -25,7 +25,6 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
     InfoCardAdapter adapter;
     ViewPager viewPager;
     RelativeLayout rel_back;
-    ImageButton next_btn;
     TextView skip_btn;
     ClickListener clickListener;
 
@@ -38,8 +37,7 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         context = InfoCardCategoryActivity.this;
         spManager = new SPManager(context);
         progressbar_completed = findViewById(R.id.progressbar_completed);
-        next_btn = findViewById(R.id.next_btn);
-        next_btn.setOnClickListener(this);
+
         skip_btn = findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
         viewPager = findViewById(R.id.viewPager);

@@ -109,7 +109,7 @@
                     android:layout_marginTop="@dimen/margin_15">
 
                     <Button
-                        android:id="@+id/male"
+                        android:id="@+id/yes"
                         android:layout_width="@dimen/margin_100"
                         android:layout_height="@dimen/margin_45"
                         android:text="Yes"
@@ -122,7 +122,7 @@
                         android:textAllCaps="false"/>
 
                     <Button
-                        android:id="@+id/female"
+                        android:id="@+id/no"
                         android:layout_width="@dimen/margin_100"
                         android:layout_height="@dimen/margin_45"
                         android:text="No"
@@ -143,6 +143,7 @@
                     android:text="Thank You Got It"
                     android:textColor="@color/black"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:layout_below="@id/yes_no_lay"
                     android:layout_marginTop="@dimen/margin_10"
                     android:textSize="@dimen/text_size15"

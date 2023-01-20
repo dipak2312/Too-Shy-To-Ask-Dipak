@@ -11,39 +11,39 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.RecentlyBlogItems;
-import com.example.tooshytoask.Models.RecommendedBlogItems;
+import com.example.tooshytoask.Models.EventBlogItems;
+import com.example.tooshytoask.Models.HighlightBlogItems;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
-public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapter.ViewHolder>{
+public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<RecentlyBlogItems>recentlyBlogItems;
+    ArrayList<EventBlogItems>eventBlogItems;
 
-    public RecentlyBlogAdapter(Context context, ArrayList<RecentlyBlogItems>recentlyBlogItems) {
+    public EventBlogAdapter(Context context, ArrayList<EventBlogItems>eventBlogItems) {
         this.context = context;
-        this.recentlyBlogItems = recentlyBlogItems;
+        this.eventBlogItems = eventBlogItems;
     }
 
     @NonNull
     @Override
-    public RecentlyBlogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EventBlogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_items_view,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecentlyBlogAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,recentlyBlogItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,recentlyBlogItems.get(position).getSave_img()));
-        holder.blog_title.setText(recentlyBlogItems.get(position).getBlog_title());
+    public void onBindViewHolder(@NonNull EventBlogAdapter.ViewHolder holder, int position) {
+        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,eventBlogItems.get(position).getBlog_img()));
+        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,eventBlogItems.get(position).getSave_img()));
+        holder.blog_title.setText(eventBlogItems.get(position).getBlog_title());
 
     }
 
     @Override
     public int getItemCount() {
-        return recentlyBlogItems.size();
+        return eventBlogItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
