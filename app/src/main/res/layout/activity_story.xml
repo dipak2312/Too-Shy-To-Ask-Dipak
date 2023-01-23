@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/story_image"
+        android:foreground="@drawable/gradient_background"
         android:scaleType="centerCrop"/>
 
     <pt.tornelas.segmentedprogressbar.SegmentedProgressBar

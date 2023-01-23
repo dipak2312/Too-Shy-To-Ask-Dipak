@@ -93,8 +93,6 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         if (id == skip_btn.getId()){
             clickListener.onClick(true);
-        } else if (id == next_btn.getId()){
-            clickListener.onClick(true);
         }
 
         if (id == yes_btn.getId()){
@@ -116,6 +114,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
             yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
 
         }
+
         else {
             ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
             for (int i = 0; i < healthIssues.size(); i++) {
@@ -153,10 +152,6 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
-        if (id == no_btn.getId()){
-
-
         }
 
     }

@@ -109,6 +109,7 @@
         android:layout_marginTop="@dimen/margin_40"
         android:includeFontPadding="false"
         android:gravity="center"
+        android:fontFamily="@font/worksansbold"
         android:layout_below="@+id/radioGrp"
         android:background="@drawable/active_con_btn"
         android:layout_marginBottom="@dimen/margin_30"

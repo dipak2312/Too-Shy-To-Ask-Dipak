@@ -230,7 +230,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             if(status)
             {
                 ImagePickUtilsCamera.selectImage(context);
-
+                camera.isClickable();
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
             else

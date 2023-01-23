@@ -5,42 +5,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Activity.Landing.LanguageActivity">
+    tools:context=".Activity.Setting.FeedbackActivity">
 
     <RelativeLayout
+        android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text="Send Feedback"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/lin_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_below="@id/rel_top_bar"
         android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_80">
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/choose_your_preferred_language"
-            android:layout_marginTop="@dimen/margin_60"
-            android:textSize="@dimen/text_size24"
+            android:text="Tell us what you love about the app, or what we could be doing better."
             android:textColor="@color/black"
-            android:fontFamily="@font/worksansregular"/>
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size12"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_feeds_will_be_served_basis_on_your_selection"
-            android:layout_marginTop="@dimen/margin_15"
-            android:textSize="@dimen/text_size15"
-            android:textColor="@color/black"
-            android:fontFamily="@font/worksansregular"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/description_enter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_90"
+            android:layout_marginTop="@dimen/margin_20"
+            android:background="@drawable/background"
+            android:fontFamily="@font/worksanslight"
+            android:gravity="top"
+            android:paddingStart="@dimen/padding_15"
+            android:paddingTop="@dimen/margin_5"
+            android:paddingEnd="@dimen/padding_15"
+            app:hintTextColor="@color/purple">
 
-    </LinearLayout>
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_age"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_70"
+                android:background="@drawable/border"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="top"
+                android:hint="Enter Feedback"
+                android:inputType="textPostalAddress|textMultiLine|textCapSentences"
+                android:paddingTop="@dimen/margin_5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size12" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
             android:id="@+id/radioGrp"
@@ -61,7 +97,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size15"
                 android:fontFamily="@font/worksanssemibold"
-                android:layoutDirection="rtl"
                 android:text="@string/english"
                 android:onClick="radioButtobClickEvent"/>
 
@@ -74,7 +109,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size15"
                 android:fontFamily="@font/worksanssemibold"
-                android:layoutDirection="rtl"
                 android:onClick="radioButtobClickEvent"
                 android:text="हिंदी"/>
 
@@ -86,13 +120,13 @@
                 android:checked="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size15"
-                android:layoutDirection="rtl"
                 android:fontFamily="@font/worksanssemibold"
                 android:onClick="radioButtobClickEvent"
                 android:text="मराठी"/>
 
         </RadioGroup>
 
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_next"
@@ -107,10 +141,8 @@
         android:layout_marginStart="@dimen/margin_20"
         android:background="@drawable/active_con_btn"
         android:layout_marginBottom="@dimen/margin_30"
-        android:text="@string/next"
+        android:text="SUBMIT FEEDBACK"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size14" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

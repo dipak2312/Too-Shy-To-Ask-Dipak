@@ -37,11 +37,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Relationships"
-                android:textColor="@color/black"
-                android:fontFamily="@font/worksansmedium"
                 android:layout_centerInParent="true"
-                android:textSize="@dimen/text_size18"/>
+                android:fontFamily="@font/worksansmedium"
+                android:text="Blogs"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
 
             <ImageView
                 android:id="@+id/bookmark_blog"

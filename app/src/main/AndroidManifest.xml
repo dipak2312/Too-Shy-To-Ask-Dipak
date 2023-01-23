@@ -20,9 +20,22 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".FeedbackActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.Blogs.DetailBlogActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activity.Help.ContactUsActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -30,7 +43,6 @@
         <activity
             android:name=".Activity.Help.Help3Activity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -108,7 +120,6 @@
         <activity
             android:name=".Activity.Help.HelpActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -151,7 +162,11 @@
         <activity
             android:name=".Activity.Home.HomeActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <!--
             <service
                 android:name=".MessagingService"
@@ -161,7 +176,6 @@
                 </intent-filter>
             </service>
             -->
-
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -194,11 +208,6 @@
         <activity
             android:name=".Activity.Landing.SplashScreenActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -23,6 +23,7 @@ import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.BlogItems;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     AllBlogAdapter adapter2;
     ArrayList<BlogItems> blogItems;
     ImageView bookmark_blog;
+    CustomProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = AllBlogsActivity.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
 
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
