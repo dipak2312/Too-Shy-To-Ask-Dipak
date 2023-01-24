@@ -4,16 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.CategoryItem;
-import com.example.tooshytoask.Models.HealthIssues;
-import com.example.tooshytoask.Models.ProfileItems;
+import com.example.tooshytoask.Models.HealthIssue;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
 
@@ -22,9 +19,9 @@ import java.util.ArrayList;
 public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder> {
     Context context;
     OnClickListner onclicklistener;
-    ArrayList<HealthIssues> healthIssues;
+    ArrayList<HealthIssue> healthIssues;
 
-    public HealthAdapter(ArrayList<HealthIssues> healthIssues, OnClickListner onclicklistener,  Context context){
+    public HealthAdapter(ArrayList<HealthIssue> healthIssues, OnClickListner onclicklistener, Context context){
         this.healthIssues = healthIssues;
         this.onclicklistener = onclicklistener;
         this.context = context;
@@ -56,7 +53,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
             health_btn = itemView.findViewById(R.id.health_btn);
         }
 
-        public void HealthIssues(final HealthIssues healthIssues, int position){
+        public void HealthIssues(final HealthIssue healthIssues, int position){
             health_btn.setText(healthIssues.getHealth_btn());
 
             if (healthIssues.isSelected){

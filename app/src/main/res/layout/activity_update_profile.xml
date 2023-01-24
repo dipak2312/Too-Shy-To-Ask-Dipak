@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
+    android:background="@color/white"
     tools:context=".Activity.Setting.UpdateProfileActivity">
 
     <FrameLayout
@@ -128,15 +128,11 @@
                     android:background="@drawable/background"
                     android:fontFamily="@font/worksanslight"
                     android:gravity="top"
-                    android:hint="@string/first_name"
                     android:paddingStart="@dimen/padding_15"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:paddingEnd="@dimen/padding_15"
-                    android:textColorHint="@color/teal_700"
                     app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/purple"
-                    app:placeholderText="Enter Your First Name"
-                    app:placeholderTextColor="#a2a2a2">
+                    app:hintTextColor="@color/purple">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -146,6 +142,7 @@
                         android:background="@drawable/border"
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
+                        android:hint="@string/first_name"
                         android:inputType="textPersonName"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
@@ -161,15 +158,11 @@
                     android:background="@drawable/background"
                     android:fontFamily="@font/worksanslight"
                     android:gravity="top"
-                    android:hint="@string/last_name"
                     android:paddingStart="@dimen/padding_15"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:paddingEnd="@dimen/padding_15"
-                    android:textColorHint="@color/teal_700"
                     app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/purple"
-                    app:placeholderText="Enter Your Last Name"
-                    app:placeholderTextColor="#a2a2a2">
+                    app:hintTextColor="@color/purple">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -179,6 +172,7 @@
                         android:background="@drawable/border"
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
+                        android:hint="@string/last_name"
                         android:inputType="textPersonName"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
@@ -194,15 +188,11 @@
                     android:background="@drawable/background"
                     android:fontFamily="@font/worksanslight"
                     android:gravity="top"
-                    android:hint="@string/phone_number"
                     android:paddingStart="@dimen/padding_15"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:paddingEnd="@dimen/padding_15"
-                    android:textColorHint="@color/teal_700"
                     app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/purple"
-                    app:placeholderText="Enter Your Mobile Number"
-                    app:placeholderTextColor="#a2a2a2">
+                    app:hintTextColor="@color/purple">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -212,6 +202,7 @@
                         android:background="@drawable/border"
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
+                        android:hint="@string/phone_number"
                         android:inputType="number"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
@@ -227,15 +218,12 @@
                     android:background="@drawable/background"
                     android:fontFamily="@font/worksanslight"
                     android:gravity="top"
-                    android:hint="@string/email"
+
                     android:paddingStart="@dimen/padding_15"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:paddingEnd="@dimen/padding_15"
-                    android:textColorHint="@color/teal_700"
                     app:hintTextAppearance="@style/TextInputLayoutHintText"
-                    app:hintTextColor="@color/purple"
-                    app:placeholderText="Enter Your Email"
-                    app:placeholderTextColor="#a2a2a2">
+                    app:hintTextColor="@color/purple">
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -246,7 +234,8 @@
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
                         android:inputType="textEmailAddress"
-                        android:paddingTop="@dimen/margin_5"
+                        android:hint="@string/email"
+                        android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size16" />
 

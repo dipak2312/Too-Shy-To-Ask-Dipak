@@ -87,10 +87,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             startActivity(intent);
         }
         else if (id == bookmarks.getId()) {
-            Intent intent = new Intent(context, BookmarkActivity.class);
+            /*Intent intent = new Intent(context, BookmarkActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            startActivity(intent);*/
         }
         else if (id == feedback.getId()) {
             /*Intent intent = new Intent(context, UpdateProfileActivity.class);

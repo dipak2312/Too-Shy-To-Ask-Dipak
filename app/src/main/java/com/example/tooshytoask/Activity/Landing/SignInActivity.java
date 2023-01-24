@@ -65,12 +65,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         int id = view.getId();
 
         if (id == btn_signin.getId()) {
-            Intent intent = new Intent(context, OtpVerificationActivity.class);
+            /*Intent intent = new Intent(context, OtpVerificationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
-                //loginWithOTP();
+            finish();*/
+                loginWithOTP();
         } else if (id == guest_login.getId()) {
             Intent intent = new Intent(context, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

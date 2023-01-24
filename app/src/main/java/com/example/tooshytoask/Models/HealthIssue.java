@@ -1,10 +1,10 @@
 package com.example.tooshytoask.Models;
 
-public class HealthIssues {
+public class HealthIssue {
     String health_btn;
     public Boolean isSelected = false;
 
-    public HealthIssues(String health_btn, Boolean isSelected) {
+    public HealthIssue(String health_btn, Boolean isSelected) {
         this.health_btn = health_btn;
         this.isSelected = isSelected;
     }

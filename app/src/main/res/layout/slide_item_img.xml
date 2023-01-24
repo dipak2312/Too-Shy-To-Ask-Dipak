@@ -13,11 +13,11 @@
         app:riv_corner_radius="@dimen/margin_12"
         android:src="@drawable/welcome"/>
 
-    <!--<TextView
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/heading_one"
+        android:text="Heading"
         android:fontFamily="@font/worksansregular"
         android:layout_below="@id/img_slide"
         android:layout_centerHorizontal="true"
@@ -29,12 +29,12 @@
         android:id="@+id/txt_desc"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:text="@string/desc_one"
+        android:text="Description"
         android:fontFamily="@font/worksansregular"
         android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/text_size15"
         android:textColor="@color/black"
-        android:layout_marginTop="@dimen/margin_20"/>-->
+        android:layout_marginTop="@dimen/margin_20"/>
 
 </RelativeLayout>

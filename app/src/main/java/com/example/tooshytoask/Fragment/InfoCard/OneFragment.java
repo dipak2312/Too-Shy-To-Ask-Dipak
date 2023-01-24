@@ -13,9 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
+import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.HealthCateResponse;
+import com.example.tooshytoask.Models.InformationStorehouseList;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
@@ -23,13 +28,19 @@ import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class OneFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnClickListner, ClickListener {
     Context context;
     SPManager spManager;
     RecyclerView recyclerView, category_recy;
     CategoryAdapter adapter;
     ArrayList<CategoryItem> categoryItem;
+    ArrayList<InformationStorehouseList>informationStorehouseLists;
     TextView skip_btn;
+    OnClickListner onclicklistener;
     ImageButton next_btn;
     ClickListener clickListener;
 
@@ -49,12 +60,12 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
 
-        recyclerView = view.findViewById(R.id.category_recy);
-        recyclerView.setOnTouchListener(this);
+        category_recy = view.findViewById(R.id.category_recy);
+        category_recy.setOnTouchListener(this);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
+        category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        categoryItem = new ArrayList<>();
+        /*categoryItem = new ArrayList<>();
 
         categoryItem.add(new CategoryItem(R.drawable.reproduction,"Relationships",false));
         categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sex & Sexuality",false));
@@ -63,9 +74,60 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         categoryItem.add(new CategoryItem(R.drawable.reproduction,"Education",false));
         categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));
 
-        recyclerView.setAdapter(new CategoryAdapter(categoryItem,this, clickListener));
+        category_recy.setAdapter(new CategoryAdapter(categoryItem,this, clickListener));*/
 
     return view;
+    }
+
+    public void healthcategory() {
+
+        HealthCateModel model = new HealthCateModel();
+        model.setUser_id(spManager.getUserId());
+        WebServiceModel.getRestApi().healthcategory(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<HealthCateResponse>() {
+                    @Override
+                    public void onNext(HealthCateResponse healthCateResponse) {
+
+                        String msg = healthCateResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+
+                            informationStorehouseLists = healthCateResponse.getInformationStorehouseLists();
+
+
+                            /*for (int i = 0; i < informationStorehouseLists.size(); i++) {
+
+
+                            }*/
+
+                            adapter = new CategoryAdapter(informationStorehouseLists,onclicklistener, clickListener);
+                            category_recy.setAdapter(adapter);
+
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -78,9 +140,9 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<categoryItem.size();i++)
+        for(int i=0;i<informationStorehouseLists.size();i++)
         {
-            myvalue.add(categoryItem.get(i).getSelected());
+            myvalue.add(informationStorehouseLists.get(i).getSelected());
         }
         boolean ans = myvalue.contains(true);
 
@@ -108,9 +170,9 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
       ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<categoryItem.size();i++)
+        for(int i=0;i<informationStorehouseLists.size();i++)
         {
-            myvalue.add(categoryItem.get(i).getSelected());
+            myvalue.add(informationStorehouseLists.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);

@@ -1,5 +1,6 @@
 package com.example.tooshytoask.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tooshytoask.Models.InformationStorehouseList;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
@@ -18,12 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-    ArrayList<CategoryItem> categoryItem;
+    ArrayList<InformationStorehouseList>informationStorehouseLists;
     OnClickListner onclicklistener;
     ClickListener clickListener;
+    Context context;
 
-    public CategoryAdapter(ArrayList<CategoryItem> categoryItem,OnClickListner onclicklistener, ClickListener clickListener){
-        this.categoryItem = categoryItem;
+    public CategoryAdapter(ArrayList<InformationStorehouseList>informationStorehouseLists,OnClickListner onclicklistener, ClickListener clickListener){
+        this.informationStorehouseLists = informationStorehouseLists;
         this.onclicklistener=onclicklistener;
         this.clickListener = clickListener;
     }
@@ -37,13 +41,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-        holder.CategoryItem(categoryItem.get(position),position);
-
+       holder.category_title.setText(informationStorehouseLists.get(position).getTitle());
+       holder.cate_img.setImageDrawable(ContextCompat.getDrawable(context,informationStorehouseLists.get(position).getImg()));
     }
 
     @Override
     public int getItemCount() {
-        return categoryItem.size();
+        return informationStorehouseLists.size();
     }
 
     /*public List<CategoryItem> getSelectedCategoryItems(){
@@ -71,36 +75,37 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         }
 
-        public void CategoryItem(final CategoryItem categoryItem,int position){
-            cate_img.setImageResource(categoryItem.getCate_img());
-            category_title.setText(categoryItem.getCategory_title());
+        public void InformationStorehouseList(final InformationStorehouseList informationStorehouseLists,int position){
+            //cate_img.setImageDrawable(ContextCompat.getDrawable(informationStorehouseLists.get(position).getSlug()));
+            category_title.setText(informationStorehouseLists.getTitle());
 
-            if (categoryItem.isSelected){
+
+            if (informationStorehouseLists.isSelected){
                 cate_img.setBackgroundResource(R.drawable.circle_active_background);
             }else {
                 cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
             }
 
-            cate_img.setOnClickListener(new View.OnClickListener() {
+            /*cate_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   if (categoryItem.isSelected) {
+                   if (informationStorehouseLists.isSelected) {
                        cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
-                       categoryItem.setSelected(false);
+                       informationStorehouseLists.setSelected(false);
                        notifyDataSetChanged();
                        onclicklistener.onClickData(position,1);
 
 
                    }else {
                        cate_img.setBackgroundResource(R.drawable.circle_active_background);
-                       categoryItem.setSelected(true);
+                       informationStorehouseLists.setSelected(true);
                        notifyDataSetChanged();
                        onclicklistener.onClickData(position,1);
 
                    }
 
                 }
-            });
+            });*/
         }
     }
 }

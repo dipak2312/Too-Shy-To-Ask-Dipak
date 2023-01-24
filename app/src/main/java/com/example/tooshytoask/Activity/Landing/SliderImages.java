@@ -1,38 +1,45 @@
 package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.SliderItem;
+import com.example.tooshytoask.Models.OnBordingResponse;
+import com.example.tooshytoask.Models.OnboardingList;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class SliderImages extends AppCompatActivity implements View.OnClickListener {
     //ActivitySliderImagesBinding binding;
-    ViewPagerAdapter adapter;
+    ViewPagerAdapter viewPagerAdapter;
     ViewPager viewPager;
     TextView skip_btn;
     Button started;
     ImageButton next_btn;
     DotsIndicator mBarLayout;
+    CustomProgressDialog dialog;
     Context context;
     SPManager spManager;
+    FragmentManager fm;
+    ArrayList<OnboardingList> onboardingLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = SliderImages.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
 
         viewPager = findViewById(R.id.view_pager_img);
         mBarLayout = findViewById(R.id.indicator_layout);
@@ -57,9 +65,10 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
     }
 
     private void AddView() {
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
+        viewPagerAdapter = new ViewPagerAdapter(fm, context, onboardingLists);
+        viewPager.setAdapter(viewPagerAdapter);
         mBarLayout.setViewPager(viewPager);
+        //getOnBorading();
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -103,6 +112,45 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
     private int getitem(int i) {
 
         return viewPager.getCurrentItem() + i;
+    }
+
+    public void getOnBorading(){
+        dialog.show("");
+
+        WebServiceModel.getRestApi().getOnBorading()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<OnBordingResponse>() {
+                    @Override
+                    public void onNext(OnBordingResponse onBordingResponse) {
+                        dialog.show("");
+                        String msg = onBordingResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            onboardingLists = onBordingResponse.getOnboardingLists();
+
+                            viewPagerAdapter = new ViewPagerAdapter(fm, context, onboardingLists);
+                            viewPager.setAdapter(viewPagerAdapter);
+
+
+
+                        } else {
+                            //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 

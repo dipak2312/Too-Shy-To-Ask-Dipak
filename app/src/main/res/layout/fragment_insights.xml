@@ -393,6 +393,7 @@
                 android:id="@+id/video_rel_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@id/video_lay"
                 android:layout_marginTop="@dimen/margin_10">
 

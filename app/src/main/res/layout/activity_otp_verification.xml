@@ -138,7 +138,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_30"
                 android:inputType="number"
-                android:itemBackground="@color/resend_color"
+                android:itemBackground="@drawable/border"
                 android:cursorVisible="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size16"

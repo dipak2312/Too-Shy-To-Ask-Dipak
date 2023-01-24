@@ -73,6 +73,7 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            getActivity().finish();
         }
         else if (id == next_btn.getId()){
             clickListener.onClick(true);
@@ -81,6 +82,7 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            getActivity().finish();
         }
 
        /* else if (id == spinner_country.getId()){

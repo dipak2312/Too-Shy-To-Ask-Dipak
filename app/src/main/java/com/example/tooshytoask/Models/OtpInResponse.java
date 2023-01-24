@@ -1,9 +1,9 @@
 package com.example.tooshytoask.Models;
 
 public class OtpInResponse {
+    private String user_id;
     private String msg;
     private String code;
-    private String user_id;
     private String first_name;
     private String last_name;
     private String email;

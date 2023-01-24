@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activity.Setting.UpdateProfile.UpdatePersonalInfoActivity">
 
     <RelativeLayout
@@ -48,8 +49,166 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/lin_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_55"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/blood_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Group"
+            android:layout_marginStart="@dimen/margin_3"
+            android:fontFamily="@font/worksansmedium"
+            android:textColor="@color/purple"
+            android:paddingStart="@dimen/margin_15"
+            android:textSize="@dimen/text_size12"
+            android:paddingEnd="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_5"/>
+
+        <Spinner
+            android:id="@+id/spinner_blood"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_35"
+            android:layout_below="@id/blood_group"
+            android:layout_centerVertical="true"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="@dimen/margin_3"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:fontFamily="@font/worksansmedium"
+            android:background="@drawable/border"
+            android:textSize="@dimen/text_size16"/>
+
+
+        <!--<EditText
+            android:id="@+id/etBlood_group"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:layout_below="@+id/blood_group"
+            android:paddingStart="@dimen/margin_15"
+            android:fontFamily="@font/worksansregular"
+            android:paddingEnd="@dimen/margin_10"
+            android:background="@android:color/transparent"
+            android:textSize="@dimen/text_size15"
+            android:inputType="text"/>-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/height_lay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_55"
+            android:background="@drawable/background"
+            android:fontFamily="@font/worksansmedium"
+            android:gravity="top"
+            android:paddingStart="@dimen/padding_15"
+            android:paddingTop="@dimen/margin_3"
+            android:paddingEnd="@dimen/padding_15"
+            android:orientation="horizontal"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:hintTextColor="@color/purple">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etHeight"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_37"
+                android:background="@drawable/border"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="top"
+                android:maxLength="3"
+                android:hint="@string/height"
+                android:inputType="phone"
+                android:paddingTop="@dimen/margin_3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size16" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_48"
+            android:text="Cms"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:textSize="@dimen/text_size12"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/weight_lay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_55"
+            android:background="@drawable/background"
+            android:fontFamily="@font/worksansmedium"
+            android:gravity="top"
+            android:paddingStart="@dimen/padding_15"
+            android:paddingTop="@dimen/margin_3"
+            android:paddingEnd="@dimen/padding_15"
+            android:orientation="horizontal"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:hintTextColor="@color/purple">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etWeight"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_37"
+                android:background="@drawable/border"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="top"
+                android:inputType="phone"
+                android:hint="@string/weight"
+                android:paddingTop="@dimen/margin_3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size16" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_48"
+            android:text="Kgs"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:textSize="@dimen/text_size12"/>
+
+    </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_below="@id/rel_top_bar"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
@@ -92,7 +251,7 @@
                     android:textSize="@dimen/text_size16"/>
 
 
-                <!--<EditText
+                &lt;!&ndash;<EditText
                     android:id="@+id/etBlood_group"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_48"
@@ -102,7 +261,7 @@
                     android:paddingEnd="@dimen/margin_10"
                     android:background="@android:color/transparent"
                     android:textSize="@dimen/text_size15"
-                    android:inputType="text"/>-->
+                    android:inputType="text"/>&ndash;&gt;
 
             </RelativeLayout>
         </RelativeLayout>
@@ -218,7 +377,7 @@
         </RelativeLayout>
 
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

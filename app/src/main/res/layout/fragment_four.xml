@@ -72,16 +72,12 @@
             android:background="@drawable/background"
             android:fontFamily="@font/worksansmedium"
             android:gravity="top"
-            android:hint="@string/height"
             android:paddingStart="@dimen/padding_15"
-            android:paddingTop="@dimen/margin_5"
+            android:paddingTop="@dimen/margin_3"
             android:paddingEnd="@dimen/padding_15"
-            android:textColorHint="@color/teal_700"
             android:orientation="horizontal"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
-            app:hintTextColor="@color/purple"
-            app:placeholderText="Enter Your Height"
-            app:placeholderTextColor="#a2a2a2">
+            app:hintTextColor="@color/purple">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -92,6 +88,7 @@
                 android:fontFamily="@font/worksansmedium"
                 android:gravity="top"
                 android:maxLength="3"
+                android:hint="@string/height"
                 android:inputType="phone"
                 android:paddingTop="@dimen/margin_3"
                 android:textColor="@color/black"
@@ -109,7 +106,7 @@
                 android:fontFamily="@font/worksansregular"
                 android:textColor="@color/black"
                 android:layout_marginEnd="@dimen/margin_15"
-                android:textSize="@dimen/margin_12"/>
+                android:textSize="@dimen/text_size12"/>
 
         </RelativeLayout>
 
@@ -125,16 +122,12 @@
                 android:background="@drawable/background"
                 android:fontFamily="@font/worksansmedium"
                 android:gravity="top"
-                android:hint="@string/weight"
                 android:paddingStart="@dimen/padding_15"
-                android:paddingTop="@dimen/margin_5"
+                android:paddingTop="@dimen/margin_3"
                 android:paddingEnd="@dimen/padding_15"
-                android:textColorHint="@color/teal_700"
                 android:orientation="horizontal"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
-                app:hintTextColor="@color/purple"
-                app:placeholderText="Enter Your Weight"
-                app:placeholderTextColor="#a2a2a2">
+                app:hintTextColor="@color/purple">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -145,6 +138,8 @@
                     android:fontFamily="@font/worksansmedium"
                     android:gravity="top"
                     android:inputType="phone"
+                    android:hint="@string/weight"
+                    android:maxLength="5"
                     android:paddingTop="@dimen/margin_3"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size16" />

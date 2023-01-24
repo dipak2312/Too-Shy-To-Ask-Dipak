@@ -1,12 +1,10 @@
 package com.example.tooshytoask.Fragment.InfoCard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,15 +14,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
-import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.HealthAdapter;
-import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.HealthIssues;
+import com.example.tooshytoask.Models.HealthIssue;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -35,7 +29,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     Context context;
     SPManager spManager;
     RecyclerView health_recy, recyclerView;
-    ArrayList<HealthIssues>healthIssues;
+    ArrayList<HealthIssue>healthIssues;
     HealthAdapter adapter;
     ClickListener clickListener;
     LinearLayout health_issues_title;
@@ -70,12 +64,12 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         healthIssues = new ArrayList<>();
 
-        healthIssues.add(new HealthIssues("Throid", false));
-        healthIssues.add(new HealthIssues("Painful Periods", false));
-        healthIssues.add(new HealthIssues("Mental Health", false));
-        healthIssues.add(new HealthIssues("Irregular Periods", false));
-        healthIssues.add(new HealthIssues("Fibroids", false));
-        healthIssues.add(new HealthIssues("PCOS/PCOD", false));
+        healthIssues.add(new HealthIssue("Throid", false));
+        healthIssues.add(new HealthIssue("Painful Periods", false));
+        healthIssues.add(new HealthIssue("Mental Health", false));
+        healthIssues.add(new HealthIssue("Irregular Periods", false));
+        healthIssues.add(new HealthIssue("Fibroids", false));
+        healthIssues.add(new HealthIssue("PCOS/PCOD", false));
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);

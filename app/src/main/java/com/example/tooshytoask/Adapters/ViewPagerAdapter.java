@@ -1,39 +1,36 @@
 package com.example.tooshytoask.Adapters;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tooshytoask.Fragment.SplashScreenFragment.FirstSplashFragment;
 import com.example.tooshytoask.Fragment.SplashScreenFragment.SecondSplashFragment;
 import com.example.tooshytoask.Fragment.SplashScreenFragment.ThirdSplashFragment;
-import com.example.tooshytoask.Models.SliderItem;
-import com.example.tooshytoask.R;
+import com.example.tooshytoask.Models.OnboardingList;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
+    Context context;
+    ArrayList<OnboardingList> onboardingLists;
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm) {
+    public ViewPagerAdapter(@NonNull FragmentManager fm, Context context, ArrayList<OnboardingList> onboardingLists) {
         super(fm);
+        this.context = context;
+        this.onboardingLists = onboardingLists;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
+
         if(position==0){
 
-            FirstSplashFragment first=new FirstSplashFragment();
+            FirstSplashFragment first = new FirstSplashFragment();
             return first;
 
         }
@@ -55,6 +52,50 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 3;
     }
+}
+
+/*public class OnBoradingAdapter extends RecyclerView.Adapter<OnBoradingAdapter.ViewHolder>{
+    Context context;
+    ArrayList<OnboardingList> onboardingLists;
+
+    public OnBoradingAdapter(Context context, ArrayList<OnboardingList> onboardingLists) {
+        this.context = context;
+        this.onboardingLists = onboardingLists;
+    }
+
+    @NonNull
+    @Override
+    public OnBoradingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new OnBoradingAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.slide_item_img,parent,false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull OnBoradingAdapter.ViewHolder holder, int position) {
+        holder.title.setText(onboardingLists.get(position).getTitle());
+        holder.txt_desc.setText(onboardingLists.get(position).getDesc());
+        Glide.with(context).load(onboardingLists.get(position).getImg()).placeholder(R.drawable.welcome).into(holder.img_slide);
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return onboardingLists.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView title,txt_desc;
+        ImageView img_slide;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            title=(TextView)itemView.findViewById(R.id.title);
+            txt_desc=(TextView)itemView.findViewById(R.id.txt_desc);
+            img_slide=(ImageView)itemView.findViewById(R.id.img_slide);
+        }
+    }
+}*/
+
 
     /*List<SliderItem> sliderItems;
     ViewPager2 viewPager2;
@@ -88,7 +129,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }*/
 
 
-
    /* public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img_slide;
 
@@ -112,4 +152,4 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             notifyDataSetChanged();
         }
     };*/
-}
+

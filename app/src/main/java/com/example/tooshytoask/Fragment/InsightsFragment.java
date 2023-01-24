@@ -173,8 +173,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         int id = view.getId();
 
         if (id == see_all.getId()) {
-            Intent intent = new Intent(context, AllBlogsActivity.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(context, AllBlogsActivity.class);
+            startActivity(intent);*/
         }
 
     }

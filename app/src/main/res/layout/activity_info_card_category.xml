@@ -61,7 +61,7 @@
         android:id="@+id/progressbar_completed"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_5"
+        android:layout_height="@dimen/margin_4"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_30"

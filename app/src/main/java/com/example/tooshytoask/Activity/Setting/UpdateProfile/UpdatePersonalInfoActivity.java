@@ -77,7 +77,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
     {
 
 
-        String[] countries = new String[]{"A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
+        String[] countries = new String[]{"Select", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
         spinner_blood.setAdapter(countryAdapter);

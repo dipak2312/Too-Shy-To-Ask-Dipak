@@ -145,6 +145,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         adapter4 = new SliderBannerAdapter(sliderBannerItems, viewPager2);
         viewPager2.setAdapter(adapter4);
         mBarLayout.setViewPager2(viewPager2);
+        viewPager2.setClipChildren(false);
+        viewPager2.setClipToPadding(false);
+        viewPager2.setOffscreenPageLimit(3);
+        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(8));

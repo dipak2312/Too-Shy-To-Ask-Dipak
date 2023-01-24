@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -37,7 +36,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class OtpVerificationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String phone = "", user_otp = "";
+    String phone = "";
+    CharSequence user_otp = "";
     TextView btn_resend_otp, progress_text, mobile_no;
     Button btn_submit;
     ImageView otp_img;
@@ -112,18 +112,15 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         otp_view.setItemCount(4);
         otp_view.setAnimationEnable(false);// start animation when adding text
 
-
         otp_view.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                user_otp = "";
+
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
 
             }
 
@@ -193,11 +190,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
         if (id == btn_submit.getId()) {
 
-            Intent intent = new Intent(context, SignUpActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            verifyOTP();
         }
 
             /*if (user_otp.equals("")) {
@@ -213,12 +206,12 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent1);
                 finish();
-            } /*else if (id == btn_resend_otp.getId()) {
+            } else if (id == btn_resend_otp.getId()) {
                 sendOtpApi();
                 progressBar();
-            }*/
+            }
             else {
-                //verifyOTP();
+                verifyOTP();
 
             }
 
@@ -286,9 +279,18 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     public void onNext(OtpInResponse otpInResponse) {
 
                         String msg = otpInResponse.getMsg();
-                        Log.v("--------------",otpInResponse.toString());
 
-                        if (msg.equalsIgnoreCase("User not exits.")) {
+                       if (msg.equals("Success")){
+                           Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                           Intent intent = new Intent(context, HomeActivity.class);
+                           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                           startActivity(intent);
+                           finish();
+
+                       }
+
+                        else if (msg.equals("User not exits.")) {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                             //Open OTP Screen
                             Intent intent = new Intent(context, SignUpActivity.class);
@@ -329,7 +331,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

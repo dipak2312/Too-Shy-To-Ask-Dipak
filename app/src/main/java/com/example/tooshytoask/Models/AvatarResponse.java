@@ -1,10 +1,15 @@
 package com.example.tooshytoask.Models;
 
-public class ProfileItems {
+import java.util.ArrayList;
+
+public class AvatarResponse {
+    private String code;
+    private String msg;
+    ArrayList<avatarList>avatarLists;
     int img;
     public Boolean isSelected = false;
 
-    public ProfileItems(int img, Boolean isSelected) {
+    public AvatarResponse(int img, Boolean isSelected) {
         this.img = img;
         this.isSelected = isSelected;
     }

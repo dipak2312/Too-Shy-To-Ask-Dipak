@@ -3,7 +3,6 @@ package com.example.tooshytoask.Activity.Setting.UpdateProfile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,13 +14,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
-import com.example.tooshytoask.Adapters.HealthAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.HealthIssues;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtils;
-import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
 
 import java.util.ArrayList;
 import java.util.List;

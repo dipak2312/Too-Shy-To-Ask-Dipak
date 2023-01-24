@@ -3,7 +3,7 @@ package com.example.tooshytoask.AuthModels;
 public class OtpAuthModel {
 
     private String mobile_no;
-    private String otp_no;
+    private CharSequence otp_no;
 
 
     public String getMobile_no() {
@@ -14,11 +14,11 @@ public class OtpAuthModel {
         this.mobile_no = mobile_no;
     }
 
-    public String getOtp_no() {
+    public CharSequence getOtp_no() {
         return otp_no;
     }
 
-    public void setOtp_no(String otp_no) {
+    public void setOtp_no(CharSequence otp_no) {
         this.otp_no = otp_no;
     }
 }

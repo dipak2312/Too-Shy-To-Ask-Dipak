@@ -9,19 +9,18 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.ProfileItems;
+import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
     Context context;
-    ArrayList<ProfileItems> profileItems;
+    ArrayList<AvatarResponse> profileItems;
     OnClickListner onclicklistener;
 
-    public ProfileAdapter(ArrayList<ProfileItems> profileItems, OnClickListner onclicklistener,  Context context) {
+    public ProfileAdapter(ArrayList<AvatarResponse> profileItems, OnClickListner onclicklistener, Context context) {
         this.profileItems = profileItems;
         this.onclicklistener = onclicklistener;
         this.context = context;
@@ -56,7 +55,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         }
 
-            public void ProfileItems(final ProfileItems profileItems, int position){
+            public void ProfileItems(final AvatarResponse profileItems, int position){
                 img.setImageResource(profileItems.getImg());
 
                 if (profileItems.isSelected){

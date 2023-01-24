@@ -18,10 +18,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.ProfileItems;
+import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
@@ -43,7 +42,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     ImageView camera, file;
     String profile_pic;
     CircleImageView avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8;
-    ArrayList<ProfileItems>profileItems;
+    ArrayList<AvatarResponse>profileItems;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
@@ -95,14 +94,14 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
         profileItems  = new ArrayList<>();
 
-        profileItems.add(new ProfileItems(R.drawable.avatar1, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar2, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar3, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar4, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar5, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar6, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar7, false));
-        profileItems.add(new ProfileItems(R.drawable.avatar8, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar1, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar2, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar3, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar4, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar5, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar6, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar7, false));
+        profileItems.add(new AvatarResponse(R.drawable.avatar8, false));
 
         profile_recy.setAdapter(new ProfileAdapter(profileItems, this, context));
 
