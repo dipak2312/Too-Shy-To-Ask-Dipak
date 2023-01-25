@@ -12,30 +12,45 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Activity.Home.HomeActivity;
+import com.example.tooshytoask.Adapters.ViewPagerAdapter;
+import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.LanguageList;
+import com.example.tooshytoask.Models.LanguageResponse;
+import com.example.tooshytoask.Models.OnBordingResponse;
+import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, ClickListener{
     int year, month, day;
     RelativeLayout rel_back;
-    String select_birtct_date = "", encodedImage = "";
     CustomProgressDialog dialog;
     Button btn_next, male, female, other;
     Context context;
     SPManager spManager;
-    EditText edit_first_name, edit_last_name, edit_email_id;
+    TextInputEditText edit_name, edit_surname, edit_email_enter, edit_mobile_number,edit_country_enter,
+                      edit_state_enter, edit_city_enter;
     TextView edit_age;
     private DatePickerPopup datePickerPopup;
     BottomSheetDialog bottomSheetDialog;
@@ -62,7 +77,29 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
-        //userPopup();
+        edit_name = findViewById(R.id.edit_name);
+        edit_name.setOnClickListener(this);
+        edit_surname = findViewById(R.id.edit_surname);
+        edit_surname.setOnClickListener(this);
+        edit_email_enter = findViewById(R.id.edit_email_enter);
+        edit_email_enter.setOnClickListener(this);
+        edit_country_enter = findViewById(R.id.edit_country_enter);
+        edit_country_enter.setOnClickListener(this);
+        edit_state_enter = findViewById(R.id.edit_state_enter);
+        edit_state_enter.setOnClickListener(this);
+        edit_city_enter = findViewById(R.id.edit_city_enter);
+        edit_city_enter.setOnClickListener(this);
+        edit_mobile_number = findViewById(R.id.edit_mobile_number);
+        edit_mobile_number.setOnClickListener(this);
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("phone");
+        edit_mobile_number.setText(str);
+        edit_mobile_number.setClickable(false);
+        edit_mobile_number.setFocusable(false);
+
+
+
+        userPopup();
 
         /*edit_first_name = findViewById(R.id.edit_first_name);
         edit_last_name = findViewById(R.id.edit_last_name);
@@ -111,11 +148,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if (id == edit_age.getId()) {
             openDatePicker();
         } else if (id == btn_next.getId()) {
-            Intent intent = new Intent(context, InfoCardCategoryActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            Usersignup();
         }
             }
 
@@ -168,7 +201,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
         TextView parent_text = bottomSheetDialog.findViewById(R.id.parent_text);
 
-        //String selectValue=spManager.getLanguage();
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,6 +243,76 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    public void Usersignup() {
+
+        SignupAuthModel signupmodel = new SignupAuthModel();
+        signupmodel.setFirst_name(edit_name.getText().toString().trim());
+        signupmodel.setLast_name(edit_surname.getText().toString().trim());
+        signupmodel.setEmail_id(edit_email_enter.getText().toString().trim());
+        signupmodel.setPhone(edit_mobile_number.getText().toString().trim());
+        //signupmodel.setGender(spinner_gender.getSelectedItem().toString());
+        signupmodel.setDob(edit_age.getText().toString().trim());
+        signupmodel.setCountry(edit_country_enter.getText().toString().trim());
+        signupmodel.setState(edit_state_enter.getText().toString().trim());
+        signupmodel.setCity(edit_city_enter.getText().toString().trim());
+
+
+
+        WebServiceModel.getRestApi().signup(signupmodel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SignupResponse>() {
+                    @Override
+                    public void onNext(SignupResponse signupResponse) {
+                        dialog.dismiss("");
+                        String msg = signupResponse.getMsg();
+
+
+                        if (msg.equals("User Registered Successfully")) {
+
+                            spManager.setFirstName(edit_name.getText().toString().trim());
+                            spManager.setLastName(edit_surname.getText().toString().trim());
+                            spManager.setEmail(edit_email_enter.getText().toString().trim());
+                            spManager.setDob(edit_age.getText().toString().trim());
+                            spManager.setPhone(edit_mobile_number.getText().toString().trim());
+                            //signupmodel.setGender(spinner_gender.getSelectedItem().toString());
+                            spManager.setDob(edit_age.getText().toString().trim());
+                            spManager.setUserId(signupResponse.getUser_id());
+                            spManager.setCountry(edit_country_enter.getText().toString().trim());
+                            spManager.setState(edit_state_enter.getText().toString().trim());
+                            spManager.setCity(edit_city_enter.getText().toString().trim());
+
+                            spManager.setTstaLoginStatus("true");
+
+
+                            Intent intent = new Intent(context, HomeActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
+    }
+
     @Override
     public void onClick(Boolean status) {
 
@@ -219,14 +321,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             btn_submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    spManager.setUser("true");
+                    spManager.setUser("");
                     bottomSheetDialog.dismiss();
 
                 }
             });
-
-        }else
-        {
 
         }
 

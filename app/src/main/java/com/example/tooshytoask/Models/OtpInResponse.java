@@ -6,24 +6,10 @@ public class OtpInResponse {
     private String code;
     private String first_name;
     private String last_name;
-    private String email;
     private String phone;
     private String gender;
     private String dob;
     private String profile_pic;
-
-    public OtpInResponse(String msg, String code, String user_id, String first_name, String last_name, String phone, String gender, String dob, String profile_pic) {
-        this.msg = msg;
-        this.code = code;
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.phone = phone;
-        this.gender = gender;
-        this.dob = dob;
-        this.profile_pic = profile_pic;
-    }
-
 
     public String getMsg() {
         return msg;
@@ -63,14 +49,6 @@ public class OtpInResponse {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {

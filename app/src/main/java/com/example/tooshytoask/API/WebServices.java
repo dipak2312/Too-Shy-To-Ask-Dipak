@@ -1,13 +1,13 @@
 package com.example.tooshytoask.API;
 
-import com.example.tooshytoask.AuthModels.AvatarModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
+import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.Models.AvatarResponse;
-import com.example.tooshytoask.Models.HealthIssue;
 import com.example.tooshytoask.Models.HealthCateResponse;
+import com.example.tooshytoask.Models.LanguageResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
 import com.example.tooshytoask.Models.SignInResponse;
@@ -24,14 +24,17 @@ public interface WebServices {
 
     @Headers("Content-Type: application/json")
     @POST("api/send_otp")
-    Observable<SignInResponse> signIn(@Body SignInAuthModel model);
+    Observable<SignInResponse> sendOtp(@Body SignInAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/verify_otp")
-    Observable<OtpInResponse> sendOtp(@Body OtpAuthModel model);
+    Observable<OtpInResponse> signIn(@Body OtpAuthModel model);
 
     @GET("api/onboarding_details")
     Observable<OnBordingResponse> getOnBorading();
+
+    @GET("api/languages")
+    Observable<LanguageResponse> languageget();
 
     @Headers("Content-Type: application/json")
     @POST("api/register_user")
@@ -44,5 +47,8 @@ public interface WebServices {
     @GET("api/avatars")
     Observable<AvatarResponse> healthcategory();
 
+    @Headers("Content-Type: application/json")
+    @POST("api/healthissues")
+    Observable<HealthIssueResponse> healthcategory(@Body HealthIssueModel model);
 
 }

@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.UpdateHealthAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.HealthIssue;
+import com.example.tooshytoask.Models.HealthIssuseList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
 
@@ -25,7 +25,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
     Context context;
     SPManager spManager;
     RecyclerView health_recy, recyclerView;
-    ArrayList<HealthIssue> healthIssues;
+    ArrayList<HealthIssuseList> healthIssues;
     UpdateHealthAdapter adapter;
     RelativeLayout rel_back, health;
     Button yes_btn, no_btn, update_btn2;
@@ -52,14 +52,14 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         health_recy = findViewById(R.id.health_recy);
         //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
 
-        healthIssues = new ArrayList<>();
+        /*healthIssues = new ArrayList<>();
 
-        healthIssues.add(new HealthIssue("Throid", false));
-        healthIssues.add(new HealthIssue("Painful Periods", false));
-        healthIssues.add(new HealthIssue("Mental Health", false));
-        healthIssues.add(new HealthIssue("Irregular Periods", false));
-        healthIssues.add(new HealthIssue("Fibroids", false));
-        healthIssues.add(new HealthIssue("PCOS/PCOD", false));
+        healthIssues.add(new HealthIssuseList("Throid", false));
+        healthIssues.add(new HealthIssuseList("Painful Periods", false));
+        healthIssues.add(new HealthIssuseList("Mental Health", false));
+        healthIssues.add(new HealthIssuseList("Irregular Periods", false));
+        healthIssues.add(new HealthIssuseList("Fibroids", false));
+        healthIssues.add(new HealthIssuseList("PCOS/PCOD", false));*/
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);

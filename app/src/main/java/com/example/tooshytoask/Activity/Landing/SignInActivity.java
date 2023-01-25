@@ -1,5 +1,7 @@
 package com.example.tooshytoask.Activity.Landing;
 
+import static java.util.Objects.requireNonNull;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,7 +91,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         SignInAuthModel signinmodel = new SignInAuthModel();
         signinmodel.setMobile_no (etMobile.getText().toString().trim());
 
-        WebServiceModel.getRestApi().signIn(signinmodel)
+        WebServiceModel.getRestApi().sendOtp(signinmodel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<SignInResponse>() {

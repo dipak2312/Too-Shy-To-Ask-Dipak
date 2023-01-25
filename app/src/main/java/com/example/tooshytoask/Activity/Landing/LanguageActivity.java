@@ -40,6 +40,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
 
+        selectLanguage();
+
     }
 
     @Override
@@ -73,28 +75,65 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.eng_lang:
                 if(isChecked){
+
+                    setLocale("en");
                     btn_next.setText(R.string.select);
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
                 }
                 break;
             case R.id.hindi_lang:
                 if(isChecked){
+
+                    setLocale("hi");
                     btn_next.setText(R.string.चुनें);
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
                 }
                 break;
             case R.id.marathi_lang:
                 if(isChecked){
+
+                    setLocale("mr");
                     btn_next.setText(R.string.निवडा);
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
                 }
                 break;
+        }
+    }
+
+    public void selectLanguage(){
+
+        String selectValue=spManager.getLanguage();
+
+//RadioButton RadioButton eng_lang, hindi_lang, marathi_lang;, hindi_lang, marathi_lang;
+        if(selectValue.equals("en"))
+        {
+            eng_lang.setChecked(true);
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+        else if(selectValue.equals("hi"))
+        {
+            hindi_lang.setChecked(true);
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+        else if(selectValue.equals("mr"))
+        {
+            marathi_lang.setChecked(true);
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
     }
 

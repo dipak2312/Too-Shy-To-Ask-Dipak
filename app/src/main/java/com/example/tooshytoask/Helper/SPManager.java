@@ -15,27 +15,32 @@ public class SPManager {
     public static final String LASTNAME = "lastname";
     public static final String EMAIL = "email";
     public static final String GENDER = "gender";
-    public static final String AGE = "age";
+    public static final String DOB = "dob";
     public static final String PHONE = "phone";
     public static final String USERID = "userid";
     public static final String USERPROFILE = "profile";
     public static final String TSTALOGINSTATUS="tstaloginstatus";
     public static final String LANGUAGE="language";
     public static final String USER="user";
+    public static final String COUNTRY="country";
+    public static final String STATE="state";
+    public static final String CITY="city";
 
 
     String firstName;
     String lastName;
     String Email;
     String Gender;
-    String Age;
+    String dob;
     String Phone;
     String tstaLoginStatus;
     String userId;
     String userPhoto;
     String language;
     String user;
-
+    String country;
+    String state;
+    String city;
 
     public String getUser() {
         user = pref.getString(USER, "");
@@ -51,6 +56,36 @@ public class SPManager {
         this.context = context;
         pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+    }
+
+    public String getCountry() {
+        country = pref.getString(COUNTRY, "");
+        return country;
+    }
+
+    public void setCountry(String country) {
+        editor.putString(COUNTRY, country);
+        editor.commit();
+    }
+
+    public String getState() {
+        state = pref.getString(STATE, "");
+        return state;
+    }
+
+    public void setState(String state) {
+        editor.putString(STATE, state);
+        editor.commit();
+    }
+
+    public String getCity() {
+        city = pref.getString(CITY, "");
+        return city;
+    }
+
+    public void setCity(String city) {
+        editor.putString(CITY, city);
+        editor.commit();
     }
 
     public String getFirstName() {
@@ -92,14 +127,13 @@ public class SPManager {
         editor.putString(GENDER, gender);
         editor.commit();
     }
-
-    public String getAge() {
-        Age = pref.getString(AGE, "");
-        return Age;
+    public String getDob() {
+        dob = pref.getString(DOB, "");
+        return dob;
     }
 
-    public void setAge(String age) {
-        editor.putString(AGE, age);
+    public void setDob(String dob) {
+        editor.putString(DOB, dob);
         editor.commit();
     }
 

@@ -75,7 +75,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         }
 
-        public void InformationStorehouseList(final InformationStorehouseList informationStorehouseLists,int position){
+        /*public void InformationStorehouseList(final InformationStorehouseList informationStorehouseLists,int position){
             //cate_img.setImageDrawable(ContextCompat.getDrawable(informationStorehouseLists.get(position).getSlug()));
             category_title.setText(informationStorehouseLists.getTitle());
 
@@ -86,7 +86,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
             }
 
-            /*cate_img.setOnClickListener(new View.OnClickListener() {
+            cate_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                    if (informationStorehouseLists.isSelected) {
@@ -105,7 +105,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                    }
 
                 }
-            });*/
-        }
+            });
+        }*/
     }
 }

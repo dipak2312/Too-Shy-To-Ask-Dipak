@@ -6,28 +6,28 @@ public class AvatarResponse {
     private String code;
     private String msg;
     ArrayList<avatarList>avatarLists;
-    int img;
-    public Boolean isSelected = false;
 
-    public AvatarResponse(int img, Boolean isSelected) {
-        this.img = img;
-        this.isSelected = isSelected;
+    public String getCode() {
+        return code;
     }
 
-
-    public int getImg() {
-        return img;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public String getMsg() {
+        return msg;
     }
 
-    public Boolean getSelected() {
-        return isSelected;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public void setSelected(Boolean selected) {
-        isSelected = selected;
+    public ArrayList<avatarList> getAvatarLists() {
+        return avatarLists;
+    }
+
+    public void setAvatarLists(ArrayList<avatarList> avatarLists) {
+        this.avatarLists = avatarLists;
     }
 }

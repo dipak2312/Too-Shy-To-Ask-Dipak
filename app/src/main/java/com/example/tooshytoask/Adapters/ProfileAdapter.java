@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
 
@@ -17,11 +19,11 @@ import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
     Context context;
-    ArrayList<AvatarResponse> profileItems;
+    ArrayList<avatarList>avatarLists;
     OnClickListner onclicklistener;
 
-    public ProfileAdapter(ArrayList<AvatarResponse> profileItems, OnClickListner onclicklistener, Context context) {
-        this.profileItems = profileItems;
+    public ProfileAdapter(ArrayList<avatarList>avatarLists, OnClickListner onclicklistener, Context context) {
+        this.avatarLists = avatarLists;
         this.onclicklistener = onclicklistener;
         this.context = context;
     }
@@ -35,13 +37,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
-        //holder.img.setImageDrawable(ContextCompat.getDrawable(context,profileItems.get(position).getImg()));
-        holder.ProfileItems(profileItems.get(position),position);
+        holder.img.setImageDrawable(ContextCompat.getDrawable(context,avatarLists.get(position).getEncimg()));
     }
 
     @Override
     public int getItemCount() {
-        return profileItems.size();
+        return avatarLists.size();
     }
 
 
@@ -55,7 +56,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         }
 
-            public void ProfileItems(final AvatarResponse profileItems, int position){
+            /*public void ProfileItems(final AvatarResponse profileItems, int position){
                 img.setImageResource(profileItems.getImg());
 
                 if (profileItems.isSelected){
@@ -85,7 +86,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                     }
                 });
 
-            }
+            }*/
     }
 
 }

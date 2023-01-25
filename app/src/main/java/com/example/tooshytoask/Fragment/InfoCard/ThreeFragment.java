@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.example.tooshytoask.Adapters.HealthAdapter;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.HealthIssue;
+import com.example.tooshytoask.Models.HealthIssuseList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -29,7 +29,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     Context context;
     SPManager spManager;
     RecyclerView health_recy, recyclerView;
-    ArrayList<HealthIssue>healthIssues;
+    ArrayList<HealthIssuseList>healthIssues;
     HealthAdapter adapter;
     ClickListener clickListener;
     LinearLayout health_issues_title;
@@ -62,14 +62,14 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
 
-        healthIssues = new ArrayList<>();
+        /*healthIssues = new ArrayList<>();
 
-        healthIssues.add(new HealthIssue("Throid", false));
-        healthIssues.add(new HealthIssue("Painful Periods", false));
-        healthIssues.add(new HealthIssue("Mental Health", false));
-        healthIssues.add(new HealthIssue("Irregular Periods", false));
-        healthIssues.add(new HealthIssue("Fibroids", false));
-        healthIssues.add(new HealthIssue("PCOS/PCOD", false));
+        healthIssues.add(new HealthIssuseList("Throid", false));
+        healthIssues.add(new HealthIssuseList("Painful Periods", false));
+        healthIssues.add(new HealthIssuseList("Mental Health", false));
+        healthIssues.add(new HealthIssuseList("Irregular Periods", false));
+        healthIssues.add(new HealthIssuseList("Fibroids", false));
+        healthIssues.add(new HealthIssuseList("PCOS/PCOD", false));*/
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);

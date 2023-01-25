@@ -1,14 +1,11 @@
 package com.example.tooshytoask.Models;
 
-import java.util.ArrayList;
 
 public class InformationStorehouseList {
     private String id;
     private String title;
     private int img;
-    private String slug;
     public Boolean isSelected = false;
-    //ArrayList<usertype>usertypes
 
     public Boolean getSelected() {
         return isSelected;
@@ -40,13 +37,5 @@ public class InformationStorehouseList {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
     }
 }

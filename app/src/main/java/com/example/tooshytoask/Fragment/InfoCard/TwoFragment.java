@@ -17,10 +17,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
+import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.HealthCateResponse;
+import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
@@ -31,6 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class TwoFragment extends Fragment implements View.OnClickListener, OnClickListner {
     Context context;
@@ -40,9 +49,12 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     ImageButton next_btn2;
     RecyclerView profile_recy;
     ImageView camera, file;
+    ProfileAdapter adapter;
     String profile_pic;
+    OnClickListner onclicklistener;
     CircleImageView avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8;
     ArrayList<AvatarResponse>profileItems;
+    ArrayList<avatarList>avatarLists;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
@@ -92,7 +104,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
         profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
 
-        profileItems  = new ArrayList<>();
+       /* profileItems  = new ArrayList<>();
 
         profileItems.add(new AvatarResponse(R.drawable.avatar1, false));
         profileItems.add(new AvatarResponse(R.drawable.avatar2, false));
@@ -103,10 +115,54 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         profileItems.add(new AvatarResponse(R.drawable.avatar7, false));
         profileItems.add(new AvatarResponse(R.drawable.avatar8, false));
 
-        profile_recy.setAdapter(new ProfileAdapter(profileItems, this, context));
+        profile_recy.setAdapter(new ProfileAdapter(profileItems, this, context));*/
 
         checkPermissions();
+        healthcategory();
         return view;
+    }
+
+    public void healthcategory() {
+
+        HealthCateModel model = new HealthCateModel();
+        model.setUser_id(spManager.getUserId());
+        WebServiceModel.getRestApi().healthcategory(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<AvatarResponse>() {
+                    @Override
+                    public void onNext(AvatarResponse avatarResponse) {
+
+                        String msg = avatarResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            avatarLists = avatarResponse.getAvatarLists();
+
+                            adapter = new ProfileAdapter(avatarLists,onclicklistener,context);
+                            profile_recy.setAdapter(adapter);
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -115,101 +171,13 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
         if (id == skip_btn2.getId()){
             clickListener.onClick(true);
-        } else if (id == avatar1.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar1.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
         }
-        else if (id == avatar2.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar2.setBackgroundResource(R.drawable.circle_active_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar3.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar3.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar4.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar4.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar5.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar5.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar6.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar6.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar7.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar7.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar8.getId()){
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            avatar8.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar1.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<profileItems.size();i++)
+        for(int i=0;i<avatarLists.size();i++)
         {
-            myvalue.add(profileItems.get(i).getSelected());
+            myvalue.add(avatarLists.get(i).getSelected());
         }
         boolean ans = myvalue.contains(true);
 
@@ -273,9 +241,9 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     public void onClickData(int position, int id) {
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<profileItems.size();i++)
+        for(int i=0;i<avatarLists.size();i++)
         {
-            myvalue.add(profileItems.get(i).getSelected());
+            myvalue.add(avatarLists.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);

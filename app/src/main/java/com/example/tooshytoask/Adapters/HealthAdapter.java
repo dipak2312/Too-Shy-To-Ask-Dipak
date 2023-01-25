@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.HealthIssue;
+import com.example.tooshytoask.Models.HealthIssuseList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
 
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder> {
     Context context;
     OnClickListner onclicklistener;
-    ArrayList<HealthIssue> healthIssues;
+    ArrayList<HealthIssuseList> healthIssues;
 
-    public HealthAdapter(ArrayList<HealthIssue> healthIssues, OnClickListner onclicklistener, Context context){
+    public HealthAdapter(ArrayList<HealthIssuseList> healthIssues, OnClickListner onclicklistener, Context context){
         this.healthIssues = healthIssues;
         this.onclicklistener = onclicklistener;
         this.context = context;
@@ -53,7 +53,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
             health_btn = itemView.findViewById(R.id.health_btn);
         }
 
-        public void HealthIssues(final HealthIssue healthIssues, int position){
+        public void HealthIssues(final HealthIssuseList healthIssues, int position){
             health_btn.setText(healthIssues.getHealth_btn());
 
             if (healthIssues.isSelected){

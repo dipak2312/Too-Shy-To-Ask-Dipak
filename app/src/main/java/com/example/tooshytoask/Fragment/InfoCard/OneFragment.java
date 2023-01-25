@@ -58,7 +58,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         skip_btn.setOnClickListener(this);
 
         clickListener=(ClickListener)context;
-        clickListener.onClick(false);
+        clickListener.onClick(true);
 
         category_recy = view.findViewById(R.id.category_recy);
         category_recy.setOnTouchListener(this);
@@ -75,6 +75,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));
 
         category_recy.setAdapter(new CategoryAdapter(categoryItem,this, clickListener));*/
+        healthcategory();
 
     return view;
     }
@@ -94,18 +95,12 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                         if (msg.equals("success")) {
 
-
                             informationStorehouseLists = healthCateResponse.getInformationStorehouseLists();
 
-
-                            /*for (int i = 0; i < informationStorehouseLists.size(); i++) {
-
-
-                            }*/
-
-                            adapter = new CategoryAdapter(informationStorehouseLists,onclicklistener, clickListener);
-                            category_recy.setAdapter(adapter);
-
+                            /*if(informationStorehouseLists.size() !=0)
+                            {}*/
+                                adapter = new CategoryAdapter(informationStorehouseLists,onclicklistener, clickListener);
+                                category_recy.setAdapter(adapter);
 
                         } else {
 
