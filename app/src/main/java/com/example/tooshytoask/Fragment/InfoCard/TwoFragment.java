@@ -118,11 +118,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         profile_recy.setAdapter(new ProfileAdapter(profileItems, this, context));*/
 
         checkPermissions();
-        healthcategory();
+        //healthcategory();
         return view;
     }
 
-    public void healthcategory() {
+    /*public void healthcategory() {
 
         HealthCateModel model = new HealthCateModel();
         model.setUser_id(spManager.getUserId());
@@ -163,7 +163,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
                     }
                 });
-    }
+    }*/
 
     @Override
     public void onClick(View view) {
@@ -173,7 +173,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             clickListener.onClick(true);
         }
 
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<avatarLists.size();i++)
         {
@@ -189,7 +189,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             }else
             {
                 clickListener.onClick(false);
-            }
+            }*/
 
 
         if (id == camera.getId()) {

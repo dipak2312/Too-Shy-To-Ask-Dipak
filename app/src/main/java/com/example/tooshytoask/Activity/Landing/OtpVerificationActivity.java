@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+
 import com.chaos.view.PinView;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
@@ -29,7 +30,11 @@ import com.example.tooshytoask.Models.OtpInResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.google.gson.Gson;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -37,8 +42,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class OtpVerificationActivity extends AppCompatActivity implements View.OnClickListener {
 
-    String phone = "";
-    CharSequence user_otp = "";
+    String phone = "",  user_otp = "";
     TextView btn_resend_otp, progress_text, mobile_no;
     Button btn_submit;
     ImageView otp_img;
@@ -120,17 +124,18 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                user_otp = charSequence;
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                user_otp = charSequence;
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+                user_otp=editable.toString();
 
             }
         });
@@ -259,6 +264,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
     private void verifyOTP() {
 
+
         OtpAuthModel model=new OtpAuthModel();
         model.setMobile_no(phone);
         model.setOtp_no(user_otp);
@@ -275,14 +281,14 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                        if (msg.equals("Success")){
 
-                           spManager.setFirstName(otpInResponse.getFirst_name());
-                           spManager.setLastName(otpInResponse.getLast_name());
-                           spManager.setDob(otpInResponse.getDob());
-                           spManager.setGender(otpInResponse.getGender());
-                           spManager.setPhone(otpInResponse.getPhone());
-                           spManager.setUserId(otpInResponse.getUser_id());
+                           /*spManager.setFirstName(otpInResponse.getData().getFirstName());
+                           spManager.setLastName(otpInResponse.getData().getLastName());
+                           spManager.setDob(otpInResponse.getData().getDob());
+                           spManager.setGender(otpInResponse.getData().getGender());
+                           spManager.setPhone(otpInResponse.getData().getPhone());
+                           spManager.setUserId(otpInResponse.getData().getUserId());
                            spManager.setTstaLoginStatus("true");
-                           spManager.setUserPhoto(otpInResponse.getProfile_pic());
+                           spManager.setUserPhoto(otpInResponse.getData().getProfilePic());*/
 
                            Intent intent = new Intent(context, HomeActivity.class);
                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -293,12 +299,13 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                        }
 
                         else if (msg.equals("User not exits.")) {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context, SignUpActivity.class);
                             intent.putExtra("phone", phone);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+                            finish();
                         }
                         else if(msg.equals("Please enter valid OTP."))
                         {
@@ -318,6 +325,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                     @Override
                     public void onError(Throwable e) {
+
                         Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
                     }
 
@@ -327,4 +335,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     }
                 });
     }
+
+
 }

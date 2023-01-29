@@ -91,7 +91,7 @@
             android:id="@+id/lin_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_48"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginTop="@dimen/margin_20"
             android:layout_marginBottom="@dimen/margin_30"
             android:layout_below="@+id/user_parent_lay">

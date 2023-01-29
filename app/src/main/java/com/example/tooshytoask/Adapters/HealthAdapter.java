@@ -19,10 +19,10 @@ import java.util.ArrayList;
 public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder> {
     Context context;
     OnClickListner onclicklistener;
-    ArrayList<HealthIssuseList> healthIssues;
+    ArrayList<HealthIssuseList> healthIssuseList;
 
-    public HealthAdapter(ArrayList<HealthIssuseList> healthIssues, OnClickListner onclicklistener, Context context){
-        this.healthIssues = healthIssues;
+    public HealthAdapter(ArrayList<HealthIssuseList> healthIssuseList, OnClickListner onclicklistener, Context context){
+        this.healthIssuseList = healthIssuseList;
         this.onclicklistener = onclicklistener;
         this.context = context;
     }
@@ -36,13 +36,13 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull HealthAdapter.ViewHolder holder, int position) {
         //holder.health_btn.setText(healthIssues.get(position).getHealth_btn());
-        holder.HealthIssues(healthIssues.get(position),position);
+        holder.HealthIssues(healthIssuseList.get(position),position);
 
     }
 
     @Override
     public int getItemCount() {
-        return healthIssues.size();
+        return healthIssuseList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -53,10 +53,10 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
             health_btn = itemView.findViewById(R.id.health_btn);
         }
 
-        public void HealthIssues(final HealthIssuseList healthIssues, int position){
-            health_btn.setText(healthIssues.getHealth_btn());
+        public void HealthIssues(final HealthIssuseList healthIssuseList, int position){
+            //health_btn.setText(healthIssuseList.getHealth_btn());
 
-            if (healthIssues.isSelected){
+            if (healthIssuseList.isSelected){
                 health_btn.setBackgroundResource(R.drawable.health_active);
                 health_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
             }else {
@@ -67,10 +67,10 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
             health_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (healthIssues.isSelected) {
+                    if (healthIssuseList.isSelected) {
                         health_btn.setBackgroundResource(R.drawable.health_inactive);
                         //health_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
-                        healthIssues.setSelected(false);
+                        healthIssuseList.setSelected(false);
                         notifyDataSetChanged();
                         onclicklistener.onClickData(position,1);
 
@@ -78,7 +78,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
                     }else {
                         health_btn.setBackgroundResource(R.drawable.health_active);
                         //health_btn.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                        healthIssues.setSelected(true);
+                        healthIssuseList.setSelected(true);
                         notifyDataSetChanged();
                         onclicklistener.onClickData(position,1);
 

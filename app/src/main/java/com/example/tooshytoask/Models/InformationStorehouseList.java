@@ -5,6 +5,11 @@ public class InformationStorehouseList {
     private String id;
     private String title;
     private int img;
+
+    public InformationStorehouseList(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
     public Boolean isSelected = false;
 
     public Boolean getSelected() {

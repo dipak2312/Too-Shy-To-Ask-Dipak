@@ -17,10 +17,13 @@ import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
+import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
+import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.InformationStorehouseList;
+import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
@@ -38,6 +41,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     RecyclerView recyclerView, category_recy;
     CategoryAdapter adapter;
     ArrayList<CategoryItem> categoryItem;
+    ArrayList<String> healthId;
     ArrayList<InformationStorehouseList>informationStorehouseLists;
     TextView skip_btn;
     OnClickListner onclicklistener;
@@ -97,10 +101,50 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                             informationStorehouseLists = healthCateResponse.getInformationStorehouseLists();
 
-                            /*if(informationStorehouseLists.size() !=0)
-                            {}*/
                                 adapter = new CategoryAdapter(informationStorehouseLists,onclicklistener, clickListener);
                                 category_recy.setAdapter(adapter);
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void saveHealthCategory() {
+
+        SaveHealthCateAuthModel model = new SaveHealthCateAuthModel();
+        model.setUserId(spManager.getUserId());
+        model.setHealthId(model.getHealthId());
+        WebServiceModel.getRestApi().saveHealthCategory(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SaveHealthCategoryResponse>() {
+                    @Override
+                    public void onNext(SaveHealthCategoryResponse saveHealthCategoryResponse) {
+
+                        String msg = saveHealthCategoryResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+
+
 
                         } else {
 
@@ -133,7 +177,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
             clickListener.onClick(true);
         }
 
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<informationStorehouseLists.size();i++)
         {
@@ -149,7 +193,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             clickListener.onClick(false);
-        }
+        }*/
 
     }
 

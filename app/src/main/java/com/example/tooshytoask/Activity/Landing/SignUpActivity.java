@@ -19,12 +19,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
-import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.LanguageList;
-import com.example.tooshytoask.Models.LanguageResponse;
-import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
@@ -47,6 +43,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     RelativeLayout rel_back;
     CustomProgressDialog dialog;
     Button btn_next, male, female, other;
+
+    String gender =" ";
     Context context;
     SPManager spManager;
     TextInputEditText edit_name, edit_surname, edit_email_enter, edit_mobile_number,edit_country_enter,
@@ -94,8 +92,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         String str = intent.getStringExtra("phone");
         edit_mobile_number.setText(str);
-        edit_mobile_number.setClickable(false);
-        edit_mobile_number.setFocusable(false);
+        edit_mobile_number.setClickable(true);
+        edit_mobile_number.setFocusable(true);
 
 
 
@@ -139,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         if (id == rel_back.getId()) {
-            Intent intent = new Intent(context, OtpVerificationActivity.class);
+            Intent intent = new Intent(context, SignInActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -150,6 +148,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if (id == btn_next.getId()) {
             Usersignup();
         }
+
             }
 
     private void openDatePicker() {
@@ -167,6 +166,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
             other.setBackgroundResource(R.drawable.gender_border_inactive);
             other.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gender = "male";
+
         } else if (id == female.getId()){
             female.setBackgroundResource(R.drawable.gender_border_active);
             female.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -174,6 +175,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             male.setTextColor(ContextCompat.getColor(context, R.color.black));
             other.setBackgroundResource(R.drawable.gender_border_inactive);
             other.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gender = "female";
+
         } else if (id == other.getId()){
             other.setBackgroundResource(R.drawable.gender_border_active);
             other.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -181,6 +184,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             male.setTextColor(ContextCompat.getColor(context, R.color.black));
             female.setBackgroundResource(R.drawable.gender_border_inactive);
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gender = "other";
         }
         return true;
     }
@@ -201,11 +205,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
         TextView parent_text = bottomSheetDialog.findViewById(R.id.parent_text);
 
+        String selectValue = spManager.getUser();
+
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                selectValue.equals("user");
                 user.setBackgroundResource(R.drawable.gender_border_active);
                 user_icon.setImageResource(R.drawable.account_inactive);
                 user_text.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -223,6 +230,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selectValue.equals("parent");
                 parent.setBackgroundResource(R.drawable.gender_border_active);
                 parent_icon.setImageResource(R.drawable.family_active);
                 parent_text.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -232,6 +240,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 btn_submit.setBackgroundResource(R.drawable.active_con_btn);
                 btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
+
 
 
             }
@@ -250,6 +259,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signupmodel.setLast_name(edit_surname.getText().toString().trim());
         signupmodel.setEmail_id(edit_email_enter.getText().toString().trim());
         signupmodel.setPhone(edit_mobile_number.getText().toString().trim());
+        signupmodel.setGender(male.getText().toString().trim());
+        signupmodel.setLanguage(spManager.getLanguage());
+        signupmodel.setUsertype(spManager.getUser());
         //signupmodel.setGender(spinner_gender.getSelectedItem().toString());
         signupmodel.setDob(edit_age.getText().toString().trim());
         signupmodel.setCountry(edit_country_enter.getText().toString().trim());
@@ -275,14 +287,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             spManager.setEmail(edit_email_enter.getText().toString().trim());
                             spManager.setDob(edit_age.getText().toString().trim());
                             spManager.setPhone(edit_mobile_number.getText().toString().trim());
-                            //signupmodel.setGender(spinner_gender.getSelectedItem().toString());
                             spManager.setDob(edit_age.getText().toString().trim());
                             spManager.setUserId(signupResponse.getUser_id());
                             spManager.setCountry(edit_country_enter.getText().toString().trim());
                             spManager.setState(edit_state_enter.getText().toString().trim());
                             spManager.setCity(edit_city_enter.getText().toString().trim());
-
                             spManager.setTstaLoginStatus("true");
+                            spManager.setGender(male.getText().toString().trim());
 
 
                             Intent intent = new Intent(context, HomeActivity.class);
@@ -320,8 +331,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         {
             btn_submit.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    spManager.setUser("");
+                public void onClick(View view) {//user, parent
                     bottomSheetDialog.dismiss();
 
                 }

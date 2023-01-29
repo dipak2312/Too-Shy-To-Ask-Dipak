@@ -15,27 +15,40 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.HealthAdapter;
+import com.example.tooshytoask.AuthModels.HealthCateModel;
+import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.HealthCateResponse;
+import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.HealthIssuseList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class ThreeFragment extends Fragment implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
-    RecyclerView health_recy, recyclerView;
-    ArrayList<HealthIssuseList>healthIssues;
+    RecyclerView health_recy;
+    ArrayList<HealthIssuseList> healthIssuseList;
     HealthAdapter adapter;
     ClickListener clickListener;
     LinearLayout health_issues_title;
     Button yes_btn, no_btn;
     ImageButton next_btn;
     TextView skip_btn;
+    OnClickListner onclicklistener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,21 +75,64 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
 
-        /*healthIssues = new ArrayList<>();
+        /*healthIssuseList = new ArrayList<>();
 
-        healthIssues.add(new HealthIssuseList("Throid", false));
-        healthIssues.add(new HealthIssuseList("Painful Periods", false));
-        healthIssues.add(new HealthIssuseList("Mental Health", false));
-        healthIssues.add(new HealthIssuseList("Irregular Periods", false));
-        healthIssues.add(new HealthIssuseList("Fibroids", false));
-        healthIssues.add(new HealthIssuseList("PCOS/PCOD", false));*/
+        healthIssuseList.add(new HealthIssuseList("Throid", false));
+        healthIssuseList.add(new HealthIssuseList("Painful Periods", false));
+        healthIssuseList.add(new HealthIssuseList("Mental Health", false));
+        healthIssuseList.add(new HealthIssuseList("Irregular Periods", false));
+        healthIssuseList.add(new HealthIssuseList("Fibroids", false));
+        healthIssuseList.add(new HealthIssuseList("PCOS/PCOD", false));*/
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
 
-        health_recy.setAdapter(new HealthAdapter(healthIssues, this, context));
+        //health_recy.setAdapter(new HealthAdapter(healthIssuseList, this, context));
 
         return view;
+    }
+
+    public void healthIssues() {
+
+        HealthIssueModel model = new HealthIssueModel();
+        model.setUser_id(spManager.getUserId());
+        WebServiceModel.getRestApi().healthIssues(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<HealthIssueResponse>() {
+                    @Override
+                    public void onNext(HealthIssueResponse healthIssueResponse) {
+
+                        String msg = healthIssueResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            healthIssuseList = healthIssueResponse.getHealthIssuseList();
+
+                            adapter = new HealthAdapter(healthIssuseList,onclicklistener, context);
+                            health_recy.setAdapter(adapter);
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -110,9 +166,9 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }
 
         else {
-            ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
-            for (int i = 0; i < healthIssues.size(); i++) {
-                myvalue.add(healthIssues.get(i).getSelected());
+            /*ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
+            for (int i = 0; i < healthIssuseList.size(); i++) {
+                myvalue.add(healthIssuseList.get(i).getSelected());
             }
             boolean ans = myvalue.contains(true);
 
@@ -122,7 +178,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
             } {
                 clickListener.onClick(false);
-            }
+            }*/
         }
 
     }
@@ -132,9 +188,9 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<healthIssues.size();i++)
+        for(int i=0;i<healthIssuseList.size();i++)
         {
-            myvalue.add(healthIssues.get(i).getSelected());
+            myvalue.add(healthIssuseList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);

@@ -113,7 +113,6 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
 
         String selectValue=spManager.getLanguage();
 
-//RadioButton RadioButton eng_lang, hindi_lang, marathi_lang;, hindi_lang, marathi_lang;
         if(selectValue.equals("en"))
         {
             eng_lang.setChecked(true);

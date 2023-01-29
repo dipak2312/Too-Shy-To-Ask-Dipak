@@ -61,14 +61,14 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
         started = findViewById(R.id.started);
         started.setOnClickListener(this);
 
-        AddView();
+        //AddView();
+        getOnBorading();
     }
 
     private void AddView() {
-        viewPagerAdapter = new ViewPagerAdapter(fm, context, onboardingLists);
+       viewPagerAdapter = new ViewPagerAdapter(fm, context, onboardingLists);
         viewPager.setAdapter(viewPagerAdapter);
         mBarLayout.setViewPager(viewPager);
-        //getOnBorading();
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -89,8 +89,6 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
                 } else if (getitem(0) < 3) {
 
                      started.setVisibility(View.VISIBLE);
-                     /*Animation alpha = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
-                     started.startAnimation(alpha);*/
                      skip_btn.setVisibility(View.GONE);
                      next_btn.setVisibility(View.GONE);
 

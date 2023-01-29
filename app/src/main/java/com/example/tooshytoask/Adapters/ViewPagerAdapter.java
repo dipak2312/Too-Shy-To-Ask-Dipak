@@ -23,7 +23,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         this.context = context;
         this.onboardingLists = onboardingLists;
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
