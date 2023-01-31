@@ -12,23 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Story.StoryActivity;
 import com.example.tooshytoask.Models.StatusItem;
+import com.example.tooshytoask.Models.StoryCategory;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder>{
-    ArrayList<StatusItem> statusItems;
+    ArrayList<StoryCategory> storyCategories;
     Context context;
 
-    public StatusAdapter(Context context, ArrayList<StatusItem> statusItems) {
-        this.statusItems = statusItems;
+    public StatusAdapter(Context context, ArrayList<StoryCategory> storyCategories) {
+        this.storyCategories = storyCategories;
         this.context = context;
-    }
-
-    public StatusAdapter() {
-
     }
 
     @NonNull
@@ -39,14 +37,15 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StatusAdapter.ViewHolder holder, int position) {
-        holder.status_img.setImageDrawable(ContextCompat.getDrawable(context,statusItems.get(position).getStatus_img()));
-        holder.status_title.setText(statusItems.get(position).getStatus_title());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //holder.status_img.setImageResource(storyCategories.get(position).getCategoryImg());
+        Glide.with(context).load(storyCategories.get(position).getCategoryImg()).into(holder.status_img);
+        holder.status_title.setText(storyCategories.get(position).getCategoryTitle());
     }
 
     @Override
     public int getItemCount() {
-        return statusItems.size();
+        return storyCategories.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

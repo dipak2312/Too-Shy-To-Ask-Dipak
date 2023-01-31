@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.tooshytoask.Fragment.SplashScreenFragment.FirstSplashFragment;
 import com.example.tooshytoask.Fragment.SplashScreenFragment.SecondSplashFragment;
@@ -16,32 +17,31 @@ import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     Context context;
-    ArrayList<OnboardingList> onboardingLists;
+   ArrayList<OnboardingList> onboardingLists;
 
-    public ViewPagerAdapter(@NonNull FragmentManager fm, Context context, ArrayList<OnboardingList> onboardingLists) {
+    public ViewPagerAdapter(@NonNull FragmentManager fm, ArrayList<OnboardingList> onboardingLists) {
+
         super(fm);
-        this.context = context;
-        this.onboardingLists = onboardingLists;
+        this.onboardingLists=onboardingLists;
+
     }
+
     @NonNull
     @Override
     public Fragment getItem(int position) {
 
-        if(position==0){
-
-            FirstSplashFragment first = new FirstSplashFragment();
+        if (position == 0) {
+            FirstSplashFragment first = new FirstSplashFragment(onboardingLists);
             return first;
 
-        }
-        else if(position==1){
+        } else if (position == 1) {
 
-            SecondSplashFragment second=new SecondSplashFragment();
+            SecondSplashFragment second = new SecondSplashFragment(onboardingLists);
             return second;
 
-        }
-        else if(position==2){
+        } else if (position == 2) {
 
-            ThirdSplashFragment third=new ThirdSplashFragment();
+            ThirdSplashFragment third = new ThirdSplashFragment(onboardingLists);
             return third;
         }
         return null;
@@ -52,6 +52,8 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return 3;
     }
 }
+
+
 
 /*public class OnBoradingAdapter extends RecyclerView.Adapter<OnBoradingAdapter.ViewHolder>{
     Context context;

@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,16 +16,30 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.LanguageAdapter;
+import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.Language.LanguageResponse;
+import com.example.tooshytoask.Models.Language.data;
+import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.R;
 
+import java.util.ArrayList;
 import java.util.Locale;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class LanguageActivity extends AppCompatActivity implements View.OnClickListener {
     Context context;
     SPManager spManager;
     Button btn_next;
     RadioButton eng_lang, hindi_lang, marathi_lang;
+    ArrayList<data>data;
+    RecyclerView recy_language;
+    LanguageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +52,12 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         eng_lang = findViewById(R.id.eng_lang);
         hindi_lang = findViewById(R.id.hindi_lang);
         marathi_lang = findViewById(R.id.marathi_lang);
+        recy_language = findViewById(R.id.recy_language);
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
 
         selectLanguage();
+        //languageget();
 
     }
 
@@ -56,6 +73,43 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             finish();
         }
 
+    }
+
+    public void languageget(){
+
+        WebServiceModel.getRestApi().languageget()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<LanguageResponse>() {
+                    @Override
+                    public void onNext(LanguageResponse languageResponse) {
+                        String msg = languageResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            data = languageResponse.getData();
+                            if (data != null) {
+                                adapter = new LanguageAdapter(data, context, spManager);
+                                recy_language.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+
+                            }
+                        } else {
+                            //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void setLocale(String lang) {

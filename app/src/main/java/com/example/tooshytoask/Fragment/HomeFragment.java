@@ -24,20 +24,27 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Search.SearchActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.Adapters.RecentlyBlogAdapter;
 import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
 import com.example.tooshytoask.Adapters.SliderBannerAdapter;
 import com.example.tooshytoask.Adapters.StatusAdapter;
+import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.Bannerist;
+import com.example.tooshytoask.Models.BlogItems;
+import com.example.tooshytoask.Models.Blogs;
+import com.example.tooshytoask.Models.HomeScreenResponse;
 import com.example.tooshytoask.Models.RecentlyBlogItems;
 import com.example.tooshytoask.Models.RecommendedBlogItems;
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.Models.StatusItem;
+import com.example.tooshytoask.Models.StoryCategory;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.OnClickListner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -48,17 +55,26 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
-    RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs;
+    RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs, recy_blogs;
     ArrayList<StatusItem>statusItems;
     ArrayList<RecommendedBlogItems>recommendedBlogItems;
+    ArrayList<BlogItems>blogItems;
+    BlogAdapter blogAdapter;
     ArrayList<RecentlyBlogItems>recentlyBlogItems;
     ArrayList<SliderBannerItem> sliderBannerItems;
+    ArrayList<StoryCategory>storyCategories;
+    ArrayList<Bannerist> bannerist;
+    ArrayList<Blogs> blogs;
     RecommendedBlogAdapter adapter2;
     RecentlyBlogAdapter adapter3;
-    StatusAdapter adapter;
-    SliderBannerAdapter adapter4;
+    StatusAdapter statusAdapter;
+    SliderBannerAdapter sliderBannerAdapter;
+    RelativeLayout blog;
     Context context;
     SPManager spManager;
     CircleImageView update_profile;
@@ -79,7 +95,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = getActivity();
         spManager = new SPManager(context);
-        recy_status = view.findViewById(R.id.recy_status);
+
         update_profile = view.findViewById(R.id.update_profile);
         update_profile.setOnClickListener(this);
         search = view.findViewById(R.id.search);
@@ -89,8 +105,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         select_Language = view.findViewById(R.id.select_Language);
         select_Language.setOnClickListener(this);
 
-
-        statusItems = new ArrayList<>();
+        recy_status = view.findViewById(R.id.recy_status);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recy_status.setLayoutManager(linearLayoutManager);
+        /*statusItems = new ArrayList<>();
 
         statusItems.add(new StatusItem(R.drawable.status1, "Reproduction"));
         statusItems.add(new StatusItem(R.drawable.status2, "Women Safety"));
@@ -98,24 +116,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         statusItems.add(new StatusItem(R.drawable.status3, "Mental Stress"));
         statusItems.add(new StatusItem(R.drawable.status3, "Reproduction"));
         statusItems.add(new StatusItem(R.drawable.status3, "Reproduction"));
-        statusItems.add(new StatusItem(R.drawable.status3, "Sex & Sex Education"));
+        statusItems.add(new StatusItem(R.drawable.status3, "Sex & Sex Education"));*/
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recy_status.setLayoutManager(linearLayoutManager);
+        /*statusAdapter = new StatusAdapter(context ,statusItems);
+        recy_status.setAdapter(statusAdapter);*/
 
-        adapter = new StatusAdapter(context ,statusItems);
-        recy_status.setAdapter(adapter);
+        recy_blogs = view.findViewById(R.id.recy_blogs);
+        blogItems = new ArrayList<>();
+
+        blogItems.add(new BlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic"));
+        blogItems.add(new BlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling"));
+        blogItems.add(new BlogItems(R.drawable.blog3, R.drawable.save, "Obesity – much more than a cosmetic"));
+        blogItems.add(new BlogItems(R.drawable.blog2, R.drawable.save, "Dominance Of Partner – Controlling"));
+
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recy_blogs.setLayoutManager(linearLayoutManager3);
+
+        blogAdapter = new BlogAdapter(context ,blogs);
+        recy_blogs.setAdapter(blogAdapter);
 
         recy_recommended_blogs = view.findViewById(R.id.recy_recommended_blogs);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recy_recommended_blogs.setLayoutManager(linearLayoutManager1);
+
         recommendedBlogItems = new ArrayList<>();
 
         recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog2, R.drawable.save, "A Teenagers Guide To Building Self Confidence"));
         recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling"));
         recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog3, R.drawable.save, "Emergency Contrace- ption Is it being"));
         recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic"));
-
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recy_recommended_blogs.setLayoutManager(linearLayoutManager1);
 
         adapter2 = new RecommendedBlogAdapter(context ,recommendedBlogItems);
         recy_recommended_blogs.setAdapter(adapter2);
@@ -142,8 +171,68 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         sliderBannerItems.add(new SliderBannerItem(R.drawable.banner2));
         sliderBannerItems.add(new SliderBannerItem(R.drawable.banner1));
         sliderBannerItems.add(new SliderBannerItem(R.drawable.banner2));
-        adapter4 = new SliderBannerAdapter(sliderBannerItems, viewPager2);
-        viewPager2.setAdapter(adapter4);
+
+        getHomePageResponse();
+
+        return view;
+    }
+
+    public void getHomePageResponse() {
+
+        HomeScreenAuthModel model = new HomeScreenAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().homePageResponse(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<HomeScreenResponse>() {
+                    @Override
+                    public void onNext(HomeScreenResponse homeScreenResponse) {
+
+                        String msg = homeScreenResponse.getMsg();
+                        if (msg.equals("success")) {
+
+                            storyCategories = homeScreenResponse.getStoryCategory();
+                            bannerist = homeScreenResponse.getBannerist();
+                            blogs = homeScreenResponse.getBlogs();
+
+                            if(storyCategories.size() !=0)
+                            {
+                                statusAdapter = new StatusAdapter(context ,storyCategories);
+                                recy_status.setAdapter(statusAdapter);
+
+                            }
+                            else if(bannerist.size() !=0)
+                            {
+                                sliderBannerAdapter = new SliderBannerAdapter(bannerist, viewPager2, context);
+                                viewPager2.setAdapter(sliderBannerAdapter);
+                                viewPager();
+
+
+                            }
+                            else if(blogs.size() !=0)
+                            {
+                                blogAdapter = new BlogAdapter(context, blogs);
+                                recy_blogs.setAdapter(blogAdapter);
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void viewPager(){
         mBarLayout.setViewPager2(viewPager2);
         viewPager2.setClipChildren(false);
         viewPager2.setClipToPadding(false);
@@ -171,15 +260,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 super.onPageSelected(position);
                 if (getitem(0) < sliderBannerItems.size()) {
 
-                   // mBarLayout.setViewPager2(viewPager2);
+                    // mBarLayout.setViewPager2(viewPager2);
 
                 }
                 handler.removeCallbacks(sliderRunnable);
                 handler.postDelayed(sliderRunnable, 3000);
             }
         });
-
-        return view;
     }
 
     public Runnable sliderRunnable = new Runnable() {

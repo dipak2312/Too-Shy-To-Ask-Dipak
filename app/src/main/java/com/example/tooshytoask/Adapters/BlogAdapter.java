@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Models.BlogItems;
+import com.example.tooshytoask.Models.Blogs;
 import com.example.tooshytoask.Models.StoreHouseItems;
 import com.example.tooshytoask.R;
 
@@ -19,11 +20,11 @@ import java.util.ArrayList;
 
 public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<BlogItems>blogItems;
+    ArrayList<Blogs> blogs;
 
-    public BlogAdapter(Context context, ArrayList<BlogItems> blogItems) {
+    public BlogAdapter(Context context, ArrayList<Blogs> blogs) {
         this.context = context;
-        this.blogItems = blogItems;
+        this.blogs = blogs;
     }
 
     @NonNull
@@ -35,15 +36,15 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull BlogAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,blogItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,blogItems.get(position).getSave_img()));
-        holder.blog_title.setText(blogItems.get(position).getBlog_title());
+        //holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,blogs.get(position).getBlog_img()));
+        //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,blogs.get(position).getSave_img()));
+       // holder.blog_title.setText(blogs.get(position).getBlogContent());
 
     }
 
     @Override
     public int getItemCount() {
-        return blogItems.size();
+        return blogs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

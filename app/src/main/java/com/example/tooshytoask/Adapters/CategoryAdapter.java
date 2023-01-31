@@ -1,6 +1,7 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.InformationStorehouseList;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
@@ -21,15 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-    ArrayList<InformationStorehouseList>informationStorehouseLists;
-    OnClickListner onclicklistener;
+    ArrayList<InformationStorehouseList>informationStorehouseLists = new ArrayList<>();
+    //OnClickListner onclicklistener;
     ClickListener clickListener;
     Context context;
 
-    public CategoryAdapter(ArrayList<InformationStorehouseList>informationStorehouseLists,OnClickListner onclicklistener, ClickListener clickListener){
+    public CategoryAdapter(ArrayList<InformationStorehouseList>informationStorehouseLists,Context context){
         this.informationStorehouseLists = informationStorehouseLists;
-        this.onclicklistener=onclicklistener;
-        this.clickListener = clickListener;
+        this.context = context;
+
     }
 
     @NonNull
@@ -42,24 +44,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
        holder.category_title.setText(informationStorehouseLists.get(position).getTitle());
-       holder.cate_img.setImageDrawable(ContextCompat.getDrawable(context,informationStorehouseLists.get(position).getImg()));
+       Glide.with(context).load(informationStorehouseLists.get(position).getImg()).into(holder.cate_img);
+       //holder.cate_img.setImageDrawable(ContextCompat.getDrawable(context,informationStorehouseLists.get(position).getImg()));
     }
 
     @Override
     public int getItemCount() {
         return informationStorehouseLists.size();
     }
-
-    /*public List<CategoryItem> getSelectedCategoryItems(){
-        List<CategoryItem> selectedCategoryItems = new ArrayList<>();
-        for (CategoryItem categoryItem : categoryItem){
-            if (categoryItem.isSelected){
-                selectedCategoryItems.add(categoryItem);
-            }
-        }
-        return selectedCategoryItems;
-    }*/
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView cate_img;
@@ -71,7 +63,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             cate_img = itemView.findViewById(R.id.cate_img);
             category_title = itemView.findViewById(R.id.category_title);
 
-
+        }
+    }
 
         }
 
@@ -107,5 +100,3 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 }
             });
         }*/
-    }
-}

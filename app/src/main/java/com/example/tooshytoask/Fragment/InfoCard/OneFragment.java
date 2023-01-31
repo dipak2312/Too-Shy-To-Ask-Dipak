@@ -38,10 +38,9 @@ import io.reactivex.schedulers.Schedulers;
 public class OneFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnClickListner, ClickListener {
     Context context;
     SPManager spManager;
-    RecyclerView recyclerView, category_recy;
+    RecyclerView category_recy;
     CategoryAdapter adapter;
     ArrayList<CategoryItem> categoryItem;
-    ArrayList<String> healthId;
     ArrayList<InformationStorehouseList>informationStorehouseLists;
     TextView skip_btn;
     OnClickListner onclicklistener;
@@ -100,9 +99,12 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                         if (msg.equals("success")) {
 
                             informationStorehouseLists = healthCateResponse.getInformationStorehouseLists();
+                            adapter = new CategoryAdapter(informationStorehouseLists, context);
+                            category_recy.setAdapter(adapter);
 
-                                adapter = new CategoryAdapter(informationStorehouseLists,onclicklistener, clickListener);
-                                category_recy.setAdapter(adapter);
+                            if (informationStorehouseLists != null) {
+
+                            }
 
                         } else {
 
@@ -207,7 +209,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     public void onClickData(int position, int id) {
 
 
-      ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+      /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<informationStorehouseLists.size();i++)
         {
@@ -224,7 +226,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
+        }*/
 
     }
 

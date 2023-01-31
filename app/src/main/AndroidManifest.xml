@@ -155,7 +155,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Landing.SliderImages"
+            android:name=".Activity.Landing.SliderImagesActivity"
             android:exported="true">
 
             <meta-data

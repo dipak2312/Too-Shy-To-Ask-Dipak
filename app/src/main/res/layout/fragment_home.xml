@@ -178,12 +178,66 @@
 
      </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/blog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recommended_blogs_lay"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20">
+
+           <RelativeLayout
+               android:id="@+id/blogs_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_25"
+                android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_25"
+                android:text="Blogs"
+                android:textSize="@dimen/text_size18"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_25"
+                android:layout_alignParentEnd="true"
+                android:text="See All"
+                android:gravity="center"
+                android:fontFamily="@font/worksansitalic"
+                android:textSize="@dimen/text_size12"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:textColor="@color/purple"/>
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/recy_blog_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/blogs_title"
+        android:layout_marginTop="@dimen/margin_10">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_blogs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"/>
+
+    </RelativeLayout>
+
+            </RelativeLayout>
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/game_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/game_banner"
-                android:layout_below="@id/recommended_blogs_lay"
+                android:layout_below="@id/blog"
                 android:layout_marginEnd="@dimen/margin_20"
                 app:shapeAppearanceOverlay="@style/radiusimage"
                 android:layout_marginStart="@dimen/margin_20"

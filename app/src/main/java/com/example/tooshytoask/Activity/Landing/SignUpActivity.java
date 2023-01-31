@@ -44,7 +44,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     CustomProgressDialog dialog;
     Button btn_next, male, female, other;
 
-    String gender =" ";
+    String gender ="";
+    String selectValue = "";
+    String yearnew = "";
     Context context;
     SPManager spManager;
     TextInputEditText edit_name, edit_surname, edit_email_enter, edit_mobile_number,edit_country_enter,
@@ -124,6 +126,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onDateSelected(DatePicker dp, long date, int day, int month, int year) {
+                         yearnew=year+"-"+(month + 1)+"-"+day;
                         edit_age.setText("" + day + "/" + (month + 1) + "/" + year);
                     }
                 })
@@ -166,7 +169,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
             other.setBackgroundResource(R.drawable.gender_border_inactive);
             other.setTextColor(ContextCompat.getColor(context, R.color.black));
-            gender = "male";
+            gender = "Male";
 
         } else if (id == female.getId()){
             female.setBackgroundResource(R.drawable.gender_border_active);
@@ -175,7 +178,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             male.setTextColor(ContextCompat.getColor(context, R.color.black));
             other.setBackgroundResource(R.drawable.gender_border_inactive);
             other.setTextColor(ContextCompat.getColor(context, R.color.black));
-            gender = "female";
+            gender = "Female";
 
         } else if (id == other.getId()){
             other.setBackgroundResource(R.drawable.gender_border_active);
@@ -184,7 +187,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             male.setTextColor(ContextCompat.getColor(context, R.color.black));
             female.setBackgroundResource(R.drawable.gender_border_inactive);
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
-            gender = "other";
+            gender = "Other";
         }
         return true;
     }
@@ -205,14 +208,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
         TextView parent_text = bottomSheetDialog.findViewById(R.id.parent_text);
 
-        String selectValue = spManager.getUser();
+        //String selectValue = spManager.getUser();
 
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                selectValue.equals("user");
+                selectValue ="user";
                 user.setBackgroundResource(R.drawable.gender_border_active);
                 user_icon.setImageResource(R.drawable.account_inactive);
                 user_text.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -230,7 +233,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectValue.equals("parent");
+                selectValue ="parent";
                 parent.setBackgroundResource(R.drawable.gender_border_active);
                 parent_icon.setImageResource(R.drawable.family_active);
                 parent_text.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -259,11 +262,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signupmodel.setLast_name(edit_surname.getText().toString().trim());
         signupmodel.setEmail_id(edit_email_enter.getText().toString().trim());
         signupmodel.setPhone(edit_mobile_number.getText().toString().trim());
-        signupmodel.setGender(male.getText().toString().trim());
+        signupmodel.setGender(gender);
         signupmodel.setLanguage(spManager.getLanguage());
-        signupmodel.setUsertype(spManager.getUser());
+        signupmodel.setUsertype(selectValue);
         //signupmodel.setGender(spinner_gender.getSelectedItem().toString());
-        signupmodel.setDob(edit_age.getText().toString().trim());
+        signupmodel.setDob(yearnew);
         signupmodel.setCountry(edit_country_enter.getText().toString().trim());
         signupmodel.setState(edit_state_enter.getText().toString().trim());
         signupmodel.setCity(edit_city_enter.getText().toString().trim());
@@ -276,7 +279,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 .subscribe(new DisposableObserver<SignupResponse>() {
                     @Override
                     public void onNext(SignupResponse signupResponse) {
-                        dialog.dismiss("");
                         String msg = signupResponse.getMsg();
 
 
@@ -287,16 +289,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             spManager.setEmail(edit_email_enter.getText().toString().trim());
                             spManager.setDob(edit_age.getText().toString().trim());
                             spManager.setPhone(edit_mobile_number.getText().toString().trim());
-                            spManager.setDob(edit_age.getText().toString().trim());
                             spManager.setUserId(signupResponse.getUser_id());
                             spManager.setCountry(edit_country_enter.getText().toString().trim());
                             spManager.setState(edit_state_enter.getText().toString().trim());
                             spManager.setCity(edit_city_enter.getText().toString().trim());
                             spManager.setTstaLoginStatus("true");
-                            spManager.setGender(male.getText().toString().trim());
+                            spManager.setGender(gender);
+                            spManager.setLanguage(spManager.getLanguage());
+                            spManager.setUser(selectValue);
 
 
-                            Intent intent = new Intent(context, HomeActivity.class);
+                            Intent intent = new Intent(context, InfoCardCategoryActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);

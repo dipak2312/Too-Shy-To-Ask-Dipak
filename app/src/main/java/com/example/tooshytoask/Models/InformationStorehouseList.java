@@ -4,29 +4,7 @@ package com.example.tooshytoask.Models;
 public class InformationStorehouseList {
     private String id;
     private String title;
-    private int img;
-
-    public InformationStorehouseList(Boolean isSelected) {
-        this.isSelected = isSelected;
-    }
-
-    public Boolean isSelected = false;
-
-    public Boolean getSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(Boolean selected) {
-        isSelected = selected;
-    }
-
-    public int getImg() {
-        return img;
-    }
-
-    public void setImg(int img) {
-        this.img = img;
-    }
+    private String img;
 
     public String getId() {
         return id;
@@ -43,4 +21,16 @@ public class InformationStorehouseList {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    //public Boolean isSelected = false;
+
+
 }

@@ -4,7 +4,7 @@ import android.content.Intent;
 
 public class OtpInResponse {
 
-    private Integer code;
+    /*private Integer code;
     private String msg;
     public Integer getCode() {
         return code;
@@ -17,8 +17,8 @@ public class OtpInResponse {
     }
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-    /*private Integer code;
+    }*/
+    private Integer code;
     private String msg;
     private data data;
 
@@ -39,5 +39,5 @@ public class OtpInResponse {
     }
     public void setData(data data) {
         this.data = data;
-    }*/
+    }
 }

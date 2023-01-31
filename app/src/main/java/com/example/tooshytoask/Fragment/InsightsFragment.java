@@ -24,6 +24,7 @@ import com.example.tooshytoask.Adapters.StoreHouseAdapter;
 import com.example.tooshytoask.Adapters.VideoGalleryAdapter;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.BlogItems;
+import com.example.tooshytoask.Models.Blogs;
 import com.example.tooshytoask.Models.CoursesItems;
 import com.example.tooshytoask.Models.EventBlogItems;
 import com.example.tooshytoask.Models.HighlightBlogItems;
@@ -40,6 +41,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
     RecyclerView recy_storehouse, recy_blogs, recy_highlight_blogs, recy_event_blogs,
                  recy_just_added_blogs, recy_courses, recy_video_gallery;
     ArrayList<BlogItems>blogItems;
+    ArrayList<Blogs> blogs;
     ArrayList<StoreHouseItems>storeHouseItems;
     ArrayList<HighlightBlogItems>highlightBlogItem;
     ArrayList<EventBlogItems>eventBlogItems;
@@ -82,7 +84,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         recy_storehouse.setAdapter(adapter);
 
         recy_blogs = view.findViewById(R.id.recy_blogs);
-        blogItems = new ArrayList<>();
+        /*blogItems = new ArrayList<>();
 
         blogItems.add(new BlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic"));
         blogItems.add(new BlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling"));
@@ -93,7 +95,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         recy_blogs.setLayoutManager(linearLayoutManager1);
 
         blogAdapter = new BlogAdapter(context ,blogItems);
-        recy_blogs.setAdapter(blogAdapter);
+        recy_blogs.setAdapter(blogAdapter);*/
 
         recy_highlight_blogs = view.findViewById(R.id.recy_highlight_blogs);
         highlightBlogItem = new ArrayList<>();

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -190,7 +189,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Intent intent = new Intent(this, SliderImages.class);
+                        Intent intent = new Intent(this, SliderImagesActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

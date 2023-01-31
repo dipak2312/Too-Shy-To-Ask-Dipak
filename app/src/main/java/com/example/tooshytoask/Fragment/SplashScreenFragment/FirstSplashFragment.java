@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,33 +18,47 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Models.OnboardingList;
 import com.example.tooshytoask.R;
+
+import java.util.ArrayList;
 
 public class FirstSplashFragment extends Fragment {
     ImageView img1;
     Context context;
     TextView heading, txt_desc;
+    ArrayList<OnboardingList> onboardingLists;
+
+    public FirstSplashFragment(ArrayList<OnboardingList> onboardingLists) {
+        this.onboardingLists=onboardingLists;
+
+    }
 
     @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_first_splash, container, false);
-
+        context = getActivity();
         img1 = view.findViewById(R.id.img1);
         heading = view.findViewById(R.id.heading);
-        //Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
-        //heading.startAnimation(animation);
+
         txt_desc = view.findViewById(R.id.txt_desc);
-        //Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
-        //txt_desc.startAnimation(anim);
 
-        context = getActivity();
+        if (onboardingLists != null){
+            heading.setText(onboardingLists.get(0).getTitle());
+            txt_desc.setText(onboardingLists.get(0).getDesc());
+            Log.d("saggi",onboardingLists.toString());
+            Glide.with(context).load(onboardingLists.get(0).getImg()).into(img1);
+        }
 
 
-        Glide.with(context).load(R.drawable.welcome).into(img1);
-        Glide.with(context).load(R.string.heading_one);
-        Glide.with(context).load(R.string.desc_one);
+
+
+
+
+
+
 
         return view;
     }

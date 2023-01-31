@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.ViewPagerAdapter;
@@ -27,7 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class SliderImages extends AppCompatActivity implements View.OnClickListener {
+public class SliderImagesActivity extends AppCompatActivity implements View.OnClickListener {
     //ActivitySliderImagesBinding binding;
     ViewPagerAdapter viewPagerAdapter;
     ViewPager viewPager;
@@ -47,7 +48,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
         //binding = ActivitySliderImagesBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_slider_images);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        context = SliderImages.this;
+        context = SliderImagesActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
@@ -66,9 +67,6 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
     }
 
     private void AddView() {
-       viewPagerAdapter = new ViewPagerAdapter(fm, context, onboardingLists);
-        viewPager.setAdapter(viewPagerAdapter);
-        mBarLayout.setViewPager(viewPager);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -114,6 +112,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
 
     public void getOnBorading(){
         dialog.show("");
+        dialog.dismiss();
 
         WebServiceModel.getRestApi().getOnBorading()
                 .subscribeOn(Schedulers.io())
@@ -121,15 +120,21 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
                 .subscribe(new DisposableObserver<OnBordingResponse>() {
                     @Override
                     public void onNext(OnBordingResponse onBordingResponse) {
-                        dialog.show("");
+                        dialog.dismiss("") ;
                         String msg = onBordingResponse.getMsg();
 
                         if (msg.equals("success")) {
 
                             onboardingLists = onBordingResponse.getOnboardingLists();
+                            if(onboardingLists !=null)
+                            {
+                                viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),onboardingLists);
+                                viewPager.setAdapter(viewPagerAdapter);
+                                mBarLayout.setViewPager(viewPager);
+                            }
 
-                            viewPagerAdapter = new ViewPagerAdapter(fm, context, onboardingLists);
-                            viewPager.setAdapter(viewPagerAdapter);
+
+                            AddView();
 
 
 
@@ -141,7 +146,7 @@ public class SliderImages extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Toast.makeText(context, "msg", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

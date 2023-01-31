@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Models.OnboardingList;
 import com.example.tooshytoask.R;
+
+import java.util.ArrayList;
 
 public class SecondSplashFragment extends Fragment {
     ImageView img2;
     Context context;
     TextView heading, txt_desc;
+    ArrayList<OnboardingList> onboardingLists;
+
+    public SecondSplashFragment(ArrayList<OnboardingList> onboardingLists) {
+        this.onboardingLists=onboardingLists;
+
+    }
 
     @SuppressLint({ "ResourceType"})
     @Override
@@ -30,18 +40,18 @@ public class SecondSplashFragment extends Fragment {
 
         img2 = view.findViewById(R.id.img2);
         heading = view.findViewById(R.id.heading);
-        //Animation animation = AnimationUtils.loadAnimation(context, R.anim.alpha);
-        //heading.startAnimation(animation);
+
         txt_desc = view.findViewById(R.id.txt_desc);
-        //Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
-        //txt_desc.startAnimation(anim);
+
+        heading.setText(onboardingLists.get(1).getTitle());
+        txt_desc.setText(onboardingLists.get(1).getDesc());
 
         context = getActivity();
+        Log.d("saggi",onboardingLists.toString());
+
+        Glide.with(context).load(onboardingLists.get(1).getImg()).into(img2);
 
 
-        Glide.with(context).load(R.drawable.create_account).into(img2);
-        Glide.with(context).load(R.string.heading_two);
-        Glide.with(context).load(R.string.desc_two);
 
         return view;
     }

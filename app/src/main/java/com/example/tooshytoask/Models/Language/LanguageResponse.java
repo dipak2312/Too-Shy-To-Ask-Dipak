@@ -1,11 +1,14 @@
-package com.example.tooshytoask.Models;
+package com.example.tooshytoask.Models.Language;
 
 import java.util.ArrayList;
 
-public class OnBordingResponse {
+public class LanguageResponse {
+
     private String code;
     private String msg;
-    ArrayList<OnboardingList> OnboardingList;
+
+    private ArrayList<data>data;
+
 
     public String getCode() {
         return code;
@@ -23,11 +26,11 @@ public class OnBordingResponse {
         this.msg = msg;
     }
 
-    public ArrayList<OnboardingList> getOnboardingLists() {
-        return OnboardingList;
+    public ArrayList<com.example.tooshytoask.Models.Language.data> getData() {
+        return data;
     }
 
-    public void setOnboardingLists(ArrayList<OnboardingList> onboardingLists) {
-        this.OnboardingList = onboardingLists;
+    public void setData(ArrayList<com.example.tooshytoask.Models.Language.data> data) {
+        this.data = data;
     }
 }

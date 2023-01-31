@@ -6,15 +6,16 @@ public class OnboardingList {
     private String title;
     private String desc;
 
-    public int getImg() {
+
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
-    private int img;
+    private String img;
 
     public String getId() {
         return id;

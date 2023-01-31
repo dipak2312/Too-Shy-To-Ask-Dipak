@@ -2,6 +2,7 @@ package com.example.tooshytoask.API;
 
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
+import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
@@ -10,7 +11,8 @@ import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
-import com.example.tooshytoask.Models.LanguageResponse;
+import com.example.tooshytoask.Models.HomeScreenResponse;
+import com.example.tooshytoask.Models.Language.LanguageResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
@@ -31,8 +33,7 @@ public interface WebServices {
     @POST("api/send_otp")
     Observable<SignInResponse> sendOtp(@Body SignInAuthModel model);
 
-    //@Headers("Content-Type: application/json")
-    @Headers({"Content-Length:0","Accept: application/json"})
+    @Headers("Content-Type: application/json")
     @POST("api/verify_otp")
     Observable<OtpInResponse> signIn(@Body OtpAuthModel model);
 
@@ -64,5 +65,9 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/save_userdetails")
     Observable<UserDetailResponse> userDetails(@Body UserDetailAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/homescreen")
+    Observable<HomeScreenResponse> homePageResponse(@Body HomeScreenAuthModel model);
 
 }
