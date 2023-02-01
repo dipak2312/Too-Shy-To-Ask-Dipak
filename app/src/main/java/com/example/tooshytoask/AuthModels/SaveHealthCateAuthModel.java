@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SaveHealthCateAuthModel {
     private String userId;
-    private ArrayList<String> healthId = new ArrayList<String>();
+    private ArrayList<String> healthId;
 
 
     public String getUserId() {

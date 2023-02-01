@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<Blogs> blogs;
+    ArrayList<Blogs> Blogs;
 
-    public BlogAdapter(Context context, ArrayList<Blogs> blogs) {
+    public BlogAdapter(Context context, ArrayList<Blogs> Blogs) {
         this.context = context;
-        this.blogs = blogs;
+        this.Blogs = Blogs;
     }
 
     @NonNull
@@ -44,7 +44,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return blogs.size();
+        return Blogs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

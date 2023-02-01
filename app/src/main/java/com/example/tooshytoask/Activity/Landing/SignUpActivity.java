@@ -64,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = SignUpActivity.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
 
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
@@ -94,16 +95,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         String str = intent.getStringExtra("phone");
         edit_mobile_number.setText(str);
-        edit_mobile_number.setClickable(true);
-        edit_mobile_number.setFocusable(true);
-
-
+        edit_mobile_number.setClickable(false);
+        edit_mobile_number.setFocusable(false);
 
         userPopup();
-
-        /*edit_first_name = findViewById(R.id.edit_first_name);
-        edit_last_name = findViewById(R.id.edit_last_name);
-        edit_email_id = findViewById(R.id.edit_email_id);*/
 
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
@@ -208,8 +203,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
         TextView parent_text = bottomSheetDialog.findViewById(R.id.parent_text);
 
-        //String selectValue = spManager.getUser();
-
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,7 +218,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 btn_submit.setBackgroundResource(R.drawable.active_con_btn);
                 btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
-
 
             }
         });
@@ -244,18 +236,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
 
-
-
             }
         });
-
-
 
         bottomSheetDialog.show();
 
     }
 
     public void Usersignup() {
+        dialog.show("");
 
         SignupAuthModel signupmodel = new SignupAuthModel();
         signupmodel.setFirst_name(edit_name.getText().toString().trim());
@@ -265,13 +254,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signupmodel.setGender(gender);
         signupmodel.setLanguage(spManager.getLanguage());
         signupmodel.setUsertype(selectValue);
-        //signupmodel.setGender(spinner_gender.getSelectedItem().toString());
         signupmodel.setDob(yearnew);
         signupmodel.setCountry(edit_country_enter.getText().toString().trim());
         signupmodel.setState(edit_state_enter.getText().toString().trim());
         signupmodel.setCity(edit_city_enter.getText().toString().trim());
-
-
 
         WebServiceModel.getRestApi().signup(signupmodel)
                 .subscribeOn(Schedulers.io())
@@ -309,13 +295,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
-
+                        dialog.dismiss("");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
                         Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -323,7 +309,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                     }
                 });
-
 
     }
 

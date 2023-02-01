@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AvatarResponse {
     private String code;
     private String msg;
-    ArrayList<avatarList>avatarLists;
+    ArrayList<avatarList>avatarList;
 
     public String getCode() {
         return code;
@@ -23,11 +23,11 @@ public class AvatarResponse {
         this.msg = msg;
     }
 
-    public ArrayList<avatarList> getAvatarLists() {
-        return avatarLists;
+    public ArrayList<com.example.tooshytoask.Models.avatarList> getAvatarList() {
+        return avatarList;
     }
 
-    public void setAvatarLists(ArrayList<avatarList> avatarLists) {
-        this.avatarLists = avatarLists;
+    public void setAvatarList(ArrayList<com.example.tooshytoask.Models.avatarList> avatarList) {
+        this.avatarList = avatarList;
     }
 }

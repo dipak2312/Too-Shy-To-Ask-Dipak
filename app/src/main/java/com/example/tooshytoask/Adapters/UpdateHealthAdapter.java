@@ -36,7 +36,7 @@ public class UpdateHealthAdapter extends RecyclerView.Adapter<UpdateHealthAdapte
     @Override
     public void onBindViewHolder(@NonNull UpdateHealthAdapter.ViewHolder holder, int position) {
         //holder.health_btn.setText(healthIssues.get(position).getHealth_btn());
-        holder.HealthIssues(healthIssues.get(position),position);
+        //holder.HealthIssues(healthIssues.get(position),position);
 
     }
 
@@ -53,7 +53,7 @@ public class UpdateHealthAdapter extends RecyclerView.Adapter<UpdateHealthAdapte
             health_btn = itemView.findViewById(R.id.health_btn);
         }
 
-        public void HealthIssues(final HealthIssuseList healthIssues, int position){
+        /*public void HealthIssues(final HealthIssuseList healthIssues, int position){
             //health_btn.setText(healthIssues.getHealth_btn());
 
             if (healthIssues.isSelected){
@@ -86,6 +86,6 @@ public class UpdateHealthAdapter extends RecyclerView.Adapter<UpdateHealthAdapte
 
                 }
             });
-        }
+        }*/
     }
 }

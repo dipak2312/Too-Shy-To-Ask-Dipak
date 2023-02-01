@@ -115,26 +115,15 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         return true;
     }
 
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
 
         if (id == rel_back.getId()) {
             viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
-           /* Intent intent = new Intent(context, SignUpActivity.class);
-            startActivity(intent);*/
-        }
-        /*else if (id == next_btn.getId()) {
-            viewPager.setCurrentItem(getitem(1), true);
-        }
 
-        else if (id == skip_btn.getId()){
-            viewPager.setCurrentItem(getitem(1), true);
-        }*/
+        }
     }
-
-
 
     @Override
     public void onClick(Boolean status) {

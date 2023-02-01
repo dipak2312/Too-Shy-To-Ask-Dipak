@@ -12,18 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Help.HelpActivity2;
+import com.example.tooshytoask.Models.Help.data;
 import com.example.tooshytoask.Models.HelpCategory;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class HelpCategoryAdapter extends RecyclerView.Adapter<HelpCategoryAdapter.ViewHolder> {
-    ArrayList<HelpCategory> helpCategories;
-    Context context;
 
-    public HelpCategoryAdapter(Context context, ArrayList<HelpCategory>helpCategories) {
-        this.helpCategories = helpCategories;
+    Context context;
+    ArrayList<com.example.tooshytoask.Models.Help.data>data;
+
+    public HelpCategoryAdapter(Context context,ArrayList<data>data) {
+        this.data = data;
         this.context = context;
     }
 
@@ -37,13 +40,14 @@ public class HelpCategoryAdapter extends RecyclerView.Adapter<HelpCategoryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull HelpCategoryAdapter.ViewHolder holder, int position) {
-        holder.help_img.setImageDrawable(ContextCompat.getDrawable(context, helpCategories.get(position).getHelp_img()));
-        holder.help_text.setText(helpCategories.get(position).getHelp_text());
+        //holder.help_img.setImageDrawable(ContextCompat.getDrawable(context, helpCategories.get(position).getHelp_img()));
+        holder.help_text.setText(data.get(position).getTitle());
+        Glide.with(context).load(data.get(position).getImg()).into(holder.help_img);
     }
 
     @Override
     public int getItemCount() {
-        return helpCategories.size();
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

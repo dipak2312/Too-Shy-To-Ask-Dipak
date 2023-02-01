@@ -150,6 +150,7 @@
          android:layout_height="wrap_content"
          android:layout_below="@+id/indicator_layout"
          android:orientation="vertical"
+         android:visibility="gone"
          android:layout_marginTop="@dimen/margin_20"
          android:layout_marginStart="@dimen/margin_20">
 
@@ -182,6 +183,7 @@
                 android:id="@+id/blog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@id/recommended_blogs_lay"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
@@ -218,7 +220,6 @@
         android:id="@+id/recy_blog_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_below="@id/blogs_title"
         android:layout_marginTop="@dimen/margin_10">
 

@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.AvatarResponse;
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
     Context context;
-    ArrayList<avatarList>avatarLists;
+    ArrayList<avatarList>avatarList;
     OnClickListner onclicklistener;
 
-    public ProfileAdapter(ArrayList<avatarList>avatarLists, OnClickListner onclicklistener, Context context) {
-        this.avatarLists = avatarLists;
+    public ProfileAdapter(ArrayList<avatarList>avatarList, OnClickListner onclicklistener, Context context) {
+        this.avatarList = avatarList;
         this.onclicklistener = onclicklistener;
         this.context = context;
     }
@@ -37,12 +36,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
-        holder.img.setImageDrawable(ContextCompat.getDrawable(context,avatarLists.get(position).getEncimg()));
+        Glide.with(context).load(avatarList.get(position).getEncimg()).into(holder.img);
     }
 
     @Override
     public int getItemCount() {
-        return avatarLists.size();
+        return avatarList.size();
     }
 
 

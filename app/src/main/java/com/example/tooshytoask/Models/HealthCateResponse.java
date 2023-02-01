@@ -6,7 +6,7 @@ public class HealthCateResponse {
     private String code;
     private String msg;
 
-    ArrayList<InformationStorehouseList>informationStorehouseLists;
+    ArrayList<InformationStorehouseList>InformationStorehouseList;
 
 
     public String getCode() {
@@ -25,11 +25,11 @@ public class HealthCateResponse {
         this.msg = msg;
     }
 
-    public ArrayList<InformationStorehouseList> getInformationStorehouseLists() {
-        return informationStorehouseLists;
+    public ArrayList<com.example.tooshytoask.Models.InformationStorehouseList> getInformationStorehouseList() {
+        return InformationStorehouseList;
     }
 
-    public void setInformationStorehouseLists(ArrayList<InformationStorehouseList> informationStorehouseLists) {
-        this.informationStorehouseLists = informationStorehouseLists;
+    public void setInformationStorehouseList(ArrayList<com.example.tooshytoask.Models.InformationStorehouseList> informationStorehouseList) {
+        InformationStorehouseList = informationStorehouseList;
     }
 }

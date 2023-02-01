@@ -5,17 +5,20 @@ import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
+import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
+import com.example.tooshytoask.Models.Help.HelpCategoryResponse;
 import com.example.tooshytoask.Models.HomeScreenResponse;
 import com.example.tooshytoask.Models.Language.LanguageResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
+import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.UserDetailResponse;
@@ -56,11 +59,15 @@ public interface WebServices {
     Observable<SaveHealthCategoryResponse> saveHealthCategory(@Body SaveHealthCateAuthModel model);
 
     @GET("api/avatars")
-    Observable<AvatarResponse> healthcategory();
+    Observable<AvatarResponse> getProfile();
 
     @Headers("Content-Type: application/json")
     @POST("api/healthissues")
     Observable<HealthIssueResponse> healthIssues(@Body HealthIssueModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/save_healthissues")
+    Observable<SaveHealthIssueResponse> saveHealthIssue(@Body SaveHealthIssueAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/save_userdetails")
@@ -69,5 +76,8 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/homescreen")
     Observable<HomeScreenResponse> homePageResponse(@Body HomeScreenAuthModel model);
+
+    @GET("api/helpcategory")
+    Observable<HelpCategoryResponse> getHelpCategory();
 
 }

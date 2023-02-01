@@ -21,11 +21,11 @@ import com.example.tooshytoask.R;
 import java.util.ArrayList;
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder>{
-    ArrayList<StoryCategory> storyCategories;
+    ArrayList<StoryCategory> StoryCategory;
     Context context;
 
-    public StatusAdapter(Context context, ArrayList<StoryCategory> storyCategories) {
-        this.storyCategories = storyCategories;
+    public StatusAdapter(Context context, ArrayList<StoryCategory> StoryCategory) {
+        this.StoryCategory = StoryCategory;
         this.context = context;
     }
 
@@ -39,13 +39,13 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //holder.status_img.setImageResource(storyCategories.get(position).getCategoryImg());
-        Glide.with(context).load(storyCategories.get(position).getCategoryImg()).into(holder.status_img);
-        holder.status_title.setText(storyCategories.get(position).getCategoryTitle());
+        Glide.with(context).load(StoryCategory.get(position).getCategoryImg()).into(holder.status_img);
+        holder.status_title.setText(StoryCategory.get(position).getCategoryTitle());
     }
 
     @Override
     public int getItemCount() {
-        return storyCategories.size();
+        return StoryCategory.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

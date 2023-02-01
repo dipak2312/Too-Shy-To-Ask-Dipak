@@ -27,6 +27,7 @@ import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
@@ -38,10 +39,10 @@ import io.reactivex.schedulers.Schedulers;
 public class OneFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnClickListner, ClickListener {
     Context context;
     SPManager spManager;
+    CustomProgressDialog dialog;
     RecyclerView category_recy;
     CategoryAdapter adapter;
-    ArrayList<CategoryItem> categoryItem;
-    ArrayList<InformationStorehouseList>informationStorehouseLists;
+    ArrayList<InformationStorehouseList>InformationStorehouseList;
     TextView skip_btn;
     OnClickListner onclicklistener;
     ImageButton next_btn;
@@ -55,35 +56,27 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         context = getActivity();
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
         next_btn = view.findViewById(R.id.btnNext);
         next_btn.setOnClickListener(this);
         skip_btn = view.findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
 
         clickListener=(ClickListener)context;
-        clickListener.onClick(true);
+        clickListener.onClick(false);
 
         category_recy = view.findViewById(R.id.category_recy);
         category_recy.setOnTouchListener(this);
 
         category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        /*categoryItem = new ArrayList<>();
-
-        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Relationships",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sex & Sexuality",false));
-        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Reproduction",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Mental Health",false));
-        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Education",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));
-
-        category_recy.setAdapter(new CategoryAdapter(categoryItem,this, clickListener));*/
         healthcategory();
 
     return view;
     }
 
     public void healthcategory() {
+        dialog.show();
 
         HealthCateModel model = new HealthCateModel();
         model.setUser_id(spManager.getUserId());
@@ -98,12 +91,12 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                         if (msg.equals("success")) {
 
-                            informationStorehouseLists = healthCateResponse.getInformationStorehouseLists();
-                            adapter = new CategoryAdapter(informationStorehouseLists, context);
-                            category_recy.setAdapter(adapter);
+                            InformationStorehouseList = healthCateResponse.getInformationStorehouseList();
 
-                            if (informationStorehouseLists != null) {
 
+                            if (InformationStorehouseList != null) {
+                                adapter = new CategoryAdapter(InformationStorehouseList, context, onclicklistener);
+                                category_recy.setAdapter(adapter);
                             }
 
                         } else {
@@ -111,7 +104,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
-
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -143,7 +136,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                         String msg = saveHealthCategoryResponse.getMsg();
 
-                        if (msg.equals("success")) {
+                        if (msg.equals("Health Categories updated to profile.")) {
 
 
 
@@ -179,23 +172,25 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
             clickListener.onClick(true);
         }
 
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<informationStorehouseLists.size();i++)
+        for(int i=0;i<InformationStorehouseList.size();i++)
         {
-            myvalue.add(informationStorehouseLists.get(i).getSelected());
+            myvalue.add(InformationStorehouseList.get(i).getSelected());
         }
         boolean ans = myvalue.contains(true);
 
         if(ans)
         {
+
+            saveHealthCategory();
             clickListener.onClick(true);
 
 
         }else
         {
             clickListener.onClick(false);
-        }*/
+        }
 
     }
 
@@ -209,11 +204,11 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     public void onClickData(int position, int id) {
 
 
-      /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+      ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<informationStorehouseLists.size();i++)
+        for(int i=0;i<InformationStorehouseList.size();i++)
         {
-            myvalue.add(informationStorehouseLists.get(i).getSelected());
+            myvalue.add(InformationStorehouseList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);
@@ -226,7 +221,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }*/
+        }
 
     }
 

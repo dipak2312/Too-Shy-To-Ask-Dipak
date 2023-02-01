@@ -1,17 +1,8 @@
 package com.example.tooshytoask.Models;
 
 public class avatarList {
-    private int encimg;
+    private String encimg;
     public Boolean isSelected = false;
-
-
-    public int getEncimg() {
-        return encimg;
-    }
-
-    public void setEncimg(int encimg) {
-        this.encimg = encimg;
-    }
 
     public Boolean getSelected() {
         return isSelected;
@@ -20,4 +11,17 @@ public class avatarList {
     public void setSelected(Boolean selected) {
         isSelected = selected;
     }
+
+    public avatarList(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    public String getEncimg() {
+        return encimg;
+    }
+
+    public void setEncimg(String encimg) {
+        this.encimg = encimg;
+    }
+
 }

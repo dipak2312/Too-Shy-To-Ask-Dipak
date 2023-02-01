@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapter.SliderViewHolder> {
-    ArrayList<Bannerist> bannerist;
+    ArrayList<Bannerist> Bannerist;
     Context context;
     private ViewPager2 viewPager2;
 
-    public SliderBannerAdapter(ArrayList<Bannerist> bannerist, ViewPager2 viewPager2, Context context) {
-        this.bannerist = bannerist;
+    public SliderBannerAdapter(ArrayList<Bannerist> Bannerist, ViewPager2 viewPager2, Context context) {
+        this.Bannerist = Bannerist;
         this.viewPager2 = viewPager2;
         this.context = context;
     }
@@ -37,16 +37,16 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
-        //holder.setImage(bannerist.get(position));
-        Glide.with(context).load(bannerist.get(position).getBannerImg()).into(holder.imageSlide);
-        if (position == bannerist.size()){
+        //holder.setImage(Bannerist.get(position));
+        Glide.with(context).load(Bannerist.get(position).getBannerImg()).into(holder.imageSlide);
+        if (position == Bannerist.size()){
             viewPager2.post(sliderRunnable);
         }
     }
 
     @Override
     public int getItemCount() {
-        return bannerist.size();
+        return Bannerist.size();
     }
 
     class SliderViewHolder extends RecyclerView.ViewHolder{
@@ -56,17 +56,18 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
             imageSlide = itemView.findViewById(R.id.imageSlide);
 
         }
-        void setImage(SliderBannerItem sliderBannerItems){
+        void setImage(Bannerist Bannerist){
 
             //if we want to use Glide and set image from API we can set here
-            imageSlide.setImageResource(sliderBannerItems.getImageSlide());
+            //imageSlide.setImageResource(Bannerist.getBannerImg());
+            Glide.with(context).load(Bannerist.getBannerImg()).into(imageSlide);
         }
     }
 
     private Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
-            bannerist.addAll(bannerist);
+            Bannerist.addAll(Bannerist);
             notifyDataSetChanged();
         }
     };

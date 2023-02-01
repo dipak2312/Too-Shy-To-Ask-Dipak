@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
@@ -45,6 +46,7 @@ import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.Models.StatusItem;
 import com.example.tooshytoask.Models.StoryCategory;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -67,9 +69,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     BlogAdapter blogAdapter;
     ArrayList<RecentlyBlogItems>recentlyBlogItems;
     ArrayList<SliderBannerItem> sliderBannerItems;
-    ArrayList<StoryCategory>storyCategories;
-    ArrayList<Bannerist> bannerist;
-    ArrayList<Blogs> blogs;
+    ArrayList<StoryCategory> StoryCategory;
+    ArrayList<Bannerist> Bannerist;
+    ArrayList<Blogs> Blogs;
     RecommendedBlogAdapter adapter2;
     RecentlyBlogAdapter adapter3;
     StatusAdapter statusAdapter;
@@ -82,10 +84,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     RadioButton eng_lang, hindi_lang, marathi_lang;
     Button btn_select;
     RelativeLayout back_arrow;
+    LinearLayout recommended_blogs_lay;
     ViewPager2 viewPager2;
     Handler handler = new Handler();
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
+    CustomProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,7 +99,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = getActivity();
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
 
+        recommended_blogs_lay = view.findViewById(R.id.recommended_blogs_lay);
+        recommended_blogs_lay.setOnClickListener(this);
         update_profile = view.findViewById(R.id.update_profile);
         update_profile.setOnClickListener(this);
         search = view.findViewById(R.id.search);
@@ -132,7 +139,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_blogs.setLayoutManager(linearLayoutManager3);
 
-        blogAdapter = new BlogAdapter(context ,blogs);
+        blogAdapter = new BlogAdapter(context ,Blogs);
         recy_blogs.setAdapter(blogAdapter);
 
         recy_recommended_blogs = view.findViewById(R.id.recy_recommended_blogs);
@@ -178,6 +185,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     public void getHomePageResponse() {
+        dialog.show("");
 
         HomeScreenAuthModel model = new HomeScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -192,32 +200,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         String msg = homeScreenResponse.getMsg();
                         if (msg.equals("success")) {
 
-                            storyCategories = homeScreenResponse.getStoryCategory();
-                            bannerist = homeScreenResponse.getBannerist();
-                            blogs = homeScreenResponse.getBlogs();
+                            StoryCategory = homeScreenResponse.getStoryCategory();
+                            Bannerist = homeScreenResponse.getBannerist();
+                            Blogs = homeScreenResponse.getBlogs();
 
-                            if(storyCategories.size() !=0)
+                            if(Bannerist !=null)
                             {
-                                statusAdapter = new StatusAdapter(context ,storyCategories);
-                                recy_status.setAdapter(statusAdapter);
-
-                            }
-                            else if(bannerist.size() !=0)
-                            {
-                                sliderBannerAdapter = new SliderBannerAdapter(bannerist, viewPager2, context);
+                                sliderBannerAdapter = new SliderBannerAdapter(Bannerist, viewPager2, context);
                                 viewPager2.setAdapter(sliderBannerAdapter);
                                 viewPager();
-
-
                             }
-                            else if(blogs.size() !=0)
+
+                             if(StoryCategory !=null)
                             {
-                                blogAdapter = new BlogAdapter(context, blogs);
-                                recy_blogs.setAdapter(blogAdapter);
-
-
+                                statusAdapter = new StatusAdapter(context ,StoryCategory);
+                                recy_status.setAdapter(statusAdapter);
                             }
+
+                             if(Blogs !=null)
+                            {
+                                blogAdapter = new BlogAdapter(context, Blogs);
+                                recy_blogs.setAdapter(blogAdapter);
+                            }
+
                         }
+                        dialog.dismiss("");
+
                     }
 
                     @Override

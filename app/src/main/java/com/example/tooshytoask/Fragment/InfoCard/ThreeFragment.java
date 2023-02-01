@@ -22,10 +22,14 @@ import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.HealthAdapter;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
+import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
+import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.HealthIssuseList;
+import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
+import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -41,7 +45,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     Context context;
     SPManager spManager;
     RecyclerView health_recy;
-    ArrayList<HealthIssuseList> healthIssuseList;
+    ArrayList<HealthIssuseList>HealthIssuseList;
     HealthAdapter adapter;
     ClickListener clickListener;
     LinearLayout health_issues_title;
@@ -73,8 +77,6 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         health_recy = view.findViewById(R.id.health_recy);
         health_recy.setOnClickListener(this);
 
-        //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
-
         /*healthIssuseList = new ArrayList<>();
 
         healthIssuseList.add(new HealthIssuseList("Throid", false));
@@ -87,8 +89,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
 
-        //health_recy.setAdapter(new HealthAdapter(healthIssuseList, this, context));
-
+        healthIssues();
         return view;
     }
 
@@ -107,10 +108,51 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
                         if (msg.equals("success")) {
 
-                            healthIssuseList = healthIssueResponse.getHealthIssuseList();
+                            HealthIssuseList = healthIssueResponse.getHealthIssuseList();
 
-                            adapter = new HealthAdapter(healthIssuseList,onclicklistener, context);
+                            adapter = new HealthAdapter(HealthIssuseList,onclicklistener, context);
                             health_recy.setAdapter(adapter);
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void saveHealthIssue() {
+
+        SaveHealthIssueAuthModel model = new SaveHealthIssueAuthModel();
+        model.setUserId(spManager.getUserId());
+        model.setHealthissueId(model.getHealthissueId());
+        WebServiceModel.getRestApi().saveHealthIssue(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SaveHealthIssueResponse>() {
+                    @Override
+                    public void onNext(SaveHealthIssueResponse saveHealthIssueResponse) {
+
+                        String msg = saveHealthIssueResponse.getMsg();
+
+                        if (msg.equals("Health Issues updated to profile.")) {
+
+
+
 
                         } else {
 
@@ -142,7 +184,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
 
         if (id == skip_btn.getId()){
-            clickListener.onClick(true);
+            clickListener.onClick(false);
         }
 
         if (id == yes_btn.getId()){
@@ -166,19 +208,20 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }
 
         else {
-            /*ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
-            for (int i = 0; i < healthIssuseList.size(); i++) {
-                myvalue.add(healthIssuseList.get(i).getSelected());
+            ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
+            for (int i = 0; i < HealthIssuseList.size(); i++) {
+                myvalue.add(HealthIssuseList.get(i).getSelected());
             }
             boolean ans = myvalue.contains(true);
 
             if (ans) {
+                saveHealthIssue();
                 clickListener.onClick(true);
 
 
             } {
                 clickListener.onClick(false);
-            }*/
+            }
         }
 
     }
@@ -188,9 +231,9 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<healthIssuseList.size();i++)
+        for(int i=0;i<HealthIssuseList.size();i++)
         {
-            myvalue.add(healthIssuseList.get(i).getSelected());
+            myvalue.add(HealthIssuseList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);

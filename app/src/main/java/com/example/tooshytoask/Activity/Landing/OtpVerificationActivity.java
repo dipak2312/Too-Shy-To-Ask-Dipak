@@ -222,6 +222,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     }
 
     private void sendOtpApi() {
+        dialog.show();
 
         SignInAuthModel model=new SignInAuthModel();
         model.setMobile_no(phone);
@@ -246,13 +247,13 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
-
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
-
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -263,7 +264,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     }
 
     private void verifyOTP() {
-
+        dialog.show("");
 
         OtpAuthModel model=new OtpAuthModel();
         model.setMobile_no(phone);
@@ -319,7 +320,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                         {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         }
-
+                        dialog.dismiss("");
 
                     }
 

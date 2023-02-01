@@ -20,12 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
-import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
-import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
@@ -53,8 +50,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     String profile_pic;
     OnClickListner onclicklistener;
     CircleImageView avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8;
-    ArrayList<AvatarResponse>profileItems;
-    ArrayList<avatarList>avatarLists;
+    ArrayList<avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
@@ -81,22 +77,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         skip_btn2.setOnClickListener(this);
         next_btn2 = view.findViewById(R.id.next_btn2);
         next_btn2.setOnClickListener(this);
-        avatar1 = view.findViewById(R.id.avatar1);
-        avatar1.setOnClickListener(this);
-        avatar2 = view.findViewById(R.id.avatar2);
-        avatar2.setOnClickListener(this);
-        avatar3 = view.findViewById(R.id.avatar3);
-        avatar3.setOnClickListener(this);
-        avatar4 = view.findViewById(R.id.avatar4);
-        avatar4.setOnClickListener(this);
-        avatar5 = view.findViewById(R.id.avatar5);
-        avatar5.setOnClickListener(this);
-        avatar6 = view.findViewById(R.id.avatar6);
-        avatar6.setOnClickListener(this);
-        avatar7 = view.findViewById(R.id.avatar7);
-        avatar7.setOnClickListener(this);
-        avatar8 = view.findViewById(R.id.avatar8);
-        avatar8.setOnClickListener(this);
+
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
 
@@ -113,20 +94,16 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         profileItems.add(new AvatarResponse(R.drawable.avatar5, false));
         profileItems.add(new AvatarResponse(R.drawable.avatar6, false));
         profileItems.add(new AvatarResponse(R.drawable.avatar7, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar8, false));
-
-        profile_recy.setAdapter(new ProfileAdapter(profileItems, this, context));*/
+        profileItems.add(new AvatarResponse(R.drawable.avatar8, false));*/
 
         checkPermissions();
-        //healthcategory();
+        getProfile();
         return view;
     }
 
-    /*public void healthcategory() {
+    public void getProfile() {
 
-        HealthCateModel model = new HealthCateModel();
-        model.setUser_id(spManager.getUserId());
-        WebServiceModel.getRestApi().healthcategory(model)
+        WebServiceModel.getRestApi().getProfile()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<AvatarResponse>() {
@@ -137,11 +114,12 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
                         if (msg.equals("success")) {
 
-                            avatarLists = avatarResponse.getAvatarLists();
+                            avatarList = avatarResponse.getAvatarList();
 
-                            adapter = new ProfileAdapter(avatarLists,onclicklistener,context);
-                            profile_recy.setAdapter(adapter);
-
+                            if (avatarList != null) {
+                                adapter = new ProfileAdapter(avatarList, onclicklistener, context);
+                                profile_recy.setAdapter(adapter);
+                            }
                         } else {
 
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -163,7 +141,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
                     }
                 });
-    }*/
+    }
 
     @Override
     public void onClick(View view) {
@@ -175,9 +153,9 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
         /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<avatarLists.size();i++)
+        for(int i=0;i<AvatarList.size();i++)
         {
-            myvalue.add(avatarLists.get(i).getSelected());
+            myvalue.add(AvatarList.get(i).getSelected());
         }
         boolean ans = myvalue.contains(true);
 
@@ -239,11 +217,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
     @Override
     public void onClickData(int position, int id) {
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<avatarLists.size();i++)
+        for(int i=0;i<AvatarList.size();i++)
         {
-            myvalue.add(avatarLists.get(i).getSelected());
+            myvalue.add(AvatarList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);
@@ -256,7 +234,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         }else
         {
             next_btn2.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
+        }*/
 
     }
 
