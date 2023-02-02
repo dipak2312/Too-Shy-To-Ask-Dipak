@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.BlogItems;
 import com.example.tooshytoask.Models.Blogs;
+import com.example.tooshytoask.Models.InsightScreen.blogs;
 import com.example.tooshytoask.Models.StoreHouseItems;
 import com.example.tooshytoask.R;
 
@@ -20,11 +22,11 @@ import java.util.ArrayList;
 
 public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<Blogs> Blogs;
+    ArrayList<com.example.tooshytoask.Models.InsightScreen.blogs>blogs;
 
-    public BlogAdapter(Context context, ArrayList<Blogs> Blogs) {
+    public BlogAdapter(Context context, ArrayList<blogs>blogs) {
         this.context = context;
-        this.Blogs = Blogs;
+        this.blogs = blogs;
     }
 
     @NonNull
@@ -36,15 +38,14 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull BlogAdapter.ViewHolder holder, int position) {
-        //holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,blogs.get(position).getBlog_img()));
-        //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,blogs.get(position).getSave_img()));
-       // holder.blog_title.setText(blogs.get(position).getBlogContent());
+        holder.blog_title.setText(blogs.get(position).getBlog_title());
+        Glide.with(context).load(blogs.get(position).getBlog_img()).into(holder.blog_img);
 
     }
 
     @Override
     public int getItemCount() {
-        return Blogs.size();
+        return blogs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -2,7 +2,9 @@ package com.example.tooshytoask.API;
 
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
+import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
+import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
@@ -13,7 +15,9 @@ import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.Help.HelpCategoryResponse;
+import com.example.tooshytoask.Models.Help.HelpSubCategoryResponse;
 import com.example.tooshytoask.Models.HomeScreenResponse;
+import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
 import com.example.tooshytoask.Models.Language.LanguageResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
@@ -79,5 +83,13 @@ public interface WebServices {
 
     @GET("api/helpcategory")
     Observable<HelpCategoryResponse> getHelpCategory();
+
+    @Headers("Content-Type: application/json")
+    @POST("api/helpsubcategory")
+    Observable<HelpSubCategoryResponse> getHelpSubCategory(@Body HelpSubCategoryAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/insightscreen")
+    Observable<InsightScreenResponse> insightScreenResponse(@Body InsightScreenAuthModel model);
 
 }

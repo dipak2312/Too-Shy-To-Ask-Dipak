@@ -2,14 +2,19 @@ package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -53,17 +58,23 @@ public class HelpCategoryAdapter extends RecyclerView.Adapter<HelpCategoryAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView help_img;
         TextView help_text;
+        RelativeLayout rel_help;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             help_img = itemView.findViewById(R.id.help_img);
             help_text = itemView.findViewById(R.id.help_text);
+            rel_help = itemView.findViewById(R.id.rel_help);
 
-            help_img.setOnClickListener(new View.OnClickListener() {
+            rel_help.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("id",data.get(getAdapterPosition()).getId());
                     Intent intent = new Intent(context, HelpActivity2.class);
+                    intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

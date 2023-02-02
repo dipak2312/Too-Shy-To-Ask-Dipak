@@ -1,47 +1,67 @@
 package com.example.tooshytoask.Models;
 
 public class Blogs {
-    private String blogId;
-    private String blogTitle;
-    private String blogContent;
-    private String blogShort;
-    private String blogLink;
-    private Integer blogCategory;
+    private String blog_id;
+    private String blog_title;
+    private String blog_content;
+    private String blog_short;
+    private String blog_link;
+    private String blog_img;
+    private Integer blog_category;
 
-    public String getBlogId() {
-        return blogId;
+    public String getBlog_id() {
+        return blog_id;
     }
-    public void setBlogId(String blogId) {
-        this.blogId = blogId;
+
+    public void setBlog_id(String blog_id) {
+        this.blog_id = blog_id;
     }
-    public String getBlogTitle() {
-        return blogTitle;
+
+    public String getBlog_title() {
+        return blog_title;
     }
-    public void setBlogTitle(String blogTitle) {
-        this.blogTitle = blogTitle;
+
+    public void setBlog_title(String blog_title) {
+        this.blog_title = blog_title;
     }
-    public String getBlogContent() {
-        return blogContent;
+
+    public String getBlog_content() {
+        return blog_content;
     }
-    public void setBlogContent(String blogContent) {
-        this.blogContent = blogContent;
+
+    public void setBlog_content(String blog_content) {
+        this.blog_content = blog_content;
     }
-    public String getBlogShort() {
-        return blogShort;
+
+    public String getBlog_short() {
+        return blog_short;
     }
-    public void setBlogShort(String blogShort) {
-        this.blogShort = blogShort;
+
+    public void setBlog_short(String blog_short) {
+        this.blog_short = blog_short;
     }
-    public String getBlogLink() {
-        return blogLink;
+
+    public String getBlog_link() {
+        return blog_link;
     }
-    public void setBlogLink(String blogLink) {
-        this.blogLink = blogLink;
+
+    public void setBlog_link(String blog_link) {
+        this.blog_link = blog_link;
     }
-    public Integer getBlogCategory() {
-        return blogCategory;
+
+    public String getBlog_img() {
+        return blog_img;
     }
-    public void setBlogCategory(Integer blogCategory) {
-        this.blogCategory = blogCategory;
+
+    public void setBlog_img(String blog_img) {
+        this.blog_img = blog_img;
+    }
+
+    public Integer getBlog_category() {
+        return blog_category;
+    }
+
+    public void setBlog_category(Integer blog_category) {
+        this.blog_category = blog_category;
     }
 }

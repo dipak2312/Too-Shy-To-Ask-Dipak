@@ -37,8 +37,8 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
-        //holder.setImage(Bannerist.get(position));
-        Glide.with(context).load(Bannerist.get(position).getBannerImg()).into(holder.imageSlide);
+        holder.setImage(Bannerist.get(position));
+        //Glide.with(context).load(Bannerist.get(position).getBannerImg()).into(holder.imageSlide);
         if (position == Bannerist.size()){
             viewPager2.post(sliderRunnable);
         }
@@ -60,7 +60,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
 
             //if we want to use Glide and set image from API we can set here
             //imageSlide.setImageResource(Bannerist.getBannerImg());
-            Glide.with(context).load(Bannerist.getBannerImg()).into(imageSlide);
+            Glide.with(context).load(Bannerist.getBanner_img()).into(imageSlide);
         }
     }
 

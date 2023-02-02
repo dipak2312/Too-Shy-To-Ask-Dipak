@@ -86,12 +86,25 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             getActivity().finish();
-        } /*else if (id == next_btn.getId()) {
+        }
+        else if (id == next_btn.getId()) {
 
+            if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")){
+                Toast.makeText(context, "Select Blood Group", Toast.LENGTH_SHORT).show();
+            }
+            else if (etHeight.getText().toString().trim().equals("")){
+                Toast.makeText(context, "Height is required", Toast.LENGTH_SHORT).show();
+                //etHeight.requestFocus();
+                //etHeight.setError("Height is required");
+            }
+            else if (etWeight.getText().toString().trim().equals("")){
+                Toast.makeText(context, "Weight is required", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                userDetails();
+            }
 
-            userDetails();
-
-        }*/ else if (id == spinner_blood.getId()) {
+        } else if (id == spinner_blood.getId()) {
             OpenBloodGrp();
         }
 
@@ -102,20 +115,21 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(true);
+                clickListener.onClick(false);
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+                next_btn.setBackgroundResource(R.drawable.circle_button_active);
                 clickListener.onClick(true);
+
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                clickListener.onClick(true);
+                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+                clickListener.onClick(false);
 
             }
         });
@@ -129,15 +143,16 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(false);
+                next_btn.setBackgroundResource(R.drawable.circle_button_active);
+                clickListener.onClick(true);
+
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                clickListener.onClick(true);
+                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+                clickListener.onClick(false);
 
             }
         });
@@ -146,12 +161,14 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                 if (spinner_blood.getSelectedItem().toString().equals("Select")) {
-                    Toast.makeText(context, "Select Blood Group", Toast.LENGTH_SHORT).show();
-                }
+                 if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")) {
+                     next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+                     clickListener.onClick(false);
+                } else {
 
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                clickListener.onClick(true);
+                     next_btn.setBackgroundResource(R.drawable.circle_button_active);
+                     clickListener.onClick(true);
+                 }
             }
 
             @Override
@@ -210,7 +227,7 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
     public void OpenBloodGrp() {
 
 
-        String[] countries = new String[]{"Select", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
+        String[] countries = new String[]{"Select Your Blood Group", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
         spinner_blood.setAdapter(countryAdapter);

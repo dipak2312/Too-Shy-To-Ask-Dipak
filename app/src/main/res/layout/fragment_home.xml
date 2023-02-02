@@ -150,7 +150,6 @@
          android:layout_height="wrap_content"
          android:layout_below="@+id/indicator_layout"
          android:orientation="vertical"
-         android:visibility="gone"
          android:layout_marginTop="@dimen/margin_20"
          android:layout_marginStart="@dimen/margin_20">
 
@@ -226,8 +225,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recy_blogs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20"/>
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

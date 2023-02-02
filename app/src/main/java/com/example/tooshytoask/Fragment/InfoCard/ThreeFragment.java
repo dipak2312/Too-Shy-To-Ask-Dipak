@@ -184,7 +184,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
 
         if (id == skip_btn.getId()){
-            clickListener.onClick(false);
+            clickListener.onClick(true);
         }
 
         if (id == yes_btn.getId()){

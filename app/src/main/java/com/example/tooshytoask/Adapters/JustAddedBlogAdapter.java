@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.EventBlogItems;
+import com.example.tooshytoask.Models.InsightScreen.new_blogs;
 import com.example.tooshytoask.Models.JustAddedBlogItems;
 import com.example.tooshytoask.R;
 
@@ -19,11 +21,11 @@ import java.util.ArrayList;
 
 public class JustAddedBlogAdapter extends RecyclerView.Adapter<JustAddedBlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<JustAddedBlogItems>justAddedBlogItems;
+    ArrayList<new_blogs>new_blogs;
 
-    public JustAddedBlogAdapter(Context context, ArrayList<JustAddedBlogItems>justAddedBlogItems) {
+    public JustAddedBlogAdapter(Context context, ArrayList<new_blogs>new_blogs) {
         this.context = context;
-        this.justAddedBlogItems = justAddedBlogItems;
+        this.new_blogs = new_blogs;
     }
 
     @NonNull
@@ -35,15 +37,14 @@ public class JustAddedBlogAdapter extends RecyclerView.Adapter<JustAddedBlogAdap
 
     @Override
     public void onBindViewHolder(@NonNull JustAddedBlogAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,justAddedBlogItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,justAddedBlogItems.get(position).getSave_img()));
-        holder.blog_title.setText(justAddedBlogItems.get(position).getBlog_title());
+        Glide.with(context).load(new_blogs.get(position).getBlog_img()).into(holder.blog_img);
+        holder.blog_title.setText(new_blogs.get(position).getBlog_title());
 
     }
 
     @Override
     public int getItemCount() {
-        return justAddedBlogItems.size();
+        return new_blogs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.EventBlogItems;
+import com.example.tooshytoask.Models.InsightScreen.video_gallery;
 import com.example.tooshytoask.Models.VideoGalleryItems;
 import com.example.tooshytoask.R;
 
@@ -19,11 +21,11 @@ import java.util.ArrayList;
 
 public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapter.ViewHolder>{
     Context context;
-    ArrayList<VideoGalleryItems>videoGalleryItems;
+    ArrayList<video_gallery>video_gallery;
 
-    public VideoGalleryAdapter(Context context, ArrayList<VideoGalleryItems>videoGalleryItems) {
+    public VideoGalleryAdapter(Context context, ArrayList<video_gallery>video_gallery) {
         this.context = context;
-        this.videoGalleryItems = videoGalleryItems;
+        this.video_gallery = video_gallery;
     }
 
     @NonNull
@@ -35,16 +37,14 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull VideoGalleryAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,videoGalleryItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,videoGalleryItems.get(position).getSave_img()));
-        holder.play_video.setImageDrawable(ContextCompat.getDrawable(context,videoGalleryItems.get(position).getPlay_video()));
-        holder.blog_title.setText(videoGalleryItems.get(position).getBlog_title());
+        //Glide.with(context).load(video_gallery.get(position).get()).into(holder.blog_img);
+        holder.blog_title.setText(video_gallery.get(position).getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return videoGalleryItems.size();
+        return video_gallery.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

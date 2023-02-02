@@ -248,7 +248,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/margin_20">
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/dob_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -257,20 +257,16 @@
                         android:layout_marginStart="@dimen/margin_15"
                         android:textSize="@dimen/text_size12"
                         android:layout_marginTop="@dimen/margin_3"
-                        android:fontFamily="@font/worksansmedium"/>
+                        android:fontFamily="@font/worksansmedium"/>-->
 
                     <TextView
                         android:id="@+id/edit_age"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/dob_txt"
+                        android:layout_height="@dimen/margin_55"
                         android:clickable="true"
                         android:gravity="center_vertical"
                         android:hint="@string/select_your_dob"
-                        android:textColorHint="@color/teal_700"
                         android:textColor="@color/black"
-                        android:layout_marginTop="@dimen/margin_1"
-                        android:layout_marginBottom="@dimen/margin_8"
                         android:fontFamily="@font/worksansmedium"
                         android:background="@drawable/border"
                         android:layout_marginStart="@dimen/margin_15"

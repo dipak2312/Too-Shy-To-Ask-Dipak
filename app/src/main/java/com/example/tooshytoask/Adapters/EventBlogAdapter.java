@@ -11,19 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.EventBlogItems;
 import com.example.tooshytoask.Models.HighlightBlogItems;
+import com.example.tooshytoask.Models.InsightScreen.events;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<EventBlogItems>eventBlogItems;
+    ArrayList<events>events;
 
-    public EventBlogAdapter(Context context, ArrayList<EventBlogItems>eventBlogItems) {
+    public EventBlogAdapter(Context context, ArrayList<events>events) {
         this.context = context;
-        this.eventBlogItems = eventBlogItems;
+        this.events = events;
     }
 
     @NonNull
@@ -35,15 +37,14 @@ public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull EventBlogAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,eventBlogItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,eventBlogItems.get(position).getSave_img()));
-        holder.blog_title.setText(eventBlogItems.get(position).getBlog_title());
+        holder.blog_title.setText(events.get(position).getEvent_title());
+        Glide.with(context).load(events.get(position).getBlog_img()).into(holder.blog_img);
 
     }
 
     @Override
     public int getItemCount() {
-        return eventBlogItems.size();
+        return events.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

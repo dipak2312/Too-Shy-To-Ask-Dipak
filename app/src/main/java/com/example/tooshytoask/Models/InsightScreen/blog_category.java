@@ -1,10 +1,9 @@
-package com.example.tooshytoask.Models;
+package com.example.tooshytoask.Models.InsightScreen;
 
-public class StoryCategory {
+public class blog_category {
     private String category_id;
     private String category_title;
     private String category_img;
-    private Integer category_storycount;
 
 
     public String getCategory_id() {
@@ -29,13 +28,5 @@ public class StoryCategory {
 
     public void setCategory_img(String category_img) {
         this.category_img = category_img;
-    }
-
-    public Integer getCategory_storycount() {
-        return category_storycount;
-    }
-
-    public void setCategory_storycount(Integer category_storycount) {
-        this.category_storycount = category_storycount;
     }
 }

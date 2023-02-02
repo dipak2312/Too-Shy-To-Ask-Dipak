@@ -51,7 +51,6 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_one, container, false);
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         context = getActivity();

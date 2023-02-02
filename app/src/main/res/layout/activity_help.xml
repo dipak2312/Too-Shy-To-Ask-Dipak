@@ -65,8 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/help_title"
         android:layout_marginTop="@dimen/margin_15"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20">
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_15">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/help_category_recy"
@@ -83,7 +83,7 @@
         android:background="@drawable/infocard_shadow"
         android:layout_below="@id/rel_help_category"
         android:layout_marginBottom="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:elevation="@dimen/margin_5">

@@ -1,13 +1,14 @@
-package com.example.tooshytoask.Models;
+package com.example.tooshytoask.Models.InsightScreen;
 
-public class RecommendedBlogs {
+public class higlights {
+
     private String blog_id;
     private String blog_title;
     private String blog_content;
     private String blog_short;
     private String blog_link;
+    private String blog_category;
     private String blog_img;
-    private Integer blog_category;
 
     public String getBlog_id() {
         return blog_id;
@@ -49,19 +50,19 @@ public class RecommendedBlogs {
         this.blog_link = blog_link;
     }
 
+    public String getBlog_category() {
+        return blog_category;
+    }
+
+    public void setBlog_category(String blog_category) {
+        this.blog_category = blog_category;
+    }
+
     public String getBlog_img() {
         return blog_img;
     }
 
     public void setBlog_img(String blog_img) {
         this.blog_img = blog_img;
-    }
-
-    public Integer getBlog_category() {
-        return blog_category;
-    }
-
-    public void setBlog_category(Integer blog_category) {
-        this.blog_category = blog_category;
     }
 }

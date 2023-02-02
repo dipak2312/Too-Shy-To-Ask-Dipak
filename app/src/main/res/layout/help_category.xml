@@ -6,21 +6,20 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/rel_top_bar"
+        android:id="@+id/rel_help"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_120"
+        android:layout_height="@dimen/margin_110"
         android:background="@drawable/infocard_shadow"
-        android:layout_marginBottom="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginTop="@dimen/margin_2"
         android:layout_marginStart="@dimen/margin_5"
         android:layout_marginEnd="@dimen/margin_5"
         android:gravity="center"
         android:elevation="@dimen/margin_5">
 
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_120"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_110"
             android:orientation="vertical"
             android:gravity="center"
             android:background="@drawable/help_background">
@@ -29,7 +28,7 @@
             <ImageView
                 android:id="@+id/help_img"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_90"
+                android:layout_height="@dimen/margin_80"
                 android:src="@drawable/using_tsta"/>
 
             <TextView
@@ -37,6 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Using TSTA"
+                android:paddingStart="@dimen/margin_2"
+                android:paddingEnd="@dimen/margin_2"
                 android:textSize="@dimen/text_size10"
                 android:fontFamily="@font/worksansmedium"
                 android:layout_marginBottom="@dimen/margin_5"

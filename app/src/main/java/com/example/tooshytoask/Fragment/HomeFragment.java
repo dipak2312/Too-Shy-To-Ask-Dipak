@@ -42,6 +42,7 @@ import com.example.tooshytoask.Models.Blogs;
 import com.example.tooshytoask.Models.HomeScreenResponse;
 import com.example.tooshytoask.Models.RecentlyBlogItems;
 import com.example.tooshytoask.Models.RecommendedBlogItems;
+import com.example.tooshytoask.Models.RecommendedBlogs;
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.Models.StatusItem;
 import com.example.tooshytoask.Models.StoryCategory;
@@ -63,17 +64,14 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
     RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs, recy_blogs;
-    ArrayList<StatusItem>statusItems;
-    ArrayList<RecommendedBlogItems>recommendedBlogItems;
-    ArrayList<BlogItems>blogItems;
     BlogAdapter blogAdapter;
     ArrayList<RecentlyBlogItems>recentlyBlogItems;
-    ArrayList<SliderBannerItem> sliderBannerItems;
     ArrayList<StoryCategory> StoryCategory;
     ArrayList<Bannerist> Bannerist;
     ArrayList<Blogs> Blogs;
-    RecommendedBlogAdapter adapter2;
-    RecentlyBlogAdapter adapter3;
+    ArrayList<RecommendedBlogs> RecommendedBlogs;
+    RecommendedBlogAdapter recommendedBlogAdapter;
+    RecentlyBlogAdapter recentlyBlogAdapter;
     StatusAdapter statusAdapter;
     SliderBannerAdapter sliderBannerAdapter;
     RelativeLayout blog;
@@ -101,6 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        blog = view.findViewById(R.id.blog);
         recommended_blogs_lay = view.findViewById(R.id.recommended_blogs_lay);
         recommended_blogs_lay.setOnClickListener(this);
         update_profile = view.findViewById(R.id.update_profile);
@@ -115,69 +114,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         recy_status = view.findViewById(R.id.recy_status);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_status.setLayoutManager(linearLayoutManager);
-        /*statusItems = new ArrayList<>();
-
-        statusItems.add(new StatusItem(R.drawable.status1, "Reproduction"));
-        statusItems.add(new StatusItem(R.drawable.status2, "Women Safety"));
-        statusItems.add(new StatusItem(R.drawable.status3, "Sex & Sex Education"));
-        statusItems.add(new StatusItem(R.drawable.status3, "Mental Stress"));
-        statusItems.add(new StatusItem(R.drawable.status3, "Reproduction"));
-        statusItems.add(new StatusItem(R.drawable.status3, "Reproduction"));
-        statusItems.add(new StatusItem(R.drawable.status3, "Sex & Sex Education"));*/
-
-        /*statusAdapter = new StatusAdapter(context ,statusItems);
-        recy_status.setAdapter(statusAdapter);*/
 
         recy_blogs = view.findViewById(R.id.recy_blogs);
-        blogItems = new ArrayList<>();
-
-        blogItems.add(new BlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic"));
-        blogItems.add(new BlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling"));
-        blogItems.add(new BlogItems(R.drawable.blog3, R.drawable.save, "Obesity – much more than a cosmetic"));
-        blogItems.add(new BlogItems(R.drawable.blog2, R.drawable.save, "Dominance Of Partner – Controlling"));
-
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_blogs.setLayoutManager(linearLayoutManager3);
-
-        blogAdapter = new BlogAdapter(context ,Blogs);
-        recy_blogs.setAdapter(blogAdapter);
 
         recy_recommended_blogs = view.findViewById(R.id.recy_recommended_blogs);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_recommended_blogs.setLayoutManager(linearLayoutManager1);
 
-        recommendedBlogItems = new ArrayList<>();
-
-        recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog2, R.drawable.save, "A Teenagers Guide To Building Self Confidence"));
-        recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling"));
-        recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog3, R.drawable.save, "Emergency Contrace- ption Is it being"));
-        recommendedBlogItems.add(new RecommendedBlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic"));
-
-        adapter2 = new RecommendedBlogAdapter(context ,recommendedBlogItems);
-        recy_recommended_blogs.setAdapter(adapter2);
-
         recy_recently_blogs = view.findViewById(R.id.recy_recently_blogs);
-        recentlyBlogItems = new ArrayList<>();
-
-        recentlyBlogItems.add(new RecentlyBlogItems(R.drawable.blog2, R.drawable.save, "Obesity – much more than a cosmetic"));
-        recentlyBlogItems.add(new RecentlyBlogItems(R.drawable.blog1, R.drawable.save, "Dominance Of Partner – Controlling"));
-        recentlyBlogItems.add(new RecentlyBlogItems(R.drawable.blog3, R.drawable.save, "Emergency Contrace- ption Is it being"));
-        recentlyBlogItems.add(new RecentlyBlogItems(R.drawable.blog2, R.drawable.save, "A Teenagers Guide To Building Self Confidence"));
-
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_recently_blogs.setLayoutManager(linearLayoutManager2);
 
-        adapter3 = new RecentlyBlogAdapter(context ,recentlyBlogItems);
-        recy_recently_blogs.setAdapter(adapter3);
-
-        //setting slider ViewPager Adapter
         viewPager2 = view.findViewById(R.id.view_pager_img);
+        viewPager2.setOnClickListener(this);
         mBarLayout = view.findViewById(R.id.indicator_layout);
-        sliderBannerItems = new ArrayList<>();
-        sliderBannerItems.add(new SliderBannerItem(R.drawable.banner1));
-        sliderBannerItems.add(new SliderBannerItem(R.drawable.banner2));
-        sliderBannerItems.add(new SliderBannerItem(R.drawable.banner1));
-        sliderBannerItems.add(new SliderBannerItem(R.drawable.banner2));
 
         getHomePageResponse();
 
@@ -186,6 +138,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     public void getHomePageResponse() {
         dialog.show("");
+        dialog.dismiss("");
 
         HomeScreenAuthModel model = new HomeScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -203,28 +156,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                             StoryCategory = homeScreenResponse.getStoryCategory();
                             Bannerist = homeScreenResponse.getBannerist();
                             Blogs = homeScreenResponse.getBlogs();
+                            RecommendedBlogs = homeScreenResponse.getRecommendedBlogs();
 
-                            if(Bannerist !=null)
+                            if(Bannerist.size() !=0)
                             {
                                 sliderBannerAdapter = new SliderBannerAdapter(Bannerist, viewPager2, context);
                                 viewPager2.setAdapter(sliderBannerAdapter);
                                 viewPager();
                             }
 
-                             if(StoryCategory !=null)
+                             if(StoryCategory.size() !=0)
                             {
                                 statusAdapter = new StatusAdapter(context ,StoryCategory);
                                 recy_status.setAdapter(statusAdapter);
                             }
-
-                             if(Blogs !=null)
+                            if(RecommendedBlogs.size() !=0)
                             {
+                                recommended_blogs_lay.setVisibility(View.VISIBLE);
+                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs);
+                                recy_recommended_blogs.setAdapter(recommendedBlogAdapter);
+
+                            }
+                            if (RecommendedBlogs.size() == 0){
+                                recommended_blogs_lay.setVisibility(View.GONE);
+                            }
+                             /*if (Blogs.size() !=0){
+
                                 blogAdapter = new BlogAdapter(context, Blogs);
                                 recy_blogs.setAdapter(blogAdapter);
+                            }*/
+                            if (Blogs.size() !=0){
+
+                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs);
+                                recy_recently_blogs.setAdapter(recentlyBlogAdapter);
                             }
 
                         }
-                        dialog.dismiss("");
 
                     }
 
@@ -266,9 +233,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                if (getitem(0) < sliderBannerItems.size()) {
-
-                    // mBarLayout.setViewPager2(viewPager2);
+                if (getitem(0) < Bannerist.size()) {
 
                 }
                 handler.removeCallbacks(sliderRunnable);

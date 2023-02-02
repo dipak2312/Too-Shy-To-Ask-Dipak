@@ -24,12 +24,12 @@
                 android:id="@+id/blog_img"
                 android:layout_width="@dimen/margin_210"
                 android:layout_height="@dimen/margin_220"
-                android:background="@drawable/status_background"
-                android:scaleType="centerCrop"
                 android:layout_centerInParent="true"
                 android:adjustViewBounds="true"
+                android:background="@drawable/status_background"
+                android:scaleType="centerCrop"
                 android:src="@drawable/blog2"
-                app:shapeAppearanceOverlay="@style/radiusimage"/>
+                app:shapeAppearanceOverlay="@style/radiusimage" />
 
             <ImageView
                 android:id="@+id/save_img"
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/margin_140"
             android:layout_marginBottom="@dimen/margin_15"
-            android:alpha="0.7"
+            android:alpha="0.8"
             android:layout_marginStart="@dimen/margin_15"
             android:layout_marginEnd="@dimen/margin_15">
 

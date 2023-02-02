@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.HighlightBlogItems;
+import com.example.tooshytoask.Models.InsightScreen.higlights;
 import com.example.tooshytoask.Models.RecentlyBlogItems;
 import com.example.tooshytoask.R;
 
@@ -19,11 +21,11 @@ import java.util.ArrayList;
 
 public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<HighlightBlogItems>highlightBlogItem;
+    ArrayList<higlights>higlights;
 
-    public HighlightBlogAdapter(Context context, ArrayList<HighlightBlogItems>highlightBlogItem) {
+    public HighlightBlogAdapter(Context context, ArrayList<higlights>higlights) {
         this.context = context;
-        this.highlightBlogItem = highlightBlogItem;
+        this.higlights = higlights;
     }
 
     @NonNull
@@ -35,15 +37,16 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
 
     @Override
     public void onBindViewHolder(@NonNull HighlightBlogAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,highlightBlogItem.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,highlightBlogItem.get(position).getSave_img()));
-        holder.blog_title.setText(highlightBlogItem.get(position).getBlog_title());
+        //holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,higlights.get(position).getBlog_img()));
+        //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,higlights.get(position).getSave_img()));
+        holder.blog_title.setText(higlights.get(position).getBlog_title());
+        Glide.with(context).load(higlights.get(position).getBlog_img()).into(holder.blog_img);
 
     }
 
     @Override
     public int getItemCount() {
-        return highlightBlogItem.size();
+        return higlights.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

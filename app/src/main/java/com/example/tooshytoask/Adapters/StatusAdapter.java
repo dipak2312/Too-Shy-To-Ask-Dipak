@@ -39,8 +39,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //holder.status_img.setImageResource(storyCategories.get(position).getCategoryImg());
-        Glide.with(context).load(StoryCategory.get(position).getCategoryImg()).into(holder.status_img);
-        holder.status_title.setText(StoryCategory.get(position).getCategoryTitle());
+        Glide.with(context).load(StoryCategory.get(position).getCategory_img()).into(holder.status_img);
+        holder.status_title.setText(StoryCategory.get(position).getCategory_title());
     }
 
     @Override

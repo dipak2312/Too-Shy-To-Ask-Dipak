@@ -8,22 +8,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.BlogItems;
-import com.example.tooshytoask.Models.RecommendedBlogItems;
+import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Models.RecommendedBlogs;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<RecommendedBlogItems>recommendedBlogItems;
+    ArrayList<RecommendedBlogs> RecommendedBlogs;
 
-    public RecommendedBlogAdapter(Context context,  ArrayList<RecommendedBlogItems>recommendedBlogItems) {
+    public RecommendedBlogAdapter(Context context,  ArrayList<RecommendedBlogs> RecommendedBlogs) {
         this.context = context;
-        this.recommendedBlogItems = recommendedBlogItems;
+        this.RecommendedBlogs = RecommendedBlogs;
     }
 
     @NonNull
@@ -35,15 +34,16 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
 
     @Override
     public void onBindViewHolder(@NonNull RecommendedBlogAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,recommendedBlogItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,recommendedBlogItems.get(position).getSave_img()));
-        holder.blog_title.setText(recommendedBlogItems.get(position).getBlog_title());
+        //holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,RecommendedBlogs.get(position).getBlog_img()));
+        //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,RecommendedBlogs.get(position).getSave_img()));
+        holder.blog_title.setText(RecommendedBlogs.get(position).getBlog_title());
+        Glide.with(context).load(RecommendedBlogs.get(position).getBlog_img()).into(holder.blog_img);
 
     }
 
     @Override
     public int getItemCount() {
-        return recommendedBlogItems.size();
+        return RecommendedBlogs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

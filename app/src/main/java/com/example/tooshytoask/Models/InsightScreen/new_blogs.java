@@ -1,6 +1,6 @@
-package com.example.tooshytoask.Models;
+package com.example.tooshytoask.Models.InsightScreen;
 
-public class RecommendedBlogs {
+public class new_blogs {
     private String blog_id;
     private String blog_title;
     private String blog_content;

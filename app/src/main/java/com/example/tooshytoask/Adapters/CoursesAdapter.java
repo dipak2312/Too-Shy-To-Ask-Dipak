@@ -11,19 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.CoursesItems;
 import com.example.tooshytoask.Models.EventBlogItems;
+import com.example.tooshytoask.Models.InsightScreen.courses;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder>{
     Context context;
-    ArrayList<CoursesItems>coursesItems;
+    ArrayList<courses>courses;
 
-    public CoursesAdapter(Context context, ArrayList<CoursesItems>coursesItems) {
+    public CoursesAdapter(Context context, ArrayList<courses>courses) {
         this.context = context;
-        this.coursesItems = coursesItems;
+        this.courses = courses;
     }
 
     @NonNull
@@ -35,17 +37,16 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CoursesAdapter.ViewHolder holder, int position) {
-        holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,coursesItems.get(position).getBlog_img()));
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,coursesItems.get(position).getSave_img()));
-        holder.courses_title.setText(coursesItems.get(position).getCourses_title());
-        holder.course_time.setText(coursesItems.get(position).getCourse_time());
-        holder.lessons.setText(coursesItems.get(position).getLessons());
+        Glide.with(context).load(courses.get(position).getImage()).into(holder.blog_img);
+        holder.courses_title.setText(courses.get(position).getTitle());
+        //holder.course_time.setText(courses.get(position).getCourse_time());
+        //holder.lessons.setText(courses.get(position).getLessons());
 
     }
 
     @Override
     public int getItemCount() {
-        return coursesItems.size();
+        return courses.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

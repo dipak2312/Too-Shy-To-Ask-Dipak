@@ -1,7 +1,6 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
-import android.provider.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,21 +8,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tooshytoask.Models.StoreHouseItems;
+import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Models.InsightScreen.blog_category;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class StoreHouseAdapter extends RecyclerView.Adapter<StoreHouseAdapter.ViewHolder> {
     Context context;
-    ArrayList<StoreHouseItems> storeHouseItems;
+    ArrayList<blog_category>blog_category;
 
-    public StoreHouseAdapter(Context context, ArrayList<StoreHouseItems> storeHouseItems) {
+    public StoreHouseAdapter(Context context, ArrayList<blog_category>blog_category) {
         this.context = context;
-        this.storeHouseItems = storeHouseItems;
+        this.blog_category = blog_category;
     }
 
     @NonNull
@@ -35,14 +34,15 @@ public class StoreHouseAdapter extends RecyclerView.Adapter<StoreHouseAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull StoreHouseAdapter.ViewHolder holder, int position) {
-        holder.storehouse_items_img.setImageDrawable(ContextCompat.getDrawable(context,storeHouseItems.get(position).getStorehouse_items_img()));
-        holder.storehouse_item_txt.setText(storeHouseItems.get(position).getStorehouse_item_txt());
+        //holder.storehouse_items_img.setImageDrawable(ContextCompat.getDrawable(context,BlogCategory.get(position).getCategoryImg()));
+        Glide.with(context).load(blog_category.get(position).getCategory_img()).into(holder.storehouse_items_img);
+        holder.storehouse_item_txt.setText(blog_category.get(position).getCategory_title());
 
     }
 
     @Override
     public int getItemCount() {
-        return storeHouseItems.size();
+        return blog_category.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

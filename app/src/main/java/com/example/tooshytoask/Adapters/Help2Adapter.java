@@ -15,17 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Activity.Help.Help3Activity;
 import com.example.tooshytoask.Activity.Help.HelpActivity2;
+import com.example.tooshytoask.Models.Help.helpsubcategory;
 import com.example.tooshytoask.Models.Help2Item;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class Help2Adapter extends RecyclerView.Adapter<Help2Adapter.ViewHolder> {
-    ArrayList<Help2Item> help2Item;
+    ArrayList<helpsubcategory>helpsubcategory;
     Context context;
 
-    public Help2Adapter(ArrayList<Help2Item> help2Item, Context context) {
-        this.help2Item = help2Item;
+    public Help2Adapter(ArrayList<helpsubcategory> helpsubcategory, Context context) {
+        this.helpsubcategory = helpsubcategory;
         this.context = context;
     }
 
@@ -39,14 +40,13 @@ public class Help2Adapter extends RecyclerView.Adapter<Help2Adapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull Help2Adapter.ViewHolder holder, int position) {
-        holder.arrow_img.setImageDrawable(ContextCompat.getDrawable(context, help2Item.get(position).getArrow_img()));
-        holder.question.setText(help2Item.get(position).getQuestion());
+        holder.question.setText(helpsubcategory.get(position).getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return help2Item.size();
+        return helpsubcategory.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
