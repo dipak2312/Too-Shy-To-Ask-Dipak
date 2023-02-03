@@ -40,7 +40,7 @@ public class Help2Adapter extends RecyclerView.Adapter<Help2Adapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull Help2Adapter.ViewHolder holder, int position) {
-        holder.question.setText(helpsubcategory.get(position).getTitle());
+        //holder.question.setText(helpsubcategory.get(position).getContent().get(1).getHelpcontent_title());
 
     }
 

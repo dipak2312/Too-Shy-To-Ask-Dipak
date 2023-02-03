@@ -7,7 +7,6 @@ public class SignInResponse {
     private String errors;
 
 
-
     public String getMsg() {
         return msg;
     }

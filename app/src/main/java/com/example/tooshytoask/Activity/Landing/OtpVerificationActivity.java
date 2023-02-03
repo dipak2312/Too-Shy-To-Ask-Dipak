@@ -282,12 +282,12 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                        if (msg.equals("Success")){
 
-                           spManager.setFirstName(otpInResponse.getData().getFirstName());
-                           spManager.setLastName(otpInResponse.getData().getLastName());
+                           spManager.setFirstName(otpInResponse.getData().getFirst_name());
+                           spManager.setLastName(otpInResponse.getData().getLast_name());
                            spManager.setDob(otpInResponse.getData().getDob());
                            spManager.setGender(otpInResponse.getData().getGender());
                            spManager.setPhone(otpInResponse.getData().getPhone());
-                           spManager.setUserId(otpInResponse.getData().getUserId());
+                           spManager.setUserId(otpInResponse.getData().getUser_id());
                            spManager.setTstaLoginStatus("true");
                            spManager.setUserPhoto(otpInResponse.getData().getProfilePic());
 

@@ -45,6 +45,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
     Button contact;
     CustomProgressDialog dialog;
     TextView txt_title, help_title, content_title;
+    String category_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = HelpActivity2.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
 
         txt_title = findViewById(R.id.txt_title);
         content_title = findViewById(R.id.content_title);
@@ -82,6 +84,14 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         content_related_recy.setLayoutManager(linearLayoutManager1);
 
+       Intent intent = getIntent();
+        if (intent != null) {
+
+            category_id = intent.getStringExtra("category_id");
+
+        }
+        getHelpSubCategory();
+
         /*help3Item = new ArrayList<>();
 
         help3Item.add(new Help3Item(R.drawable.update_arrow,"Suspendisse condimentum nisl vitae tellus?"));
@@ -100,7 +110,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         dialog.dismiss("");
 
         HelpSubCategoryAuthModel model = new HelpSubCategoryAuthModel();
-        model.setCategory_id(model.getCategory_id());
+        model.setCategory_id(category_id);
 
         WebServiceModel.getRestApi().getHelpSubCategory(model)
                 .subscribeOn(Schedulers.io())
@@ -112,12 +122,16 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
                         if (msg.equals("success")) {
 
                             helpsubcategory = helpSubCategoryResponse.getHelpsubcategory();
-                            help2Adapter = new Help2Adapter(helpsubcategory, context);
-                            using_tsta_recy.setAdapter(help2Adapter);
+                            //helpsubcategory = helpSubCategoryResponse.getContent();
 
+                            if (helpsubcategory != null) {
+
+                                help2Adapter = new Help2Adapter(helpsubcategory, context);
+                                using_tsta_recy.setAdapter(help2Adapter);
+                            }
                             txt_title.setText(helpSubCategoryResponse.getHelpcategory());
-                            help_title.setText(helpsubcategory.get(1).getTitle());
-                            content_title.setText(helpsubcategory.get(2).getTitle());
+                            //help_title.setText(helpsubcategory.get(0).getTitle());
+                            //content_title.setText(helpsubcategory.get(1).getTitle());
 
 
                         }

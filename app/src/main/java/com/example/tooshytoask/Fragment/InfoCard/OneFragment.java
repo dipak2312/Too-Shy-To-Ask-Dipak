@@ -31,6 +31,7 @@ import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -42,7 +43,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     CustomProgressDialog dialog;
     RecyclerView category_recy;
     CategoryAdapter adapter;
-    ArrayList<InformationStorehouseList>InformationStorehouseList;
+    ArrayList<InformationStorehouseList>informationStorehouseList;
     TextView skip_btn;
     OnClickListner onclicklistener;
     ImageButton next_btn;
@@ -75,7 +76,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     }
 
     public void healthcategory() {
-        dialog.show();
+        dialog.show("");
 
         HealthCateModel model = new HealthCateModel();
         model.setUser_id(spManager.getUserId());
@@ -90,11 +91,11 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                         if (msg.equals("success")) {
 
-                            InformationStorehouseList = healthCateResponse.getInformationStorehouseList();
+                                informationStorehouseList = healthCateResponse.getInformationStorehouseList();
 
 
-                            if (InformationStorehouseList != null) {
-                                adapter = new CategoryAdapter(InformationStorehouseList, context, onclicklistener);
+                            if (informationStorehouseList != null) {
+                                adapter = new CategoryAdapter(informationStorehouseList, context, onclicklistener);
                                 category_recy.setAdapter(adapter);
                             }
 
@@ -103,7 +104,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
-                        dialog.dismiss();
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -122,6 +123,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     }
 
     public void saveHealthCategory() {
+        dialog.show("");
 
         SaveHealthCateAuthModel model = new SaveHealthCateAuthModel();
         model.setUserId(spManager.getUserId());
@@ -145,6 +147,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
+                        dialog.dismiss("");
 
                     }
 
@@ -171,11 +174,11 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
             clickListener.onClick(true);
         }
 
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<InformationStorehouseList.size();i++)
+        for(int i=0;i<informationStorehouseList.size();i++)
         {
-            myvalue.add(InformationStorehouseList.get(i).getSelected());
+            myvalue.add(informationStorehouseList.get(i).getSelected());
         }
         boolean ans = myvalue.contains(true);
 
@@ -189,7 +192,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             clickListener.onClick(false);
-        }
+        }*/
 
     }
 
@@ -200,14 +203,14 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     }
 
     @Override
-    public void onClickData(int position, int id) {
+    public void onClickData(int position, String id) {
 
 
-      ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+      /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<InformationStorehouseList.size();i++)
+        for(int i=0;i<informationStorehouseList.size();i++)
         {
-            myvalue.add(InformationStorehouseList.get(i).getSelected());
+            myvalue.add(informationStorehouseList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);
@@ -220,7 +223,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
+        }*/
 
     }
 

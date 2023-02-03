@@ -216,7 +216,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     }
 
     @Override
-    public void onClickData(int position, int id) {
+    public void onClickData(int position, String id) {
         /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<AvatarList.size();i++)

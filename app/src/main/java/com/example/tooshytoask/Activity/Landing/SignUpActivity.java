@@ -267,8 +267,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onNext(SignupResponse signupResponse) {
                         String msg = signupResponse.getMsg();
 
+                        /*if (signupResponse!=null && signupResponse.getUser_id()!=null && signupResponse.getUser_id().length() == 1) {
+                            Toast.makeText(context, signupResponse.getMsg(), Toast.LENGTH_SHORT).show();
+                        }*/
 
-                        if (msg.equals("User Registered Successfully")) {
+                         if (msg.equals("User Registered Successfully")) {
 
                             spManager.setFirstName(edit_name.getText().toString().trim());
                             spManager.setLastName(edit_surname.getText().toString().trim());

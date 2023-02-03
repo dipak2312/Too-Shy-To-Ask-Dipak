@@ -1,7 +1,10 @@
 package com.example.tooshytoask.API;
 
+import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
+import com.example.tooshytoask.AuthModels.HelpContentAuthModel;
+import com.example.tooshytoask.AuthModels.HelpFeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
@@ -10,11 +13,15 @@ import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
+import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
+import com.example.tooshytoask.Models.Help.ContactFormResponse;
 import com.example.tooshytoask.Models.Help.HelpCategoryResponse;
+import com.example.tooshytoask.Models.Help.HelpContentResponse;
+import com.example.tooshytoask.Models.Help.HelpFeedbackResponse;
 import com.example.tooshytoask.Models.Help.HelpSubCategoryResponse;
 import com.example.tooshytoask.Models.HomeScreenResponse;
 import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
@@ -25,6 +32,7 @@ import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
+import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserDetailResponse;
 
 import io.reactivex.Observable;
@@ -81,6 +89,10 @@ public interface WebServices {
     @POST("api/homescreen")
     Observable<HomeScreenResponse> homePageResponse(@Body HomeScreenAuthModel model);
 
+    @Headers("Content-Type: application/json")
+    @POST("api/insightscreen")
+    Observable<InsightScreenResponse> insightScreenResponse(@Body InsightScreenAuthModel model);
+
     @GET("api/helpcategory")
     Observable<HelpCategoryResponse> getHelpCategory();
 
@@ -89,7 +101,19 @@ public interface WebServices {
     Observable<HelpSubCategoryResponse> getHelpSubCategory(@Body HelpSubCategoryAuthModel model);
 
     @Headers("Content-Type: application/json")
-    @POST("api/insightscreen")
-    Observable<InsightScreenResponse> insightScreenResponse(@Body InsightScreenAuthModel model);
+    @POST("api/helpcontent")
+    Observable<HelpContentResponse> getHelpContent(@Body HelpContentAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/helpfeedback")
+    Observable<HelpFeedbackResponse> getHelpFeedback(@Body HelpFeedbackAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/contactform")
+    Observable<ContactFormResponse> getContact(@Body ContactFormAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/userproile")
+    Observable<UpdateProfileResponse> getUserProfile(@Body UpdateProfileAuthModel model);
 
 }

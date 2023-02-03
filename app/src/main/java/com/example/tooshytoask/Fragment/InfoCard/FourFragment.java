@@ -235,7 +235,7 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
     }
 
     @Override
-    public void onClickData(int position, int id) {
+    public void onClickData(int position, String id) {
 
         ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
 

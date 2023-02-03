@@ -18,14 +18,14 @@ public class OtpInResponse {
     public void setMsg(String msg) {
         this.msg = msg;
     }*/
-    private Integer code;
+    private String code;
     private String msg;
     private data data;
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
     public String getMsg() {

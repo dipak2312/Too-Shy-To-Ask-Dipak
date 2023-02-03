@@ -98,7 +98,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClickData(int position, int id) {
+    public void onClickData(int position, String id) {
 
     }
 }

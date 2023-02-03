@@ -66,11 +66,23 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         int id = view.getId();
 
         if (id == btn_next.getId()) {
-            Intent intent = new Intent(context, SignInActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+
+            if (eng_lang.getText().toString().equals("")){
+                Toast.makeText(context, "Select Your Language ", Toast.LENGTH_SHORT).show();
+            }
+            else if (hindi_lang.getText().toString().equals("")){
+                Toast.makeText(context, "Select Your Language ", Toast.LENGTH_SHORT).show();
+            }
+            else if (marathi_lang.getText().toString().equals("")){
+                Toast.makeText(context, "Select Your Language ", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent intent = new Intent(context, SignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
         }
 
     }

@@ -72,7 +72,7 @@ public class HelpCategoryAdapter extends RecyclerView.Adapter<HelpCategoryAdapte
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("id",data.get(getAdapterPosition()).getId());
+                    bundle.putString("category_id",data.get(getAdapterPosition()).getCategory_id());
                     Intent intent = new Intent(context, HelpActivity2.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

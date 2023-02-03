@@ -56,7 +56,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
         }
 
         /*public void HealthIssues(final HealthIssuseList healthIssuseList, int position){
-            //health_btn.setText(healthIssuseList.getHealth_btn());
+            health_btn.setText(healthIssuseList.getHealth_btn());
 
             if (healthIssuseList.isSelected){
                 health_btn.setBackgroundResource(R.drawable.health_active);

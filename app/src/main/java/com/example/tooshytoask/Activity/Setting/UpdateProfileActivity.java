@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
@@ -25,25 +26,38 @@ import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateAvatarActivi
 import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateHealthActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateInterestActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdatePersonalInfoActivity;
+import com.example.tooshytoask.AuthModels.SignupAuthModel;
+import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.Fragment.InfoCard.FourFragment;
 import com.example.tooshytoask.Fragment.InfoCard.OneFragment;
 import com.example.tooshytoask.Fragment.InfoCard.ThreeFragment;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 
 import java.util.Calendar;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
     RelativeLayout update_interest, update_personal_info, update_health, rel_back;
     SPManager spManager;
     TextView edit_age, change_avatar;
     Button update_pro, male, female, other;
+    TextInputEditText edit_name, edit_surname, etMobile, edit_email_enter;
     Context context;
     int year, month, day;
     private DatePickerPopup datePickerPopup;
+    CustomProgressDialog dialog;
+    String gender ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +66,18 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = UpdateProfileActivity.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
+
+        edit_name = findViewById(R.id.edit_name);
+        edit_surname = findViewById(R.id.edit_surname);
+        etMobile = findViewById(R.id.etMobile);
+
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("phone");
+        etMobile.setText(str);
+
+        edit_email_enter = findViewById(R.id.edit_email_enter);
+
         update_interest = findViewById(R.id.update_interest);
         update_interest.setOnClickListener(this);
         update_personal_info = findViewById(R.id.update_personal_info);
@@ -112,6 +138,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
             other.setBackgroundResource(R.drawable.gender_border_inactive);
             other.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gender = "Male";
+
         } else if (id == female.getId()){
             female.setBackgroundResource(R.drawable.gender_border_active);
             female.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -119,6 +147,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             male.setTextColor(ContextCompat.getColor(context, R.color.black));
             other.setBackgroundResource(R.drawable.gender_border_inactive);
             other.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gender = "Female";
+
         } else if (id == other.getId()){
             other.setBackgroundResource(R.drawable.gender_border_active);
             other.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -126,8 +156,61 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             male.setTextColor(ContextCompat.getColor(context, R.color.black));
             female.setBackgroundResource(R.drawable.gender_border_inactive);
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gender = "Other";
+
         }
         return true;
+    }
+
+    public void getUserProfile(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setFirst_name(edit_name.getText().toString().trim());
+        model.setFirst_name(edit_surname.getText().toString().trim());
+        model.setFirst_name(etMobile.getText().toString().trim());
+        model.setFirst_name(edit_email_enter.getText().toString().trim());
+        model.setDob(edit_age.getText().toString().trim());
+        model.setGender(gender);
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+                            spManager.setFirstName(edit_name.getText().toString().trim());
+                            spManager.setLastName(edit_surname.getText().toString().trim());
+                            spManager.setEmail(edit_email_enter.getText().toString().trim());
+                            spManager.setDob(edit_age.getText().toString().trim());
+                            spManager.setUserId(spManager.getUserId());
+                            spManager.setTstaLoginStatus("true");
+                            spManager.setGender(gender);
+                            spManager.setLanguage(spManager.getLanguage());
+
+                            Intent intent = new Intent(context, UpdateProfileActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -162,9 +245,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             openDatePicker();
         }
         else if (id == update_pro.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            startActivity(intent);
-            finish();
+            getUserProfile();
         }
         else if (id == rel_back.getId()){
             Intent intent = new Intent(context, HomeActivity.class);

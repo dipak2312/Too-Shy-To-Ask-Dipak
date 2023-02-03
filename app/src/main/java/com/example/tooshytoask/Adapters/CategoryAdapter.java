@@ -23,12 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-    ArrayList<InformationStorehouseList>InformationStorehouseList;
+    ArrayList<InformationStorehouseList>informationStorehouseList ;
+
     OnClickListner onclicklistener;
     Context context;
 
     public CategoryAdapter(ArrayList<InformationStorehouseList>InformationStorehouseList, Context context, OnClickListner onclicklistener){
-        this.InformationStorehouseList = InformationStorehouseList;
+        this.informationStorehouseList = InformationStorehouseList;
         this.context = context;
         this.onclicklistener = onclicklistener;
 
@@ -43,14 +44,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-       holder.category_title.setText(InformationStorehouseList.get(position).getTitle());
-       Glide.with(context).load(InformationStorehouseList.get(position).getImg()).into(holder.cate_img);
-       //holder.InformationStorehouseList(InformationStorehouseList.get(position),position);
+       holder.category_title.setText(informationStorehouseList.get(position).getTitle());
+       Glide.with(context).load(informationStorehouseList.get(position).getImg()).into(holder.cate_img);
+       //holder.InformationStorehouseList(informationStorehouseList.get(position),position);
     }
 
     @Override
     public int getItemCount() {
-        return InformationStorehouseList.size();
+        return informationStorehouseList.size();
         /*informationStorehouseLists == null ? 0 :*/
     }
 
@@ -66,12 +67,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         }
 
-        /*public void InformationStorehouseList(final InformationStorehouseList InformationStorehouseList,int position){
-            category_title.setText(InformationStorehouseList.getTitle());
-            Glide.with(context).load(InformationStorehouseList.getImg()).into(cate_img);
+        /*public void InformationStorehouseList(final InformationStorehouseList informationStorehouseList,int position){
+            category_title.setText(informationStorehouseList.getTitle());
+            Glide.with(context).load(informationStorehouseList.getImg()).into(cate_img);
 
 
-            if (InformationStorehouseList.isSelected){
+            if (informationStorehouseList.isSelected){
                 cate_img.setBackgroundResource(R.drawable.circle_active_background);
             }else {
                 cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
@@ -80,20 +81,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             cate_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   if (InformationStorehouseList.isSelected) {
+                   if (informationStorehouseList.isSelected) {
                        cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
-                       InformationStorehouseList.setSelected(false);
+                       informationStorehouseList.setSelected(false);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position,1);
+                       onclicklistener.onClickData(position,informationStorehouseList.getId());
 
 
                    }else {
                        cate_img.setBackgroundResource(R.drawable.circle_active_background);
-                       InformationStorehouseList.setSelected(true);
+                       informationStorehouseList.setSelected(true);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position,1);
-
-                   }
+                       onclicklistener.onClickData(position,informationStorehouseList.getId());
+///informationStorehouseList.get(position).getId().toString()
+                }
 
                 }
             });

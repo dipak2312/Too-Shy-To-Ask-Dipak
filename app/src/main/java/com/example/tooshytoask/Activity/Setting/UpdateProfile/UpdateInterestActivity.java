@@ -109,7 +109,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void onClickData(int position, int id) {
+    public void onClickData(int position, String id) {
         /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<categoryItem.size();i++)

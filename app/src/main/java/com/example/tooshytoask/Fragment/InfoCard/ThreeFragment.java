@@ -32,6 +32,7 @@ import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     ImageButton next_btn;
     TextView skip_btn;
     OnClickListner onclicklistener;
+    CustomProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         View view = inflater.inflate(R.layout.fragment_three, container, false);
         context = getActivity();
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
 
@@ -94,6 +97,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     }
 
     public void healthIssues() {
+        dialog.show("");
 
         HealthIssueModel model = new HealthIssueModel();
         model.setUser_id(spManager.getUserId());
@@ -118,6 +122,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
+                        dialog.dismiss("");
 
                     }
 
@@ -136,6 +141,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     }
 
     public void saveHealthIssue() {
+        dialog.show("");
+        dialog.dismiss("");
 
         SaveHealthIssueAuthModel model = new SaveHealthIssueAuthModel();
         model.setUserId(spManager.getUserId());
@@ -208,7 +215,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }
 
         else {
-            ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
+            /*ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
             for (int i = 0; i < HealthIssuseList.size(); i++) {
                 myvalue.add(HealthIssuseList.get(i).getSelected());
             }
@@ -221,15 +228,15 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
             } {
                 clickListener.onClick(false);
-            }
+            }*/
         }
 
     }
 
     @Override
-    public void onClickData(int position, int id) {
+    public void onClickData(int position, String id) {
 
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+       /* ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<HealthIssuseList.size();i++)
         {
@@ -245,7 +252,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
+        }*/
 
     }
 
