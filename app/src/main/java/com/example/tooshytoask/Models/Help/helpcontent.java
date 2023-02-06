@@ -8,6 +8,8 @@ public class helpcontent {
     private String helpcontent_subcatid;
     private String helpcontent_title;
     private String helpcontent_status;
+    private String helpcontent_desc;
+
 
     public String getHelpcat_title() {
         return helpcat_title;
@@ -63,5 +65,13 @@ public class helpcontent {
 
     public void setHelpcontent_status(String helpcontent_status) {
         this.helpcontent_status = helpcontent_status;
+    }
+
+    public String getHelpcontent_desc() {
+        return helpcontent_desc;
+    }
+
+    public void setHelpcontent_desc(String helpcontent_desc) {
+        this.helpcontent_desc = helpcontent_desc;
     }
 }

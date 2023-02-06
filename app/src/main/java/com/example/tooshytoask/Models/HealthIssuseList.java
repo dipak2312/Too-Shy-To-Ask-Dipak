@@ -1,9 +1,15 @@
 package com.example.tooshytoask.Models;
 
 public class HealthIssuseList {
-    String health_id;
-    String health_title;
+    private String health_id;
+    private String health_title;
+    public Boolean isSelected = false;
 
+    public HealthIssuseList(String health_id, String health_title, Boolean isSelected) {
+        this.health_id = health_id;
+        this.health_title = health_title;
+        this.isSelected = isSelected;
+    }
 
 
     public String getHealth_id() {
@@ -22,5 +28,11 @@ public class HealthIssuseList {
         this.health_title = health_title;
     }
 
+    public Boolean getSelected() {
+        return isSelected;
+    }
 
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
+    }
 }

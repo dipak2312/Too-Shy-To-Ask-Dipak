@@ -52,12 +52,14 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     SPManager spManager;
     TextView edit_age, change_avatar;
     Button update_pro, male, female, other;
-    TextInputEditText edit_name, edit_surname, etMobile, edit_email_enter;
+    TextInputEditText edit_name, edit_surname, etMobile, edit_email_enter,edit_country_enter,
+            edit_state_enter, edit_city_enter;
     Context context;
     int year, month, day;
     private DatePickerPopup datePickerPopup;
     CustomProgressDialog dialog;
     String gender ="";
+    String yearnew = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +69,23 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         context = UpdateProfileActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-
+//edit_country_enter,
+//                      edit_state_enter, edit_city_enter
         edit_name = findViewById(R.id.edit_name);
+        edit_name.setText(spManager.getFirstName());
         edit_surname = findViewById(R.id.edit_surname);
+        edit_surname.setText(spManager.getLastName());
         etMobile = findViewById(R.id.etMobile);
+        etMobile.setText(spManager.getPhone());
 
-        Intent intent = getIntent();
-        String str = intent.getStringExtra("phone");
-        etMobile.setText(str);
-
+        edit_city_enter = findViewById(R.id.edit_city_enter);
+        edit_city_enter.setText(spManager.getCity());
+        edit_country_enter = findViewById(R.id.edit_country_enter);
+        edit_country_enter.setText(spManager.getCountry());
+        edit_state_enter = findViewById(R.id.edit_state_enter);
+        edit_state_enter.setText(spManager.getState());
         edit_email_enter = findViewById(R.id.edit_email_enter);
+        edit_email_enter.setText(spManager.getEmail());
 
         update_interest = findViewById(R.id.update_interest);
         update_interest.setOnClickListener(this);
@@ -87,8 +96,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         edit_age = findViewById(R.id.edit_age);
+        edit_age.setText(spManager.getDob());
         edit_age.setOnClickListener(this);
         change_avatar = findViewById(R.id.change_avatar);
+        change_avatar.setText(spManager.getUserPhoto());
         change_avatar.setOnClickListener(this);
         male = findViewById(R.id.male);
         male.setOnTouchListener(this);
@@ -96,6 +107,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
+        //gender.setText(spManager.getGender());
+        spManager.getGender();
         update_pro = findViewById(R.id.update_pro);
         update_pro.setOnClickListener(this);
 
@@ -117,6 +130,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onDateSelected(DatePicker dp, long date, int day, int month, int year) {
+                        yearnew=year+"-"+(month + 1)+"-"+day;
                         edit_age.setText("" + day + "/" + (month + 1) + "/" + year);
                     }
                 })
@@ -173,6 +187,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         model.setFirst_name(edit_email_enter.getText().toString().trim());
         model.setDob(edit_age.getText().toString().trim());
         model.setGender(gender);
+        model.setDob(yearnew);
+        model.setCountry(edit_country_enter.getText().toString().trim());
+        model.setState(edit_state_enter.getText().toString().trim());
+        model.setCity(edit_city_enter.getText().toString().trim());
 
         WebServiceModel.getRestApi().getUserProfile(model)
                 .subscribeOn(Schedulers.io())
@@ -191,12 +209,15 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                             spManager.setUserId(spManager.getUserId());
                             spManager.setTstaLoginStatus("true");
                             spManager.setGender(gender);
+                            spManager.setCountry(edit_country_enter.getText().toString().trim());
+                            spManager.setState(edit_state_enter.getText().toString().trim());
+                            spManager.setCity(edit_city_enter.getText().toString().trim());
                             spManager.setLanguage(spManager.getLanguage());
 
-                            Intent intent = new Intent(context, UpdateProfileActivity.class);
+                            /*Intent intent = new Intent(context, UpdateProfileActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
+                            startActivity(intent);*/
                             finish();
                         }
                     }
@@ -220,12 +241,16 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         if (id == update_interest.getId()) {
 
             Intent intent = new Intent(context, UpdateInterestActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
 
         }
         else if (id == update_personal_info.getId()) {
             Intent intent = new Intent(context, UpdatePersonalInfoActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
 
@@ -233,11 +258,15 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         }
         else if (id == update_health.getId()) {
             Intent intent = new Intent(context, UpdateHealthActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
 
         } else if (id == change_avatar.getId()){
             Intent intent = new Intent(context, UpdateAvatarActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         }
@@ -246,9 +275,12 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         }
         else if (id == update_pro.getId()) {
             getUserProfile();
+            finish();
         }
         else if (id == rel_back.getId()){
             Intent intent = new Intent(context, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         }

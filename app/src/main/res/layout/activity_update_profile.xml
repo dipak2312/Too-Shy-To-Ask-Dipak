@@ -282,6 +282,97 @@
 
                 </RelativeLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/country_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_country_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/country"
+                        android:inputType="textCapSentences"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/state_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_state_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/state"
+                        android:inputType="textCapSentences"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/city_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_city_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="textCapSentences"
+                        android:hint="@string/city"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

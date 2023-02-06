@@ -10,43 +10,42 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Activity.Help.Help3Activity;
-import com.example.tooshytoask.Models.Help2Item;
-import com.example.tooshytoask.Models.Help3Item;
+import com.example.tooshytoask.Models.Help.content;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
-public class Help3Adapter extends RecyclerView.Adapter<Help3Adapter.ViewHolder> {
-    ArrayList<Help3Item> help3Item;
+public class HelpContentAdapter extends RecyclerView.Adapter<HelpContentAdapter.ViewHolder> {
+    ArrayList<content> content;
     Context context;
 
-    public Help3Adapter(ArrayList<Help3Item> help3Item, Context context) {
-        this.help3Item = help3Item;
+    public HelpContentAdapter(Context context, ArrayList<com.example.tooshytoask.Models.Help.content> content) {
+        this.content = content;
         this.context = context;
     }
 
 
     @NonNull
     @Override
-    public Help3Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.help2_item,parent,false);
+    public HelpContentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.help_content_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Help3Adapter.ViewHolder holder, int position) {
-        holder.arrow_img.setImageDrawable(ContextCompat.getDrawable(context, help3Item.get(position).getArrow_img()));
-        holder.question.setText(help3Item.get(position).getQuestion());
+    public void onBindViewHolder(@NonNull HelpContentAdapter.ViewHolder holder, int position) {
+        //holder.arrow_img.setImageDrawable(ContextCompat.getDrawable(context, help3Item.get(position).getArrow_img()));
+        holder.question.setText(content.get(position).getHelpcontent_title());
 
     }
 
     @Override
     public int getItemCount() {
-        return help3Item.size();
+        return content.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,13 +63,18 @@ public class Help3Adapter extends RecyclerView.Adapter<Help3Adapter.ViewHolder> 
             lin_lay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
                     Intent intent = new Intent(context, Help3Activity.class);
+                    intent.putExtra("helpcontent_id",content.get(getAdapterPosition()).getHelpcontent_id());
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
 
                 }
             });
+
+
         }
     }
 }

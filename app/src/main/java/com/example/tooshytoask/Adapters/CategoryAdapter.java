@@ -1,7 +1,6 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.InformationStorehouseList;
-import com.example.tooshytoask.Utils.ClickListener;
-import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
 
@@ -44,9 +40,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-       holder.category_title.setText(informationStorehouseList.get(position).getTitle());
-       Glide.with(context).load(informationStorehouseList.get(position).getImg()).into(holder.cate_img);
-       //holder.InformationStorehouseList(informationStorehouseList.get(position),position);
+       //holder.category_title.setText(informationStorehouseList.get(position).getTitle());
+       //Glide.with(context).load(informationStorehouseList.get(position).getImg()).into(holder.cate_img);
+       holder.InformationStorehouseList(informationStorehouseList.get(position),position);
     }
 
     @Override
@@ -67,7 +63,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         }
 
-        /*public void InformationStorehouseList(final InformationStorehouseList informationStorehouseList,int position){
+        public void InformationStorehouseList(final InformationStorehouseList informationStorehouseList,int position){
             category_title.setText(informationStorehouseList.getTitle());
             Glide.with(context).load(informationStorehouseList.getImg()).into(cate_img);
 
@@ -85,20 +81,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                        cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
                        informationStorehouseList.setSelected(false);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position,informationStorehouseList.getId());
+                       onclicklistener.onClickData(position, informationStorehouseList.getId().toString());
 
 
                    }else {
                        cate_img.setBackgroundResource(R.drawable.circle_active_background);
                        informationStorehouseList.setSelected(true);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position,informationStorehouseList.getId());
+                       onclicklistener.onClickData(position, informationStorehouseList.getId().toString());
 ///informationStorehouseList.get(position).getId().toString()
                 }
 
                 }
             });
-        }*/
+        }
     }
 
 }

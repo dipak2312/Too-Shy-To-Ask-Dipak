@@ -11,12 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.UpdateCategoryAdapter;
+import com.example.tooshytoask.AuthModels.HealthCateModel;
+import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.CategoryItem;
+import com.example.tooshytoask.Models.HealthCateResponse;
+import com.example.tooshytoask.Models.InformationStorehouseList;
+import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
@@ -24,12 +31,16 @@ import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class UpdateInterestActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
     RecyclerView category_recy;
-    UpdateCategoryAdapter adapter;
-    ArrayList<CategoryItem> categoryItem;
+    CategoryAdapter adapter;
+    ArrayList<InformationStorehouseList>informationStorehouseList;
     RelativeLayout rel_back;
     CustomProgressDialog dialog;
     Button update_btn;
@@ -44,8 +55,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         context = UpdateInterestActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-        /*clickListener=(ClickListener)context;
-        clickListener.onClick(false);*/
+
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         update_btn = findViewById(R.id.update_btn);
@@ -54,16 +64,110 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
         category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        categoryItem = new ArrayList<>();
+        /*categoryItem = new ArrayList<>();
 
         categoryItem.add(new CategoryItem(R.drawable.reproduction,"Relationships",false));
         categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sex & Sexuality",false));
         categoryItem.add(new CategoryItem(R.drawable.reproduction,"Reproduction",false));
         categoryItem.add(new CategoryItem(R.drawable.mental_health,"Mental Health",false));
         categoryItem.add(new CategoryItem(R.drawable.reproduction,"Education",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));
+        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));*/
 
-        category_recy.setAdapter(new UpdateCategoryAdapter(categoryItem,onclicklistener, clickListener));
+       // category_recy.setAdapter(new UpdateCategoryAdapter(informationStorehouseList,onclicklistener, clickListener));
+        healthcategory();
+    }
+
+    public void healthcategory() {
+        dialog.show("");
+
+        HealthCateModel model = new HealthCateModel();
+        model.setUser_id(spManager.getUserId());
+        WebServiceModel.getRestApi().healthcategory(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<HealthCateResponse>() {
+                    @Override
+                    public void onNext(HealthCateResponse healthCateResponse) {
+
+                        String msg = healthCateResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            informationStorehouseList = healthCateResponse.getInformationStorehouseList();
+                            for(int i=0;i<informationStorehouseList.size();i++)
+                            {
+                                informationStorehouseList.get(i).isSelected=false;
+                            }
+
+
+                            if (informationStorehouseList != null) {
+                                CallAdapter();
+                            }
+
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                        dialog.dismiss("");
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void CallAdapter()
+
+    {
+        adapter = new CategoryAdapter(informationStorehouseList, context,this);
+        category_recy.setAdapter(adapter);
+    }
+
+    public void getUserProfile(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setHealth_id(model.getHealth_id());
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+                            //spManager.setFirstName(edit_name.getText().toString().trim());
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -76,59 +180,25 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            //clickListener.onClick(true);
+            finish();
         }
         if (id == update_btn.getId()){
 
+            getUserProfile();
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+            Toast.makeText(context, "Update Your Interests", Toast.LENGTH_SHORT).show();
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            finish();
             dialog.show("");
             dialog.dismiss("");
         }
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
-
-        for(int i=0;i<categoryItem.size();i++)
-        {
-            myvalue.add(categoryItem.get(i).getSelected());
-        }
-        boolean ans = myvalue.contains(true);
-
-        if(ans)
-        {
-            clickListener.onClick(true);
-
-
-        }else
-        {
-            clickListener.onClick(false);
-        }*/
-
 
     }
 
     @Override
     public void onClickData(int position, String id) {
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<categoryItem.size();i++)
-        {
-            myvalue.add(categoryItem.get(i).getSelected());
-        }
-
-        boolean ans = myvalue.contains(true);
-
-        if(ans)
-        {
-            update_btn.setBackgroundResource(R.drawable.circle_button_active);
-
-
-        }else
-        {
-            update_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }*/
     }
-
-
 }

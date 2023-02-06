@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/help_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,13 +71,12 @@
         android:fontFamily="@font/worksansregular"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size14"
-        android:layout_marginStart="@dimen/margin_20"/>
+        android:layout_marginStart="@dimen/margin_20"/>-->
 
     <RelativeLayout
         android:id="@+id/rel_using_tsta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/help_title"
         android:layout_marginTop="@dimen/margin_15"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20">
@@ -90,7 +89,7 @@
 
     </RelativeLayout>
 
-        <TextView
+        <!--<TextView
             android:id="@+id/content_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,12 +116,12 @@
             android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rel_content_related"
+            android:layout_below="@+id/rel_using_tsta"
             android:gravity="center"
             android:layout_marginStart="@dimen/margin_20"
             android:layout_marginEnd="@dimen/margin_20"

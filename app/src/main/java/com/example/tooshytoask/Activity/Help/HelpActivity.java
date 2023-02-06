@@ -47,16 +47,6 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
         help_category_recy = findViewById(R.id.help_category_recy);
         help_category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        /*helpCategories = new ArrayList<>();
-
-        helpCategories.add(new HelpCategory(R.drawable.using_tsta,"Using TSTA"));
-        helpCategories.add(new HelpCategory(R.drawable.acccount, "Account"));
-        helpCategories.add(new HelpCategory(R.drawable.general, "General"));
-        helpCategories.add(new HelpCategory(R.drawable.privacy, "Privacy & Security"));
-        helpCategories.add(new HelpCategory(R.drawable.troubleshooting, "Troubleshooting"));
-        helpCategories.add(new HelpCategory(R.drawable.others, "Others"));
-
-        help_category_recy.setAdapter(new HelpCategoryAdapter(context, helpCategories));*/
         getHelpCategory();
 
     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Activity.Help.Help3Activity;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class Help2Adapter extends RecyclerView.Adapter<Help2Adapter.ViewHolder> {
     ArrayList<helpsubcategory>helpsubcategory;
+    HelpContentAdapter adapter;
     Context context;
 
     public Help2Adapter(ArrayList<helpsubcategory> helpsubcategory, Context context) {
@@ -40,7 +42,10 @@ public class Help2Adapter extends RecyclerView.Adapter<Help2Adapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull Help2Adapter.ViewHolder holder, int position) {
-        //holder.question.setText(helpsubcategory.get(position).getContent().get(1).getHelpcontent_title());
+        holder.title.setText(helpsubcategory.get(position).getTitle());
+        adapter=new HelpContentAdapter(context,helpsubcategory.get(position).getContent());
+        holder.recy_que.setAdapter(adapter);
+
 
     }
 
@@ -50,27 +55,21 @@ public class Help2Adapter extends RecyclerView.Adapter<Help2Adapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView arrow_img;
-        TextView question;
-        RelativeLayout lin_lay;
+        TextView title;
+        RecyclerView recy_que;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            arrow_img = itemView.findViewById(R.id.arrow_img);
-            question = itemView.findViewById(R.id.question);
-            lin_lay = itemView.findViewById(R.id.lin_lay);
+            title = itemView.findViewById(R.id.title);
+            recy_que = itemView.findViewById(R.id.recy_que);
 
-            lin_lay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, Help3Activity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+            if(recy_que !=null) {
+                LinearLayoutManager lm = new LinearLayoutManager(context);
+                lm.setOrientation(RecyclerView.VERTICAL);
+                recy_que.setLayoutManager(lm);
+            }
 
-                }
-            });
         }
     }
 }

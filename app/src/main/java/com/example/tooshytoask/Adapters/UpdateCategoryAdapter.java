@@ -45,16 +45,6 @@ public class UpdateCategoryAdapter extends RecyclerView.Adapter<UpdateCategoryAd
         return categoryItem.size();
     }
 
-    /*public List<CategoryItem> getSelectedCategoryItems(){
-        List<CategoryItem> selectedCategoryItems = new ArrayList<>();
-        for (CategoryItem categoryItem : categoryItem){
-            if (categoryItem.isSelected){
-                selectedCategoryItems.add(categoryItem);
-            }
-        }
-        return selectedCategoryItems;
-    }*/
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView cate_img;

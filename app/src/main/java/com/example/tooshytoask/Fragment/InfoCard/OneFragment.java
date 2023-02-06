@@ -48,6 +48,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     OnClickListner onclicklistener;
     ImageButton next_btn;
     ClickListener clickListener;
+    String healthcategory = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,11 +93,14 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                         if (msg.equals("success")) {
 
                                 informationStorehouseList = healthCateResponse.getInformationStorehouseList();
+                                for(int i=0;i<informationStorehouseList.size();i++)
+                                {
+                                    informationStorehouseList.get(i).isSelected=false;
+                                }
 
 
                             if (informationStorehouseList != null) {
-                                adapter = new CategoryAdapter(informationStorehouseList, context, onclicklistener);
-                                category_recy.setAdapter(adapter);
+                                CallAdapter();
                             }
 
                         } else {
@@ -106,6 +110,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                         }
                         dialog.dismiss("");
                     }
+
 
                     @Override
                     public void onError(Throwable e) {
@@ -120,6 +125,13 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                     }
                 });
+    }
+
+    public void CallAdapter()
+
+    {
+        adapter = new CategoryAdapter(informationStorehouseList, context,this);
+        category_recy.setAdapter(adapter);
     }
 
     public void saveHealthCategory() {
@@ -139,7 +151,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                         if (msg.equals("Health Categories updated to profile.")) {
 
-
+                            spManager.setHealthcategory(saveHealthCategoryResponse.toString());
 
 
                         } else {
@@ -174,7 +186,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
             clickListener.onClick(true);
         }
 
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<informationStorehouseList.size();i++)
         {
@@ -192,7 +204,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             clickListener.onClick(false);
-        }*/
+        }
 
     }
 
@@ -206,7 +218,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     public void onClickData(int position, String id) {
 
 
-      /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+      ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<informationStorehouseList.size();i++)
         {
@@ -223,7 +235,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }*/
+        }
 
     }
 

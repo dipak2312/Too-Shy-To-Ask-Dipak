@@ -59,25 +59,6 @@
 
     </LinearLayout>
 
-     <RelativeLayout
-         android:id="@+id/rel_sub_parent_hide_show"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/rel_main_title"
-         android:layout_marginLeft="@dimen/margin_5"
-         android:layout_marginRight="@dimen/margin_5"
-         android:layout_marginBottom="@dimen/margin_10"
-         android:visibility="gone">
-
-         <androidx.recyclerview.widget.RecyclerView
-             android:id="@+id/recy_sub_parent"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
-
-         </androidx.recyclerview.widget.RecyclerView>
-
-     </RelativeLayout>
-
     </RelativeLayout>
 
 

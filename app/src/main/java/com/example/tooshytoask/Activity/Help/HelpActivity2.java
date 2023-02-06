@@ -14,12 +14,11 @@ import android.widget.TextView;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.Help2Adapter;
-import com.example.tooshytoask.Adapters.Help3Adapter;
-import com.example.tooshytoask.Adapters.HelpCategoryAdapter;
+import com.example.tooshytoask.Adapters.HelpContentAdapter;
 import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
-import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Help.HelpSubCategoryResponse;
+import com.example.tooshytoask.Models.Help.content;
 import com.example.tooshytoask.Models.Help.helpsubcategory;
 import com.example.tooshytoask.Models.Help2Item;
 import com.example.tooshytoask.Models.Help3Item;
@@ -33,18 +32,15 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class HelpActivity2 extends AppCompatActivity implements View.OnClickListener{
-    RecyclerView using_tsta_recy, content_related_recy;
+    RecyclerView using_tsta_recy;
     SPManager spManager;
     Context context;
     Help2Adapter help2Adapter;
-    Help3Adapter help3Adapter;
-    ArrayList<Help2Item>help2Item;
     ArrayList<helpsubcategory>helpsubcategory;
-    ArrayList<Help3Item>help3Item;
     RelativeLayout rel_back;
     Button contact;
     CustomProgressDialog dialog;
-    TextView txt_title, help_title, content_title;
+    TextView txt_title;
     String category_id = "";
 
     @Override
@@ -57,8 +53,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         dialog = new CustomProgressDialog(context);
 
         txt_title = findViewById(R.id.txt_title);
-        content_title = findViewById(R.id.content_title);
-        help_title = findViewById(R.id.help_title);
+
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         using_tsta_recy = findViewById(R.id.using_tsta_recy);
@@ -68,22 +63,6 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         using_tsta_recy.setLayoutManager(linearLayoutManager);
 
-        /*help2Item = new ArrayList<>();
-
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Suspendisse condimentum nisl vitae tellus?"));
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Morbi blandit elit et urna placerat?"));
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Sed auctor justo id dictum sodales.?"));
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Suspendisse ut leo at libero cursus iaculis.?"));
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Cras vitae diam eu quam tincidunt semper.?"));
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Suspendisse condimentum nisl vitae tellus?"));
-        help2Item.add(new Help2Item(R.drawable.update_arrow,"Mauris fringilla justo in arcu facilisis?"));*/
-
-
-
-        content_related_recy = findViewById(R.id.content_related_recy);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        content_related_recy.setLayoutManager(linearLayoutManager1);
-
        Intent intent = getIntent();
         if (intent != null) {
 
@@ -92,17 +71,6 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         }
         getHelpSubCategory();
 
-        /*help3Item = new ArrayList<>();
-
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Suspendisse condimentum nisl vitae tellus?"));
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Morbi blandit elit et urna placerat?"));
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Sed auctor justo id dictum sodales.?"));
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Suspendisse ut leo at libero cursus iaculis.?"));
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Cras vitae diam eu quam tincidunt semper.?"));
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Suspendisse condimentum nisl vitae tellus?"));
-        help3Item.add(new Help3Item(R.drawable.update_arrow,"Mauris fringilla justo in arcu facilisis?"));*/
-
-        //content_related_recy.setAdapter(new Help2Adapter(help2Item, context));
     }
 
     public void getHelpSubCategory() {
@@ -122,16 +90,14 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
                         if (msg.equals("success")) {
 
                             helpsubcategory = helpSubCategoryResponse.getHelpsubcategory();
-                            //helpsubcategory = helpSubCategoryResponse.getContent();
 
                             if (helpsubcategory != null) {
 
                                 help2Adapter = new Help2Adapter(helpsubcategory, context);
                                 using_tsta_recy.setAdapter(help2Adapter);
+
                             }
                             txt_title.setText(helpSubCategoryResponse.getHelpcategory());
-                            //help_title.setText(helpsubcategory.get(0).getTitle());
-                            //content_title.setText(helpsubcategory.get(1).getTitle());
 
 
                         }

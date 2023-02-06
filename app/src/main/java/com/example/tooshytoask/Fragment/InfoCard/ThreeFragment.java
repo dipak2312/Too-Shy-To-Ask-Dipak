@@ -46,7 +46,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     Context context;
     SPManager spManager;
     RecyclerView health_recy;
-    ArrayList<HealthIssuseList>HealthIssuseList;
+    ArrayList<HealthIssuseList>healthIssuseList;
     HealthAdapter adapter;
     ClickListener clickListener;
     LinearLayout health_issues_title;
@@ -66,6 +66,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
 
+        health_issues_title = view.findViewById(R.id.health_issues_title);
         yes_btn = view.findViewById(R.id.yes_btn);
         yes_btn.setOnClickListener(this);
         no_btn = view.findViewById(R.id.no_btn);
@@ -79,15 +80,6 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         health_recy = view.findViewById(R.id.health_recy);
         health_recy.setOnClickListener(this);
-
-        /*healthIssuseList = new ArrayList<>();
-
-        healthIssuseList.add(new HealthIssuseList("Throid", false));
-        healthIssuseList.add(new HealthIssuseList("Painful Periods", false));
-        healthIssuseList.add(new HealthIssuseList("Mental Health", false));
-        healthIssuseList.add(new HealthIssuseList("Irregular Periods", false));
-        healthIssuseList.add(new HealthIssuseList("Fibroids", false));
-        healthIssuseList.add(new HealthIssuseList("PCOS/PCOD", false));*/
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
@@ -112,10 +104,16 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
                         if (msg.equals("success")) {
 
-                            HealthIssuseList = healthIssueResponse.getHealthIssuseList();
+                            healthIssuseList = healthIssueResponse.getHealthIssuseList();
 
-                            adapter = new HealthAdapter(HealthIssuseList,onclicklistener, context);
-                            health_recy.setAdapter(adapter);
+                            for(int i=0;i<healthIssuseList.size();i++)
+                            {
+                                healthIssuseList.get(i).isSelected=false;
+                            }
+                            if (healthIssuseList != null) {
+                                CallAdapter();
+                            }
+
 
                         } else {
 
@@ -140,6 +138,11 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
                 });
     }
 
+    public void CallAdapter(){
+        adapter = new HealthAdapter(healthIssuseList,this, context);
+        health_recy.setAdapter(adapter);
+    }
+
     public void saveHealthIssue() {
         dialog.show("");
         dialog.dismiss("");
@@ -158,7 +161,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
                         if (msg.equals("Health Issues updated to profile.")) {
 
-
+                            //spManager.setHealthissues(saveHealthIssueResponse.getMsg());
 
 
                         } else {
@@ -193,9 +196,18 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         if (id == skip_btn.getId()){
             clickListener.onClick(true);
         }
+        else if (id == next_btn.getId()){
+            saveHealthIssue();
+        }
 
         if (id == yes_btn.getId()){
-            health_recy.setVisibility(View.VISIBLE);
+            health_issues_title.setVisibility(View.VISIBLE);
+            for(int i=0;i<healthIssuseList.size();i++)
+            {
+                healthIssuseList.get(i).isSelected=false;
+                adapter.notifyDataSetChanged();
+            }
+
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
             yes_btn.setBackgroundResource(R.drawable.gender_border_active);
             yes_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -205,7 +217,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }
 
         else if (id == no_btn.getId()){
-            health_recy.setVisibility(View.GONE);
+            health_issues_title.setVisibility(View.GONE);
+            adapter.notifyDataSetChanged();
             next_btn.setBackgroundResource(R.drawable.circle_button_active);
             no_btn.setBackgroundResource(R.drawable.gender_border_active);
             no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -215,20 +228,20 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }
 
         else {
-            /*ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
-            for (int i = 0; i < HealthIssuseList.size(); i++) {
-                myvalue.add(HealthIssuseList.get(i).getSelected());
+            ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
+            for (int i = 0; i < healthIssuseList.size(); i++) {
+                myvalue.add(healthIssuseList.get(i).getSelected());
             }
             boolean ans = myvalue.contains(true);
 
             if (ans) {
-                saveHealthIssue();
+
                 clickListener.onClick(true);
 
 
             } {
                 clickListener.onClick(false);
-            }*/
+            }
         }
 
     }
@@ -236,11 +249,12 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     @Override
     public void onClickData(int position, String id) {
 
-       /* ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<HealthIssuseList.size();i++)
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        for(int i=0;i<healthIssuseList.size();i++)
         {
-            myvalue.add(HealthIssuseList.get(i).getSelected());
+            myvalue.add(healthIssuseList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);
@@ -252,7 +266,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         }else
         {
             next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-        }*/
+        }
 
     }
 

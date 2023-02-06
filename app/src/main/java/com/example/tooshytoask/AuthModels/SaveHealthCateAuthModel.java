@@ -4,19 +4,22 @@ import java.util.ArrayList;
 
 public class SaveHealthCateAuthModel {
     private String userId;
-    private ArrayList<String> healthId;
+    private String healthId;
 
 
     public String getUserId() {
         return userId;
     }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    public ArrayList<String> getHealthId() {
+
+    public String getHealthId() {
         return healthId;
     }
-    public void setHealthId(ArrayList<String> healthId) {
+
+    public void setHealthId(String healthId) {
         this.healthId = healthId;
     }
 }

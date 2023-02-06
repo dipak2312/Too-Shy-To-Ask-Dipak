@@ -10,7 +10,7 @@
         android:layout_height="@dimen/margin_30">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/question"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Suspendisse condimentum nisl vitae tellus?"
@@ -18,19 +18,16 @@
             android:textSize="@dimen/text_size12"
             android:textColor="@color/black"/>
 
+        <ImageView
+            android:id="@+id/arrow_img"
+            android:layout_width="@dimen/margin_10"
+            android:layout_height="@dimen/margin_10"
+            android:src="@drawable/update_arrow"
+            android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recy_que"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lin_lay"
-        android:layout_marginTop="@dimen/margin_10">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <!--<View
+    <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
@@ -39,6 +36,6 @@
         android:layout_marginBottom="@dimen/margin_10"
         android:background="@color/line_color">
 
-    </View>-->
+    </View>
 
 </RelativeLayout>

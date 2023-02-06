@@ -42,14 +42,14 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class FourFragment extends Fragment implements View.OnClickListener, OnClickListner, ClickListener {
+public class FourFragment extends Fragment implements View.OnClickListener {
     Context context;
     SPManager spManager;
     Spinner spinner_blood;
     TextView skip_btn;
     ImageButton next_btn;
-    ClickListener clickListener;
-    EditText etHeight, etWeight;
+    EditText etHeight;
+    EditText etWeight;
 
 
     @Override
@@ -63,8 +63,7 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
         skip_btn.setOnClickListener(this);
         next_btn = view.findViewById(R.id.next_btn);
         next_btn.setOnClickListener(this);
-        clickListener = (ClickListener) context;
-        clickListener.onClick(false);
+
         etHeight = view.findViewById(R.id.etHeight);
         etWeight = view.findViewById(R.id.etWeight);
         spinner_blood = view.findViewById(R.id.spinner_blood);
@@ -80,7 +79,6 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
         int id = view.getId();
 
         if (id == skip_btn.getId()) {
-            clickListener.onClick(true);
             Intent intent = new Intent(context, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -115,21 +113,18 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(false);
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                clickListener.onClick(true);
 
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(false);
+                next_btn.setBackgroundResource(R.drawable.circle_button_active);
 
             }
         });
@@ -138,21 +133,18 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(false);
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                clickListener.onClick(true);
 
 
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(false);
+                next_btn.setBackgroundResource(R.drawable.circle_button_active);
 
             }
         });
@@ -163,11 +155,9 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
 
                  if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")) {
                      next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                     clickListener.onClick(false);
                 } else {
 
                      next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                     clickListener.onClick(true);
                  }
             }
 
@@ -175,7 +165,6 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
             public void onNothingSelected(AdapterView<?> adapterView) {
 
                 next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                clickListener.onClick(false);
             }
         });
     }
@@ -197,13 +186,18 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
                         String msg = userDetailResponse.getMsg();
 
                         if (msg.equals("User Details updated.")) {
+
+                            spManager.setBloodgroup(spinner_blood.getSelectedItem().toString());
+                            spManager.setHeight(etHeight.getText().toString().trim());
+                            spManager.setWeight(etWeight.getText().toString().trim());
+                            spManager.setUserId(spManager.getUserId());
+
                             Intent intent = new Intent(context, HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             getActivity().finish();
-                            clickListener.onClick(true);
                         } else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         }
@@ -234,44 +228,4 @@ public class FourFragment extends Fragment implements View.OnClickListener, OnCl
 
     }
 
-    @Override
-    public void onClickData(int position, String id) {
-
-        ArrayList<Boolean> myvalue = new ArrayList<Boolean>();
-
-        boolean ans = myvalue.contains(true);
-
-        if (ans) {
-            next_btn.setBackgroundResource(R.drawable.circle_button_active);
-
-
-        } else {
-            next_btn.setBackgroundResource(R.drawable.circle_button_active);
-        }
-
     }
-
-    @Override
-    public void onClick(Boolean status) {
-        if(status)
-        {
-
-            next_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {//user, parent
-
-
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    getActivity().finish();
-                    //userDetails();
-                    clickListener.onClick(true);
-                }
-            });
-
-        }
-    }
-}

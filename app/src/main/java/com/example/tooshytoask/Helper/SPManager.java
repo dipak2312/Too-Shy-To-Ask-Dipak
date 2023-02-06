@@ -25,6 +25,11 @@ public class SPManager {
     public static final String COUNTRY="country";
     public static final String STATE="state";
     public static final String CITY="city";
+    public static final String HEALTHCATEGORY="healthcategory";
+    public static final String HEALTHISSUES="healthissues";
+    public static final String BLOODGROUP="bloodgroup";
+    public static final String HEIGHT="height";
+    public static final String WEIGHT="weight";
 
 
     String firstName;
@@ -41,6 +46,11 @@ public class SPManager {
     String country;
     String state;
     String city;
+    String healthcategory;
+    String healthissues;
+    String bloodgroup;
+    String height;
+    String weight;
 
     public String getUser() {
         user = pref.getString(USER, "");
@@ -185,6 +195,56 @@ public class SPManager {
 
     public void setLanguage(String language) {
         editor.putString(LANGUAGE, language);
+        editor.commit();
+    }
+
+    public String getHealthcategory() {
+        healthcategory = pref.getString(HEALTHCATEGORY, "");
+        return healthcategory;
+    }
+
+    public void setHealthcategory(String healthcategory) {
+        editor.putString(HEALTHCATEGORY, healthcategory);
+        editor.commit();
+    }
+
+    public String getHealthissues() {
+        healthcategory = pref.getString(HEALTHISSUES, "");
+        return healthissues;
+    }
+
+    public void setHealthissues(String healthissues) {
+        editor.putString(HEALTHISSUES, healthissues);
+        editor.commit();
+    }
+
+    public String getBloodgroup() {
+        healthcategory = pref.getString(BLOODGROUP, "");
+        return bloodgroup;
+    }
+
+    public void setBloodgroup(String bloodgroup) {
+        editor.putString(BLOODGROUP, bloodgroup);
+        editor.commit();
+    }
+
+    public String getHeight() {
+        healthcategory = pref.getString(HEIGHT, "");
+        return height;
+    }
+
+    public void setHeight(String height) {
+        editor.putString(HEIGHT, height);
+        editor.commit();
+    }
+
+    public String getWeight() {
+        healthcategory = pref.getString(WEIGHT, "");
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        editor.putString(WEIGHT, weight);
         editor.commit();
     }
 }
