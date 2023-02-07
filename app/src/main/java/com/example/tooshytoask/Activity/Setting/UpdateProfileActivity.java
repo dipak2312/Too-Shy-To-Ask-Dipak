@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
@@ -59,7 +60,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     private DatePickerPopup datePickerPopup;
     CustomProgressDialog dialog;
     String gender ="";
-    String yearnew = "";
+    String yearnew = "", profile_pic="";
+    ImageView profile_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         context = UpdateProfileActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-//edit_country_enter,
-//                      edit_state_enter, edit_city_enter
+
         edit_name = findViewById(R.id.edit_name);
         edit_name.setText(spManager.getFirstName());
         edit_surname = findViewById(R.id.edit_surname);
@@ -98,17 +99,39 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         edit_age = findViewById(R.id.edit_age);
         edit_age.setText(spManager.getDob());
         edit_age.setOnClickListener(this);
+        profile_image = findViewById(R.id.profile_image);
+
+//        profile_pic=spManager.getUserPhoto();
+//
+//        if(!profile_pic.equals("")) {
+//
+//            Glide.with(context).load(profile_pic).into(profile_image);
+//        }
+
         change_avatar = findViewById(R.id.change_avatar);
-        change_avatar.setText(spManager.getUserPhoto());
         change_avatar.setOnClickListener(this);
         male = findViewById(R.id.male);
         male.setOnTouchListener(this);
+
+
+        if (spManager.getGender().equals("Male")){
+            male.setBackgroundResource(R.drawable.gender_border_active);
+            male.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
+        else if (spManager.getGender().equals("Female")){
+            female.setBackgroundResource(R.drawable.gender_border_active);
+            female.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
+        else if (spManager.getGender().equals("Other")){
+            other.setBackgroundResource(R.drawable.gender_border_active);
+            other.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
+
         female = findViewById(R.id.female);
         female.setOnTouchListener(this);
         other = findViewById(R.id.other);
         other.setOnTouchListener(this);
-        //gender.setText(spManager.getGender());
-        spManager.getGender();
+        //gender.setText(spManager.getDob());
         update_pro = findViewById(R.id.update_pro);
         update_pro.setOnClickListener(this);
 

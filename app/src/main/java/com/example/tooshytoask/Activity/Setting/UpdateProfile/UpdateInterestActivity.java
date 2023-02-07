@@ -96,7 +96,12 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
                             informationStorehouseList = healthCateResponse.getInformationStorehouseList();
                             for(int i=0;i<informationStorehouseList.size();i++)
                             {
-                                informationStorehouseList.get(i).isSelected=false;
+                                if (informationStorehouseList.get(i).equals(true)){
+                                spManager.setHealthcategory(informationStorehouseList.get(i).getId());
+                            }
+                                else {
+                                    informationStorehouseList.get(i).isSelected = false;
+                                }
                             }
 
 

@@ -15,6 +15,7 @@ import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
+import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
@@ -34,6 +35,7 @@ import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserDetailResponse;
+import com.example.tooshytoask.Models.UserProfileResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -113,7 +115,11 @@ public interface WebServices {
     Observable<ContactFormResponse> getContact(@Body ContactFormAuthModel model);
 
     @Headers("Content-Type: application/json")
-    @POST("api/userproile")
+    @POST("api/updateuserproile")
     Observable<UpdateProfileResponse> getUserProfile(@Body UpdateProfileAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/userproile")
+    Observable<UserProfileResponse> getUserData(@Body UserProfileAuthModel model);
 
 }

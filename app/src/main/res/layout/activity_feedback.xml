@@ -79,53 +79,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/radioGrp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lin_title"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:layout_marginStart="@dimen/margin_20"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/eng_lang"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_48"
-                android:buttonTint="@color/purple"
-                android:checked="true"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size15"
-                android:fontFamily="@font/worksanssemibold"
-                android:text="@string/english"
-                android:onClick="radioButtobClickEvent"/>
-
-            <RadioButton
-                android:id="@+id/hindi_lang"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_48"
-                android:buttonTint="@color/purple"
-                android:checked="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size15"
-                android:fontFamily="@font/worksanssemibold"
-                android:onClick="radioButtobClickEvent"
-                android:text="हिंदी"/>
-
-            <RadioButton
-                android:id="@+id/marathi_lang"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_48"
-                android:buttonTint="@color/purple"
-                android:checked="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size15"
-                android:fontFamily="@font/worksanssemibold"
-                android:onClick="radioButtobClickEvent"
-                android:text="मराठी"/>
-
-        </RadioGroup>
 
     </LinearLayout>
 

@@ -21,9 +21,9 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Help.ContactFormResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.ImagePickUtilsFile;
 import com.example.tooshytoask.Utils.MyValidator;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +37,9 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
     SPManager spManager;
     CustomProgressDialog dialog;
     RelativeLayout add_file, rel_back;
-    TextInputEditText edit_email_enter, edit_sub_enter, edit_age;
+    TextInputEditText edit_email_enter, edit_sub_enter, description;
     Button submit_req;
+    String image = "";
     String[] permissions = new String[]{
 
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -61,8 +62,8 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
         edit_email_enter.setOnClickListener(this);
         edit_sub_enter = findViewById(R.id.edit_sub_enter);
         edit_sub_enter.setOnClickListener(this);
-        edit_age = findViewById(R.id.edit_age);
-        edit_age.setOnClickListener(this);
+        description = findViewById(R.id.description);
+        description.setOnClickListener(this);
         submit_req = findViewById(R.id.submit_req);
         submit_req.setOnClickListener(this);
 
@@ -70,7 +71,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    private void checkPermissions() {
+    private boolean checkPermissions() {
         int result;
         List<String> listPermissionsNeeded = new ArrayList<>();
         for (String p : permissions) {
@@ -81,7 +82,9 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
+            return false;
         }
+        return true;
     }
 
     public void getContact() {
@@ -90,10 +93,10 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
 
         ContactFormAuthModel model = new ContactFormAuthModel();
         model.setUser_id(spManager.getUserId());
-        model.setEmail(model.getEmail());
-        model.setUser_id(model.getSubject());
-        model.setUser_id(model.getDescription());
-        model.setUser_id(model.getImg());
+        model.setEmail(edit_email_enter.getText().toString().trim());
+        model.setSubject(edit_sub_enter.getText().toString().trim());
+        model.setDescription(description.getText().toString().trim());
+        //model.setImg();
 
         WebServiceModel.getRestApi().getContact(model)
                 .subscribeOn(Schedulers.io())
@@ -129,9 +132,14 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
         if (id == rel_back.getId()) {
             finish();
         } else if (id == add_file.getId()) {
-            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT, MediaStore.Downloads.EXTERNAL_CONTENT_URI);
-            intent.setType("*/*");
-            startActivity(intent);
+            boolean status=checkPermissions();
+            if(status)
+            {
+                ImagePickUtilsFile.selectImage(context);
+            }
+           // Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT, MediaStore.Downloads.EXTERNAL_CONTENT_URI);
+           // intent.setType("*/*");
+           // startActivity(intent);
         } else if (id == submit_req.getId()) {
 
             if (edit_email_enter.getText().toString().trim().equals("")) {
@@ -144,9 +152,9 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
             } else if (edit_sub_enter.getText().toString().trim().equals("")) {
                 edit_sub_enter.requestFocus();
                 edit_sub_enter.setError("Enter your subject");
-            } else if (edit_age.getText().toString().trim().equals("")) {
-                edit_age.requestFocus();
-                edit_age.setError("Enter your description");
+            } else if (description.getText().toString().trim().equals("")) {
+                description.requestFocus();
+                description.setError("Enter your description");
             } else {
                 getContact();
                 Toast.makeText(context, "Thank you for taking the time.", Toast.LENGTH_SHORT).show();

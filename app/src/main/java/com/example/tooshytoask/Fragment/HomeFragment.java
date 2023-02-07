@@ -137,6 +137,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     public void getHomePageResponse() {
+        dialog.show("");
 
         HomeScreenAuthModel model = new HomeScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -147,7 +148,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 .subscribe(new DisposableObserver<HomeScreenResponse>() {
                     @Override
                     public void onNext(HomeScreenResponse homeScreenResponse) {
-                        dialog.show("");
+
                         String msg = homeScreenResponse.getMsg();
                         if (msg.equals("success")) {
 
@@ -188,9 +189,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                 recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs);
                                 recy_recently_blogs.setAdapter(recentlyBlogAdapter);
                             }
-
+                            dialog.dismiss("");
                         }
-                        dialog.dismiss("");
+
 
                     }
 

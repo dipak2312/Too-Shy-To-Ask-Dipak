@@ -120,7 +120,7 @@
     <string name="other_topics_in_this_section">Other topics in this section.</string>
     <string name="didn_t_find_the_answer">Didn\'t find the answer?</string>
     <string name="contact_us">CONTACT US</string>
-    <string name="thank_you_got_it">Thank You Got It</string>
+    <string name="thank_you_got_it">Thank you for your response</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="was_this_topic_helpful">Was this topic helpful?</string>
@@ -128,6 +128,7 @@
     <string name="this_article_didn_t_answer_my_questions_or_solve_my_problem">This article didn\'t answer my questions or solve my problem</string>
     <string name="i_found_this_article_confusing_or_difficult_to_read">I found this article confusing or difficult to read</string>
     <string name="i_don_t_like_how_the_feature_works">I don\'t like how the feature works</string>
+    <string name="change_avtar">Change Avtar</string>
 
 
 </resources>

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -15,19 +16,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
 import com.example.tooshytoask.Activity.Help.HelpActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
+import com.example.tooshytoask.BuildConfig;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.Locale;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener{
     ImageView profile_image;
@@ -39,6 +52,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     BottomSheetDialog bottomSheetDialog;
     Button btn_select;
     RelativeLayout back_arrow;
+    CustomProgressDialog dialog;
+    TextView profile_status,txt_name, app_version;
+    CircularProgressBar progress_circular;
+    boolean time;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +63,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         context = getActivity();
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
 
+        progress_circular = view.findViewById(R.id.progress_circular);
+        app_version = view.findViewById(R.id.app_version);
+        int versionCode = BuildConfig.VERSION_CODE;
+        profile_status = view.findViewById(R.id.profile_status);
+        txt_name = view.findViewById(R.id.txt_name);
         update_profile = view.findViewById(R.id.update_profile);
         update_profile.setOnClickListener(this);
         notification_setting = view.findViewById(R.id.notification_setting);
@@ -66,8 +89,50 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         logout = view.findViewById(R.id.logout);
         logout.setOnClickListener(this);
 
-
+        getUserData();
+        progressBar();
         return view;
+    }
+
+    private void progressBar() {
+        progress_circular.setProgress(0f);
+        progress_circular.setProgressMax(100f);
+        progress_circular.setProgressWithAnimation( 20f, 100L);
+        progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
+        progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
+    }
+
+    public void getUserData(){
+        dialog.show("");
+
+        UserProfileAuthModel model = new UserProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getUserData(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UserProfileResponse>() {
+                    @Override
+                    public void onNext(UserProfileResponse userProfileResponse) {
+                        String msg = userProfileResponse.getMsg();
+
+                        if (msg.equals("success")){
+                            profile_status.setText(userProfileResponse.getProfile_percent());
+                            txt_name.setText(userProfileResponse.getUser_name());
+                        }
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override

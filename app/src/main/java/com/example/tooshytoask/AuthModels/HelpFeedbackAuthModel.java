@@ -6,6 +6,8 @@ public class HelpFeedbackAuthModel {
     private String feedback;
     private String feedbacktype;
     private String feedbackreason;
+    private String helpcontent_catid;
+
 
     public String getUser_id() {
         return user_id;
@@ -45,5 +47,13 @@ public class HelpFeedbackAuthModel {
 
     public void setFeedbackreason(String feedbackreason) {
         this.feedbackreason = feedbackreason;
+    }
+
+    public String getHelpcontent_catid() {
+        return helpcontent_catid;
+    }
+
+    public void setHelpcontent_catid(String helpcontent_catid) {
+        this.helpcontent_catid = helpcontent_catid;
     }
 }

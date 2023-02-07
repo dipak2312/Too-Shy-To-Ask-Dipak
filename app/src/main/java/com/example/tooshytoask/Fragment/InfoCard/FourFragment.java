@@ -92,8 +92,7 @@ public class FourFragment extends Fragment implements View.OnClickListener {
             }
             else if (etHeight.getText().toString().trim().equals("")){
                 Toast.makeText(context, "Height is required", Toast.LENGTH_SHORT).show();
-                //etHeight.requestFocus();
-                //etHeight.setError("Height is required");
+
             }
             else if (etWeight.getText().toString().trim().equals("")){
                 Toast.makeText(context, "Weight is required", Toast.LENGTH_SHORT).show();

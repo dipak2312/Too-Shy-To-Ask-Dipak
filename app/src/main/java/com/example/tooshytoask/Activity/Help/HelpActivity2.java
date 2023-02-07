@@ -41,7 +41,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
     Button contact;
     CustomProgressDialog dialog;
     TextView txt_title;
-    String category_id = "";
+    String category_id = "", helpcontent_catid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,13 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         using_tsta_recy.setLayoutManager(linearLayoutManager);
 
+        Intent intent1 = getIntent();
+        if (intent1 != null) {
+
+            helpcontent_catid = intent1.getStringExtra("helpcontent_catid");
+
+        }
+
        Intent intent = getIntent();
         if (intent != null) {
 
@@ -75,7 +82,6 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
 
     public void getHelpSubCategory() {
         dialog.show("");
-        dialog.dismiss("");
 
         HelpSubCategoryAuthModel model = new HelpSubCategoryAuthModel();
         model.setCategory_id(category_id);
@@ -101,6 +107,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
 
 
                         }
+                        dialog.dismiss("");
                     }
 
                     @Override

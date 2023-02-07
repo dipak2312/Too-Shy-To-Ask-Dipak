@@ -1,6 +1,7 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,14 +82,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                        cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
                        informationStorehouseList.setSelected(false);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position, informationStorehouseList.getId().toString());
+                       onclicklistener.onClickData(position, informationStorehouseList.getId());
 
 
                    }else {
                        cate_img.setBackgroundResource(R.drawable.circle_active_background);
                        informationStorehouseList.setSelected(true);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position, informationStorehouseList.getId().toString());
+                       onclicklistener.onClickData(position, informationStorehouseList.getId());
+
 ///informationStorehouseList.get(position).getId().toString()
                 }
 

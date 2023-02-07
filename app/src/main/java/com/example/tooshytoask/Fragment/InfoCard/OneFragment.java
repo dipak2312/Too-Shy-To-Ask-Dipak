@@ -151,7 +151,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
                         if (msg.equals("Health Categories updated to profile.")) {
 
-                            spManager.setHealthcategory(saveHealthCategoryResponse.toString());
+
 
 
                         } else {
@@ -184,6 +184,9 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
         if (id == skip_btn.getId()){
             clickListener.onClick(true);
+        }
+        else if (id == next_btn.getId()){
+            saveHealthCategory();
         }
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();

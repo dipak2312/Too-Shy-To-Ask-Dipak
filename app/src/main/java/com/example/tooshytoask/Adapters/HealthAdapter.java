@@ -74,7 +74,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
                         //health_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
                         healthIssuseList.setSelected(false);
                         notifyDataSetChanged();
-                        onclicklistener.onClickData(position,"1");
+                        onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
 
 
                     }else {
@@ -82,7 +82,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
                         //health_btn.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         healthIssuseList.setSelected(true);
                         notifyDataSetChanged();
-                        onclicklistener.onClickData(position,"1");
+                        onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
 
                     }
 

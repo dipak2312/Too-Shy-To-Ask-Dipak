@@ -67,6 +67,7 @@ public class HelpContentAdapter extends RecyclerView.Adapter<HelpContentAdapter.
 
                     Intent intent = new Intent(context, Help3Activity.class);
                     intent.putExtra("helpcontent_id",content.get(getAdapterPosition()).getHelpcontent_id());
+                    intent.putExtra("helpcontent_catid",content.get(getAdapterPosition()).getHelpcontent_catid());
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

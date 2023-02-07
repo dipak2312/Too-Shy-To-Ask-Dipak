@@ -19,6 +19,7 @@ import com.example.tooshytoask.Models.Help.HelpCategoryResponse;
 import com.example.tooshytoask.Models.Help.data;
 import com.example.tooshytoask.Models.HelpCategory;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 
 import java.util.ArrayList;
 
@@ -34,6 +35,7 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<com.example.tooshytoask.Models.Help.data> data;
     HelpCategoryAdapter adapter;
     RelativeLayout rel_back;
+    CustomProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = HelpActivity.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         help_category_recy = findViewById(R.id.help_category_recy);
@@ -51,6 +54,7 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void getHelpCategory() {
+        dialog.show("");
 
         WebServiceModel.getRestApi().getHelpCategory()
                 .subscribeOn(Schedulers.io())
@@ -74,6 +78,7 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
+                        dialog.dismiss("");
 
                     }
 

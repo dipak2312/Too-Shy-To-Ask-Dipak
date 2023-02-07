@@ -116,7 +116,6 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
 
     public void getInsightScreenResponse() {
         dialog.show("");
-        dialog.dismiss("");
 
         InsightScreenAuthModel model = new InsightScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -174,7 +173,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                                 recy_video_gallery.setAdapter(videoGalleryAdapter);
                             }
                         }
-
+                        dialog.dismiss("");
                     }
 
                     @Override

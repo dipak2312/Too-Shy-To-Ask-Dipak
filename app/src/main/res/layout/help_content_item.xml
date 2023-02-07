@@ -14,7 +14,8 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Suspendisse condimentum nisl vitae tellus?"
-            android:fontFamily="@font/worksanslight"
+            android:fontFamily="@font/worksansregular"
+            android:layout_centerVertical="true"
             android:textSize="@dimen/text_size12"
             android:textColor="@color/black"/>
 
@@ -22,6 +23,7 @@
             android:id="@+id/arrow_img"
             android:layout_width="@dimen/margin_10"
             android:layout_height="@dimen/margin_10"
+            android:layout_centerVertical="true"
             android:src="@drawable/update_arrow"
             android:layout_alignParentEnd="true"/>
 
@@ -32,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:layout_below="@+id/lin_lay"
-        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_10"
         android:layout_marginBottom="@dimen/margin_10"
         android:background="@color/line_color">
 

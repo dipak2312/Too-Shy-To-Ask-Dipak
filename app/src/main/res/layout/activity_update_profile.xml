@@ -107,7 +107,7 @@
                 android:layout_marginTop="@dimen/margin_5"
                 android:fontFamily="@font/worksansregular"
                 android:textSize="@dimen/text_size18"
-                android:text="Change Avtar"/>
+                android:text="@string/change_avtar"/>
 
             <LinearLayout
                 android:id="@+id/info"
