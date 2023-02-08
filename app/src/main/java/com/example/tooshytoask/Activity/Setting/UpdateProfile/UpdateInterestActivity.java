@@ -19,11 +19,14 @@ import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.UpdateCategoryAdapter;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
+import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.InformationStorehouseList;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
+import com.example.tooshytoask.Models.UpdateProfile.health_interest;
+import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
@@ -46,6 +49,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
     Button update_btn;
     ClickListener clickListener;
     OnClickListner onclicklistener;
+    ArrayList<com.example.tooshytoask.Models.UpdateProfile.health_interest> health_interest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +68,6 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
         category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-        /*categoryItem = new ArrayList<>();
-
-        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Relationships",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sex & Sexuality",false));
-        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Reproduction",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Mental Health",false));
-        categoryItem.add(new CategoryItem(R.drawable.reproduction,"Education",false));
-        categoryItem.add(new CategoryItem(R.drawable.mental_health,"Sexual Assault",false));*/
-
-       // category_recy.setAdapter(new UpdateCategoryAdapter(informationStorehouseList,onclicklistener, clickListener));
         healthcategory();
     }
 
@@ -140,7 +134,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         category_recy.setAdapter(adapter);
     }
 
-    public void getUserProfile(){
+    public void getUserProfileUpdate(){
         dialog.show("");
         dialog.dismiss("");
 
@@ -175,6 +169,38 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
                 });
     }
 
+    public void getUserData(){
+        dialog.show("");
+
+        UserProfileAuthModel model = new UserProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getUserData(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UserProfileResponse>() {
+                    @Override
+                    public void onNext(UserProfileResponse userProfileResponse) {
+                        String msg = userProfileResponse.getMsg();
+
+                        if (msg.equals("success")){
+                            health_interest = userProfileResponse.getProfiledetails().getHealth_interest();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -189,7 +215,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         }
         if (id == update_btn.getId()){
 
-            getUserProfile();
+            getUserProfileUpdate();
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             Toast.makeText(context, "Update Your Interests", Toast.LENGTH_SHORT).show();
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginStart="@dimen/margin_5"
     android:layout_marginBottom="@dimen/margin_10">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img"
-            android:layout_width="@dimen/margin_65"
-            android:layout_height="@dimen/margin_65"
+            android:layout_width="@dimen/margin_70"
+            android:layout_height="@dimen/margin_70"
             android:padding="@dimen/margin_5"
             android:src="@drawable/avatar1"/>
 

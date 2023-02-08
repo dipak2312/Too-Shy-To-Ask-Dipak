@@ -58,71 +58,16 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
         next_btn.setOnClickListener(this);
         spinner_blood = findViewById(R.id.spinner_blood);
         etHeight = findViewById(R.id.etHeight);
+        etHeight.setText(spManager.getHeight());
         etWeight = findViewById(R.id.etWeight);
+        etWeight.setText(spManager.getWeight());
 
-        listener();
-        OpenBloodGrp();
-    }
+        String[] countries = new String[]{"Select Your Blood Group", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
-    private void listener(){
-        etHeight.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-            }
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
+        spinner_blood.setAdapter(countryAdapter);
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-
-            }
-        });
-
-        etWeight.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                next_btn.setBackgroundResource(R.drawable.circle_button_active);
-
-            }
-        });
-        spinner_blood.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")) {
-                    next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-                } else {
-
-                    next_btn.setBackgroundResource(R.drawable.circle_button_active);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-                next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
-            }
-        });
+        spinner_blood.setSelection(((ArrayAdapter<String>)spinner_blood.getAdapter()).getPosition(spManager.getBloodgroup()));
     }
     public void getUserProfile(){
         dialog.show("");

@@ -78,7 +78,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         edit_surname.setText(spManager.getLastName());
         etMobile = findViewById(R.id.etMobile);
         etMobile.setText(spManager.getPhone());
-
+        etMobile.setClickable(false);
+        etMobile.setFocusable(false);
         edit_city_enter = findViewById(R.id.edit_city_enter);
         edit_city_enter.setText(spManager.getCity());
         edit_country_enter = findViewById(R.id.edit_country_enter);
@@ -199,7 +200,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         return true;
     }
 
-    public void getUserProfile(){
+    public void getUserProfileUpdate(){
         dialog.show("");
         dialog.dismiss("");
 
@@ -297,7 +298,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             openDatePicker();
         }
         else if (id == update_pro.getId()) {
-            getUserProfile();
+            getUserProfileUpdate();
             finish();
         }
         else if (id == rel_back.getId()){

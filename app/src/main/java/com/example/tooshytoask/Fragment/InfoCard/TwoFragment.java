@@ -20,12 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
+import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.SaveProfilePicResponse;
 import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
 import com.example.tooshytoask.Utils.ImagePickUtilsFile;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -49,6 +53,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     ProfileAdapter adapter;
     String profile_pic;
     OnClickListner onclicklistener;
+    CustomProgressDialog dialog;
     CircleImageView avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8;
     ArrayList<avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
@@ -69,6 +74,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         context = getActivity();
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
         camera = view.findViewById(R.id.camera);
         camera.setOnClickListener(this);
         file = view.findViewById(R.id.file);
@@ -85,23 +91,13 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
         profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
 
-       /* profileItems  = new ArrayList<>();
-
-        profileItems.add(new AvatarResponse(R.drawable.avatar1, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar2, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar3, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar4, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar5, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar6, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar7, false));
-        profileItems.add(new AvatarResponse(R.drawable.avatar8, false));*/
-
         checkPermissions();
         getProfile();
         return view;
     }
 
     public void getProfile() {
+        dialog.show("");
 
         WebServiceModel.getRestApi().getProfile()
                 .subscribeOn(Schedulers.io())
@@ -115,16 +111,21 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                         if (msg.equals("success")) {
 
                             avatarList = avatarResponse.getAvatarList();
+                            for(int i=0;i<avatarList.size();i++)
+                            {
+                                avatarList.get(i).isSelected=false;
+                            }
 
                             if (avatarList != null) {
-                                adapter = new ProfileAdapter(avatarList, onclicklistener, context);
-                                profile_recy.setAdapter(adapter);
+                                CallAdapter();
+
                             }
                         } else {
 
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
+                        dialog.dismiss("");
 
                     }
 
@@ -142,6 +143,45 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                     }
                 });
     }
+    public void CallAdapter()
+
+    {
+        adapter = new ProfileAdapter(avatarList, this, context);
+        profile_recy.setAdapter(adapter);
+    }
+
+ public void saveProfilePic(){
+        dialog.show("");
+
+     SaveProfilePicAuthModel model = new SaveProfilePicAuthModel();
+     model.setUser_id(spManager.getUserId());
+    // model.setImage();
+
+     WebServiceModel.getRestApi().saveProfilePic(model)
+             .subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(new DisposableObserver<SaveProfilePicResponse>() {
+                 @Override
+                 public void onNext(SaveProfilePicResponse saveProfilePicResponse) {
+                     String msg = saveProfilePicResponse.getMsg();
+
+                     if (msg.equals("Profile Image Updated Successfully")){
+
+
+                     }
+                 }
+
+                 @Override
+                 public void onError(Throwable e) {
+
+                 }
+
+                 @Override
+                 public void onComplete() {
+
+                 }
+             });
+ }
 
     @Override
     public void onClick(View view) {
@@ -150,12 +190,15 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         if (id == skip_btn2.getId()){
             clickListener.onClick(true);
         }
+        else if (id == next_btn2.getId()){
+            saveProfilePic();
+        }
 
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<AvatarList.size();i++)
+        for(int i=0;i<avatarList.size();i++)
         {
-            myvalue.add(AvatarList.get(i).getSelected());
+            myvalue.add(avatarList.get(i).getSelected());
         }
         boolean ans = myvalue.contains(true);
 
@@ -167,7 +210,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             }else
             {
                 clickListener.onClick(false);
-            }*/
+            }
 
 
         if (id == camera.getId()) {
@@ -217,11 +260,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
     @Override
     public void onClickData(int position, String id) {
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<AvatarList.size();i++)
+        for(int i=0;i<avatarList.size();i++)
         {
-            myvalue.add(AvatarList.get(i).getSelected());
+            myvalue.add(avatarList.get(i).getSelected());
         }
 
         boolean ans = myvalue.contains(true);
@@ -234,7 +277,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
         }else
         {
             next_btn2.setBackgroundResource(R.drawable.circle_button_inactive);
-        }*/
+        }
 
     }
 

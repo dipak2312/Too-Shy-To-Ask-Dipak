@@ -51,7 +51,7 @@
 
     //setting
     <string name="terms_conditions_support"><![CDATA[Terms & Conditions | Support]]></string>
-    <string name="_2022_all_right_reserved_powered_by_hats_off">© 2022 All Right Reserved Powered by Hats-Off</string>
+    <string name="_2022_all_right_reserved_powered_by_hats_off">© 2023 All Right Reserved Powered by Hats-Off</string>
     <string name="version_10_01">Version 10.01</string>
     <string name="too_shy_to_ask">Too Shy To Ask</string>
     <string name="log_out">Log Out</string>
@@ -129,6 +129,7 @@
     <string name="i_found_this_article_confusing_or_difficult_to_read">I found this article confusing or difficult to read</string>
     <string name="i_don_t_like_how_the_feature_works">I don\'t like how the feature works</string>
     <string name="change_avtar">Change Avtar</string>
+    <string name="update_your_avatar">Update your Avatar</string>
 
 
 </resources>

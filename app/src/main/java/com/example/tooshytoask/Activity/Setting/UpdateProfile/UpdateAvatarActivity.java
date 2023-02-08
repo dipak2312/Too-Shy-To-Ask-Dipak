@@ -3,6 +3,8 @@ package com.example.tooshytoask.Activity.Setting.UpdateProfile;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Context;
@@ -12,25 +14,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.Adapters.ProfileAdapter;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtils;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
-public class UpdateAvatarActivity extends AppCompatActivity implements View.OnClickListener {
+public class UpdateAvatarActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner {
     Context context;
     SPManager spManager;
     RelativeLayout rel_back;
     Button next_btn;
     CustomProgressDialog dialog;
-    CircleImageView avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8;
+    RecyclerView profile_recy;
+    CircleImageView avatar1;
+    ProfileAdapter adapter;
+    OnClickListner onclicklistener;
+    ArrayList<com.example.tooshytoask.Models.avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
@@ -55,20 +69,64 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         next_btn.setOnClickListener(this);
         avatar1 = findViewById(R.id.avatar1);
         avatar1.setOnClickListener(this);
-        avatar2 = findViewById(R.id.avatar2);
-        avatar2.setOnClickListener(this);
-        avatar3 = findViewById(R.id.avatar3);
-        avatar3.setOnClickListener(this);
-        avatar4 = findViewById(R.id.avatar4);
-        avatar4.setOnClickListener(this);
-        avatar5 = findViewById(R.id.avatar5);
-        avatar5.setOnClickListener(this);
-        avatar6 = findViewById(R.id.avatar6);
-        avatar6.setOnClickListener(this);
-        avatar7 = findViewById(R.id.avatar7);
-        avatar7.setOnClickListener(this);
-        avatar8 = findViewById(R.id.avatar8);
-        avatar8.setOnClickListener(this);
+        profile_recy = findViewById(R.id.profile_recy);
+
+        profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
+        getProfile();
+    }
+
+    public void getProfile() {
+        dialog.show("");
+
+        WebServiceModel.getRestApi().getProfile()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<AvatarResponse>() {
+                    @Override
+                    public void onNext(AvatarResponse avatarResponse) {
+
+                        String msg = avatarResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            avatarList = avatarResponse.getAvatarList();
+                            for(int i=0;i<avatarList.size();i++)
+                            {
+                                avatarList.get(i).isSelected=false;
+                            }
+
+                            if (avatarList != null) {
+                                CallAdapter();
+
+                            }
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                        dialog.dismiss("");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void CallAdapter()
+
+    {
+        adapter = new ProfileAdapter(avatarList, this, context);
+        profile_recy.setAdapter(adapter);
     }
 
     private boolean checkPermissions() {
@@ -116,68 +174,11 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                 checkPermissions();
             }
         }
-        else if (id == avatar2.getId()){
-            avatar2.setBackgroundResource(R.drawable.circle_active_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar3.getId()){
-            avatar3.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar4.getId()){
-            avatar4.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar5.getId()){
-            avatar5.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar6.getId()){
-            avatar6.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar7.getId()){
-            avatar7.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar8.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
-        else if (id == avatar8.getId()){
-            avatar8.setBackgroundResource(R.drawable.circle_active_background);
-            avatar2.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar3.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar4.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar5.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar6.setBackgroundResource(R.drawable.circle_inactive_background);
-            avatar7.setBackgroundResource(R.drawable.circle_inactive_background);
-        }
+
+    }
+
+    @Override
+    public void onClickData(int position, String id) {
+
     }
 }

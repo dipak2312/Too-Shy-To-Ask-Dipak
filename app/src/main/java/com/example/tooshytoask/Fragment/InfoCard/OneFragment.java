@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
-import com.example.tooshytoask.Adapters.ViewPagerAdapter;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -25,13 +24,11 @@ import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.InformationStorehouseList;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Utils.ClickListener;
-import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -134,12 +131,16 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
         category_recy.setAdapter(adapter);
     }
 
+    public void main(String[] args){
+
+    }
+
     public void saveHealthCategory() {
         dialog.show("");
 
         SaveHealthCateAuthModel model = new SaveHealthCateAuthModel();
         model.setUserId(spManager.getUserId());
-        model.setHealthId(model.getHealthId());
+        //model.setHealthId();
         WebServiceModel.getRestApi().saveHealthCategory(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

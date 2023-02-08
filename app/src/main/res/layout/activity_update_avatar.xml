@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansregular"
-                android:text="Update your Avatar"
+                android:text="@string/update_your_avatar"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -49,153 +49,39 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rel_recy_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_15"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_15">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_recy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/rel_avatar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rel_top_bar"
+        android:layout_below="@id/rel_recy_lay"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:layout_marginTop="@dimen/margin_15">
 
-        <LinearLayout
-            android:id="@+id/lin_avtar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/margin_15"
-            android:weightSum="4">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar1"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/profile_popup"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar2"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar2"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar3"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar3"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar4"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar4"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lin_avtar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lin_avtar"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/margin_15"
-            android:weightSum="4">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar5"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar5"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar6"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar6"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar7"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar7"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/margin_70"
-                android:layout_weight="1"
-                android:background="@drawable/circle_inactive_background">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar8"
-                    android:layout_width="@dimen/margin_70"
-                    android:layout_height="@dimen/margin_70"
-                    android:padding="@dimen/margin_5"
-                    android:src="@drawable/avatar8"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar1"
+            android:layout_width="@dimen/margin_70"
+            android:layout_height="@dimen/margin_70"
+            android:padding="@dimen/margin_5"
+            android:src="@drawable/profile_popup"/>
 
     </RelativeLayout>
 

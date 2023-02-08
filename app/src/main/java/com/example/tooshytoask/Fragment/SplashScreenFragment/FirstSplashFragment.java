@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ public class FirstSplashFragment extends Fragment {
         txt_desc = view.findViewById(R.id.txt_desc);
 
         if (onboardingLists != null){
-            heading.setText(onboardingLists.get(0).getTitle());
+            heading.setText(Html.fromHtml(onboardingLists.get(0).getTitle()));
             txt_desc.setText(onboardingLists.get(0).getDesc());
             Log.d("saggi",onboardingLists.toString());
             Glide.with(context).load(onboardingLists.get(0).getImg()).into(img1);

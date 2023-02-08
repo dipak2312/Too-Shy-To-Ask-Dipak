@@ -64,18 +64,14 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         int id = view.getId();
+        String selectValue=spManager.getLanguage();
 
         if (id == btn_next.getId()) {
 
-            if (eng_lang.getText().toString().equals("")){
+            if (selectValue.equals("")){
                 Toast.makeText(context, "Select Your Language ", Toast.LENGTH_SHORT).show();
             }
-            else if (hindi_lang.getText().toString().equals("")){
-                Toast.makeText(context, "Select Your Language ", Toast.LENGTH_SHORT).show();
-            }
-            else if (marathi_lang.getText().toString().equals("")){
-                Toast.makeText(context, "Select Your Language ", Toast.LENGTH_SHORT).show();
-            }
+
             else {
                 Intent intent = new Intent(context, SignInActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

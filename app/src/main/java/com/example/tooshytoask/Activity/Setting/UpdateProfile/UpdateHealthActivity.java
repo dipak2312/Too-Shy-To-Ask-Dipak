@@ -11,25 +11,42 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.Adapters.HealthAdapter;
 import com.example.tooshytoask.Adapters.UpdateHealthAdapter;
+import com.example.tooshytoask.AuthModels.HealthIssueModel;
+import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
+import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.HealthIssuseList;
+import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
+import com.example.tooshytoask.Models.UpdateProfile.health_issues;
+import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class UpdateHealthActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
     RecyclerView health_recy, recyclerView;
-    ArrayList<HealthIssuseList> healthIssues;
-    UpdateHealthAdapter adapter;
+    ArrayList<HealthIssuseList>healthIssuseList;
+    ArrayList<health_issues> health_issues;
+    HealthAdapter adapter;
     RelativeLayout rel_back, health;
     Button yes_btn, no_btn, update_btn2;
     OnClickListner onclicklistener;
+    CustomProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +55,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = UpdateHealthActivity.this;
         spManager = new SPManager(context);
+        dialog = new CustomProgressDialog(context);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         yes_btn = findViewById(R.id.yes_btn);
@@ -50,22 +68,132 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         health.setOnClickListener(this);
 
         health_recy = findViewById(R.id.health_recy);
-        //health_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, true));
-
-        /*healthIssues = new ArrayList<>();
-
-        healthIssues.add(new HealthIssuseList("Throid", false));
-        healthIssues.add(new HealthIssuseList("Painful Periods", false));
-        healthIssues.add(new HealthIssuseList("Mental Health", false));
-        healthIssues.add(new HealthIssuseList("Irregular Periods", false));
-        healthIssues.add(new HealthIssuseList("Fibroids", false));
-        healthIssues.add(new HealthIssuseList("PCOS/PCOD", false));*/
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
+        healthIssues();
+    }
+
+    public void healthIssues() {
+        dialog.show("");
+
+        HealthIssueModel model = new HealthIssueModel();
+        model.setUser_id(spManager.getUserId());
+        WebServiceModel.getRestApi().healthIssues(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<HealthIssueResponse>() {
+                    @Override
+                    public void onNext(HealthIssueResponse healthIssueResponse) {
+
+                        String msg = healthIssueResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            healthIssuseList = healthIssueResponse.getHealthIssuseList();
+
+                            for(int i=0;i<healthIssuseList.size();i++)
+                            {
+                                healthIssuseList.get(i).isSelected=false;
+                            }
+                            if (healthIssuseList != null) {
+                                CallAdapter();
+                            }
 
 
-        health_recy.setAdapter(new UpdateHealthAdapter(healthIssues,onclicklistener, context));
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                        dialog.dismiss("");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void CallAdapter(){
+        adapter = new HealthAdapter(healthIssuseList,this, context);
+        health_recy.setAdapter(adapter);
+    }
+
+    public void getUserProfileUpdate(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setHealth_id(model.getHealthissue_id());
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+                            //spManager.setFirstName(edit_name.getText().toString().trim());
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getUserData(){
+        dialog.show("");
+
+        UserProfileAuthModel model = new UserProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getUserData(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UserProfileResponse>() {
+                    @Override
+                    public void onNext(UserProfileResponse userProfileResponse) {
+                        String msg = userProfileResponse.getMsg();
+
+                        if (msg.equals("success")){
+                            health_issues = userProfileResponse.getProfiledetails().getHealth_issues();
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -74,14 +202,24 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
          if (id == rel_back.getId()){
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
          else if (id == update_btn2.getId()){
+             getUserProfileUpdate();
              Intent intent = new Intent(context, UpdateProfileActivity.class);
+             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
              startActivity(intent);
          }
          else if (id == yes_btn.getId()){
              health.setVisibility(View.VISIBLE);
+             for(int i=0;i<healthIssuseList.size();i++)
+             {
+                 healthIssuseList.get(i).isSelected=false;
+                 adapter.notifyDataSetChanged();
+             }
              yes_btn.setBackgroundResource(R.drawable.gender_border_active);
              yes_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
              no_btn.setBackgroundResource(R.drawable.gender_border_inactive);

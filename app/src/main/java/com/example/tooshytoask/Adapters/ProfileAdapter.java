@@ -41,12 +41,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
-        String img=avatarList.get(position).getEncimg();
-        byte[] imageByteArray = Base64.decode(avatarList.get(position).getEncimg(), Base64.DEFAULT);
-       // Bitmap decodedByte = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
-        InputStream is = new ByteArrayInputStream(imageByteArray);
-        Bitmap bmp = BitmapFactory.decodeStream(is);
-        holder.img.setImageBitmap(bmp);
+//        String img=avatarList.get(position).getEncimg();
+//        byte[] imageByteArray = Base64.decode(avatarList.get(position).getEncimg(), Base64.DEFAULT);
+//       // Bitmap decodedByte = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
+//        InputStream is = new ByteArrayInputStream(imageByteArray);
+//        Bitmap bmp = BitmapFactory.decodeStream(is);
+//        holder.img.setImageBitmap(bmp);
+        holder.ProfileItems(avatarList.get(position),position);
     }
 
     @Override
@@ -65,10 +66,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         }
 
-            /*public void ProfileItems(final AvatarResponse profileItems, int position){
-                img.setImageResource(profileItems.getImg());
+            public void ProfileItems(final avatarList avatarList, int position){
+                //img.setImageResource(avatarList.getEncimg());
+                Glide.with(context).load(avatarList.getUrl()).into(img);
 
-                if (profileItems.isSelected){
+                if (avatarList.isSelected){
                     img.setBackgroundResource(R.drawable.circle_active_background);
                 }else {
                     img.setBackgroundResource(R.drawable.circle_inactive_background);
@@ -77,25 +79,25 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                 img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (profileItems.isSelected) {
+                        if (avatarList.isSelected) {
                             img.setBackgroundResource(R.drawable.circle_inactive_background);
-                            profileItems.setSelected(false);
+                            avatarList.setSelected(false);
                             notifyDataSetChanged();
-                            onclicklistener.onClickData(position,1);
+                            onclicklistener.onClickData(position, avatarList.getUrl());
 
 
                         }else {
                             img.setBackgroundResource(R.drawable.circle_active_background);
-                            profileItems.setSelected(true);
+                            avatarList.setSelected(true);
                             notifyDataSetChanged();
-                            onclicklistener.onClickData(position,1);
+                            onclicklistener.onClickData(position,avatarList.getUrl());
 
                         }
 
                     }
                 });
 
-            }*/
+            }
     }
 
 }

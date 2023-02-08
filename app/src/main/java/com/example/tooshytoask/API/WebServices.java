@@ -11,6 +11,7 @@ import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
+import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
@@ -31,6 +32,7 @@ import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
+import com.example.tooshytoask.Models.SaveProfilePicResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
@@ -74,6 +76,10 @@ public interface WebServices {
 
     @GET("api/avatars")
     Observable<AvatarResponse> getProfile();
+
+    @Headers("Content-Type: application/json")
+    @POST("api/profile_pic")
+    Observable<SaveProfilePicResponse> saveProfilePic(@Body SaveProfilePicAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/healthissues")

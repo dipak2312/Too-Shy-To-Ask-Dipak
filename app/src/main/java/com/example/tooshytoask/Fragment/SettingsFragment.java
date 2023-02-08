@@ -3,6 +3,8 @@ package com.example.tooshytoask.Fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +58,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     CustomProgressDialog dialog;
     TextView profile_status,txt_name, app_version;
     CircularProgressBar progress_circular;
-    boolean time;
+    String progrss_value;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +70,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
         progress_circular = view.findViewById(R.id.progress_circular);
         app_version = view.findViewById(R.id.app_version);
-        int versionCode = BuildConfig.VERSION_CODE;
+        PackageManager pm = context.getPackageManager();
+        String pkgName = context.getPackageName();
+        PackageInfo pkgInfo = null;
+        try {
+            pkgInfo = pm.getPackageInfo(pkgName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String ver = pkgInfo.versionName;
+        app_version.setText("" +ver);
         profile_status = view.findViewById(R.id.profile_status);
         txt_name = view.findViewById(R.id.txt_name);
         update_profile = view.findViewById(R.id.update_profile);
@@ -90,14 +102,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         logout.setOnClickListener(this);
 
         getUserData();
-        progressBar();
+
         return view;
     }
 
     private void progressBar() {
-        progress_circular.setProgress(0f);
+        progress_circular.setProgress(0);
         progress_circular.setProgressMax(100f);
-        progress_circular.setProgressWithAnimation( 20f, 100L);
+        progress_circular.setProgressWithAnimation( 60f, 10000L);
         progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
         progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
     }
@@ -118,6 +130,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
                         if (msg.equals("success")){
                             profile_status.setText(userProfileResponse.getProfile_percent());
+
                             txt_name.setText(userProfileResponse.getUser_name());
                         }
                         dialog.dismiss("");
