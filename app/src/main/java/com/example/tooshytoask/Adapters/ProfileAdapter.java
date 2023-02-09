@@ -26,6 +26,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     ArrayList<avatarList>avatarList;
     OnClickListner onclicklistener;
 
+    int singleitem_selection_position = -1;
+
     public ProfileAdapter(ArrayList<avatarList>avatarList, OnClickListner onclicklistener, Context context) {
         this.avatarList = avatarList;
         this.onclicklistener = onclicklistener;
@@ -47,7 +49,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 //        InputStream is = new ByteArrayInputStream(imageByteArray);
 //        Bitmap bmp = BitmapFactory.decodeStream(is);
 //        holder.img.setImageBitmap(bmp);
-        holder.ProfileItems(avatarList.get(position),position);
+       // holder.ProfileItems(avatarList.get(position),position);
+        Glide.with(context).load(avatarList.get(position).getUrl()).into(holder.img);
+        if (singleitem_selection_position == position){
+            holder.img.setBackgroundResource(R.drawable.circle_active_background);
+        }
+        else {
+            holder.img.setBackgroundResource(R.drawable.circle_inactive_background);
+        }
     }
 
     @Override
@@ -64,9 +73,52 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
             img = itemView.findViewById(R.id.img);
 
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setSingleSelection(getAdapterPosition());
+                }
+            });
+
         }
 
-            public void ProfileItems(final avatarList avatarList, int position){
+        /*public void ProfileItems(final avatarList avatarList, int position){
+            //img.setImageResource(avatarList.getEncimg());
+            Glide.with(context).load(avatarList.getUrl()).into(img);
+
+            if (avatarList.isSelected == -1){
+                img.setBackgroundResource(R.drawable.circle_active_background);
+            }
+            else {
+                img.setBackgroundResource(R.drawable.circle_inactive_background);
+            }
+
+
+
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (avatarList.isSelected) {
+                        img.setBackgroundResource(R.drawable.circle_inactive_background);
+                        avatarList.setSelected(-1);
+                        notifyDataSetChanged();
+                        onclicklistener.onClickData(position, avatarList.getUrl());
+
+
+                    }else {
+                        img.setBackgroundResource(R.drawable.circle_active_background);
+                        avatarList.setSelected(-1);
+                        notifyDataSetChanged();
+                        onclicklistener.onClickData(position,avatarList.getUrl());
+
+                    }
+
+                }
+            });*/
+
+        }
+
+            /*public void ProfileItems(final avatarList avatarList, int position){
                 //img.setImageResource(avatarList.getEncimg());
                 Glide.with(context).load(avatarList.getUrl()).into(img);
 
@@ -75,6 +127,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                 }else {
                     img.setBackgroundResource(R.drawable.circle_inactive_background);
                 }
+
+
 
                 img.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -97,7 +151,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                     }
                 });
 
-            }
+            }*/
+
+    public void setSingleSelection(int adapterPosition){
+        if (adapterPosition == RecyclerView.NO_POSITION) return;
+
+        singleitem_selection_position = adapterPosition;
+        notifyDataSetChanged();
     }
 
 }

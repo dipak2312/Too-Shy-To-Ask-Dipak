@@ -3,6 +3,7 @@ package com.example.tooshytoask.API;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
+import com.example.tooshytoask.AuthModels.HelpCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HelpContentAuthModel;
 import com.example.tooshytoask.AuthModels.HelpFeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
@@ -101,8 +102,9 @@ public interface WebServices {
     @POST("api/insightscreen")
     Observable<InsightScreenResponse> insightScreenResponse(@Body InsightScreenAuthModel model);
 
-    @GET("api/helpcategory")
-    Observable<HelpCategoryResponse> getHelpCategory();
+    @Headers("Content-Type: application/json")
+    @POST("api/helpcategory")
+    Observable<HelpCategoryResponse> getHelpCategory(@Body HelpCategoryAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/helpsubcategory")

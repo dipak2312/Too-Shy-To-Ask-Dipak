@@ -77,7 +77,7 @@
         android:layout_marginTop="@dimen/margin_15">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avatar1"
+            android:id="@+id/profile_img"
             android:layout_width="@dimen/margin_70"
             android:layout_height="@dimen/margin_70"
             android:padding="@dimen/margin_5"

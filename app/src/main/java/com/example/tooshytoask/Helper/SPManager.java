@@ -219,7 +219,7 @@ public class SPManager {
     }
 
     public String getBloodgroup() {
-        healthcategory = pref.getString(BLOODGROUP, "");
+        bloodgroup = pref.getString(BLOODGROUP, "");
         return bloodgroup;
     }
 
@@ -229,7 +229,7 @@ public class SPManager {
     }
 
     public String getHeight() {
-        healthcategory = pref.getString(HEIGHT, "");
+        height = pref.getString(HEIGHT, "");
         return height;
     }
 
@@ -239,7 +239,7 @@ public class SPManager {
     }
 
     public String getWeight() {
-        healthcategory = pref.getString(WEIGHT, "");
+        weight = pref.getString(WEIGHT, "");
         return weight;
     }
 

@@ -3,8 +3,14 @@ package com.example.tooshytoask.Models;
 public class avatarList {
     private String encimg;
     private String url;
+    //public int singleitem_selection_position = -1;
     public Boolean isSelected = false;
 
+    public avatarList(String encimg, String url, Boolean isSelected) {
+        this.encimg = encimg;
+        this.url = url;
+        this.isSelected = isSelected;
+    }
 
     public String getEncimg() {
         return encimg;
@@ -29,4 +35,6 @@ public class avatarList {
     public void setSelected(Boolean selected) {
         isSelected = selected;
     }
+
+
 }

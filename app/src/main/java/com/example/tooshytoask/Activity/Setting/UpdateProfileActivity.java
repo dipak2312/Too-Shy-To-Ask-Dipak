@@ -48,7 +48,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
+public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener{
     RelativeLayout update_interest, update_personal_info, update_health, rel_back;
     SPManager spManager;
     TextView edit_age, change_avatar;
@@ -59,8 +59,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     int year, month, day;
     private DatePickerPopup datePickerPopup;
     CustomProgressDialog dialog;
-    String gender ="";
-    String yearnew = "", profile_pic="";
+    String yearnew = "", profile_pic="", gender ="", action = "profile";
     ImageView profile_image;
 
     @Override
@@ -102,18 +101,14 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         edit_age.setOnClickListener(this);
         profile_image = findViewById(R.id.profile_image);
 
-//        profile_pic=spManager.getUserPhoto();
-//
-//        if(!profile_pic.equals("")) {
-//
-//            Glide.with(context).load(profile_pic).into(profile_image);
-//        }
-
         change_avatar = findViewById(R.id.change_avatar);
         change_avatar.setOnClickListener(this);
         male = findViewById(R.id.male);
-        male.setOnTouchListener(this);
-
+        male.setOnClickListener(this);
+        female = findViewById(R.id.female);
+        female.setOnClickListener(this);
+        other = findViewById(R.id.other);
+        other.setOnClickListener(this);
 
         if (spManager.getGender().equals("Male")){
             male.setBackgroundResource(R.drawable.gender_border_active);
@@ -128,11 +123,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             other.setTextColor(ContextCompat.getColor(context, R.color.white));
         }
 
-        female = findViewById(R.id.female);
-        female.setOnTouchListener(this);
-        other = findViewById(R.id.other);
-        other.setOnTouchListener(this);
-        //gender.setText(spManager.getDob());
         update_pro = findViewById(R.id.update_pro);
         update_pro.setOnClickListener(this);
 
@@ -165,8 +155,62 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         datePickerPopup.show();
     }
 
+    public void getUserProfileUpdate(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setFirst_name(edit_name.getText().toString().trim());
+        model.setLast_name(edit_surname.getText().toString().trim());
+        model.setPhone(etMobile.getText().toString().trim());
+        model.setEmail_id(edit_email_enter.getText().toString().trim());
+        model.setDob(edit_age.getText().toString().trim());
+        model.setGender(gender);
+        model.setDob(yearnew);
+        model.setCountry(edit_country_enter.getText().toString().trim());
+        model.setState(edit_state_enter.getText().toString().trim());
+        model.setCity(edit_city_enter.getText().toString().trim());
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+                            spManager.setFirstName(edit_name.getText().toString().trim());
+                            spManager.setLastName(edit_surname.getText().toString().trim());
+                            spManager.setEmail(edit_email_enter.getText().toString().trim());
+                            spManager.setDob(edit_age.getText().toString().trim());
+                            spManager.setUserId(spManager.getUserId());
+                            spManager.setGender(gender);
+                            spManager.setCountry(edit_country_enter.getText().toString().trim());
+                            spManager.setState(edit_state_enter.getText().toString().trim());
+                            spManager.setCity(edit_city_enter.getText().toString().trim());
+                            spManager.setLanguage(spManager.getLanguage());
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
+    public void onClick(View view) {
         int id = view.getId();
 
         if (id == male.getId()) {
@@ -197,72 +241,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             gender = "Other";
 
         }
-        return true;
-    }
 
-    public void getUserProfileUpdate(){
-        dialog.show("");
-        dialog.dismiss("");
-
-        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
-        model.setFirst_name(edit_name.getText().toString().trim());
-        model.setFirst_name(edit_surname.getText().toString().trim());
-        model.setFirst_name(etMobile.getText().toString().trim());
-        model.setFirst_name(edit_email_enter.getText().toString().trim());
-        model.setDob(edit_age.getText().toString().trim());
-        model.setGender(gender);
-        model.setDob(yearnew);
-        model.setCountry(edit_country_enter.getText().toString().trim());
-        model.setState(edit_state_enter.getText().toString().trim());
-        model.setCity(edit_city_enter.getText().toString().trim());
-
-        WebServiceModel.getRestApi().getUserProfile(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
-                    @Override
-                    public void onNext(UpdateProfileResponse updateProfileResponse) {
-                        String msg = updateProfileResponse.getMsg();
-
-                        if (msg.equals("Profile Updated")){
-
-                            spManager.setFirstName(edit_name.getText().toString().trim());
-                            spManager.setLastName(edit_surname.getText().toString().trim());
-                            spManager.setEmail(edit_email_enter.getText().toString().trim());
-                            spManager.setDob(edit_age.getText().toString().trim());
-                            spManager.setUserId(spManager.getUserId());
-                            spManager.setTstaLoginStatus("true");
-                            spManager.setGender(gender);
-                            spManager.setCountry(edit_country_enter.getText().toString().trim());
-                            spManager.setState(edit_state_enter.getText().toString().trim());
-                            spManager.setCity(edit_city_enter.getText().toString().trim());
-                            spManager.setLanguage(spManager.getLanguage());
-
-                            /*Intent intent = new Intent(context, UpdateProfileActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);*/
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-
-        if (id == update_interest.getId()) {
+       else if (id == update_interest.getId()) {
 
             Intent intent = new Intent(context, UpdateInterestActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

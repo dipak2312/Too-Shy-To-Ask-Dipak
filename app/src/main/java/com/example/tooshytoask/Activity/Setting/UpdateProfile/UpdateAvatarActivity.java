@@ -1,5 +1,6 @@
 package com.example.tooshytoask.Activity.Setting.UpdateProfile;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -10,7 +11,10 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -19,17 +23,23 @@ import android.widget.Toast;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
+import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.Utils.OnClickListner;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -41,9 +51,10 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     Button next_btn;
     CustomProgressDialog dialog;
     RecyclerView profile_recy;
-    CircleImageView avatar1;
+    CircleImageView profile_img;
     ProfileAdapter adapter;
     OnClickListner onclicklistener;
+    String action = "avtarchange";
     ArrayList<com.example.tooshytoask.Models.avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
@@ -67,12 +78,49 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         rel_back.setOnClickListener(this);
         next_btn = findViewById(R.id.next_btn);
         next_btn.setOnClickListener(this);
-        avatar1 = findViewById(R.id.avatar1);
-        avatar1.setOnClickListener(this);
+        profile_img = findViewById(R.id.profile_img);
+        profile_img.setOnClickListener(this);
         profile_recy = findViewById(R.id.profile_recy);
 
         profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
         getProfile();
+    }
+
+    public void getUserProfileUpdate(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setImage(model.getImage());
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getProfile() {
@@ -92,7 +140,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                             avatarList = avatarResponse.getAvatarList();
                             for(int i=0;i<avatarList.size();i++)
                             {
-                                avatarList.get(i).isSelected=false;
+                                //avatarList.get(i).isSelected=false;
                             }
 
                             if (avatarList != null) {
@@ -146,6 +194,82 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SELECT_FILE) {
+            if (data != null) {
+
+                Uri uri = data.getData();
+
+                String path = String.valueOf(uri);
+
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+
+                    File choosedFile = ImagePickUtils.getPickedFile(context, data.getData());
+
+                    Bitmap compressedImageBitmap = new Compressor(this).compressToBitmap(choosedFile);
+
+                    //File compressedImageFile = new Compressor(this).compressToFile(choosedFile);
+
+                    profile_img.setImageBitmap(null);
+                    profile_img.setImageBitmap(compressedImageBitmap);
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] b = baos.toByteArray();
+
+                    //encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
+                    //System.out.println(encodedImage);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        } else if (requestCode == TAKE_PICTURE) {
+
+            if (resultCode == RESULT_OK) {
+                Bitmap bp = (Bitmap) data.getExtras().get("data");
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageInByte = stream.toByteArray();
+                //encodedImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
+
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            }
+
+
+//            if(requestCode == Camera.REQUEST_TAKE_PHOTO) {
+//                Bitmap bitmap = camera.getCameraBitmap();
+//                if (bitmap != null) {
+//                    //picFrame.setImageBitmap(bitmap);
+//
+//
+//                    profile_image.setImageBitmap(null);
+//                    profile_image.setImageBitmap(bitmap);
+//
+//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                    byte[] b = baos.toByteArray();
+//
+//                    encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
+//                    //System.out.println(encodedImage);
+//                } else {
+//                    Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+
+
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         int id = view.getId();
 
@@ -158,12 +282,13 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         }
         else if (id == next_btn.getId()){
 
+            getUserProfileUpdate();
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             startActivity(intent);
             finish();
             dialog.show("");
         }
-        else if (id == avatar1.getId()){
+        else if (id == profile_img.getId()){
             boolean status=checkPermissions();
             if(status)
             {

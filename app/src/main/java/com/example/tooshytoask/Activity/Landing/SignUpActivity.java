@@ -38,7 +38,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, ClickListener{
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, ClickListener{
     int year, month, day;
     RelativeLayout rel_back;
     CustomProgressDialog dialog;
@@ -73,11 +73,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
         male = findViewById(R.id.male);
-        male.setOnTouchListener(this);
+        male.setOnClickListener(this);
         female = findViewById(R.id.female);
-        female.setOnTouchListener(this);
+        female.setOnClickListener(this);
         other = findViewById(R.id.other);
-        other.setOnTouchListener(this);
+        other.setOnClickListener(this);
         edit_name = findViewById(R.id.edit_name);
         edit_name.setOnClickListener(this);
         edit_surname = findViewById(R.id.edit_surname);
@@ -133,30 +133,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         int id = view.getId();
 
-
-        if (id == rel_back.getId()) {
-            Intent intent = new Intent(context, SignInActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-
-        } else if (id == edit_age.getId()) {
-            openDatePicker();
-        } else if (id == btn_next.getId()) {
-            Usersignup();
-        }
-
-            }
-
-    private void openDatePicker() {
-        datePickerPopup.show();
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        int id = view.getId();
-
         if (id == male.getId()) {
             male.setBackgroundResource(R.drawable.gender_border_active);
             male.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -184,7 +160,23 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             female.setTextColor(ContextCompat.getColor(context, R.color.black));
             gender = "Other";
         }
-        return true;
+        else if (id == rel_back.getId()) {
+            Intent intent = new Intent(context, SignInActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+
+        } else if (id == edit_age.getId()) {
+            openDatePicker();
+        } else if (id == btn_next.getId()) {
+            Usersignup();
+        }
+
+            }
+
+    private void openDatePicker() {
+        datePickerPopup.show();
     }
 
     private void userPopup(){

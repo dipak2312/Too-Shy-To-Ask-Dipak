@@ -30,6 +30,7 @@ import com.example.tooshytoask.Activity.Landing.SignInActivity;
 import com.example.tooshytoask.Activity.Help.HelpActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.Adapters.InfoCardAdapter;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.BuildConfig;
 import com.example.tooshytoask.Helper.SPManager;
@@ -58,7 +59,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     CustomProgressDialog dialog;
     TextView profile_status,txt_name, app_version;
     CircularProgressBar progress_circular;
-    String progrss_value;
+    double progrss_value;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,14 +107,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
-    private void progressBar() {
-        progress_circular.setProgress(0);
-        progress_circular.setProgressMax(100f);
-        progress_circular.setProgressWithAnimation( 60f, 10000L);
-        progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
-        progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
-    }
-
     public void getUserData(){
         dialog.show("");
 
@@ -130,7 +123,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
                         if (msg.equals("success")){
                             profile_status.setText(userProfileResponse.getProfile_percent());
-
+                            progrss_value= Double.parseDouble(userProfileResponse.getProfile_percent());
+                            progress_circular.setProgress((int) progrss_value);
                             txt_name.setText(userProfileResponse.getUser_name());
                         }
                         dialog.dismiss("");
@@ -300,30 +294,77 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         btn_select.setOnClickListener(this);
 
 
+        bottomSheetDialog.show();
+        selectLanguage();
+    }
+
+    public void selectLanguage(){
+
         String selectValue=spManager.getLanguage();
 
         if(selectValue.equals("en"))
         {
-
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            eng_lang.setTextColor(context.getResources().getColor(R.color.black));
+            eng_lang.setChecked(true);
+            eng_lang.setBackgroundResource(R.drawable.language_background_active);
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("hi"))
         {
-
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            hindi_lang.setTextColor(context.getResources().getColor(R.color.black));
-
+            hindi_lang.setChecked(true);
+            hindi_lang.setBackgroundResource(R.drawable.language_background_active);
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("mr"))
         {
-
-            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            marathi_lang.setTextColor(context.getResources().getColor(R.color.black));
-
+            marathi_lang.setChecked(true);
+            marathi_lang.setBackgroundResource(R.drawable.language_background_active);
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
+    }
 
-        bottomSheetDialog.show();
+    public void radioButtonClickEvent(View view){
+        boolean isChecked = ((RadioButton) view).isChecked();
+        switch (view.getId()){
+            case R.id.eng_lang:
+                if(isChecked){
+
+                    setLocale("en");
+                    btn_select.setText(R.string.select);
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.hindi_lang:
+                if(isChecked){
+
+                    setLocale("hi");
+                    btn_select.setText(R.string.चुनें);
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.marathi_lang:
+                if(isChecked){
+
+                    setLocale("mr");
+                    btn_select.setText(R.string.निवडा);
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+        }
     }
 
     public void refreshFragment()

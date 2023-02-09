@@ -18,6 +18,8 @@ public class UpdateProfileAuthModel {
     private String state;
     private String city;
     private String language;
+    private String image;
+
 
     public String getUser_id() {
         return user_id;
@@ -153,5 +155,13 @@ public class UpdateProfileAuthModel {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

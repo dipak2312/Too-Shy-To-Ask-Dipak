@@ -84,7 +84,7 @@ public class ImagePickUtils {
 
                 Intent galleryIntent = new Intent(
                         Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                 activity.startActivityForResult(galleryIntent, SELECT_FILE);
 //            } else {

@@ -337,30 +337,77 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btn_select.setOnClickListener(this);
 
 
+        bottomSheetDialog.show();
+        selectLanguage();
+    }
+
+    public void selectLanguage(){
+
         String selectValue=spManager.getLanguage();
 
         if(selectValue.equals("en"))
         {
-
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            eng_lang.setTextColor(context.getResources().getColor(R.color.black));
+            eng_lang.setChecked(true);
+            eng_lang.setBackgroundResource(R.drawable.language_background_active);
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("hi"))
         {
-
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            hindi_lang.setTextColor(context.getResources().getColor(R.color.black));
-
+            hindi_lang.setChecked(true);
+            hindi_lang.setBackgroundResource(R.drawable.language_background_active);
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("mr"))
         {
-
-            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            marathi_lang.setTextColor(context.getResources().getColor(R.color.black));
-
+            marathi_lang.setChecked(true);
+            marathi_lang.setBackgroundResource(R.drawable.language_background_active);
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
+    }
 
-        bottomSheetDialog.show();
+    public void radioButtonClickEvent(View view){
+        boolean isChecked = ((RadioButton) view).isChecked();
+        switch (view.getId()){
+            case R.id.eng_lang:
+                if(isChecked){
+
+                    setLocale("en");
+                    btn_select.setText(R.string.select);
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.hindi_lang:
+                if(isChecked){
+
+                    setLocale("hi");
+                    btn_select.setText(R.string.चुनें);
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.marathi_lang:
+                if(isChecked){
+
+                    setLocale("mr");
+                    btn_select.setText(R.string.निवडा);
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+        }
     }
 
     public void refreshFragment()

@@ -42,6 +42,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
     Button next_btn;
     CustomProgressDialog dialog;
     EditText etHeight,etWeight;
+    String action = "personalinfo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
 
         spinner_blood.setSelection(((ArrayAdapter<String>)spinner_blood.getAdapter()).getPosition(spManager.getBloodgroup()));
     }
-    public void getUserProfile(){
+    public void getUserProfileUpdate(){
         dialog.show("");
         dialog.dismiss("");
 
@@ -78,6 +79,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
         model.setHeight(etHeight.getText().toString().trim());
         model.setWeight(etWeight.getText().toString().trim());
         model.setUser_id(spManager.getUserId());
+        model.setAction(action);
 
         WebServiceModel.getRestApi().getUserProfile(model)
                 .subscribeOn(Schedulers.io())
@@ -94,6 +96,9 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
                             spManager.setWeight(etWeight.getText().toString().trim());
                             spManager.setUserId(spManager.getUserId());
 
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -124,7 +129,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
         }
          else if (id == next_btn.getId()) {
 
-             if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")){
+             /*if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")){
                  Toast.makeText(context, "Select Blood Group", Toast.LENGTH_SHORT).show();
              }
              else if (etHeight.getText().toString().trim().equals("")){
@@ -135,9 +140,12 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
              else if (etWeight.getText().toString().trim().equals("")){
                  Toast.makeText(context, "Weight is required", Toast.LENGTH_SHORT).show();
              }
-             else {
-                 getUserProfile();
-             }
+             else {*/
+             getUserProfileUpdate();
+             Intent intent = new Intent(context, UpdateProfileActivity.class);
+             startActivity(intent);
+             finish();
+
 
          } else if (id == spinner_blood.getId()) {
              OpenBloodGrp();

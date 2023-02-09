@@ -50,6 +50,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
     ClickListener clickListener;
     OnClickListner onclicklistener;
     ArrayList<com.example.tooshytoask.Models.UpdateProfile.health_interest> health_interest;
+    String action = "healthcategory";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setHealth_id(model.getHealth_id());
+        model.setAction(action);
 
         WebServiceModel.getRestApi().getUserProfile(model)
                 .subscribeOn(Schedulers.io())

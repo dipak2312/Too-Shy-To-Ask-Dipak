@@ -47,6 +47,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
     Button yes_btn, no_btn, update_btn2;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
+    String action = "healthissue";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +137,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setHealth_id(model.getHealthissue_id());
+        model.setAction(action);
 
         WebServiceModel.getRestApi().getUserProfile(model)
                 .subscribeOn(Schedulers.io())

@@ -171,10 +171,10 @@ public class FourFragment extends Fragment implements View.OnClickListener {
     public void userDetails() {
 
         UserDetailAuthModel model = new UserDetailAuthModel();
+        model.setUser_id(spManager.getUserId());
         model.setBloodgroup(spinner_blood.getSelectedItem().toString());
         model.setHeight(etHeight.getText().toString().trim());
         model.setWeight(etWeight.getText().toString().trim());
-        model.setUserId(spManager.getUserId());
 
         WebServiceModel.getRestApi().userDetails(model)
                 .subscribeOn(Schedulers.io())

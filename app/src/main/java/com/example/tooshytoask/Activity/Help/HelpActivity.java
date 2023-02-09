@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.HelpCategoryAdapter;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
+import com.example.tooshytoask.AuthModels.HelpCategoryAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.Help.HelpCategoryResponse;
@@ -56,7 +57,10 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
     public void getHelpCategory() {
         dialog.show("");
 
-        WebServiceModel.getRestApi().getHelpCategory()
+        HelpCategoryAuthModel model = new HelpCategoryAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getHelpCategory(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<HelpCategoryResponse>() {

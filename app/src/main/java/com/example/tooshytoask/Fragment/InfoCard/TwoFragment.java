@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -37,7 +36,6 @@ import com.example.tooshytoask.Utils.OnClickListner;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -54,7 +52,6 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     String profile_pic;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
-    CircleImageView avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8;
     ArrayList<avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
@@ -113,7 +110,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                             avatarList = avatarResponse.getAvatarList();
                             for(int i=0;i<avatarList.size();i++)
                             {
-                                avatarList.get(i).isSelected=false;
+                                //avatarList.get(i).isSelected=false;
                             }
 
                             if (avatarList != null) {
@@ -194,11 +191,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             saveProfilePic();
         }
 
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
         for(int i=0;i<avatarList.size();i++)
         {
-            myvalue.add(avatarList.get(i).getSelected());
+           myvalue.add(avatarList.get(i).isSelected());
         }
         boolean ans = myvalue.contains(true);
 
@@ -210,7 +207,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             }else
             {
                 clickListener.onClick(false);
-            }
+            }*/
 
 
         if (id == camera.getId()) {
@@ -219,6 +216,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             {
                 ImagePickUtilsCamera.selectImage(context);
                 camera.isClickable();
+                adapter.notifyDataSetChanged();
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
             else
@@ -230,7 +228,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             if(status)
             {
                 ImagePickUtilsFile.selectImage(context);
-
+                for(int i=0;i<avatarList.size();i++)
+                {
+                    //avatarList.get(i).isSelected=false;
+                    adapter.notifyDataSetChanged();
+                }
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
             else
@@ -260,11 +262,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
     @Override
     public void onClickData(int position, String id) {
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+        ArrayList<Boolean> myvalue=new ArrayList<>();
 
         for(int i=0;i<avatarList.size();i++)
         {
-            myvalue.add(avatarList.get(i).getSelected());
+            //myvalue.add(avatarList.get(i).isSelected());
         }
 
         boolean ans = myvalue.contains(true);
