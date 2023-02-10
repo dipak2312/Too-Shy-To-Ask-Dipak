@@ -9,10 +9,12 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
 import com.example.tooshytoask.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,20 +31,24 @@ public class ImagePickUtils {
 
     public static void selectImage(final Context context) {
 
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.select_image_dialog_layout);
+        bottomSheetDialog.setCancelable(false);
 
 
-       AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+       /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         final View dialogView = inflater.inflate(R.layout.select_image_dialog_layout, null);
-        dialogBuilder.setView(dialogView);
+        dialogBuilder.setView(dialogView);*/
 
         //TextView title = (TextView) dialogView.findViewById(R.id.textView1);
-        final Button camera1 = (Button) dialogView.findViewById(R.id.select_image_dialog_btn_camera_btn);
-        Button gallery = (Button) dialogView.findViewById(R.id.select_image_dialog_btn_gallery_btn);
-        Button btnCancel = (Button) dialogView.findViewById(R.id.select_image_dialog_close_btn);
+        final Button camera1 = (Button) bottomSheetDialog.findViewById(R.id.select_image_dialog_btn_camera_btn);
+        Button gallery = (Button) bottomSheetDialog.findViewById(R.id.select_image_dialog_btn_gallery_btn);
+        RelativeLayout btnCancel = (RelativeLayout) bottomSheetDialog.findViewById(R.id.select_image_dialog_close_btn);
 
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
+       /* final AlertDialog b = dialogBuilder.create();
+        b.show();*/
+        bottomSheetDialog.show();
 
 
         camera1.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +56,7 @@ public class ImagePickUtils {
             public void onClick(View v) {
 
                 CameraIntent(context);
-                b.dismiss();
+                bottomSheetDialog.dismiss();
 
             }
 
@@ -61,7 +67,7 @@ public class ImagePickUtils {
             @Override
             public void onClick(View v) {
                 GalleryIntent(context);
-                b.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
 
@@ -69,7 +75,7 @@ public class ImagePickUtils {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                b.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
 

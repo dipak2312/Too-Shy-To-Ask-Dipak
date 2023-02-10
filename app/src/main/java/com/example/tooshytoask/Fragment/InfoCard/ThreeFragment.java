@@ -55,6 +55,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     TextView skip_btn;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
+    String healthissueId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -149,7 +150,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         SaveHealthIssueAuthModel model = new SaveHealthIssueAuthModel();
         model.setUserId(spManager.getUserId());
-        model.setHealthissueId(model.getHealthissueId());
+        model.setHealthissueId(healthissueId);
+
         WebServiceModel.getRestApi().saveHealthIssue(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -248,7 +250,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
     @Override
     public void onClickData(int position, String id) {
-
+        healthissueId = id;
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 

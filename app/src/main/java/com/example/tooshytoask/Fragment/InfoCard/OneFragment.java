@@ -29,6 +29,8 @@ import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -46,6 +48,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     ImageButton next_btn;
     ClickListener clickListener;
     String healthcategory = "";
+    String healthId="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +93,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                         if (msg.equals("success")) {
 
                                 informationStorehouseList = healthCateResponse.getInformationStorehouseList();
+
                                 for(int i=0;i<informationStorehouseList.size();i++)
                                 {
                                     informationStorehouseList.get(i).isSelected=false;
@@ -140,7 +144,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
         SaveHealthCateAuthModel model = new SaveHealthCateAuthModel();
         model.setUserId(spManager.getUserId());
-        //model.setHealthId();
+        model.setHealthId(healthId);
         WebServiceModel.getRestApi().saveHealthCategory(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -187,7 +191,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
             clickListener.onClick(true);
         }
         else if (id == next_btn.getId()){
-            saveHealthCategory();
+
         }
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
@@ -220,7 +224,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
     @Override
     public void onClickData(int position, String id) {
-
+        healthId = id;
 
       ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 

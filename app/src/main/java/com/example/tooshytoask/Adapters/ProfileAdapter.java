@@ -43,14 +43,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
-//        String img=avatarList.get(position).getEncimg();
-//        byte[] imageByteArray = Base64.decode(avatarList.get(position).getEncimg(), Base64.DEFAULT);
-//       // Bitmap decodedByte = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
-//        InputStream is = new ByteArrayInputStream(imageByteArray);
-//        Bitmap bmp = BitmapFactory.decodeStream(is);
-//        holder.img.setImageBitmap(bmp);
-       // holder.ProfileItems(avatarList.get(position),position);
-        Glide.with(context).load(avatarList.get(position).getUrl()).into(holder.img);
+        String img=avatarList.get(position).getEncimg();
+        byte[] imageByteArray = Base64.decode(avatarList.get(position).getEncimg(), Base64.DEFAULT);
+       // Bitmap decodedByte = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
+        InputStream is = new ByteArrayInputStream(imageByteArray);
+        Bitmap bmp = BitmapFactory.decodeStream(is);
+        holder.img.setImageBitmap(bmp);
+       //holder.ProfileItems(avatarList.get(position),position);
+
         if (singleitem_selection_position == position){
             holder.img.setBackgroundResource(R.drawable.circle_active_background);
         }
@@ -82,41 +82,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         }
 
-        /*public void ProfileItems(final avatarList avatarList, int position){
-            //img.setImageResource(avatarList.getEncimg());
-            Glide.with(context).load(avatarList.getUrl()).into(img);
-
-            if (avatarList.isSelected == -1){
-                img.setBackgroundResource(R.drawable.circle_active_background);
-            }
-            else {
-                img.setBackgroundResource(R.drawable.circle_inactive_background);
-            }
-
-
-
-            img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (avatarList.isSelected) {
-                        img.setBackgroundResource(R.drawable.circle_inactive_background);
-                        avatarList.setSelected(-1);
-                        notifyDataSetChanged();
-                        onclicklistener.onClickData(position, avatarList.getUrl());
-
-
-                    }else {
-                        img.setBackgroundResource(R.drawable.circle_active_background);
-                        avatarList.setSelected(-1);
-                        notifyDataSetChanged();
-                        onclicklistener.onClickData(position,avatarList.getUrl());
-
-                    }
-
-                }
-            });*/
-
         }
+    public void setSingleSelection(int adapterPosition){
+        if (adapterPosition == RecyclerView.NO_POSITION) return;
+
+        singleitem_selection_position = adapterPosition;
+        notifyDataSetChanged();
+    }
 
             /*public void ProfileItems(final avatarList avatarList, int position){
                 //img.setImageResource(avatarList.getEncimg());
@@ -152,12 +124,4 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                 });
 
             }*/
-
-    public void setSingleSelection(int adapterPosition){
-        if (adapterPosition == RecyclerView.NO_POSITION) return;
-
-        singleitem_selection_position = adapterPosition;
-        notifyDataSetChanged();
-    }
-
 }

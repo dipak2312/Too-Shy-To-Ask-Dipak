@@ -25,6 +25,7 @@ import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.MyValidator;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
@@ -170,7 +171,40 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else if (id == edit_age.getId()) {
             openDatePicker();
         } else if (id == btn_next.getId()) {
-            Usersignup();
+            if (edit_name.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "First Name is required", Toast.LENGTH_SHORT).show();
+
+            } else if (edit_surname.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Last Name is required", Toast.LENGTH_SHORT).show();
+
+            } else if (edit_email_enter.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Email is required", Toast.LENGTH_SHORT).show();
+
+            } else if (!MyValidator.isValidEmail(edit_email_enter.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid email id", Toast.LENGTH_SHORT).show();
+
+            } else if (edit_mobile_number.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Mobile Number is required", Toast.LENGTH_SHORT).show();
+
+            }   else if (edit_age.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Please select your Date Of Birth", Toast.LENGTH_SHORT).show();
+
+            }
+            else if (edit_state_enter.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Please enter your State", Toast.LENGTH_SHORT).show();
+            }
+            else if (edit_city_enter.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Please enter your City", Toast.LENGTH_SHORT).show();
+            }
+            else if (edit_country_enter.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Please enter your Country", Toast.LENGTH_SHORT).show();
+            }
+            else if (gender.equals("")){
+                Toast.makeText(context, "Please select your Gender", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Usersignup();
+            }
         }
 
             }

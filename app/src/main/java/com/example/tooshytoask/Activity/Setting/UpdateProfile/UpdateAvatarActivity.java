@@ -54,7 +54,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     CircleImageView profile_img;
     ProfileAdapter adapter;
     OnClickListner onclicklistener;
-    String action = "avtarchange";
+    String action = "avtarchange", encodedImage = "";
     ArrayList<com.example.tooshytoask.Models.avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
@@ -91,8 +91,9 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
-        model.setImage(model.getImage());
+        model.setUser_id(spManager.getUserId());
         model.setAction(action);
+        model.setImage(encodedImage);
 
         WebServiceModel.getRestApi().getUserProfile(model)
                 .subscribeOn(Schedulers.io())
@@ -104,7 +105,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
                         if (msg.equals("Profile Updated")){
 
-
+                            spManager.setUserPhoto(encodedImage);
                         }
                         else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -220,7 +221,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                     compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] b = baos.toByteArray();
 
-                    //encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
+                    encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
                     //System.out.println(encodedImage);
 
                 } catch (IOException e) {
@@ -237,7 +238,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] imageInByte = stream.toByteArray();
-                //encodedImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
+                encodedImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
 
 
             } else if (resultCode == RESULT_CANCELED) {

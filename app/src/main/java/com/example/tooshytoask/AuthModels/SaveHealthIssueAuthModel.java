@@ -5,18 +5,22 @@ import java.util.ArrayList;
 public class SaveHealthIssueAuthModel {
 
     private String userId;
-    private ArrayList<String>healthissueId;
+    private String healthissueId;
+
 
     public String getUserId() {
         return userId;
     }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    public ArrayList<String> getHealthissueId() {
+
+    public String getHealthissueId() {
         return healthissueId;
     }
-    public void setHealthissueId(ArrayList<String>healthissueId) {
+
+    public void setHealthissueId(String healthissueId) {
         this.healthissueId = healthissueId;
     }
 }

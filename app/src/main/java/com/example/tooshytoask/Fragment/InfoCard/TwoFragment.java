@@ -1,16 +1,24 @@
 package com.example.tooshytoask.Fragment.InfoCard;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +37,18 @@ import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
 import com.example.tooshytoask.Utils.ImagePickUtilsFile;
 import com.example.tooshytoask.Utils.OnClickListner;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -49,7 +62,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     RecyclerView profile_recy;
     ImageView camera, file;
     ProfileAdapter adapter;
-    String profile_pic;
+    String encodedImage = "";
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
     ArrayList<avatarList>avatarList;
@@ -110,7 +123,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                             avatarList = avatarResponse.getAvatarList();
                             for(int i=0;i<avatarList.size();i++)
                             {
-                                //avatarList.get(i).isSelected=false;
+                                avatarList.get(i).isSelected=false;
                             }
 
                             if (avatarList != null) {
@@ -152,7 +165,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
      SaveProfilePicAuthModel model = new SaveProfilePicAuthModel();
      model.setUser_id(spManager.getUserId());
-    // model.setImage();
+     model.setImage(encodedImage);
 
      WebServiceModel.getRestApi().saveProfilePic(model)
              .subscribeOn(Schedulers.io())
@@ -244,6 +257,62 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SELECT_FILE) {
+            if (data != null) {
+
+                Uri uri = data.getData();
+
+                String path = String.valueOf(uri);
+
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+
+                    File choosedFile = ImagePickUtils.getPickedFile(context, data.getData());
+
+                    Bitmap compressedImageBitmap = new Compressor(context).compressToBitmap(choosedFile);
+
+                    //File compressedImageFile = new Compressor(this).compressToFile(choosedFile);
+
+                    camera.setImageBitmap(null);
+                    camera.setImageBitmap(compressedImageBitmap);
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] b = baos.toByteArray();
+
+                    encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
+                    //System.out.println(encodedImage);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        } else if (requestCode==TAKE_PICTURE) {
+
+            if (resultCode == RESULT_OK) {
+                Bitmap bp = (Bitmap) data.getExtras().get("data");
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageInByte = stream.toByteArray();
+                encodedImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
+
+
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+
     private boolean checkPermissions() {
         int result;
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -262,6 +331,9 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
     @Override
     public void onClickData(int position, String id) {
+
+        encodedImage = id;
+
         ArrayList<Boolean> myvalue=new ArrayList<>();
 
         for(int i=0;i<avatarList.size();i++)

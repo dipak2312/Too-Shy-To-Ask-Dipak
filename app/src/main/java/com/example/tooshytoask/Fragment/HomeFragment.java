@@ -35,6 +35,7 @@ import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
 import com.example.tooshytoask.Adapters.SliderBannerAdapter;
 import com.example.tooshytoask.Adapters.StatusAdapter;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
+import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Bannerist;
 import com.example.tooshytoask.Models.BlogItems;
@@ -46,6 +47,7 @@ import com.example.tooshytoask.Models.RecommendedBlogs;
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.Models.StatusItem;
 import com.example.tooshytoask.Models.StoryCategory;
+import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -88,6 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
+    String action = "language";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -308,6 +311,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
         else if(id==btn_select.getId())
         {
+            getUserProfileUpdate();
             bottomSheetDialog.dismiss();
             refreshFragment();
         }
@@ -339,6 +343,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         bottomSheetDialog.show();
         selectLanguage();
+        getUserProfileUpdate();
     }
 
     public void selectLanguage(){
@@ -408,6 +413,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
         }
+    }
+
+    public void getUserProfileUpdate(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setAction(action);
+        model.setLanguage(spManager.getLanguage());
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void refreshFragment()
