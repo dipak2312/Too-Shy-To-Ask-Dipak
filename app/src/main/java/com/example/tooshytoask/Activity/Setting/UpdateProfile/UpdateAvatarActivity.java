@@ -21,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -54,7 +53,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     CircleImageView profile_img;
     ProfileAdapter adapter;
     OnClickListner onclicklistener;
-    String action = "avtarchange", encodedImage = "";
+    String action = "avtarchange", avtarImage = "";
     ArrayList<com.example.tooshytoask.Models.avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
@@ -93,7 +92,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setAction(action);
-        model.setImage(encodedImage);
+        model.setImage(avtarImage);
 
         WebServiceModel.getRestApi().getUserProfile(model)
                 .subscribeOn(Schedulers.io())
@@ -105,7 +104,6 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
                         if (msg.equals("Profile Updated")){
 
-                            spManager.setUserPhoto(encodedImage);
                         }
                         else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -221,8 +219,8 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                     compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] b = baos.toByteArray();
 
-                    encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
-                    //System.out.println(encodedImage);
+                    avtarImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
+                    System.out.println(avtarImage);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -238,7 +236,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] imageInByte = stream.toByteArray();
-                encodedImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
+                avtarImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
 
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -304,7 +302,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClickData(int position, String id) {
-
+    public void onClickData(int position, String base64Image) {
+        avtarImage=base64Image;
     }
 }

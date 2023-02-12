@@ -8,15 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.HealthAdapter;
-import com.example.tooshytoask.Adapters.UpdateHealthAdapter;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
@@ -47,7 +46,8 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
     Button yes_btn, no_btn, update_btn2;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
-    String action = "healthissue";
+    String action = "healthissue", healthissueId="";
+    ArrayList<String>healthissueIds=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
         healthIssues();
+        //getUserData();
     }
 
     public void healthIssues() {
@@ -136,7 +137,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
-        model.setHealth_id(model.getHealthissue_id());
+        model.setHealthissue_id(healthissueIds);
         model.setAction(action);
 
         WebServiceModel.getRestApi().getUserProfile(model)
@@ -182,6 +183,16 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
                         if (msg.equals("success")){
                             health_issues = userProfileResponse.getProfiledetails().getHealth_issues();
+
+                            for(int j=0;j<health_issues.size();j++) {
+
+                                if (health_issues.get(j).isSelected) {
+                                    health_issues.get(j).setIsselcted("1");
+                                }
+                                else {
+                                    health_issues.get(j).setIsselcted("0");
+                                }
+                            }
 
                         }
                     }
@@ -239,6 +250,13 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClickData(int position, String id) {
-
+        healthissueId = id;
+        if(healthIssuseList.get(position).isSelected)
+        {
+            healthissueIds.add(healthissueId);
+        }else
+        {
+            healthissueIds.remove(healthissueId);
+        }
     }
 }

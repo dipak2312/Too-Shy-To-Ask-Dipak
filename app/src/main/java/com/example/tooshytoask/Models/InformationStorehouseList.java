@@ -5,7 +5,7 @@ public class InformationStorehouseList {
     private String title;
     private String img;
 
-    public Boolean isSelected = false;
+    public Boolean isSelected;
 
     public InformationStorehouseList(String id, String title, String img, Boolean isSelected) {
         this.id = id;

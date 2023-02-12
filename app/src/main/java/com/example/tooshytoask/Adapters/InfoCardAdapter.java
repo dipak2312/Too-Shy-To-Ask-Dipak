@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.tooshytoask.Fragment.InfoCard.FourFragment;
-import com.example.tooshytoask.Fragment.InfoCard.OneFragment;
-import com.example.tooshytoask.Fragment.InfoCard.ThreeFragment;
-import com.example.tooshytoask.Fragment.InfoCard.TwoFragment;
+import com.example.tooshytoask.Fragment.InfoCard.PersonalInfoFragment;
+import com.example.tooshytoask.Fragment.InfoCard.HealthCategoryFragment;
+import com.example.tooshytoask.Fragment.InfoCard.HealthIssuesFragment;
+import com.example.tooshytoask.Fragment.InfoCard.AvtarFragment;
 
 public class InfoCardAdapter extends FragmentPagerAdapter implements View.OnClickListener {
     TextView skip_btn;
@@ -27,24 +27,24 @@ public class InfoCardAdapter extends FragmentPagerAdapter implements View.OnClic
     public Fragment getItem(int position) {
         if(position==0){
 
-            OneFragment first=new OneFragment();
+            HealthCategoryFragment first=new HealthCategoryFragment();
             return first;
 
         }
         else if(position==1){
 
-            TwoFragment second=new TwoFragment();
+            AvtarFragment second=new AvtarFragment();
             return second;
 
         }
         else if(position==2){
 
-            ThreeFragment third=new ThreeFragment();
+            HealthIssuesFragment third=new HealthIssuesFragment();
             return third;
         }
         else if(position==3){
 
-            FourFragment forth=new FourFragment();
+            PersonalInfoFragment forth=new PersonalInfoFragment();
             return forth;
         }
         return null;

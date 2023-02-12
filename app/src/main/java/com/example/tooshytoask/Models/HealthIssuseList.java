@@ -3,7 +3,7 @@ package com.example.tooshytoask.Models;
 public class HealthIssuseList {
     private String health_id;
     private String health_title;
-    public Boolean isSelected = false;
+    public Boolean isSelected = true;
 
     public HealthIssuseList(String health_id, String health_title, Boolean isSelected) {
         this.health_id = health_id;

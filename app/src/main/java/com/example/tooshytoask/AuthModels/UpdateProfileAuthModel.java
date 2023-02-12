@@ -1,5 +1,7 @@
 package com.example.tooshytoask.AuthModels;
 
+import java.util.ArrayList;
+
 public class UpdateProfileAuthModel {
     private String user_id;
     private String action;
@@ -9,8 +11,6 @@ public class UpdateProfileAuthModel {
     private String phone;
     private String gender;
     private String dob;
-    private String health_id;
-    private String healthissue_id;
     private String bloodgroup;
     private String height;
     private String weight;
@@ -19,6 +19,8 @@ public class UpdateProfileAuthModel {
     private String city;
     private String language;
     private String image;
+    ArrayList<String> healthissue_id=new ArrayList<>();
+    ArrayList<String> health_id=new ArrayList<>();
 
 
     public String getUser_id() {
@@ -85,22 +87,6 @@ public class UpdateProfileAuthModel {
         this.dob = dob;
     }
 
-    public String getHealth_id() {
-        return health_id;
-    }
-
-    public void setHealth_id(String health_id) {
-        this.health_id = health_id;
-    }
-
-    public String getHealthissue_id() {
-        return healthissue_id;
-    }
-
-    public void setHealthissue_id(String healthissue_id) {
-        this.healthissue_id = healthissue_id;
-    }
-
     public String getBloodgroup() {
         return bloodgroup;
     }
@@ -163,5 +149,21 @@ public class UpdateProfileAuthModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public ArrayList<String> getHealthissue_id() {
+        return healthissue_id;
+    }
+
+    public void setHealthissue_id(ArrayList<String> healthissue_id) {
+        this.healthissue_id = healthissue_id;
+    }
+
+    public ArrayList<String> getHealth_id() {
+        return health_id;
+    }
+
+    public void setHealth_id(ArrayList<String> health_id) {
+        this.health_id = health_id;
     }
 }

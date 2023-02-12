@@ -5,6 +5,8 @@ public class health_interest {
     private String title;
     private String slug;
     private String isselcted;
+    public Boolean isSelected;
+
 
     public String getId() {
         return id;
@@ -36,5 +38,13 @@ public class health_interest {
 
     public void setIsselcted(String isselcted) {
         this.isselcted = isselcted;
+    }
+
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
     }
 }

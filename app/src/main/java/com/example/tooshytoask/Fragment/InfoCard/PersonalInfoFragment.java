@@ -1,6 +1,5 @@
 package com.example.tooshytoask.Fragment.InfoCard;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,27 +21,16 @@ import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
-import com.example.tooshytoask.Activity.Landing.SignUpActivity;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.UserDetailResponse;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.ClickListener;
-import com.example.tooshytoask.Utils.OnClickListner;
-import com.google.android.material.navigation.NavigationBarView;
-import com.ozcanalasalvar.library.utils.DateUtils;
-import com.ozcanalasalvar.library.view.datePicker.DatePicker;
-import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class FourFragment extends Fragment implements View.OnClickListener {
+public class PersonalInfoFragment extends Fragment implements View.OnClickListener {
     Context context;
     SPManager spManager;
     Spinner spinner_blood;

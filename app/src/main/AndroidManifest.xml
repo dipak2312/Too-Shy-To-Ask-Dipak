@@ -132,7 +132,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.UpdateProfileActivity"
+            android:name=".Activity.Setting.UpdateProfile.UpdateProfileActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

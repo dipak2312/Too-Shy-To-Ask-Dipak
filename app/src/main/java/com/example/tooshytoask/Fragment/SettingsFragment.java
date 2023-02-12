@@ -6,34 +6,29 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
 import com.example.tooshytoask.Activity.Help.HelpActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
-import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
-import com.example.tooshytoask.Adapters.InfoCardAdapter;
+import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateProfileActivity;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
-import com.example.tooshytoask.BuildConfig;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
@@ -44,12 +39,13 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener{
-    ImageView profile_image;
+    CircleImageView profile_image;
     RelativeLayout update_profile, notification_setting, bookmarks, faq, help,
             feedback, select_Language, refer_friends, logout;
     Context context;
@@ -62,7 +58,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     TextView profile_status,txt_name, app_version;
     CircularProgressBar progress_circular;
     double progrss_value;
-    String action = "language";
+    String action = "language", profile_pic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +82,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         app_version.setText("" +ver);
         profile_status = view.findViewById(R.id.profile_status);
         txt_name = view.findViewById(R.id.txt_name);
+        profile_image = view.findViewById(R.id.profile_image);
         update_profile = view.findViewById(R.id.update_profile);
         update_profile.setOnClickListener(this);
         notification_setting = view.findViewById(R.id.notification_setting);
@@ -426,4 +423,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        profile_pic = spManager.getUserPhoto();
+        if (!profile_pic.equals("")) {
+
+            Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
+        }
+    }
+
     }

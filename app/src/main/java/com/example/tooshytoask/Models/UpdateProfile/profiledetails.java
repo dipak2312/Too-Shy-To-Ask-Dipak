@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class profiledetails {
     private profile profile;
-    ArrayList<health_interest> health_interest;
-    ArrayList<health_issues> health_issues;
+    ArrayList<health_interest>health_interest;
+    ArrayList<health_issues>health_issues;
     personal_info personalInfo;
 
 

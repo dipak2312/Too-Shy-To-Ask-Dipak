@@ -59,7 +59,7 @@
                     app:cpb_progressbar_color="@color/purple"
                     app:cpb_progressbar_width="@dimen/margin_4" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
                     android:layout_width="@dimen/margin_90"
                     android:layout_height="@dimen/margin_90"

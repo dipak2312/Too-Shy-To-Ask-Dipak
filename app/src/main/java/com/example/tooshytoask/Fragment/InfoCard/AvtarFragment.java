@@ -53,7 +53,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class TwoFragment extends Fragment implements View.OnClickListener, OnClickListner {
+public class AvtarFragment extends Fragment implements View.OnClickListener, OnClickListner {
     Context context;
     SPManager spManager;
     ClickListener clickListener;
@@ -66,6 +66,8 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
     ArrayList<avatarList>avatarList;
+
+    String avtarImage="";
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
@@ -165,7 +167,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
      SaveProfilePicAuthModel model = new SaveProfilePicAuthModel();
      model.setUser_id(spManager.getUserId());
-     model.setImage(encodedImage);
+     model.setImage(avtarImage);
 
      WebServiceModel.getRestApi().saveProfilePic(model)
              .subscribeOn(Schedulers.io())
@@ -176,7 +178,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                      String msg = saveProfilePicResponse.getMsg();
 
                      if (msg.equals("Profile Image Updated Successfully")){
-
+                         clickListener.onClick(true);
 
                      }
                  }
@@ -204,26 +206,11 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
             saveProfilePic();
         }
 
-        /*ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
-
-        for(int i=0;i<avatarList.size();i++)
-        {
-           myvalue.add(avatarList.get(i).isSelected());
-        }
-        boolean ans = myvalue.contains(true);
-
-            if(ans)
-            {
-                clickListener.onClick(true);
-
-
-            }else
-            {
-                clickListener.onClick(false);
-            }*/
-
 
         if (id == camera.getId()) {
+            adapter.singleitem_selection_position=-1;
+            adapter.notifyDataSetChanged();
+            avtarImage="";
             boolean status=checkPermissions();
             if(status)
             {
@@ -237,15 +224,14 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                 checkPermissions();
             }
         } else if (id == file.getId()) {
+            adapter.singleitem_selection_position=-1;
+            adapter.notifyDataSetChanged();
+            avtarImage="";
             boolean status=checkPermissions();
             if(status)
             {
                 ImagePickUtilsFile.selectImage(context);
-                for(int i=0;i<avatarList.size();i++)
-                {
-                    //avatarList.get(i).isSelected=false;
-                    adapter.notifyDataSetChanged();
-                }
+
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
             else
@@ -277,15 +263,15 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
 
                     //File compressedImageFile = new Compressor(this).compressToFile(choosedFile);
 
-                    camera.setImageBitmap(null);
-                    camera.setImageBitmap(compressedImageBitmap);
+                    file.setImageBitmap(null);
+                    file.setImageBitmap(compressedImageBitmap);
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] b = baos.toByteArray();
 
-                    encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
-                    //System.out.println(encodedImage);
+                    avtarImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
+                    System.out.println(avtarImage);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -301,7 +287,7 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] imageInByte = stream.toByteArray();
-                encodedImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
+                avtarImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
 
 
 
@@ -330,28 +316,10 @@ public class TwoFragment extends Fragment implements View.OnClickListener, OnCli
     }
 
     @Override
-    public void onClickData(int position, String id) {
+    public void onClickData(int position, String base64Image) {
 
-        encodedImage = id;
-
-        ArrayList<Boolean> myvalue=new ArrayList<>();
-
-        for(int i=0;i<avatarList.size();i++)
-        {
-            //myvalue.add(avatarList.get(i).isSelected());
-        }
-
-        boolean ans = myvalue.contains(true);
-
-        if(ans)
-        {
-            next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-
-
-        }else
-        {
-            next_btn2.setBackgroundResource(R.drawable.circle_button_inactive);
-        }
+       avtarImage=base64Image;
+       //clickListener.onClick(true);
 
     }
 

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,14 +30,12 @@ import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class OneFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnClickListner, ClickListener {
+public class HealthCategoryFragment extends Fragment implements View.OnClickListener, View.OnTouchListener, OnClickListner, ClickListener {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -49,6 +48,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     ClickListener clickListener;
     String healthcategory = "";
     String healthId="";
+    ArrayList<String>helthIds=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,7 +144,7 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
 
         SaveHealthCateAuthModel model = new SaveHealthCateAuthModel();
         model.setUserId(spManager.getUserId());
-        model.setHealthId(healthId);
+        model.setHealth_id(helthIds);
         WebServiceModel.getRestApi().saveHealthCategory(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -155,8 +155,6 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
                         String msg = saveHealthCategoryResponse.getMsg();
 
                         if (msg.equals("Health Categories updated to profile.")) {
-
-
 
 
                         } else {
@@ -225,6 +223,14 @@ public class OneFragment extends Fragment implements View.OnClickListener, View.
     @Override
     public void onClickData(int position, String id) {
         healthId = id;
+        if(informationStorehouseList.get(position).isSelected)
+        {
+            helthIds.add(healthId);
+        }else
+        {
+            helthIds.remove(healthId);
+        }
+        //Log.d("saggi",helthIds.toString());
 
       ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 

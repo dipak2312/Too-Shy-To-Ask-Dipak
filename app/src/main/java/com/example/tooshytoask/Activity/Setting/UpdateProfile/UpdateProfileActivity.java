@@ -1,19 +1,14 @@
-package com.example.tooshytoask.Activity.Setting;
+package com.example.tooshytoask.Activity.Setting.UpdateProfile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,17 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
-import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
-import com.example.tooshytoask.Activity.Landing.SignInActivity;
-import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateAvatarActivity;
-import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateHealthActivity;
-import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateInterestActivity;
-import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdatePersonalInfoActivity;
-import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
-import com.example.tooshytoask.Fragment.InfoCard.FourFragment;
-import com.example.tooshytoask.Fragment.InfoCard.OneFragment;
-import com.example.tooshytoask.Fragment.InfoCard.ThreeFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.R;
@@ -45,7 +30,7 @@ import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 
 import java.util.Calendar;
 
-import io.reactivex.Scheduler;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -61,8 +46,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     int year, month, day;
     private DatePickerPopup datePickerPopup;
     CustomProgressDialog dialog;
-    String yearnew = "", profile_pic="", gender ="", action = "profile";
-    ImageView profile_image;
+    String yearnew = "", profile_pic, gender ="", action = "profile";
+    CircleImageView profile_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,13 +138,22 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 .build();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        profile_pic = spManager.getUserPhoto();
+        if (!profile_pic.equals("")) {
+
+            Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
+        }
+    }
+
     private void openDatePicker() {
         datePickerPopup.show();
     }
 
     public void getUserProfileUpdate(){
         dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -196,6 +190,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                             spManager.setCity(edit_city_enter.getText().toString().trim());
 
                         }
+                        dialog.dismiss("");
                     }
 
                     @Override

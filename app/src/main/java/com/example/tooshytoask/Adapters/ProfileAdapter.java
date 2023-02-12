@@ -26,7 +26,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     ArrayList<avatarList>avatarList;
     OnClickListner onclicklistener;
 
-    int singleitem_selection_position = -1;
+   public int singleitem_selection_position = -1;
 
     public ProfileAdapter(ArrayList<avatarList>avatarList, OnClickListner onclicklistener, Context context) {
         this.avatarList = avatarList;
@@ -49,13 +49,23 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         InputStream is = new ByteArrayInputStream(imageByteArray);
         Bitmap bmp = BitmapFactory.decodeStream(is);
         holder.img.setImageBitmap(bmp);
+//
+//        if(avatarList.get(position).isSelected)
+//        {
+//            holder.img.setBackgroundResource(R.drawable.circle_active_background);
+//        }else
+//        {
+//            holder.img.setBackgroundResource(R.drawable.circle_inactive_background);
+//        }
        //holder.ProfileItems(avatarList.get(position),position);
 
         if (singleitem_selection_position == position){
+
             holder.img.setBackgroundResource(R.drawable.circle_active_background);
         }
         else {
             holder.img.setBackgroundResource(R.drawable.circle_inactive_background);
+
         }
     }
 
@@ -76,7 +86,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    setSingleSelection(getAdapterPosition());
+
+                    onclicklistener.onClickData(getAdapterPosition(),avatarList.get(getAbsoluteAdapterPosition()).getEncimg());
+
+
+                    setSingleSelection(getAbsoluteAdapterPosition());
+
                 }
             });
 

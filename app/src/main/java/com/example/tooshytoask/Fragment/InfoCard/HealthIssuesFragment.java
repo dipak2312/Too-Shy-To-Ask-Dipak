@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Adapters.CategoryAdapter;
 import com.example.tooshytoask.Adapters.HealthAdapter;
-import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
-import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.HealthIssuseList;
-import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
@@ -36,13 +32,12 @@ import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class ThreeFragment extends Fragment implements View.OnClickListener, OnClickListner{
+public class HealthIssuesFragment extends Fragment implements View.OnClickListener, OnClickListner{
     Context context;
     SPManager spManager;
     RecyclerView health_recy;
@@ -51,11 +46,12 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     ClickListener clickListener;
     LinearLayout health_issues_title;
     Button yes_btn, no_btn;
-    ImageButton next_btn;
+    ImageButton btnYesNo;
     TextView skip_btn;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
-    String healthissueId;
+    String healthissueId="";
+    ArrayList<String>healthissueIds=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,8 +68,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         yes_btn.setOnClickListener(this);
         no_btn = view.findViewById(R.id.no_btn);
         no_btn.setOnClickListener(this);
-        next_btn = view.findViewById(R.id.next_btn);
-        next_btn.setOnClickListener(this);
+        btnYesNo = view.findViewById(R.id.btnYesNo);
+        btnYesNo.setOnClickListener(this);
         skip_btn = view.findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
         health_issues_title = view.findViewById(R.id.health_issues_title);
@@ -149,8 +145,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         dialog.dismiss("");
 
         SaveHealthIssueAuthModel model = new SaveHealthIssueAuthModel();
-        model.setUserId(spManager.getUserId());
-        model.setHealthissueId(healthissueId);
+        model.setUser_id(spManager.getUserId());
+        model.setHealthissue_id(healthissueIds);
 
         WebServiceModel.getRestApi().saveHealthIssue(model)
                 .subscribeOn(Schedulers.io())
@@ -198,7 +194,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         if (id == skip_btn.getId()){
             clickListener.onClick(true);
         }
-        else if (id == next_btn.getId()){
+        else if (id == btnYesNo.getId()){
             saveHealthIssue();
         }
 
@@ -210,7 +206,7 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
                 adapter.notifyDataSetChanged();
             }
 
-            next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+            btnYesNo.setBackgroundResource(R.drawable.circle_button_inactive);
             yes_btn.setBackgroundResource(R.drawable.gender_border_active);
             yes_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
             no_btn.setBackgroundResource(R.drawable.gender_border_inactive);
@@ -221,7 +217,8 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
         else if (id == no_btn.getId()){
             health_issues_title.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();
-            next_btn.setBackgroundResource(R.drawable.circle_button_active);
+            btnYesNo.setBackgroundResource(R.drawable.circle_button_active);
+            clickListener.onClick(true);
             no_btn.setBackgroundResource(R.drawable.gender_border_active);
             no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
             yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
@@ -251,6 +248,14 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
     @Override
     public void onClickData(int position, String id) {
         healthissueId = id;
+        if(healthIssuseList.get(position).isSelected)
+        {
+            healthissueIds.add(healthissueId);
+        }else
+        {
+            healthissueIds.remove(healthissueId);
+        }
+       // Log.d("saggi",healthissueIds.toString());
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
@@ -263,11 +268,11 @@ public class ThreeFragment extends Fragment implements View.OnClickListener, OnC
 
         if(ans)
         {
-            next_btn.setBackgroundResource(R.drawable.circle_button_active);
+            btnYesNo.setBackgroundResource(R.drawable.circle_button_active);
 
         }else
         {
-            next_btn.setBackgroundResource(R.drawable.circle_button_inactive);
+            btnYesNo.setBackgroundResource(R.drawable.circle_button_inactive);
         }
 
     }

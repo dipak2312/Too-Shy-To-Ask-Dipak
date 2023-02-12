@@ -4,6 +4,7 @@ public class health_issues {
     private String health_id;
     private String health_title;
     private String isselcted;
+    public Boolean isSelected =false;
 
     public String getHealth_id() {
         return health_id;
@@ -27,5 +28,13 @@ public class health_issues {
 
     public void setIsselcted(String isselcted) {
         this.isselcted = isselcted;
+    }
+
+    public Boolean getSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected) {
+        isSelected = selected;
     }
 }

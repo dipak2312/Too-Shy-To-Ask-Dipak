@@ -10,18 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Adapters.CategoryAdapter;
-import com.example.tooshytoask.Adapters.UpdateCategoryAdapter;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.CategoryItem;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.InformationStorehouseList;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
@@ -44,13 +40,14 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
     RecyclerView category_recy;
     CategoryAdapter adapter;
     ArrayList<InformationStorehouseList>informationStorehouseList;
+    ArrayList<health_interest>health_interest;
     RelativeLayout rel_back;
     CustomProgressDialog dialog;
     Button update_btn;
     ClickListener clickListener;
     OnClickListner onclicklistener;
-    ArrayList<com.example.tooshytoask.Models.UpdateProfile.health_interest> health_interest;
-    String action = "healthcategory";
+    String action = "healthcategory", healthId="";
+    ArrayList<String>helthIds=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +67,8 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
         healthcategory();
+        //getUserData();
+
     }
 
     public void healthcategory() {
@@ -91,12 +90,9 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
                             informationStorehouseList = healthCateResponse.getInformationStorehouseList();
                             for(int i=0;i<informationStorehouseList.size();i++)
                             {
-                                if (informationStorehouseList.get(i).equals(true)){
-                                spManager.setHealthcategory(informationStorehouseList.get(i).getId());
-                            }
-                                else {
+
                                     informationStorehouseList.get(i).isSelected = false;
-                                }
+
                             }
 
 
@@ -141,7 +137,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
-        model.setHealth_id(model.getHealth_id());
+        model.setHealth_id(helthIds);
         model.setAction(action);
 
         WebServiceModel.getRestApi().getUserProfile(model)
@@ -154,7 +150,7 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
                         if (msg.equals("Profile Updated")){
 
-                            //spManager.setFirstName(edit_name.getText().toString().trim());
+
 
                         }
                     }
@@ -187,6 +183,20 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
                         if (msg.equals("success")){
                             health_interest = userProfileResponse.getProfiledetails().getHealth_interest();
+
+                            for(int i=0;i<informationStorehouseList.size();i++) {
+                                for (int j = 0; j < health_interest.size(); j++) {
+
+                                    if (i == j){
+                                        health_interest.get(i).isSelected = true;
+                                    }
+                                    else {
+                                        health_interest.get(i).isSelected = false;
+                                    }
+                                }
+
+
+                            }
 
                         }
                     }
@@ -232,6 +242,13 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClickData(int position, String id) {
-
+        healthId = id;
+        if(informationStorehouseList.get(position).isSelected)
+        {
+            helthIds.add(healthId);
+        }else
+        {
+            helthIds.remove(healthId);
+        }
     }
 }

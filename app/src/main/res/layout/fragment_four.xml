@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="@dimen/margin_20"
     android:layout_marginEnd="@dimen/margin_20"
-    tools:context=".Fragment.InfoCard.FourFragment">
+    tools:context=".Fragment.InfoCard.PersonalInfoFragment">
 
     <LinearLayout
         android:id="@+id/lin_layout"

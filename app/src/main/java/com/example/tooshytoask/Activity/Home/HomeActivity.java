@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,14 +12,11 @@ import android.view.View;
 
 import com.example.tooshytoask.Fragment.AskExpertFragment;
 import com.example.tooshytoask.Fragment.HomeFragment;
-import com.example.tooshytoask.Fragment.InfoCard.FourFragment;
 import com.example.tooshytoask.Fragment.InsightsFragment;
 import com.example.tooshytoask.Fragment.QuizFragment;
 import com.example.tooshytoask.Fragment.SettingsFragment;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.CustomBottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class HomeActivity extends AppCompatActivity {

@@ -82,14 +82,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                        cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
                        informationStorehouseList.setSelected(false);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position, informationStorehouseList.getId().toString());
+                       onclicklistener.onClickData(position, informationStorehouseList.getId());
 
                    }else {
                        cate_img.setBackgroundResource(R.drawable.circle_active_background);
                        informationStorehouseList.setSelected(true);
                        notifyDataSetChanged();
-                       onclicklistener.onClickData(position, informationStorehouseList.getId().replace("[", "")
-                               .replace("]", "").replace(" ", ""));
+                       onclicklistener.onClickData(position, informationStorehouseList.getId());
 
 
 ///informationStorehouseList.get(position).getId().toString()
