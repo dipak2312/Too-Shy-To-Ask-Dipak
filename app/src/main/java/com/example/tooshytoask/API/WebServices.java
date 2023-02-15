@@ -9,6 +9,8 @@ import com.example.tooshytoask.AuthModels.HelpFeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
+import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
+import com.example.tooshytoask.AuthModels.NotificationAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
@@ -29,6 +31,8 @@ import com.example.tooshytoask.Models.Help.HelpSubCategoryResponse;
 import com.example.tooshytoask.Models.HomeScreenResponse;
 import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
 import com.example.tooshytoask.Models.Language.LanguageResponse;
+import com.example.tooshytoask.Models.ManageNotificationResponse;
+import com.example.tooshytoask.Models.NotificationResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
@@ -129,5 +133,13 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/userproile")
     Observable<UserProfileResponse> getUserData(@Body UserProfileAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/usernotification")
+    Observable<NotificationResponse> getNotification(@Body NotificationAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/ManageNotificationList")
+    Observable<ManageNotificationResponse> getManageNotification(@Body ManageNotificationAuthModel model);
 
 }

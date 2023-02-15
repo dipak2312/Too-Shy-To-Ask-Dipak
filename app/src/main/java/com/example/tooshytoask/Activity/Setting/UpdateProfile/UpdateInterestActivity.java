@@ -66,8 +66,8 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
         category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
+
         healthcategory();
-        //getUserData();
 
     }
 
@@ -84,28 +84,29 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
                     public void onNext(HealthCateResponse healthCateResponse) {
 
                         String msg = healthCateResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("success")) {
 
                             informationStorehouseList = healthCateResponse.getInformationStorehouseList();
-                            for(int i=0;i<informationStorehouseList.size();i++)
-                            {
-
-                                    informationStorehouseList.get(i).isSelected = false;
-
-                            }
-
 
                             if (informationStorehouseList != null) {
                                 CallAdapter();
                             }
 
-                        } else {
+
+                            for(int i=0;i<informationStorehouseList.size();i++)
+                            {
+
+                                }
+
+
+                        }
+                        else {
 
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
-                        dialog.dismiss("");
+
                     }
 
 
@@ -133,7 +134,6 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
     public void getUserProfileUpdate(){
         dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -147,56 +147,10 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
                     @Override
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
 
 
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    public void getUserData(){
-        dialog.show("");
-
-        UserProfileAuthModel model = new UserProfileAuthModel();
-        model.setUser_id(spManager.getUserId());
-
-        WebServiceModel.getRestApi().getUserData(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<UserProfileResponse>() {
-                    @Override
-                    public void onNext(UserProfileResponse userProfileResponse) {
-                        String msg = userProfileResponse.getMsg();
-
-                        if (msg.equals("success")){
-                            health_interest = userProfileResponse.getProfiledetails().getHealth_interest();
-
-                            for(int i=0;i<informationStorehouseList.size();i++) {
-                                for (int j = 0; j < health_interest.size(); j++) {
-
-                                    if (i == j){
-                                        health_interest.get(i).isSelected = true;
-                                    }
-                                    else {
-                                        health_interest.get(i).isSelected = false;
-                                    }
-                                }
-
-
-                            }
 
                         }
                     }

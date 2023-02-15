@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Search.SearchActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
@@ -36,6 +37,7 @@ import com.example.tooshytoask.Adapters.SliderBannerAdapter;
 import com.example.tooshytoask.Adapters.StatusAdapter;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
+import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Bannerist;
 import com.example.tooshytoask.Models.Blogs;
@@ -44,6 +46,7 @@ import com.example.tooshytoask.Models.RecentlyBlogItems;
 import com.example.tooshytoask.Models.RecommendedBlogs;
 import com.example.tooshytoask.Models.StoryCategory;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
+import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -87,6 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
     String action = "language";
+    RelativeLayout stories_rel_lay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +102,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        stories_rel_lay = view.findViewById(R.id.stories_rel_lay);
         blog = view.findViewById(R.id.blog);
         recommended_blogs_lay = view.findViewById(R.id.recommended_blogs_lay);
         recommended_blogs_lay.setOnClickListener(this);
@@ -131,12 +136,45 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mBarLayout = view.findViewById(R.id.indicator_layout);
 
         getHomePageResponse();
+        getUserData();
 
         return view;
     }
+    public void getUserData(){
+        dialog.show("");
+
+        UserProfileAuthModel model = new UserProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getUserData(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UserProfileResponse>() {
+                    @Override
+                    public void onNext(UserProfileResponse userProfileResponse) {
+                        String msg = userProfileResponse.getMsg();
+
+                        if (msg.equals("success")){
+                            //Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(update_profile);
+                        }
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 
     public void getHomePageResponse() {
-        dialog.show("");
+        //dialog.show("");
 
         HomeScreenAuthModel model = new HomeScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -168,6 +206,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                 statusAdapter = new StatusAdapter(context ,StoryCategory);
                                 recy_status.setAdapter(statusAdapter);
                             }
+                             if (StoryCategory.size() == 0){
+                                 stories_rel_lay.setVisibility(View.GONE);
+                             }
                             if(RecommendedBlogs.size() !=0)
                             {
                                 recommended_blogs_lay.setVisibility(View.VISIBLE);
@@ -178,11 +219,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                             if (RecommendedBlogs.size() == 0){
                                 recommended_blogs_lay.setVisibility(View.GONE);
                             }
-                             /*if (Blogs.size() !=0){
 
-                                blogAdapter = new BlogAdapter(context, Blogs);
-                                recy_blogs.setAdapter(blogAdapter);
-                            }*/
                             if (Blogs.size() !=0){
 
                                 recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs);

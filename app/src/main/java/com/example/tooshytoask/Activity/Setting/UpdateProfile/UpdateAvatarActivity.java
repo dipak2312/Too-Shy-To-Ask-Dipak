@@ -103,6 +103,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                         String msg = updateProfileResponse.getMsg();
 
                         if (msg.equals("Profile Updated")){
+                           spManager.setUserPhoto(avtarImage);
 
                         }
                         else {
@@ -210,8 +211,6 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
                     Bitmap compressedImageBitmap = new Compressor(this).compressToBitmap(choosedFile);
 
-                    //File compressedImageFile = new Compressor(this).compressToFile(choosedFile);
-
                     profile_img.setImageBitmap(null);
                     profile_img.setImageBitmap(compressedImageBitmap);
 
@@ -243,30 +242,10 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
 
-
-//            if(requestCode == Camera.REQUEST_TAKE_PHOTO) {
-//                Bitmap bitmap = camera.getCameraBitmap();
-//                if (bitmap != null) {
-//                    //picFrame.setImageBitmap(bitmap);
-//
-//
-//                    profile_image.setImageBitmap(null);
-//                    profile_image.setImageBitmap(bitmap);
-//
-//                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//                    byte[] b = baos.toByteArray();
-//
-//                    encodedImage = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
-//                    //System.out.println(encodedImage);
-//                } else {
-//                    Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-
+            }
 
         }
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -275,6 +254,8 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         if (id == rel_back.getId()){
 
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
             dialog.show("");
@@ -283,6 +264,8 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
             getUserProfileUpdate();
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
             dialog.show("");

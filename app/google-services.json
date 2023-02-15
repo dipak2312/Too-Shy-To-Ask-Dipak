@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "192470492971",
+    "project_id": "too-shy-to-ask",
+    "storage_bucket": "too-shy-to-ask.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192470492971:android:c1e351eaf5fae43ccc076e",
+        "android_client_info": {
+          "package_name": "com.neuronimbus.metropolis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "192470492971-452oijid08nred0ptkuk5ircolmfedhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk4MKjGeVMr9zuupLC2Zr50ToDqFv1w-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "192470492971-452oijid08nred0ptkuk5ircolmfedhe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

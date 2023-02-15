@@ -102,7 +102,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         logout = view.findViewById(R.id.logout);
         logout.setOnClickListener(this);
 
-        getUserData();
+        //getUserData();
 
         return view;
     }
@@ -126,6 +126,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                             progrss_value= Double.parseDouble(userProfileResponse.getProfile_percent());
                             progress_circular.setProgress((int) progrss_value);
                             txt_name.setText(userProfileResponse.getUser_name());
+                            //Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(profile_image);
                         }
                         dialog.dismiss("");
                     }
@@ -297,7 +299,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
         bottomSheetDialog.show();
         selectLanguage();
-        getUserProfileUpdate();
+
     }
     public void getUserProfileUpdate(){
         dialog.show("");
@@ -427,6 +429,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
+
+        getUserData();
         profile_pic = spManager.getUserPhoto();
         if (!profile_pic.equals("")) {
 

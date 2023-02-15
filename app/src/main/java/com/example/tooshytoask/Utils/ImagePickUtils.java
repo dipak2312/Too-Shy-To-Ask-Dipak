@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -22,10 +25,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import retrofit2.http.DELETE;
+
 public class ImagePickUtils {
 
     private static final int TAKE_PICTURE = 1;
-    private Uri imageUri;
+    private static final int REMOVE_PICTURE = 123;
+    private static Uri imageUri;
 
     private static final int SELECT_FILE = 2754;
 
@@ -36,18 +42,11 @@ public class ImagePickUtils {
         bottomSheetDialog.setCancelable(false);
 
 
-       /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        final View dialogView = inflater.inflate(R.layout.select_image_dialog_layout, null);
-        dialogBuilder.setView(dialogView);*/
-
-        //TextView title = (TextView) dialogView.findViewById(R.id.textView1);
         final Button camera1 = (Button) bottomSheetDialog.findViewById(R.id.select_image_dialog_btn_camera_btn);
         Button gallery = (Button) bottomSheetDialog.findViewById(R.id.select_image_dialog_btn_gallery_btn);
         RelativeLayout btnCancel = (RelativeLayout) bottomSheetDialog.findViewById(R.id.select_image_dialog_close_btn);
+        Button btnRemoveProfile = (Button) bottomSheetDialog.findViewById(R.id.remove_image_dialog_button);
 
-       /* final AlertDialog b = dialogBuilder.create();
-        b.show();*/
         bottomSheetDialog.show();
 
 
@@ -59,8 +58,6 @@ public class ImagePickUtils {
                 bottomSheetDialog.dismiss();
 
             }
-
-
         });
 
         gallery.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +68,13 @@ public class ImagePickUtils {
             }
         });
 
+        btnRemoveProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +83,12 @@ public class ImagePickUtils {
             }
         });
 
+    }
+
+    private static void RemoveProfilePic(Context context){
 
     }
+
 
     private static void GalleryIntent(Context context) {
 
@@ -114,6 +122,8 @@ public class ImagePickUtils {
 //        activity.openCamera();
 
     }
+
+
 
 
     public static boolean canDeviceHandleGallery(@NonNull Context context) {

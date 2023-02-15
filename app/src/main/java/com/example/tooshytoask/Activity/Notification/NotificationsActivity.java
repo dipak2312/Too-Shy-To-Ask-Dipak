@@ -15,10 +15,22 @@ import androidx.appcompat.widget.Toolbar;
 //import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.NotificationAdapter;
+import com.example.tooshytoask.AuthModels.NotificationAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.NotificationList;
+import com.example.tooshytoask.Models.NotificationResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class NotificationsActivity extends AppCompatActivity implements View.OnClickListener {
     Context context;
@@ -27,6 +39,9 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     RelativeLayout rel_back;
     Toolbar toolbar;
     ImageView clear_all_notification, settings;
+    RecyclerView rec_show_notification;
+    ArrayList<NotificationList> notificationLists;
+    NotificationAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         settings = findViewById(R.id.settings);
         settings.setOnClickListener(this);
         toolbar = findViewById(R.id.toolbar);
+        rec_show_notification = findViewById(R.id.rec_show_notification);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
@@ -73,6 +89,44 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void getNotification(){
+        dialog.show("");
+
+        NotificationAuthModel model = new NotificationAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getNotification(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<NotificationResponse>() {
+                    @Override
+                    public void onNext(NotificationResponse notificationResponse) {
+                        String msg = notificationResponse.getMsg();
+                        if (msg.equals("success")){
+
+                            notificationLists = notificationResponse.getNotificationList();
+
+                            if (notificationLists.size() != 0){
+                                adapter = new NotificationAdapter(context, notificationLists);
+                                rec_show_notification.setAdapter(adapter);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     @Override

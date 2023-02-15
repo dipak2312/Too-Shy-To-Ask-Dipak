@@ -1,6 +1,7 @@
 package com.example.tooshytoask.Activity.Landing;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.tooshytoask.Adapters.InfoCardAdapter;
+import com.example.tooshytoask.Fragment.InfoCard.AvtarFragment;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.R;
@@ -137,6 +139,13 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
 
       }
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, intent);
+        }
     }
 
 }

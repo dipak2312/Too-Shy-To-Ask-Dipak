@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">TooShyToAsk</string>
+    <string name="app_name">Too Shy To Ask</string>
     <string name="page_count_total">%d/%d</string>
     <string name="app_images_folderName">TSTA</string>
 
 
     //Landing
-    <string name="resend_otp">RESEND OTP</string>
+    <string name="resend_otp">RESEND OTP </string>
     <string name="todo">TODO</string>
     <string name="create_your_account">Create Your Account</string>
     <string name="login_text">Please Login to access your account</string>
@@ -130,6 +130,12 @@
     <string name="i_don_t_like_how_the_feature_works">I don\'t like how the feature works</string>
     <string name="change_avtar">Change Avtar</string>
     <string name="update_your_avatar">Update your Avatar</string>
+    <string name="profile_photo">Profile Photo</string>
+    <string name="remove_profile">Remove Profile</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="add_screenshot">Add Media</string>
+    <string name="attachment_optional">Attachment (Optional)</string>
 
 
 </resources>

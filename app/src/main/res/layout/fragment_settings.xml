@@ -65,7 +65,7 @@
                     android:layout_height="@dimen/margin_90"
                     android:layout_centerInParent="true"
                     android:padding="@dimen/margin_4"
-                    android:src="@drawable/avatar1" />
+                    android:src="@drawable/demo" />
 
             </RelativeLayout>
 

@@ -74,11 +74,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             finish();*/
                 loginWithOTP();
         } else if (id == guest_login.getId()) {
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+//            Intent intent = new Intent(context, HomeActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            finish();
         }
     }
 

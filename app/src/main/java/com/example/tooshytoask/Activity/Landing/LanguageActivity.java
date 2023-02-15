@@ -24,6 +24,7 @@ import com.example.tooshytoask.Models.Language.LanguageResponse;
 import com.example.tooshytoask.Models.Language.data;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -32,7 +33,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class LanguageActivity extends AppCompatActivity implements View.OnClickListener {
+public class LanguageActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner {
     Context context;
     SPManager spManager;
     Button btn_next;
@@ -40,6 +41,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<data>data;
     RecyclerView recy_language;
     LanguageAdapter adapter;
+    OnClickListner onClickListner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +99,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
 
                             data = languageResponse.getData();
                             if (data != null) {
-                                adapter = new LanguageAdapter(data, context, spManager);
+                                adapter = new LanguageAdapter(data, context, spManager, onClickListner);
                                 recy_language.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
 
@@ -198,4 +200,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @Override
+    public void onClickData(int position, String id) {
+
+    }
 }

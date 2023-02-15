@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/margin_5"
+    android:layout_margin="@dimen/margin_5"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10"
+        android:background="#FFECF9">
+
+        <TextView
+            android:id="@+id/notification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/worksansmedium"
+            android:textColor="@color/black"
+            android:text="Hi Dipak!"/>
+
+        <TextView
+            android:id="@+id/notification_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today, 09:04 AM"
+            android:textColor="@color/black"
+            android:alpha="0.7"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/worksansregular"/>
+
+        <TextView
+            android:id="@+id/notification_desc"
+            android:layout_width="@dimen/margin_250"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/worksansmedium"
+            android:layout_below="@id/notification_title"
+            android:layout_marginTop="@dimen/margin_10"
+            android:textColor="@color/black"
+            android:alpha="0.7"
+            android:text="Integer id urna non quam commodo gravida."/>
+        
+        <ImageView
+            android:id="@+id/single_notification_clear"
+            android:layout_width="@dimen/margin_20"
+            android:layout_height="@dimen/margin_3"
+            android:src="@drawable/horizontal_dots"
+            android:layout_below="@id/notification_title"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+        
+        <ImageView
+            android:id="@+id/notification_img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_125"
+            android:layout_below="@id/notification_desc"
+            android:layout_marginTop="@dimen/margin_10"
+            android:src="@drawable/welcome"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

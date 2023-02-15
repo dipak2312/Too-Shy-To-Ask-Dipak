@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/lin_noti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20">
+
+            <TextView
+                android:id="@+id/push_notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Push Notifications"
+                android:fontFamily="@font/worksansmedium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size15"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/notification_on_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/thumb"
+                android:layout_marginTop="@dimen/margin_4"
+                app:track="@drawable/track"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/on_off_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Off"
+                android:layout_marginTop="@dimen/margin_2"
+                android:fontFamily="@font/worksansmedium"
+                android:textColor="@color/line_color"
+                android:layout_below="@id/push_notification"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_below="@id/lin_noti"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:background="#a2a2a2">
+
+    </View>
+
+</RelativeLayout>
+
+<!--<RelativeLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginTop="@dimen/margin_15"-->
+<!--android:layout_marginStart="@dimen/margin_20"-->
+<!--android:visibility="gone"-->
+<!--android:layout_marginEnd="@dimen/margin_20">-->
+
+<!--<TextView-->
+<!--    android:id="@+id/email_notification"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Email Notifications"-->
+<!--    android:fontFamily="@font/worksansmedium"-->
+<!--    android:textColor="@color/black"-->
+<!--    android:textSize="@dimen/text_size15"/>-->
+
+<!--<androidx.appcompat.widget.SwitchCompat-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:thumb="@drawable/thumb"-->
+<!--    android:layout_marginTop="@dimen/margin_4"-->
+<!--    app:track="@drawable/track"-->
+<!--    android:layout_alignParentEnd="true"/>-->
+
+<!--<TextView-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="Off"-->
+<!--    android:layout_marginTop="@dimen/margin_2"-->
+<!--    android:fontFamily="@font/worksansmedium"-->
+<!--    android:textColor="@color/line_color"-->
+<!--    android:layout_below="@id/email_notification"/>-->
+<!--</RelativeLayout>-->

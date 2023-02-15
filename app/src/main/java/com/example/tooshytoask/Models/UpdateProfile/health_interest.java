@@ -5,7 +5,7 @@ public class health_interest {
     private String title;
     private String slug;
     private String isselcted;
-    public Boolean isSelected;
+    public Boolean isSelected = false;
 
 
     public String getId() {

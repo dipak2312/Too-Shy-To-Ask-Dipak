@@ -62,11 +62,10 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
     RecyclerView profile_recy;
     ImageView camera, file;
     ProfileAdapter adapter;
-    String encodedImage = "";
+
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
     ArrayList<avatarList>avatarList;
-
     String avtarImage="";
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
@@ -178,9 +177,10 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
                      String msg = saveProfilePicResponse.getMsg();
 
                      if (msg.equals("Profile Image Updated Successfully")){
-                         clickListener.onClick(true);
+
 
                      }
+                     dialog.dismiss("");
                  }
 
                  @Override
@@ -203,7 +203,13 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             clickListener.onClick(true);
         }
         else if (id == next_btn2.getId()){
-            saveProfilePic();
+            if (avtarImage.equals("")) {
+                Toast.makeText(context, "Please select your profile", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                saveProfilePic();
+                clickListener.onClick(true);
+            }
         }
 
 
@@ -215,7 +221,6 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             if(status)
             {
                 ImagePickUtilsCamera.selectImage(context);
-                camera.isClickable();
                 adapter.notifyDataSetChanged();
                 next_btn2.setBackgroundResource(R.drawable.circle_button_active);
             }
@@ -319,8 +324,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
     public void onClickData(int position, String base64Image) {
 
        avtarImage=base64Image;
-       //clickListener.onClick(true);
-
+        next_btn2.setBackgroundResource(R.drawable.circle_button_active);
     }
 
 }

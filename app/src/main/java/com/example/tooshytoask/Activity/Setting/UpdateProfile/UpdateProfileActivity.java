@@ -18,8 +18,10 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
+import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
+import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.MyValidator;
@@ -97,19 +99,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         other = findViewById(R.id.other);
         other.setOnClickListener(this);
 
-        if (spManager.getGender().equals("Male")){
-            male.setBackgroundResource(R.drawable.gender_border_active);
-            male.setTextColor(ContextCompat.getColor(context, R.color.white));
-        }
-        else if (spManager.getGender().equals("Female")){
-            female.setBackgroundResource(R.drawable.gender_border_active);
-            female.setTextColor(ContextCompat.getColor(context, R.color.white));
-        }
-        else if (spManager.getGender().equals("Other")){
-            other.setBackgroundResource(R.drawable.gender_border_active);
-            other.setTextColor(ContextCompat.getColor(context, R.color.white));
-        }
-
         update_pro = findViewById(R.id.update_pro);
         update_pro.setOnClickListener(this);
 
@@ -136,11 +125,28 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     }
                 })
                 .build();
+
+        getUserData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        gender = spManager.getGender();
+
+        if (spManager.getGender().equals("Male")){
+            male.setBackgroundResource(R.drawable.gender_border_active);
+            male.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
+        else if (spManager.getGender().equals("Female")){
+            female.setBackgroundResource(R.drawable.gender_border_active);
+            female.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
+        else if (spManager.getGender().equals("Other")){
+            other.setBackgroundResource(R.drawable.gender_border_active);
+            other.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
         profile_pic = spManager.getUserPhoto();
         if (!profile_pic.equals("")) {
 
@@ -150,6 +156,39 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
 
     private void openDatePicker() {
         datePickerPopup.show();
+    }
+
+    public void getUserData(){
+        dialog.show("");
+
+        UserProfileAuthModel model = new UserProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getUserData(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UserProfileResponse>() {
+                    @Override
+                    public void onNext(UserProfileResponse userProfileResponse) {
+                        String msg = userProfileResponse.getMsg();
+
+                        if (msg.equals("success")){
+                            //Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(profile_image);
+                        }
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getUserProfileUpdate(){
@@ -188,6 +227,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                             spManager.setCountry(edit_country_enter.getText().toString().trim());
                             spManager.setState(edit_state_enter.getText().toString().trim());
                             spManager.setCity(edit_city_enter.getText().toString().trim());
+                            spManager.setUserPhoto(profile_pic);
 
                         }
                         dialog.dismiss("");
@@ -280,13 +320,13 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             } else if (edit_surname.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Last Name is required", Toast.LENGTH_SHORT).show();
 
-            } else if (edit_email_enter.getText().toString().trim().equals("")) {
+            } /*else if (edit_email_enter.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Email is required", Toast.LENGTH_SHORT).show();
 
             } else if (!MyValidator.isValidEmail(edit_email_enter.getText().toString().trim())) {
                 Toast.makeText(context, "Please enter valid email id", Toast.LENGTH_SHORT).show();
 
-            } else if (etMobile.getText().toString().trim().equals("")) {
+            }*/ else if (etMobile.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Mobile Number is required", Toast.LENGTH_SHORT).show();
 
             }   else if (edit_age.getText().toString().trim().equals("")) {
@@ -302,19 +342,15 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             else if (edit_country_enter.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Please enter your Country", Toast.LENGTH_SHORT).show();
             }
-            /*else if (gender.equals("")){
+            else if (gender.equals("")){
                 Toast.makeText(context, "Please select your Gender", Toast.LENGTH_SHORT).show();
-            }*/
+            }
             else {
                 getUserProfileUpdate();
                 finish();
             }
         }
         else if (id == rel_back.getId()){
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
             finish();
         }
 

@@ -73,7 +73,6 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
         healthIssues();
-        //getUserData();
     }
 
     public void healthIssues() {
@@ -94,14 +93,14 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
                             healthIssuseList = healthIssueResponse.getHealthIssuseList();
 
-                            for(int i=0;i<healthIssuseList.size();i++)
-                            {
-                                healthIssuseList.get(i).isSelected=false;
-                            }
                             if (healthIssuseList != null) {
                                 CallAdapter();
                             }
 
+                            for(int i=0;i<healthIssuseList.size();i++)
+                            {
+
+                                }
 
                         } else {
 
@@ -167,57 +166,13 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
                 });
     }
 
-    public void getUserData(){
-        dialog.show("");
-
-        UserProfileAuthModel model = new UserProfileAuthModel();
-        model.setUser_id(spManager.getUserId());
-
-        WebServiceModel.getRestApi().getUserData(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<UserProfileResponse>() {
-                    @Override
-                    public void onNext(UserProfileResponse userProfileResponse) {
-                        String msg = userProfileResponse.getMsg();
-
-                        if (msg.equals("success")){
-                            health_issues = userProfileResponse.getProfiledetails().getHealth_issues();
-
-                            for(int j=0;j<health_issues.size();j++) {
-
-                                if (health_issues.get(j).isSelected) {
-                                    health_issues.get(j).setIsselcted("1");
-                                }
-                                else {
-                                    health_issues.get(j).setIsselcted("0");
-                                }
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
 
          if (id == rel_back.getId()){
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            finish();
         }
          else if (id == update_btn2.getId()){
              getUserProfileUpdate();

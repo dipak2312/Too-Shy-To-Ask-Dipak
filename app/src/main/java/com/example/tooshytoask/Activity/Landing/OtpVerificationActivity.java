@@ -154,7 +154,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     private void progressBar() {
         progress_circular.setProgress(0f);
         progress_circular.setProgressMax(60f);
-        progress_circular.setProgressWithAnimation( 60f, 10000L);
+        progress_circular.setProgressWithAnimation( 60f, 60000L);
         progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
         progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
     }
@@ -162,13 +162,13 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
     private void countDownTimer() {
 
 
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(60000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 String value = " " + millisUntilFinished / 1000;
                     btn_resend_otp.setClickable(false);
-                    btn_resend_otp.setText("RESEND IN"+ millisUntilFinished / 1000);
+                    btn_resend_otp.setText("RESEND IN "+ millisUntilFinished / 1000);
                     btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.resend_color));
                     progress_text.setText(value);
                     //progress_text.setVisibility(View.VISIBLE);

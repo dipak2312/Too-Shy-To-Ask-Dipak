@@ -75,13 +75,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rec_show_notification"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
+                android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
 
 
         </RelativeLayout>
+
+
 
 </RelativeLayout>
 

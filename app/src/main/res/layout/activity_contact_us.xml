@@ -82,11 +82,8 @@
                 android:paddingStart="@dimen/padding_15"
                 android:paddingTop="@dimen/margin_5"
                 android:paddingEnd="@dimen/padding_15"
-                android:textColorHint="@color/teal_700"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
-                app:hintTextColor="@color/purple"
-                app:placeholderText="Enter Your Email"
-                app:placeholderTextColor="#a2a2a2">
+                app:hintTextColor="@color/purple">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -115,11 +112,8 @@
                 android:paddingStart="@dimen/padding_15"
                 android:paddingTop="@dimen/margin_5"
                 android:paddingEnd="@dimen/padding_15"
-                android:textColorHint="@color/teal_700"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
-                app:hintTextColor="@color/purple"
-                app:placeholderText="Enter Your Subject"
-                app:placeholderTextColor="#a2a2a2">
+                app:hintTextColor="@color/purple">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_sub_enter"
@@ -148,11 +142,8 @@
                 android:paddingStart="@dimen/padding_15"
                 android:paddingTop="@dimen/margin_5"
                 android:paddingEnd="@dimen/padding_15"
-                android:textColorHint="@color/teal_700"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
-                app:hintTextColor="@color/purple"
-                app:placeholderText="Enter Your Description"
-                app:placeholderTextColor="#a2a2a2">
+                app:hintTextColor="@color/purple">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -192,11 +183,11 @@
                     android:layout_marginStart="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_8"
                     android:fontFamily="@font/worksansmedium"
-                    android:text="Attachment (Optional)"
+                    android:text="@string/attachment_optional"
                     android:textColor="@color/purple"
                     android:textSize="@dimen/text_size12" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/email_txt"
@@ -206,25 +197,36 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/img_name"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_30"
-                        android:fontFamily="@font/worksansmedium"
+                        android:layout_marginStart="@dimen/margin_15"
+                        android:layout_marginEnd="@dimen/margin_40"
                         android:gravity="center_vertical"
-                        android:text="Add file"
+                        android:singleLine="true"
+                        android:fontFamily="@font/worksansmedium"
+                        android:text="@string/add_screenshot"
                         android:textColor="@color/purple"
                         android:textSize="@dimen/text_size12" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/remove_img"
+                        android:layout_width="@dimen/margin_25"
                         android:layout_height="@dimen/margin_30"
-                        android:layout_marginStart="@dimen/margin_5"
-                        android:fontFamily="@font/worksanslight"
-                        android:gravity="center_vertical"
-                        android:text="(image/screenshot/pdf)"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size12" />
+                        android:layout_marginEnd="@dimen/margin_15"
+                        android:paddingEnd="@dimen/padding_15"
+                        android:visibility="gone"
+                        android:src="@drawable/back_arrow_lang"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical"/>
 
-                </LinearLayout>
+                    <ImageView
+                        android:id="@+id/profile_img"
+                        android:layout_width="@dimen/margin_100"
+                        android:layout_height="@dimen/margin_100"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
