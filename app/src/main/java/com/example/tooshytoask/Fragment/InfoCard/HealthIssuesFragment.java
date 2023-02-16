@@ -140,6 +140,10 @@ public class HealthIssuesFragment extends Fragment implements View.OnClickListen
         health_recy.setAdapter(adapter);
     }
 
+    public void main(String[] args){
+
+    }
+
     public void saveHealthIssue() {
         dialog.show("");
         dialog.dismiss("");

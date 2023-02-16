@@ -450,7 +450,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     public void getUserProfileUpdate(){
         dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -464,7 +463,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
 
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,14 +23,17 @@ import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.ProfileAdapter;
+import com.example.tooshytoask.AuthModels.RemoveProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.RemoveProfileResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.Utils.OnClickListner;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -83,6 +87,38 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
         profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
         getProfile();
+    }
+
+    public void RemoveProfile(){
+        dialog.show("");
+
+        RemoveProfileAuthModel model = new RemoveProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().RemoveProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<RemoveProfileResponse>() {
+                    @Override
+                    public void onNext(RemoveProfileResponse removeProfileResponse) {
+                        String msg = removeProfileResponse.getMsg();
+                            dialog.dismiss("");
+                        if (msg.equals("Profile Image Updated Successfully")){
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getUserProfileUpdate(){
@@ -175,6 +211,66 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     {
         adapter = new ProfileAdapter(avatarList, this, context);
         profile_recy.setAdapter(adapter);
+    }
+
+    public void profilePopup(){
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.select_image_dialog_layout);
+        bottomSheetDialog.setCancelable(false);
+
+
+        final Button camera1 = (Button) bottomSheetDialog.findViewById(R.id.select_image_dialog_btn_camera_btn);
+        Button gallery = (Button) bottomSheetDialog.findViewById(R.id.select_image_dialog_btn_gallery_btn);
+        RelativeLayout btnCancel = (RelativeLayout) bottomSheetDialog.findViewById(R.id.select_image_dialog_close_btn);
+        Button btnRemoveProfile = (Button) bottomSheetDialog.findViewById(R.id.remove_image_dialog_button);
+
+        bottomSheetDialog.show();
+
+
+        camera1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Activity activity = (Activity) context;
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                activity.startActivityForResult(intent, TAKE_PICTURE);
+                bottomSheetDialog.dismiss();
+
+            }
+        });
+
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity = (Activity) context;
+
+                Intent galleryIntent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                activity.startActivityForResult(galleryIntent, SELECT_FILE);
+                bottomSheetDialog.dismiss();
+            }
+        });
+
+        btnRemoveProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RemoveProfile();
+                bottomSheetDialog.dismiss();
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomSheetDialog.dismiss();
+            }
+        });
+
     }
 
     private boolean checkPermissions() {
@@ -271,15 +367,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
             dialog.show("");
         }
         else if (id == profile_img.getId()){
-            boolean status=checkPermissions();
-            if(status)
-            {
-                ImagePickUtils.selectImage(context);
-            }
-            else
-            {
-                checkPermissions();
-            }
+            profilePopup();
         }
 
     }

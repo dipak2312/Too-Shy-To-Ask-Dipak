@@ -87,7 +87,6 @@
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:layout_marginTop="@dimen/margin_10"
-        android:layout_marginBottom="@dimen/margin_30"
         android:layout_below="@+id/select_image_dialog_btn_camera_btn_container">
 
         <Button
@@ -120,7 +119,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_20"
-        android:visibility="gone"
         android:layout_marginEnd="@dimen/margin_20"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginBottom="@dimen/margin_30"

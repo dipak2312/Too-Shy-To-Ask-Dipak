@@ -11,8 +11,8 @@
         android:orientation="vertical"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
-        android:layout_marginTop="@dimen/margin_5"
-        android:layout_marginBottom="@dimen/margin_5">
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:thumb="@drawable/thumb"
                 android:layout_marginTop="@dimen/margin_4"
+                android:checked="true"
                 app:track="@drawable/track"
                 android:layout_alignParentEnd="true"/>
 
@@ -42,7 +43,7 @@
                 android:id="@+id/on_off_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Off"
+                android:text="@string/off"
                 android:layout_marginTop="@dimen/margin_2"
                 android:fontFamily="@font/worksansmedium"
                 android:textColor="@color/line_color"
@@ -56,7 +57,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
         android:layout_below="@id/lin_noti"
-        android:layout_marginBottom="@dimen/margin_10"
         android:background="#a2a2a2">
 
     </View>

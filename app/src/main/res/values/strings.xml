@@ -136,6 +136,9 @@
     <string name="camera">Camera</string>
     <string name="add_screenshot">Add Media</string>
     <string name="attachment_optional">Attachment (Optional)</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="are_you_sure_you_want_to_clear_notification">Are you sure you want to clear notification?</string>
 
 
 </resources>

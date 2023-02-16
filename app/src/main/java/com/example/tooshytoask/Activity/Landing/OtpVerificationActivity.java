@@ -290,6 +290,9 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setUserId(otpInResponse.getData().getUser_id());
                            spManager.setTstaLoginStatus("true");
                            spManager.setUserPhoto(otpInResponse.getData().getProfilePic());
+                           spManager.setCountry(otpInResponse.getData().getCountry());
+                           spManager.setState(otpInResponse.getData().getState());
+                           spManager.setCity(otpInResponse.getData().getCity());
 
                            Intent intent = new Intent(context, HomeActivity.class);
                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

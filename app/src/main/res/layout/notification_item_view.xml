@@ -8,10 +8,10 @@
     >
 
     <RelativeLayout
+        android:id="@+id/notification_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_10"
-        android:background="#FFECF9">
+        android:padding="@dimen/padding_10">
 
         <TextView
             android:id="@+id/notification_title"
@@ -55,10 +55,10 @@
         <ImageView
             android:id="@+id/notification_img"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_125"
+            android:layout_height="wrap_content"
             android:layout_below="@id/notification_desc"
             android:layout_marginTop="@dimen/margin_10"
-            android:src="@drawable/welcome"/>
+            android:src="@drawable/blog1"/>
 
     </RelativeLayout>
 

@@ -1,5 +1,6 @@
 package com.example.tooshytoask.API;
 
+import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
@@ -10,8 +11,10 @@ import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
+import com.example.tooshytoask.AuthModels.ManageNotificationListUpdateAuthModel;
 import com.example.tooshytoask.AuthModels.NotificationAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
+import com.example.tooshytoask.AuthModels.RemoveProfileAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
@@ -21,6 +24,7 @@ import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.ClearNotificationResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.Help.ContactFormResponse;
@@ -31,10 +35,12 @@ import com.example.tooshytoask.Models.Help.HelpSubCategoryResponse;
 import com.example.tooshytoask.Models.HomeScreenResponse;
 import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
 import com.example.tooshytoask.Models.Language.LanguageResponse;
+import com.example.tooshytoask.Models.ManageNotificationListUpdateResponse;
 import com.example.tooshytoask.Models.ManageNotificationResponse;
 import com.example.tooshytoask.Models.NotificationResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
+import com.example.tooshytoask.Models.RemoveProfileResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.Models.SaveProfilePicResponse;
@@ -135,6 +141,10 @@ public interface WebServices {
     Observable<UserProfileResponse> getUserData(@Body UserProfileAuthModel model);
 
     @Headers("Content-Type: application/json")
+    @POST("api/remove_profile_pic")
+    Observable<RemoveProfileResponse> RemoveProfile(@Body RemoveProfileAuthModel model);
+
+    @Headers("Content-Type: application/json")
     @POST("api/usernotification")
     Observable<NotificationResponse> getNotification(@Body NotificationAuthModel model);
 
@@ -142,4 +152,11 @@ public interface WebServices {
     @POST("api/ManageNotificationList")
     Observable<ManageNotificationResponse> getManageNotification(@Body ManageNotificationAuthModel model);
 
+    @Headers("Content-Type: application/json")
+    @POST("api/ManageNotificationListUpdate")
+    Observable<ManageNotificationListUpdateResponse> getManageNotificationUpdate(@Body ManageNotificationListUpdateAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/clearnotification")
+    Observable<ClearNotificationResponse> ClearNotification(@Body ClearNotificationAuthModel model);
 }

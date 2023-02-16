@@ -2,7 +2,7 @@ package com.example.tooshytoask.Models;
 
 public class dataNotification {
     private String module_name;
-    private String status;
+    public Boolean status;
     private String manage_id;
 
     public String getModule_name() {
@@ -13,11 +13,11 @@ public class dataNotification {
         this.module_name = module_name;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

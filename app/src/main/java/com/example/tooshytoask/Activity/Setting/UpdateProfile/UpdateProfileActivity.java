@@ -86,7 +86,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         edit_age = findViewById(R.id.edit_age);
-        edit_age.setText(spManager.getDob());
         edit_age.setOnClickListener(this);
         profile_image = findViewById(R.id.profile_image);
 
@@ -132,6 +131,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onResume() {
         super.onResume();
+        edit_age.setText(spManager.getDob());
 
         gender = spManager.getGender();
 
@@ -147,11 +147,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             other.setBackgroundResource(R.drawable.gender_border_active);
             other.setTextColor(ContextCompat.getColor(context, R.color.white));
         }
-        profile_pic = spManager.getUserPhoto();
-        if (!profile_pic.equals("")) {
 
-            Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
-        }
     }
 
     private void openDatePicker() {

@@ -8,6 +8,10 @@ package com.example.tooshytoask.Models;
         private String gender;
         private String dob;
         private String profilePic;
+        private String city;
+        private String state;
+        private String country;
+
 
         public String getUser_id() {
             return user_id;
@@ -63,6 +67,30 @@ package com.example.tooshytoask.Models;
 
         public void setProfilePic(String profilePic) {
             this.profilePic = profilePic;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        public String getCountry() {
+            return country;
+        }
+
+        public void setCountry(String country) {
+            this.country = country;
         }
     }
 

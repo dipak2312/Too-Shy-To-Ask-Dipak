@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/margin_20"
+    android:layout_marginEnd="@dimen/margin_20">
+
+    <TextView
+        android:id="@+id/are_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/are_you_sure_you_want_to_clear_notification"
+        android:fontFamily="@font/worksansmedium"
+        android:textSize="@dimen/text_size14"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/user_parent_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_30"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:layout_below="@+id/are_you"
+        android:weightSum="2">
+
+
+        <Button
+            android:id="@+id/no_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_45"
+            android:text="@string/no"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size15"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:clickable="true"
+            android:textAllCaps="false"
+            android:background="@drawable/user_border"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="#2B2B2B"/>
+
+        <!--<Button
+            android:id="@+id/male"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_45"
+            android:text="@string/male"
+            android:clickable="true"
+            android:fontFamily="@font/worksansregular"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:textSize="@dimen/text_size14"
+            android:background="@drawable/gender_border_inactive"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:layout_weight="1"/>-->
+
+        <Button
+            android:id="@+id/yes_btn"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_45"
+            android:text="@string/yes"
+            android:textSize="@dimen/text_size15"
+            android:layout_marginStart="@dimen/margin_5"
+            android:clickable="true"
+            android:textAllCaps="false"
+            android:fontFamily="@font/worksansregular"
+            android:background="@drawable/user_border"
+            android:layout_weight="1"
+            android:textColor="@color/black"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
