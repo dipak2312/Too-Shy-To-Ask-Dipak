@@ -26,10 +26,12 @@ import com.example.tooshytoask.Activity.Landing.SignInActivity;
 import com.example.tooshytoask.Adapters.NotificationAdapter;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.NotificationAuthModel;
+import com.example.tooshytoask.AuthModels.SingleClearNotificationAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.ClearNotificationResponse;
 import com.example.tooshytoask.Models.NotificationList;
 import com.example.tooshytoask.Models.NotificationResponse;
+import com.example.tooshytoask.Models.SingleClearNotificationResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 
@@ -47,10 +49,10 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     Toolbar toolbar;
     ImageView clear_all_notification, settings;
     RecyclerView rec_show_notification;
-    ArrayList<NotificationList> notificationLists;
     NotificationAdapter adapter;
-    NotificationAdapter.ClearNotification clearNotification;
-    String action = "clear";
+    NotificationAdapter.ClearNotification ClearNotification;
+    String action = "clear", notification_id = "";
+    ArrayList<NotificationList> notificationLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +99,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
         switch (id){
             case R.id.notification_clear:
-                ClearNotification();
-                Toast.makeText(getApplicationContext(),"Clear All Notification",Toast.LENGTH_LONG).show();
+                AllClearNotificationPopup();
                 return true;
 
             default:
@@ -106,7 +107,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void ClearNotification(){
+    public void ClearNotification(String id){
         dialog.show("");
 
         ClearNotificationAuthModel model = new ClearNotificationAuthModel();
@@ -125,6 +126,38 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
 
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void SingleClearNotification(){
+        dialog.show("");
+
+        SingleClearNotificationAuthModel model = new SingleClearNotificationAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setNotification_id(notification_id);
+
+        WebServiceModel.getRestApi().SingleClearNotification(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SingleClearNotificationResponse>() {
+                    @Override
+                    public void onNext(SingleClearNotificationResponse singleClearNotificationResponse) {
+                        String msg = singleClearNotificationResponse.getMsg();
+                        dialog.dismiss("");
+                        if (msg.equals("Notification Deleted")){
+
+                        }
                     }
 
                     @Override
@@ -158,7 +191,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
                             notificationLists = notificationResponse.getNotificationList();
 
                             if (notificationLists.size() != 0){
-                                adapter = new NotificationAdapter(context, notificationLists,clearNotification);
+                                adapter = new NotificationAdapter(context, notificationLists, ClearNotification);
                                 rec_show_notification.setAdapter(adapter);
                             }
                         }
@@ -198,9 +231,9 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
 
     }
 
-    public void AllClearNotification(){
+    public void AllClearNotificationPopup(){
         Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.single_notification_clear);
+        dialog.setContentView(R.layout.all_clear_notification);
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
 
@@ -210,8 +243,8 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         yes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                ClearNotification(notification_id);
+                Toast.makeText(getApplicationContext(),"Clear All Notification",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
 
             }
@@ -240,8 +273,8 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         yes_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                SingleClearNotification();
+                Toast.makeText(getApplicationContext(),"Clear Notification",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
 
             }
@@ -259,8 +292,8 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void ClearNotificationClick(int position, String single_notification_clear) {
-
+    public void ClearNotificationClick(int position, String id) {
+        notification_id = id;
         SingleClearNotificationPopup();
 
     }

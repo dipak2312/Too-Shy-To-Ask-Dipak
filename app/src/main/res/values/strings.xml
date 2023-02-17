@@ -139,6 +139,7 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="are_you_sure_you_want_to_clear_notification">Are you sure you want to clear notification?</string>
+    <string name="are_you_sure_you_want_to_clear_all_notification">Are you sure you want to clear all notification?</string>
 
 
 </resources>

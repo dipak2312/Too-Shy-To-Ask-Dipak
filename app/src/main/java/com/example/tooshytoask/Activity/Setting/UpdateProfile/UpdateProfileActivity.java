@@ -124,13 +124,13 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     }
                 })
                 .build();
-
         getUserData();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         edit_age.setText(spManager.getDob());
 
         gender = spManager.getGender();

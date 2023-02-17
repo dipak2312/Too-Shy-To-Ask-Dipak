@@ -20,13 +20,14 @@ import java.util.ArrayList;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
     Context context;
     ArrayList<NotificationList>notificationLists;
-    ClearNotification clearNotification;
+    ClearNotification ClearNotification;
 
-    public NotificationAdapter(Context context, ArrayList<NotificationList> notificationLists, ClearNotification clearNotification) {
+    public NotificationAdapter(Context context, ArrayList<NotificationList> notificationLists, ClearNotification ClearNotification) {
         this.context = context;
         this.notificationLists = notificationLists;
-        this.clearNotification = clearNotification;
+        this.ClearNotification = ClearNotification;
     }
+
 
     @NonNull
     @Override
@@ -45,7 +46,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.single_notification_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // clearNotification.ClearNotificationClick(position,notificationLists.get(position));
+                ClearNotification.ClearNotificationClick(position,notificationLists.get(position).getId());
             }
         });
 
@@ -79,7 +80,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public interface ClearNotification{
-        public void ClearNotificationClick(int position, String single_notification_clear);
+        public void ClearNotificationClick(int position, String id);
 
     }
 }

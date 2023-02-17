@@ -23,11 +23,12 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
     ArrayList<dataNotification> dataNotification;
     OnClickListner onclicklistener;
 
-    public ManageNotificationAdapter(Context context, ArrayList<dataNotification> dataNotification, OnClickListner onclicklistener) {
+    public ManageNotificationAdapter(Context context, ArrayList<com.example.tooshytoask.Models.dataNotification> dataNotification, OnClickListner onclicklistener) {
         this.context = context;
         this.dataNotification = dataNotification;
         this.onclicklistener = onclicklistener;
     }
+
 
     @NonNull
     @Override
@@ -65,23 +66,25 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
             push_notification.setText(dataNotification.getModule_name());
 
             if (dataNotification.status){
-                on_off_status.setText("On");
+                on_off_status.setText(R.string.on);
             }else {
-                on_off_status.setText("Off");
+                on_off_status.setText(R.string.off);
+
             }
 
             notification_on_off.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
 
                     if (dataNotification.status){
-                        dataNotification.setStatus(true);
-                        on_off_status.setText("On");
+                        dataNotification.setStatus(false);
+                        on_off_status.setText(R.string.off);
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
                     }
-                    else {
-                        dataNotification.setStatus(false);
-                        on_off_status.setText("Off");
+                     else {
+                        dataNotification.setStatus(true);
+                        on_off_status.setText(R.string.on);
+                        //onclicklistener.onClickData(getAdapterPosition(), dataNotification.getManage_id());
 
                     }
 
