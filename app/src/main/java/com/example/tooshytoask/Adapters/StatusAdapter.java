@@ -2,6 +2,7 @@ package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,11 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             status_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("story_id",StoryCategory.get(getAdapterPosition()).getCategory_id());
                     Intent intent = new Intent(context, StoryActivity.class);
+                    intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     view.getContext().startActivity(intent);

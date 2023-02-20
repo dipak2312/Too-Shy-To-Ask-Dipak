@@ -5,35 +5,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/black"
     tools:context=".Activity.Story.StoryActivity">
 
     <ImageView
         android:id="@+id/story_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/story_image"
+        android:src="@drawable/story_test"
         android:foreground="@drawable/gradient_background"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitCenter"/>
+
+    <!--<jp.shts.android.storiesprogressview.StoriesProgressView
+        android:id="@+id/story_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_3"
+        android:paddingStart="@dimen/margin_20"
+        android:paddingEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20" />-->
 
     <pt.tornelas.segmentedprogressbar.SegmentedProgressBar
         android:id="@+id/story_progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_3"
-        android:layout_margin="@dimen/margin_8"
+        android:layout_height="@dimen/margin_1"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:segmentBackgroundColor="@color/story_progress_background"
-        app:segmentSelectedBackgroundColor="@color/story_progress"
+        app:segmentBackgroundColor="@color/resend_color"
+        app:segmentSelectedBackgroundColor="@color/purple"
         app:segmentStrokeColor="@android:color/black"
         app:segmentSelectedStrokeColor="@android:color/black"
-        app:segmentStrokeWidth="@dimen/margin_1"
+        app:segmentStrokeWidth="0dp"
         app:segmentCornerRadius="@dimen/margin_2"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20"
-        app:segmentMargins="@dimen/default_segment_margin"
+        app:segmentMargins="@dimen/margin_5"
         app:totalSegments="1"
-        app:timePerSegment="2000"/>
+        app:timePerSegment="5000"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +65,7 @@
         
         
     </LinearLayout>
-    
+
     <RelativeLayout
         android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"
@@ -71,10 +81,8 @@
         android:layout_height="@dimen/margin_30"
         android:text="Duis egestas dui ipsum, eleifend"
         android:fontFamily="@font/worksansmedium"
-        android:alpha="0.7"
-        android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size18"
+        android:textSize="@dimen/text_size16"
         android:singleLine="true"/>
 
         <RelativeLayout
@@ -85,8 +93,8 @@
             android:layout_alignParentEnd="true">
 
         <ImageView
-            android:layout_width="@dimen/margin_20"
-            android:layout_height="@dimen/margin_20"
+            android:layout_width="@dimen/margin_15"
+            android:layout_height="@dimen/margin_15"
             android:src="@drawable/back_arrow"/>
 
         </RelativeLayout>
@@ -102,15 +110,13 @@
         android:fontFamily="@font/worksansmedium"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size12"
-        android:alpha="0.5"
         android:layout_below="@id/rel_top_bar"
-        android:layout_marginTop="@dimen/margin_10"
         android:singleLine="true"/>
 
     <LinearLayout
         android:layout_width="@dimen/margin_35"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_rel"
+        android:layout_above="@+id/swipe_up"
         android:layout_marginEnd="@dimen/margin_20"
         android:orientation="vertical"
         android:layout_marginBottom="@dimen/margin_20"
@@ -132,17 +138,21 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/bottom_rel"
+        android:id="@+id/swipe_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center_horizontal"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
 
         <ImageView
             android:id="@+id/arrow_up"
@@ -158,7 +168,8 @@
             android:fontFamily="@font/worksansregular"
             android:layout_marginTop="@dimen/margin_10"
             android:layout_marginBottom="@dimen/margin_15"
-            android:text="Swipe up to know more"
+            android:singleLine="true"
+            android:text="@string/swipe_up_to_know_more"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size15"/>
 

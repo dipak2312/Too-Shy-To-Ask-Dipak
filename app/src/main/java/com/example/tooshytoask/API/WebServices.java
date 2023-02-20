@@ -21,6 +21,7 @@ import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.SingleClearNotificationAuthModel;
+import com.example.tooshytoask.AuthModels.StoryAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
@@ -48,6 +49,7 @@ import com.example.tooshytoask.Models.SaveProfilePicResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.SingleClearNotificationResponse;
+import com.example.tooshytoask.Models.StoryResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserDetailResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
@@ -109,6 +111,10 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/homescreen")
     Observable<HomeScreenResponse> homePageResponse(@Body HomeScreenAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/categorystory")
+    Observable<StoryResponse> getStory(@Body StoryAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/insightscreen")

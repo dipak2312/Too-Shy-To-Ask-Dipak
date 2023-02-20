@@ -10,7 +10,7 @@
         android:layout_width="@dimen/margin_140"
         android:layout_height="@dimen/margin_205"
         android:orientation="vertical"
-        android:background="@drawable/infocard_shadow"
+        android:background="@drawable/help_background"
         android:layout_marginStart="@dimen/margin_2"
         android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginTop="5dp"

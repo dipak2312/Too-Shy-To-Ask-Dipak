@@ -8,7 +8,7 @@
         android:id="@+id/status_lay"
         android:layout_width="@dimen/margin_70"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_5"
+        android:layout_marginEnd="@dimen/margin_8"
         android:background="@drawable/status_background">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -16,7 +16,7 @@
         android:layout_width="@dimen/margin_70"
         android:layout_height="@dimen/margin_75"
         android:background="@drawable/status_background"
-        android:padding="@dimen/margin_3"
+        android:padding="@dimen/margin_4"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:src="@drawable/status1"
@@ -31,6 +31,7 @@
         android:singleLine="true"
         android:layout_marginStart="@dimen/margin_2"
         android:layout_marginEnd="@dimen/margin_2"
+        android:gravity="center"
         android:text="Reproduction"
         android:fontFamily="@font/worksansregular"
         android:textSize="@dimen/text_size10"
