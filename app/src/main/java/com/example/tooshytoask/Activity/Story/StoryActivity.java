@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.Story;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,10 +14,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
@@ -41,6 +45,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import jp.shts.android.storiesprogressview.StoriesProgressView;
 import pt.tornelas.segmentedprogressbar.SegmentedProgressBar;
+import pt.tornelas.segmentedprogressbar.SegmentedProgressBarListener;
 
 public class StoryActivity extends AppCompatActivity implements View.OnClickListener, StoriesProgressView.StoriesListener {
     Context context;
@@ -53,6 +58,8 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     String story_id = "";
     TextView story_title,day, link_name;
     View previous,skip;
+    VideoView story_video;
+    String story_count = "";
     ArrayList<StoryDetails>storyDetails;
     StoryDetailAdapter adapter;
     int counter = 0;
@@ -86,16 +93,18 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        story_video = findViewById(R.id.story_video);
+
         swipe_up = findViewById(R.id.swipe_up);
         swipe_up.setOnClickListener(this);
         swipe_up.setOnTouchListener(onTouchListener);
         skip = findViewById(R.id.skip);
         skip.setOnClickListener(this);
-        skip.setOnTouchListener(onTouchListener);
         previous = findViewById(R.id.previous);
         previous.setOnClickListener(this);
-        previous.setOnTouchListener(onTouchListener);
+
         story_progress_bar = findViewById(R.id.story_progress_bar);
+
         story_title = findViewById(R.id.story_title);
         day = findViewById(R.id.day);
         story_img = findViewById(R.id.story_img);
@@ -137,23 +146,21 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
                         if (msg.equals("success")) {
                             storyDetails = storyResponse.getStoryDetails();
+                            story_progress_bar.setSegmentCount(storyDetails.size());
+                            story_progress_bar.start();
 
                             for (int i = 0; i < storyDetails.size(); i++) {
-
-                                story_progress_bar.setSegmentCount(storyDetails.size());
 
                                 story_title.setText(storyResponse.getStoryDetails().get(i).getStory_title());
                                 day.setText(storyResponse.getStoryDetails().get(i).getStory_date());
                                 link_name.setText(storyResponse.getStoryDetails().get(i).getStory_link());
                                 Glide.with(context).load(storyResponse.getStoryDetails().get(i).getStory_img()).into(story_img);
+                                //story_video.setVideoPath(storyResponse.getStoryDetails().get(i).getStory_video());
+                                //story_video.start();
 
-                                if (link_name != null){
-                                    swipe_up.setVisibility(View.VISIBLE);
-                                }
-                                else if (link_name == null){
-                                    swipe_up.setVisibility(View.GONE);
-                                }
                             }
+
+
 
                             }
 
@@ -195,41 +202,53 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         }
         else if (id == previous.getId()){
             story_progress_bar.previous();
+
         }
-        else if (id == skip.getId()){
+        previous.setOnTouchListener(onTouchListener);
+         if (id == skip.getId()){
             story_progress_bar.next();
+
+
         }
+        skip.setOnTouchListener(onTouchListener);
     }
 
     @Override
     public void onNext() {
-        if ((counter + 1) < storyDetails.size()) return;
         Glide.with(context).load(storyDetails.get(++counter).getStory_img()).into(story_img);
-
     }
 
     @Override
     public void onPrev() {
-        if ((counter - 1) < storyDetails.size()) return;
+        if ((counter - 1) < 0)
+            return;
         Glide.with(context).load(storyDetails.get(--counter).getStory_img()).into(story_img);
     }
 
     @Override
     public void onComplete() {
+        story_progress_bar.start();
 
     }
 
     @Override
     protected void onDestroy() {
-        // Very important !
-
         super.onDestroy();
     }
 
-    public void shareTheApp()
-    {
+    @Override
+    protected void onPause() {
+        story_progress_bar.pause();
+        super.onPause();
+    }
 
+    @Override
+    protected void onRestart() {
+        story_progress_bar.start();
+        super.onRestart();
+    }
 
+    public void shareTheApp() {
 
     }
 }

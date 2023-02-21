@@ -85,12 +85,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
     TextView see_all;
     CustomProgressDialog dialog;
     CircleImageView update_profile;
-    BottomSheetDialog bottomSheetDialog;
-    RadioButton eng_lang, hindi_lang, marathi_lang;
-    RelativeLayout back_arrow;
-    Button btn_select;
-    String action = "language", profile_pic;
-    ImageView lanuage_popup;
+    RelativeLayout insight_lay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,8 +96,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
-        lanuage_popup = view.findViewById(R.id.lanuage_popup);
-        lanuage_popup.setOnClickListener(this);
+        insight_lay = view.findViewById(R.id.insight_lay);
         update_profile = view.findViewById(R.id.update_profile);
         update_profile.setOnClickListener(this);
         recy_storehouse = view.findViewById(R.id.recy_storehouse);
@@ -149,6 +143,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
 
     public void getInsightScreenResponse() {
         dialog.show("");
+        insight_lay.setVisibility(View.GONE);
 
         InsightScreenAuthModel model = new InsightScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -206,6 +201,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                                 recy_video_gallery.setAdapter(videoGalleryAdapter);
                             }
                         }
+                        insight_lay.setVisibility(View.VISIBLE);
                         dialog.dismiss("");
                     }
 
@@ -252,155 +248,6 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
-
-    public void openLanguagePopup()
-    {
-
-        bottomSheetDialog = new BottomSheetDialog(context);
-        bottomSheetDialog.setContentView(R.layout.select_language_view);
-        bottomSheetDialog.setCancelable(false);
-
-        eng_lang=bottomSheetDialog.findViewById(R.id.eng_lang);
-        eng_lang.setOnClickListener(this);
-        hindi_lang=bottomSheetDialog.findViewById(R.id.hindi_lang);
-        hindi_lang.setOnClickListener(this);
-        marathi_lang=bottomSheetDialog.findViewById(R.id.marathi_lang);
-        marathi_lang.setOnClickListener(this);
-        back_arrow = bottomSheetDialog.findViewById(R.id.back_arrow);
-        back_arrow.setOnClickListener(this);
-        btn_select = bottomSheetDialog.findViewById(R.id.btn_select);
-        btn_select.setOnClickListener(this);
-
-
-        bottomSheetDialog.show();
-        selectLanguage();
-        getUserProfileUpdate();
-    }
-
-    public void selectLanguage(){
-
-        String selectValue=spManager.getLanguage();
-
-        if(selectValue.equals("en"))
-        {
-            eng_lang.setChecked(true);
-            eng_lang.setBackgroundResource(R.drawable.language_background_active);
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-        else if(selectValue.equals("hi"))
-        {
-            hindi_lang.setChecked(true);
-            hindi_lang.setBackgroundResource(R.drawable.language_background_active);
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-        else if(selectValue.equals("mr"))
-        {
-            marathi_lang.setChecked(true);
-            marathi_lang.setBackgroundResource(R.drawable.language_background_active);
-            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-    }
-
-    public void radioButtonClickEvent(View view){
-        boolean isChecked = ((RadioButton) view).isChecked();
-        switch (view.getId()){
-            case R.id.eng_lang:
-                if(isChecked){
-
-                    setLocale("en");
-                    btn_select.setText(R.string.select);
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-            case R.id.hindi_lang:
-                if(isChecked){
-
-                    setLocale("hi");
-                    btn_select.setText(R.string.चुनें);
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-            case R.id.marathi_lang:
-                if(isChecked){
-
-                    setLocale("mr");
-                    btn_select.setText(R.string.निवडा);
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-        }
-    }
-
-    public void getUserProfileUpdate(){
-        dialog.show("");
-        dialog.dismiss("");
-
-        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
-        model.setUser_id(spManager.getUserId());
-        model.setAction(action);
-        model.setLanguage(spManager.getLanguage());
-
-        WebServiceModel.getRestApi().getUserProfile(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
-                    @Override
-                    public void onNext(UpdateProfileResponse updateProfileResponse) {
-                        String msg = updateProfileResponse.getMsg();
-
-                        if (msg.equals("Profile Updated")){
-
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    public void refreshFragment()
-    {
-        HomeFragment fragment1=new HomeFragment();
-        FragmentTransaction ft=getFragmentManager().beginTransaction();
-        ft.replace(R.id.rootLayout,fragment1);
-        ft.commit();
-    }
-
-    private void setLocale(String lang) {
-
-        Locale locale=new Locale(lang);
-        Locale.setDefault(locale);
-
-        Configuration config=new Configuration();
-        config.locale=locale;
-        getActivity().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
-        spManager.setLanguage(lang);
-
-    }
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -408,43 +255,6 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         if (id == see_all.getId()) {
             /*Intent intent = new Intent(context, AllBlogsActivity.class);
             startActivity(intent);*/
-        }
-        else if (id == lanuage_popup.getId()){
-            openLanguagePopup();
-        }
-        else if(id==eng_lang.getId())
-        {
-            setLocale("en");
-            btn_select.setText(R.string.select);
-            eng_lang.setBackgroundResource(R.drawable.language_background_active);
-            hindi_lang.setBackgroundResource(R.drawable.language_background);
-            marathi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==hindi_lang.getId())
-        {
-            setLocale("hi");
-            btn_select.setText(R.string.चुनें);
-            hindi_lang.setBackgroundResource(R.drawable.language_background_active);
-            eng_lang.setBackgroundResource(R.drawable.language_background);
-            marathi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==marathi_lang.getId())
-        {
-            setLocale("mr");
-            btn_select.setText(R.string.निवडा);
-            marathi_lang.setBackgroundResource(R.drawable.language_background_active);
-            eng_lang.setBackgroundResource(R.drawable.language_background);
-            hindi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==btn_select.getId())
-        {
-            getUserProfileUpdate();
-            bottomSheetDialog.dismiss();
-            refreshFragment();
-        }
-        else if(id==back_arrow.getId())
-        {
-            bottomSheetDialog.dismiss();
         }
 
     }

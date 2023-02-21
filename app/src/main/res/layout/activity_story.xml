@@ -16,15 +16,20 @@
         android:foreground="@drawable/gradient_background"
         android:scaleType="fitCenter"/>
 
+    <VideoView
+        android:id="@+id/story_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
     <!--<jp.shts.android.storiesprogressview.StoriesProgressView
         android:id="@+id/story_progress_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_3"
-        android:paddingStart="@dimen/margin_20"
-        android:paddingEnd="@dimen/margin_20"
+        android:layout_height="@dimen/margin_1"
         android:layout_marginTop="@dimen/margin_10"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20" />-->
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10" />-->
 
     <pt.tornelas.segmentedprogressbar.SegmentedProgressBar
         android:id="@+id/story_progress_bar"
@@ -79,7 +84,7 @@
         android:id="@+id/story_title"
         android:layout_width="@dimen/margin_250"
         android:layout_height="@dimen/margin_30"
-        android:text="Duis egestas dui ipsum, eleifend"
+        android:text="Dipak Yadav"
         android:fontFamily="@font/worksansmedium"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size16"
@@ -105,7 +110,7 @@
         android:id="@+id/day"
         android:layout_width="@dimen/margin_250"
         android:layout_height="wrap_content"
-        android:text="Yesterday"
+        android:text="23 Feb 1995"
         android:layout_marginStart="@dimen/margin_20"
         android:fontFamily="@font/worksansmedium"
         android:textColor="@color/white"
@@ -113,13 +118,18 @@
         android:layout_below="@id/rel_top_bar"
         android:singleLine="true"/>
 
-    <LinearLayout
-        android:layout_width="@dimen/margin_35"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/swipe_up"
+        android:layout_alignParentBottom="true">
+
+    <LinearLayout
+        android:id="@+id/sare_like_lay"
+        android:layout_width="@dimen/margin_35"
+        android:layout_height="@dimen/margin_90"
         android:layout_marginEnd="@dimen/margin_20"
         android:orientation="vertical"
-        android:layout_marginBottom="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_40"
         android:layout_alignParentEnd="true">
 
         <ImageView
@@ -142,8 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
+        android:layout_below="@id/sare_like_lay"
         android:background="@color/white">
 
     <LinearLayout
@@ -176,5 +185,7 @@
     </LinearLayout>
 
     </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
