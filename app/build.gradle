@@ -85,7 +85,6 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation "com.google.android.play:app-update:2.0.1"
-    //implementation 'com.github.thekhaeng:pushdown-anim-click:1.1.1'
 
     implementation 'com.github.shts:StoriesProgressView:3.0.0'
     implementation 'com.github.TOrnelas:SegmentedProgressBar:0.0.1'
@@ -94,5 +93,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.4.2')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.3'
 
 }

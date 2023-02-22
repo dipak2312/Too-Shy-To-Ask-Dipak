@@ -10,11 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Story.StoryActivity;
+import com.example.tooshytoask.Activity.Story.StoryDisplayFragment;
 import com.example.tooshytoask.Models.StatusItem;
 import com.example.tooshytoask.Models.StoryCategory;
 import com.example.tooshytoask.R;
@@ -61,6 +65,19 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             status_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    /*Bundle bundle = new Bundle();
+
+                    bundle.putString("story_id",StoryCategory.get(getAdapterPosition()).getCategory_id());
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    StoryDisplayFragment fragment = new StoryDisplayFragment();
+                    fragment.setArguments(bundle);
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                    FragmentTransaction ft = fragmentManager.beginTransaction();
+                    ft.add(R.id.rootLayout, fragment);
+                    ft.addToBackStack(null);
+                    ft.commit();*/
+
                     Bundle bundle = new Bundle();
 
                     bundle.putString("story_id",StoryCategory.get(getAdapterPosition()).getCategory_id());

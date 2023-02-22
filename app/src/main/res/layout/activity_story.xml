@@ -8,20 +8,12 @@
     android:background="@color/black"
     tools:context=".Activity.Story.StoryActivity">
 
-    <ImageView
-        android:id="@+id/story_img"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/story_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/story_test"
-        android:foreground="@drawable/gradient_background"
-        android:scaleType="fitCenter"/>
+        android:layout_height="match_parent"/>
 
-    <VideoView
-        android:id="@+id/story_video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_centerInParent="true"/>
+
 
     <!--<jp.shts.android.storiesprogressview.StoriesProgressView
         android:id="@+id/story_progress_bar"
@@ -31,70 +23,13 @@
         android:layout_marginStart="@dimen/margin_10"
         android:layout_marginEnd="@dimen/margin_10" />-->
 
-    <pt.tornelas.segmentedprogressbar.SegmentedProgressBar
-        android:id="@+id/story_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_1"
-        android:layout_marginStart="@dimen/margin_10"
-        android:layout_marginEnd="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_10"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:segmentBackgroundColor="@color/resend_color"
-        app:segmentSelectedBackgroundColor="@color/purple"
-        app:segmentStrokeColor="@android:color/black"
-        app:segmentSelectedStrokeColor="@android:color/black"
-        app:segmentStrokeWidth="0dp"
-        app:segmentCornerRadius="@dimen/margin_2"
-        app:segmentMargins="@dimen/margin_5"
-        app:totalSegments="1"
-        app:timePerSegment="5000"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        
-        <View
-            android:id="@+id/previous"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <View
-            android:id="@+id/skip"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        
-        
-        
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/rel_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_30"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20"
-        android:layout_below="@id/story_progress_bar"
-        android:layout_marginTop="@dimen/margin_10">
-
-    <TextView
-        android:id="@+id/story_title"
-        android:layout_width="@dimen/margin_250"
-        android:layout_height="@dimen/margin_30"
-        android:text="Dipak Yadav"
-        android:fontFamily="@font/worksansmedium"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size16"
-        android:singleLine="true"/>
-
         <RelativeLayout
             android:id="@+id/back_img"
             android:layout_width="@dimen/margin_30"
             android:layout_height="@dimen/margin_30"
             android:gravity="center"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
             android:layout_alignParentEnd="true">
 
         <ImageView
@@ -103,89 +38,5 @@
             android:src="@drawable/back_arrow"/>
 
         </RelativeLayout>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/day"
-        android:layout_width="@dimen/margin_250"
-        android:layout_height="wrap_content"
-        android:text="23 Feb 1995"
-        android:layout_marginStart="@dimen/margin_20"
-        android:fontFamily="@font/worksansmedium"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size12"
-        android:layout_below="@id/rel_top_bar"
-        android:singleLine="true"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-    <LinearLayout
-        android:id="@+id/sare_like_lay"
-        android:layout_width="@dimen/margin_35"
-        android:layout_height="@dimen/margin_90"
-        android:layout_marginEnd="@dimen/margin_20"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/margin_40"
-        android:layout_alignParentEnd="true">
-
-        <ImageView
-            android:id="@+id/like_img"
-            android:layout_width="@dimen/margin_35"
-            android:layout_height="@dimen/margin_35"
-            android:src="@drawable/like"/>
-
-        <ImageView
-            android:id="@+id/share_img"
-            android:layout_width="@dimen/margin_35"
-            android:layout_height="@dimen/margin_35"
-            android:src="@drawable/share"
-            android:layout_marginTop="@dimen/margin_15"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/swipe_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/sare_like_lay"
-        android:background="@color/white">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20">
-
-        <ImageView
-            android:id="@+id/arrow_up"
-            android:layout_width="@dimen/margin_15"
-            android:layout_height="@dimen/margin_15"
-            android:layout_marginTop="@dimen/margin_10"
-            android:src="@drawable/arrow_up" />
-
-        <TextView
-            android:id="@+id/link_name"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_20"
-            android:fontFamily="@font/worksansregular"
-            android:layout_marginTop="@dimen/margin_10"
-            android:layout_marginBottom="@dimen/margin_15"
-            android:singleLine="true"
-            android:text="@string/swipe_up_to_know_more"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size15"/>
-
-    </LinearLayout>
-
-    </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>

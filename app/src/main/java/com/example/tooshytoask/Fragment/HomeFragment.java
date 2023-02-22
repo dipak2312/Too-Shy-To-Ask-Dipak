@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -83,6 +84,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     RadioButton eng_lang, hindi_lang, marathi_lang;
     Button btn_select;
     RelativeLayout back_arrow, home_lay;
+    NestedScrollView home_scroll;
     LinearLayout recommended_blogs_lay;
     ViewPager2 viewPager2;
     Handler handler = new Handler();
@@ -102,6 +104,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        home_scroll = view.findViewById(R.id.home_scroll);
         home_lay = view.findViewById(R.id.home_lay);
         stories_rel_lay = view.findViewById(R.id.stories_rel_lay);
         blog = view.findViewById(R.id.blog);
@@ -176,7 +179,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     public void getHomePageResponse() {
         //dialog.show("");
-        home_lay.setVisibility(View.GONE);
+        home_scroll.setVisibility(View.GONE);
 
         HomeScreenAuthModel model = new HomeScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -227,7 +230,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                 recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs);
                                 recy_recently_blogs.setAdapter(recentlyBlogAdapter);
                             }
-                            home_lay.setVisibility(View.VISIBLE);
+                            home_scroll.setVisibility(View.VISIBLE);
                             dialog.dismiss("");
                         }
 

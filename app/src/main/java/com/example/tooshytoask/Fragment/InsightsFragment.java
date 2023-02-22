@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -86,6 +87,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
     CustomProgressDialog dialog;
     CircleImageView update_profile;
     RelativeLayout insight_lay;
+    NestedScrollView insight_scroll;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +98,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        insight_scroll = view.findViewById(R.id.insight_scroll);
         insight_lay = view.findViewById(R.id.insight_lay);
         update_profile = view.findViewById(R.id.update_profile);
         update_profile.setOnClickListener(this);
@@ -143,7 +146,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
 
     public void getInsightScreenResponse() {
         dialog.show("");
-        insight_lay.setVisibility(View.GONE);
+        insight_scroll.setVisibility(View.GONE);
 
         InsightScreenAuthModel model = new InsightScreenAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -201,7 +204,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                                 recy_video_gallery.setAdapter(videoGalleryAdapter);
                             }
                         }
-                        insight_lay.setVisibility(View.VISIBLE);
+                        insight_scroll.setVisibility(View.VISIBLE);
                         dialog.dismiss("");
                     }
 
