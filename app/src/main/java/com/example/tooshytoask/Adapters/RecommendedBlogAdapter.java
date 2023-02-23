@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,17 +18,22 @@ import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Activity.Help.HelpActivity2;
 import com.example.tooshytoask.Models.RecommendedBlogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
 public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<RecommendedBlogs> RecommendedBlogs;
+    OnClickListner onclicklistener;
+    boolean like = true;
 
-    public RecommendedBlogAdapter(Context context,  ArrayList<RecommendedBlogs> RecommendedBlogs) {
+    public RecommendedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.RecommendedBlogs> recommendedBlogs, OnClickListner onclicklistener) {
         this.context = context;
-        this.RecommendedBlogs = RecommendedBlogs;
+        RecommendedBlogs = recommendedBlogs;
+        this.onclicklistener = onclicklistener;
     }
+
 
     @NonNull
     @Override
@@ -42,6 +48,25 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
         //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,RecommendedBlogs.get(position).getSave_img()));
         holder.blog_title.setText(RecommendedBlogs.get(position).getBlog_title());
         Glide.with(context).load(RecommendedBlogs.get(position).getBlog_img()).into(holder.blog_img);
+
+
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save_active));
+                    onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    like = false;
+
+                } else    {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    like = true;
+
+                }
+
+            }
+        });
 
     }
 
@@ -60,6 +85,7 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
+
 
             blog_img.setOnClickListener(new View.OnClickListener() {
                 @Override

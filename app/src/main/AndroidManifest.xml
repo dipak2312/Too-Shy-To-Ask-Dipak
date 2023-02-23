@@ -21,8 +21,14 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".VideoGallerySingleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.InformationStoreHouse.InformationStoreHouseDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Setting.FeedbackActivity"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -51,7 +57,6 @@
         <activity
             android:name=".Activity.Notification.ManageNotificationActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -122,7 +127,6 @@
         <activity
             android:name=".Activity.Help.HelpActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -130,7 +134,6 @@
         <activity
             android:name=".Activity.Notification.NotificationsActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -138,7 +141,6 @@
         <activity
             android:name=".Activity.Setting.UpdateProfile.UpdateProfileActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -146,7 +148,6 @@
         <activity
             android:name=".Activity.Landing.LanguageActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -154,7 +155,6 @@
         <activity
             android:name=".Activity.Landing.InfoCardCategoryActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -162,7 +162,6 @@
         <activity
             android:name=".Activity.Landing.SliderImagesActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -201,7 +200,6 @@
         <activity
             android:name=".Activity.Landing.SignUpActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -210,7 +208,6 @@
             android:name=".Activity.Landing.SignInActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -218,7 +215,6 @@
         <activity
             android:name=".Activity.Landing.SplashScreenActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

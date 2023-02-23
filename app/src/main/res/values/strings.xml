@@ -141,6 +141,7 @@
     <string name="are_you_sure_you_want_to_clear_notification">Are you sure you want to clear notification?</string>
     <string name="are_you_sure_you_want_to_clear_all_notification">Are you sure you want to clear all notification?</string>
     <string name="swipe_up_to_know_more">Swipe up to know more</string>
+    <string name="related_blogs">Related Blogs</string>
 
 
 </resources>

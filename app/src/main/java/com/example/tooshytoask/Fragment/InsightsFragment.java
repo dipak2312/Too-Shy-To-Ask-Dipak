@@ -1,6 +1,7 @@
 package com.example.tooshytoask.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
 import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.Adapters.CoursesAdapter;
 import com.example.tooshytoask.Adapters.EventBlogAdapter;
@@ -256,8 +258,11 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         int id = view.getId();
 
         if (id == see_all.getId()) {
-            /*Intent intent = new Intent(context, AllBlogsActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(context, AllBlogsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
         }
 
     }

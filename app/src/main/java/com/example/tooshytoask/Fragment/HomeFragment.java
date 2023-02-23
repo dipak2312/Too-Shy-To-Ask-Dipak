@@ -36,6 +36,7 @@ import com.example.tooshytoask.Adapters.RecentlyBlogAdapter;
 import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
 import com.example.tooshytoask.Adapters.SliderBannerAdapter;
 import com.example.tooshytoask.Adapters.StatusAdapter;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
@@ -50,6 +51,7 @@ import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnClickListner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -64,10 +66,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener, OnClickListner{
     RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs, recy_blogs;
-    BlogAdapter blogAdapter;
-    ArrayList<RecentlyBlogItems>recentlyBlogItems;
     ArrayList<StoryCategory> StoryCategory;
     ArrayList<Bannerist> Bannerist;
     ArrayList<Blogs> Blogs;
@@ -91,8 +91,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
-    String action = "language";
+    String action = "language", recommended_blog_id = "", type = "blog";
     RelativeLayout stories_rel_lay;
+    OnClickListner onclicklistener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,6 +144,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         getUserData();
 
         return view;
+    }
+
+    public void getBookmarkBlogs(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(recommended_blog_id);
+        model.setType(type);
     }
     public void getUserData(){
         dialog.show("");
@@ -217,7 +228,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                             if(RecommendedBlogs.size() !=0)
                             {
                                 recommended_blogs_lay.setVisibility(View.VISIBLE);
-                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs);
+                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs, onclicklistener);
                                 recy_recommended_blogs.setAdapter(recommendedBlogAdapter);
 
                             }
@@ -488,6 +499,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
+
+
     public void refreshFragment()
     {
         HomeFragment fragment1=new HomeFragment();
@@ -525,5 +538,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
                     }
                 });
+    }
+
+    @Override
+    public void onClickData(int position, String id) {
+        recommended_blog_id = id;
     }
 }

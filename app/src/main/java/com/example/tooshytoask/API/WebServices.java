@@ -1,5 +1,7 @@
 package com.example.tooshytoask.API;
 
+import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
@@ -20,13 +22,16 @@ import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
+import com.example.tooshytoask.AuthModels.SingleBlogAuthModel;
 import com.example.tooshytoask.AuthModels.SingleClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.StoryAuthModel;
 import com.example.tooshytoask.AuthModels.StoryLikeAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
+import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.ClearNotificationResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
@@ -49,6 +54,7 @@ import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.Models.SaveProfilePicResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
+import com.example.tooshytoask.Models.SingleBlogResponse;
 import com.example.tooshytoask.Models.SingleClearNotificationResponse;
 import com.example.tooshytoask.Models.StoryLikeResponse;
 import com.example.tooshytoask.Models.StoryResponse;
@@ -127,6 +133,14 @@ public interface WebServices {
     Observable<InsightScreenResponse> insightScreenResponse(@Body InsightScreenAuthModel model);
 
     @Headers("Content-Type: application/json")
+    @POST("api/insightblogs")
+    Observable<AllBlogResponse> getAllBlogs(@Body AllBlogAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/articlesingleblog")
+    Observable<SingleBlogResponse> getSingleBlog(@Body SingleBlogAuthModel model);
+
+    @Headers("Content-Type: application/json")
     @POST("api/helpcategory")
     Observable<HelpCategoryResponse> getHelpCategory(@Body HelpCategoryAuthModel model);
 
@@ -177,4 +191,9 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/deletenotification")
     Observable<SingleClearNotificationResponse> SingleClearNotification(@Body SingleClearNotificationAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/articlebookmark")
+    Observable<BookmarkBlogResponse> getBookmarkBlogs(@Body BookmarkBlogAuthModel model);
+
 }
