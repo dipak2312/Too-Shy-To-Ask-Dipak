@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Quiz.ResultQuizActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:id="@+id/rel_top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_20">
+
+                <RelativeLayout
+                    android:id="@+id/rel_back"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/back" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_top"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_below="@+id/rel_top_bar"
+                android:layout_marginTop="@dimen/margin_20"
+                android:src="@drawable/quiz_wohoo">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/txt_whoo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_top"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_40"
+                android:fontFamily="@font/worksansmedium"
+                android:text="WOHOO..GREAT!"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size18" />
+
+            <TextView
+                android:id="@+id/txt_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_whoo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:fontFamily="@font/worksansmedium"
+                android:text="90% Score"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size24" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_percentage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/text_size20"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginRight="@dimen/text_size20"
+                android:fontFamily="@font/worksansregular"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14" />
+
+            <Button
+                android:id="@+id/back_to_home_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_50"
+                android:layout_marginTop="@dimen/margin_30"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:background="@drawable/back_to_home"
+                android:layout_below="@id/txt_title"
+                android:fontFamily="@font/worksansbold"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_20"
+                android:text="@string/back_to_home"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size14" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_50"
+                android:layout_marginTop="@dimen/margin_15"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:layout_below="@id/back_to_home_btn"
+                android:fontFamily="@font/worksansbold"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_20"
+                android:background="@drawable/active_con_btn"
+                android:layout_marginBottom="@dimen/margin_30"
+                android:text="@string/next_quiz"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size14"/>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

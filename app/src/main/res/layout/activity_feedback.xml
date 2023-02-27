@@ -95,7 +95,7 @@
         android:layout_marginStart="@dimen/margin_20"
         android:background="@drawable/active_con_btn"
         android:layout_marginBottom="@dimen/margin_30"
-        android:text="SUBMIT FEEDBACK"
+        android:text="@string/submit_feedback"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size14" />
 

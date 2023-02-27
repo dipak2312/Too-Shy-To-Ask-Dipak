@@ -64,6 +64,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = getActivity();
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
@@ -108,7 +109,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     }
 
     public void getUserData(){
-        dialog.show("");
+        dialog.show("Loading");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());

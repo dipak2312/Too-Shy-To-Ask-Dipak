@@ -43,7 +43,8 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     RelativeLayout rel_back,selection_button_rl;
     AllBlogAdapter adapter;
     ImageView bookmark_blog;
-    TextView tv_category_selection, selection_category;
+    TextView tv_category_selection;
+    ImageView selection_category;
     CustomProgressDialog dialog;
     ArrayList<insightblogs>insightblogs;
     int selectedPosition=0;

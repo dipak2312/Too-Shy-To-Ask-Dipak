@@ -142,6 +142,27 @@
     <string name="are_you_sure_you_want_to_clear_all_notification">Are you sure you want to clear all notification?</string>
     <string name="swipe_up_to_know_more">Swipe up to know more</string>
     <string name="related_blogs">Related Blogs</string>
+    <string name="submit_feedback">SUBMIT FEEDBACK</string>
+    <string name="let_s_start">LET\'S START</string>
+    <string name="welcome">Welcome</string>
+    <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">Take care of your health. Test your knowledge of adolescence health by taking our quiz.</string>
+    <string name="submit">SUBMIT</string>
+    <string name="correct_answer">Correct Answer</string>
+    <string name="next_question">NEXT QUESTION</string>
+    <string name="back_to_home">BACK TO HOME</string>
+    <string name="next_quiz">NEXT QUIZ</string>
+    <string name="highlight">Highlight</string>
+    <string name="events">Events</string>
+    <string name="recentlyadded">Recently Added</string>
+    <string name="recommended">Recommended</string>
+    <string name="your_daily_insights">Your Daily Insights</string>
+    <string name="see_all">See All</string>
+    <string name="video_gallery">Video Gallery</string>
+    <string name="courses">Courses</string>
+    <string name="event">Event</string>
+    <string name="highlights">Highlights</string>
+    <string name="blogs">Blogs</string>
+    <string name="information_storehouse">Information Storehouse</string>
 
 
 </resources>

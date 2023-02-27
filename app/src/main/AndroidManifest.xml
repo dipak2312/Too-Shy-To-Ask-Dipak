@@ -21,8 +21,41 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
-            android:name=".VideoGallerySingleActivity"
-            android:exported="false" />
+            android:name=".Activity.Blogs.AllRecentlyAddedActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.VideoGallery.AllVideoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Courses.AllCoursesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Blogs.AllEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Blogs.AllHighlightActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Game.LeaderBoardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Game.GameHomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Game.GameLevelActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Game.GameMainPageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Quiz.ResultQuizActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Quiz.QuizActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.VideoGallery.VideoGallerySingleActivity"
+            android:exported="true" />
         <activity
             android:name=".Activity.InformationStoreHouse.InformationStoreHouseDetailActivity"
             android:exported="true" />

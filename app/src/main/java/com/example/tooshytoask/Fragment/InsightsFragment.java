@@ -24,6 +24,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
+import com.example.tooshytoask.Activity.Blogs.AllEventActivity;
+import com.example.tooshytoask.Activity.Blogs.AllHighlightActivity;
+import com.example.tooshytoask.Activity.Blogs.AllRecentlyAddedActivity;
+import com.example.tooshytoask.Activity.Courses.AllCoursesActivity;
+import com.example.tooshytoask.Activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.Activity.VideoGallery.AllVideoActivity;
 import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.Adapters.CoursesAdapter;
 import com.example.tooshytoask.Adapters.EventBlogAdapter;
@@ -56,6 +62,7 @@ import com.example.tooshytoask.Models.VideoGalleryItems;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -85,7 +92,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
     StoreHouseAdapter storeHouseAdapter;
     HighlightBlogAdapter highlightBlogAdapter;
     BlogAdapter blogAdapter;
-    TextView see_all;
+    ShapeableImageView game_banner;
+    TextView see_all, see_all1, see_all2, see_all3, see_all4, see_all5;
     CustomProgressDialog dialog;
     CircleImageView update_profile;
     RelativeLayout insight_lay;
@@ -100,6 +108,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        game_banner = view.findViewById(R.id.game_banner);
+        game_banner.setOnClickListener(this);
         insight_scroll = view.findViewById(R.id.insight_scroll);
         insight_lay = view.findViewById(R.id.insight_lay);
         update_profile = view.findViewById(R.id.update_profile);
@@ -107,6 +117,16 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         recy_storehouse = view.findViewById(R.id.recy_storehouse);
         see_all = view.findViewById(R.id.see_all);
         see_all.setOnClickListener(this);
+        see_all1 = view.findViewById(R.id.see_all1);
+        see_all1.setOnClickListener(this);
+        see_all2 = view.findViewById(R.id.see_all2);
+        see_all2.setOnClickListener(this);
+        see_all3 = view.findViewById(R.id.see_all3);
+        see_all3.setOnClickListener(this);
+        see_all4 = view.findViewById(R.id.see_all4);
+        see_all4.setOnClickListener(this);
+        see_all5 = view.findViewById(R.id.see_all5);
+        see_all5.setOnClickListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_storehouse.setLayoutManager(linearLayoutManager);
 
@@ -263,6 +283,47 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
+        }
+        else if (id == see_all1.getId()) {
+            Intent intent = new Intent(context, AllHighlightActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else if (id == see_all2.getId()) {
+            Intent intent = new Intent(context, AllEventActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else if (id == see_all3.getId()) {
+            Intent intent = new Intent(context, AllRecentlyAddedActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else if (id == see_all4.getId()) {
+            Intent intent = new Intent(context, AllCoursesActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else if (id == see_all5.getId()) {
+            Intent intent = new Intent(context, AllVideoActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else if (id == game_banner.getId()) {
+            Intent intent = new Intent(context, GameMainPageActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
     }

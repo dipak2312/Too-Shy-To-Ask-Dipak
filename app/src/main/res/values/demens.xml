@@ -82,6 +82,7 @@
     <dimen name="margin_220">220.0dp</dimen>
     <dimen name="margin_210">210.0dp</dimen>
     <dimen name="margin_200">200.0dp</dimen>
+    <dimen name="margin_300">300.0dp</dimen>
     <dimen name="margin_205">205.0dp</dimen>
     <dimen name="margin_219">218.0dp</dimen>
     <dimen name="margin_165">165.0dp</dimen>

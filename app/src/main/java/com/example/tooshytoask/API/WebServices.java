@@ -1,6 +1,9 @@
 package com.example.tooshytoask.API;
 
 import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
+import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
+import com.example.tooshytoask.AuthModels.AllEventAuthModel;
+import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
@@ -30,6 +33,9 @@ import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Models.AllBlogResponse;
+import com.example.tooshytoask.Models.AllCoursesResponse;
+import com.example.tooshytoask.Models.AllEventResponse;
+import com.example.tooshytoask.Models.AllHighlightResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.ClearNotificationResponse;
@@ -135,6 +141,18 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/insightblogs")
     Observable<AllBlogResponse> getAllBlogs(@Body AllBlogAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/insighthighlights")
+    Observable<AllHighlightResponse> getHighlightBlogs(@Body AllHighlightAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/insightevents")
+    Observable<AllEventResponse> getEventBlogs(@Body AllEventAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/insightcourses")
+    Observable<AllCoursesResponse> getCoursesBlogs(@Body AllCoursesAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/articlesingleblog")

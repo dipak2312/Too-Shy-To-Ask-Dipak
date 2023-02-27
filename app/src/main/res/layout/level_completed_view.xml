@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/level_completed_img"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginRight="@dimen/margin_20"
+        android:layout_height="160dp"
+        android:src="@drawable/level_completed">
+
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/txt_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_20"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_25"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size14"
+        android:fontFamily="@font/worksansregular"
+        android:text=""
+        android:layout_below="@+id/level_completed_img"/>
+
+    <Button
+        android:id="@+id/btn_next_level"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/txt_desc"
+        android:layout_marginLeft="@dimen/margin_40"
+        android:layout_marginTop="52dp"
+        android:layout_marginRight="@dimen/margin_40"
+        android:layout_marginBottom="@dimen/margin_40"
+        android:background="@drawable/play_now"
+        android:fontFamily="@font/worksansregular"
+        android:includeFontPadding="false"
+        android:text="NEXT LEVEL"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size14" />
+
+</RelativeLayout>

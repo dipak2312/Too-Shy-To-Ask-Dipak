@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Quiz.QuizActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <RelativeLayout
+            android:id="@+id/rel_back"
+            android:layout_width="@dimen/margin_30"
+            android:layout_height="@dimen/margin_30"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_centerVertical="true"
+                android:src="@drawable/back" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_20">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_submit"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginRight="@dimen/margin_20">
+
+        <TextView
+            android:id="@+id/txt_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/worksansregular"
+            android:text="1/8"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_completed"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/margin_250"
+            android:layout_height="@dimen/margin_4"
+            android:layout_below="@+id/txt_count"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_5"
+            android:progress="40"
+            android:progressDrawable="@drawable/progress_bar_missed" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginTop="@dimen/margin_30"
+        android:includeFontPadding="false"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:fontFamily="@font/worksansbold"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginStart="@dimen/margin_20"
+        android:background="@drawable/active_con_btn"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size14" />
+
+</RelativeLayout>

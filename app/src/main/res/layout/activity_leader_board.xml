@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Game.LeaderBoardActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/game_bag">
+
+        </ImageView>
+
+        <RelativeLayout
+            android:id="@+id/rel_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_20">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="70dp"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back_white" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rel_help"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/worksansitalic"
+                    android:includeFontPadding="false"
+                    android:text="@string/help"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/margin_14" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_top">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/txt_leaderboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_20"
+                android:fontFamily="@font/worksansmedium"
+                android:includeFontPadding="false"
+                android:text="Leaderboard"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+            <RelativeLayout
+                android:id="@+id/rel_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_leaderboard"
+                android:background="@drawable/leaderboard_pink"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_20">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_first_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel_first"
+                android:background="@drawable/leaderboard_gray"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_20">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_second_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

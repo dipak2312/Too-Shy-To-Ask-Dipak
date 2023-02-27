@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Activity.Game.GameMainPageActivity;
 import com.example.tooshytoask.Activity.Search.SearchActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Setting.UpdateProfile.UpdateProfileActivity;
@@ -55,6 +56,7 @@ import com.example.tooshytoask.Utils.OnClickListner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
@@ -81,6 +83,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnCl
     SPManager spManager;
     CircleImageView update_profile;
     ImageView search, notification, select_Language;
+    ShapeableImageView game_banner;
     RadioButton eng_lang, hindi_lang, marathi_lang;
     Button btn_select;
     RelativeLayout back_arrow, home_lay;
@@ -105,6 +108,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnCl
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        game_banner = view.findViewById(R.id.game_banner);
+        game_banner.setOnClickListener(this);
         home_scroll = view.findViewById(R.id.home_scroll);
         home_lay = view.findViewById(R.id.home_lay);
         stories_rel_lay = view.findViewById(R.id.stories_rel_lay);
@@ -314,6 +319,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnCl
 
         if (id == update_profile.getId()) {
             Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if (id == game_banner.getId()) {
+            Intent intent = new Intent(context, GameMainPageActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

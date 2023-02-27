@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Blogs.AllEventActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text="@string/events"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+            <ImageView
+                android:id="@+id/bookmark_blog"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:src="@drawable/bookmark_img"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_below="@id/rel_top_bar">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/events_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_15"
+            android:layout_marginEnd="@dimen/margin_15"/>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

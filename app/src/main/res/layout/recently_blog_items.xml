@@ -13,7 +13,7 @@
         android:layout_marginEnd="@dimen/margin_5"
         android:layout_marginTop="@dimen/margin_5"
         app:cardElevation="@dimen/margin_3"
-        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_5"
         app:cardCornerRadius="@dimen/margin_7">
 
         <LinearLayout

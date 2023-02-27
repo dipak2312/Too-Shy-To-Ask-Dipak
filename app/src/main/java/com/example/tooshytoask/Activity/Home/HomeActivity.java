@@ -13,7 +13,7 @@ import android.view.View;
 import com.example.tooshytoask.Fragment.AskExpertFragment;
 import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Fragment.InsightsFragment;
-import com.example.tooshytoask.Fragment.QuizFragment;
+import com.example.tooshytoask.Fragment.Quiz.QuizFragment;
 import com.example.tooshytoask.Fragment.SettingsFragment;
 import com.example.tooshytoask.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
