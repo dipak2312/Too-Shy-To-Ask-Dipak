@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activity.Setting.FeedbackActivity">
+    tools:context=".Activity.Feedback.FeedbackActivity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"
@@ -51,7 +51,7 @@
             android:textSize="@dimen/text_size12"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/description_enter"
+            android:id="@+id/description_lay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_90"
             android:layout_marginTop="@dimen/margin_20"
@@ -65,7 +65,7 @@
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_age"
+                android:id="@+id/description_enter"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_70"
                 android:background="@drawable/border"
@@ -83,7 +83,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_feedback_sub"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_50"
         android:layout_marginTop="@dimen/margin_40"

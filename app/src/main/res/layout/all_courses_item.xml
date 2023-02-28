@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/margin_210"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/infocard_shadow"
@@ -16,11 +16,10 @@
         app:cardCornerRadius="@dimen/margin_7">
 
         <LinearLayout
-            android:layout_width="@dimen/margin_210"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/help_background"
-            android:layout_marginEnd="@dimen/margin_10">
+            android:background="@drawable/help_background">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -28,7 +27,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/blog_img"
-                    android:layout_width="@dimen/margin_210"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_160"
                     android:background="@drawable/status_background"
                     android:scaleType="centerCrop"

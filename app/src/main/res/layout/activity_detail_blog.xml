@@ -168,7 +168,7 @@
                     android:fontFamily="@font/worksansmedium"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size18"
-                    android:text="Premarital Pregnancy"/>
+                    android:text=""/>
 
                 <TextView
                     android:id="@+id/blog_description"
@@ -178,7 +178,7 @@
                     android:fontFamily="@font/worksansregular"
                     android:layout_marginTop="@dimen/margin_10"
                     android:textSize="@dimen/text_size12"
-                    android:text="A surprise pregnancy can be stressful, especially if you are a teenager."/>
+                    android:text=""/>
 
 
                 <TextView

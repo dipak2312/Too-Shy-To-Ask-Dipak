@@ -41,8 +41,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/worksansmedium"
-                    android:singleLine="true"
                     android:gravity="center_horizontal"
+                    android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size18" />
@@ -169,7 +169,7 @@
                         android:fontFamily="@font/worksansmedium"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size18"
-                        android:text="Premarital Pregnancy"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/blog_description"
@@ -179,10 +179,11 @@
                         android:fontFamily="@font/worksansregular"
                         android:layout_marginTop="@dimen/margin_10"
                         android:textSize="@dimen/text_size12"
-                        android:text="A surprise pregnancy can be stressful, especially if you are a teenager."/>
+                        android:text=""/>
 
 
                     <TextView
+                        android:id="@+id/helpful"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Was this article helpful?"
@@ -192,6 +193,7 @@
                         android:fontFamily="@font/worksansregular" />
 
                     <LinearLayout
+                        android:id="@+id/yes_no_lay"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/margin_40"
                         android:layout_marginTop="@dimen/margin_15"

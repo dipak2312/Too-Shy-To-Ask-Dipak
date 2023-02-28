@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class InsightScreenResponse {
     private String code;
     private String msg;
-    private ArrayList<blog_category>blog_category;
+    private ArrayList<storeHouse> storeHouse;
     private ArrayList<blogs>blogs;
     private ArrayList<higlights>higlights;
     private ArrayList<events>events;
@@ -30,12 +30,12 @@ public class InsightScreenResponse {
         this.msg = msg;
     }
 
-    public ArrayList<com.example.tooshytoask.Models.InsightScreen.blog_category> getBlog_category() {
-        return blog_category;
+    public ArrayList<storeHouse> getBlog_category() {
+        return storeHouse;
     }
 
-    public void setBlog_category(ArrayList<com.example.tooshytoask.Models.InsightScreen.blog_category> blog_category) {
-        this.blog_category = blog_category;
+    public void setBlog_category(ArrayList<storeHouse> storeHouse) {
+        this.storeHouse = storeHouse;
     }
 
     public ArrayList<com.example.tooshytoask.Models.InsightScreen.blogs> getBlogs() {

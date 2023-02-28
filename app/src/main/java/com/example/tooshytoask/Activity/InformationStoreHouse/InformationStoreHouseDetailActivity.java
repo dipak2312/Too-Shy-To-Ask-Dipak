@@ -19,10 +19,10 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String blog_id;
-    TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description;
+    String blog_id, event_id;
+    TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description, helpful;
     ImageView blog_img, like_courses, save_courses, share_courses,like_count_img;
-    LinearLayout previous, next;
+    LinearLayout previous, next, yes_no_lay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,8 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        helpful = findViewById(R.id.helpful);
+        yes_no_lay = findViewById(R.id.yes_no_lay);
         blog_headline = findViewById(R.id.blog_headline);
         blog_description = findViewById(R.id.blog_description);
         yes_count = findViewById(R.id.yes_count);
@@ -56,7 +58,16 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         if (intent != null) {
 
             blog_id = intent.getStringExtra("blog_id");
+            yes_no_lay.setVisibility(View.VISIBLE);
+            helpful.setVisibility(View.VISIBLE);
 
+        }
+        Intent intent1 = getIntent();
+        if (intent != null) {
+
+            event_id = intent1.getStringExtra("event_id");
+            //yes_no_lay.setVisibility(View.GONE);
+            //helpful.setVisibility(View.GONE);
         }
     }
 

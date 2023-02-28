@@ -6,6 +6,8 @@ public class insightcourses {
     private String description;
     private String image;
     private String videolink;
+    private String timing;
+    private String total_lesson;
 
     public String getId() {
         return id;
@@ -45,5 +47,21 @@ public class insightcourses {
 
     public void setVideolink(String videolink) {
         this.videolink = videolink;
+    }
+
+    public String getTiming() {
+        return timing;
+    }
+
+    public void setTiming(String timing) {
+        this.timing = timing;
+    }
+
+    public String getTotal_lesson() {
+        return total_lesson;
+    }
+
+    public void setTotal_lesson(String total_lesson) {
+        this.total_lesson = total_lesson;
     }
 }

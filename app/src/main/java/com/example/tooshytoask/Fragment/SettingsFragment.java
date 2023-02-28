@@ -23,6 +23,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
+import com.example.tooshytoask.Activity.FAQ.FAQActivity;
+import com.example.tooshytoask.Activity.Feedback.FeedbackActivity;
 import com.example.tooshytoask.Activity.Landing.SignInActivity;
 import com.example.tooshytoask.Activity.Help.HelpActivity;
 import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
@@ -162,22 +165,22 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             startActivity(intent);
         }
         else if (id == bookmarks.getId()) {
-            /*Intent intent = new Intent(context, BookmarkActivity.class);
+            Intent intent = new Intent(context, BookmarkActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);*/
+            startActivity(intent);
         }
         else if (id == feedback.getId()) {
-            /*Intent intent = new Intent(context, UpdateProfileActivity.class);
+            Intent intent = new Intent(context, FeedbackActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);*/
+            startActivity(intent);
         }
         else if (id == faq.getId()) {
-           /* Intent intent = new Intent(context, UpdateProfileActivity.class);
+            Intent intent = new Intent(context, FAQActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);*/
+            startActivity(intent);
         }
         else if (id == select_Language.getId()) {
             openLanguagePopup();

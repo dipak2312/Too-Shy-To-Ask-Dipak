@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
 import com.example.tooshytoask.Models.EventBlogItems;
 import com.example.tooshytoask.Models.HighlightBlogItems;
 import com.example.tooshytoask.Models.InsightScreen.events;
@@ -66,8 +67,8 @@ public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.View
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id",events.get(getAdapterPosition()).getEvent_id());
-                    Intent intent = new Intent(context, DetailBlogActivity.class);
+                    bundle.putString("event_id",events.get(getAdapterPosition()).getEvent_id());
+                    Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -3,7 +3,6 @@ package com.example.tooshytoask.Activity.Blogs;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -11,21 +10,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
-import com.example.tooshytoask.Activity.Landing.OtpVerificationActivity;
-import com.example.tooshytoask.Activity.Landing.SignUpActivity;
 import com.example.tooshytoask.Adapters.AllBlogAdapter;
-import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
+import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllBlogResponse;
-import com.example.tooshytoask.Models.BlogItems;
+import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
+import com.example.tooshytoask.Models.InsightScreen.storeHouse;
 import com.example.tooshytoask.Models.insightblogs;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
@@ -47,7 +44,9 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     ImageView selection_category;
     CustomProgressDialog dialog;
     ArrayList<insightblogs>insightblogs;
+    ArrayList<storeHouse> storeHouse;
     int selectedPosition=0;
+    String[] listItems ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +71,43 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 
         getAllBlogs();
 
+    }
 
+    public void getInsightScreenResponse(String category) {
+        dialog.show("");
+
+        InsightScreenAuthModel model = new InsightScreenAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().insightScreenResponse(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<InsightScreenResponse>() {
+                    @Override
+                    public void onNext(InsightScreenResponse insightScreenResponse) {
+                        String msg = insightScreenResponse.getMsg();
+
+                        if (msg.equals("success")) {
+                            storeHouse = insightScreenResponse.getBlog_category();
+
+                        }
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getAllBlogs(){
         dialog.show("");
-        dialog.dismiss("");
 
         AllBlogAuthModel model = new AllBlogAuthModel();
 
@@ -88,7 +118,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onNext(AllBlogResponse allBlogResponse) {
                         String msg = allBlogResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("success")){
                             insightblogs = allBlogResponse.getInsightblogs();
 
@@ -124,11 +154,11 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
             finish();
         }
         else if (id == selection_button_rl.getId()){
-           // selectCategoryMethod();
+            selectCategoryMethod();
         }
     }
 
-   /* private void selectCategoryMethod() {
+    private void selectCategoryMethod() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(AllBlogsActivity.this);
         mBuilder.setTitle("All Category");
 
@@ -145,12 +175,12 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 //               checkedItem [0] = which;
                     selectedPosition=which;
                     // now also update the TextView which previews the selected item
-                    getBlogDataCategoryWise(which==0?"":insightblogs.get(which-1).getBlog_id()+"");
+                    //getInsightScreenResponse(which==0?"":insightblogs.get(which-1).getBlog_id()+"");
                     if (which==0){
 //                        getCategoriesData("all");
-                        selectCategoryTitle.setText(categoryListForSingleItem[which]);
+                        tv_category_selection.setText(categoryListForSingleItem[which]);
                     }else{
-                        selectCategoryTitle.setText(categoryListForSingleItem[which]);
+                        tv_category_selection.setText(categoryListForSingleItem[which]);
                     }
 
                     // when selected an item the dialog should be closed with the dismiss method
@@ -179,7 +209,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                 public void onClick(DialogInterface dialogInterface, int which) {
 
                     // now also update the TextView which previews the selected item
-                    selectCategoryTitle.setText(listItems[which]);
+                    tv_category_selection.setText(listItems[which]);
 
                     // when selected an item the dialog should be closed with the dismiss method
                     dialogInterface.dismiss();
@@ -204,16 +234,10 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
-
-
-
         mBuilder.setCancelable(false);
-
-
 
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();
 
-
-    }*/
+    }
 }

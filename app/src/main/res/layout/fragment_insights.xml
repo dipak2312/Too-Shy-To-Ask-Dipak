@@ -106,7 +106,7 @@
             android:id="@+id/recy_storehouse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20"/>
+            android:layout_marginStart="@dimen/margin_15"/>
 
         </RelativeLayout>
 
@@ -152,7 +152,7 @@
                     android:id="@+id/recy_blogs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_20"/>
+                    android:layout_marginStart="@dimen/margin_15"/>
 
             </RelativeLayout>
 
@@ -161,7 +161,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_25"
                 android:layout_below="@id/recy_blog_lay"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
 
@@ -180,6 +179,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/see_all"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:fontFamily="@font/worksansitalic"
                     android:textSize="@dimen/text_size12"
                     android:layout_marginEnd="@dimen/margin_20"
@@ -198,7 +198,7 @@
                     android:id="@+id/recy_highlight_blogs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_20"/>
+                    android:layout_marginStart="@dimen/margin_15"/>
 
             </RelativeLayout>
 
@@ -244,7 +244,7 @@
                     android:id="@+id/recy_event_blogs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_20"/>
+                    android:layout_marginStart="@dimen/margin_15"/>
 
             </RelativeLayout>
 
@@ -264,7 +264,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_25"
                 android:layout_below="@id/game_banner"
-                android:gravity="center"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
 
@@ -282,6 +281,7 @@
                     android:layout_height="@dimen/margin_25"
                     android:layout_alignParentEnd="true"
                     android:text="@string/see_all"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:fontFamily="@font/worksansitalic"
                     android:textSize="@dimen/text_size12"
@@ -301,7 +301,7 @@
                     android:id="@+id/recy_just_added_blogs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_20"/>
+                    android:layout_marginStart="@dimen/margin_15"/>
 
             </RelativeLayout>
 
@@ -358,7 +358,7 @@
                     android:id="@+id/recy_courses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_20"/>
+                    android:layout_marginStart="@dimen/margin_15"/>
 
             </RelativeLayout>
 
@@ -398,13 +398,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/video_lay"
-                android:layout_marginTop="@dimen/margin_10">
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recy_video_gallery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_20"/>
+                    android:layout_marginStart="@dimen/margin_15"/>
 
             </RelativeLayout>
 

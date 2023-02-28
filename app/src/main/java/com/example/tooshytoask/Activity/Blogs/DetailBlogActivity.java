@@ -74,8 +74,8 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
             blog_id = intent.getStringExtra("blog_id");
 
         }
-
         getSingleBlog();
+
     }
 
     public void getSingleBlog(){

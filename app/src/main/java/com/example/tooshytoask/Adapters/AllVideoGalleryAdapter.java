@@ -11,36 +11,37 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Models.InsightScreen.video_gallery;
+import com.example.tooshytoask.Models.insightvideo;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
-public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapter.ViewHolder>{
+public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGalleryAdapter.ViewHolder>{
     Context context;
-    ArrayList<video_gallery>video_gallery;
+    ArrayList<insightvideo>insightvideo;
 
-    public VideoGalleryAdapter(Context context, ArrayList<video_gallery>video_gallery) {
+    public AllVideoGalleryAdapter(Context context, ArrayList<insightvideo>insightvideo) {
         this.context = context;
-        this.video_gallery = video_gallery;
+        this.insightvideo = insightvideo;
     }
 
     @NonNull
     @Override
-    public VideoGalleryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_gallery_items,parent,false);
+    public AllVideoGalleryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_video_gallery_items,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoGalleryAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AllVideoGalleryAdapter.ViewHolder holder, int position) {
         //Glide.with(context).load(video_gallery.get(position).get()).into(holder.blog_img);
-        holder.blog_title.setText(video_gallery.get(position).getTitle());
+        holder.blog_title.setText(insightvideo.get(position).getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return video_gallery.size();
+        return insightvideo.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

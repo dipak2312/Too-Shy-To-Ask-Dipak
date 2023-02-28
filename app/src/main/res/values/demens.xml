@@ -62,6 +62,7 @@
     <dimen name="margin_44">44.0dp</dimen>
     <dimen name="margin_90">90.0dp</dimen>
     <dimen name="margin_91">91.0dp</dimen>
+    <dimen name="margin_95">95.0dp</dimen>
     <dimen name="margin_100">100.0dp</dimen>
     <dimen name="margin_110">110.0dp</dimen>
     <dimen name="margin_115">115.0dp</dimen>

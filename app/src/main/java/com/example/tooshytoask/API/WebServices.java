@@ -4,9 +4,11 @@ import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
 import com.example.tooshytoask.AuthModels.AllEventAuthModel;
 import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
+import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
+import com.example.tooshytoask.AuthModels.FeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.HelpCategoryAuthModel;
@@ -36,9 +38,11 @@ import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllEventResponse;
 import com.example.tooshytoask.Models.AllHighlightResponse;
+import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.ClearNotificationResponse;
+import com.example.tooshytoask.Models.FeedbackResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.Help.ContactFormResponse;
@@ -155,6 +159,11 @@ public interface WebServices {
     Observable<AllCoursesResponse> getCoursesBlogs(@Body AllCoursesAuthModel model);
 
     @Headers("Content-Type: application/json")
+    @POST("api/insightvideogallery")
+    Observable<AllVideoGalleryResponse> getVideoGallery(@Body AllVideoGalleryAuthModel model);
+
+
+    @Headers("Content-Type: application/json")
     @POST("api/articlesingleblog")
     Observable<SingleBlogResponse> getSingleBlog(@Body SingleBlogAuthModel model);
 
@@ -213,5 +222,9 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/articlebookmark")
     Observable<BookmarkBlogResponse> getBookmarkBlogs(@Body BookmarkBlogAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/feedback")
+    Observable<FeedbackResponse> getFeedback(@Body FeedbackAuthModel model);
 
 }

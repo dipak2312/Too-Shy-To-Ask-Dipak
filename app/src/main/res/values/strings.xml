@@ -163,6 +163,8 @@
     <string name="highlights">Highlights</string>
     <string name="blogs">Blogs</string>
     <string name="information_storehouse">Information Storehouse</string>
+    <string name="frequently_asked_question_s">Frequently Asked Question\'s</string>
+    <string name="all_categories">All Categories</string>
 
 
 </resources>

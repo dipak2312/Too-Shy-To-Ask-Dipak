@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F3F3FA"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:id="@+id/main_card_at_faq_item"
+    android:layout_marginLeft="@dimen/margin_5"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="@dimen/margin_5"
+    android:layout_marginBottom="4dp">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_margin="4dp"
+        android:id="@+id/linearLayout"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/rel_question_selection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="@dimen/margin_15"
+            android:layout_marginBottom="8dp"
+          >
+
+            <TextView
+                android:id="@+id/question_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/show_answer"
+                android:fontFamily="@font/worksansmedium"
+                android:text="Question 1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/show_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:padding="2dp"
+                android:src="@drawable/add" />
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandable"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="@dimen/margin_15"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/answer_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text="Answer 1"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -13,20 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
-import com.example.tooshytoask.Models.InsightScreen.blog_category;
+import com.example.tooshytoask.Models.InsightScreen.storeHouse;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class StoreHouseAdapter extends RecyclerView.Adapter<StoreHouseAdapter.ViewHolder> {
     Context context;
-    ArrayList<blog_category>blog_category;
+    ArrayList<storeHouse> storeHouse;
 
-    public StoreHouseAdapter(Context context, ArrayList<blog_category>blog_category) {
+    public StoreHouseAdapter(Context context, ArrayList<storeHouse> storeHouse) {
         this.context = context;
-        this.blog_category = blog_category;
+        this.storeHouse = storeHouse;
     }
 
     @NonNull
@@ -39,14 +38,14 @@ public class StoreHouseAdapter extends RecyclerView.Adapter<StoreHouseAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull StoreHouseAdapter.ViewHolder holder, int position) {
         //holder.storehouse_items_img.setImageDrawable(ContextCompat.getDrawable(context,BlogCategory.get(position).getCategoryImg()));
-        Glide.with(context).load(blog_category.get(position).getCategory_img()).into(holder.storehouse_items_img);
-        holder.storehouse_item_txt.setText(blog_category.get(position).getCategory_title());
+        Glide.with(context).load(storeHouse.get(position).getTitle_image()).into(holder.storehouse_items_img);
+        holder.storehouse_item_txt.setText(storeHouse.get(position).getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return blog_category.size();
+        return storeHouse.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +63,7 @@ public class StoreHouseAdapter extends RecyclerView.Adapter<StoreHouseAdapter.Vi
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id",blog_category.get(getAdapterPosition()).getCategory_id());
+                    bundle.putString("blog_id", storeHouse.get(getAdapterPosition()).getTitle_id());
                     Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

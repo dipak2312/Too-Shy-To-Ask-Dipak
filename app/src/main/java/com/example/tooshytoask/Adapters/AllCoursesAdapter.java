@@ -1,6 +1,8 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,45 +10,44 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tooshytoask.Models.CoursesItems;
-import com.example.tooshytoask.Models.EventBlogItems;
-import com.example.tooshytoask.Models.InsightScreen.courses;
+import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Models.insightcourses;
+import com.example.tooshytoask.Models.insightevents;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder>{
+public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.ViewHolder> {
     Context context;
-    ArrayList<courses>courses;
+    ArrayList<insightcourses> insightcourses;
 
-    public CoursesAdapter(Context context, ArrayList<courses>courses) {
+    public AllCoursesAdapter(Context context, ArrayList<insightcourses> insightcourses) {
         this.context = context;
-        this.courses = courses;
+        this.insightcourses = insightcourses;
     }
+
 
     @NonNull
     @Override
-    public CoursesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.courses_items,parent,false);
+    public AllCoursesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_courses_item,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CoursesAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(courses.get(position).getImage()).into(holder.blog_img);
-        holder.courses_title.setText(courses.get(position).getTitle());
-        holder.course_time.setText(courses.get(position).getTiming());
-        holder.lessons.setText(courses.get(position).getTotal_lesson());
-
+    public void onBindViewHolder(@NonNull AllCoursesAdapter.ViewHolder holder, int position) {
+        Glide.with(context).load(insightcourses.get(position).getImage()).into(holder.blog_img);
+        holder.courses_title.setText(insightcourses.get(position).getTitle());
+        holder.course_time.setText(insightcourses.get(position).getTiming());
+        holder.lessons.setText(insightcourses.get(position).getTotal_lesson());
     }
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return insightcourses.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

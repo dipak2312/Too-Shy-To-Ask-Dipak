@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
+
         <activity
             android:name=".Activity.Blogs.AllRecentlyAddedActivity"
             android:exported="true" />
@@ -60,7 +61,7 @@
             android:name=".Activity.InformationStoreHouse.InformationStoreHouseDetailActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.Setting.FeedbackActivity"
+            android:name=".Activity.Feedback.FeedbackActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -253,7 +254,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.FAQ.FAQActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

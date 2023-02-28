@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="@dimen/margin_110"
         android:layout_height="@dimen/margin_120"
-        android:background="@drawable/infocard_shadow"
         android:layout_marginBottom="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/help_background"
         android:layout_marginStart="@dimen/margin_5"
         android:layout_marginEnd="@dimen/margin_5"
-        android:gravity="center"
-        android:elevation="@dimen/margin_5">
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="@dimen/margin_7"
+        app:cardElevation="@dimen/margin_3">
 
 
         <LinearLayout
             android:layout_width="@dimen/margin_110"
             android:layout_height="@dimen/margin_120"
             android:orientation="vertical"
-            android:gravity="center"
             android:background="@drawable/help_background">
 
-
-            <ImageView
-                android:id="@+id/storehouse_items_img"
+            <RelativeLayout
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/storehouse_items_img"
+                android:layout_width="@dimen/margin_110"
                 android:layout_height="@dimen/margin_90"
-                android:src="@drawable/relationships"/>
+                android:background="@drawable/status_background"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:src="@drawable/blog2"
+                app:shapeAppearanceOverlay="@style/radiusimageview"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/storehouse_item_txt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Relationships"
                 android:textSize="@dimen/text_size10"
-                android:fontFamily="@font/worksansmedium"
+                android:singleLine="true"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/margin_5"
-                android:layout_marginBottom="@dimen/margin_5"
+                android:paddingStart="@dimen/margin_2"
+                android:paddingEnd="@dimen/margin_2"
+                android:fontFamily="@font/worksansmedium"
                 android:textColor="@color/black"/>
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
