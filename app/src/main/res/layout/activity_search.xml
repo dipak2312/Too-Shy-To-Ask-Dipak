@@ -5,54 +5,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F1F1"
     tools:context=".Activity.Search.SearchActivity">
 
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
 
         <RelativeLayout
-            android:id="@+id/search_lay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_45"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_30"
-            android:background="@drawable/language_background_active">
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
 
-            <ImageView
-                android:id="@+id/img_search"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_20"
-                android:src="@drawable/search">
+                android:layout_marginStart="@dimen/margin_20">
 
-            </ImageView>
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
 
             <EditText
                 android:id="@+id/edit_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:layout_toEndOf="@+id/img_search"
-                android:layout_marginLeft="@dimen/margin_12"
-                android:layout_marginRight="@dimen/margin_12"
+                android:layout_toEndOf="@+id/rel_back"
+                android:layout_marginStart="@dimen/margin_12"
+                android:layout_marginEnd="@dimen/margin_70"
                 android:fontFamily="@font/worksansregular"
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:imeOptions="actionSearch"
-                android:hint="Search..."
-                android:textColorHint="@color/black"
-                android:textSize="@dimen/text_size12" />
+                android:hint="Search for blogs, courses etc..."
+                android:textColorHint="#A2A2A2"
+                android:textSize="@dimen/text_size15" />
 
+            <RelativeLayout
+                android:id="@+id/rel_lesson_search"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_alignParentEnd="true">
 
-            </RelativeLayout>
+            <ImageView
+                android:id="@+id/img_lesson"
+                android:layout_width="@dimen/margin_15"
+                android:layout_height="@dimen/margin_15"
+                android:src="@drawable/microphone"
+                />
 
+        </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txt_empty_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Oops ! No products found."
+        android:text="@string/oops_no_products_found"
         android:textColor="@color/black"
         android:alpha="0.8"
         android:visibility="gone"
@@ -61,23 +86,236 @@
 
     </TextView>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top_bar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/info_storehouse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Information Storehouse"
+                android:paddingTop="@dimen/margin_15"
+                android:layout_marginStart="@dimen/margin_20"
+                android:textSize="@dimen/text_size18"
+                android:fontFamily="@font/worksansmedium"
+                android:textColor="@color/black"/>
+
+            </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/storehouse_lay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/search_lay"
-        android:layout_margin="@dimen/margin_20">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_storehouse"
+        android:background="@color/white">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_storeHouse_search"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/blogs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/storehouse_lay"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/blogs"
+                    android:textSize="@dimen/text_size18"
+                    android:paddingTop="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:fontFamily="@font/worksansmedium"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/blog_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="@dimen/margin_10"
+        android:layout_below="@+id/blogs">
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recy_search"
+            android:id="@+id/recy_blogs_search"
             android:overScrollMode="never"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20">
 
         </androidx.recyclerview.widget.RecyclerView>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/blog_lay"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/events"
+                    android:textSize="@dimen/text_size18"
+                    android:paddingTop="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:fontFamily="@font/worksansmedium"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/event_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/margin_10"
+                android:background="@color/white"
+                android:layout_below="@+id/events">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recy_event_search"
+                    android:overScrollMode="never"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/courses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/event_lay"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/courses"
+                    android:textSize="@dimen/text_size18"
+                    android:paddingTop="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:fontFamily="@font/worksansmedium"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/courses_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/courses"
+        android:paddingTop="@dimen/margin_10"
+        android:background="@color/white">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_courses_search"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/courses_lay"
+                android:layout_marginTop="@dimen/margin_5"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/video_gallery"
+                    android:textSize="@dimen/text_size18"
+                    android:paddingTop="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:fontFamily="@font/worksansmedium"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video"
+        android:paddingTop="@dimen/margin_10"
+        android:background="@color/white">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_video_search"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/purple"
+        android:layout_centerHorizontal="true">
+
+    </ProgressBar>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

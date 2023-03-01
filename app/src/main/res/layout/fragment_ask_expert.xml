@@ -26,9 +26,241 @@
                 android:text="TSTA Expert"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
+            
+            <ImageView
+                android:id="@+id/expert_img"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:src="@drawable/expert_icon"/>
 
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/expert_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_15"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/expert_background"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_80">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TSTA"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_10"
+            android:fontFamily="@font/worksansmedium"
+            android:textSize="@dimen/text_size12"
+            android:textColor="@color/purple"/>
+
+            <TextView
+                android:id="@+id/hi_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi Thomas, Welcome to TSTA Chat Support"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:fontFamily="@font/worksansregular"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginBottom="@dimen/margin_15"
+                android:textSize="@dimen/text_size14"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/expert_upper_radius"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_80">
+
+            <TextView
+                android:id="@+id/title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TSTA"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginStart="@dimen/margin_10"
+                android:fontFamily="@font/worksansmedium"
+                android:textSize="@dimen/text_size12"
+                android:textColor="@color/purple"/>
+
+            <TextView
+                android:id="@+id/select_issue_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please select the issue for which you seek support"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:fontFamily="@font/worksansregular"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginBottom="@dimen/margin_15"
+                android:textSize="@dimen/text_size14"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_issues_recy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expert_lay"
+        android:layout_marginStart="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_75">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/issues_recy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/faq_lin_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_below="@id/rel_issues_recy"
+        android:background="@drawable/expert_background"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_80">
+
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TSTA"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_10"
+            android:fontFamily="@font/worksansmedium"
+            android:textSize="@dimen/text_size12"
+            android:textColor="@color/purple"/>
+
+        <TextView
+            android:id="@+id/faq_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:fontFamily="@font/worksansregular"
+            android:layout_marginTop="@dimen/margin_5"
+            android:textColorLink="@color/purple"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:textSize="@dimen/text_size14"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/yes_no_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_below="@id/faq_lin_lay"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_80">
+
+    <LinearLayout
+        android:id="@+id/helpful_lin_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/expert_upper_radius">
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TSTA"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_10"
+            android:fontFamily="@font/worksansmedium"
+            android:textSize="@dimen/text_size12"
+            android:textColor="@color/purple"/>
+
+        <TextView
+            android:id="@+id/helpful_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Was this helpful?"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:fontFamily="@font/worksansregular"
+            android:layout_marginTop="@dimen/margin_5"
+            android:textColorLink="@color/purple"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:textSize="@dimen/text_size14"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_lay_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helpful_lin_lay"
+        android:background="@drawable/expert_issues_background">
+
+        <TextView
+            android:id="@+id/yes_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:fontFamily="@font/worksansmedium"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_5"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size15"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_lay_id"
+        android:background="@drawable/expert_issues_background">
+
+        <TextView
+            android:id="@+id/no_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:fontFamily="@font/worksansmedium"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_5"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size15"/>
+
+    </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

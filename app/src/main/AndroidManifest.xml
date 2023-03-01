@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
-
+        <activity
+            android:name=".Activity.Expert.ExpertActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.Blogs.AllRecentlyAddedActivity"
             android:exported="true" />

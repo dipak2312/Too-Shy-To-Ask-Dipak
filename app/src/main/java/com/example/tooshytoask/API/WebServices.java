@@ -25,6 +25,7 @@ import com.example.tooshytoask.AuthModels.RemoveProfileAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
+import com.example.tooshytoask.AuthModels.SearchAuthModel;
 import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.SingleBlogAuthModel;
@@ -62,6 +63,7 @@ import com.example.tooshytoask.Models.RemoveProfileResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
 import com.example.tooshytoask.Models.SaveProfilePicResponse;
+import com.example.tooshytoask.Models.SearchResponse;
 import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.SingleBlogResponse;
@@ -129,6 +131,10 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/homescreen")
     Observable<HomeScreenResponse> homePageResponse(@Body HomeScreenAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/search")
+    Observable<SearchResponse> getSearch(@Body SearchAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/categorystory")
