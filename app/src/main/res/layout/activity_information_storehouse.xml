@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Blogs.AllBlogsActivity">
+    tools:context=".Activity.InformationStoreHouse.InformationStorehouseActivity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"
@@ -35,11 +35,12 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/storehouse_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansmedium"
-                android:text="Blogs"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -65,56 +66,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20">
-
-
-        <RelativeLayout
-            android:id="@+id/selection_button_rl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_45"
-            android:background="@drawable/infocard_shadow"
-            android:elevation="@dimen/margin_3">
-
             <RelativeLayout
+                android:id="@+id/categories"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_45"
-                android:background="@drawable/help_background">
-
-            <TextView
-                android:id="@+id/tv_category_selection"
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_10"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/worksansmedium"
-                android:padding="4dp"
-                android:text="All Category"
-                android:textSize="14sp" />
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20">
 
-            <ImageView
-                android:id="@+id/selection_category"
-                android:layout_width="@dimen/margin_15"
-                android:layout_height="@dimen/margin_15"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/dropdown_aarow" />
-        </RelativeLayout>
-        </RelativeLayout>
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/selection_button_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_45"
+                    android:background="@drawable/infocard_shadow"
+                    android:elevation="@dimen/margin_3">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:background="@drawable/help_background">
+
+                        <TextView
+                            android:id="@+id/tv_category_selection"
+                            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/margin_10"
+                            android:layout_marginEnd="2dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/worksansmedium"
+                            android:padding="4dp"
+                            android:text="All Category"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/selection_category"
+                            android:layout_width="@dimen/margin_15"
+                            android:layout_height="@dimen/margin_15"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/dropdown_aarow" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/blog_recy"
+                android:id="@+id/storehouse_recy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/categories"
@@ -127,4 +128,3 @@
     </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
-

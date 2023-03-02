@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.example.tooshytoask.Activity.Blogs.AllHighlightActivity;
 import com.example.tooshytoask.Activity.Blogs.AllRecentlyAddedActivity;
 import com.example.tooshytoask.Activity.Courses.AllCoursesActivity;
 import com.example.tooshytoask.Activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.Activity.Quiz.QuizActivity;
 import com.example.tooshytoask.Activity.VideoGallery.AllVideoActivity;
 import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.Adapters.CoursesAdapter;
@@ -73,12 +75,13 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
     StoreHouseAdapter storeHouseAdapter;
     HighlightBlogAdapter highlightBlogAdapter;
     BlogAdapter blogAdapter;
-    ShapeableImageView game_banner;
+    ShapeableImageView game_banner,take_a_quiz_banner;
     TextView see_all, see_all1, see_all2, see_all3, see_all4, see_all5;
     CustomProgressDialog dialog;
     CircleImageView update_profile;
     RelativeLayout insight_lay;
     NestedScrollView insight_scroll;
+    ImageView bookmark, search;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,6 +92,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        take_a_quiz_banner = view.findViewById(R.id.take_a_quiz_banner);
+        take_a_quiz_banner.setOnClickListener(this);
         game_banner = view.findViewById(R.id.game_banner);
         game_banner.setOnClickListener(this);
         insight_scroll = view.findViewById(R.id.insight_scroll);
@@ -235,7 +240,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onNext(UserProfileResponse userProfileResponse) {
                         String msg = userProfileResponse.getMsg();
-                        dialog.dismiss("");
+                        //dialog.dismiss("");
                         if (msg.equals("success")){
                             Glide.with(context).load(userProfileResponse.getProfile_pic()).into(update_profile);
                         }
@@ -302,6 +307,12 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         }
         else if (id == game_banner.getId()) {
             Intent intent = new Intent(context, GameMainPageActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if (id == take_a_quiz_banner.getId()) {
+            Intent intent = new Intent(context, QuizActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

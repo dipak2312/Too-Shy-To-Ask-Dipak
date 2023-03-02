@@ -1,8 +1,6 @@
 package com.example.tooshytoask.Activity.Blogs;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Adapters.DetailBlogAdapter;
 import com.example.tooshytoask.AuthModels.SingleBlogAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.SingleBlogResponse;

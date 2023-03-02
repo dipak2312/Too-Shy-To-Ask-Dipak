@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HelpTopicAdapter extends RecyclerView.Adapter<HelpTopicAdapter.ViewHolder>{
     Context context;
-    OtherTopicAdapter adapter;
+    BookmarkStoreHouseAdapter adapter;
 
 
     @NonNull

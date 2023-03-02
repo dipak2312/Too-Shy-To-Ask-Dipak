@@ -14,13 +14,10 @@ import android.widget.RelativeLayout;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllEventsAdapter;
-import com.example.tooshytoask.Adapters.AllHighlightAdapter;
-import com.example.tooshytoask.Adapters.EventBlogAdapter;
 import com.example.tooshytoask.AuthModels.AllEventAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllEventResponse;
 import com.example.tooshytoask.Models.insightevents;
-import com.example.tooshytoask.Models.insighthighlights;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 

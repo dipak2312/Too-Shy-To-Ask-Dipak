@@ -1,5 +1,6 @@
 package com.example.tooshytoask.Activity.Search;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -51,7 +52,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     CustomProgressDialog dialog;
     EditText edit_search;
     RecyclerView recy_storeHouse_search,recy_blogs_search,recy_event_search,recy_courses_search,recy_video_search;
-    RelativeLayout rel_lesson_search, rel_back;
+    RelativeLayout rel_lesson_search, rel_back, info_storehouse, blogs, events, courses, video;
     ProgressBar progress_bar;
     boolean isScrolling=true;
     int CurrentItem,totalitem,scrolledoutitem;
@@ -83,31 +84,34 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        blogs = findViewById(R.id.blogs);
+        events = findViewById(R.id.events);
+        courses = findViewById(R.id.courses);
+        video = findViewById(R.id.video);
+        info_storehouse = findViewById(R.id.info_storehouse);
         txt_empty_search = findViewById(R.id.txt_empty_search);
         edit_search = findViewById(R.id.edit_search);
-        progress_bar=(ProgressBar)findViewById(R.id.progress_bar);
+        progress_bar= findViewById(R.id.progress_bar);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         rel_lesson_search = findViewById(R.id.rel_lesson_search);
         rel_lesson_search.setOnClickListener(this);
 
-        recy_storeHouse_search = findViewById(R.id.recy_storeHouse_search);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recy_storeHouse_search.setLayoutManager(linearLayoutManager);
+        storehouse_search=new ArrayList<>();
+        Allstorehouse_search=new ArrayList<>();
 
-        recy_blogs_search = findViewById(R.id.recy_blogs_search);
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recy_blogs_search.setLayoutManager(linearLayoutManager1);
+        blog_search=new ArrayList<>();
+        Allblog_search=new ArrayList<>();
 
-        recy_event_search = findViewById(R.id.recy_event_search);
-        LinearLayoutManager lm = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        recy_event_search.setLayoutManager(lm);
+        event_search=new ArrayList<>();
+        Allevent_search=new ArrayList<>();
 
-        recy_courses_search = findViewById(R.id.recy_courses_search);
-        recy_courses_search.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
+        course_search=new ArrayList<>();
+        Allcourse_search=new ArrayList<>();
 
-        recy_video_search = findViewById(R.id.recy_video_search);
-        recy_video_search.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
+        video_search=new ArrayList<>();
+        Allvideo_search=new ArrayList<>();
+
 
         edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -129,8 +133,172 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 return false;
             }
         });
+        RecyView();
 
+    }
 
+    public void RecyView(){
+
+        recy_storeHouse_search = findViewById(R.id.recy_storeHouse_search);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recy_storeHouse_search.setLayoutManager(linearLayoutManager);
+
+        recy_blogs_search = findViewById(R.id.recy_blogs_search);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recy_blogs_search.setLayoutManager(linearLayoutManager1);
+
+        recy_event_search = findViewById(R.id.recy_event_search);
+        LinearLayoutManager lm = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recy_event_search.setLayoutManager(lm);
+
+        recy_courses_search = findViewById(R.id.recy_courses_search);
+        GridLayoutManager layout = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+        recy_courses_search.setLayoutManager(layout);
+        //recy_courses_search.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
+
+        recy_video_search = findViewById(R.id.recy_video_search);
+        GridLayoutManager layout1 = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+        recy_video_search.setLayoutManager(layout1);
+        //recy_video_search.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
+        recy_video_search.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {//check for scroll down
+                    //As many as are visible on the page
+                    CurrentItem = layout1.getChildCount();
+                    //all item
+                    totalitem = layout1.getItemCount();
+                    //scroll top up all item
+                    scrolledoutitem = layout1.findFirstVisibleItemPosition();
+
+                    if (isScrolling) {
+                        if (CurrentItem + scrolledoutitem >= totalitem) {
+                            isScrolling = false;
+                            i++;
+                            fetchData();
+                        }
+                    }
+                }
+            }
+        });
+
+        recy_courses_search.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {//check for scroll down
+                    //As many as are visible on the page
+                    CurrentItem = layout.getChildCount();
+                    //all item
+                    totalitem = layout.getItemCount();
+                    //scroll top up all item
+                    scrolledoutitem = layout.findFirstVisibleItemPosition();
+
+                    if (isScrolling) {
+                        if (CurrentItem + scrolledoutitem >= totalitem) {
+                            isScrolling = false;
+                            i++;
+                            fetchData();
+                        }
+                    }
+                }
+            }
+        });
+
+        recy_storeHouse_search.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {//check for scroll down
+                    //As many as are visible on the page
+                    CurrentItem = linearLayoutManager.getChildCount();
+                    //all item
+                    totalitem = linearLayoutManager.getItemCount();
+                    //scroll top up all item
+                    scrolledoutitem = linearLayoutManager.findFirstVisibleItemPosition();
+
+                    if (isScrolling) {
+                        if (CurrentItem + scrolledoutitem >= totalitem) {
+                            isScrolling = false;
+                            i++;
+                            fetchData();
+                        }
+                    }
+                }
+            }
+        });
+
+        recy_event_search.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {//check for scroll down
+                    //As many as are visible on the page
+                    CurrentItem = lm.getChildCount();
+                    //all item
+                    totalitem = lm.getItemCount();
+                    //scroll top up all item
+                    scrolledoutitem = lm.findFirstVisibleItemPosition();
+
+                    if (isScrolling) {
+                        if (CurrentItem + scrolledoutitem >= totalitem) {
+                            isScrolling = false;
+                            i++;
+                            fetchData();
+                        }
+                    }
+                }
+            }
+        });
+
+        recy_blogs_search.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {//check for scroll down
+                    //As many as are visible on the page
+                    CurrentItem = linearLayoutManager1.getChildCount();
+                    //all item
+                    totalitem = linearLayoutManager1.getItemCount();
+                    //scroll top up all item
+                    scrolledoutitem = linearLayoutManager1.findFirstVisibleItemPosition();
+
+                    if (isScrolling) {
+                        if (CurrentItem + scrolledoutitem >= totalitem) {
+                            isScrolling = false;
+                            i++;
+                            fetchData();
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public void fetchData()
@@ -149,6 +317,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         SearchAuthModel model = new SearchAuthModel();
         model.setSearch_key(searchresult);
+
         WebServiceModel.getRestApi().getSearch(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -173,10 +342,61 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                             Allevent_search = searchResponse.getEvent_search();
                             setAdapter(status);
                         }
+                        else {
+                            if(status.equals("wrefresh"))
+                            {
+                                if(adapter != null) {
+                                    adapter.notifyDataSetChanged();
+                                }
+                                txt_empty_search.setVisibility(View.VISIBLE);
+                            }
+                             if(status.equals("wrefresh"))
+                            {
+                                if(blogSearchAdapter !=null) {
+                                    blogSearchAdapter.notifyDataSetChanged();
+                                }
+
+                                txt_empty_search.setVisibility(View.VISIBLE);
+                            }
+
+                            if(status.equals("wrefresh"))
+                            {
+                                if(eventSearchAdapter !=null) {
+                                    eventSearchAdapter.notifyDataSetChanged();
+                                }
+                                txt_empty_search.setVisibility(View.VISIBLE);
+                            }
+
+                            if(status.equals("wrefresh"))
+                            {
+                                if(coursesSearchAdapter !=null) {
+                                    coursesSearchAdapter.notifyDataSetChanged();
+                                }
+                                txt_empty_search.setVisibility(View.VISIBLE);
+                            }
+
+                            if(status.equals("wrefresh"))
+                            {
+                                if(videoGallerySearchAdapter !=null) {
+                                    videoGallerySearchAdapter.notifyDataSetChanged();
+                                }
+                                txt_empty_search.setVisibility(View.VISIBLE);
+                            }
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        isScrolling=true;
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        if(status.equals("refresh")) {
+
+                            progress_bar.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            dialog.dismiss("");
+                        }
 
                     }
 
@@ -192,6 +412,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         {
             Allstorehouse_search.add(storehouse_search.get(i));
         }
+
         isScrolling=true;
 
         if(status.equals("refresh"))
@@ -200,11 +421,15 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         }
         else
         {
-            adapter=new InfoStoreHouseSearchAdapter(context,Allstorehouse_search);
-            recy_storeHouse_search.setAdapter(adapter);
-
+            if (Allstorehouse_search.size() == 0){
+                info_storehouse.setVisibility(View.GONE);
+            }
+            else {
+                adapter = new InfoStoreHouseSearchAdapter(context, Allstorehouse_search);
+                recy_storeHouse_search.setAdapter(adapter);
+                info_storehouse.setVisibility(View.VISIBLE);
+            }
         }
-
         for (int i=0;i<blog_search.size();i++)
         {
             Allblog_search.add(blog_search.get(i));
@@ -213,13 +438,84 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         if(status.equals("refresh"))
         {
-            adapter.notifyDataSetChanged();
+            blogSearchAdapter.notifyDataSetChanged();
         }
         else
         {
-            blogSearchAdapter=new BlogSearchAdapter(context,Allblog_search);
-            recy_blogs_search.setAdapter(blogSearchAdapter);
+            if (Allblog_search.size() == 0){
+                blogs.setVisibility(View.GONE);
+            }
+            else {
+                blogSearchAdapter = new BlogSearchAdapter(context, Allblog_search);
+                recy_blogs_search.setAdapter(blogSearchAdapter);
+                blogs.setVisibility(View.VISIBLE);
+            }
+        }
 
+        for (int i=0;i<event_search.size();i++)
+        {
+            Allevent_search.add(event_search.get(i));
+        }
+        isScrolling=true;
+
+        if(status.equals("refresh"))
+        {
+            eventSearchAdapter.notifyDataSetChanged();
+        }
+        else
+        {
+            if (Allevent_search.size() == 0){
+                events.setVisibility(View.GONE);
+            }
+            else {
+                eventSearchAdapter = new EventSearchAdapter(context, Allevent_search);
+                recy_event_search.setAdapter(eventSearchAdapter);
+                events.setVisibility(View.VISIBLE);
+            }
+        }
+
+        for (int i=0;i<course_search.size();i++)
+        {
+            Allcourse_search.add(course_search.get(i));
+        }
+        isScrolling=true;
+
+        if(status.equals("refresh"))
+        {
+            coursesSearchAdapter.notifyDataSetChanged();
+        }
+        else
+        {
+            if (Allcourse_search.size() == 0){
+                courses.setVisibility(View.GONE);
+            }
+            else {
+                coursesSearchAdapter = new CoursesSearchAdapter(context, Allcourse_search);
+                recy_courses_search.setAdapter(coursesSearchAdapter);
+                courses.setVisibility(View.VISIBLE);
+            }
+        }
+
+        for (int i=0;i<video_search.size();i++)
+        {
+            Allvideo_search.add(video_search.get(i));
+        }
+        isScrolling=true;
+
+        if(status.equals("refresh"))
+        {
+            videoGallerySearchAdapter.notifyDataSetChanged();
+        }
+        else
+        {
+            if (Allvideo_search.size() == 0){
+                video.setVisibility(View.GONE);
+            }
+            else {
+                videoGallerySearchAdapter = new VideoGallerySearchAdapter(context, Allvideo_search);
+                recy_video_search.setAdapter(videoGallerySearchAdapter);
+                video.setVisibility(View.VISIBLE);
+            }
         }
     }
 

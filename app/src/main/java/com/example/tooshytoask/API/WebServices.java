@@ -8,6 +8,7 @@ import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
+import com.example.tooshytoask.AuthModels.FAQContentAuthModel;
 import com.example.tooshytoask.AuthModels.FeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
@@ -43,6 +44,8 @@ import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.ClearNotificationResponse;
+import com.example.tooshytoask.Models.FAQCategoryResponse;
+import com.example.tooshytoask.Models.FAQContentResponse;
 import com.example.tooshytoask.Models.FeedbackResponse;
 import com.example.tooshytoask.Models.HealthCateResponse;
 import com.example.tooshytoask.Models.HealthIssueResponse;
@@ -232,5 +235,12 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/feedback")
     Observable<FeedbackResponse> getFeedback(@Body FeedbackAuthModel model);
+
+    @GET("api/faqcategory")
+    Observable<FAQCategoryResponse> getFAQCategory();
+
+    @Headers("Content-Type: application/json")
+    @POST("api/faqcontent")
+    Observable<FAQContentResponse> getFAQContent(@Body FAQContentAuthModel model);
 
 }

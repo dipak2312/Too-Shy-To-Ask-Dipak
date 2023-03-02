@@ -1,4 +1,4 @@
-package com.example.tooshytoask.Activity.Setting.UpdateProfile;
+package com.example.tooshytoask.Activity.Setting.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -18,13 +17,11 @@ import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.HealthAdapter;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
-import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.HealthIssueResponse;
 import com.example.tooshytoask.Models.HealthIssuseList;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UpdateProfile.health_issues;
-import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnClickListner;

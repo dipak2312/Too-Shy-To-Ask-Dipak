@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
-import com.example.tooshytoask.Models.insightblogs;
 import com.example.tooshytoask.Models.insighthighlights;
 import com.example.tooshytoask.R;
 

@@ -12,10 +12,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllCoursesAdapter;
-import com.example.tooshytoask.Adapters.RecentlyBlogAdapter;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllCoursesResponse;

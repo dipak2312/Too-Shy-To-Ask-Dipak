@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;

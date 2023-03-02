@@ -10,16 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
-import com.example.tooshytoask.Adapters.AllBlogAdapter;
 import com.example.tooshytoask.Adapters.AllHighlightAdapter;
 import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllHighlightResponse;
-import com.example.tooshytoask.Models.insightblogs;
 import com.example.tooshytoask.Models.insighthighlights;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;

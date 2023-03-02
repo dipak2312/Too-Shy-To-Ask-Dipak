@@ -1,4 +1,4 @@
-package com.example.tooshytoask.Activity.Setting.UpdateProfile;
+package com.example.tooshytoask.Activity.Setting.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -9,14 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Home.HomeActivity;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -24,7 +22,6 @@ import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
-import com.example.tooshytoask.Utils.MyValidator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;

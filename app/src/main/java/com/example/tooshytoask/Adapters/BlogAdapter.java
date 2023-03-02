@@ -10,15 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
-import com.example.tooshytoask.Models.BlogItems;
-import com.example.tooshytoask.Models.Blogs;
 import com.example.tooshytoask.Models.InsightScreen.blogs;
-import com.example.tooshytoask.Models.StoreHouseItems;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;

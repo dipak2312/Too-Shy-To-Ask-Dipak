@@ -1,4 +1,4 @@
-package com.example.tooshytoask.Activity.Setting.UpdateProfile;
+package com.example.tooshytoask.Activity.Setting.Setting;
 
 import androidx.appcompat.app.AppCompatActivity;
 

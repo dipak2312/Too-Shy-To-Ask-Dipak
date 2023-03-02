@@ -21,6 +21,12 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".InformationStorehouseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailEventActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Expert.ExpertActivity"
             android:exported="false" />
         <activity
@@ -133,28 +139,28 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.UpdateProfile.UpdateAvatarActivity"
+            android:name=".Activity.Setting.Setting.UpdateAvatarActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.UpdateProfile.UpdatePersonalInfoActivity"
+            android:name=".Activity.Setting.Setting.UpdatePersonalInfoActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.UpdateProfile.UpdateHealthActivity"
+            android:name=".Activity.Setting.Setting.UpdateHealthActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.UpdateProfile.UpdateInterestActivity"
+            android:name=".Activity.Setting.Setting.UpdateInterestActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -175,7 +181,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.Setting.UpdateProfile.UpdateProfileActivity"
+            android:name=".Activity.Setting.Setting.UpdateProfileActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
