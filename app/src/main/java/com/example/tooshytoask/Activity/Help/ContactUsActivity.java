@@ -109,7 +109,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
 
-                    File choosedFile = ImagePickUtils.getPickedFile(context, data.getData());
+                    File choosedFile = ImagePickUtilsFile.getPickedFile(context, data.getData());
 
                     Bitmap compressedImageBitmap = new Compressor(this).compressToBitmap(choosedFile);
                     Cursor cursor = getContentResolver().query(uri, filepath, null,null,null);
@@ -171,7 +171,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
         model.setEmail(edit_email_enter.getText().toString().trim());
         model.setSubject(edit_sub_enter.getText().toString().trim());
         model.setDescription(description.getText().toString().trim());
-        //model.setImg();
+        model.setImg(image);
 
         WebServiceModel.getRestApi().getContact(model)
                 .subscribeOn(Schedulers.io())
@@ -213,11 +213,15 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
             img_name.setText("");
             profile_img.setImageBitmap(null);
         }
-        else if (id == img_name.getId()) {
+        else if (id == add_file.getId()) {
             boolean status=checkPermissions();
             if(status)
             {
                 ImagePickUtilsFile.selectImage(context);
+            }
+            else
+            {
+                checkPermissions();
             }
 
         } else if (id == submit_req.getId()) {

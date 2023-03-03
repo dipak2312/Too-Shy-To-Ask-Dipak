@@ -168,5 +168,13 @@
     <string name="please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition">Please check out the FAQ section to know more about Diet and Nutrition</string>
     <string name="oops_no_products_found">Oops ! No products found.</string>
 
+    <string-array name="category_list">
+        <item>Category 1</item>
+        <item>Category 2</item>
+        <item>Category 3</item>
+        <item>Category 4</item>
+        <item>Category 5</item>
+
+    </string-array>
 
 </resources>

@@ -21,14 +21,14 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
-            android:name=".InformationStorehouseActivity"
-            android:exported="false" />
+            android:name=".Activity.InformationStoreHouse.InformationStorehouseActivity"
+            android:exported="true" />
         <activity
-            android:name=".DetailEventActivity"
-            android:exported="false" />
+            android:name=".Activity.Blogs.DetailEventActivity"
+            android:exported="true" />
         <activity
             android:name=".Activity.Expert.ExpertActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Activity.Blogs.AllRecentlyAddedActivity"
             android:exported="true" />
@@ -197,6 +197,7 @@
         <activity
             android:name=".Activity.Landing.InfoCardCategoryActivity"
             android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

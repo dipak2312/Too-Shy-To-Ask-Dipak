@@ -236,10 +236,10 @@ public class Help3Activity extends AppCompatActivity implements View.OnClickList
         }
         else if (id == rel_back.getId()){
             Intent intent = new Intent(context, HelpActivity2.class);
+            intent.putExtra("category_id",category_id);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
         }
         else if (id == yes.getId()){
             feedback = "Yes";

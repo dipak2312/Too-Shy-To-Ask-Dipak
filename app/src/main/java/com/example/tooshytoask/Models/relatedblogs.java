@@ -1,8 +1,6 @@
 package com.example.tooshytoask.Models;
 
-import java.util.ArrayList;
-
-public class singleblog {
+public class relatedblogs {
     private String blog_id;
     private String blog_title;
     private String blog_content;
@@ -10,10 +8,6 @@ public class singleblog {
     private String blog_link;
     private String blog_category;
     private String blog_img;
-    private String blog_like;
-    private String blog_helpfull_yes;
-    private String blog_helpfull_no;
-    ArrayList<comments>comments;
 
     public String getBlog_id() {
         return blog_id;
@@ -69,37 +63,5 @@ public class singleblog {
 
     public void setBlog_img(String blog_img) {
         this.blog_img = blog_img;
-    }
-
-    public String getBlog_like() {
-        return blog_like;
-    }
-
-    public void setBlog_like(String blog_like) {
-        this.blog_like = blog_like;
-    }
-
-    public String getBlog_helpfull_yes() {
-        return blog_helpfull_yes;
-    }
-
-    public void setBlog_helpfull_yes(String blog_helpfull_yes) {
-        this.blog_helpfull_yes = blog_helpfull_yes;
-    }
-
-    public String getBlog_helpfull_no() {
-        return blog_helpfull_no;
-    }
-
-    public void setBlog_helpfull_no(String blog_helpfull_no) {
-        this.blog_helpfull_no = blog_helpfull_no;
-    }
-
-    public ArrayList<com.example.tooshytoask.Models.comments> getComments() {
-        return comments;
-    }
-
-    public void setComments(ArrayList<com.example.tooshytoask.Models.comments> comments) {
-        this.comments = comments;
     }
 }

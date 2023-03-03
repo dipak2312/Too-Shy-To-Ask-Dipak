@@ -111,7 +111,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     }
 
     public void getUserData(){
-        dialog.show("Loading");
+        dialog.show("");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());

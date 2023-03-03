@@ -30,7 +30,6 @@ import retrofit2.http.DELETE;
 public class ImagePickUtils {
 
     private static final int TAKE_PICTURE = 1;
-    private static final int REMOVE_PICTURE = 123;
     private static Uri imageUri;
 
     private static final int SELECT_FILE = 2754;
@@ -82,10 +81,6 @@ public class ImagePickUtils {
                 bottomSheetDialog.dismiss();
             }
         });
-
-    }
-
-    private static void RemoveProfilePic(Context context){
 
     }
 

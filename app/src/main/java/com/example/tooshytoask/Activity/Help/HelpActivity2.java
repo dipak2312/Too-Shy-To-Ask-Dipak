@@ -84,6 +84,7 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
         dialog.show("");
 
         HelpSubCategoryAuthModel model = new HelpSubCategoryAuthModel();
+        model.setUser_id(spManager.getUserId());
         model.setCategory_id(category_id);
 
         WebServiceModel.getRestApi().getHelpSubCategory(model)

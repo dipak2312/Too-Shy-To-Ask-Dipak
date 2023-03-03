@@ -18,11 +18,14 @@ import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllBlogAdapter;
 import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
+import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllBlogResponse;
+import com.example.tooshytoask.Models.BlogCategoryResponse;
 import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
 import com.example.tooshytoask.Models.InsightScreen.storeHouse;
+import com.example.tooshytoask.Models.insightblogcategories;
 import com.example.tooshytoask.Models.insightblogs;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
@@ -44,9 +47,10 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     ImageView selection_category;
     CustomProgressDialog dialog;
     ArrayList<insightblogs>insightblogs;
-    ArrayList<storeHouse> storeHouse;
+    ArrayList<com.example.tooshytoask.Models.insightblogcategories>insightblogcategories;
     int selectedPosition=0;
     String[] listItems ;
+    boolean[] checkedItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,30 +69,33 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         rel_back.setOnClickListener(this);
         bookmark_blog = findViewById(R.id.bookmark_blog);
         bookmark_blog.setOnClickListener(this);
-        blog_recy = findViewById(R.id.blog_recy);
 
+        insightblogcategories = new ArrayList<>();
+        blog_recy = findViewById(R.id.blog_recy);
         blog_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
+
+        listItems = getResources().getStringArray(R.array.category_list);
+        checkedItems = new boolean[listItems.length];
 
         getAllBlogs();
 
     }
 
-    public void getInsightScreenResponse(String category) {
-        dialog.show("");
+    public void getBlogCategory(String category) {
+       // dialog.show("");
 
-        InsightScreenAuthModel model = new InsightScreenAuthModel();
-        model.setUser_id(spManager.getUserId());
+        BlogCategoryAuthModel model = new BlogCategoryAuthModel();
 
-        WebServiceModel.getRestApi().insightScreenResponse(model)
+        WebServiceModel.getRestApi().getBlogCategory(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<InsightScreenResponse>() {
+                .subscribe(new DisposableObserver<BlogCategoryResponse>() {
                     @Override
-                    public void onNext(InsightScreenResponse insightScreenResponse) {
-                        String msg = insightScreenResponse.getMsg();
+                    public void onNext(BlogCategoryResponse blogCategoryResponse) {
+                        String msg = blogCategoryResponse.getMsg();
 
                         if (msg.equals("success")) {
-                            storeHouse = insightScreenResponse.getBlog_category();
+                            insightblogcategories = blogCategoryResponse.getInsightblogcategories();
 
                         }
                         dialog.dismiss("");
@@ -124,6 +131,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 
                             adapter = new AllBlogAdapter(context ,insightblogs);
                             blog_recy.setAdapter(adapter);
+                            getBlogCategory("");
                         }
                     }
 
@@ -162,20 +170,20 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(AllBlogsActivity.this);
         mBuilder.setTitle("All Category");
 
-        String [] categoryListForSingleItem = new String[insightblogs.size()+1];
+        String [] categoryListForSingleItem = new String[insightblogcategories.size()+1];
         categoryListForSingleItem[0]="All Categories";
-        for (int i = 0; i<insightblogs.size(); i++){
-            categoryListForSingleItem[i+1]=insightblogs.get(i).getBlog_category() ;
+        for (int i = 0; i<insightblogcategories.size(); i++){
+            categoryListForSingleItem[i+1]=insightblogcategories.get(i).getCategory_title() ;
         }
 
-        if (!insightblogs.isEmpty()){
+        if (!insightblogcategories.isEmpty()){
             mBuilder.setSingleChoiceItems(categoryListForSingleItem, selectedPosition, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int which) {
 //               checkedItem [0] = which;
                     selectedPosition=which;
                     // now also update the TextView which previews the selected item
-                    //getInsightScreenResponse(which==0?"":insightblogs.get(which-1).getBlog_id()+"");
+                    getBlogCategory(which==0?"":insightblogcategories.get(which-1).getCategory_id()+"");
                     if (which==0){
 //                        getCategoriesData("all");
                         tv_category_selection.setText(categoryListForSingleItem[which]);

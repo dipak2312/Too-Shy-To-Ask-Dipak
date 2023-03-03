@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.FAQ;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
+import com.example.tooshytoask.Adapters.FAQAdapter;
 import com.example.tooshytoask.AuthModels.FAQContentAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.FAQCategoryResponse;
@@ -41,6 +43,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     ArrayList<faqcategory>faqcategory;
     ArrayList<com.example.tooshytoask.Models.faqcontent>faqcontent;
     String[] listItems ;
+    FAQAdapter faqAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +59,12 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
         tv_category_selection = findViewById(R.id.tv_category_selection);
         selection_category= findViewById(R.id.selection_category);
         tv_category_selection = findViewById(R.id.tv_category_selection);
-        faq_category_rv = findViewById(R.id.faq_category_rv);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
+
+        faq_category_rv = findViewById(R.id.faq_category_rv);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        faq_category_rv.setLayoutManager(linearLayoutManager1);
 
         getFAQCategory();
     }
@@ -80,6 +86,9 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
 
                         if (msg.equals("success")){
                             faqcontent = faqContentResponse.getFaqcontent();
+
+                            faqAdapter = new FAQAdapter(context, faqcontent);
+                            faq_category_rv.setAdapter(faqAdapter);
                         }
 
                     }
@@ -127,16 +136,12 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void selectCategoryMethod() {
-        //AlertDialog
-//
-
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FAQActivity.this);
         mBuilder.setTitle("All Category");
 
         String [] categoryListForSingleItem = new String[faqcategory.size()];
         for (int i = 0; i<faqcategory.size(); i++){
-//            categoryListForSingleItem[i]= categoryList.get(i).toString();
 
             //categoryListForSingleItem[i]=responseAllCategory.getCategories().get(i).getName() ;
 
@@ -146,13 +151,10 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
             mBuilder.setSingleChoiceItems(categoryListForSingleItem, -1, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int which) {
-//               checkedItem [0] = which;
 
-                    // now also update the TextView which previews the selected item
 
                     getFAQContent(categoryListForSingleItem[which]);
                     if (which==0){
-//                        getCategoriesData("all");
                         tv_category_selection.setText(categoryListForSingleItem[which]+"Categories");
                     }else{
                         tv_category_selection.setText(categoryListForSingleItem[which]);
@@ -210,12 +212,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
 
         }
 
-
-
-
         mBuilder.setCancelable(false);
-
-
 
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();

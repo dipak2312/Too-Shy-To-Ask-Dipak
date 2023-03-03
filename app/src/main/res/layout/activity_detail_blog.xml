@@ -122,7 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/margin_25"
                         android:fontFamily="@font/worksansregular"
-                        android:text="200"
+                        android:text="0"
                         android:gravity="center_vertical"
                         android:layout_marginStart="@dimen/margin_5"
                         android:textColor="@color/white"
@@ -141,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/margin_25"
                         android:fontFamily="@font/worksansregular"
-                        android:text="5 Min"
+                        android:text="0"
                         android:gravity="center_vertical"
                         android:layout_marginStart="@dimen/margin_5"
                         android:textColor="@color/white"
@@ -197,6 +197,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/helpful_yes"
                         android:layout_width="@dimen/margin_120"
                         android:layout_height="@dimen/margin_40"
                         android:orientation="horizontal"
@@ -210,7 +211,6 @@
                             android:src="@drawable/thumbs_up"/>
 
                         <TextView
-                            android:id="@+id/yes_count"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/margin_40"
                             android:gravity="center_vertical"
@@ -218,11 +218,22 @@
                             android:layout_marginStart="@dimen/margin_15"
                             android:textSize="@dimen/text_size12"
                             android:textColor="@color/black"
-                            android:text="Yes 118"/>
+                            android:text="Yes "/>
+
+                        <TextView
+                            android:id="@+id/yes_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/margin_40"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/worksansregular"
+                            android:textSize="@dimen/text_size12"
+                            android:textColor="@color/black"
+                            android:text="118"/>
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/helpful_no"
                         android:layout_width="@dimen/margin_120"
                         android:layout_height="@dimen/margin_40"
                         android:orientation="horizontal"
@@ -237,7 +248,6 @@
                             android:src="@drawable/thumbs_down"/>
 
                         <TextView
-                            android:id="@+id/no_count"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/margin_40"
                             android:gravity="center_vertical"
@@ -245,7 +255,17 @@
                             android:fontFamily="@font/worksansregular"
                             android:textSize="@dimen/text_size12"
                             android:textColor="@color/black"
-                            android:text="No 15"/>
+                            android:text="No "/>
+
+                        <TextView
+                            android:id="@+id/no_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/margin_40"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/worksansregular"
+                            android:textSize="@dimen/text_size12"
+                            android:textColor="@color/black"
+                            android:text="15"/>
 
                     </LinearLayout>
 
