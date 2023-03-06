@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Models.insightblogcategories;
 import com.example.tooshytoask.Models.insightblogs;
 import com.example.tooshytoask.R;
 
@@ -37,6 +38,7 @@ public class AllBlogAdapter extends RecyclerView.Adapter<AllBlogAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AllBlogAdapter.ViewHolder holder, int position) {
+        insightblogs.get(position).getBlog_category_name();
         Glide.with(context).load(insightblogs.get(position).getBlog_img()).into(holder.blog_img);
         holder.blog_title.setText(insightblogs.get(position).getBlog_title());
 

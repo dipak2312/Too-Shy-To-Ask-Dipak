@@ -75,38 +75,39 @@
                     android:id="@+id/lin_courses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/margin_50">
+                    android:layout_above="@+id/time_like_count">
 
                     <ImageView
                         android:id="@+id/like_courses"
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
+                        android:layout_width="@dimen/margin_35"
+                        android:layout_height="@dimen/margin_35"
                         android:src="@drawable/like"/>
 
                     <ImageView
                         android:id="@+id/save_courses"
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
+                        android:layout_width="@dimen/margin_35"
+                        android:layout_height="@dimen/margin_35"
                         android:layout_marginStart="@dimen/margin_15"
                         android:src="@drawable/saved"/>
 
                     <ImageView
                         android:id="@+id/share_courses"
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
+                        android:layout_width="@dimen/margin_35"
+                        android:layout_height="@dimen/margin_35"
                         android:layout_marginStart="@dimen/margin_15"
                         android:src="@drawable/share"/>
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/time_like_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginBottom="@dimen/margin_20"
                     android:orientation="horizontal">
 
@@ -168,7 +169,7 @@
                     android:fontFamily="@font/worksansmedium"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size18"
-                    android:text=""/>
+                    android:text="Dipak"/>
 
                 <TextView
                     android:id="@+id/blog_description"
@@ -178,7 +179,7 @@
                     android:fontFamily="@font/worksansregular"
                     android:layout_marginTop="@dimen/margin_10"
                     android:textSize="@dimen/text_size12"
-                    android:text=""/>
+                    android:text="Hello"/>
 
 
                 <TextView

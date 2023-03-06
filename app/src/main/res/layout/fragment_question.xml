@@ -9,7 +9,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_next">
+        android:layout_above="@+id/btn_submit">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                     android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginRight="@dimen/margin_20"
                     android:fontFamily="@font/worksansmedium"
-                    android:text="How long does a woman usually take to orgasm during sex? "
+                    android:text=" "
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size16" />
 
@@ -74,10 +74,9 @@
                 android:id="@+id/rel_check_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
                 android:layout_centerInParent="true"
+                android:layout_marginTop="60dp"
                 android:visibility="gone">
-
 
 
                 <ImageView
@@ -93,55 +92,55 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/img_answer"
-                    android:layout_marginTop="15dp"
-                    android:textSize="@dimen/text_size18"
-                    android:fontFamily="@font/worksansmedium"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/worksansmedium"
+                    android:text="@string/correct_answer"
                     android:textColor="@color/purple"
-                    android:text="@string/correct_answer" />
+                    android:textSize="@dimen/text_size18" />
 
                 <TextView
                     android:id="@+id/txt_question_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txt_answer"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:layout_marginLeft="@dimen/margin_25"
-                    android:layout_marginRight="@dimen/margin_25"
-                    android:gravity="center"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/margin_25"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_25"
                     android:fontFamily="@font/worksansmedium"
-                    android:textSize="@dimen/text_size16"
-                    android:text="" />
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
 
                 <TextView
                     android:id="@+id/txt_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txt_question_name"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:layout_marginLeft="@dimen/margin_20"
-                    android:layout_marginRight="@dimen/margin_20"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/black"
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_20"
                     android:fontFamily="@font/worksansmedium"
-                    android:textSize="@dimen/text_size14"
-                    android:text="" />
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size14" />
 
                 <TextView
                     android:id="@+id/txt_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txt_hint"
-                    android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginRight="@dimen/margin_20"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/worksansmedium"
-                    android:textSize="@dimen/text_size16"
-                    android:text="@string/description" />
+                    android:text="@string/description"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
 
 
                 <TextView
@@ -151,13 +150,12 @@
                     android:layout_below="@+id/txt_desc"
                     android:layout_marginLeft="@dimen/margin_20"
                     android:layout_marginRight="@dimen/margin_20"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/worksansregular"
-                    android:textSize="@dimen/text_size14"
-                    android:text="">
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size14">
 
                 </TextView>
-
 
 
             </RelativeLayout>

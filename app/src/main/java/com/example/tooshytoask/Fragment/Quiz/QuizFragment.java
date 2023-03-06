@@ -22,6 +22,8 @@ public class QuizFragment extends Fragment {
     CustomProgressDialog dialog;
     Button btn_start;
 
+    Button btn_quiz;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

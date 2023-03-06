@@ -8,6 +8,7 @@ public class insightblogs {
     private String blog_link;
     private String blog_category;
     private String blog_img;
+    private String blog_category_name;
 
     public String getBlog_id() {
         return blog_id;
@@ -63,5 +64,12 @@ public class insightblogs {
 
     public void setBlog_img(String blog_img) {
         this.blog_img = blog_img;
+    }
+    public String getBlog_category_name() {
+        return blog_category_name;
+    }
+
+    public void setBlog_category_name(String blog_category_name) {
+        this.blog_category_name = blog_category_name;
     }
 }

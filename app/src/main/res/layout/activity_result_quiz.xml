@@ -89,7 +89,7 @@
                 android:textSize="@dimen/text_size14" />
 
             <Button
-                android:id="@+id/back_to_home_btn"
+                android:id="@+id/btn_home"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_50"
                 android:layout_marginTop="@dimen/margin_30"
@@ -105,13 +105,13 @@
                 android:textSize="@dimen/text_size14" />
 
             <Button
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_next_quiz"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_50"
                 android:layout_marginTop="@dimen/margin_15"
                 android:includeFontPadding="false"
                 android:gravity="center"
-                android:layout_below="@id/back_to_home_btn"
+                android:layout_below="@id/btn_home"
                 android:fontFamily="@font/worksansbold"
                 android:layout_marginEnd="@dimen/margin_20"
                 android:layout_marginStart="@dimen/margin_20"

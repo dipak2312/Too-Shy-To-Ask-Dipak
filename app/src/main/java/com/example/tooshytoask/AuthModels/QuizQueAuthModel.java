@@ -1,6 +1,6 @@
 package com.example.tooshytoask.AuthModels;
 
-public class AllHighlightAuthModel {
+public class QuizQueAuthModel {
     private String user_id;
 
     public String getUser_id() {

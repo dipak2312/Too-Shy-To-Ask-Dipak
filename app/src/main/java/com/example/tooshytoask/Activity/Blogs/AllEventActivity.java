@@ -61,6 +61,7 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
         dialog.show("");
 
         AllEventAuthModel model = new AllEventAuthModel();
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getEventBlogs(model)
                 .subscribeOn(Schedulers.io())

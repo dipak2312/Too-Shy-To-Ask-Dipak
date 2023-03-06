@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <RadioButton
-            android:id="@+id/eng_lang"
+            android:id="@+id/option"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_48"
             android:paddingStart="@dimen/margin_10"

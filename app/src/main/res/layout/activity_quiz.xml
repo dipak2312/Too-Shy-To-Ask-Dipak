@@ -28,6 +28,17 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/txt_quiz_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/worksansmedium"
+            android:includeFontPadding="false"
+            android:text="TAKE A QUIZ"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size18" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -39,7 +50,9 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_above="@id/rel_progress_bar"
+        android:layout_marginBottom="@dimen/margin_50"/>
 
     </RelativeLayout>
 

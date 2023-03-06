@@ -61,6 +61,7 @@ public class AllHighlightActivity extends AppCompatActivity implements View.OnCl
         dialog.show("");
 
         AllHighlightAuthModel model = new AllHighlightAuthModel();
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getHighlightBlogs(model)
                 .subscribeOn(Schedulers.io())

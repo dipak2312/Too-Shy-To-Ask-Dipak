@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllBlogAdapter;
@@ -31,6 +32,7 @@ import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -46,7 +48,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     TextView tv_category_selection;
     ImageView selection_category;
     CustomProgressDialog dialog;
-    ArrayList<insightblogs>insightblogs;
+    ArrayList<insightblogs>insightblogsArrayList;
     ArrayList<com.example.tooshytoask.Models.insightblogcategories>insightblogcategories;
     int selectedPosition=0;
     String[] listItems ;
@@ -70,6 +72,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         bookmark_blog = findViewById(R.id.bookmark_blog);
         bookmark_blog.setOnClickListener(this);
 
+        insightblogsArrayList = new ArrayList<>();
         insightblogcategories = new ArrayList<>();
         blog_recy = findViewById(R.id.blog_recy);
         blog_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
@@ -82,9 +85,10 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void getBlogCategory(String category) {
-       // dialog.show("");
+        dialog.show("");
 
         BlogCategoryAuthModel model = new BlogCategoryAuthModel();
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getBlogCategory(model)
                 .subscribeOn(Schedulers.io())
@@ -117,6 +121,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         dialog.show("");
 
         AllBlogAuthModel model = new AllBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getAllBlogs(model)
                 .subscribeOn(Schedulers.io())
@@ -127,11 +132,12 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                         String msg = allBlogResponse.getMsg();
                         dialog.dismiss("");
                         if (msg.equals("success")){
-                            insightblogs = allBlogResponse.getInsightblogs();
 
-                            adapter = new AllBlogAdapter(context ,insightblogs);
-                            blog_recy.setAdapter(adapter);
-                            getBlogCategory("");
+                            insightblogsArrayList.clear();
+
+                            insightblogsArrayList = allBlogResponse.getInsightblogs();
+
+                            setUpViews(insightblogsArrayList,insightblogcategories);
                         }
                     }
 
@@ -146,6 +152,18 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
     }
+    private void setUpViews(ArrayList<insightblogs> insightblogs, List<insightblogcategories> insightblogcategories) {
+        dialog.dismiss("");
+        //Glide.with(this).load(insightblogs.get(0).getBlog_img()).into(firstCardImage);
+        //blogTitleTv.setText(blogData.get(0).getTitle());
+        //categoryCardTitleTv.setText(blogData.get(0).getCategories().get(0).getName());
+        //dateTv.setText(new DateUtil().getStringDateInDisplayFormat(blogData.get(0).getDate(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY)+"  -  "+blogData.get(0).getCommentsCount()+" Comments");
+
+        adapter = new AllBlogAdapter(context ,insightblogs);
+        blog_recy.setAdapter(adapter);
+        getBlogCategory("");
+    }
+
 
     @Override
     public void onClick(View view) {

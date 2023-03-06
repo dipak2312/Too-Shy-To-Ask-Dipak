@@ -7,6 +7,8 @@ public class SingleBlogResponse {
     private String msg;
     private String index;
     private String totalblogs;
+    private String nextblog;
+    private String previousblog;
     ArrayList<singleblog>singleblog;
     ArrayList<relatedblogs>relatedblogs;
 
@@ -57,5 +59,21 @@ public class SingleBlogResponse {
 
     public void setTotalblogs(String totalblogs) {
         this.totalblogs = totalblogs;
+    }
+
+    public String getNextblog() {
+        return nextblog;
+    }
+
+    public void setNextblog(String nextblog) {
+        this.nextblog = nextblog;
+    }
+
+    public String getPreviousblog() {
+        return previousblog;
+    }
+
+    public void setPreviousblog(String previousblog) {
+        this.previousblog = previousblog;
     }
 }

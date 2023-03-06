@@ -24,6 +24,8 @@ import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationListUpdateAuthModel;
 import com.example.tooshytoask.AuthModels.NotificationAuthModel;
 import com.example.tooshytoask.AuthModels.OtpAuthModel;
+import com.example.tooshytoask.AuthModels.QuizAnswerAuthModel;
+import com.example.tooshytoask.AuthModels.QuizQueAuthModel;
 import com.example.tooshytoask.AuthModels.RemoveProfileAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthCateAuthModel;
 import com.example.tooshytoask.AuthModels.SaveHealthIssueAuthModel;
@@ -66,6 +68,8 @@ import com.example.tooshytoask.Models.ManageNotificationResponse;
 import com.example.tooshytoask.Models.NotificationResponse;
 import com.example.tooshytoask.Models.OnBordingResponse;
 import com.example.tooshytoask.Models.OtpInResponse;
+import com.example.tooshytoask.Models.QuizAnswerResponse;
+import com.example.tooshytoask.Models.QuizQueResponse;
 import com.example.tooshytoask.Models.RemoveProfileResponse;
 import com.example.tooshytoask.Models.SaveHealthCategoryResponse;
 import com.example.tooshytoask.Models.SaveHealthIssueResponse;
@@ -254,5 +258,17 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/articlelikehelp")
     Observable<BlogLikeResponse> blogLike(@Body BlogLikeAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/quizanswer")
+    Observable<QuizAnswerResponse> getQuizAns(@Body QuizAnswerAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/quiz")
+    Observable<QuizQueResponse> getQuizQue(@Body QuizQueAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/articlecomments")
+    Observable<BlogCommentsResponse> getQuizQue(@Body BlogCommentsAuthModel model);
 
 }

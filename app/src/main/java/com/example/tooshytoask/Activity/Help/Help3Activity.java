@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -109,6 +110,7 @@ public class Help3Activity extends AppCompatActivity implements View.OnClickList
 
         HelpContentAuthModel model = new HelpContentAuthModel();
         model.setHelpcontent_id(helpcontent_id);
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getHelpContent(model)
                 .subscribeOn(Schedulers.io())
@@ -124,9 +126,9 @@ public class Help3Activity extends AppCompatActivity implements View.OnClickList
                                 helpContentDiscAdapter = new HelpContentDiscAdapter(helpcontent, context);
                                 recy_help_desc.setAdapter(helpContentDiscAdapter);
                             }//topic_title, description
-                            txt_title.setText(helpContentResponse.getTitle());
-                            topic_title.setText(helpContentResponse.getHelpcontent_title());
-                            description.setText(helpContentResponse.getHelpcontent_desc());
+                            txt_title.setText(Html.fromHtml(helpContentResponse.getTitle()));
+                            topic_title.setText(Html.fromHtml(helpContentResponse.getHelpcontent_title()));
+                            description.setText(Html.fromHtml(helpContentResponse.getHelpcontent_desc()));
                         }
                         dialog.dismiss("");
                     }

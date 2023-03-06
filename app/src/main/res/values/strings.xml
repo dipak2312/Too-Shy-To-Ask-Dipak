@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Too Shy To Ask</string>
     <string name="page_count_total">%d/%d</string>
     <string name="app_images_folderName">TSTA</string>
@@ -147,7 +147,7 @@
     <string name="welcome">Welcome</string>
     <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">Take care of your health. Test your knowledge of adolescence health by taking our quiz.</string>
     <string name="submit">SUBMIT</string>
-    <string name="correct_answer">Correct Answer</string>
+
     <string name="next_question">NEXT QUESTION</string>
     <string name="back_to_home">BACK TO HOME</string>
     <string name="next_quiz">NEXT QUIZ</string>
@@ -176,5 +176,14 @@
         <item>Category 5</item>
 
     </string-array>
+
+    <string name="correct_answer_title">CORRECT ANSWER</string>
+    <string name="incorrect_answer_title">INCORRECT ANSWER</string>
+
+    //my_answer
+
+    <string name="answered_by">Answered by</string>
+    <string name="correct_answer" tools:ignore="DuplicateDefinition">You have answered the question correctly</string>
+    <string name="correct_answer_is">The correct answer is:</string>
 
 </resources>

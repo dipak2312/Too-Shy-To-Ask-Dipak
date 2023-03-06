@@ -53,12 +53,12 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         next = findViewById(R.id.next);
         next.setOnClickListener(this);
 
-        Intent intent = getIntent();
-        if (intent != null) {
-
-            blog_id = intent.getStringExtra("blog_id");
-
-        }
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//
+//            blog_id = intent.getStringExtra("blog_id");
+//
+//        }
     }
 
     @Override
