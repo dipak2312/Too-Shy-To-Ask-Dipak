@@ -7,13 +7,18 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,40 +28,51 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Home.HomeActivity;
+import com.example.tooshytoask.Adapters.BlogCommentsAdapter;
 import com.example.tooshytoask.Adapters.RelatedBlogAdapter;
+import com.example.tooshytoask.AuthModels.BlogCommentsAuthModel;
 import com.example.tooshytoask.AuthModels.BlogLikeAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.SingleBlogAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.BlogCommentsResponse;
 import com.example.tooshytoask.Models.BlogLikeResponse;
 import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.SingleBlogResponse;
+import com.example.tooshytoask.Models.comments;
 import com.example.tooshytoask.Models.relatedblogs;
 import com.example.tooshytoask.Models.singleblog;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailBlogActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailBlogActivity extends AppCompatActivity implements View.OnClickListener, BlogCommentsAdapter.onReplyClicked {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String blog_id, type = "blog", helpful ="";
+    String blog_id, type = "blog", helpful ="", commentId ="";
     ArrayList<singleblog> singleblog;
     private SingleBlogResponse singleBlogResponse;
     ArrayList<relatedblogs> relatedblogs;
+    ArrayList<comments> comments;
     TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description;
     ImageView blog_img, like_courses, save_courses, share_courses;
-    LinearLayout previous, next, helpful_yes, helpful_no;
-    RecyclerView recy_blogs;
+    TextInputEditText edit_comment;
+    LinearLayout previous, next, helpful_yes, helpful_no, comment_lin_lay, related_blog_lay;
+    RecyclerView recy_blogs, recy_all_comments;
     RelatedBlogAdapter adapter;
+    BlogCommentsAdapter blogCommentsAdapter;
     boolean like = true;
     RelativeLayout rel_back;
+    Dialog dialogPopup;
+    Button submit_comment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +83,9 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        edit_comment = findViewById(R.id.edit_comment);
+        related_blog_lay = findViewById(R.id.related_blog_lay);
+        comment_lin_lay = findViewById(R.id.comment_lin_lay);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         helpful_yes = findViewById(R.id.helpful_yes);
@@ -87,12 +106,18 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         save_courses.setOnClickListener(this);
         share_courses = findViewById(R.id.share_courses);
         share_courses.setOnClickListener(this);
+        submit_comment = findViewById(R.id.submit_comment);
+        submit_comment.setOnClickListener(this);
         previous = findViewById(R.id.previous);
         previous.setOnClickListener(this);
         next = findViewById(R.id.next);
         next.setOnClickListener(this);
 
         singleBlogResponse = new SingleBlogResponse();
+
+        recy_all_comments = findViewById(R.id.recy_all_comments);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        recy_all_comments.setLayoutManager(linearLayoutManager1);
 
         recy_blogs = findViewById(R.id.recy_blogs);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -180,6 +205,40 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                 });
     }
 
+    public void getBlogComment(){
+        //dialog.show("");
+
+        BlogCommentsAuthModel model = new BlogCommentsAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setBlog_id(blog_id);
+        model.setComment_content(edit_comment.getText().toString().trim());
+
+        WebServiceModel.getRestApi().getBlogComment(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BlogCommentsResponse>() {
+                    @Override
+                    public void onNext(BlogCommentsResponse blogCommentsResponse) {
+                        String msg = blogCommentsResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Comment Added")){
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 
     public void getSingleBlog() {
         dialog.show("");
@@ -198,6 +257,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                         if (msg.equals("success")) {
                             singleblog = singleBlogResponse.getSingleblog();
                             relatedblogs = singleBlogResponse.getRelatedblogs();
+                            comments = singleBlogResponse.getSingleblog().get(0).getComments();
 
                             txt_title.setText(Html.fromHtml(singleblog.get(0).getBlog_title()));
                             blog_headline.setText(Html.fromHtml(singleblog.get(0).getBlog_title()));
@@ -208,9 +268,24 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             yes_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
                             no_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
 
-                            if (relatedblogs != null) {
+                            if (relatedblogs.size() != 0) {
+                                related_blog_lay.setVisibility(View.VISIBLE);
                                 adapter = new RelatedBlogAdapter(context, relatedblogs);
                                 recy_blogs.setAdapter(adapter);
+                            }
+
+                            if (relatedblogs.size() == 0) {
+                                related_blog_lay.setVisibility(View.GONE);
+
+                            }
+
+                            if (comments != null){
+                                comment_lin_lay.setVisibility(View.VISIBLE);
+                                blogCommentsAdapter = new BlogCommentsAdapter(context, comments, DetailBlogActivity.this);
+                                recy_all_comments.setAdapter(blogCommentsAdapter);
+                            }
+                            if (comments == null ){
+                                comment_lin_lay.setVisibility(View.GONE);
                             }
 
                         }
@@ -246,14 +321,28 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
             }
 
         }
+        else if (id == submit_comment.getId()){
+            if (!edit_comment.getText().toString().trim().isEmpty()){
+                getBlogComment();
+                getSingleBlog();
+                edit_comment.setText("");
+                Toast.makeText(context, "Comment submitted successfully", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(context, "Please add some comment", Toast.LENGTH_SHORT).show();
+        }
+
+        }
         else if (id == like_courses.getId()) {
             if (like) {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
                 blogLike("like");
+                getSingleBlog();
                 like = false;
             } else {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
                 blogLike("like");
+                getSingleBlog();
                 like = true;
             }
 
@@ -303,5 +392,46 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Too Shy Too Ask App");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, singleblog.get(0).getBlog_title() + "\n\n" + singleblog.get(0).getBlog_link());
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    public void openReplyPopup() {
+        dialogPopup = new Dialog(context);
+        dialogPopup.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogPopup.setContentView(R.layout.reply_popup);
+        Window window = dialogPopup.getWindow();
+        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        TextInputEditText etComment = (TextInputEditText) dialogPopup.findViewById(R.id.etComment);
+        Button btn_resume = (Button) dialogPopup.findViewById(R.id.btn_submit);
+        btn_resume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Objects.requireNonNull(etComment.getText()).toString().trim().isEmpty()){
+
+                    Toast.makeText(context, "Please add some comment", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    //addReplyComment(Objects.requireNonNull(etComment.getText()).toString(), commentId);
+                }
+            }
+        });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                etComment.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(etComment, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }, 100);
+
+        dialogPopup.show();
+    }
+
+    @Override
+    public void onReplyButtonClick(int position, String comment_id) {
+        commentId = comment_id;
+
+        openReplyPopup();
     }
 }

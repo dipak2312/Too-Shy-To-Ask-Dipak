@@ -385,7 +385,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edit_age"
+                        android:id="@+id/edit_comment"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_70"
                         android:background="@drawable/border"
@@ -400,7 +400,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/submit_req"
+                    android:id="@+id/submit_comment"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_50"
                     android:layout_marginTop="@dimen/margin_40"
@@ -413,79 +413,98 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size14" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/comment_lin_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/comment_lin"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:visibility="gone"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/worksansmedium"
                     android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/margin_20"
                     android:textSize="@dimen/text_size12"
-                    android:text="Comments"/>
+                    android:text="@string/comments"/>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/purple">
+
+                </View>
+
+                <RelativeLayout
+                    android:id="@+id/rel_recy_comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recy_all_comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="0.2dp"
-                android:layout_below="@+id/comment_lin"
-                android:layout_marginTop="@dimen/margin_10"
-                android:background="@color/purple">
-
-            </View>
-
-            <RelativeLayout
-                android:id="@+id/rel_recy_comments"
+            <LinearLayout
+                android:id="@+id/related_blog_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view3"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_20">
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_below="@+id/comment_lin_lay">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recy_all_comments"
+                <View
+                    android:id="@+id/view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="0.2dp"
+                    android:background="@color/purple">
 
-                </androidx.recyclerview.widget.RecyclerView>
+                </View>
 
-            </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:text="@string/related_blogs"/>
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="0.2dp"
-                android:layout_below="@+id/rel_recy_comments"
-                android:layout_marginTop="@dimen/margin_10"
-                android:background="@color/purple">
-
-            </View>
-
-            <TextView
-                android:id="@+id/related_blog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/view"
-                android:textColor="@color/black"
-                android:fontFamily="@font/worksansregular"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_20"
-                android:text="@string/related_blogs"/>
-
-            <RelativeLayout
-                android:id="@+id/recy_blog_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/related_blog"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_10">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recy_blogs"
+                <RelativeLayout
+                    android:id="@+id/recy_blog_lay"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/related_blog"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10">
 
-            </RelativeLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recy_blogs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
 

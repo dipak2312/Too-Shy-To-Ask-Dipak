@@ -6,6 +6,7 @@ import com.example.tooshytoask.AuthModels.AllEventAuthModel;
 import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
 import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
+import com.example.tooshytoask.AuthModels.BlogCommentsAuthModel;
 import com.example.tooshytoask.AuthModels.BlogLikeAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
@@ -47,6 +48,7 @@ import com.example.tooshytoask.Models.AllHighlightResponse;
 import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.BlogCategoryResponse;
+import com.example.tooshytoask.Models.BlogCommentsResponse;
 import com.example.tooshytoask.Models.BlogLikeResponse;
 import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.ClearNotificationResponse;
@@ -269,6 +271,6 @@ public interface WebServices {
 
     @Headers("Content-Type: application/json")
     @POST("api/articlecomments")
-    Observable<BlogCommentsResponse> getQuizQue(@Body BlogCommentsAuthModel model);
+    Observable<BlogCommentsResponse> getBlogComment(@Body BlogCommentsAuthModel model);
 
 }

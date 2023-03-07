@@ -27,6 +27,16 @@
 
     </style>
 
+    <style name="TextStyleItalic" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/worksansitalic</item>
+    </style>
+
+    <style name="TextStyleRegular" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/worksansregular</item>
+    </style>
+
     <style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/white</item>
         <item name="android:textColor">@color/black</item>

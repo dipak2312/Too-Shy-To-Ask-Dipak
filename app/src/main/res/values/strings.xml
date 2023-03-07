@@ -185,5 +185,6 @@
     <string name="answered_by">Answered by</string>
     <string name="correct_answer" tools:ignore="DuplicateDefinition">You have answered the question correctly</string>
     <string name="correct_answer_is">The correct answer is:</string>
+    <string name="comments">Comments</string>
 
 </resources>
