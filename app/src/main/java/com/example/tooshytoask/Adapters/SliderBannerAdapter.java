@@ -1,6 +1,8 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
+import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.Bannerist;
 import com.example.tooshytoask.Models.SliderBannerItem;
 import com.example.tooshytoask.R;
@@ -55,6 +59,31 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
             super(itemView);
             imageSlide = itemView.findViewById(R.id.imageSlide);
 
+            imageSlide.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    if (Bannerist.get(0).setBanner_screen()){
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("blog_id",Bannerist.get(getAdapterPosition()).getBanner_blogid());
+//                        Intent intent = new Intent(context, AllBlogsActivity.class);
+//                        intent.putExtras(bundle);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        context.startActivity(intent);
+//
+//                    }
+//                    else if (Bannerist.get(0).setBanner_screen()){
+//
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("blog_id",Bannerist.get(getAdapterPosition()).getBanner_blogid());
+//                        Intent intent = new Intent(context, DetailBlogActivity.class);
+//                        intent.putExtras(bundle);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        context.startActivity(intent);
+//                    }
+                }
+            });
         }
         void setImage(Bannerist Bannerist){
 

@@ -4,6 +4,7 @@ public class BlogCommentsAuthModel {
     private String user_id;
     private String blog_id;
     private String comment_content;
+    private String comment_id;
 
     public String getUser_id() {
         return user_id;
@@ -27,5 +28,13 @@ public class BlogCommentsAuthModel {
 
     public void setComment_content(String comment_content) {
         this.comment_content = comment_content;
+    }
+
+    public String getComment_id() {
+        return comment_id;
+    }
+
+    public void setComment_id(String comment_id) {
+        this.comment_id = comment_id;
     }
 }

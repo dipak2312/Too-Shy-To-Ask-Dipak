@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AllBlogResponse {
     private String code;
     private String msg;
-    ArrayList<insightblogs>insightblogs;
+    ArrayList<articleblogs>articleblogs;
 
     public String getCode() {
         return code;
@@ -23,11 +23,12 @@ public class AllBlogResponse {
         this.msg = msg;
     }
 
-    public ArrayList<com.example.tooshytoask.Models.insightblogs> getInsightblogs() {
-        return insightblogs;
+
+    public ArrayList<com.example.tooshytoask.Models.articleblogs> getArticleblogs() {
+        return articleblogs;
     }
 
-    public void setInsightblogs(ArrayList<com.example.tooshytoask.Models.insightblogs> insightblogs) {
-        this.insightblogs = insightblogs;
+    public void setArticleblogs(ArrayList<com.example.tooshytoask.Models.articleblogs> articleblogs) {
+        this.articleblogs = articleblogs;
     }
 }

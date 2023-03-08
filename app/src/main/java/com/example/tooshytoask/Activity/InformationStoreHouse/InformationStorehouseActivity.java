@@ -10,11 +10,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Blogs.AllEventActivity;
 import com.example.tooshytoask.Adapters.StoreHouseListingAdapter;
+import com.example.tooshytoask.AuthModels.AllStoreHouseAuthModel;
+import com.example.tooshytoask.AuthModels.StoreHouseCategoryAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.StoreHouse.AllStoreHouseResponse;
+import com.example.tooshytoask.Models.StoreHouse.CategoryData.StoreHouseCategoryResponse;
+import com.example.tooshytoask.Models.StoreHouse.data;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class InformationStorehouseActivity extends AppCompatActivity implements View.OnClickListener {
     Context context;
@@ -25,6 +37,8 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     RelativeLayout categories, rel_back;
     RecyclerView storehouse_recy;
     StoreHouseListingAdapter adapter;
+    ArrayList<com.example.tooshytoask.Models.StoreHouse.data> data;
+    String title_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +59,76 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
         categories.setOnClickListener(this);
         tv_category_selection = findViewById(R.id.tv_category_selection);
         storehouse_recy = findViewById(R.id.storehouse_recy);
+
+        title_id = getIntent().getStringExtra("title_id");
+        //title_id = getIntent().getStringExtra("title_id");
+    }
+
+    public void getAllStoreHouse(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        AllStoreHouseAuthModel model = new AllStoreHouseAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setTitle_id(title_id);
+
+        WebServiceModel.getRestApi().getAllStoreHouse(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<AllStoreHouseResponse>() {
+                    @Override
+                    public void onNext(AllStoreHouseResponse allStoreHouseResponse) {
+                        String msg = allStoreHouseResponse.getMsg();
+
+                        if (msg.equals("success")){
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getStoreHouseCategory(){
+        dialog.show("");
+        dialog.dismiss("");
+
+        StoreHouseCategoryAuthModel model = new StoreHouseCategoryAuthModel();
+        model.setUser_id(spManager.getUserId());
+        //model.setCategory_id();
+        model.setTitle_id(title_id);
+
+        WebServiceModel.getRestApi().getStoreHouseCategory(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<StoreHouseCategoryResponse>() {
+                    @Override
+                    public void onNext(StoreHouseCategoryResponse storeHouseCategoryResponse) {
+                        String msg = storeHouseCategoryResponse.getMsg();
+
+                        if (msg.equals("success")){
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override

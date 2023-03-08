@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
+import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStorehouseActivity;
 import com.example.tooshytoask.Models.InsightScreen.storeHouse;
 import com.example.tooshytoask.R;
 
@@ -63,8 +64,8 @@ public class StoreHouseAdapter extends RecyclerView.Adapter<StoreHouseAdapter.Vi
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id", storeHouse.get(getAdapterPosition()).getTitle_id());
-                    Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
+                    bundle.putString("title_id", storeHouse.get(getAdapterPosition()).getTitle_id());
+                    Intent intent = new Intent(context, InformationStorehouseActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

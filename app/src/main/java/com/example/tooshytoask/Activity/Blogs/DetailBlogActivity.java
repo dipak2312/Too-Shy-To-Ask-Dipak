@@ -123,12 +123,14 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_blogs.setLayoutManager(linearLayoutManager);
 
-        Intent intent = getIntent();
-        if (intent != null) {
+        blog_id = getIntent().getStringExtra("blog_id");
 
-            blog_id = intent.getStringExtra("blog_id");
-
-        }
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//
+//            blog_id = intent.getStringExtra("blog_id");
+//
+//        }
         getSingleBlog();
 
     }
@@ -141,6 +143,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         model.setPost_id(blog_id);
         model.setType(type);
         model.setIshelpfull(helpful);
+
         WebServiceModel.getRestApi().blogLike(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -205,13 +208,13 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                 });
     }
 
-    public void getBlogComment(){
+    public void getBlogComment(String comment){
         //dialog.show("");
 
         BlogCommentsAuthModel model = new BlogCommentsAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setBlog_id(blog_id);
-        model.setComment_content(edit_comment.getText().toString().trim());
+        model.setComment_content(comment);
 
         WebServiceModel.getRestApi().getBlogComment(model)
                 .subscribeOn(Schedulers.io())
@@ -224,6 +227,44 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
                         if (msg.equals("Comment Added")){
 
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getAddBlogComment(String comment, String commentId){
+        //dialog.show("");
+
+        BlogCommentsAuthModel model = new BlogCommentsAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setBlog_id(blog_id);
+        model.setComment_content(comment);
+        model.setComment_id(commentId);
+
+        WebServiceModel.getRestApi().getBlogComment(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BlogCommentsResponse>() {
+                    @Override
+                    public void onNext(BlogCommentsResponse blogCommentsResponse) {
+                        String msg = blogCommentsResponse.getMsg();
+
+                        if (msg.equals("Comment Added")){
+                            getSingleBlog();
+                            Toast.makeText(context, "Comment submitted successfully", Toast.LENGTH_SHORT).show();
+                            dialogPopup.dismiss();
+                            dialog.dismiss("");
                         }
 
                     }
@@ -312,7 +353,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         if (id == save_courses.getId()) {
             if (like) {
                 save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.filled));
-                getBookmarkBlogs("move");
+                getBookmarkBlogs("save");
                 like = false;
             } else {
                 save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved));
@@ -323,7 +364,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         }
         else if (id == submit_comment.getId()){
             if (!edit_comment.getText().toString().trim().isEmpty()){
-                getBlogComment();
+                getBlogComment(edit_comment.getText().toString().trim());
                 getSingleBlog();
                 edit_comment.setText("");
                 Toast.makeText(context, "Comment submitted successfully", Toast.LENGTH_SHORT).show();
@@ -364,7 +405,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
             Intent intent = new Intent(context, DetailBlogActivity.class);
             intent.putExtra("blog_id",singleBlogResponse.getPreviousblog());
-            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            //LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -373,7 +414,6 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
             Intent intent = new Intent(context, DetailBlogActivity.class);
             intent.putExtra("blog_id", singleBlogResponse.getNextblog());
-            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -411,7 +451,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                     Toast.makeText(context, "Please add some comment", Toast.LENGTH_SHORT).show();
 
                 }else {
-                    //addReplyComment(Objects.requireNonNull(etComment.getText()).toString(), commentId);
+                    getAddBlogComment(Objects.requireNonNull(etComment.getText()).toString(), commentId);
                 }
             }
         });

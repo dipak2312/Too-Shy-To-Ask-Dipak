@@ -14,17 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
-import com.example.tooshytoask.Models.insightblogcategories;
-import com.example.tooshytoask.Models.insightblogs;
+import com.example.tooshytoask.Models.articleblogs;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class AllBlogAdapter extends RecyclerView.Adapter<AllBlogAdapter.ViewHolder>{
     Context context;
-    ArrayList<insightblogs>insightblogs;
+    ArrayList<articleblogs>insightblogs;
 
-    public AllBlogAdapter(Context context, ArrayList<insightblogs> insightblogs) {
+    public AllBlogAdapter(Context context, ArrayList<articleblogs> insightblogs) {
         this.context = context;
         this.insightblogs = insightblogs;
     }

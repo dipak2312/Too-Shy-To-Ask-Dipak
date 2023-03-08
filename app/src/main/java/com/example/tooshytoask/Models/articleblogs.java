@@ -1,6 +1,6 @@
 package com.example.tooshytoask.Models;
 
-public class insightblogs {
+public class articleblogs {
     private String blog_id;
     private String blog_title;
     private String blog_content;

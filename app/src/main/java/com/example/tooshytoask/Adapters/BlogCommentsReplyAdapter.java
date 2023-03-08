@@ -1,6 +1,7 @@
 package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tooshytoask.Helper.DateUtil;
+import com.example.tooshytoask.Helper.IDateTimeFormat;
 import com.example.tooshytoask.R;
 import java.util.ArrayList;
 
@@ -34,9 +38,9 @@ public class BlogCommentsReplyAdapter extends RecyclerView.Adapter<BlogCommentsR
     @Override
     public void onBindViewHolder(@NonNull allcommentViewHolder holder, int position) {
 
-        //holder.txt_comment.setText(Html.fromHtml(child_comment.get(position).getCommentContent()).toString());
-        //holder.txt_name.setText(child_comment.get(position).getCommentAuthor());
-        //holder.txt_date.setText(new DateUtil().getStringDateInDisplayFormat(child_comment.get(position).getCommentDate(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY));
+        holder.txt_comment.setText(Html.fromHtml(child_comment.get(position).getComment_content()).toString());
+        holder.txt_name.setText(child_comment.get(position).getComment_author());
+        holder.txt_date.setText(new DateUtil().getStringDateInDisplayFormat(child_comment.get(position).getComment_date(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY));
 
     }
 

@@ -4,6 +4,7 @@ import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
 import com.example.tooshytoask.AuthModels.AllEventAuthModel;
 import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
+import com.example.tooshytoask.AuthModels.AllStoreHouseAuthModel;
 import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCommentsAuthModel;
@@ -36,6 +37,7 @@ import com.example.tooshytoask.AuthModels.SignInAuthModel;
 import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.SingleBlogAuthModel;
 import com.example.tooshytoask.AuthModels.SingleClearNotificationAuthModel;
+import com.example.tooshytoask.AuthModels.StoreHouseCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.StoryAuthModel;
 import com.example.tooshytoask.AuthModels.StoryLikeAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
@@ -45,6 +47,7 @@ import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllEventResponse;
 import com.example.tooshytoask.Models.AllHighlightResponse;
+import com.example.tooshytoask.Models.StoreHouse.AllStoreHouseResponse;
 import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
 import com.example.tooshytoask.Models.BlogCategoryResponse;
@@ -81,6 +84,7 @@ import com.example.tooshytoask.Models.SignInResponse;
 import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.SingleBlogResponse;
 import com.example.tooshytoask.Models.SingleClearNotificationResponse;
+import com.example.tooshytoask.Models.StoreHouse.CategoryData.StoreHouseCategoryResponse;
 import com.example.tooshytoask.Models.StoryLikeResponse;
 import com.example.tooshytoask.Models.StoryResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
@@ -166,7 +170,7 @@ public interface WebServices {
     Observable<BlogCategoryResponse> getBlogCategory(@Body BlogCategoryAuthModel model);
 
     @Headers("Content-Type: application/json")
-    @POST("api/insightblogs")
+    @POST("api/articlecategoryblogs")
     Observable<AllBlogResponse> getAllBlogs(@Body AllBlogAuthModel model);
 
     @Headers("Content-Type: application/json")
@@ -272,5 +276,13 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/articlecomments")
     Observable<BlogCommentsResponse> getBlogComment(@Body BlogCommentsAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/allstorhouse")
+    Observable<AllStoreHouseResponse> getAllStoreHouse(@Body AllStoreHouseAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/articles_from_category")
+    Observable<StoreHouseCategoryResponse> getStoreHouseCategory(@Body StoreHouseCategoryAuthModel model);
 
 }
