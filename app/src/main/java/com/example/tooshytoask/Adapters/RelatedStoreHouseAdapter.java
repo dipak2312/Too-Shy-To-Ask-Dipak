@@ -14,41 +14,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
-import com.example.tooshytoask.Models.insightevents;
+import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
+import com.example.tooshytoask.Models.relatedblogs;
+import com.example.tooshytoask.Models.relatedstorehouse;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
-public class AllEventsAdapter extends RecyclerView.Adapter<AllEventsAdapter.ViewHolder> {
+public class RelatedStoreHouseAdapter extends RecyclerView.Adapter<RelatedStoreHouseAdapter.ViewHolder> {
     Context context;
-    ArrayList<insightevents> insightevents;
-    OnBookmarkClicked onBookmarkClicked;
-    boolean like = true;
+    ArrayList<com.example.tooshytoask.Models.relatedstorehouse>relatedstorehouse;
 
-    public AllEventsAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightevents> insightevents, OnBookmarkClicked onBookmarkClicked) {
+    public RelatedStoreHouseAdapter(Context context, ArrayList<com.example.tooshytoask.Models.relatedstorehouse> relatedstorehouse) {
         this.context = context;
-        this.insightevents = insightevents;
-        this.onBookmarkClicked = onBookmarkClicked;
+        this.relatedstorehouse = relatedstorehouse;
     }
 
 
     @NonNull
     @Override
-    public AllEventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recently_blog_items,parent,false);
+    public RelatedStoreHouseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blog_items_view,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllEventsAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(insightevents.get(position).getBlog_img()).into(holder.blog_img);
-        holder.blog_title.setText(insightevents.get(position).getEvent_title());
+    public void onBindViewHolder(@NonNull RelatedStoreHouseAdapter.ViewHolder holder, int position) {
+        holder.blog_title.setText(relatedstorehouse.get(position).getArticle_name());
+        Glide.with(context).load(relatedstorehouse.get(position).getArticle_image()).into(holder.blog_img);
     }
 
     @Override
     public int getItemCount() {
-        return insightevents.size();
+        return relatedstorehouse.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +55,6 @@ public class AllEventsAdapter extends RecyclerView.Adapter<AllEventsAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
@@ -67,8 +64,8 @@ public class AllEventsAdapter extends RecyclerView.Adapter<AllEventsAdapter.View
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id",insightevents.get(getAdapterPosition()).getEvent_id());
-                    Intent intent = new Intent(context, DetailBlogActivity.class);
+                    bundle.putString("article_id",relatedstorehouse.get(getAdapterPosition()).getArticle_id());
+                    Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

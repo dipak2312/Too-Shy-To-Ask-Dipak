@@ -14,19 +14,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllBlogAdapter;
 import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.BlogCategoryResponse;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.insightblogcategories;
 import com.example.tooshytoask.Models.articleblogs;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +39,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class AllBlogsActivity extends AppCompatActivity implements View.OnClickListener{
+public class AllBlogsActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     RecyclerView blog_recy;
     SPManager spManager;
     Context context;
@@ -49,7 +53,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<com.example.tooshytoask.Models.insightblogcategories>insightblogcategories;
     int selectedPosition=0;
     String[] listItems ;
-    String  category = "71";
+    String blog_id = "", type = "blog";
     boolean[] checkedItems;
 
     @Override
@@ -78,8 +82,50 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         listItems = getResources().getStringArray(R.array.category_list);
         checkedItems = new boolean[listItems.length];
 
-        getAllBlogs(category);
+        blog_id = getIntent().getStringExtra("blog_id");
 
+        getAllBlogs("");
+
+    }
+
+    public void getBookmarkBlogs(String action){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getBlogCategory() {
@@ -156,7 +202,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         //categoryCardTitleTv.setText(blogData.get(0).getCategories().get(0).getName());
         //dateTv.setText(new DateUtil().getStringDateInDisplayFormat(blogData.get(0).getDate(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY)+"  -  "+blogData.get(0).getCommentsCount()+" Comments");
 
-        adapter = new AllBlogAdapter(context ,insightblogs);
+        adapter = new AllBlogAdapter(context ,insightblogs, this);
         blog_recy.setAdapter(adapter);
         getBlogCategory();
     }
@@ -262,5 +308,12 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         AlertDialog mDialog = mBuilder.create();
         mDialog.show();
 
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id) {
+        blog_id = Blog_id;
+        getBookmarkBlogs("save");
+        getBookmarkBlogs("remove");
     }
 }

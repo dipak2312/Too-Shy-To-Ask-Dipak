@@ -62,7 +62,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
             imageSlide.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if (Bannerist.get(0).setBanner_screen()){
+//                    if (Bannerist.get(0).setBanner_screen("category")){
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("blog_id",Bannerist.get(getAdapterPosition()).getBanner_blogid());
 //                        Intent intent = new Intent(context, AllBlogsActivity.class);
@@ -72,7 +72,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
 //                        context.startActivity(intent);
 //
 //                    }
-//                    else if (Bannerist.get(0).setBanner_screen()){
+//                    else if (Bannerist.get(0).setBanner_screen("blog")){
 //
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("blog_id",Bannerist.get(getAdapterPosition()).getBanner_blogid());

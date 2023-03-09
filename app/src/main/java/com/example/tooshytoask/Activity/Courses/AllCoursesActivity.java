@@ -61,6 +61,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
         dialog.show("");
 
         AllCoursesAuthModel model = new AllCoursesAuthModel();
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getCoursesBlogs(model)
                 .subscribeOn(Schedulers.io())

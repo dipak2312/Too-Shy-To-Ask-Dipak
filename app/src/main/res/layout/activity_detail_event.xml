@@ -82,21 +82,21 @@
 
                     <ImageView
                         android:id="@+id/like_courses"
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
+                        android:layout_width="@dimen/margin_35"
+                        android:layout_height="@dimen/margin_35"
                         android:src="@drawable/like"/>
 
                     <ImageView
                         android:id="@+id/save_courses"
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
+                        android:layout_width="@dimen/margin_35"
+                        android:layout_height="@dimen/margin_35"
                         android:layout_marginStart="@dimen/margin_15"
                         android:src="@drawable/saved"/>
 
                     <ImageView
                         android:id="@+id/share_courses"
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
+                        android:layout_width="@dimen/margin_35"
+                        android:layout_height="@dimen/margin_35"
                         android:layout_marginStart="@dimen/margin_15"
                         android:src="@drawable/share"/>
 
@@ -243,42 +243,51 @@
 
             </RelativeLayout>
 
-            <View
-                android:id="@+id/view2"
+            <LinearLayout
+                android:id="@+id/related_blog_lay"
                 android:layout_width="match_parent"
-                android:layout_height="0.2dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_below="@+id/next_back"
-                android:layout_marginTop="@dimen/margin_30"
-                android:background="@color/purple">
+                android:layout_marginTop="@dimen/margin_30">
 
-            </View>
-
-            <TextView
-                android:id="@+id/related_blog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/view2"
-                android:textColor="@color/black"
-                android:fontFamily="@font/worksansregular"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_20"
-                android:text="@string/related_blogs"/>
-
-            <RelativeLayout
-                android:id="@+id/recy_blog_lay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/related_blog"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_10">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recy_blogs"
+                <View
+                    android:id="@+id/view2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="0.2dp"
+                    android:background="@color/purple">
 
-            </RelativeLayout>
+                </View>
+
+                <TextView
+                    android:id="@+id/related_blog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view2"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:text="@string/related_blogs"/>
+
+                <RelativeLayout
+                    android:id="@+id/recy_blog_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/related_blog"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recy_blogs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
 
         </RelativeLayout>
 

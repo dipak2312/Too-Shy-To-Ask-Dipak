@@ -10,23 +10,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.articleblogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class AllBlogAdapter extends RecyclerView.Adapter<AllBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<articleblogs>insightblogs;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
 
-    public AllBlogAdapter(Context context, ArrayList<articleblogs> insightblogs) {
+    public AllBlogAdapter(Context context, ArrayList<articleblogs> insightblogs, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         this.insightblogs = insightblogs;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
+
 
     @NonNull
     @Override
@@ -40,6 +46,23 @@ public class AllBlogAdapter extends RecyclerView.Adapter<AllBlogAdapter.ViewHold
         insightblogs.get(position).getBlog_category_name();
         Glide.with(context).load(insightblogs.get(position).getBlog_img()).into(holder.blog_img);
         holder.blog_title.setText(insightblogs.get(position).getBlog_title());
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightblogs.get(position).getBlog_id());
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightblogs.get(position).getBlog_id());
+                    like = true;
+
+                }
+
+            }
+        });
 
     }
 

@@ -50,6 +50,7 @@
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/all_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rel_top_bar">
@@ -287,6 +288,7 @@
                     android:id="@+id/previous"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="visible"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -311,6 +313,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="visible"
                     android:layout_alignParentEnd="true">
 
                     <TextView

@@ -12,16 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
 import com.example.tooshytoask.Activity.Blogs.AllEventActivity;
-import com.example.tooshytoask.Activity.Blogs.AllHighlightActivity;
-import com.example.tooshytoask.Activity.Blogs.AllRecentlyAddedActivity;
 import com.example.tooshytoask.Activity.Courses.AllCoursesActivity;
 import com.example.tooshytoask.Activity.Game.GameMainPageActivity;
 import com.example.tooshytoask.Activity.Quiz.QuizActivity;
@@ -33,9 +31,11 @@ import com.example.tooshytoask.Adapters.HighlightBlogAdapter;
 import com.example.tooshytoask.Adapters.JustAddedBlogAdapter;
 import com.example.tooshytoask.Adapters.StoreHouseAdapter;
 import com.example.tooshytoask.Adapters.VideoGalleryAdapter;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.InsightScreen.storeHouse;
 import com.example.tooshytoask.Models.InsightScreen.InsightScreenResponse;
 import com.example.tooshytoask.Models.InsightScreen.blogs;
@@ -47,6 +47,7 @@ import com.example.tooshytoask.Models.InsightScreen.video_gallery;
 import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class InsightsFragment extends Fragment implements View.OnClickListener{
+public class InsightsFragment extends Fragment implements View.OnClickListener, OnBookmarkClicked {
     Context context;
     SPManager spManager;
     RecyclerView recy_storehouse, recy_blogs, recy_highlight_blogs, recy_event_blogs,
@@ -81,7 +82,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
     CircleImageView update_profile;
     RelativeLayout insight_lay;
     NestedScrollView insight_scroll;
-    ImageView bookmark, search;
+    OnBookmarkClicked onBookmarkClicked;
+    String blog_id = "", type = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -113,6 +115,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
         see_all4.setOnClickListener(this);
         see_all5 = view.findViewById(R.id.see_all5);
         see_all5.setOnClickListener(this);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_storehouse.setLayoutManager(linearLayoutManager);
 
@@ -152,6 +155,46 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
 
     }
 
+    public void getBookmarkBlogs(String action){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     public void getInsightScreenResponse() {
         dialog.show("");
         insight_scroll.setVisibility(View.GONE);
@@ -182,34 +225,34 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                                 recy_storehouse.setAdapter(storeHouseAdapter);
                             }
                             if(blogs.size() !=0) {
-
-                                blogAdapter = new BlogAdapter(context ,blogs);
+                                blogAdapter = new BlogAdapter(context ,blogs, onBookmarkClicked, type = "blog");
                                 recy_blogs.setAdapter(blogAdapter);
+
                             }
                             if(higlights.size() !=0) {
 
-                                highlightBlogAdapter = new HighlightBlogAdapter(context ,higlights);
+                                highlightBlogAdapter = new HighlightBlogAdapter(context ,higlights, onBookmarkClicked,  type = "blog");
                                 recy_highlight_blogs.setAdapter(highlightBlogAdapter);
                             }
                             if(events.size() !=0) {
 
-                                eventBlogAdapter = new EventBlogAdapter(context ,events);
+                                eventBlogAdapter = new EventBlogAdapter(context ,events, onBookmarkClicked, type = "event");
                                 recy_event_blogs.setAdapter(eventBlogAdapter);
                             }
                             if(new_blogs.size() !=0) {
-
-                                justAddedBlogAdapter = new JustAddedBlogAdapter(context ,new_blogs);
+                                justAddedBlogAdapter = new JustAddedBlogAdapter(context ,new_blogs, onBookmarkClicked, type = "blog");
                                 recy_just_added_blogs.setAdapter(justAddedBlogAdapter);
+
                             }
                             if(courses.size() !=0) {
-
-                                coursesAdapter = new CoursesAdapter(context ,courses);
+                                coursesAdapter = new CoursesAdapter(context ,courses, onBookmarkClicked, type = "courses");
                                 recy_courses.setAdapter(coursesAdapter);
+
                             }
                             if(video_gallery.size() !=0) {
-
-                                videoGalleryAdapter = new VideoGalleryAdapter(context ,video_gallery);
+                                videoGalleryAdapter = new VideoGalleryAdapter(context ,video_gallery, onBookmarkClicked, type = "video");
                                 recy_video_gallery.setAdapter(videoGalleryAdapter);
+
                             }
                         }
                         insight_scroll.setVisibility(View.VISIBLE);
@@ -227,6 +270,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
                     }
                 });
     }
+
     public void getUserData(){
         //dialog.show("");
 
@@ -270,22 +314,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
             startActivity(intent);
 
         }
-        else if (id == see_all1.getId()) {
-            Intent intent = new Intent(context, AllHighlightActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
         else if (id == see_all2.getId()) {
             Intent intent = new Intent(context, AllEventActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-        else if (id == see_all3.getId()) {
-            Intent intent = new Intent(context, AllRecentlyAddedActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -318,5 +348,12 @@ public class InsightsFragment extends Fragment implements View.OnClickListener{
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id) {
+        blog_id = Blog_id;
+        getBookmarkBlogs("save");
+        getBookmarkBlogs("remove");
     }
 }

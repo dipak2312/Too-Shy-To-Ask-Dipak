@@ -38,6 +38,9 @@ import com.example.tooshytoask.AuthModels.SignupAuthModel;
 import com.example.tooshytoask.AuthModels.SingleBlogAuthModel;
 import com.example.tooshytoask.AuthModels.SingleClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.StoreHouseCategoryAuthModel;
+import com.example.tooshytoask.AuthModels.StoreHouseLikeAuthModel;
+import com.example.tooshytoask.AuthModels.StoreHouseRelatedAuthModel;
+import com.example.tooshytoask.AuthModels.StoreHouseSinglePageAuthModel;
 import com.example.tooshytoask.AuthModels.StoryAuthModel;
 import com.example.tooshytoask.AuthModels.StoryLikeAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
@@ -85,6 +88,9 @@ import com.example.tooshytoask.Models.SignupResponse;
 import com.example.tooshytoask.Models.SingleBlogResponse;
 import com.example.tooshytoask.Models.SingleClearNotificationResponse;
 import com.example.tooshytoask.Models.StoreHouse.CategoryData.StoreHouseCategoryResponse;
+import com.example.tooshytoask.Models.StoreHouseLikeResponse;
+import com.example.tooshytoask.Models.StoreHouseRelatedResponse;
+import com.example.tooshytoask.Models.StoreHouseSinglePageResponse;
 import com.example.tooshytoask.Models.StoryLikeResponse;
 import com.example.tooshytoask.Models.StoryResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
@@ -284,5 +290,19 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/articles_from_category")
     Observable<StoreHouseCategoryResponse> getStoreHouseCategory(@Body StoreHouseCategoryAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/storhouseDetails")
+    Observable<StoreHouseSinglePageResponse> getStoreHouseSinglePage(@Body StoreHouseSinglePageAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/storehouseLike")
+    Observable<StoreHouseLikeResponse> getStoreHouseLike(@Body StoreHouseLikeAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/relatedstorehouse")
+    Observable<StoreHouseRelatedResponse> getStoreHouseRelated(@Body StoreHouseRelatedAuthModel model);
+
+
 
 }

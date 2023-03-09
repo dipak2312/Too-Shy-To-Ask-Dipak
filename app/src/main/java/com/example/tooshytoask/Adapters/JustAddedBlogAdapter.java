@@ -10,23 +10,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.InsightScreen.new_blogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class JustAddedBlogAdapter extends RecyclerView.Adapter<JustAddedBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<new_blogs>new_blogs;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
+    String type = "blog";
 
-    public JustAddedBlogAdapter(Context context, ArrayList<new_blogs>new_blogs) {
+    public JustAddedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.new_blogs> new_blogs, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
         this.new_blogs = new_blogs;
+        this.onBookmarkClicked = onBookmarkClicked;
+        this.type = type;
     }
+
 
     @NonNull
     @Override
@@ -40,6 +48,23 @@ public class JustAddedBlogAdapter extends RecyclerView.Adapter<JustAddedBlogAdap
         Glide.with(context).load(new_blogs.get(position).getBlog_img()).into(holder.blog_img);
         holder.blog_title.setText(new_blogs.get(position).getBlog_title());
 
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,new_blogs.get(position).getBlog_id());
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,new_blogs.get(position).getBlog_id());
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.Blogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,7 +58,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String blog_id, type = "blog", helpful ="", commentId ="";
+    String blog_id, type = "blog", helpful ="", commentId ="", next_id ="", previous_id ="", islike;
     ArrayList<singleblog> singleblog;
     private SingleBlogResponse singleBlogResponse;
     ArrayList<relatedblogs> relatedblogs;
@@ -73,6 +74,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
     RelativeLayout rel_back;
     Dialog dialogPopup;
     Button submit_comment;
+    NestedScrollView all_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        all_data = findViewById(R.id.all_data);
         edit_comment = findViewById(R.id.edit_comment);
         related_blog_lay = findViewById(R.id.related_blog_lay);
         comment_lin_lay = findViewById(R.id.comment_lin_lay);
@@ -125,12 +128,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
         blog_id = getIntent().getStringExtra("blog_id");
 
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//
-//            blog_id = intent.getStringExtra("blog_id");
-//
-//        }
+
         getSingleBlog();
 
     }
@@ -192,6 +190,9 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
                         if (msg.equals("Article Bookmarked")) {
 
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -283,6 +284,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
     public void getSingleBlog() {
         dialog.show("");
+        //all_data.setVisibility(View.GONE);
 
         SingleBlogAuthModel model = new SingleBlogAuthModel();
         model.setPost_id(blog_id);
@@ -308,6 +310,24 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             like_count.setText(Html.fromHtml(singleblog.get(0).getBlog_like()));
                             yes_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
                             no_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
+                            next_id = singleBlogResponse.getNextblog();
+                            previous_id = singleBlogResponse.getPreviousblog();
+
+                            if (next_id.equals(next_id)) {
+                                next.setVisibility(View.VISIBLE);
+
+                            }
+                            if (next_id.equals("0")){
+                                next.setVisibility(View.GONE);
+                            }
+
+                            if (previous_id.equals(previous_id)) {
+                                previous.setVisibility(View.VISIBLE);
+
+                            }
+                            if (previous_id.equals("0")){
+                                previous.setVisibility(View.GONE);
+                            }
 
                             if (relatedblogs.size() != 0) {
                                 related_blog_lay.setVisibility(View.VISIBLE);
@@ -331,6 +351,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
                         }
                         dialog.dismiss("");
+                        all_data.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -378,11 +399,15 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
             if (like) {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
                 blogLike("like");
+                dialog.dismiss("");
+                all_data.setVisibility(View.VISIBLE);
                 getSingleBlog();
                 like = false;
             } else {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
                 blogLike("like");
+                all_data.setVisibility(View.VISIBLE);
+                dialog.dismiss("");
                 getSingleBlog();
                 like = true;
             }
@@ -403,20 +428,21 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         }
         else if (id == previous.getId()){
 
-            Intent intent = new Intent(context, DetailBlogActivity.class);
-            intent.putExtra("blog_id",singleBlogResponse.getPreviousblog());
-            //LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+                Intent intent = new Intent(context, DetailBlogActivity.class);
+                intent.putExtra("blog_id", previous_id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
         }
         else if (id == next.getId()){
 
-            Intent intent = new Intent(context, DetailBlogActivity.class);
-            intent.putExtra("blog_id", singleBlogResponse.getNextblog());
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+                Intent intent = new Intent(context, DetailBlogActivity.class);
+                intent.putExtra("blog_id", next_id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
         }
         else if (id == rel_back.getId()){
             Intent intent = new Intent(context, HomeActivity.class);

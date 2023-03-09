@@ -67,6 +67,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
         dialog.show("");
 
         AllVideoGalleryAuthModel model = new AllVideoGalleryAuthModel();
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getVideoGallery(model)
                 .subscribeOn(Schedulers.io())

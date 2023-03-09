@@ -10,12 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.InsightScreen.blogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
@@ -23,10 +25,17 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
     Context context;
     ArrayList<com.example.tooshytoask.Models.InsightScreen.blogs>blogs;
 
-    public BlogAdapter(Context context, ArrayList<blogs>blogs) {
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
+    String type ;
+
+    public BlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.blogs> blogs, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
         this.blogs = blogs;
+        this.onBookmarkClicked = onBookmarkClicked;
+        this.type = type;
     }
+
 
     @NonNull
     @Override
@@ -39,6 +48,25 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull BlogAdapter.ViewHolder holder, int position) {
         holder.blog_title.setText(blogs.get(position).getBlog_title());
         Glide.with(context).load(blogs.get(position).getBlog_img()).into(holder.blog_img);
+
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id());
+                    //onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id());
+                    like = true;
+
+                }
+
+            }
+        });
 
     }
 

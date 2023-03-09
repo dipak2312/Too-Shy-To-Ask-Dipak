@@ -5,15 +5,6 @@ public class Bannerist {
     private String banner_img;
     private String banner_screen;
     private String banner_blogid;
-    public Boolean screen = true;
-
-    public Bannerist(String banner_id, String banner_img, String banner_screen, String banner_blogid, Boolean screen) {
-        this.banner_id = banner_id;
-        this.banner_img = banner_img;
-        this.banner_screen = banner_screen;
-        this.banner_blogid = banner_blogid;
-        this.screen = screen;
-    }
 
 
     public String getBanner_id() {
@@ -48,11 +39,4 @@ public class Bannerist {
         this.banner_blogid = banner_blogid;
     }
 
-    public Boolean getScreen() {
-        return screen;
-    }
-
-    public void setScreen(Boolean screen) {
-        this.screen = screen;
-    }
 }

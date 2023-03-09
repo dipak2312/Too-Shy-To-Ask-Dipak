@@ -30,9 +30,6 @@
             android:name=".Activity.Expert.ExpertActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.Blogs.AllRecentlyAddedActivity"
-            android:exported="true" />
-        <activity
             android:name=".Activity.VideoGallery.AllVideoActivity"
             android:exported="true" />
         <activity
@@ -40,9 +37,6 @@
             android:exported="true" />
         <activity
             android:name=".Activity.Blogs.AllEventActivity"
-            android:exported="true" />
-        <activity
-            android:name=".Activity.Blogs.AllHighlightActivity"
             android:exported="true" />
         <activity
             android:name=".Activity.Game.LeaderBoardActivity"

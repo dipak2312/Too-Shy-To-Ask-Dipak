@@ -10,16 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllEventsAdapter;
 import com.example.tooshytoask.AuthModels.AllEventAuthModel;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllEventResponse;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.insightevents;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
@@ -27,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class AllEventActivity extends AppCompatActivity implements View.OnClickListener{
+public class AllEventActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     RecyclerView events_recy;
     SPManager spManager;
     Context context;
@@ -36,7 +40,7 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
     CustomProgressDialog dialog;
     ArrayList<insightevents> insightevents;
     AllEventsAdapter adapter;
-    int selectedPosition=0;
+    String blog_id = "", type = "event";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,46 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
         getEventBlogs();
     }
 
+    public void getBookmarkBlogs(String action){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     public void getEventBlogs(){
         dialog.show("");
 
@@ -75,7 +119,7 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
                         if (msg.equals("success")){
                             insightevents = allEventResponse.getInsightevents();
 
-                            adapter = new AllEventsAdapter(context, insightevents);
+                            adapter = new AllEventsAdapter(context, insightevents, AllEventActivity.this);
                             events_recy.setAdapter(adapter);
                         }
 
@@ -107,5 +151,12 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id) {
+        blog_id = Blog_id;
+        getBookmarkBlogs("save");
+        getBookmarkBlogs("remove");
     }
 }

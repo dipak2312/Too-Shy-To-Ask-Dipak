@@ -24,13 +24,13 @@ import java.util.ArrayList;
 public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<RecommendedBlogs> RecommendedBlogs;
-    OnClickListner onclicklistener;
+    onSavedClicked onSavedClicked;
     boolean like = true;
 
-    public RecommendedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.RecommendedBlogs> recommendedBlogs, OnClickListner onclicklistener) {
+    public RecommendedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.RecommendedBlogs> recommendedBlogs, RecommendedBlogAdapter.onSavedClicked onSavedClicked) {
         this.context = context;
         RecommendedBlogs = recommendedBlogs;
-        this.onclicklistener = onclicklistener;
+        this.onSavedClicked = onSavedClicked;
     }
 
 
@@ -53,13 +53,14 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
             @Override
             public void onClick(View v) {
                 if (like) {
-                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save_active));
-                    onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onSavedClicked.onSavedButtonClick(position,RecommendedBlogs.get(position).getBlog_id());
+                    //onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
                     like = false;
 
                 } else    {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    //onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
                     like = true;
 
                 }
@@ -100,5 +101,9 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
                 }
             });
         }
+    }
+
+    public interface onSavedClicked{
+        public void onSavedButtonClick(int position, String Blog_id);
     }
 }

@@ -11,23 +11,33 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
 import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStorehouseActivity;
-import com.example.tooshytoask.Models.StoreHouse.data;
+import com.example.tooshytoask.Models.StoreHouse.CategoryData.data;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 
 public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseListingAdapter.ViewHolder> {
     Context context;
-    ArrayList<com.example.tooshytoask.Models.StoreHouse.data> data;
+    ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>data;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
+    String type ;
 
-    public StoreHouseListingAdapter(Context context, ArrayList<com.example.tooshytoask.Models.StoreHouse.data> data) {
+    public StoreHouseListingAdapter(Context context, ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data> data, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
         this.data = data;
+        this.onBookmarkClicked = onBookmarkClicked;
+        this.type = type;
     }
+
 
     @NonNull
     @Override
@@ -38,7 +48,26 @@ public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseLis
 
     @Override
     public void onBindViewHolder(@NonNull StoreHouseListingAdapter.ViewHolder holder, int position) {
+        Glide.with(context).load(data.get(position).getArticle_image()).into(holder.storehouse_items_img);
+        holder.storehouse_item_txt.setText(data.get(position).getArticle_name());
 
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,data.get(position).getArticle_id());
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,data.get(position).getArticle_id());
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override
@@ -65,8 +94,8 @@ public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseLis
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("title_id", data.get(getAdapterPosition()).getCategory_id());
-                    Intent intent = new Intent(context, InformationStorehouseActivity.class);
+                    bundle.putString("article_id", data.get(getAdapterPosition()).getArticle_id());
+                    Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

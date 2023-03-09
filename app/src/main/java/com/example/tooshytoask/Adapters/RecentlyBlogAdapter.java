@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,11 +23,15 @@ import java.util.ArrayList;
 public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<com.example.tooshytoask.Models.Blogs> Blogs;
+    onSavedClicked onSavedClicked;
+    boolean like = true;
 
-    public RecentlyBlogAdapter(Context context,  ArrayList<Blogs> Blogs) {
+    public RecentlyBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.Blogs> blogs, RecentlyBlogAdapter.onSavedClicked onSavedClicked) {
         this.context = context;
-        this.Blogs = Blogs;
+        Blogs = blogs;
+        this.onSavedClicked = onSavedClicked;
     }
+
 
     @NonNull
     @Override
@@ -40,6 +45,23 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
         holder.blog_title.setText(Blogs.get(position).getBlog_title());
         Glide.with(context).load(Blogs.get(position).getBlog_img()).into(holder.blog_img);
 
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onSavedClicked.onSavedButtonClick(position,Blogs.get(position).getBlog_id());
+                    like = false;
+
+                } else    {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onSavedClicked.onSavedButtonClick(position,Blogs.get(position).getBlog_id());
+                    like = true;
+
+                }
+
+            }
+        });
 
     }
 
@@ -73,5 +95,9 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
                 }
             });
         }
+    }
+
+    public interface onSavedClicked{
+        public void onSavedButtonClick(int position, String Blog_id);
     }
 }

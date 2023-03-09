@@ -10,23 +10,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.InsightScreen.higlights;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<higlights>higlights;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
+    String type = "blog";
 
-    public HighlightBlogAdapter(Context context, ArrayList<higlights>higlights) {
+    public HighlightBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.higlights> higlights, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
         this.higlights = higlights;
+        this.onBookmarkClicked = onBookmarkClicked;
+        this.type = type;
     }
+
 
     @NonNull
     @Override
@@ -42,6 +50,23 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
         holder.blog_title.setText(higlights.get(position).getBlog_title());
         Glide.with(context).load(higlights.get(position).getBlog_img()).into(holder.blog_img);
 
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,higlights.get(position).getBlog_id());
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,higlights.get(position).getBlog_id());
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override
