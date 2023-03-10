@@ -83,7 +83,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     RelativeLayout insight_lay;
     NestedScrollView insight_scroll;
     OnBookmarkClicked onBookmarkClicked;
-    String blog_id = "", type = "";
+    String blog_id = "", type = "", actions = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -353,6 +353,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onBookmarkButtonClick(int position, String Blog_id) {
         blog_id = Blog_id;
+        //actions = action;
         getBookmarkBlogs("save");
         getBookmarkBlogs("remove");
     }

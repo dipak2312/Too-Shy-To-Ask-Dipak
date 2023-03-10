@@ -17,19 +17,20 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.Blogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<com.example.tooshytoask.Models.Blogs> Blogs;
-    onSavedClicked onSavedClicked;
     boolean like = true;
+    OnBookmarkClicked onBookmarkClicked;
 
-    public RecentlyBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.Blogs> blogs, RecentlyBlogAdapter.onSavedClicked onSavedClicked) {
+    public RecentlyBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.Blogs> blogs, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         Blogs = blogs;
-        this.onSavedClicked = onSavedClicked;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
 
 
@@ -50,12 +51,12 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onSavedClicked.onSavedButtonClick(position,Blogs.get(position).getBlog_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,Blogs.get(position).getBlog_id());
                     like = false;
 
-                } else    {
+                } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onSavedClicked.onSavedButtonClick(position,Blogs.get(position).getBlog_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,Blogs.get(position).getBlog_id());
                     like = true;
 
                 }
@@ -95,9 +96,5 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
                 }
             });
         }
-    }
-
-    public interface onSavedClicked{
-        public void onSavedButtonClick(int position, String Blog_id);
     }
 }

@@ -11,7 +11,6 @@ import com.example.tooshytoask.Models.Question;
 import java.util.ArrayList;
 
 public class QuestionPagerAdapter extends FragmentStatePagerAdapter {
-
     ArrayList<Question> questions;
     public QuestionPagerAdapter(FragmentManager fm, ArrayList<Question> questions) {
         super(fm);

@@ -40,7 +40,7 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
     CustomProgressDialog dialog;
     ArrayList<insightevents> insightevents;
     AllEventsAdapter adapter;
-    String blog_id = "", type = "event";
+    String blog_id = "", type = "event", actions = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +156,7 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBookmarkButtonClick(int position, String Blog_id) {
         blog_id = Blog_id;
+        //actions = action;
         getBookmarkBlogs("save");
         getBookmarkBlogs("remove");
     }

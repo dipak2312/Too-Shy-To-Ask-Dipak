@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -44,6 +45,24 @@ public class AllEventsAdapter extends RecyclerView.Adapter<AllEventsAdapter.View
     public void onBindViewHolder(@NonNull AllEventsAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(insightevents.get(position).getBlog_img()).into(holder.blog_img);
         holder.blog_title.setText(insightevents.get(position).getEvent_title());
+
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightevents.get(position).getEvent_id());
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightevents.get(position).getEvent_id());
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override

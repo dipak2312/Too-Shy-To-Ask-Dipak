@@ -53,7 +53,7 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     StoreHouseListingAdapter adapter;
     ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>dataList;
     ArrayList<com.example.tooshytoask.Models.StoreHouse.InfoStoreCategory>InfoStoreCategory;
-    String title_id = "", type = "";
+    String title_id = "", type = "", actions = "";
     OnBookmarkClicked onBookmarkClicked;
     int selectedPosition=0;
     String[] listItems ;
@@ -307,6 +307,7 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     @Override
     public void onBookmarkButtonClick(int position, String Blog_id) {
         title_id = Blog_id;
+        //actions = Blog_id;
         getBookmarkBlogs("save");
         getBookmarkBlogs("remove");
     }

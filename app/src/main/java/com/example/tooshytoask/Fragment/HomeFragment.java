@@ -52,6 +52,7 @@ import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.Utils.OnClickListner;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -68,7 +69,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, RecommendedBlogAdapter.onSavedClicked, RecentlyBlogAdapter.onSavedClicked {
+public class HomeFragment extends Fragment implements View.OnClickListener, OnBookmarkClicked {
     RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs, recy_blogs;
     ArrayList<StoryCategory> StoryCategory;
     ArrayList<Bannerist> Bannerist;
@@ -94,9 +95,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Reco
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
-    String action = "language", blog_id = "", type = "blog";
+    String action = "language", blog_id = "", type = "blog", actions = "";
     RelativeLayout stories_rel_lay;
-    OnClickListner onclicklistener;
+    OnBookmarkClicked onBookmarkClicked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -263,7 +264,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Reco
                             if(RecommendedBlogs.size() !=0)
                             {
                                 recommended_blogs_lay.setVisibility(View.VISIBLE);
-                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs, HomeFragment.this);
+                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs, onBookmarkClicked );
                                 recy_recommended_blogs.setAdapter(recommendedBlogAdapter);
 
                             }
@@ -273,7 +274,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Reco
 
                             if (Blogs.size() !=0){
 
-                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, HomeFragment.this);
+                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, onBookmarkClicked);
                                 recy_recently_blogs.setAdapter(recentlyBlogAdapter);
                             }
                             home_scroll.setVisibility(View.VISIBLE);
@@ -580,10 +581,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Reco
                     }
                 });
     }
-
     @Override
-    public void onSavedButtonClick(int position, String Blog_id) {
+    public void onBookmarkButtonClick(int position, String Blog_id) {
         blog_id = Blog_id;
+        //actions = action;
         getBookmarkBlogs("save");
         getBookmarkBlogs("remove");
     }

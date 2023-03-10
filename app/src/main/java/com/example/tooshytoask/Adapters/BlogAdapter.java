@@ -55,7 +55,6 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
                     onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id());
-                    //onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
                     like = false;
 
                 } else  {

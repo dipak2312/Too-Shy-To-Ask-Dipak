@@ -1,9 +1,11 @@
 package com.example.tooshytoask.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -24,6 +26,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.optionview
     Context context;
     ArrayList<Option> optionList;
     private int selectedPos = -1;
+    private boolean isChecked = true;
     private IOnClick iOnClick;
 
     public OptionAdapter(Context context, ArrayList<Option> optionList, IOnClick iOnClick) {
@@ -42,36 +45,30 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.optionview
     }
 
     @Override
-    public void onBindViewHolder(@NonNull optionviewholder holder, int position) {
+    public void onBindViewHolder(@NonNull optionviewholder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.option.setText(optionList.get(position).getOption_serial());
        //holder.option.setText(String.valueOf(optionList.get(position).getOption()));
 
-        holder.radioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        holder.option.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                selectedPos=position;
+            public void onClick(View view) {
 
-                //if (!optionList.get(position).isSelected()) {
-//                    if (selectedPos != -1) {
-//                        optionList.get(selectedPos).setSelected(false);
-//                    }
-//                    optionList.get(position).setSelected(true);
-//                    selectedPos = position;
-//                }
-                if (iOnClick != null) {
-                    iOnClick.optionSelected(optionList.get(position),optionList);
-                }
+                        if (isChecked) {
+                            selectedPos = position;
+                            if (iOnClick != null) {
+                                iOnClick.optionSelected(optionList.get(position), optionList);
+                            }
+                            notifyDataSetChanged();
 
+                   }
 
-                notifyDataSetChanged();
             }
         });
 
-
             if (selectedPos==position) {
                 holder.rel_option_bag.setBackground(ContextCompat.getDrawable(context, R.drawable.options_dark));
-                holder.option.setTextColor(ContextCompat.getColor(context, R.color.white));
+                holder.option.setTextColor(ContextCompat.getColor(context, R.color.purple));
             } else {
                 holder.rel_option_bag.setBackground(ContextCompat.getDrawable(context, R.drawable.options_fent));
                 holder.option.setTextColor(ContextCompat.getColor(context, R.color.black));

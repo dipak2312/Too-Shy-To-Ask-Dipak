@@ -1,5 +1,6 @@
 package com.example.tooshytoask.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.RecommendedBlogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
@@ -24,13 +26,13 @@ import java.util.ArrayList;
 public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlogAdapter.ViewHolder>{
     Context context;
     ArrayList<RecommendedBlogs> RecommendedBlogs;
-    onSavedClicked onSavedClicked;
+    OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
 
-    public RecommendedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.RecommendedBlogs> recommendedBlogs, RecommendedBlogAdapter.onSavedClicked onSavedClicked) {
+    public RecommendedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.RecommendedBlogs> recommendedBlogs, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         RecommendedBlogs = recommendedBlogs;
-        this.onSavedClicked = onSavedClicked;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
 
 
@@ -42,9 +44,7 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendedBlogAdapter.ViewHolder holder, int position) {
-        //holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,RecommendedBlogs.get(position).getBlog_img()));
-        //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,RecommendedBlogs.get(position).getSave_img()));
+    public void onBindViewHolder(@NonNull RecommendedBlogAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position ) {
         holder.blog_title.setText(RecommendedBlogs.get(position).getBlog_title());
         Glide.with(context).load(RecommendedBlogs.get(position).getBlog_img()).into(holder.blog_img);
 
@@ -54,13 +54,12 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onSavedClicked.onSavedButtonClick(position,RecommendedBlogs.get(position).getBlog_id());
-                    //onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,RecommendedBlogs.get(position).getBlog_id());
                     like = false;
 
-                } else    {
+                } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    //onclicklistener.onClickData(position, RecommendedBlogs.get(position).getBlog_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,RecommendedBlogs.get(position).getBlog_id());
                     like = true;
 
                 }
@@ -101,9 +100,5 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
                 }
             });
         }
-    }
-
-    public interface onSavedClicked{
-        public void onSavedButtonClick(int position, String Blog_id);
     }
 }

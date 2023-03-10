@@ -26,7 +26,7 @@ public class JustAddedBlogAdapter extends RecyclerView.Adapter<JustAddedBlogAdap
     ArrayList<new_blogs>new_blogs;
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
-    String type = "blog";
+    String type;
 
     public JustAddedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.new_blogs> new_blogs, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;

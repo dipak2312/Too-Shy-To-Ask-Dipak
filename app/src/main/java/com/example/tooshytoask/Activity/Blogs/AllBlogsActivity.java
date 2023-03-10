@@ -53,7 +53,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<com.example.tooshytoask.Models.insightblogcategories>insightblogcategories;
     int selectedPosition=0;
     String[] listItems ;
-    String blog_id = "", type = "blog";
+    String blog_id = "", type = "blog",actions = "";
     boolean[] checkedItems;
 
     @Override
@@ -313,6 +313,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBookmarkButtonClick(int position, String Blog_id) {
         blog_id = Blog_id;
+        ///actions = action;
         getBookmarkBlogs("save");
         getBookmarkBlogs("remove");
     }

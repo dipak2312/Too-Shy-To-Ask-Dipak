@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.VideoView;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Adapters.AllVideoGalleryAdapter;
@@ -24,10 +25,14 @@ import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 import com.potyvideo.library.AndExoPlayerView;
 
 import java.util.ArrayList;
@@ -40,10 +45,11 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    PlayerView video_play;
+    VideoView video_play;
     ArrayList<com.example.tooshytoask.Models.insightvideo> insightvideo;
     String video_link ="";
     SimpleExoPlayer exoPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +61,17 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
         video_play = findViewById(R.id.video_play);
-
-        video_play.setPlayer(exoPlayer);
-
-
+        //exoPlayer = new SimpleExoPlayer.Builder(this).build();
+        //video_play.requestFocus();
         video_link = getIntent().getStringExtra("video_link");
-        MediaItem mediaItem = MediaItem.fromUri(video_link);
-        exoPlayer.addMediaItem(mediaItem);
-        exoPlayer.prepare();
-        exoPlayer.setPlayWhenReady(true);
-        //Uri videouri = Uri.parse(video_link);
+        video_play.setVideoPath("https://www.youtube.com/watch?v=Cm2vzY728L0");
+//        video_play.setPlayer(exoPlayer);
+//        MediaItem mediaItem = MediaItem.fromUri(video_link);
+//        exoPlayer.addMediaItem(mediaItem);
+//
+//        exoPlayer.prepare();
+//        exoPlayer.play();
 
-
-        //getVideoGallery();
     }
 
     public void getVideoGallery(){

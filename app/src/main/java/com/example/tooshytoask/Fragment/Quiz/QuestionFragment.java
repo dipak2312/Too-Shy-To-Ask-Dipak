@@ -39,7 +39,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
     public Option selectedOption;
     private boolean isAnswerSelected;
 
-    CardView card_img;
+    //CardView card_img;
     ArrayList<Option> optionList;
     ArrayList<Question> quetions;
     TextView txt_answer,txt_desc,txt_question_name,txt_question, txt_hint;
@@ -93,7 +93,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
         recy_question= view.findViewById(R.id.recy_question);
         rel_question=view.findViewById(R.id.rel_question);
         rel_check_question=view.findViewById(R.id.rel_check_question);
-        card_img= view.findViewById(R.id.card_img);
+        //card_img= view.findViewById(R.id.card_img);
         txt_answer=view.findViewById(R.id.txt_answer);
         txt_desc=view.findViewById(R.id.txt_full_desc);
         txt_hint=view.findViewById(R.id.txt_hint);
@@ -116,7 +116,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
         {
 
             if (btn_submit.getText().equals("SUBMIT")) {
-                card_img.setVisibility(View.GONE);
+                img_question.setVisibility(View.GONE);
                 txt_question.setVisibility(View.GONE);
                 recy_question.setVisibility(View.GONE);
                 rel_check_question.setVisibility(View.VISIBLE);
