@@ -439,8 +439,6 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
             pinView2.setItemCount(name2.length());
         }
 
-
-        //String show_text=wordLists.get(position).getWord();
         checkPreviousActivityStatus();
 
 
