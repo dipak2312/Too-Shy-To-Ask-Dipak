@@ -49,6 +49,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/text_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_15"
@@ -68,5 +69,82 @@
         android:textColor="#F2B63E"/>
 
     </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_msg"
+        android:layout_marginTop="@dimen/margin_20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_user_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_80"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type here.."
+        android:textColorHint="@color/skip"
+        android:background="@drawable/chatting_field_background"
+        android:padding="@dimen/padding_10"
+        android:inputType="textPostalAddress|textMultiLine|textCapSentences"
+        android:fontFamily="@font/worksansmedium"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size14"/>
+
+    </RelativeLayout>
+
+    <!--<com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description_lay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_45"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:background="@drawable/chatting_field_background"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/worksanslight"
+        android:gravity="top"
+        android:paddingStart="@dimen/padding_15"
+        android:paddingTop="@dimen/margin_3"
+        android:paddingEnd="@dimen/padding_15"
+        app:hintTextColor="@color/purple">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/description_enter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_45"
+            android:background="@drawable/border"
+            android:fontFamily="@font/worksansmedium"
+            android:gravity="top"
+            android:hint="Type here.."
+            android:inputType="textPostalAddress|textMultiLine|textCapSentences"
+            android:paddingTop="@dimen/margin_3"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size12" />
+
+    </com.google.android.material.textfield.TextInputLayout>-->
 
 </RelativeLayout>

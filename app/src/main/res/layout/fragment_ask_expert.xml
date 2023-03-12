@@ -132,6 +132,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <!--<TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/issues_recy"
+            android:padding="@dimen/padding_10"
+            android:text="My query is not listed"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/margin_10"
+            android:fontFamily="@font/worksansmedium"
+            android:textSize="@dimen/text_size15"
+            android:textColor="@color/purple"/>-->
+
     </RelativeLayout>
 
     <LinearLayout

@@ -8,7 +8,43 @@
     android:background="@drawable/options_fent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RadioGroup
+    <RelativeLayout
+        android:id="@+id/option_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/radio_btn"
+            android:layout_width="@dimen/margin_15"
+            android:layout_height="@dimen/margin_15"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_10"
+            android:src="@drawable/radio_button_unchecked"/>
+
+        <ImageView
+            android:id="@+id/radio_btn_active"
+            android:layout_width="@dimen/margin_15"
+            android:layout_height="@dimen/margin_15"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/margin_10"
+            android:src="@drawable/radio_button_checked"/>
+
+        <TextView
+            android:id="@+id/option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_10"
+            android:textSize="@dimen/text_size15"
+            android:fontFamily="@font/worksansregular"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/margin_25"
+            android:text="Nightmare and trouble sleepig"/>
+
+    </RelativeLayout>
+
+    <!--<RadioGroup
         android:id="@+id/radioGrp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +64,6 @@
             android:text="Nightmare and trouble sleepig"
             android:onClick="radioButtobClickEvent"/>
 
-    </RadioGroup>
+    </RadioGroup>-->
 
 </RelativeLayout>

@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -26,7 +29,6 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.optionview
     Context context;
     ArrayList<Option> optionList;
     private int selectedPos = -1;
-    private boolean isChecked = true;
     private IOnClick iOnClick;
 
     public OptionAdapter(Context context, ArrayList<Option> optionList, IOnClick iOnClick) {
@@ -48,30 +50,29 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.optionview
     public void onBindViewHolder(@NonNull optionviewholder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.option.setText(optionList.get(position).getOption_serial());
-       //holder.option.setText(String.valueOf(optionList.get(position).getOption()));
 
-        holder.option.setOnClickListener(new View.OnClickListener() {
+        holder.option_lay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
 
-                        if (isChecked) {
-                            selectedPos = position;
-                            if (iOnClick != null) {
-                                iOnClick.optionSelected(optionList.get(position), optionList);
-                            }
-                            notifyDataSetChanged();
-
-                   }
+                    selectedPos = position;
+                    if (iOnClick != null) {
+                        iOnClick.optionSelected(optionList.get(position), optionList);
+                    }
+                    notifyDataSetChanged();
 
             }
+
         });
 
             if (selectedPos==position) {
                 holder.rel_option_bag.setBackground(ContextCompat.getDrawable(context, R.drawable.options_dark));
                 holder.option.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                holder.radio_btn.setBackgroundResource(R.drawable.radio_button_checked);
             } else {
                 holder.rel_option_bag.setBackground(ContextCompat.getDrawable(context, R.drawable.options_fent));
                 holder.option.setTextColor(ContextCompat.getColor(context, R.color.black));
+                holder.radio_btn.setBackgroundResource(R.drawable.radio_button_unchecked);
             }
 
 
@@ -85,15 +86,18 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.optionview
     public class optionviewholder extends RecyclerView.ViewHolder
     {
         RelativeLayout rel_option_bag;
-        RadioGroup radioGrp;
-        RadioButton option;
+        TextView option;
+        ImageView radio_btn, radio_btn_active;
+        RelativeLayout option_lay;
 
         public optionviewholder(@NonNull View itemView) {
             super(itemView);
 
             rel_option_bag= itemView.findViewById(R.id.rel_option_bag);
-            option= itemView.findViewById(R.id.option);
-            radioGrp= itemView.findViewById(R.id.radioGrp);
+           option= itemView.findViewById(R.id.option);
+            radio_btn= itemView.findViewById(R.id.radio_btn);
+            radio_btn_active= itemView.findViewById(R.id.radio_btn_active);
+            option_lay= itemView.findViewById(R.id.option_lay);
 
         }
     }

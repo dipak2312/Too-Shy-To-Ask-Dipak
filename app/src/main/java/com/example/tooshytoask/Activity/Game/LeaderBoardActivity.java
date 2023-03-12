@@ -11,20 +11,31 @@ import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.LeaderboardFirstAdapter;
+import com.example.tooshytoask.Adapters.LeaderboardSecondAdapter;
+import com.example.tooshytoask.Models.LeaderboardResponse;
+import com.example.tooshytoask.Models.TopTenList;
+import com.example.tooshytoask.Models.TopThreeList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 public class LeaderBoardActivity extends AppCompatActivity implements View.OnClickListener{
-    //LeaderboardFirstAdapter firstAdapter;
-    //LeaderboardSecondAdapter secondAdapter;
+    LeaderboardFirstAdapter firstAdapter;
+    LeaderboardSecondAdapter secondAdapter;
     RecyclerView recy_first_list, recy_second_list;
     Context context;
     CustomProgressDialog dialog;
-    //ArrayList<TopThreeList> firstList;
-    //ArrayList<TopTenList> secondList;
+    ArrayList<TopThreeList> firstList;
+    ArrayList<TopTenList> secondList;
     RelativeLayout rel_back;
     RelativeLayout rel_help;
 
@@ -44,8 +55,8 @@ public class LeaderBoardActivity extends AppCompatActivity implements View.OnCli
         recy_first_list.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         dialog = new CustomProgressDialog(context);
-        //firstList = new ArrayList<>();
-        //secondList = new ArrayList<>();
+        firstList = new ArrayList<>();
+        secondList = new ArrayList<>();
 
         rel_help=(RelativeLayout)findViewById(R.id.rel_help);
         rel_help.setOnClickListener(this);
@@ -59,6 +70,57 @@ public class LeaderBoardActivity extends AppCompatActivity implements View.OnCli
         recy_second_list.setLayoutManager(lm1);
         recy_second_list.setNestedScrollingEnabled(true);
         recy_second_list.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+
+        getLeaderBoard();
+    }
+
+    public void getLeaderBoard() {
+        dialog.show("");
+
+
+        WebServiceModel.getRestApi().getLeaderboard()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<LeaderboardResponse>() {
+                    @Override
+                    public void onNext(LeaderboardResponse leaderResponse) {
+                        dialog.dismiss("");
+                        String msg = leaderResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            firstList = leaderResponse.getTopThreeList();
+                            secondList = leaderResponse.getTopTenList();
+
+                            firstAdapter = new LeaderboardFirstAdapter(context,firstList);
+                            recy_first_list.setAdapter(firstAdapter);
+
+                            secondAdapter = new LeaderboardSecondAdapter(context,secondList);
+                            recy_second_list.setAdapter(secondAdapter);
+
+
+                        } else {
+                            //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
     }
 
     @Override

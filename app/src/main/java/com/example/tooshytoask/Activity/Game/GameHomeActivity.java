@@ -22,7 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Adapters.SelectTextAdapter;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.AddChar;
+import com.example.tooshytoask.Models.GameTimeAuthModel;
+import com.example.tooshytoask.Models.GetWordList;
+import com.example.tooshytoask.Models.SuccessResponse;
+import com.example.tooshytoask.Models.WordResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.GameValueClick;
@@ -35,12 +42,15 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class GameHomeActivity extends AppCompatActivity implements View.OnClickListener, GameValueClick {
     Context context;
     RecyclerView recy_select_text;
-    //SelectTextAdapter selectAdapter;
-    //ArrayList<AddChar> value;
+    SelectTextAdapter selectAdapter;
+    ArrayList<AddChar> value;
     String name = "", name2 = "";
     GridLayoutManager layout;
     Dialog dialog;
@@ -54,7 +64,7 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
     String final_char = "";
     ArrayList<String> selectvalue = new ArrayList<>();
     CustomProgressDialog custdialog;
-    //ArrayList<GetWordList> wordLists;
+    ArrayList<GetWordList> wordLists;
     String level = "1";
     int position = 0, set_status = 0;
     int multicharsize;
@@ -74,7 +84,7 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
         txt_level = (TextView) findViewById(R.id.txt_level);
 
         custdialog = new CustomProgressDialog(context);
-        //wordLists = new ArrayList<>();
+        wordLists = new ArrayList<>();
         linkedvalue=new LinkedHashMap<Integer, String>();
 
         rel_quit_game=(RelativeLayout)findViewById(R.id.rel_quit_game);
@@ -96,12 +106,60 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
         timer = new Timer();
 
-        //value = new ArrayList<>();
+        value = new ArrayList<>();
 
         pinView = (PinView) findViewById(R.id.pinView);
         pinView2 = (PinView) findViewById(R.id.pinView2);
 
+
         showpendingGame(level);
+
+        getwordList();
+    }
+    public void getwordList() {
+        custdialog.show("");
+
+
+        WebServiceModel.getRestApi().getword()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<WordResponse>() {
+                    @Override
+                    public void onNext(WordResponse wordresponse) {
+                        custdialog.dismiss("");
+                        String msg = wordresponse.getMsg();
+
+
+                        if (msg.equals("success")) {
+
+                            wordLists = wordresponse.getGetWordList();
+
+                            starttimer();
+
+
+                            showword();
+
+
+                        } else {
+                            //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        custdialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     @Override
@@ -127,9 +185,9 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
         TextView txt_hint = (TextView) dialog.findViewById(R.id.txt_hint);
 
-//        if (wordLists.size() != 1) {
-//            txt_hint.setText(wordLists.get(position).getHint());
-//        }
+        if (wordLists.size() != 1) {
+            txt_hint.setText(wordLists.get(position).getHint());
+        }
 
         dialog.show();
 
@@ -248,7 +306,7 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
         Button btn_next_level = (Button) dialog.findViewById(R.id.btn_next_level);
         TextView txt_desc = (TextView) dialog.findViewById(R.id.txt_desc);
 
-        //txt_desc.setText(wordLists.get(position).getExplanation());
+        txt_desc.setText(wordLists.get(position).getExplanation());
 
 
         btn_next_level.setOnClickListener(new View.OnClickListener() {
@@ -259,19 +317,19 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
                 dialog.dismiss();
                 pinView.setText("");
                 pinView2.setText("");
-                //value.clear();
+                value.clear();
                 position++;
 
-                //int size = wordLists.size();
-                //if (position == size) {
-                    //submitwordapi();
-                //} else {
-                    //showpendingGame(wordLists.get(position).getLevel());
-                    //txt_level.setText("LEVEL" + " " + wordLists.get(position).getLevel());
+                int size = wordLists.size();
+                if (position == size) {
+                    submitwordapi();
+                } else {
+                    showpendingGame(wordLists.get(position).getLevel());
+                    txt_level.setText("LEVEL" + " " + wordLists.get(position).getLevel());
 
-                    //set_status = 0;
-                    //showword();
-               // }
+                    set_status = 0;
+                    showword();
+                }
 
 
             }
@@ -280,6 +338,57 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
         dialog.show();
     }
+
+    public void submitwordapi() {
+        custdialog.show("");
+
+        String[] units = final_time.split(" : "); //will break the string up into an array
+        int minutes = Integer.parseInt(units[0]); //first element
+        int seconds = Integer.parseInt(units[1]); //second element
+        int duration = 60 * minutes + seconds; //add up our values
+
+        GameTimeAuthModel model = new GameTimeAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setGame_time(String.valueOf(duration));
+
+
+        WebServiceModel.getRestApi().submitwordtime(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SuccessResponse>() {
+                    @Override
+                    public void onNext(SuccessResponse successResponse) {
+                        custdialog.dismiss("");
+                        String msg = successResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+
+                            Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        } else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        custdialog.dismiss("");
+                        finish();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 
     public void showpendingGame(String level) {
         dialog = new Dialog(context, R.style.tsta_game);
@@ -300,28 +409,28 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
     public void showword() {
 
-       // String[] parts = wordLists.get(position).getWord().split(" ");
+        String[] parts = wordLists.get(position).getWord().split(" ");
 
-        //multicharsize = parts.length;
+        multicharsize = parts.length;
 
         if (multicharsize == 1) {
-            //name = parts[0];
+            name = parts[0];
             name = name.replaceAll("-", "");
             name = name.replaceAll(" ", "");
 
             pinView.setItemCount(name.length());
             pinView2.setVisibility(View.GONE);
-            //showchar(name);
+            showchar(name);
 
         } else {
             pinView2.setVisibility(View.VISIBLE);
-            //name = parts[0];
-            //name2 = parts[1];
+            name = parts[0];
+            name2 = parts[1];
 
             name = name.replaceAll("-", "");
             name = name.replaceAll(" ", "");
 
-            //showchar(name);
+            showchar(name);
 
             name2 = name2.replaceAll("-", "");
             name2 = name2.replaceAll(" ", "");
@@ -362,14 +471,14 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
         for (int i = 0; i < length; i++) {
             letter = show_text.charAt(i);
-            //value.add(new AddChar(Character.toString(letter).toUpperCase(), false));
+            value.add(new AddChar(Character.toString(letter).toUpperCase(), false));
 
         }
 
-        //Collections.shuffle(value);
+        Collections.shuffle(value);
 
-        //selectAdapter = new SelectTextAdapter(context, value, this);
-        //recy_select_text.setAdapter(selectAdapter);
+        selectAdapter = new SelectTextAdapter(context, value, this);
+        recy_select_text.setAdapter(selectAdapter);
     }
 
     public void starttimer() {
@@ -382,7 +491,7 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
                     public void run() {
 
                         time++;
-                        //final_time = getTimerText();
+                        final_time = getTimerText();
                         show_timer.setText(final_time);
 
                     }
@@ -468,7 +577,7 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
                         Toast.makeText(context, "GOOD", Toast.LENGTH_SHORT).show();
 
-                        //value.clear();
+                        value.clear();
                         showchar(name2);
 
 

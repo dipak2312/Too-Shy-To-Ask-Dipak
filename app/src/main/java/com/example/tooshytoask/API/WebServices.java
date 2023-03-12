@@ -50,6 +50,8 @@ import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllEventResponse;
 import com.example.tooshytoask.Models.AllHighlightResponse;
+import com.example.tooshytoask.Models.GameTimeAuthModel;
+import com.example.tooshytoask.Models.LeaderboardResponse;
 import com.example.tooshytoask.Models.StoreHouse.AllStoreHouseResponse;
 import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
@@ -93,9 +95,11 @@ import com.example.tooshytoask.Models.StoreHouseRelatedResponse;
 import com.example.tooshytoask.Models.StoreHouseSinglePageResponse;
 import com.example.tooshytoask.Models.StoryLikeResponse;
 import com.example.tooshytoask.Models.StoryResponse;
+import com.example.tooshytoask.Models.SuccessResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserDetailResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
+import com.example.tooshytoask.Models.WordResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -303,6 +307,14 @@ public interface WebServices {
     @POST("api/relatedstorehouse")
     Observable<StoreHouseRelatedResponse> getStoreHouseRelated(@Body StoreHouseRelatedAuthModel model);
 
+    @GET("api/leaderboard")
+    Observable<LeaderboardResponse> getLeaderboard();
 
+    @GET("api/wordgame")
+    Observable<WordResponse> getword();
+
+    @Headers("Content-Type: application/json")
+    @POST("api/gamesubmit")
+    Observable<SuccessResponse> submitwordtime(@Body GameTimeAuthModel model);
 
 }
