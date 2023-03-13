@@ -13,6 +13,9 @@ public class singleblog {
     private String blog_like;
     private String blog_helpfull_yes;
     private String blog_helpfull_no;
+    private String blog_bookmarked;
+    private String blog_liked;
+    private String blog_readTime;
     ArrayList<comments>comments;
 
     public String getBlog_id() {
@@ -101,5 +104,29 @@ public class singleblog {
 
     public void setComments(ArrayList<com.example.tooshytoask.Models.comments> comments) {
         this.comments = comments;
+    }
+
+    public String getBlog_bookmarked() {
+        return blog_bookmarked;
+    }
+
+    public void setBlog_bookmarked(String blog_bookmarked) {
+        this.blog_bookmarked = blog_bookmarked;
+    }
+
+    public String getBlog_liked() {
+        return blog_liked;
+    }
+
+    public void setBlog_liked(String blog_liked) {
+        this.blog_liked = blog_liked;
+    }
+
+    public String getBlog_readTime() {
+        return blog_readTime;
+    }
+
+    public void setBlog_readTime(String blog_readTime) {
+        this.blog_readTime = blog_readTime;
     }
 }

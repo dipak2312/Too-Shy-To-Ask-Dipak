@@ -90,7 +90,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                        onclicklistener.onClickData(position, informationStorehouseList.getId());
 
 
-///informationStorehouseList.get(position).getId().toString()
                 }
 
                 }

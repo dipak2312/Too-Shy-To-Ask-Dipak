@@ -13,6 +13,8 @@ public class storehousedata {
     private String helpfull;
     private String shareUrl;
     private String Nothelpfull_cnt;
+    private String bookmarked;
+    private String liked;
 
     public String getArticle_name() {
         return article_name;
@@ -108,5 +110,21 @@ public class storehousedata {
 
     public void setHelpfull(String helpfull) {
         this.helpfull = helpfull;
+    }
+
+    public String getBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(String bookmarked) {
+        this.bookmarked = bookmarked;
+    }
+
+    public String getLiked() {
+        return liked;
+    }
+
+    public void setLiked(String liked) {
+        this.liked = liked;
     }
 }

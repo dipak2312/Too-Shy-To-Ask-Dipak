@@ -14,6 +14,7 @@ import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
 import com.example.tooshytoask.AuthModels.FAQContentAuthModel;
 import com.example.tooshytoask.AuthModels.FeedbackAuthModel;
+import com.example.tooshytoask.AuthModels.GameScoreAuthModel;
 import com.example.tooshytoask.AuthModels.HealthCateModel;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.HelpCategoryAuthModel;
@@ -50,6 +51,9 @@ import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllEventResponse;
 import com.example.tooshytoask.Models.AllHighlightResponse;
+import com.example.tooshytoask.AuthModels.BookmarkAuthModel;
+import com.example.tooshytoask.Models.BookmarkResponse;
+import com.example.tooshytoask.Models.GameScoreResponse;
 import com.example.tooshytoask.Models.GameTimeAuthModel;
 import com.example.tooshytoask.Models.LeaderboardResponse;
 import com.example.tooshytoask.Models.StoreHouse.AllStoreHouseResponse;
@@ -184,10 +188,6 @@ public interface WebServices {
     Observable<AllBlogResponse> getAllBlogs(@Body AllBlogAuthModel model);
 
     @Headers("Content-Type: application/json")
-    @POST("api/insighthighlights")
-    Observable<AllHighlightResponse> getHighlightBlogs(@Body AllHighlightAuthModel model);
-
-    @Headers("Content-Type: application/json")
     @POST("api/insightevents")
     Observable<AllEventResponse> getEventBlogs(@Body AllEventAuthModel model);
 
@@ -316,5 +316,13 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/gamesubmit")
     Observable<SuccessResponse> submitwordtime(@Body GameTimeAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/gamescore")
+    Observable<GameScoreResponse> gamescore(@Body GameScoreAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/articlebookmarked")
+    Observable<BookmarkResponse> getBookmark(@Body BookmarkAuthModel model);
 
 }

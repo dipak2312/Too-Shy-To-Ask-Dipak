@@ -11,10 +11,20 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.AuthModels.GameScoreAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.GameScoreResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class GameMainPageActivity extends AppCompatActivity implements View.OnClickListener {
     RelativeLayout rel_leader_board,rel_help,rel_back;
@@ -48,6 +58,54 @@ public class GameMainPageActivity extends AppCompatActivity implements View.OnCl
 
         btn_play_now=(Button)findViewById(R.id.btn_play_now);
         btn_play_now.setOnClickListener(this);
+
+        gameScore();
+    }
+
+    public void gameScore()
+    {
+
+        GameScoreAuthModel model=new GameScoreAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        dialog.show("");
+
+        WebServiceModel.getRestApi().gamescore(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<GameScoreResponse>() {
+                    @Override
+                    public void onNext(GameScoreResponse scoreresponse) {
+                        dialog.dismiss("");
+                        String msg = scoreresponse.getMsg();
+
+
+                        if (msg.equals("success")) {
+
+                            txt_best_score.setText(scoreresponse.getGametime());
+                            txt_overall_score.setText(scoreresponse.getUsergametime());
+
+
+                        } else {
+                            //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
     @Override

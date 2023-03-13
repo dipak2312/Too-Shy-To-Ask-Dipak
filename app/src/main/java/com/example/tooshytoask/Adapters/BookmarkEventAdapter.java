@@ -1,5 +1,8 @@
 package com.example.tooshytoask.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Models.events;
 import com.example.tooshytoask.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.util.ArrayList;
+
 public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventAdapter.ViewHolder> {
+    Context context;
+    ArrayList<com.example.tooshytoask.Models.events> events;
+
+    public BookmarkEventAdapter(Context context, ArrayList<com.example.tooshytoask.Models.events> events) {
+        this.context = context;
+        this.events = events;
+    }
 
     @NonNull
     @Override
@@ -24,12 +39,13 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventAdap
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkEventAdapter.ViewHolder holder, int position) {
-
+        Glide.with(context).load(events.get(position).getBookmark_imgvid()).into(holder.blog_img);
+        holder.blog_title.setText(events.get(position).getBookmark_posttitle());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return events.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,8 +59,21 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventAdap
             card_view = itemView.findViewById(R.id.card_view);
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
-            save_img.setVisibility(View.GONE);
             blog_title = itemView.findViewById(R.id.blog_title);
+
+            blog_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("blog_id",events.get(getAdapterPosition()).getBookmark_postid());
+                    Intent intent = new Intent(context, DetailBlogActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.InformationStoreHouse;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String article_id, next_id ="", previous_id ="", type = "storehouse";
+    String article_id, next_id ="", previous_id ="", type = "storehouse", islike, isBookmark;
     TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description, helpful;
     ImageView blog_img, like_courses, save_courses, share_courses,like_count_img;
     LinearLayout previous, next, helpful_yes, helpful_no, related_blog_lay;
@@ -59,6 +60,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
     ArrayList<com.example.tooshytoask.Models.relatedstorehouse>relatedstorehouse;
     boolean like = true;
     RecyclerView recy_storehouse;
+    NestedScrollView storehouse_scroll_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        storehouse_scroll_view = findViewById(R.id.storehouse_scroll_view);
         related_blog_lay = findViewById(R.id.related_blog_lay);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
@@ -107,6 +110,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
 
     public void getStoreHouseSinglePage(){
         dialog.show("");
+        storehouse_scroll_view.setVisibility(View.GONE);
 
         StoreHouseSinglePageAuthModel model = new StoreHouseSinglePageAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -120,6 +124,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                     public void onNext(StoreHouseSinglePageResponse storeHouseSinglePageResponse) {
                         String msg = storeHouseSinglePageResponse.getMsg();
                         dialog.dismiss("");
+                        storehouse_scroll_view.setVisibility(View.VISIBLE);
                         if (msg.equals("success")){
                             storehousedata = storeHouseSinglePageResponse.getStorehousedata();
 
@@ -134,6 +139,11 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                             no_count.setText(Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
                             next_id = storehousedata.get(0).getNextarticleId();
                             previous_id = storehousedata.get(0).getPreviousarticleId();
+
+                            islike = storehousedata.get(0).getLiked();
+                            isBookmark = storehousedata.get(0).getBookmarked();
+
+                            setIslike();
 
                             if (next_id.equals(next_id)) {
                                 next.setVisibility(View.VISIBLE);
@@ -150,6 +160,64 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                             if (previous_id.equals("0")){
                                 previous.setVisibility(View.GONE);
                             }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    public void setIslike(){
+
+        if (islike.equals("1")) {
+            like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
+            like = false;
+
+        } else {
+            like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
+            like = true;
+        }
+
+        if (isBookmark.equals("1")) {
+            save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.filled));
+            like = false;
+
+        } else {
+            save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved));
+            like = true;
+        }
+    }
+
+    public void getSinglePage(){
+
+        StoreHouseSinglePageAuthModel model = new StoreHouseSinglePageAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setArticle_id(article_id);
+
+        WebServiceModel.getRestApi().getStoreHouseSinglePage(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<StoreHouseSinglePageResponse>() {
+                    @Override
+                    public void onNext(StoreHouseSinglePageResponse storeHouseSinglePageResponse) {
+                        String msg = storeHouseSinglePageResponse.getMsg();
+                        if (msg.equals("success")){
+                            storehousedata = storeHouseSinglePageResponse.getStorehousedata();
+
+                            like_count.setText(Html.fromHtml(storehousedata.get(0).getLikeCnt()));
+                            yes_count.setText(Html.fromHtml(storehousedata.get(0).getHelpfull()));
+                            no_count.setText(Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
+
 
                         }
 
@@ -243,7 +311,6 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
     }
 
     public void getStoreHouseRelated(){
-        //dialog.show("");
 
         StoreHouseRelatedAuthModel model = new StoreHouseRelatedAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -309,23 +376,23 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
             if (like) {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
                 getStoreHouseLike("like");
-                getStoreHouseSinglePage();
+                getSinglePage();
                 like = false;
             } else {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
                 getStoreHouseLike("unlike");
-                getStoreHouseSinglePage();
+                getSinglePage();
                 like = true;
             }
 
         }
         else if (id  == helpful_yes.getId()){
             getStoreHouseLike("helpfull");
-            getStoreHouseSinglePage();
+            getSinglePage();
         }
         else if (id  == helpful_no.getId()){
             getStoreHouseLike("nothelpfull");
-            getStoreHouseSinglePage();
+            getSinglePage();
         }
         else if (id  == share_courses.getId()){
             sharevalue();

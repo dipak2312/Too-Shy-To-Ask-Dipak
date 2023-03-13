@@ -2,6 +2,7 @@ package com.example.tooshytoask.Activity.Blogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,9 +48,10 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
     RelativeLayout rel_back;
     ImageView blog_img, like_courses, save_courses, share_courses, like_count_img;
     TextView txt_title, like_count, duration_time, blog_headline, blog_description;
-    String event_id, type = "event", helpful ="", commentId ="", next_id ="", previous_id ="";
+    String event_id, type = "event", helpful ="", commentId ="", next_id ="", previous_id ="", islike, isBookmark;
     RecyclerView recy_blogs;
     LinearLayout previous, next, related_blog_lay;
+    NestedScrollView event_scroll_view;
     boolean like = true;
     RelatedBlogAdapter adapter;
     ArrayList<com.example.tooshytoask.Models.relatedblogs> relatedblogs;
@@ -64,6 +66,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        event_scroll_view = findViewById(R.id.event_scroll_view);
         related_blog_lay = findViewById(R.id.related_blog_lay);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
@@ -95,7 +98,6 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void blogLike(String type){
-        //dialog.show("");
 
         BlogLikeAuthModel model = new BlogLikeAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -110,7 +112,6 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onNext(BlogLikeResponse blogLikeResponse) {
                         String msg = blogLikeResponse.getMsg();
-                        dialog.dismiss("");
 
                         if (msg.equals("Blog Liked")){
 
@@ -132,7 +133,6 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void getBookmarkBlogs(String action) {
-        //dialog.show("");
 
         BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -172,6 +172,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
 
     public void getSingleBlog() {
         dialog.show("");
+        event_scroll_view.setVisibility(View.GONE);
 
         SingleBlogAuthModel model = new SingleBlogAuthModel();
         model.setPost_id(event_id);
@@ -196,6 +197,11 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
                             like_count.setText(Html.fromHtml(singleblog.get(0).getBlog_like()));
                             next_id = singleBlogResponse.getNextblog();
                             previous_id = singleBlogResponse.getPreviousblog();
+
+                            islike = singleblog.get(0).getBlog_liked();
+                            isBookmark = singleblog.get(0).getBlog_bookmarked();
+
+                            setIslike();
 
                             if (next_id.equals(next_id)) {
                                 next.setVisibility(View.VISIBLE);
@@ -226,6 +232,63 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
 
                         }
                         dialog.dismiss("");
+                        event_scroll_view.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void setIslike(){
+
+        if (islike.equals("1")) {
+            like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
+            like = false;
+
+        } else {
+            like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
+            like = true;
+        }
+
+        if (isBookmark.equals("1")) {
+            save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.filled));
+            like = false;
+
+        } else {
+            save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved));
+            like = true;
+        }
+    }
+
+    public void singleBlog() {
+
+        SingleBlogAuthModel model = new SingleBlogAuthModel();
+        model.setPost_id(event_id);
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getSingleBlog(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SingleBlogResponse>() {
+                    @Override
+                    public void onNext(SingleBlogResponse singleBlogResponse) {
+                        String msg = singleBlogResponse.getMsg();
+                        if (msg.equals("success")) {
+                            singleblog = singleBlogResponse.getSingleblog();
+
+                            like_count.setText(Html.fromHtml(singleblog.get(0).getBlog_like()));
+
+
+                        }
                     }
 
                     @Override
@@ -262,13 +325,13 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
                 blogLike("like");
                 dialog.dismiss("");
-                getSingleBlog();
+                singleBlog();
                 like = false;
             } else {
                 like_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
                 blogLike("like");
                 dialog.dismiss("");
-                getSingleBlog();
+                singleBlog();
                 like = true;
             }
         }

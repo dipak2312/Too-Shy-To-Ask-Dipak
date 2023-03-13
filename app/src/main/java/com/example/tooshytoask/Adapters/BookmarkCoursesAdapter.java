@@ -1,5 +1,6 @@
 package com.example.tooshytoask.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Models.courses;
 import com.example.tooshytoask.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.util.ArrayList;
+
 public class BookmarkCoursesAdapter extends RecyclerView.Adapter<BookmarkCoursesAdapter.ViewHolder> {
+    Context context;
+    ArrayList<com.example.tooshytoask.Models.courses> courses;
+
+    public BookmarkCoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.courses> courses) {
+        this.context = context;
+        this.courses = courses;
+    }
+
     @NonNull
     @Override
     public BookmarkCoursesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -23,12 +36,15 @@ public class BookmarkCoursesAdapter extends RecyclerView.Adapter<BookmarkCourses
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkCoursesAdapter.ViewHolder holder, int position) {
-
+        Glide.with(context).load(courses.get(position).getBookmark_imgvid()).into(holder.blog_img);
+        holder.courses_title.setText(courses.get(position).getBookmark_posttitle());
+       // holder.course_time.setText(courses.get(position).get());
+       // holder.lessons.setText(courses.get(position).getTotal_lesson());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return courses.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

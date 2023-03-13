@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -83,7 +84,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     RelativeLayout insight_lay;
     NestedScrollView insight_scroll;
     OnBookmarkClicked onBookmarkClicked;
-    String blog_id = "", type = "", actions = "";
+    String blog_id = "", type = "", actions = "", isBookmark;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,6 +143,15 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
         recy_video_gallery = view.findViewById(R.id.recy_video_gallery);
         LinearLayoutManager linearLayoutManager6 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_video_gallery.setLayoutManager(linearLayoutManager6);
+
+        /*if (isBookmark.equals("0")) {
+            img_like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.parent_like_inactive));
+            like = true;
+
+        } else {
+            img_like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.parent_like_active));
+            like = false;
+        }*/
 
         getInsightScreenResponse();
 
@@ -218,6 +228,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                             new_blogs = insightScreenResponse.getNew_blogs();
                             courses = insightScreenResponse.getCourses();
                             video_gallery = insightScreenResponse.getVideo_gallery();
+
+                            isBookmark = blogs.get(0).getBlog_bookmarked();
 
                             if(storeHouse.size() !=0) {
 

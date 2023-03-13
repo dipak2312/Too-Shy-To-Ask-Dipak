@@ -8,6 +8,8 @@ public class relatedblogs {
     private String blog_link;
     private String blog_category;
     private String blog_img;
+    private String blog_bookmarked;
+    private String blog_liked;
 
     public String getBlog_id() {
         return blog_id;
@@ -63,5 +65,21 @@ public class relatedblogs {
 
     public void setBlog_img(String blog_img) {
         this.blog_img = blog_img;
+    }
+
+    public String getBlog_bookmarked() {
+        return blog_bookmarked;
+    }
+
+    public void setBlog_bookmarked(String blog_bookmarked) {
+        this.blog_bookmarked = blog_bookmarked;
+    }
+
+    public String getBlog_liked() {
+        return blog_liked;
+    }
+
+    public void setBlog_liked(String blog_liked) {
+        this.blog_liked = blog_liked;
     }
 }

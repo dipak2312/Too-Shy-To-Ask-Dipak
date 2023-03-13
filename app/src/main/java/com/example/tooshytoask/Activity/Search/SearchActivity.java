@@ -317,6 +317,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         SearchAuthModel model = new SearchAuthModel();
         model.setSearch_key(searchresult);
+        model.setUser_id(spManager.getUserId());
 
         WebServiceModel.getRestApi().getSearch(model)
                 .subscribeOn(Schedulers.io())

@@ -146,6 +146,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         viewPager2.setOnClickListener(this);
         mBarLayout = view.findViewById(R.id.indicator_layout);
 
+
+        FirebaseMessaging.getInstance().subscribeToTopic("welcome")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Done";
+                        if (!task.isSuccessful()) {
+                            msg = "Failed";
+
+                        }
+
+
+                    }
+                });
+
+
         getHomePageResponse();
         getUserData();
 
