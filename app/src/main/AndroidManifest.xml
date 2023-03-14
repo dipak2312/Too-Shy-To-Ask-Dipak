@@ -14,9 +14,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/tsta"
+        android:icon="@mipmap/tsta_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/tsta"
+        android:roundIcon="@mipmap/tsta_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
@@ -218,7 +218,7 @@
 
         <service
             android:name=".Activity.Notification.MessagingService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

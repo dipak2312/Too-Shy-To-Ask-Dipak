@@ -311,10 +311,9 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onBookmarkButtonClick(int position, String Blog_id) {
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
         blog_id = Blog_id;
-        ///actions = action;
-        getBookmarkBlogs("save");
-        getBookmarkBlogs("remove");
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

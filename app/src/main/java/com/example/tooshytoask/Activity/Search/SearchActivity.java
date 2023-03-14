@@ -28,8 +28,10 @@ import com.example.tooshytoask.Adapters.CoursesSearchAdapter;
 import com.example.tooshytoask.Adapters.EventSearchAdapter;
 import com.example.tooshytoask.Adapters.InfoStoreHouseSearchAdapter;
 import com.example.tooshytoask.Adapters.VideoGallerySearchAdapter;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.SearchAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.SearchResponse;
 import com.example.tooshytoask.Models.blog_search;
 import com.example.tooshytoask.Models.course_search;
@@ -38,6 +40,7 @@ import com.example.tooshytoask.Models.storehouse_search;
 import com.example.tooshytoask.Models.video_search;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -46,7 +49,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -74,6 +77,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<blog_search>Allblog_search;
     ArrayList<event_search>event_search;
     ArrayList<event_search>Allevent_search;
+    String blog_id = "", type = "", actions = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -491,7 +495,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 courses.setVisibility(View.GONE);
             }
             else {
-                coursesSearchAdapter = new CoursesSearchAdapter(context, Allcourse_search);
+                coursesSearchAdapter = new CoursesSearchAdapter(context, Allcourse_search, SearchActivity.this, type = "courses");
                 recy_courses_search.setAdapter(coursesSearchAdapter);
                 courses.setVisibility(View.VISIBLE);
             }
@@ -513,13 +517,52 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 video.setVisibility(View.GONE);
             }
             else {
-                videoGallerySearchAdapter = new VideoGallerySearchAdapter(context, Allvideo_search);
+                videoGallerySearchAdapter = new VideoGallerySearchAdapter(context, Allvideo_search, SearchActivity.this, type ="video");
                 recy_video_search.setAdapter(videoGallerySearchAdapter);
                 video.setVisibility(View.VISIBLE);
             }
         }
     }
 
+    public void getBookmarkBlogs(String action){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
     @Override
     public void onClick(View view) {
         int id=view.getId();
@@ -562,5 +605,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         }
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
+        blog_id = Blog_id;
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

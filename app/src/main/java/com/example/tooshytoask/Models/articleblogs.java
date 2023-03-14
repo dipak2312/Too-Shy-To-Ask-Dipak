@@ -9,6 +9,7 @@ public class articleblogs {
     private String blog_category;
     private String blog_img;
     private String blog_category_name;
+    private String blog_bookmarked;
 
     public String getBlog_id() {
         return blog_id;
@@ -71,5 +72,13 @@ public class articleblogs {
 
     public void setBlog_category_name(String blog_category_name) {
         this.blog_category_name = blog_category_name;
+    }
+
+    public String getBlog_bookmarked() {
+        return blog_bookmarked;
+    }
+
+    public void setBlog_bookmarked(String blog_bookmarked) {
+        this.blog_bookmarked = blog_bookmarked;
     }
 }

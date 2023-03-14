@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +17,11 @@ import com.example.tooshytoask.Fragment.InsightsFragment;
 import com.example.tooshytoask.Fragment.Quiz.QuizFragment;
 import com.example.tooshytoask.Fragment.SettingsFragment;
 import com.example.tooshytoask.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottom_view;
@@ -28,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setupNavigationView();
+
+
     }
 
     /*public void setupNavigationView() {

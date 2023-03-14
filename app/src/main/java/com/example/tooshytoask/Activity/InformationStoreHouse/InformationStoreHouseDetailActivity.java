@@ -39,6 +39,7 @@ import com.example.tooshytoask.Models.relatedstorehouse;
 import com.example.tooshytoask.Models.storehousedata;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class InformationStoreHouseDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class InformationStoreHouseDetailActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -331,7 +332,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
 
                             if (relatedstorehouse.size() != 0) {
                                 related_blog_lay.setVisibility(View.VISIBLE);
-                                adapter = new RelatedStoreHouseAdapter(context, relatedstorehouse);
+                                adapter = new RelatedStoreHouseAdapter(context, relatedstorehouse, InformationStoreHouseDetailActivity.this);
                                 recy_storehouse.setAdapter(adapter);
                             }
 
@@ -429,5 +430,10 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Too Shy Too Ask App");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, storehousedata.get(0).getArticle_name() + "\n\n" + storehousedata.get(0).getShareUrl());
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
+
     }
 }

@@ -28,7 +28,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
     ArrayList<video_gallery>video_gallery;
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
-    String type = "video";
+    String type;
     String link ="";
 
     public VideoGalleryAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.video_gallery> video_gallery, OnBookmarkClicked onBookmarkClicked, String type) {
@@ -48,20 +48,30 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
 
     @Override
     public void onBindViewHolder(@NonNull VideoGalleryAdapter.ViewHolder holder, int position) {
-        //Glide.with(context).load(video_gallery.get(position).get()).into(holder.blog_img);
+        Glide.with(context).load(video_gallery.get(position).getCoverimage()).into(holder.blog_img);
         holder.blog_title.setText(video_gallery.get(position).getTitle());
         link = video_gallery.get(position).getLink();
+
+        if (video_gallery.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onBookmarkClicked.onBookmarkButtonClick(position,video_gallery.get(position).getId());
+                    onBookmarkClicked.onBookmarkButtonClick(position,video_gallery.get(position).getId(), "save");
                     like = false;
 
                 } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onBookmarkClicked.onBookmarkButtonClick(position,video_gallery.get(position).getId());
+                    onBookmarkClicked.onBookmarkButtonClick(position,video_gallery.get(position).getId(), "remove");
                     like = true;
 
                 }

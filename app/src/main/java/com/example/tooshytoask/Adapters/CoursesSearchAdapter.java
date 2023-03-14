@@ -8,22 +8,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.InsightScreen.courses;
 import com.example.tooshytoask.Models.course_search;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class CoursesSearchAdapter extends RecyclerView.Adapter<CoursesSearchAdapter.ViewHolder>{
     Context context;
     ArrayList<course_search>Allcourse_search;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like;
+    String type ;
 
-    public CoursesSearchAdapter(Context context, ArrayList<course_search> allcourse_search) {
+    public CoursesSearchAdapter(Context context, ArrayList<course_search> allcourse_search, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
         Allcourse_search = allcourse_search;
+        this.onBookmarkClicked = onBookmarkClicked;
+        this.type = type;
     }
 
 
@@ -40,6 +47,33 @@ public class CoursesSearchAdapter extends RecyclerView.Adapter<CoursesSearchAdap
         holder.courses_title.setText(Allcourse_search.get(position).getTitle());
         holder.course_time.setText(Allcourse_search.get(position).getTiming());
         holder.lessons.setText(Allcourse_search.get(position).getTotal_lesson());
+
+        if (Allcourse_search.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,Allcourse_search.get(position).getId(), "save");
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,Allcourse_search.get(position).getId(), "remove");
+                    like = true;
+
+                }
+
+            }
+        });
 
     }
 

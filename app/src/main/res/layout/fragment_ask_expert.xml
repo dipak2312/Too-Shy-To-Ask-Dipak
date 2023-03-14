@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Fragment.AskExpertFragment">
 
     <RelativeLayout
@@ -40,12 +41,22 @@
 
     </RelativeLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_15">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20">
+
+
     <LinearLayout
         android:id="@+id/expert_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rel_top_bar"
-        android:layout_marginTop="@dimen/margin_15"
         android:orientation="vertical">
 
         <LinearLayout
@@ -66,6 +77,7 @@
             android:fontFamily="@font/worksansmedium"
             android:textSize="@dimen/text_size12"
             android:textColor="@color/purple"/>
+
 
             <TextView
                 android:id="@+id/hi_msg"
@@ -132,18 +144,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <!--<TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/faq_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/issues_recy"
             android:padding="@dimen/padding_10"
+            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_5"
+            android:background="@drawable/expert_issues_background"
             android:text="My query is not listed"
-            android:visibility="gone"
-            android:layout_marginStart="@dimen/margin_10"
             android:fontFamily="@font/worksansmedium"
-            android:textSize="@dimen/text_size15"
-            android:textColor="@color/purple"/>-->
+            android:textSize="@dimen/text_size14"
+            android:textColor="@color/purple"/>
 
     </RelativeLayout>
 
@@ -152,7 +165,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
         android:layout_below="@id/rel_issues_recy"
         android:background="@drawable/expert_background"
         android:layout_marginTop="@dimen/margin_20"
@@ -191,7 +203,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
         android:layout_below="@id/faq_lin_lay"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginStart="@dimen/margin_20"
@@ -256,7 +267,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rel_lay_id"
         android:background="@drawable/expert_issues_background">
 
         <TextView
@@ -275,5 +285,65 @@
     </RelativeLayout>
 
     </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/yes_no_reply_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/yes_no_lay"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/expert_reply_que_background"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginStart="@dimen/margin_80"
+                android:layout_marginEnd="@dimen/margin_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_10"
+                    android:text="Yes"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/yes_no_reply_msg"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_80"
+                android:background="@drawable/expert_background">
+
+                <TextView
+                    android:id="@+id/title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TSTA"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:fontFamily="@font/worksansmedium"
+                    android:textSize="@dimen/text_size12"
+                    android:textColor="@color/purple"/>
+
+
+                <TextView
+                    android:id="@+id/thank_you_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thank you for reaching out to TSTA Support."
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:textSize="@dimen/text_size14"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

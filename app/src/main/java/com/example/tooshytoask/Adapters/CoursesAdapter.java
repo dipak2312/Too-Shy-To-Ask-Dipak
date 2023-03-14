@@ -49,17 +49,26 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         holder.course_time.setText(courses.get(position).getTiming());
         holder.lessons.setText(courses.get(position).getTotal_lesson());
 
+        if (courses.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onBookmarkClicked.onBookmarkButtonClick(position,courses.get(position).getId());
+                    onBookmarkClicked.onBookmarkButtonClick(position,courses.get(position).getId(), "save");
                     like = false;
 
                 } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onBookmarkClicked.onBookmarkButtonClick(position,courses.get(position).getId());
+                    onBookmarkClicked.onBookmarkButtonClick(position,courses.get(position).getId(), "remove");
                     like = true;
 
                 }

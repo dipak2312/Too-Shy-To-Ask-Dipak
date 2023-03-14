@@ -17,6 +17,7 @@ import com.example.tooshytoask.Adapters.ManageNotificationAdapter;
 import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationListUpdateAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Interface.onManageNotification;
 import com.example.tooshytoask.Models.ManageNotificationListUpdateResponse;
 import com.example.tooshytoask.Models.ManageNotificationResponse;
 import com.example.tooshytoask.Models.dataNotification;
@@ -30,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class ManageNotificationActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner{
+public class ManageNotificationActivity extends AppCompatActivity implements View.OnClickListener, onManageNotification{
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -38,7 +39,7 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
     RecyclerView recy_manage_notification;
     ManageNotificationAdapter adapter;
     ArrayList<dataNotification> dataNotification;
-    OnClickListner onclicklistener;
+    onManageNotification onManageNotification;
     String module_ids = "";
     ArrayList<String>module_id=new ArrayList<>();
 
@@ -92,13 +93,13 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
 
                             dataNotification = manageNotificationResponse.getDataNotification();
 
-                            for(int i=0;i<dataNotification.size();i++)
-                            {
-                                dataNotification.get(i).status=true;
-                            }
-
                             if (dataNotification != null){
                                 CallAdapter();
+                            }
+
+                            for(int i=0;i<dataNotification.size();i++)
+                            {
+
                             }
 
                         }
@@ -118,7 +119,7 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
     }
 
     public void CallAdapter(){
-        adapter = new ManageNotificationAdapter(context, dataNotification, onclicklistener);
+        adapter = new ManageNotificationAdapter(context, dataNotification, this);
         recy_manage_notification.setAdapter(adapter);
     }
 
@@ -127,7 +128,6 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
     }
 
     public void getManageNotificationUpdate(){
-        dialog.show("");
 
         ManageNotificationListUpdateAuthModel model = new ManageNotificationListUpdateAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -150,7 +150,6 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                         }
-                        dialog.dismiss("");
                     }
 
                     @Override
@@ -164,19 +163,39 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
                     }
                 });
     }
-
     @Override
-    public void onClickData(int position, String id) {
+    public void onManageNotificationClick(int position, String id) {
         module_ids = id;
 
         if(dataNotification.get(position).status)
         {
             module_id.add(module_ids);
-        }else
+
+        }
+        else
         {
             module_id.remove(module_ids);
+
         }
 
-        getManageNotificationUpdate();
+        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+
+        for(int i=0;i<dataNotification.size();i++)
+        {
+            myvalue.add(dataNotification.get(i).getStatus());
+        }
+
+        boolean ans = myvalue.contains(true);
+
+        if(ans)
+        {
+
+            getManageNotificationUpdate();
+
+        }else
+        {
+
+        }
+
     }
 }

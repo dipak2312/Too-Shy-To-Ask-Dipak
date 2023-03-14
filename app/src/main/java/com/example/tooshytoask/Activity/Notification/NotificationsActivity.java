@@ -45,7 +45,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    RelativeLayout rel_back;
+    RelativeLayout rel_back, notification_recy_lay;
     Toolbar toolbar;
     ImageView clear_all_notification, settings;
     RecyclerView rec_show_notification;
@@ -62,6 +62,8 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         context = NotificationsActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
+
+        notification_recy_lay = findViewById(R.id.notification_recy_lay);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         settings = findViewById(R.id.settings);
@@ -191,8 +193,13 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
                             notificationLists = notificationResponse.getNotificationList();
 
                             if (notificationLists.size() != 0){
-                                adapter = new NotificationAdapter(context, notificationLists, ClearNotification);
+                                notification_recy_lay.setVisibility(View.VISIBLE);
+                                adapter = new NotificationAdapter(context, notificationLists, NotificationsActivity.this);
                                 rec_show_notification.setAdapter(adapter);
+                            }
+
+                            if (notificationLists.size() == 0){
+                                notification_recy_lay.setVisibility(View.GONE);
                             }
                         }
 
@@ -274,6 +281,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(View view) {
                 SingleClearNotification();
+                getNotification();
                 Toast.makeText(getApplicationContext(),"Clear Notification",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
 

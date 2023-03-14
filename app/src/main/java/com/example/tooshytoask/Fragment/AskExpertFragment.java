@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.SpannableString;
@@ -20,11 +21,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Expert.ExpertActivity;
 import com.example.tooshytoask.Activity.FAQ.FAQActivity;
+import com.example.tooshytoask.Adapters.ExpertIssuesAdapter;
+import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.BlogCategoryResponse;
+import com.example.tooshytoask.Models.insightblogcategories;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+
+import java.util.ArrayList;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class AskExpertFragment extends Fragment implements View.OnClickListener{
     Context context;
@@ -32,9 +44,11 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
     CustomProgressDialog dialog;
     RecyclerView issues_recy;
     ImageView expert_img;
-    TextView faq_msg, yes_txt, no_txt;
+    TextView faq_msg, yes_txt, no_txt, faq_text, hi_msg;
     LinearLayout faq_lin_lay, helpful_lin_lay, yes_no_lay;
     String yes_no ="";
+    ArrayList<insightblogcategories> insightblogcategories;
+    ExpertIssuesAdapter expertIssuesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,11 +67,21 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         yes_txt.setOnClickListener(this);
         no_txt = view.findViewById(R.id.no_txt);
         no_txt.setOnClickListener(this);
-        issues_recy = view.findViewById(R.id.issues_recy);
         expert_img = view.findViewById(R.id.expert_img);
         expert_img.setOnClickListener(this);
+        faq_text = view.findViewById(R.id.faq_text);
+        faq_text.setOnClickListener(this);
         faq_msg = view.findViewById(R.id.faq_msg);
         faq_msg.setOnClickListener(this);
+
+        hi_msg = view.findViewById(R.id.hi_msg);
+        hi_msg.setText("Hi "+ spManager.getFirstName() +","+" Welcome to TSTA Chat Support");
+
+        issues_recy = view.findViewById(R.id.issues_recy);
+        LinearLayoutManager lm = new LinearLayoutManager(context);
+        lm.setOrientation(RecyclerView.VERTICAL);
+        issues_recy.setLayoutManager(lm);
+
         SpannableString ss = new SpannableString(getString(R.string.please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition));
 
         ClickableSpan clickableSpan = new ClickableSpan() {
@@ -79,7 +103,43 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         faq_msg.setText(ss);
         faq_msg.setMovementMethod(LinkMovementMethod.getInstance());
 
+        getBlogCategory();
         return view;
+    }
+
+    public void getBlogCategory() {
+        dialog.show("");
+
+        BlogCategoryAuthModel model = new BlogCategoryAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getBlogCategory(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BlogCategoryResponse>() {
+                    @Override
+                    public void onNext(BlogCategoryResponse blogCategoryResponse) {
+                        String msg = blogCategoryResponse.getMsg();
+
+                        if (msg.equals("success")) {
+                            insightblogcategories = blogCategoryResponse.getInsightblogcategories();
+
+                            expertIssuesAdapter = new ExpertIssuesAdapter(context, insightblogcategories);
+                            issues_recy.setAdapter(expertIssuesAdapter);
+                        }
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     @Override
@@ -97,6 +157,12 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         }
         else if (id == no_txt.getId()){
             yes_no = "No";
+        }
+        else if (id == faq_text.getId()){
+            Intent intent = new Intent(context, FAQActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
     }

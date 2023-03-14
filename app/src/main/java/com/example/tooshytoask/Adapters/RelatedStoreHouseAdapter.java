@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,16 +19,20 @@ import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStoreHo
 import com.example.tooshytoask.Models.relatedblogs;
 import com.example.tooshytoask.Models.relatedstorehouse;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class RelatedStoreHouseAdapter extends RecyclerView.Adapter<RelatedStoreHouseAdapter.ViewHolder> {
     Context context;
     ArrayList<com.example.tooshytoask.Models.relatedstorehouse>relatedstorehouse;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
 
-    public RelatedStoreHouseAdapter(Context context, ArrayList<com.example.tooshytoask.Models.relatedstorehouse> relatedstorehouse) {
+    public RelatedStoreHouseAdapter(Context context, ArrayList<com.example.tooshytoask.Models.relatedstorehouse> relatedstorehouse, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         this.relatedstorehouse = relatedstorehouse;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
 
 
@@ -42,6 +47,33 @@ public class RelatedStoreHouseAdapter extends RecyclerView.Adapter<RelatedStoreH
     public void onBindViewHolder(@NonNull RelatedStoreHouseAdapter.ViewHolder holder, int position) {
         holder.blog_title.setText(relatedstorehouse.get(position).getArticle_name());
         Glide.with(context).load(relatedstorehouse.get(position).getArticle_image()).into(holder.blog_img);
+
+        if (relatedstorehouse.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,relatedstorehouse.get(position).getArticle_id(), "save");
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,relatedstorehouse.get(position).getArticle_id(), "remove");
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override

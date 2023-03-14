@@ -8,6 +8,7 @@ public class events {
     private String event_link;
     private String event_category;
     private String blog_img;
+    private String blog_bookmarked;
 
     public String getEvent_id() {
         return event_id;
@@ -63,5 +64,13 @@ public class events {
 
     public void setBlog_img(String blog_img) {
         this.blog_img = blog_img;
+    }
+
+    public String getBlog_bookmarked() {
+        return blog_bookmarked;
+    }
+
+    public void setBlog_bookmarked(String blog_bookmarked) {
+        this.blog_bookmarked = blog_bookmarked;
     }
 }

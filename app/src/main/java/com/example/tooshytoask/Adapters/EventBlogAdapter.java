@@ -49,17 +49,26 @@ public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.View
         holder.blog_title.setText(events.get(position).getEvent_title());
         Glide.with(context).load(events.get(position).getBlog_img()).into(holder.blog_img);
 
+        if (events.get(position).getBlog_bookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onBookmarkClicked.onBookmarkButtonClick(position,events.get(position).getEvent_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,events.get(position).getEvent_id(), "save");
                     like = false;
 
                 } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onBookmarkClicked.onBookmarkButtonClick(position,events.get(position).getEvent_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,events.get(position).getEvent_id(), "remove");
                     like = true;
 
                 }

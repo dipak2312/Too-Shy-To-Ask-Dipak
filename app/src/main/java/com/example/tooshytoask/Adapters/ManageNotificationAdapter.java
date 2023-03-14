@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tooshytoask.Interface.onManageNotification;
 import com.example.tooshytoask.Models.dataNotification;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -21,12 +23,13 @@ import java.util.ArrayList;
 public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotificationAdapter.ViewHolder> {
     Context context;
     ArrayList<dataNotification> dataNotification;
-    OnClickListner onclicklistener;
+    onManageNotification onManageNotification;
+    boolean button = true;
 
-    public ManageNotificationAdapter(Context context, ArrayList<com.example.tooshytoask.Models.dataNotification> dataNotification, OnClickListner onclicklistener) {
+    public ManageNotificationAdapter(Context context, ArrayList<com.example.tooshytoask.Models.dataNotification> dataNotification, com.example.tooshytoask.Interface.onManageNotification onManageNotification) {
         this.context = context;
         this.dataNotification = dataNotification;
-        this.onclicklistener = onclicklistener;
+        this.onManageNotification = onManageNotification;
     }
 
 
@@ -67,24 +70,28 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
 
             if (dataNotification.status){
                 on_off_status.setText(R.string.on);
-            }else {
-                on_off_status.setText(R.string.off);
+                //dataNotification.setStatus(true);
 
+            }else {
+                //dataNotification.setStatus(false);
+                on_off_status.setText(R.string.off);
             }
 
             notification_on_off.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean status) {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                     if (dataNotification.status){
-                        dataNotification.setStatus(false);
-                        on_off_status.setText(R.string.off);
-                        //onclicklistener.onClickData(position, dataNotification.getManage_id());
-                    }
-                     else {
+                        notification_on_off.setChecked(true);
                         dataNotification.setStatus(true);
                         on_off_status.setText(R.string.on);
-                        //onclicklistener.onClickData(getAdapterPosition(), dataNotification.getManage_id());
+                        onManageNotification.onManageNotificationClick(position, dataNotification.getManage_id());
+                    }
+                     else {
+                        notification_on_off.setChecked(false);
+                        dataNotification.setStatus(false);
+                        on_off_status.setText(R.string.on);
+                        onManageNotification.onManageNotificationClick(position, dataNotification.getManage_id());
 
                     }
 

@@ -8,6 +8,7 @@ public class insightcourses {
     private String videolink;
     private String timing;
     private String total_lesson;
+    private String bookmarked;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class insightcourses {
 
     public void setTotal_lesson(String total_lesson) {
         this.total_lesson = total_lesson;
+    }
+
+    public String getBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(String bookmarked) {
+        this.bookmarked = bookmarked;
     }
 }

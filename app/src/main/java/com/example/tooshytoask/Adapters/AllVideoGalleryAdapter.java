@@ -11,24 +11,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Activity.VideoGallery.VideoGallerySingleActivity;
 import com.example.tooshytoask.Models.InsightScreen.video_gallery;
 import com.example.tooshytoask.Models.insightvideo;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGalleryAdapter.ViewHolder>{
     Context context;
     ArrayList<insightvideo>insightvideo;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
 
-    public AllVideoGalleryAdapter(Context context, ArrayList<insightvideo>insightvideo) {
+    public AllVideoGalleryAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightvideo> insightvideo, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         this.insightvideo = insightvideo;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
+
 
     @NonNull
     @Override
@@ -39,9 +46,35 @@ public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGallery
 
     @Override
     public void onBindViewHolder(@NonNull AllVideoGalleryAdapter.ViewHolder holder, int position) {
-        //Glide.with(context).load(video_gallery.get(position).get()).into(holder.blog_img);
+        Glide.with(context).load(insightvideo.get(position).getCoverimage()).into(holder.blog_img);
         holder.blog_title.setText(insightvideo.get(position).getTitle());
 
+        if (insightvideo.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightvideo.get(position).getId(), "save");
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightvideo.get(position).getId(), "remove");
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override

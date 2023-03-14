@@ -8,6 +8,7 @@ public class new_blogs {
     private String blog_link;
     private String blog_img;
     private Integer blog_category;
+    private String blog_bookmarked;
 
     public String getBlog_id() {
         return blog_id;
@@ -63,5 +64,13 @@ public class new_blogs {
 
     public void setBlog_category(Integer blog_category) {
         this.blog_category = blog_category;
+    }
+
+    public String getBlog_bookmarked() {
+        return blog_bookmarked;
+    }
+
+    public void setBlog_bookmarked(String blog_bookmarked) {
+        this.blog_bookmarked = blog_bookmarked;
     }
 }

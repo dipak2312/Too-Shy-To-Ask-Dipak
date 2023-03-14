@@ -8,21 +8,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.insightcourses;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
 public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.ViewHolder> {
     Context context;
     ArrayList<insightcourses> insightcourses;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like;
 
-    public AllCoursesAdapter(Context context, ArrayList<insightcourses> insightcourses) {
+    public AllCoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightcourses> insightcourses, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         this.insightcourses = insightcourses;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
 
 
@@ -39,6 +44,33 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
         holder.courses_title.setText(insightcourses.get(position).getTitle());
         holder.course_time.setText(insightcourses.get(position).getTiming());
         holder.lessons.setText(insightcourses.get(position).getTotal_lesson());
+
+        if (insightcourses.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightcourses.get(position).getId(), "save");
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,insightcourses.get(position).getId(), "remove");
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override

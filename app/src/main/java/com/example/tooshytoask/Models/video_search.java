@@ -5,6 +5,7 @@ public class video_search {
     private String title;
     private String link;
     private String coverimage;
+    private String bookmarked;
 
     public String getId() {
         return id;
@@ -36,5 +37,13 @@ public class video_search {
 
     public void setCoverimage(String coverimage) {
         this.coverimage = coverimage;
+    }
+
+    public String getBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(String bookmarked) {
+        this.bookmarked = bookmarked;
     }
 }

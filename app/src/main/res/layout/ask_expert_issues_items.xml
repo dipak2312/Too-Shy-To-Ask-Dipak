@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/rel_lay_id"
@@ -23,16 +23,5 @@
             android:textSize="@dimen/text_size14"/>
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rel_lay_id"
-        android:padding="@dimen/padding_10"
-        android:text="My query is not listed"
-        android:fontFamily="@font/worksansmedium"
-        android:textSize="@dimen/text_size14"
-        android:textColor="@color/purple"/>
 
 </RelativeLayout>

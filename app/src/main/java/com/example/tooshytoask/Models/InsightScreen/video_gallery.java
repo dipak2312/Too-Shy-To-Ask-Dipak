@@ -4,6 +4,8 @@ public class video_gallery {
     private String id;
     private String title;
     private String link;
+    private String bookmarked;
+    private String coverimage;
 
     public String getId() {
         return id;
@@ -27,5 +29,21 @@ public class video_gallery {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(String bookmarked) {
+        this.bookmarked = bookmarked;
+    }
+
+    public String getCoverimage() {
+        return coverimage;
+    }
+
+    public void setCoverimage(String coverimage) {
+        this.coverimage = coverimage;
     }
 }

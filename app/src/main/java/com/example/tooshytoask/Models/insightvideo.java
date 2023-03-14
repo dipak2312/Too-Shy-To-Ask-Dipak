@@ -4,6 +4,8 @@ public class insightvideo {
     private String id;
     private String title;
     private String link;
+    private String coverimage;
+    private String bookmarked;
 
     public String getId() {
         return id;
@@ -27,5 +29,21 @@ public class insightvideo {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getCoverimage() {
+        return coverimage;
+    }
+
+    public void setCoverimage(String coverimage) {
+        this.coverimage = coverimage;
+    }
+
+    public String getBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(String bookmarked) {
+        this.bookmarked = bookmarked;
     }
 }

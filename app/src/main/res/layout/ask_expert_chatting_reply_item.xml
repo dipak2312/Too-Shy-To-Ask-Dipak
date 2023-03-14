@@ -2,13 +2,17 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/chatt_lin_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/expert_background">
+        android:background="@drawable/expert_background"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_80">
 
         <TextView
             android:id="@+id/title"
@@ -57,5 +61,23 @@
             android:textColor="@color/black"/>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chatt_lin_lay"
+        android:layout_marginStart="@dimen/margin_5"
+        android:layout_marginTop="@dimen/margin_5">
+
+        <TextView
+            android:id="@+id/txt_my_chat_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size12"
+            android:text="01 Mar 2021 02:14 PM "/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

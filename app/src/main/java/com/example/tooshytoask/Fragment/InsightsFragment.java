@@ -237,32 +237,32 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                                 recy_storehouse.setAdapter(storeHouseAdapter);
                             }
                             if(blogs.size() !=0) {
-                                blogAdapter = new BlogAdapter(context ,blogs, onBookmarkClicked, type = "blog");
+                                blogAdapter = new BlogAdapter(context ,blogs, InsightsFragment.this, type = "blog");
                                 recy_blogs.setAdapter(blogAdapter);
 
                             }
                             if(higlights.size() !=0) {
 
-                                highlightBlogAdapter = new HighlightBlogAdapter(context ,higlights, onBookmarkClicked,  type = "blog");
+                                highlightBlogAdapter = new HighlightBlogAdapter(context ,higlights, InsightsFragment.this,  type = "blog");
                                 recy_highlight_blogs.setAdapter(highlightBlogAdapter);
                             }
                             if(events.size() !=0) {
 
-                                eventBlogAdapter = new EventBlogAdapter(context ,events, onBookmarkClicked, type = "event");
+                                eventBlogAdapter = new EventBlogAdapter(context ,events, InsightsFragment.this, type = "event");
                                 recy_event_blogs.setAdapter(eventBlogAdapter);
                             }
                             if(new_blogs.size() !=0) {
-                                justAddedBlogAdapter = new JustAddedBlogAdapter(context ,new_blogs, onBookmarkClicked, type = "blog");
+                                justAddedBlogAdapter = new JustAddedBlogAdapter(context ,new_blogs, InsightsFragment.this, type = "blog");
                                 recy_just_added_blogs.setAdapter(justAddedBlogAdapter);
 
                             }
                             if(courses.size() !=0) {
-                                coursesAdapter = new CoursesAdapter(context ,courses, onBookmarkClicked, type = "courses");
+                                coursesAdapter = new CoursesAdapter(context ,courses, InsightsFragment.this, type = "courses");
                                 recy_courses.setAdapter(coursesAdapter);
 
                             }
                             if(video_gallery.size() !=0) {
-                                videoGalleryAdapter = new VideoGalleryAdapter(context ,video_gallery, onBookmarkClicked, type = "video");
+                                videoGalleryAdapter = new VideoGalleryAdapter(context ,video_gallery, InsightsFragment.this, type = "video");
                                 recy_video_gallery.setAdapter(videoGalleryAdapter);
 
                             }
@@ -363,10 +363,10 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void onBookmarkButtonClick(int position, String Blog_id) {
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
         blog_id = Blog_id;
-        //actions = action;
-        getBookmarkBlogs("save");
-        getBookmarkBlogs("remove");
+        actions = action;
+        getBookmarkBlogs(action);
+
     }
 }

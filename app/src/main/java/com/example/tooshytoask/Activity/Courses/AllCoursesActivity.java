@@ -10,16 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Adapters.AllCoursesAdapter;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllCoursesResponse;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.insightcourses;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
@@ -27,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class AllCoursesActivity extends AppCompatActivity implements View.OnClickListener {
+public class AllCoursesActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     SPManager spManager;
     Context context;
     CustomProgressDialog dialog;
@@ -36,6 +40,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
     ImageView bookmark_blog;
     ArrayList<insightcourses> insightcourses;
     AllCoursesAdapter adapter;
+    String blog_id = "", type = "blog",actions = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                         if (msg.equals("success")){
                             insightcourses = allCoursesResponse.getInsightcourses();
 
-                            adapter = new AllCoursesAdapter(context, insightcourses);
+                            adapter = new AllCoursesAdapter(context, insightcourses, AllCoursesActivity.this);
                             courses_recy.setAdapter(adapter);
                         }
                     }
@@ -83,6 +88,46 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getBookmarkBlogs(String action){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -106,5 +151,12 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
+        blog_id = Blog_id;
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

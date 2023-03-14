@@ -5,6 +5,12 @@ public class dataNotification {
     public Boolean status;
     private String manage_id;
 
+    public dataNotification(String module_name, Boolean status, String manage_id) {
+        this.module_name = module_name;
+        this.status = status;
+        this.manage_id = manage_id;
+    }
+
     public String getModule_name() {
         return module_name;
     }

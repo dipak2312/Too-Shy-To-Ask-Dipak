@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
@@ -18,12 +19,15 @@ import com.example.tooshytoask.Adapters.AllCoursesAdapter;
 import com.example.tooshytoask.Adapters.AllVideoGalleryAdapter;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
 import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
+import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllVideoGalleryResponse;
+import com.example.tooshytoask.Models.BookmarkBlogResponse;
 import com.example.tooshytoask.Models.insightvideo;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
 
@@ -31,7 +35,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class AllVideoActivity extends AppCompatActivity implements View.OnClickListener{
+public class AllVideoActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     SPManager spManager;
     Context context;
     CustomProgressDialog dialog;
@@ -40,6 +44,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
     RecyclerView video_gallery_recy;
     ArrayList<insightvideo> insightvideo;
     AllVideoGalleryAdapter adapter;
+    String blog_id = "", type = "video", actions = "";
 
 
 
@@ -81,7 +86,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                         if (msg.equals("success")){
                             insightvideo = allVideoGalleryResponse.getInsightvideo();
 
-                            adapter = new AllVideoGalleryAdapter(context, insightvideo);
+                            adapter = new AllVideoGalleryAdapter(context, insightvideo, AllVideoActivity.this);
                             video_gallery_recy.setAdapter(adapter);
                         }
                     }
@@ -89,6 +94,46 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getBookmarkBlogs(String action){
+        dialog.show("");
+        dialog.dismiss("");
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -112,5 +157,12 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
+        blog_id = Blog_id;
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

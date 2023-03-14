@@ -9,6 +9,7 @@ public class higlights {
     private String blog_link;
     private String blog_category;
     private String blog_img;
+    private String blog_bookmarked;
 
     public String getBlog_id() {
         return blog_id;
@@ -64,5 +65,13 @@ public class higlights {
 
     public void setBlog_img(String blog_img) {
         this.blog_img = blog_img;
+    }
+
+    public String getBlog_bookmarked() {
+        return blog_bookmarked;
+    }
+
+    public void setBlog_bookmarked(String blog_bookmarked) {
+        this.blog_bookmarked = blog_bookmarked;
     }
 }

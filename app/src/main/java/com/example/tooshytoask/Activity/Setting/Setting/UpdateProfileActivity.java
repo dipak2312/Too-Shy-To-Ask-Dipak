@@ -84,6 +84,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         rel_back.setOnClickListener(this);
         edit_age = findViewById(R.id.edit_age);
         edit_age.setOnClickListener(this);
+        //edit_age.setText(spManager.getDob());
         profile_image = findViewById(R.id.profile_image);
 
         change_avatar = findViewById(R.id.change_avatar);
@@ -117,7 +118,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onDateSelected(DatePicker dp, long date, int day, int month, int year) {
                         yearnew=year+"-"+(month + 1)+"-"+day;
-                        edit_age.setText("" + day + "/" + (month + 1) + "/" + year);
+                        edit_age.setText(yearnew);
                     }
                 })
                 .build();
@@ -129,6 +130,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         super.onResume();
 
         edit_age.setText(spManager.getDob());
+        if (spManager.getDob().equals(yearnew)){
+
+        }
+
 
         gender = spManager.getGender();
 
@@ -193,9 +198,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         model.setLast_name(edit_surname.getText().toString().trim());
         model.setPhone(etMobile.getText().toString().trim());
         model.setEmail_id(edit_email_enter.getText().toString().trim());
-        model.setDob(edit_age.getText().toString().trim());
         model.setGender(gender);
-        model.setDob(yearnew);
+        model.setDob(edit_age.getText().toString().trim());
         model.setCountry(edit_country_enter.getText().toString().trim());
         model.setState(edit_state_enter.getText().toString().trim());
         model.setCity(edit_city_enter.getText().toString().trim());

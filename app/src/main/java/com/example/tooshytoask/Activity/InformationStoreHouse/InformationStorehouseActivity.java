@@ -53,7 +53,7 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     StoreHouseListingAdapter adapter;
     ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>dataList;
     ArrayList<com.example.tooshytoask.Models.StoreHouse.InfoStoreCategory>InfoStoreCategory;
-    String title_id = "", type = "", actions = "";
+    String title_id = "", type = "storehouse", actions = "";
     OnBookmarkClicked onBookmarkClicked;
     int selectedPosition=0;
     String[] listItems ;
@@ -205,7 +205,7 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     }
 
     private void setUpViews(ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>data, ArrayList<InfoStoreCategory>InfoStoreCategory) {
-        adapter = new StoreHouseListingAdapter(context, data, this, type = "storehouse");
+        adapter = new StoreHouseListingAdapter(context, data, this);
         storehouse_recy.setAdapter(adapter);
         getAllStoreHouse();
 
@@ -305,10 +305,10 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void onBookmarkButtonClick(int position, String Blog_id) {
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
         title_id = Blog_id;
-        //actions = Blog_id;
-        getBookmarkBlogs("save");
-        getBookmarkBlogs("remove");
+        actions = action;
+        getBookmarkBlogs(action);
+
     }
 }

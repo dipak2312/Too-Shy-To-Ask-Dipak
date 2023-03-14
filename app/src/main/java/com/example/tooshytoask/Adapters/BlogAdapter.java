@@ -49,17 +49,26 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
         holder.blog_title.setText(blogs.get(position).getBlog_title());
         Glide.with(context).load(blogs.get(position).getBlog_img()).into(holder.blog_img);
 
+        if (blogs.get(position).getBlog_bookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+        like = true;
+
+    }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id(), "save");
                     like = false;
 
                 } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,blogs.get(position).getBlog_id(), "remove");
                     like = true;
 
                 }

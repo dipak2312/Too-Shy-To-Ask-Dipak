@@ -1,11 +1,17 @@
 package com.example.tooshytoask.Fragment;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -17,6 +23,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,20 +153,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         viewPager2.setOnClickListener(this);
         mBarLayout = view.findViewById(R.id.indicator_layout);
 
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
 
-        FirebaseMessaging.getInstance().subscribeToTopic("welcome")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Done";
-                        if (!task.isSuccessful()) {
-                            msg = "Failed";
+                if (!task.isSuccessful()){
+                    Log.e("TokenDetails", "Token Failed to receive");
+                    return;
+                }
 
-                        }
+                String token = task.getResult();
+                Log.e("TOKEN", token);
 
-
-                    }
-                });
+            }
+        });
 
 
         getHomePageResponse();
@@ -280,7 +287,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                             if(RecommendedBlogs.size() !=0)
                             {
                                 recommended_blogs_lay.setVisibility(View.VISIBLE);
-                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs, onBookmarkClicked );
+                                recommendedBlogAdapter = new RecommendedBlogAdapter(context, RecommendedBlogs, HomeFragment.this );
                                 recy_recommended_blogs.setAdapter(recommendedBlogAdapter);
 
                             }
@@ -290,7 +297,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
                             if (Blogs.size() !=0){
 
-                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, onBookmarkClicked);
+                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, HomeFragment.this);
                                 recy_recently_blogs.setAdapter(recentlyBlogAdapter);
                             }
                             home_scroll.setVisibility(View.VISIBLE);
@@ -598,10 +605,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                 });
     }
     @Override
-    public void onBookmarkButtonClick(int position, String Blog_id) {
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
         blog_id = Blog_id;
-        //actions = action;
-        getBookmarkBlogs("save");
-        getBookmarkBlogs("remove");
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

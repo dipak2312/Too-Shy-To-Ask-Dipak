@@ -29,13 +29,12 @@ public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseLis
     ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>data;
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
-    String type ;
 
-    public StoreHouseListingAdapter(Context context, ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data> data, OnBookmarkClicked onBookmarkClicked, String type) {
+    public StoreHouseListingAdapter(Context context, ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data> data, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         this.data = data;
         this.onBookmarkClicked = onBookmarkClicked;
-        this.type = type;
+
     }
 
 
@@ -51,17 +50,26 @@ public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseLis
         Glide.with(context).load(data.get(position).getArticle_image()).into(holder.storehouse_items_img);
         holder.storehouse_item_txt.setText(data.get(position).getArticle_name());
 
+        if (data.get(position).getBookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (like) {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-                    onBookmarkClicked.onBookmarkButtonClick(position,data.get(position).getArticle_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,data.get(position).getArticle_id(), "save");
                     like = false;
 
                 } else  {
                     holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-                    onBookmarkClicked.onBookmarkButtonClick(position,data.get(position).getArticle_id());
+                    onBookmarkClicked.onBookmarkButtonClick(position,data.get(position).getArticle_id(), "remove");
                     like = true;
 
                 }
