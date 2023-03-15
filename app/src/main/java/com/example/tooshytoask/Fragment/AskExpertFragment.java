@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,18 +20,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Activity.Expert.ExpertActivity;
 import com.example.tooshytoask.Activity.FAQ.FAQActivity;
+import com.example.tooshytoask.Activity.Feedback.FeedbackActivity;
+import com.example.tooshytoask.Activity.InformationStoreHouse.InformationStorehouseActivity;
 import com.example.tooshytoask.Adapters.ExpertIssuesAdapter;
+import com.example.tooshytoask.AuthModels.AskIssuesAuthModel;
+import com.example.tooshytoask.AuthModels.AskIssuesFeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.AskExpert.AskIssuesResponse;
+import com.example.tooshytoask.Models.AskExpert.data;
+import com.example.tooshytoask.Models.AskIssuesFeedbackResponse;
 import com.example.tooshytoask.Models.BlogCategoryResponse;
 import com.example.tooshytoask.Models.insightblogcategories;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.onStoreHouseClick;
 
 import java.util.ArrayList;
 
@@ -38,16 +49,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class AskExpertFragment extends Fragment implements View.OnClickListener{
+public class AskExpertFragment extends Fragment implements View.OnClickListener, onStoreHouseClick {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
     RecyclerView issues_recy;
-    ImageView expert_img;
-    TextView faq_msg, yes_txt, no_txt, faq_text, hi_msg;
-    LinearLayout faq_lin_lay, helpful_lin_lay, yes_no_lay;
-    String yes_no ="";
-    ArrayList<insightblogcategories> insightblogcategories;
+    ImageView expert_img, like_yes, like_no;
+    TextView faq_msg, yes_txt, no_txt, faq_text, hi_msg, yes_no_text, category_msg, ask_expert_activity;
+    LinearLayout faq_lin_lay, helpful_lin_lay, yes_no_lay, chatt_lin_lay, issues_titles,
+            welcome_title_lay, thanku_lay, ask_expert_no_lay;
+    RelativeLayout yes_no_reply_msg, rel_issues_recy;
+    NestedScrollView expert_scroll_view;
+    String yes_no ="", title_id = "", title ="";
+    ArrayList<data>data;
     ExpertIssuesAdapter expertIssuesAdapter;
 
     @Override
@@ -60,9 +74,25 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        ask_expert_activity = view.findViewById(R.id.ask_expert_activity);
+        ask_expert_activity.setOnClickListener(this);
+        like_no = view.findViewById(R.id.like_no);
+        like_no.setOnClickListener(this);
+        like_yes = view.findViewById(R.id.like_yes);
+        like_yes.setOnClickListener(this);
+        ask_expert_no_lay = view.findViewById(R.id.ask_expert_no_lay);
+        thanku_lay = view.findViewById(R.id.thanku_lay);
+        expert_scroll_view = view.findViewById(R.id.expert_scroll_view);
+        welcome_title_lay = view.findViewById(R.id.welcome_title_lay);
+        issues_titles = view.findViewById(R.id.issues_titles);
+        category_msg = view.findViewById(R.id.category_msg);
+        chatt_lin_lay = view.findViewById(R.id.chatt_lin_lay);
+        yes_no_reply_msg = view.findViewById(R.id.yes_no_reply_msg);
+        rel_issues_recy = view.findViewById(R.id.rel_issues_recy);
         faq_lin_lay = view.findViewById(R.id.faq_lin_lay);
         helpful_lin_lay = view.findViewById(R.id.helpful_lin_lay);
         yes_no_lay = view.findViewById(R.id.yes_no_lay);
+        yes_no_text = view.findViewById(R.id.yes_no_text);
         yes_txt = view.findViewById(R.id.yes_txt);
         yes_txt.setOnClickListener(this);
         no_txt = view.findViewById(R.id.no_txt);
@@ -74,6 +104,8 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         faq_msg = view.findViewById(R.id.faq_msg);
         faq_msg.setOnClickListener(this);
 
+        data = new ArrayList<>();
+
         hi_msg = view.findViewById(R.id.hi_msg);
         hi_msg.setText("Hi "+ spManager.getFirstName() +","+" Welcome to TSTA Chat Support");
 
@@ -82,52 +114,34 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         lm.setOrientation(RecyclerView.VERTICAL);
         issues_recy.setLayoutManager(lm);
 
-        SpannableString ss = new SpannableString(getString(R.string.please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition));
 
-        ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                Intent intent = new Intent(context, FAQActivity.class);
-                startActivity(intent);
-            }
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setUnderlineText(true);
-            }
-        };
-
-
-        ss.setSpan(clickableSpan, 21, 32, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        faq_msg.setText(ss);
-        faq_msg.setMovementMethod(LinkMovementMethod.getInstance());
-
-        getBlogCategory();
+        getAskIssues();
         return view;
     }
 
-    public void getBlogCategory() {
+    public void getAskIssues() {
         dialog.show("");
+        expert_scroll_view.setVisibility(View.GONE);
 
-        BlogCategoryAuthModel model = new BlogCategoryAuthModel();
+        AskIssuesAuthModel model = new AskIssuesAuthModel();
         model.setUser_id(spManager.getUserId());
 
-        WebServiceModel.getRestApi().getBlogCategory(model)
+        WebServiceModel.getRestApi().getAskIssues(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<BlogCategoryResponse>() {
+                .subscribe(new DisposableObserver<AskIssuesResponse>() {
                     @Override
-                    public void onNext(BlogCategoryResponse blogCategoryResponse) {
-                        String msg = blogCategoryResponse.getMsg();
+                    public void onNext(AskIssuesResponse askIssuesResponse) {
+                        String msg = askIssuesResponse.getMsg();
 
                         if (msg.equals("success")) {
-                            insightblogcategories = blogCategoryResponse.getInsightblogcategories();
+                            data = askIssuesResponse.getData();
 
-                            expertIssuesAdapter = new ExpertIssuesAdapter(context, insightblogcategories);
+                            expertIssuesAdapter = new ExpertIssuesAdapter(context, data, AskExpertFragment.this);
                             issues_recy.setAdapter(expertIssuesAdapter);
                         }
                         dialog.dismiss("");
+                        expert_scroll_view.setVisibility(View.VISIBLE);
                     }
 
                     @Override
@@ -142,6 +156,36 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
+    public void getAskIssuesFeedback(){
+
+        AskIssuesFeedbackAuthModel model = new AskIssuesFeedbackAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setStatus(yes_no);
+
+        WebServiceModel.getRestApi().getAskIssuesFeedback(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<AskIssuesFeedbackResponse>() {
+                    @Override
+                    public void onNext(AskIssuesFeedbackResponse askIssuesFeedbackResponse) {
+                        String msg = askIssuesFeedbackResponse.getMsg();
+
+                        if (msg.equals("success")){
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -154,9 +198,19 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
         }
         else if (id == yes_txt.getId()){
             yes_no = "Yes";
+            yes_no_reply_msg.setVisibility(View.VISIBLE);
+            yes_no_text.setText("Yes");
+            ask_expert_no_lay.setVisibility(View.GONE);
+            thanku_lay.setVisibility(View.VISIBLE);
+            getAskIssuesFeedback();
         }
         else if (id == no_txt.getId()){
             yes_no = "No";
+            yes_no_reply_msg.setVisibility(View.VISIBLE);
+            yes_no_text.setText("No");
+            thanku_lay.setVisibility(View.GONE);
+            ask_expert_no_lay.setVisibility(View.VISIBLE);
+            getAskIssuesFeedback();
         }
         else if (id == faq_text.getId()){
             Intent intent = new Intent(context, FAQActivity.class);
@@ -164,6 +218,75 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener{
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+        else if (id == ask_expert_activity.getId()){
+            Intent intent = new Intent(context, ExpertActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
 
+        else if (id == like_yes.getId()){
+            Intent intent = new Intent(context, FeedbackActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+        else if (id == like_no.getId()){
+            Intent intent = new Intent(context, FeedbackActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+    }
+
+    @Override
+    public void OnStoreHouseButtonClick(int position, String id, String text) {
+        title_id = id;
+        title = text;
+
+        StorehouseMessage(position);
+        TextClickable(position);
+    }
+
+    public void StorehouseMessage(int position){
+        title = data.get(position).getTitle();
+        category_msg.setText(title);
+        chatt_lin_lay.setVisibility(View.VISIBLE);
+        faq_lin_lay.setVisibility(View.VISIBLE);
+        rel_issues_recy.setVisibility(View.GONE);
+        issues_titles.setVisibility(View.GONE);
+        welcome_title_lay.setVisibility(View.GONE);
+    }
+
+    public void TextClickable(int position){
+        SpannableString ss = new SpannableString(getString(R.string.please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition));
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Bundle bundle = new Bundle();
+
+                bundle.putString("title_id",data.get(position).getTitle_id());
+                Intent intent = new Intent(context, InformationStorehouseActivity.class);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                yes_no_lay.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(true);
+            }
+        };
+
+
+        ss.setSpan(clickableSpan, 21, 43, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        faq_msg.setText(ss);
+        faq_msg.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

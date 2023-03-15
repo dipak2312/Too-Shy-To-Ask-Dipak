@@ -71,6 +71,7 @@
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/chatting_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_msg"
@@ -101,6 +102,7 @@
         android:layout_marginEnd="@dimen/margin_20">
 
     <EditText
+        android:id="@+id/ask_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Type here.."
@@ -111,6 +113,22 @@
         android:fontFamily="@font/worksansmedium"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size14"/>
+
+        <RelativeLayout
+            android:id="@+id/send_msg"
+            android:layout_width="@dimen/margin_30"
+            android:layout_height="@dimen/margin_30"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_10">
+
+        <ImageView
+            android:layout_width="@dimen/margin_25"
+            android:layout_height="@dimen/margin_25"
+            android:layout_centerVertical="true"
+            android:src="@drawable/send_msg"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

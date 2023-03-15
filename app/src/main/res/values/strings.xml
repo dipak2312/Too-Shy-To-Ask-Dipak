@@ -165,7 +165,7 @@
     <string name="information_storehouse">Information Storehouse</string>
     <string name="frequently_asked_question_s">Frequently Asked Question\'s</string>
     <string name="all_categories">All Categories</string>
-    <string name="please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition">Please check out the FAQ section to know more about Diet and Nutrition</string>
+    <string name="please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition">Please check out the Information Storehouse section to know more about Diet and Nutrition</string>
     <string name="oops_no_products_found">Oops ! No products found.</string>
 
     <string-array name="category_list">

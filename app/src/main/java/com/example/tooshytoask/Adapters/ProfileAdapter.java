@@ -104,39 +104,4 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         singleitem_selection_position = adapterPosition;
         notifyDataSetChanged();
     }
-
-            /*public void ProfileItems(final avatarList avatarList, int position){
-                //img.setImageResource(avatarList.getEncimg());
-                Glide.with(context).load(avatarList.getUrl()).into(img);
-
-                if (avatarList.isSelected){
-                    img.setBackgroundResource(R.drawable.circle_active_background);
-                }else {
-                    img.setBackgroundResource(R.drawable.circle_inactive_background);
-                }
-
-
-
-                img.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (avatarList.isSelected) {
-                            img.setBackgroundResource(R.drawable.circle_inactive_background);
-                            avatarList.setSelected(false);
-                            notifyDataSetChanged();
-                            onclicklistener.onClickData(position, avatarList.getUrl());
-
-
-                        }else {
-                            img.setBackgroundResource(R.drawable.circle_active_background);
-                            avatarList.setSelected(true);
-                            notifyDataSetChanged();
-                            onclicklistener.onClickData(position,avatarList.getUrl());
-
-                        }
-
-                    }
-                });
-
-            }*/
 }

@@ -42,14 +42,15 @@
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/expert_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/rel_top_bar"
         android:layout_marginTop="@dimen/margin_15">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/margin_20">
 
 
@@ -60,6 +61,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/welcome_title_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -95,6 +97,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/issues_titles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -160,14 +163,43 @@
 
     </RelativeLayout>
 
+            <LinearLayout
+                android:id="@+id/chatt_lin_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_below="@id/rel_issues_recy"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/expert_reply_que_background"
+                android:layout_marginStart="@dimen/margin_80">
+
+                <TextView
+                    android:id="@+id/category_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I have questions related Acne"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:padding="@dimen/padding_10"
+                    android:fontFamily="@font/worksansregular"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:textSize="@dimen/text_size14"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
     <LinearLayout
         android:id="@+id/faq_lin_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/rel_issues_recy"
+        android:visibility="gone"
+        android:layout_below="@id/chatt_lin_lay"
         android:background="@drawable/expert_background"
-        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_80">
 
@@ -203,6 +235,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="gone"
         android:layout_below="@id/faq_lin_lay"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginStart="@dimen/margin_20"
@@ -246,19 +279,18 @@
         android:id="@+id/rel_lay_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/helpful_lin_lay"
         android:background="@drawable/expert_issues_background">
 
         <TextView
             android:id="@+id/yes_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Yes"
             android:fontFamily="@font/worksansmedium"
             android:layout_marginTop="@dimen/margin_5"
             android:layout_marginEnd="@dimen/margin_5"
             android:layout_marginBottom="@dimen/margin_10"
-            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_10"
             android:textColor="@color/purple"
             android:textSize="@dimen/text_size15"/>
 
@@ -271,14 +303,14 @@
 
         <TextView
             android:id="@+id/no_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No"
             android:fontFamily="@font/worksansmedium"
             android:layout_marginTop="@dimen/margin_5"
             android:layout_marginEnd="@dimen/margin_5"
             android:layout_marginBottom="@dimen/margin_10"
-            android:layout_marginStart="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_10"
             android:textColor="@color/purple"
             android:textSize="@dimen/text_size15"/>
 
@@ -292,24 +324,31 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/yes_no_lay"
                 android:layout_alignParentEnd="true"
+                android:visibility="gone"
                 android:background="@drawable/expert_reply_que_background"
                 android:layout_marginTop="@dimen/margin_10"
                 android:layout_marginStart="@dimen/margin_80"
                 android:layout_marginEnd="@dimen/margin_20">
 
                 <TextView
+                    android:id="@+id/yes_no_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:textColor="@color/black"
                     android:padding="@dimen/padding_10"
                     android:text="Yes"/>
 
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/thanku_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_below="@id/yes_no_reply_msg"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/margin_10"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_marginEnd="@dimen/margin_80"
@@ -345,5 +384,80 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/ask_expert_no_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@drawable/expert_reply_que_background">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Were we able to win you over?"
+            android:padding="@dimen/padding_10"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size14"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/like_yes"
+                android:layout_width="@dimen/margin_35"
+                android:layout_height="@dimen/margin_35"
+                android:src="@drawable/like_expert"/>
+
+            <ImageView
+                android:id="@+id/like_no"
+                android:layout_width="@dimen/margin_35"
+                android:layout_height="@dimen/margin_35"
+                android:layout_marginStart="@dimen/margin_15"
+                android:src="@drawable/dislike_expert"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line_color"
+            android:layout_marginTop="@dimen/margin_15"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Didn't find the Answer.?"
+                android:textColor="@color/black"
+                android:padding="@dimen/padding_10"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansregular"/>
+
+            <TextView
+                android:id="@+id/ask_expert_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ask an Expert?"
+                android:padding="@dimen/padding_10"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansmedium"/>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

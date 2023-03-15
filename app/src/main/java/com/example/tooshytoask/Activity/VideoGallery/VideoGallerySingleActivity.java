@@ -1,11 +1,14 @@
 package com.example.tooshytoask.Activity.VideoGallery;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.VideoView;
@@ -18,20 +21,25 @@ import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.insightvideo;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.util.Util;
 import com.potyvideo.library.AndExoPlayerView;
 
@@ -45,71 +53,50 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    VideoView video_play;
-    ArrayList<com.example.tooshytoask.Models.insightvideo> insightvideo;
     String video_link ="";
-    SimpleExoPlayer exoPlayer;
+    StyledPlayerView styledPlayerView;
+    ExoPlayer player;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_gallery_single);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.black));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         context = VideoGallerySingleActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-        video_play = findViewById(R.id.video_play);
-        //exoPlayer = new SimpleExoPlayer.Builder(this).build();
-        //video_play.requestFocus();
+        styledPlayerView = findViewById(R.id.styled_player_view);
         video_link = getIntent().getStringExtra("video_link");
-        video_play.setVideoPath("https://www.youtube.com/watch?v=Cm2vzY728L0");
-//        video_play.setPlayer(exoPlayer);
-//        MediaItem mediaItem = MediaItem.fromUri(video_link);
-//        exoPlayer.addMediaItem(mediaItem);
-//
-//        exoPlayer.prepare();
-//        exoPlayer.play();
+        videoPlay();
 
     }
 
-    public void getVideoGallery(){
-        dialog.show("");
+    public void videoPlay(){
 
-        AllVideoGalleryAuthModel model = new AllVideoGalleryAuthModel();
-        model.setUser_id(spManager.getUserId());
+        String videoPath = video_link;
+        Uri videoUri = Uri.parse(videoPath);
+        MediaItem mediaItem = MediaItem.fromUri(videoUri);
 
-        WebServiceModel.getRestApi().getVideoGallery(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<AllVideoGalleryResponse>() {
-                    @Override
-                    public void onNext(AllVideoGalleryResponse allVideoGalleryResponse) {
-                        String msg = allVideoGalleryResponse.getMsg();
-                        dialog.dismiss("");
+        player = new ExoPlayer.Builder(this).build();
 
-                        if (msg.equals("success")){
-                            insightvideo = allVideoGalleryResponse.getInsightvideo();
+        styledPlayerView.setPlayer(player);
 
-                            //txt_title.setText(Html.fromHtml(singleblog.get(0).getBlog_title()));
-                            //video_play.setPlayer(insightvideo.get(0).getLink());
-                            Uri videoUrl = Uri.parse(insightvideo.get(0).getLink());
+        player.setMediaItem(mediaItem);
 
+        player.prepare();
+        player.play();
+    }
 
-                        }
-                    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-                    @Override
-                    public void onError(Throwable e) {
+        styledPlayerView.setPlayer(null);
+        player.release();
 
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
     }
 
     @Override

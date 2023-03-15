@@ -6,12 +6,16 @@ import com.example.tooshytoask.AuthModels.AllEventAuthModel;
 import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
 import com.example.tooshytoask.AuthModels.AllStoreHouseAuthModel;
 import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
+import com.example.tooshytoask.AuthModels.AskIssuesAuthModel;
+import com.example.tooshytoask.AuthModels.AskIssuesFeedbackAuthModel;
+import com.example.tooshytoask.AuthModels.AskQuestionsAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCommentsAuthModel;
 import com.example.tooshytoask.AuthModels.BlogLikeAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
+import com.example.tooshytoask.AuthModels.ExpertReplyAuthModel;
 import com.example.tooshytoask.AuthModels.FAQContentAuthModel;
 import com.example.tooshytoask.AuthModels.FeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.GameScoreAuthModel;
@@ -52,7 +56,11 @@ import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllEventResponse;
 import com.example.tooshytoask.Models.AllHighlightResponse;
 import com.example.tooshytoask.AuthModels.BookmarkAuthModel;
+import com.example.tooshytoask.Models.AskExpert.AskIssuesResponse;
+import com.example.tooshytoask.Models.AskIssuesFeedbackResponse;
+import com.example.tooshytoask.Models.AskQuestionsResponse;
 import com.example.tooshytoask.Models.BookmarkResponse;
+import com.example.tooshytoask.Models.ExpertReplyResponse;
 import com.example.tooshytoask.Models.GameScoreResponse;
 import com.example.tooshytoask.Models.GameTimeAuthModel;
 import com.example.tooshytoask.Models.LeaderboardResponse;
@@ -324,5 +332,22 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/articlebookmarked")
     Observable<BookmarkResponse> getBookmark(@Body BookmarkAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/experthelpstatus")
+    Observable<AskIssuesFeedbackResponse> getAskIssuesFeedback(@Body AskIssuesFeedbackAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/askquestion")
+    Observable<AskQuestionsResponse> getAskQuestions(@Body AskQuestionsAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/expertchats")
+    Observable<ExpertReplyResponse> getExpertReply(@Body ExpertReplyAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/infostorehouse_titles")
+    Observable<AskIssuesResponse> getAskIssues(@Body AskIssuesAuthModel model);
+
 
 }

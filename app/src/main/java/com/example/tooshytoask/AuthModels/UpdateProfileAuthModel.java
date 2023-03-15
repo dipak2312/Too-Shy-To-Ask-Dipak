@@ -19,6 +19,7 @@ public class UpdateProfileAuthModel {
     private String city;
     private String language;
     private String image;
+    private String token;
     ArrayList<String> healthissue_id=new ArrayList<>();
     ArrayList<String> health_id=new ArrayList<>();
 
@@ -165,5 +166,13 @@ public class UpdateProfileAuthModel {
 
     public void setHealth_id(ArrayList<String> health_id) {
         this.health_id = health_id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

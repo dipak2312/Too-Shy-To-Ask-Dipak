@@ -33,10 +33,7 @@ import java.net.URL;
 
 public class MessagingService extends FirebaseMessagingService {
 
-    NotificationChannel mChannel;
-    Bitmap bitmap;
     Intent intent;
-    String img_url;
 
 
     @Override

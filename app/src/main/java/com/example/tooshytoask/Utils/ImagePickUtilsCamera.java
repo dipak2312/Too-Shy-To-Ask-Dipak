@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
-
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.tooshytoask.R;
 
@@ -27,10 +30,9 @@ public class ImagePickUtilsCamera {
     public static void selectImage(final Context context) {
 
         CameraIntent(context);
-
-       /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        final View dialogView = inflater.inflate(R.layout.select_image_dialog_layout, null);
+        final View dialogView = inflater.inflate(R.layout.image_dialog_layout, null);
         dialogBuilder.setView(dialogView);
 
         //TextView title = (TextView) dialogView.findViewById(R.id.textView1);
@@ -69,21 +71,19 @@ public class ImagePickUtilsCamera {
                 b.dismiss();
             }
         });*/
-
-
     }
 
     private static void GalleryIntent(Context context) {
 
         try {
-           // if (canDeviceHandleGallery(context)) {
-                Activity activity = (Activity) context;
+            // if (canDeviceHandleGallery(context)) {
+            Activity activity = (Activity) context;
 
-                Intent galleryIntent = new Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent galleryIntent = new Intent(
+                    Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                activity.startActivityForResult(galleryIntent, SELECT_FILE);
+            activity.startActivityForResult(galleryIntent, SELECT_FILE);
 //            } else {
 //                Toast.makeText(context, "You haven't gallery app", Toast.LENGTH_SHORT).show();
 //            }
@@ -124,7 +124,7 @@ public class ImagePickUtilsCamera {
             photoFile.delete();
 
         photoFile.createNewFile();
-       writeToFile(pictureInputStream, photoFile);
+        writeToFile(pictureInputStream, photoFile);
         return photoFile;
     }
 

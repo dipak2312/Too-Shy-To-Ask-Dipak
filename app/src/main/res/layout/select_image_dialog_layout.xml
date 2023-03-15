@@ -32,9 +32,9 @@
             <ImageView
                 android:layout_width="@dimen/margin_15"
                 android:layout_height="@dimen/margin_15"
-                android:src="@drawable/back_arrow_lang"
+                android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"/>
+                android:src="@drawable/back_arrow_lang" />
 
         </RelativeLayout>
 

@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
-    String action = "language", blog_id = "", type = "blog", actions = "";
+    String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken";;
     RelativeLayout stories_rel_lay;
     OnBookmarkClicked onBookmarkClicked;
 
@@ -168,7 +168,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
             }
         });
 
-
+        //getFcmToken();
         getHomePageResponse();
         getUserData();
 
@@ -215,7 +215,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                 });
     }
     public void getUserData(){
-        dialog.show("");
+        //dialog.show("");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -248,7 +248,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     }
 
     public void getHomePageResponse() {
-        //dialog.show("");
+        dialog.show("");
         home_scroll.setVisibility(View.GONE);
 
         HomeScreenAuthModel model = new HomeScreenAuthModel();
@@ -585,6 +585,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         spManager.setLanguage(lang);
 
     }
+
+    public void SendToken(String token){
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setAction(tokenaction);
+        model.setToken(token);
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+
+                        if (msg.equals("Profile Updated")){
+
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
     public void getFcmToken() {
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -595,10 +631,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                             return;
                         }
 
-                        // Get new FCM registration token
+                        //Get new FCM registration token
                         String token = task.getResult();
 
-                        //sendToken(token);
+                        SendToken(token);
 
 
                     }

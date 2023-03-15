@@ -301,6 +301,9 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
         if (id == categories.getId()){
             selectCategoryMethod();
         }
+        else if (id == rel_back.getId()){
+            finish();
+        }
 
     }
 

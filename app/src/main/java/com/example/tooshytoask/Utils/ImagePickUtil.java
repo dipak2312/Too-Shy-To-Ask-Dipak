@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class ImagePickUtilsFile {
+public class ImagePickUtil {
 
     private static final int TAKE_PICTURE = 1;
     private Uri imageUri;
@@ -29,9 +29,7 @@ public class ImagePickUtilsFile {
 
     public static void selectImage(final Context context) {
 
-        GalleryIntent(context);
-
-       /* AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+       AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         final View dialogView = inflater.inflate(R.layout.image_dialog_layout, null);
         dialogBuilder.setView(dialogView);
@@ -73,20 +71,20 @@ public class ImagePickUtilsFile {
             }
         });
 
-*/
+
     }
 
     private static void GalleryIntent(Context context) {
 
         try {
-            // if (canDeviceHandleGallery(context)) {
-            Activity activity = (Activity) context;
+           // if (canDeviceHandleGallery(context)) {
+                Activity activity = (Activity) context;
 
-            Intent galleryIntent = new Intent(
-                    Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent galleryIntent = new Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            activity.startActivityForResult(galleryIntent, SELECT_FILE);
+                activity.startActivityForResult(galleryIntent, SELECT_FILE);
 //            } else {
 //                Toast.makeText(context, "You haven't gallery app", Toast.LENGTH_SHORT).show();
 //            }
@@ -127,7 +125,7 @@ public class ImagePickUtilsFile {
             photoFile.delete();
 
         photoFile.createNewFile();
-        writeToFile(pictureInputStream, photoFile);
+       writeToFile(pictureInputStream, photoFile);
         return photoFile;
     }
 

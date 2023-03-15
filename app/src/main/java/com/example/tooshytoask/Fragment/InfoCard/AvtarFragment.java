@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,6 +38,7 @@ import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.ImagePickUtil;
 import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
 import com.example.tooshytoask.Utils.ImagePickUtilsFile;
@@ -47,6 +49,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -217,32 +220,25 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             adapter.singleitem_selection_position=-1;
             adapter.notifyDataSetChanged();
             avtarImage="";
-            boolean status=checkPermissions();
-            if(status)
-            {
-                ImagePickUtilsCamera.selectImage(context);
-                adapter.notifyDataSetChanged();
-                next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            }
-            else
-            {
-                checkPermissions();
-            }
+            Activity activity = (Activity) context;
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            activity.startActivityForResult(intent, TAKE_PICTURE);
+
+
         } else if (id == file.getId()) {
             adapter.singleitem_selection_position=-1;
             adapter.notifyDataSetChanged();
             avtarImage="";
-            boolean status=checkPermissions();
-            if(status)
-            {
-                ImagePickUtilsFile.selectImage(context);
 
-                next_btn2.setBackgroundResource(R.drawable.circle_button_active);
-            }
-            else
-            {
-                checkPermissions();
-            }
+            Activity activity = (Activity) context;
+
+            Intent galleryIntent = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            activity.startActivityForResult(galleryIntent, SELECT_FILE);
         }
 
 
@@ -262,7 +258,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
 
-                    File choosedFile = ImagePickUtils.getPickedFile(context, data.getData());
+                    File choosedFile = ImagePickUtil.getPickedFile(context, data.getData());
 
                     Bitmap compressedImageBitmap = new Compressor(context).compressToBitmap(choosedFile);
 
@@ -308,13 +304,13 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
         int result;
         List<String> listPermissionsNeeded = new ArrayList<>();
         for (String p : permissions) {
-            result = ContextCompat.checkSelfPermission(getActivity(), p);
+            result = ContextCompat.checkSelfPermission(context, p);
             if (result != PackageManager.PERMISSION_GRANTED) {
                 listPermissionsNeeded.add(p);
             }
         }
         if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(getActivity(), listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
+            ActivityCompat.requestPermissions(requireActivity(), listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
             return false;
         }
         return true;

@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +28,7 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Help.ContactFormResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.ImagePickUtil;
 import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.Utils.ImagePickUtilsFile;
 import com.example.tooshytoask.Utils.MyValidator;
@@ -109,7 +111,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
 
-                    File choosedFile = ImagePickUtilsFile.getPickedFile(context, data.getData());
+                    File choosedFile = ImagePickUtil.getPickedFile(context, data.getData());
 
                     Bitmap compressedImageBitmap = new Compressor(this).compressToBitmap(choosedFile);
                     Cursor cursor = getContentResolver().query(uri, filepath, null,null,null);
@@ -124,13 +126,14 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                     remove_img.setVisibility(View.VISIBLE);
                     profile_img.setImageBitmap(null);
                     profile_img.setImageBitmap(compressedImageBitmap);
+                    image = String.valueOf(profile_img);
 
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    /*ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                     byte[] b = baos.toByteArray();
 
                     image = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT);
-                    System.out.println(image);
+                    System.out.println(image);*/
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -214,15 +217,14 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
             profile_img.setImageBitmap(null);
         }
         else if (id == add_file.getId()) {
-            boolean status=checkPermissions();
-            if(status)
-            {
-                ImagePickUtilsFile.selectImage(context);
-            }
-            else
-            {
-                checkPermissions();
-            }
+            Activity activity = (Activity) context;
+
+            Intent galleryIntent = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            activity.startActivityForResult(galleryIntent, SELECT_FILE);
+
 
         } else if (id == submit_req.getId()) {
 
@@ -240,6 +242,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
                 description.requestFocus();
                 description.setError("Enter your description");
             } else {
+                image.equals(profile_img);
                 getContact();
                 Toast.makeText(context, "Thank you for taking the time.", Toast.LENGTH_SHORT).show();
                 finish();
