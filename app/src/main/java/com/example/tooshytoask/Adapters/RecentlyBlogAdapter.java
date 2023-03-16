@@ -2,6 +2,7 @@ package com.example.tooshytoask.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorPrivacyManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Blogs;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
@@ -25,11 +27,13 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
     Context context;
     ArrayList<com.example.tooshytoask.Models.Blogs> Blogs;
     boolean like = true;
+    SPManager spManager;
     OnBookmarkClicked onBookmarkClicked;
 
-    public RecentlyBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.Blogs> blogs, OnBookmarkClicked onBookmarkClicked) {
+    public RecentlyBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.Blogs> blogs, SPManager spManager, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         Blogs = blogs;
+        this.spManager = spManager;
         this.onBookmarkClicked = onBookmarkClicked;
     }
 
@@ -46,6 +50,7 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
         holder.blog_title.setText(Blogs.get(position).getBlog_title());
         Glide.with(context).load(Blogs.get(position).getBlog_img()).into(holder.blog_img);
 
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
         if (Blogs.get(position).getBlog_boomarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
@@ -54,6 +59,10 @@ public class RecentlyBlogAdapter extends RecyclerView.Adapter<RecentlyBlogAdapte
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
             like = true;
 
+        }
+        }
+        else {
+            holder.save_img.setVisibility(View.GONE);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override

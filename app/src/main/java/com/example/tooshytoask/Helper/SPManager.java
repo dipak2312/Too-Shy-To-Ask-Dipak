@@ -20,6 +20,8 @@ public class SPManager {
     public static final String USERID = "userid";
     public static final String USERPROFILE = "profile";
     public static final String TSTALOGINSTATUS="tstaloginstatus";
+
+    public static final String TSTAGUESTLOGINSTATUS="tstaguestloginstatus";
     public static final String LANGUAGE="language";
     public static final String USER="user";
     public static final String COUNTRY="country";
@@ -39,6 +41,7 @@ public class SPManager {
     String dob;
     String Phone;
     String tstaLoginStatus;
+    String tstaguestLoginStatus;
     String userId;
     String userPhoto;
     String language;
@@ -51,6 +54,8 @@ public class SPManager {
     String bloodgroup;
     String height;
     String weight;
+
+
 
     public String getUser() {
         user = pref.getString(USER, "");
@@ -167,6 +172,15 @@ public class SPManager {
         editor.commit();
     }
 
+    public String getTstaguestLoginStatus() {
+        tstaguestLoginStatus = pref.getString(TSTAGUESTLOGINSTATUS, "false");
+        return tstaguestLoginStatus;
+    }
+
+    public void setTstaguestLoginStatus(String tstaguestLoginStatus) {
+        editor.putString(TSTAGUESTLOGINSTATUS, tstaguestLoginStatus);
+        editor.commit();
+    }
 
     public String getUserId() {
         userId = pref.getString(USERID, "");

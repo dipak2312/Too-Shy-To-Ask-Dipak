@@ -188,7 +188,15 @@ public class SplashScreenActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
-                    } else {
+                    }
+                    else if (spManager.getTstaguestLoginStatus().equals("true")) {
+                        Intent intent = new Intent(this, SignInActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                        else {
                         Intent intent = new Intent(this, SliderImagesActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

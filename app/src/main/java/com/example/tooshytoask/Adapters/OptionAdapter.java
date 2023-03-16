@@ -69,7 +69,8 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.optionview
                 holder.rel_option_bag.setBackground(ContextCompat.getDrawable(context, R.drawable.options_dark));
                 holder.option.setTextColor(ContextCompat.getColor(context, R.color.purple));
                 holder.radio_btn.setBackgroundResource(R.drawable.radio_button_checked);
-            } else {
+            }
+            else {
                 holder.rel_option_bag.setBackground(ContextCompat.getDrawable(context, R.drawable.options_fent));
                 holder.option.setTextColor(ContextCompat.getColor(context, R.color.black));
                 holder.radio_btn.setBackgroundResource(R.drawable.radio_button_unchecked);

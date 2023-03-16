@@ -40,6 +40,14 @@
                     android:src="@drawable/blog2"
                     app:shapeAppearanceOverlay="@style/radiusimage"/>
 
+                    <ImageView
+                        android:id="@+id/lock_fent_img"
+                        android:layout_width="@dimen/margin_15"
+                        android:layout_height="@dimen/margin_15"
+                        android:src="@drawable/lock_fent"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"/>
+
                 </RelativeLayout>
 
                 <TextView

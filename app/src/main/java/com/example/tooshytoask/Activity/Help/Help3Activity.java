@@ -201,7 +201,6 @@ public class Help3Activity extends AppCompatActivity implements View.OnClickList
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<HelpFeedbackResponse>() {
-
                     @Override
                     public void onNext(HelpFeedbackResponse helpFeedbackResponse) {
                         String msg = helpFeedbackResponse.getMsg();

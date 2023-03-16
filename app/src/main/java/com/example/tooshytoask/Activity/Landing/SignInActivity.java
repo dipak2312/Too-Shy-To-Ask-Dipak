@@ -74,11 +74,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             finish();*/
                 loginWithOTP();
         } else if (id == guest_login.getId()) {
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            if (spManager.getTstaLoginStatus().equals("false")) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                spManager.setTstaguestLoginStatus("true");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                guest_login.setClickable(false);
+            }
         }
     }
 
@@ -103,6 +109,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             intent.putExtra("phone", etMobile.getText().toString().trim());
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivityForResult(intent, 1);
+                            finish();
                         }
                         else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();

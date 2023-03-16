@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -40,8 +41,8 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
     ManageNotificationAdapter adapter;
     ArrayList<dataNotification> dataNotification;
     onManageNotification onManageNotification;
-    String module_ids = "";
-    ArrayList<String>module_id=new ArrayList<>();
+    String module_id = "";
+    ArrayList<String>module_ids=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,20 +60,6 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
         recy_manage_notification.setLayoutManager(linearLayoutManager);
 
         getManageNotification();
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-
-        if (id == rel_back.getId()){
-            Intent intent = new Intent(context, NotificationsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-        }
-
     }
 
     public void getManageNotification(){
@@ -131,7 +118,7 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
 
         ManageNotificationListUpdateAuthModel model = new ManageNotificationListUpdateAuthModel();
         model.setUser_id(spManager.getUserId());
-        model.setModule_ids(module_id);
+        model.setModule_ids(module_ids);
 
         WebServiceModel.getRestApi().getManageNotificationUpdate(model)
                 .subscribeOn(Schedulers.io())
@@ -163,20 +150,36 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
                     }
                 });
     }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == rel_back.getId()){
+            Intent intent = new Intent(context, NotificationsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+
+
+    }
     @Override
     public void onManageNotificationClick(int position, String id) {
-        module_ids = id;
-
+        module_id = id;
+        getManageNotificationUpdate();
         if(dataNotification.get(position).status)
         {
-            module_id.add(module_ids);
-
+            module_ids.add(module_id);
+            getManageNotificationUpdate();
         }
         else
         {
-            module_id.remove(module_ids);
+            module_ids.remove(module_id);
 
         }
+
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 

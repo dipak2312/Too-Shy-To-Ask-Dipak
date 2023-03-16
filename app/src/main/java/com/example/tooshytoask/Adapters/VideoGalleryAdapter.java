@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailEventActivity;
 import com.example.tooshytoask.Activity.VideoGallery.VideoGallerySingleActivity;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.InsightScreen.video_gallery;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.GuestLoginPopup;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
@@ -30,12 +32,15 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
     boolean like = true;
     String type;
     String link ="";
+    SPManager spManager;
 
-    public VideoGalleryAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.video_gallery> video_gallery, OnBookmarkClicked onBookmarkClicked, String type) {
+    public VideoGalleryAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.video_gallery> video_gallery,
+                               OnBookmarkClicked onBookmarkClicked, String type, SPManager spManager) {
         this.context = context;
         this.video_gallery = video_gallery;
         this.onBookmarkClicked = onBookmarkClicked;
         this.type = type;
+        this.spManager = spManager;
     }
 
 
@@ -52,14 +57,22 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
         holder.blog_title.setText(video_gallery.get(position).getTitle());
         link = video_gallery.get(position).getLink();
 
-        if (video_gallery.get(position).getBookmarked().equals("1")){
-            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
-            like = false;
-        }
-        else  {
-            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-            like = true;
 
+
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
+            if (video_gallery.get(position).getBookmarked().equals("1")){
+                holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                like = false;
+            }
+            else  {
+                holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                like = true;
+
+            }
+        }
+        else {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_dark));
+            GuestLoginPopup.LogOut(context, spManager);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override

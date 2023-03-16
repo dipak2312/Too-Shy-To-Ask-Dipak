@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.InsightScreen.higlights;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.GuestLoginPopup;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
@@ -27,12 +29,15 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
     String type = "blog";
+    SPManager spManager;
 
-    public HighlightBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.higlights> higlights, OnBookmarkClicked onBookmarkClicked, String type) {
+    public HighlightBlogAdapter(Context context, ArrayList<higlights> higlights,
+                                OnBookmarkClicked onBookmarkClicked, String type, SPManager spManager) {
         this.context = context;
         this.higlights = higlights;
         this.onBookmarkClicked = onBookmarkClicked;
         this.type = type;
+        this.spManager = spManager;
     }
 
 
@@ -45,11 +50,11 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
 
     @Override
     public void onBindViewHolder(@NonNull HighlightBlogAdapter.ViewHolder holder, int position) {
-        //holder.blog_img.setImageDrawable(ContextCompat.getDrawable(context,higlights.get(position).getBlog_img()));
-        //holder.save_img.setImageDrawable(ContextCompat.getDrawable(context,higlights.get(position).getSave_img()));
+
         holder.blog_title.setText(higlights.get(position).getBlog_title());
         Glide.with(context).load(higlights.get(position).getBlog_img()).into(holder.blog_img);
 
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
         if (higlights.get(position).getBlog_bookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
@@ -58,6 +63,11 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
             like = true;
 
+        }
+        }
+        else {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_dark));
+            GuestLoginPopup.LogOut(context, spManager);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -77,7 +77,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements View.OnClickListener, OnBookmarkClicked {
-    RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs, recy_blogs;
+    RecyclerView recy_recommended_blogs, recy_status, recy_recently_blogs;
     ArrayList<StoryCategory> StoryCategory;
     ArrayList<Bannerist> Bannerist;
     ArrayList<Blogs> Blogs;
@@ -86,7 +86,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     RecentlyBlogAdapter recentlyBlogAdapter;
     StatusAdapter statusAdapter;
     SliderBannerAdapter sliderBannerAdapter;
-    RelativeLayout blog;
     Context context;
     SPManager spManager;
     CircleImageView update_profile;
@@ -94,7 +93,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     ShapeableImageView game_banner;
     RadioButton eng_lang, hindi_lang, marathi_lang;
     Button btn_select;
-    RelativeLayout back_arrow, home_lay;
+    RelativeLayout back_arrow, home_lay, stories_rel_lay;
     NestedScrollView home_scroll;
     LinearLayout recommended_blogs_lay;
     ViewPager2 viewPager2;
@@ -103,8 +102,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
     String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken";;
-    RelativeLayout stories_rel_lay;
-    OnBookmarkClicked onBookmarkClicked;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,7 +118,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         home_scroll = view.findViewById(R.id.home_scroll);
         home_lay = view.findViewById(R.id.home_lay);
         stories_rel_lay = view.findViewById(R.id.stories_rel_lay);
-        blog = view.findViewById(R.id.blog);
         recommended_blogs_lay = view.findViewById(R.id.recommended_blogs_lay);
         recommended_blogs_lay.setOnClickListener(this);
         update_profile = view.findViewById(R.id.update_profile);
@@ -137,9 +133,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_status.setLayoutManager(linearLayoutManager);
 
-        recy_blogs = view.findViewById(R.id.recy_blogs);
-        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recy_blogs.setLayoutManager(linearLayoutManager3);
 
         recy_recommended_blogs = view.findViewById(R.id.recy_recommended_blogs);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -278,7 +271,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
                              if(StoryCategory.size() !=0)
                             {
-                                statusAdapter = new StatusAdapter(context ,StoryCategory);
+                                statusAdapter = new StatusAdapter(StoryCategory, context, spManager);
                                 recy_status.setAdapter(statusAdapter);
                             }
                              if (StoryCategory.size() == 0){
@@ -297,13 +290,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
                             if (Blogs.size() !=0){
 
-                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, HomeFragment.this);
+                                recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, spManager,HomeFragment.this);
                                 recy_recently_blogs.setAdapter(recentlyBlogAdapter);
                             }
                             home_scroll.setVisibility(View.VISIBLE);
                             dialog.dismiss("");
                         }
-
 
                     }
 
@@ -642,8 +634,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     }
     @Override
     public void onBookmarkButtonClick(int position, String Blog_id, String action) {
-        blog_id = Blog_id;
-        actions = action;
-        getBookmarkBlogs(action);
+
+            blog_id = Blog_id;
+            actions = action;
+            getBookmarkBlogs(action);
+
     }
 }

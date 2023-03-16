@@ -252,10 +252,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
 
-        Button yes_btn = dialog.findViewById(R.id.yes_btn);
-        Button no_btn = dialog.findViewById(R.id.no_btn);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+        TextView login = dialog.findViewById(R.id.login);
 
-        yes_btn.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -269,7 +269,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        no_btn.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

@@ -24,7 +24,6 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
     Context context;
     ArrayList<dataNotification> dataNotification;
     onManageNotification onManageNotification;
-    boolean button = true;
 
     public ManageNotificationAdapter(Context context, ArrayList<com.example.tooshytoask.Models.dataNotification> dataNotification, com.example.tooshytoask.Interface.onManageNotification onManageNotification) {
         this.context = context;
@@ -43,7 +42,15 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
     @Override
     public void onBindViewHolder(@NonNull ManageNotificationAdapter.ViewHolder holder, int position) {
         holder.DataNotification(dataNotification.get(position),position);
-        //holder.on_off_status.setText(dataNotification.get(position).getModule_name());
+
+        if (dataNotification.get(0).status){
+            holder.notification_on_off.setChecked(true);
+            holder.on_off_status.setText(R.string.on);
+        }
+        else {
+            holder.notification_on_off.setChecked(false);
+            holder.on_off_status.setText(R.string.off);
+        }
 
     }
 
@@ -70,10 +77,9 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
 
             if (dataNotification.status){
                 on_off_status.setText(R.string.on);
-                //dataNotification.setStatus(true);
 
             }else {
-                //dataNotification.setStatus(false);
+
                 on_off_status.setText(R.string.off);
             }
 
@@ -82,13 +88,11 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                     if (dataNotification.status){
-                        notification_on_off.setChecked(true);
                         dataNotification.setStatus(true);
-                        on_off_status.setText(R.string.on);
+                        on_off_status.setText(R.string.off);
                         onManageNotification.onManageNotificationClick(position, dataNotification.getManage_id());
                     }
                      else {
-                        notification_on_off.setChecked(false);
                         dataNotification.setStatus(false);
                         on_off_status.setText(R.string.on);
                         onManageNotification.onManageNotificationClick(position, dataNotification.getManage_id());

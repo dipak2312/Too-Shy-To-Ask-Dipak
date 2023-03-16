@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +22,13 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.Activity.Blogs.AllBlogsActivity;
 import com.example.tooshytoask.Activity.Blogs.AllEventActivity;
+import com.example.tooshytoask.Activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.Activity.Courses.AllCoursesActivity;
 import com.example.tooshytoask.Activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.Activity.Quiz.QuizActivity;
+import com.example.tooshytoask.Activity.Search.SearchActivity;
+import com.example.tooshytoask.Activity.Setting.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.Activity.VideoGallery.AllVideoActivity;
 import com.example.tooshytoask.Adapters.BlogAdapter;
 import com.example.tooshytoask.Adapters.CoursesAdapter;
@@ -85,6 +90,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     NestedScrollView insight_scroll;
     OnBookmarkClicked onBookmarkClicked;
     String blog_id = "", type = "", actions = "", isBookmark;
+    ImageView search, bookmark, notification_img;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,14 +150,6 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
         LinearLayoutManager linearLayoutManager6 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_video_gallery.setLayoutManager(linearLayoutManager6);
 
-        /*if (isBookmark.equals("0")) {
-            img_like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.parent_like_inactive));
-            like = true;
-
-        } else {
-            img_like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.parent_like_active));
-            like = false;
-        }*/
 
         getInsightScreenResponse();
 
@@ -233,7 +231,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
 
                             if(storeHouse.size() !=0) {
 
-                                storeHouseAdapter = new StoreHouseAdapter(context , storeHouse);
+                                storeHouseAdapter = new StoreHouseAdapter(context , storeHouse, spManager);
                                 recy_storehouse.setAdapter(storeHouseAdapter);
                             }
                             if(blogs.size() !=0) {
@@ -243,7 +241,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                             }
                             if(higlights.size() !=0) {
 
-                                highlightBlogAdapter = new HighlightBlogAdapter(context ,higlights, InsightsFragment.this,  type = "blog");
+                                highlightBlogAdapter = new HighlightBlogAdapter(context ,higlights, InsightsFragment.this,  type = "blog", spManager);
                                 recy_highlight_blogs.setAdapter(highlightBlogAdapter);
                             }
                             if(events.size() !=0) {
@@ -257,12 +255,12 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
 
                             }
                             if(courses.size() !=0) {
-                                coursesAdapter = new CoursesAdapter(context ,courses, InsightsFragment.this, type = "courses");
+                                coursesAdapter = new CoursesAdapter(context ,courses, InsightsFragment.this, type = "courses", spManager);
                                 recy_courses.setAdapter(coursesAdapter);
 
                             }
                             if(video_gallery.size() !=0) {
-                                videoGalleryAdapter = new VideoGalleryAdapter(context ,video_gallery, InsightsFragment.this, type = "video");
+                                videoGalleryAdapter = new VideoGalleryAdapter(context ,video_gallery, InsightsFragment.this, type = "video", spManager);
                                 recy_video_gallery.setAdapter(videoGalleryAdapter);
 
                             }
@@ -358,6 +356,39 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+        }
+
+        if (id == update_profile.getId()) {
+            Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if (id == game_banner.getId()) {
+            Intent intent = new Intent(context, GameMainPageActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if (id == notification_img.getId()) {
+            Intent intent = new Intent(context, NotificationsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if(id==search.getId()) {
+            Intent intent = new Intent(context, SearchActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else if(id==bookmark.getId()) {
+            Intent intent = new Intent(context, BookmarkActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
         }
 
     }

@@ -12,10 +12,12 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.CoursesItems;
 import com.example.tooshytoask.Models.EventBlogItems;
 import com.example.tooshytoask.Models.InsightScreen.courses;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.GuestLoginPopup;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
@@ -26,12 +28,15 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
     String type = "courses";
+    SPManager spManager;
 
-    public CoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.courses> courses, OnBookmarkClicked onBookmarkClicked, String type) {
+    public CoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.courses> courses,
+                          OnBookmarkClicked onBookmarkClicked, String type, SPManager spManager) {
         this.context = context;
         this.courses = courses;
         this.onBookmarkClicked = onBookmarkClicked;
         this.type = type;
+        this.spManager = spManager;
     }
 
 
@@ -49,6 +54,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         holder.course_time.setText(courses.get(position).getTiming());
         holder.lessons.setText(courses.get(position).getTotal_lesson());
 
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
         if (courses.get(position).getBookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
@@ -58,6 +64,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
             like = true;
 
         }
+    }
+        else {
+        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_dark));
+        GuestLoginPopup.LogOut(context, spManager);
+    }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

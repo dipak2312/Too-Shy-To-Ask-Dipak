@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.InsightScreen.blogs;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.GuestLoginPopup;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
@@ -29,7 +31,8 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
     boolean like = true;
     String type ;
 
-    public BlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.blogs> blogs, OnBookmarkClicked onBookmarkClicked, String type) {
+    public BlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.blogs> blogs,
+                       OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
         this.blogs = blogs;
         this.onBookmarkClicked = onBookmarkClicked;
@@ -53,11 +56,11 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder>{
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
         }
-        else  {
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
-        like = true;
+        else {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
 
-    }
+        }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

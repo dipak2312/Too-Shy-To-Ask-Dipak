@@ -35,7 +35,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     Context context;
     RecyclerView recy_question;
     OptionAdapter adapter;
-    RelativeLayout rel_back;
+    RelativeLayout rel_back, rel_progress_bar;
 
     ArrayList<Question> quetions;
     ProgressBar progressbar_completed;
@@ -59,6 +59,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         quetions=new ArrayList<>();
         dialog=new CustomProgressDialog(context);
 
+        rel_progress_bar = (RelativeLayout) findViewById(R.id.rel_progress_bar);
         rel_back = (RelativeLayout) findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         txt_count = (TextView) findViewById(R.id.txt_count);
@@ -73,7 +74,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     public void getQuizQue(){
         dialog.show("");
-        dialog.dismiss("");
+        rel_progress_bar.setVisibility(View.GONE);
 
         QuizQueAuthModel model = new QuizQueAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -85,6 +86,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onNext(QuizQueResponse quizQueResponse) {
                         String msg = quizQueResponse.getMsg();
+                        dialog.dismiss("");
+                        rel_progress_bar.setVisibility(View.VISIBLE);
 
                         if (msg.equals("success")){
                             quetions=quizQueResponse.getQuestion();

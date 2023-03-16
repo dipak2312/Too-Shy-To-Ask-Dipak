@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -40,7 +41,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     ChattingAdapter adapter;
     ArrayList<chats> chats;
     ArrayList<chats> demochat;
-    NestedScrollView chatting_scroll;
+    SwipeRefreshLayout swipe_refresh;
+    String refresh_status = "open", chat_ref_status = "no";
     int chatSize, select_chat_size = 0;
 
     @Override
@@ -52,7 +54,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
-        chatting_scroll = findViewById(R.id.chatting_scroll);
+        swipe_refresh = findViewById(R.id.swipe_refresh);
         ask_questions = findViewById(R.id.ask_questions);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
@@ -69,14 +71,46 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         recy_user_msg.getLayoutManager().scrollToPosition(chats.size() - 1);
 
 
-        getExpertReply();
+        swipe_refresh.setColorSchemeResources(R.color.purple);
+        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getExpertReply("swipe");
+            }
+        });
+
     }
 
-    public void getExpertReply(){
-        dialog.show("");
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh_status = "open";
+        getExpertReply("w_swipe");
+        chat_ref_status = "no";
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        refresh_status = "close";
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        refresh_status = "close";
+        //Toast.makeText(context,"onPause",Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void getExpertReply(String refresh){
 
         ExpertReplyAuthModel model = new ExpertReplyAuthModel();
         model.setUser_id(spManager.getUserId());
+
+        if (refresh.equals("w_swipe")) {
+            dialog.show("");
+        }
 
         WebServiceModel.getRestApi().getExpertReply(model)
                 .subscribeOn(Schedulers.io())
@@ -84,27 +118,58 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                 .subscribe(new DisposableObserver<ExpertReplyResponse>() {
                     @Override
                     public void onNext(ExpertReplyResponse expertReplyResponse) {
+                        if (refresh.equals("w_swipe")) {
+                            dialog.dismiss("");
+                        } else {
+                            swipe_refresh.setRefreshing(false);
+                        }
+
                         String msg = expertReplyResponse.getMsg();
-                        dialog.dismiss("");
+
 
                         if (msg.equals("success")){
                             chats = expertReplyResponse.getChats();
 
                             if (chats.size() != 0){
-                                chatting_scroll.setVisibility(View.VISIBLE);
+                                swipe_refresh.setVisibility(View.VISIBLE);
                                 adapter = new ChattingAdapter(context, chats);
                                 recy_user_msg.setAdapter(adapter);
                                 recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
                             }
                             if (chats.size() == 0){
-                                chatting_scroll.setVisibility(View.GONE);
+                                swipe_refresh.setVisibility(View.GONE);
                             }
+
+                            if (chatSize != select_chat_size) {
+                                select_chat_size = chatSize;
+                                chats = demochat;
+
+
+                                if(chat_ref_status.equals("no")) {
+                                    adapter = new ChattingAdapter(context, chats);
+                                    recy_user_msg.setAdapter(adapter);
+                                    recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
+                                }
+                                else {
+                                    chat_ref_status="no";
+                                }
+                            }
+                        }
+                        else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        if (refresh.equals("w_swipe")) {
+                            dialog.dismiss("");
+                        } else {
+                            swipe_refresh.setRefreshing(false);
+                        }
                     }
 
                     @Override
@@ -132,20 +197,22 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                         if (msg.equals("success")){
                             chats = expertReplyResponse.getChats();
 
-                            if (chats.size() != 0){
-                                chatting_scroll.setVisibility(View.VISIBLE);
-                                adapter = new ChattingAdapter(context, chats);
-                                recy_user_msg.setAdapter(adapter);
-                            }
-                            if (chats.size() == 0){
-                                chatting_scroll.setVisibility(View.GONE);
-                            }
+                            adapter = new ChattingAdapter(context, chats);
+                            recy_user_msg.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
+
+                        }
+                        else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -156,11 +223,11 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
-    public void getAskQuestions(){
+    public void getAskQuestions(String message){
 
         AskQuestionsAuthModel model = new AskQuestionsAuthModel();
         model.setUser_id(spManager.getUserId());
-        model.setReply(ask_questions.getText().toString().trim());
+        model.setReply(message);
 
         WebServiceModel.getRestApi().getAskQuestions(model)
                 .subscribeOn(Schedulers.io())
@@ -189,14 +256,22 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
     public void sendMessage() {
 
-        if (ask_questions.getText().toString().trim().equals("")){
+        if (ask_questions.getText().toString().trim().equals("")) {
             Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+        }
+        if (!ask_questions.getText().toString().trim().equals("")) {
+            String message = ask_questions.getText().toString().trim();
 
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
                 recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
-                getAskQuestions();
+                getAskQuestions(message);
+                chat_ref_status="yes";
                 ask_questions.setText("");
+            }
+            else {
+                chat_ref_status="no";
+                getExpertReply("w_swipe");
             }
         }
     }

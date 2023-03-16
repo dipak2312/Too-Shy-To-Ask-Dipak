@@ -57,7 +57,7 @@
                     android:src="@drawable/icon_bookmark"/>
 
                 <ImageView
-                    android:id="@+id/lanuage_popup"
+                    android:id="@+id/notification_img"
                     android:layout_width="@dimen/margin_20"
                     android:layout_height="@dimen/margin_20"
                     android:layout_marginStart="@dimen/margin_15"

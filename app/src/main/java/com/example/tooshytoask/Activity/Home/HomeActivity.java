@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,7 +17,9 @@ import com.example.tooshytoask.Fragment.HomeFragment;
 import com.example.tooshytoask.Fragment.InsightsFragment;
 import com.example.tooshytoask.Fragment.Quiz.QuizFragment;
 import com.example.tooshytoask.Fragment.SettingsFragment;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.GuestLoginPopup;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,6 +28,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottom_view;
+    SPManager spManager;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,48 +37,11 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         setupNavigationView();
+        context = HomeActivity.this;
+        spManager = new SPManager(context);
 
 
     }
-
-    /*public void setupNavigationView() {
-        CustomBottomNavigationView bottomNavigationView = (CustomBottomNavigationView) findViewById(R.id.customBottomBar);
-//           bottomNavigationView = (BottomNavigationView) findViewById(R.id.customBottomBar);
-        if (bottomNavigationView != null) {
-
-            //bottomNavigationView.setItemIconTintList(null);
-            bottomNavigationView.inflateMenu(R.menu.bottom_navigation);
-
-            // Select first menu item by default and show Fragment accordingly.
-            Menu menu = bottomNavigationView.getMenu();
-            selectFragment(menu.getItem(0));
-            bottomNavigationView.setItemIconTintList(null);
-            //bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
-
-            // Set action to perform when any menu-item is selected.
-            bottomNavigationView.setOnNavigationItemSelectedListener(
-                    new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragment(item);
-                            return true;
-                        }
-                    });
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        CustomBottomNavigationView bottomNavigationView = (CustomBottomNavigationView) findViewById(R.id.customBottomBar);
-
-        if (bottomNavigationView!=null && bottomNavigationView.getSelectedItemId() == R.id.action_home)
-        {
-            super.onBackPressed();
-
-        }else {
-            bottomNavigationView.setSelectedItemId(R.id.action_home);
-
-        } }*/
 
     public void setupNavigationView() {
         bottom_view = (BottomNavigationView) findViewById(R.id.customBottomBar);
@@ -91,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
                     new BottomNavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragment(item);
+                                selectFragment(item);
                             return true;
                         }
                     });
@@ -109,7 +77,15 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.action_ask_expert:
                 // Action to perform when Bag Menu item is selected.
-                pushFragment(new AskExpertFragment());
+                if (spManager.getTstaguestLoginStatus().equals("false")) {
+                    pushFragment(new AskExpertFragment());
+                }
+                else {
+                    item.setChecked(false);
+                    GuestLoginPopup.LogOut(context, spManager);
+                    bottom_view.setItemIconTintList(null);
+
+                }
                 break;
             case R.id.action_insights:
                 // Action to perform when Account Menu item is selected.
@@ -121,7 +97,15 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_setting:
-                pushFragment(new SettingsFragment());
+
+                if (spManager.getTstaguestLoginStatus().equals("false")) {
+                    pushFragment(new SettingsFragment());
+                }
+                else {
+                    item.setChecked(false);
+                    GuestLoginPopup.LogOut(context, spManager);
+
+                }
                 break;
 
         }

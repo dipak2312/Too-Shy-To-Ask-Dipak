@@ -289,6 +289,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setPhone(otpInResponse.getData().getPhone());
                            spManager.setUserId(otpInResponse.getData().getUser_id());
                            spManager.setTstaLoginStatus("true");
+                           spManager.setTstaguestLoginStatus("false");
                            spManager.setUserPhoto(otpInResponse.getData().getProfilePic());
                            spManager.setCountry(otpInResponse.getData().getCountry());
                            spManager.setState(otpInResponse.getData().getState());

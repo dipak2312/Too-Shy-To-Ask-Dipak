@@ -2,17 +2,19 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/chatt_lin_lay"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/expert_background"
         android:layout_marginTop="@dimen/margin_15"
-        android:layout_marginEnd="@dimen/margin_80">
+        android:layout_marginEnd="@dimen/margin_80"
+        android:minHeight="50dp"
+        android:minWidth="100dp">
 
         <TextView
             android:id="@+id/title"
@@ -26,12 +28,16 @@
             android:textColor="@color/purple"/>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:id="@+id/reply_que_lay"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_10"
             android:layout_marginEnd="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_5"
-            android:background="@drawable/expert_reply_que_background">
+            android:layout_below="@id/title"
+            android:background="@drawable/expert_reply_que_background"
+            android:minHeight="50dp"
+            android:minWidth="100dp">
 
         <TextView
             android:id="@+id/reply_que"
@@ -39,6 +45,7 @@
             android:layout_height="wrap_content"
             android:text="How can find difference about love or attraction?"
             android:padding="@dimen/padding_10"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size14"
             android:textColor="@color/line_color"/>
@@ -51,7 +58,9 @@
             android:layout_height="wrap_content"
             android:text="Hi Thomas, Welcome to TSTA Chat Support."
             android:paddingTop="@dimen/padding_10"
+            android:layout_below="@+id/reply_que_lay"
             android:paddingEnd="@dimen/padding_10"
+            android:layout_centerVertical="true"
             android:paddingBottom="@dimen/padding_10"
             android:layout_marginStart="@dimen/margin_10"
             android:layout_marginEnd="@dimen/margin_10"
@@ -60,20 +69,20 @@
             android:textSize="@dimen/text_size14"
             android:textColor="@color/black"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/chatt_lin_lay"
-        android:layout_marginStart="@dimen/margin_5"
-        android:layout_marginTop="@dimen/margin_5">
+        android:layout_marginStart="@dimen/margin_5">
 
         <TextView
             android:id="@+id/txt_expert_chat_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size12"
             android:text="01 Mar 2021 02:14 PM "/>

@@ -10,8 +10,8 @@
         app:cardElevation="@dimen/margin_3"
         android:gravity="center"
         app:cardCornerRadius="@dimen/margin_7"
-        android:layout_marginStart="@dimen/margin_2"
-        android:layout_marginEnd="@dimen/margin_8">
+        android:layout_marginStart="@dimen/margin_5"
+        android:layout_marginEnd="@dimen/margin_5">
 
         <RelativeLayout
             android:layout_width="@dimen/margin_210"

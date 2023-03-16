@@ -9,8 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/banner2"
-        android:paddingEnd="@dimen/margin_3"
-        android:paddingStart="@dimen/margin_3"
         app:shapeAppearanceOverlay="@style/radiusimage"/>
 
 </RelativeLayout>
