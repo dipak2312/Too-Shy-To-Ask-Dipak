@@ -31,7 +31,9 @@
             android:exported="true" />
         <activity
             android:name=".Activity.VideoGallery.AllVideoActivity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".Activity.Courses.AllCoursesActivity"
             android:exported="true" />
@@ -58,7 +60,7 @@
             android:exported="true" />
         <activity
             android:name=".Activity.VideoGallery.VideoGallerySingleActivity"
-            android:screenOrientation="userLandscape"
+
             android:exported="true">
 
         </activity>

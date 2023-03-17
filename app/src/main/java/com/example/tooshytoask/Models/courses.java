@@ -7,6 +7,8 @@ public class courses {
     private String bookmark_postdesc;
     private String bookmark_imgvid;
     private String bookmark_type;
+    private String bookmark_total_lesson;
+    private String bookmark_timing;
 
     public String getLink() {
         return link;
@@ -54,5 +56,21 @@ public class courses {
 
     public void setBookmark_type(String bookmark_type) {
         this.bookmark_type = bookmark_type;
+    }
+
+    public String getBookmark_total_lesson() {
+        return bookmark_total_lesson;
+    }
+
+    public void setBookmark_total_lesson(String bookmark_total_lesson) {
+        this.bookmark_total_lesson = bookmark_total_lesson;
+    }
+
+    public String getBookmark_timing() {
+        return bookmark_timing;
+    }
+
+    public void setBookmark_timing(String bookmark_timing) {
+        this.bookmark_timing = bookmark_timing;
     }
 }

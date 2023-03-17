@@ -38,8 +38,8 @@ public class BookmarkCoursesAdapter extends RecyclerView.Adapter<BookmarkCourses
     public void onBindViewHolder(@NonNull BookmarkCoursesAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(courses.get(position).getBookmark_imgvid()).into(holder.blog_img);
         holder.courses_title.setText(courses.get(position).getBookmark_posttitle());
-       // holder.course_time.setText(courses.get(position).get());
-       // holder.lessons.setText(courses.get(position).getTotal_lesson());
+        holder.course_time.setText(courses.get(position).getBookmark_timing());
+        holder.lessons.setText(courses.get(position).getBookmark_total_lesson());
     }
 
     @Override

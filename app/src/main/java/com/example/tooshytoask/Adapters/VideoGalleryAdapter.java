@@ -71,8 +71,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
             }
         }
         else {
-            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_dark));
-            GuestLoginPopup.LogOut(context, spManager);
+            holder.lock_img.setVisibility(View.VISIBLE);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +98,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView blog_img, save_img, play_video;
+        ImageView blog_img, save_img, play_video, lock_img;
         TextView blog_title;
         CardView video_gallery_view;
 
@@ -110,19 +109,25 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
             save_img = itemView.findViewById(R.id.save_img);
             play_video = itemView.findViewById(R.id.play_video);
             blog_title = itemView.findViewById(R.id.blog_title);
+            lock_img = itemView.findViewById(R.id.lock_img);
             video_gallery_view = itemView.findViewById(R.id.video_gallery_view);
 
             video_gallery_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle bundle = new Bundle();
+                    if (spManager.getTstaguestLoginStatus().equals("false")) {
+                        Bundle bundle = new Bundle();
 
-                    bundle.putString("video_link",link);
-                    Intent intent = new Intent(context, VideoGallerySingleActivity.class);
-                    intent.putExtras(bundle);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                        bundle.putString("video_link", link);
+                        Intent intent = new Intent(context, VideoGallerySingleActivity.class);
+                        intent.putExtras(bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                    else {
+                        GuestLoginPopup.LogOut(context, spManager);
+                    }
                 }
             });
         }

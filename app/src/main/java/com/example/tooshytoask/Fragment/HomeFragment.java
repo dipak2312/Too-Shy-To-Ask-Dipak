@@ -253,8 +253,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                 .subscribe(new DisposableObserver<HomeScreenResponse>() {
                     @Override
                     public void onNext(HomeScreenResponse homeScreenResponse) {
-
+                        home_scroll.setVisibility(View.VISIBLE);
                         String msg = homeScreenResponse.getMsg();
+
                         if (msg.equals("success")) {
 
                             StoryCategory = homeScreenResponse.getStoryCategory();
@@ -292,8 +293,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
                                 recentlyBlogAdapter = new RecentlyBlogAdapter(context, Blogs, spManager,HomeFragment.this);
                                 recy_recently_blogs.setAdapter(recentlyBlogAdapter);
+
                             }
-                            home_scroll.setVisibility(View.VISIBLE);
+
                             dialog.dismiss("");
                         }
 
@@ -363,68 +365,64 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == update_profile.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if (id == game_banner.getId()) {
-            Intent intent = new Intent(context, GameMainPageActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if (id == notification.getId()) {
-            Intent intent = new Intent(context, NotificationsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if(id==select_Language.getId()) {
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
+            if (id == update_profile.getId()) {
+                Intent intent = new Intent(context, UpdateProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == game_banner.getId()) {
+                Intent intent = new Intent(context, GameMainPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == notification.getId()) {
+                Intent intent = new Intent(context, NotificationsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == select_Language.getId()) {
 
-            openLanguagePopup();
-        }
-        else if(id==search.getId()) {
-            Intent intent = new Intent(context, SearchActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+                openLanguagePopup();
+            } else if (id == search.getId()) {
+                Intent intent = new Intent(context, SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
+            } else if (id == eng_lang.getId()) {
+                setLocale("en");
+                btn_select.setText(R.string.select);
+                eng_lang.setBackgroundResource(R.drawable.language_background_active);
+                hindi_lang.setBackgroundResource(R.drawable.language_background);
+                marathi_lang.setBackgroundResource(R.drawable.language_background);
+            } else if (id == hindi_lang.getId()) {
+                setLocale("hi");
+                btn_select.setText(R.string.चुनें);
+                hindi_lang.setBackgroundResource(R.drawable.language_background_active);
+                eng_lang.setBackgroundResource(R.drawable.language_background);
+                marathi_lang.setBackgroundResource(R.drawable.language_background);
+            } else if (id == marathi_lang.getId()) {
+                setLocale("mr");
+                btn_select.setText(R.string.निवडा);
+                marathi_lang.setBackgroundResource(R.drawable.language_background_active);
+                eng_lang.setBackgroundResource(R.drawable.language_background);
+                hindi_lang.setBackgroundResource(R.drawable.language_background);
+            } else if (id == btn_select.getId()) {
+                getUserProfileUpdate();
+                bottomSheetDialog.dismiss();
+                refreshFragment();
+            } else if (id == back_arrow.getId()) {
+                bottomSheetDialog.dismiss();
+            }
         }
-        else if(id==eng_lang.getId())
-        {
-            setLocale("en");
-            btn_select.setText(R.string.select);
-            eng_lang.setBackgroundResource(R.drawable.language_background_active);
-            hindi_lang.setBackgroundResource(R.drawable.language_background);
-            marathi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==hindi_lang.getId())
-        {
-            setLocale("hi");
-            btn_select.setText(R.string.चुनें);
-            hindi_lang.setBackgroundResource(R.drawable.language_background_active);
-            eng_lang.setBackgroundResource(R.drawable.language_background);
-            marathi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==marathi_lang.getId())
-        {
-            setLocale("mr");
-            btn_select.setText(R.string.निवडा);
-            marathi_lang.setBackgroundResource(R.drawable.language_background_active);
-            eng_lang.setBackgroundResource(R.drawable.language_background);
-            hindi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==btn_select.getId())
-        {
-            getUserProfileUpdate();
-            bottomSheetDialog.dismiss();
-            refreshFragment();
-        }
-        else if(id==back_arrow.getId())
-        {
-            bottomSheetDialog.dismiss();
+        else {
+             if (id == game_banner.getId()) {
+                Intent intent = new Intent(context, GameMainPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
         }
 
     }

@@ -101,6 +101,12 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        bookmark = view.findViewById(R.id.bookmark);
+        bookmark.setOnClickListener(this);
+        search = view.findViewById(R.id.search);
+        search.setOnClickListener(this);
+        notification_img = view.findViewById(R.id.notification_img);
+        notification_img.setOnClickListener(this);
         take_a_quiz_banner = view.findViewById(R.id.take_a_quiz_banner);
         take_a_quiz_banner.setOnClickListener(this);
         game_banner = view.findViewById(R.id.game_banner);
@@ -186,7 +192,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
 
                         }
                         else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
@@ -317,80 +323,85 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == see_all.getId()) {
-            Intent intent = new Intent(context, AllBlogsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
+            if (id == see_all.getId()) {
+                Intent intent = new Intent(context, AllBlogsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            } else if (id == see_all2.getId()) {
+                Intent intent = new Intent(context, AllEventActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            } else if (id == see_all4.getId()) {
+                Intent intent = new Intent(context, AllCoursesActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            } else if (id == see_all5.getId()) {
+                Intent intent = new Intent(context, AllVideoActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            } else if (id == game_banner.getId()) {
+                Intent intent = new Intent(context, GameMainPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == take_a_quiz_banner.getId()) {
+                Intent intent = new Intent(context, QuizActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+
+            if (id == update_profile.getId()) {
+                Intent intent = new Intent(context, UpdateProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == game_banner.getId()) {
+                Intent intent = new Intent(context, GameMainPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == notification_img.getId()) {
+                Intent intent = new Intent(context, NotificationsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == search.getId()) {
+                Intent intent = new Intent(context, SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            } else if (id == bookmark.getId()) {
+                Intent intent = new Intent(context, BookmarkActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+        } else {
+            if (id == game_banner.getId()) {
+                Intent intent = new Intent(context, GameMainPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            } else if (id == take_a_quiz_banner.getId()) {
+                Intent intent = new Intent(context, QuizActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
 
         }
-        else if (id == see_all2.getId()) {
-            Intent intent = new Intent(context, AllEventActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-        else if (id == see_all4.getId()) {
-            Intent intent = new Intent(context, AllCoursesActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-        else if (id == see_all5.getId()) {
-            Intent intent = new Intent(context, AllVideoActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-        else if (id == game_banner.getId()) {
-            Intent intent = new Intent(context, GameMainPageActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if (id == take_a_quiz_banner.getId()) {
-            Intent intent = new Intent(context, QuizActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-
-        if (id == update_profile.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if (id == game_banner.getId()) {
-            Intent intent = new Intent(context, GameMainPageActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if (id == notification_img.getId()) {
-            Intent intent = new Intent(context, NotificationsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else if(id==search.getId()) {
-            Intent intent = new Intent(context, SearchActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-        else if(id==bookmark.getId()) {
-            Intent intent = new Intent(context, BookmarkActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-
     }
 
     @Override

@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.insightcourses;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
@@ -23,11 +24,14 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     ArrayList<insightcourses> insightcourses;
     OnBookmarkClicked onBookmarkClicked;
     boolean like;
+    SPManager spManager;
 
-    public AllCoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightcourses> insightcourses, OnBookmarkClicked onBookmarkClicked) {
+    public AllCoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightcourses> insightcourses,
+                             OnBookmarkClicked onBookmarkClicked, SPManager spManager) {
         this.context = context;
         this.insightcourses = insightcourses;
         this.onBookmarkClicked = onBookmarkClicked;
+        this.spManager = spManager;
     }
 
 
@@ -45,6 +49,7 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
         holder.course_time.setText(insightcourses.get(position).getTiming());
         holder.lessons.setText(insightcourses.get(position).getTotal_lesson());
 
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
         if (insightcourses.get(position).getBookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
@@ -53,6 +58,10 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
             like = true;
 
+        }
+        }
+        else {
+            holder.lock_img.setVisibility(View.VISIBLE);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +88,7 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView blog_img, save_img;
+        ImageView blog_img, save_img, lock_img;
         TextView courses_title, course_time, lessons;
 
         public ViewHolder(@NonNull View itemView) {
@@ -90,6 +99,7 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
             courses_title = itemView.findViewById(R.id.courses_title);
             course_time = itemView.findViewById(R.id.course_time);
             lessons = itemView.findViewById(R.id.lessons);
+            lock_img = itemView.findViewById(R.id.lock_img);
         }
     }
 }

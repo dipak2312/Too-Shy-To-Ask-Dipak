@@ -66,8 +66,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         }
     }
         else {
-        holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_dark));
-        GuestLoginPopup.LogOut(context, spManager);
+        holder.lock_img.setVisibility(View.VISIBLE);
+
     }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +94,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView blog_img, save_img;
+        ImageView blog_img, save_img, lock_img;
         TextView courses_title, course_time, lessons;
 
         public ViewHolder(@NonNull View itemView) {
@@ -105,6 +105,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
             courses_title = itemView.findViewById(R.id.courses_title);
             course_time = itemView.findViewById(R.id.course_time);
             lessons = itemView.findViewById(R.id.lessons);
+            lock_img = itemView.findViewById(R.id.lock_img);
         }
+
     }
 }

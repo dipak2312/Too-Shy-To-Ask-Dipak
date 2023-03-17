@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Activity.VideoGallery.VideoGallerySingleActivity;
+import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.InsightScreen.video_gallery;
 import com.example.tooshytoask.Models.insightvideo;
 import com.example.tooshytoask.R;
@@ -29,11 +30,14 @@ public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGallery
     ArrayList<insightvideo>insightvideo;
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
+    SPManager spManager;
 
-    public AllVideoGalleryAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightvideo> insightvideo, OnBookmarkClicked onBookmarkClicked) {
+    public AllVideoGalleryAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightvideo> insightvideo,
+                                  OnBookmarkClicked onBookmarkClicked, SPManager spManager) {
         this.context = context;
         this.insightvideo = insightvideo;
         this.onBookmarkClicked = onBookmarkClicked;
+        this.spManager = spManager;
     }
 
 
@@ -49,6 +53,7 @@ public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGallery
         Glide.with(context).load(insightvideo.get(position).getCoverimage()).into(holder.blog_img);
         holder.blog_title.setText(insightvideo.get(position).getTitle());
 
+        if (spManager.getTstaguestLoginStatus().equals("false")) {
         if (insightvideo.get(position).getBookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
@@ -57,6 +62,10 @@ public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGallery
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
             like = true;
 
+        }
+        }
+        else {
+            holder.lock_img.setVisibility(View.VISIBLE);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +92,7 @@ public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGallery
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView blog_img, save_img, play_video;
+        ImageView blog_img, save_img, play_video, lock_img;
         TextView blog_title;
         CardView video_play_btn;
 
@@ -95,6 +104,7 @@ public class AllVideoGalleryAdapter extends RecyclerView.Adapter<AllVideoGallery
             play_video = itemView.findViewById(R.id.play_video);
             blog_title = itemView.findViewById(R.id.blog_title);
             video_play_btn = itemView.findViewById(R.id.video_play_btn);
+            lock_img = itemView.findViewById(R.id.lock_img);
 
             video_play_btn.setOnClickListener(new View.OnClickListener() {
                 @Override

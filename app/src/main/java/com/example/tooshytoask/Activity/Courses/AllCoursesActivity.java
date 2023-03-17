@@ -80,7 +80,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                         if (msg.equals("success")){
                             insightcourses = allCoursesResponse.getInsightcourses();
 
-                            adapter = new AllCoursesAdapter(context, insightcourses, AllCoursesActivity.this);
+                            adapter = new AllCoursesAdapter(context, insightcourses, AllCoursesActivity.this, spManager);
                             courses_recy.setAdapter(adapter);
                         }
                     }

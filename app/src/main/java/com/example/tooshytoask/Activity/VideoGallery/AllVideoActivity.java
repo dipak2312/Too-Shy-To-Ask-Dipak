@@ -86,7 +86,7 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
                         if (msg.equals("success")){
                             insightvideo = allVideoGalleryResponse.getInsightvideo();
 
-                            adapter = new AllVideoGalleryAdapter(context, insightvideo, AllVideoActivity.this);
+                            adapter = new AllVideoGalleryAdapter(context, insightvideo, AllVideoActivity.this, spManager);
                             video_gallery_recy.setAdapter(adapter);
                         }
                     }

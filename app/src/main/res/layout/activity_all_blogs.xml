@@ -76,11 +76,12 @@
         <RelativeLayout
             android:id="@+id/selection_button_rl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_45"
+            android:layout_height="wrap_content"
             android:background="@drawable/infocard_shadow"
             android:elevation="@dimen/margin_3">
 
             <RelativeLayout
+                android:id="@+id/selected_lay"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_45"
                 android:background="@drawable/help_background">
@@ -99,6 +100,7 @@
                 android:text="All Category"
                 android:textSize="14sp" />
 
+
             <ImageView
                 android:id="@+id/selection_category"
                 android:layout_width="@dimen/margin_15"
@@ -108,7 +110,38 @@
                 android:layout_marginEnd="8dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/dropdown_aarow" />
+
         </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/selected_category_lay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_45"
+                android:visibility="gone"
+                android:layout_below="@+id/selected_lay"
+                android:background="@drawable/help_background">
+
+                <Spinner
+                    android:id="@+id/spinner_blogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_centerVertical="true"
+                    android:spinnerMode="dropdown"
+                    android:fontFamily="@font/worksansmedium"
+                    android:background="@drawable/border"
+                    android:textSize="@dimen/text_size16"/>
+
+                <ImageView
+                    android:id="@+id/selection"
+                    android:layout_width="@dimen/margin_15"
+                    android:layout_height="@dimen/margin_15"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/dropdown_aarow" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
         </RelativeLayout>

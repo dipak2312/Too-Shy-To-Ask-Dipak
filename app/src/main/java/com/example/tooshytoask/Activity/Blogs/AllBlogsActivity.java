@@ -11,8 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +58,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     String[] listItems ;
     String blog_id = "", type = "blog",actions = "";
     boolean[] checkedItems;
+    Spinner spinner_blogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        spinner_blogs = findViewById(R.id.spinner_blogs);
         selection_button_rl = findViewById(R.id.selection_button_rl);
         selection_button_rl.setOnClickListener(this);
         selection_category = findViewById(R.id.selection_category);
@@ -84,13 +89,30 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 
         blog_id = getIntent().getStringExtra("blog_id");
 
+        spinner_blogs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedPosition = position;
+                getAllBlogs(position == 0 ? "" : insightblogcategories.get(position - 1).getCategory_id() + "");
+                if (spinner_blogs.getSelectedItem().toString().equals("")) {
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         getAllBlogs("");
+        //OpenBlogSpinner();
 
     }
 
     public void getBookmarkBlogs(String action){
-        dialog.show("");
-        dialog.dismiss("");
 
         BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -105,7 +127,6 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
                         String msg = bookmarkBlogResponse.getMsg();
-                        dialog.dismiss("");
 
                         if (msg.equals("Article Bookmarked")) {
 
@@ -129,7 +150,6 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void getBlogCategory() {
-        dialog.show("");
 
         BlogCategoryAuthModel model = new BlogCategoryAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -146,7 +166,6 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                             insightblogcategories = blogCategoryResponse.getInsightblogcategories();
 
                         }
-                        dialog.dismiss("");
                     }
 
                     @Override
@@ -196,11 +215,6 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                 });
     }
     private void setUpViews(ArrayList<articleblogs> insightblogs, List<insightblogcategories> insightblogcategories) {
-        dialog.dismiss("");
-        //Glide.with(this).load(insightblogs.get(0).getBlog_img()).into(firstCardImage);
-        //blogTitleTv.setText(blogData.get(0).getTitle());
-        //categoryCardTitleTv.setText(blogData.get(0).getCategories().get(0).getName());
-        //dateTv.setText(new DateUtil().getStringDateInDisplayFormat(blogData.get(0).getDate(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY)+"  -  "+blogData.get(0).getCommentsCount()+" Comments");
 
         adapter = new AllBlogAdapter(context ,insightblogs, this);
         blog_recy.setAdapter(adapter);
@@ -224,6 +238,28 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         }
         else if (id == selection_button_rl.getId()){
             selectCategoryMethod();
+            //OpenBlogSpinner();
+        }
+        else if (id == spinner_blogs.getId()){
+            OpenBlogSpinner();
+        }
+    }
+
+    public void OpenBlogSpinner() {
+
+
+        String[] categoryListForSingleItem = new String[insightblogcategories.size() + 1];
+        categoryListForSingleItem[0] = "All Categories";
+        for (int i = 0; i < insightblogcategories.size(); i++) {
+            categoryListForSingleItem[i + 1] = insightblogcategories.get(i).getCategory_title();
+        }
+
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, categoryListForSingleItem);
+        spinner_blogs.setAdapter(countryAdapter);
+
+        if (!insightblogcategories.isEmpty()) {
+
+
         }
     }
 

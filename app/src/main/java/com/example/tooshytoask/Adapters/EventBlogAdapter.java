@@ -3,6 +3,7 @@ package com.example.tooshytoask.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull EventBlogAdapter.ViewHolder holder, int position) {
-        holder.blog_title.setText(events.get(position).getEvent_title());
+        holder.blog_title.setText(Html.fromHtml(events.get(position).getEvent_title()));
         Glide.with(context).load(events.get(position).getBlog_img()).into(holder.blog_img);
 
         if (events.get(position).getBlog_bookmarked().equals("1")){

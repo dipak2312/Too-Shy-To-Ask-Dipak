@@ -66,8 +66,7 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
         }
         }
         else {
-            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_dark));
-            GuestLoginPopup.LogOut(context, spManager);
+            holder.lock_img.setVisibility(View.VISIBLE);
         }
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +93,7 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView blog_img, save_img;
+        ImageView blog_img, save_img, lock_img;
         TextView blog_title;
 
         public ViewHolder(@NonNull View itemView) {
@@ -103,10 +102,12 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
+            lock_img = itemView.findViewById(R.id.lock_img);
 
             blog_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (spManager.getTstaguestLoginStatus().equals("false")) {
                     Bundle bundle = new Bundle();
 
                     bundle.putString("blog_id",higlights.get(getAdapterPosition()).getBlog_id());
@@ -114,7 +115,11 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+
+                    }
+                    else {
+                        GuestLoginPopup.LogOut(context, spManager);
+                    }
                 }
             });
         }
