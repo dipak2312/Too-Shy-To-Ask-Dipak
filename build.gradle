@@ -12,6 +12,7 @@ allprojects {
     }
 
 }
+
 repositories {
     google()
     mavenCentral()
@@ -21,3 +22,4 @@ repositories {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.tooshytoask.Activity.Quiz.QuizActivity;
+import com.example.tooshytoask.activity.Quiz.QuizActivity;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;

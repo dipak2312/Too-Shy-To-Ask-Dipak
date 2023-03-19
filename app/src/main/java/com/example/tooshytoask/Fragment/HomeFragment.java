@@ -1,17 +1,11 @@
 package com.example.tooshytoask.Fragment;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -36,14 +30,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Activity.Game.GameMainPageActivity;
-import com.example.tooshytoask.Activity.Search.SearchActivity;
-import com.example.tooshytoask.Activity.Notification.NotificationsActivity;
-import com.example.tooshytoask.Activity.Setting.Setting.UpdateProfileActivity;
-import com.example.tooshytoask.Adapters.RecentlyBlogAdapter;
-import com.example.tooshytoask.Adapters.RecommendedBlogAdapter;
-import com.example.tooshytoask.Adapters.SliderBannerAdapter;
-import com.example.tooshytoask.Adapters.StatusAdapter;
+import com.example.tooshytoask.activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.activity.Search.SearchActivity;
+import com.example.tooshytoask.activity.Notification.NotificationsActivity;
+import com.example.tooshytoask.activity.Setting.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.adapters.RecentlyBlogAdapter;
+import com.example.tooshytoask.adapters.RecommendedBlogAdapter;
+import com.example.tooshytoask.adapters.SliderBannerAdapter;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
@@ -60,7 +53,7 @@ import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
-import com.example.tooshytoask.Utils.OnClickListner;
+import com.example.tooshytoask.adapters.StatusAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -101,7 +94,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
-    String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken";;
+    String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -167,6 +160,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
         return view;
     }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//    }
 
     public void getBookmarkBlogs(String action){
         dialog.show("");
@@ -272,6 +270,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
                              if(StoryCategory.size() !=0)
                             {
+
                                 statusAdapter = new StatusAdapter(StoryCategory, context, spManager);
                                 recy_status.setAdapter(statusAdapter);
                             }

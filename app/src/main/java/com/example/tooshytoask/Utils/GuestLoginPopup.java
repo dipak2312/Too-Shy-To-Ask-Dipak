@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.example.tooshytoask.Activity.Home.HomeActivity;
-import com.example.tooshytoask.Activity.Landing.SignInActivity;
+import com.example.tooshytoask.activity.Landing.SignInActivity;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 

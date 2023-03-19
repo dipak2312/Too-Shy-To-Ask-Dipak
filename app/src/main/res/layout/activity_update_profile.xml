@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activity.Setting.Setting.UpdateProfileActivity">
+    tools:context=".activity.Setting.Setting.UpdateProfileActivity">
 
     <FrameLayout
         android:id="@+id/profile_lay"

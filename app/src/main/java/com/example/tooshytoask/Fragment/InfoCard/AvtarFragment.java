@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Adapters.ProfileAdapter;
+import com.example.tooshytoask.adapters.ProfileAdapter;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.AvatarResponse;
@@ -39,9 +39,6 @@ import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtil;
-import com.example.tooshytoask.Utils.ImagePickUtils;
-import com.example.tooshytoask.Utils.ImagePickUtilsCamera;
-import com.example.tooshytoask.Utils.ImagePickUtilsFile;
 import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.io.ByteArrayOutputStream;
@@ -49,7 +46,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;

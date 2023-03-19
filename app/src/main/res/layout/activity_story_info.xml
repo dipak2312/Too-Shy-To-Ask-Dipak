@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".activity.story.StoryInfoActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/story_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+    <!--<jp.shts.android.storiesprogressview.StoriesProgressView
+        android:id="@+id/story_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_1"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10" />-->
+
+    <RelativeLayout
+        android:id="@+id/back_img"
+        android:layout_width="@dimen/margin_30"
+        android:layout_height="@dimen/margin_30"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:layout_width="@dimen/margin_15"
+            android:layout_height="@dimen/margin_15"
+            android:src="@drawable/back_arrow"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</layout>

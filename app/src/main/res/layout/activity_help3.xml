@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activity.Help.Help3Activity">
+    tools:context=".activity.Help.Help3Activity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"

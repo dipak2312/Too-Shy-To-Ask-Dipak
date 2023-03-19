@@ -5,13 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +19,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.tooshytoask.Activity.Quiz.QuizActivity;
-import com.example.tooshytoask.Adapters.OptionAdapter;
+import com.example.tooshytoask.activity.Quiz.QuizActivity;
+import com.example.tooshytoask.adapters.OptionAdapter;
 import com.example.tooshytoask.Models.Option;
 import com.example.tooshytoask.Models.Question;
 import com.example.tooshytoask.Models.QuizData;

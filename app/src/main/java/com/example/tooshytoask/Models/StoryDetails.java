@@ -7,6 +7,9 @@ public class StoryDetails {
     private String story_video;
     private String story_date;
     private String story_link;
+    private String like_cnt;
+    private String share_cnt;
+    private String liked;
 
     public String getStory_link() {
         return story_link;
@@ -56,5 +59,29 @@ public class StoryDetails {
 
     public void setStory_date(String story_date) {
         this.story_date = story_date;
+    }
+
+    public String getLike_cnt() {
+        return like_cnt;
+    }
+
+    public void setLike_cnt(String like_cnt) {
+        this.like_cnt = like_cnt;
+    }
+
+    public String getShare_cnt() {
+        return share_cnt;
+    }
+
+    public void setShare_cnt(String share_cnt) {
+        this.share_cnt = share_cnt;
+    }
+
+    public String getLiked() {
+        return liked;
+    }
+
+    public void setLiked(String liked) {
+        this.liked = liked;
     }
 }
