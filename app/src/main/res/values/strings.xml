@@ -138,6 +138,10 @@
     <string name="attachment_optional">Attachment (Optional)</string>
     <string name="on">On</string>
     <string name="off">Off</string>
+    <string name="info_card1">Select Categories</string>
+    <string name="info_card2">Select Avatar</string>
+    <string name="info_card3">Select Health Issues</string>
+    <string name="info_card4">Info Card</string>
     <string name="are_you_sure_you_want_to_clear_notification">Are you sure you want to clear notification?</string>
     <string name="are_you_sure_you_want_to_clear_all_notification">Are you sure you want to clear all notification?</string>
     <string name="swipe_up_to_know_more">Swipe up to know more</string>

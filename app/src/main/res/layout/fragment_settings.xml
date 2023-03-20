@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
+    android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.SettingsFragment">
 
@@ -130,7 +130,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginTop="@dimen/margin_10"
-            android:background="@color/transparent"
+            android:background="@color/background"
             android:layout_marginRight="@dimen/margin_20">
 
             <RelativeLayout
@@ -141,9 +141,9 @@
 
                 <ImageView
                     android:id="@+id/update_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
-                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/update_pro"
                     android:layout_centerVertical="true"/>
 
@@ -155,7 +155,7 @@
                     android:layout_toEndOf="@id/update_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -179,10 +179,10 @@
 
                 <ImageView
                     android:id="@+id/notification_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/notification_setting"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -193,7 +193,7 @@
                     android:layout_toEndOf="@id/notification_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -217,10 +217,10 @@
 
                 <ImageView
                     android:id="@+id/bookmarks_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/bookmark"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -231,7 +231,7 @@
                     android:layout_toEndOf="@id/bookmarks_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -255,10 +255,10 @@
 
                 <ImageView
                     android:id="@+id/faq_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/faq"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -269,7 +269,7 @@
                     android:layout_toEndOf="@id/faq_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -293,10 +293,10 @@
 
                 <ImageView
                     android:id="@+id/help_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/faq"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -307,7 +307,7 @@
                     android:layout_toEndOf="@id/help_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -331,10 +331,10 @@
 
                 <ImageView
                     android:id="@+id/feedback_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/feedback"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -345,7 +345,7 @@
                     android:layout_toEndOf="@id/feedback_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -369,10 +369,10 @@
 
                 <ImageView
                     android:id="@+id/select_Language_logo"
-                    android:layout_width="@dimen/margin_15"
-                    android:layout_height="@dimen/margin_15"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/select_language"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -383,7 +383,7 @@
                     android:layout_toEndOf="@id/select_Language_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -407,10 +407,10 @@
 
                 <ImageView
                     android:id="@+id/refer_friends_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/refer"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -421,7 +421,7 @@
                     android:layout_toEndOf="@id/refer_friends_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView
@@ -445,10 +445,10 @@
 
                 <ImageView
                     android:id="@+id/logout_logo"
-                    android:layout_width="@dimen/margin_20"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:src="@drawable/logout"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_centerVertical="true"/>
 
                 <TextView
@@ -459,7 +459,7 @@
                     android:layout_toEndOf="@id/logout_logo"
                     android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size14"
-                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_centerVertical="true"/>
 
                 <ImageView

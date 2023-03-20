@@ -71,16 +71,6 @@
 
         </RelativeLayout>
 
-        <!--<ImageView
-                android:id="@+id/img_top"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_below="@+id/rel_back"
-                android:layout_marginTop="@dimen/margin_40"
-                android:src="@drawable/otp">
-
-            </ImageView>-->
-
 
         <TextView
             android:id="@+id/txt_welcome"
@@ -138,7 +128,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_30"
                 android:inputType="number"
-                android:itemBackground="@drawable/border"
+                android:itemBackground="@drawable/otp_box_background"
                 android:cursorVisible="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size16"
@@ -213,7 +203,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lin_btn"
-            android:layout_marginTop="@dimen/margin_10">
+            android:layout_marginTop="@dimen/margin_15">
 
             <TextView
                 android:id="@+id/otp_not_receive"

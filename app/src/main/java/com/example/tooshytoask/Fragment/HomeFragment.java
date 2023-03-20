@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         viewPager2.setOnClickListener(this);
         mBarLayout = view.findViewById(R.id.indicator_layout);
 
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+        /*FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
             public void onComplete(@NonNull Task<String> task) {
 
@@ -152,19 +152,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                 Log.e("TOKEN", token);
 
             }
-        });
+        });*/
 
-        //getFcmToken();
+        getFcmToken();
         getHomePageResponse();
         getUserData();
 
         return view;
     }
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//    }
+
 
     public void getBookmarkBlogs(String action){
         dialog.show("");
@@ -220,8 +216,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                         String msg = userProfileResponse.getMsg();
 
                         if (msg.equals("success")){
-                            //Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
-                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(update_profile);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(update_profile);
                         }
                         dialog.dismiss("");
                     }

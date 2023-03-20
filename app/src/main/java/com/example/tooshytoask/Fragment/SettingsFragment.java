@@ -129,8 +129,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                             progrss_value= Double.parseDouble(userProfileResponse.getProfile_percent());
                             progress_circular.setProgress((int) progrss_value);
                             txt_name.setText(userProfileResponse.getUser_name());
-                            //Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
-                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(profile_image);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
                         }
                         dialog.dismiss("");
                     }

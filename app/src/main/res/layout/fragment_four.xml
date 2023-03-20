@@ -30,6 +30,14 @@
                 android:background="@drawable/border"
                 android:textSize="@dimen/text_size16"/>
 
+            <ImageView
+                android:layout_width="@dimen/margin_10"
+                android:layout_height="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/down_arrow"/>
+
 
         </RelativeLayout>
 

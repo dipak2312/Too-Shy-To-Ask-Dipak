@@ -48,6 +48,7 @@ import com.example.tooshytoask.AuthModels.StoreHouseRelatedAuthModel;
 import com.example.tooshytoask.AuthModels.StoreHouseSinglePageAuthModel;
 import com.example.tooshytoask.AuthModels.StoryAuthModel;
 import com.example.tooshytoask.AuthModels.StoryLikeAuthModel;
+import com.example.tooshytoask.AuthModels.StoryShareAuthModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
 import com.example.tooshytoask.AuthModels.UserDetailAuthModel;
 import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
@@ -107,6 +108,7 @@ import com.example.tooshytoask.Models.StoreHouseRelatedResponse;
 import com.example.tooshytoask.Models.StoreHouseSinglePageResponse;
 import com.example.tooshytoask.Models.StoryLikeResponse;
 import com.example.tooshytoask.Models.StoryResponse;
+import com.example.tooshytoask.Models.StoryShareResponse;
 import com.example.tooshytoask.Models.SuccessResponse;
 import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserDetailResponse;
@@ -182,6 +184,10 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/StoryLike")
     Observable<StoryLikeResponse> getStoryLike(@Body StoryLikeAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/StoryShare")
+    Observable<StoryShareResponse> getStoryShare(@Body StoryShareAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/insightscreen")

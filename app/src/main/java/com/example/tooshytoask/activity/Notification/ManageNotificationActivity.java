@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Utils.OnClickListner;
 import com.example.tooshytoask.adapters.ManageNotificationAdapter;
 import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationListUpdateAuthModel;
@@ -29,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class ManageNotificationActivity extends AppCompatActivity implements View.OnClickListener, onManageNotification{
+public class ManageNotificationActivity extends AppCompatActivity implements View.OnClickListener, OnClickListner {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -162,21 +164,22 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
 
 
     }
+
     @Override
-    public void onManageNotificationClick(int position, String id) {
+    public void onClickData(int position, String id) {
         module_id = id;
-        getManageNotificationUpdate();
+
         if(dataNotification.get(position).status)
         {
             module_ids.add(module_id);
-            getManageNotificationUpdate();
+
         }
         else
         {
             module_ids.remove(module_id);
 
         }
-
+        Log.d("saggi",module_ids.toString());
 
         ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
@@ -194,8 +197,7 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
 
         }else
         {
-
+            getManageNotificationUpdate();
         }
-
     }
 }

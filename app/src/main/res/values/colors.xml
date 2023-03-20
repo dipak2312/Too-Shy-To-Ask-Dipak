@@ -6,6 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="background">#f5f9ff</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#0F9D58</color>
     <color name="transparent">#F9F9F9</color>
@@ -23,7 +24,7 @@
     <color name="red">#FF0000</color>
     <color name="tsta_green_color">#49C00F</color>
     <color name="tsta_leaderboard">#050505</color>
-
+    <color name="category_inactive">#777777</color>
 
     <color name="tsta_setting_fent">#16bac2</color>
 

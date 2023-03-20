@@ -81,19 +81,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
         pinView();
 
-        /*otpTextView = (OtpTextView) findViewById(R.id.otp_view);
-        otpTextView.setOtpListener(new OTPListener() {
-            @Override
-            public void onInteractionListener() {
-
-            }
-
-            @Override
-            public void onOTPComplete(String otp) {
-                user_otp = otp;
-
-            }
-        });*/
         countDownTimer();
     }
 
@@ -107,12 +94,22 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
         otp_view.setTextColor(
                 ResourcesCompat.getColorStateList(getResources(), R.color.black, getTheme()));
+
+        otp_view.setItemBackground(
+                ResourcesCompat.getDrawable(getResources(), R.drawable.otp_box_background, getTheme()));
+
+        otp_view.setItemBackgroundColor(
+                ResourcesCompat.getColor(getResources(), R.color.resend_color, getTheme()));
+
+        otp_view.setItemBackgroundColor(
+                ResourcesCompat.getColor(getResources(), R.color.resend_color, getTheme()));
+
         otp_view.setLineColor(
                 ResourcesCompat.getColor(getResources(), R.color.purple, getTheme()));
         otp_view.setLineColor(
                 ResourcesCompat.getColorStateList(getResources(), R.color.line_colors, getTheme()));
         otp_view.setItemCount(4);
-        otp_view.setAnimationEnable(false);// start animation when adding text
+        otp_view.setAnimationEnable(true);
 
         otp_view.addTextChangedListener(new TextWatcher() {
 

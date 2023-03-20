@@ -14,18 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tooshytoask.Interface.onManageNotification;
 import com.example.tooshytoask.Models.dataNotification;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
 public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotificationAdapter.ViewHolder> {
     Context context;
     ArrayList<dataNotification> dataNotification;
-    onManageNotification onManageNotification;
+    OnClickListner onclicklistener;
 
-    public ManageNotificationAdapter(Context context, ArrayList<com.example.tooshytoask.Models.dataNotification> dataNotification, com.example.tooshytoask.Interface.onManageNotification onManageNotification) {
+    public ManageNotificationAdapter(Context context, ArrayList<dataNotification> dataNotification,OnClickListner onclicklistener) {
         this.context = context;
         this.dataNotification = dataNotification;
-        this.onManageNotification = onManageNotification;
+        this.onclicklistener = onclicklistener;
     }
 
 
@@ -39,15 +40,6 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
     @Override
     public void onBindViewHolder(@NonNull ManageNotificationAdapter.ViewHolder holder, int position) {
         holder.DataNotification(dataNotification.get(position),position);
-
-        if (dataNotification.get(0).status){
-            holder.notification_on_off.setChecked(true);
-            holder.on_off_status.setText(R.string.on);
-        }
-        else {
-            holder.notification_on_off.setChecked(false);
-            holder.on_off_status.setText(R.string.off);
-        }
 
     }
 
@@ -73,10 +65,12 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
             push_notification.setText(dataNotification.getModule_name());
 
             if (dataNotification.status){
+                notification_on_off.setChecked(true);
                 on_off_status.setText(R.string.on);
 
             }else {
 
+                notification_on_off.setChecked(false);
                 on_off_status.setText(R.string.off);
             }
 
@@ -87,12 +81,12 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
                     if (dataNotification.status){
                         dataNotification.setStatus(true);
                         on_off_status.setText(R.string.off);
-                        onManageNotification.onManageNotificationClick(position, dataNotification.getManage_id());
+                        onclicklistener.onClickData(position, dataNotification.getManage_id());
                     }
                      else {
                         dataNotification.setStatus(false);
                         on_off_status.setText(R.string.on);
-                        onManageNotification.onManageNotificationClick(position, dataNotification.getManage_id());
+                        onclicklistener.onClickData(position, dataNotification.getManage_id());
 
                     }
 

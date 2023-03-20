@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.adapters.ProfileAdapter;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -66,7 +67,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
     CustomProgressDialog dialog;
     ArrayList<avatarList>avatarList;
     String avtarImage="";
-    private static final int TAKE_PICTURE = 1;
+    private static final int IMAGE_CAPTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
 
@@ -216,11 +217,22 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             adapter.singleitem_selection_position=-1;
             adapter.notifyDataSetChanged();
             avtarImage="";
+            checkPermissions();
             Activity activity = (Activity) context;
 
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-            activity.startActivityForResult(intent, TAKE_PICTURE);
+            activity.startActivityForResult(intent, IMAGE_CAPTURE);
+
+           /* boolean status=checkPermissions();
+            if(status)
+            {
+                ImagePickUtils.selectImage(context);
+            }
+            else
+            {
+                checkPermissions();
+            }*/
 
 
         } else if (id == file.getId()) {
@@ -235,6 +247,8 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
             activity.startActivityForResult(galleryIntent, SELECT_FILE);
+
+            checkPermissions();
         }
 
 
@@ -276,7 +290,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
 
             }
 
-        } else if (requestCode==TAKE_PICTURE) {
+        } else if (requestCode==IMAGE_CAPTURE) {
 
             if (resultCode == RESULT_OK) {
                 Bitmap bp = (Bitmap) data.getExtras().get("data");

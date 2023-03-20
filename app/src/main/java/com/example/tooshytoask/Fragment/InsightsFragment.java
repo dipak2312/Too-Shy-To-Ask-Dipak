@@ -157,15 +157,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
 
 
         getInsightScreenResponse();
-
-        return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         getUserData();
-
+        return view;
     }
 
     public void getBookmarkBlogs(String action){
@@ -301,7 +294,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                         String msg = userProfileResponse.getMsg();
                         //dialog.dismiss("");
                         if (msg.equals("success")){
-                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(update_profile);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(update_profile);
                         }
 
                     }

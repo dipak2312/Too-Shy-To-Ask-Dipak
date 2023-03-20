@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/or"
                     android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/text_size18"
+                    android:textSize="@dimen/text_size16"
                     android:fontFamily="@font/worksanssemibolditalic"
                     android:layout_marginBottom="@dimen/margin_20"
                     android:layout_marginTop="@dimen/margin_30"

@@ -30,10 +30,10 @@
         android:id="@+id/story_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_1"
+        android:backgroundTint="@color/purple"
         android:layout_marginStart="@dimen/margin_10"
         android:layout_marginEnd="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_10"
-        android:backgroundTint="@color/resend_color"/>
+        android:layout_marginTop="@dimen/margin_10"/>
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/videoPlayer"

@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -20,7 +21,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.AuthModels.StoryLikeAuthModel;
+import com.example.tooshytoask.AuthModels.StoryShareAuthModel;
 import com.example.tooshytoask.Models.StoryLikeResponse;
+import com.example.tooshytoask.Models.StoryShareResponse;
 import com.example.tooshytoask.activity.Home.HomeActivity;
 
 
@@ -57,7 +60,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String story_id, story_like_ids, islike;
+    String story_id, story_like_share_ids, islike, share_link, story_name;
     ArrayList<StoryDetails>storyDetails;
     StoryViewPagerAdapter adapter;
     boolean like = true;
@@ -80,7 +83,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
-        //viewPager = findViewById(R.id.story_view_pager);
         story_progress_bar = findViewById(R.id.story_progress_bar);
         story_progress_bar.setStoriesListener(this);
         previous = findViewById(R.id.previous);
@@ -156,7 +158,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
     public void getStory(){
         dialog.show("");
-        dialog.dismiss("");
 
         StoryAuthModel model = new StoryAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -169,7 +170,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onNext(StoryResponse storyResponse) {
                         String msg = storyResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("success")) {
                            storyDetails = storyResponse.getStoryDetails();
 
@@ -200,11 +201,70 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    public void getStoryLike(String type){
+        StoryLikeAuthModel model = new StoryLikeAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setStory_id(story_like_share_ids);
+        model.setType(type);
+
+        WebServiceModel.getRestApi().getStoryLike(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<StoryLikeResponse>() {
+                    @Override
+                    public void onNext(StoryLikeResponse storyLikeResponse) {
+                        String msg = storyLikeResponse.getMsg();
+                        if (msg.equals("success")){
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getStoryShare(){
+        StoryShareAuthModel model = new StoryShareAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setStory_id(story_like_share_ids);
+
+        WebServiceModel.getRestApi().getStoryShare(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<StoryShareResponse>() {
+                    @Override
+                    public void onNext(StoryShareResponse storyShareResponse) {
+                        String msg = storyShareResponse.getCode();
+                        //if (msg.equals(""))
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     private void setStoryValue(ArrayList<StoryDetails>storyDetails) {
 
 
         story_title.setText(Html.fromHtml(storyDetails.get(position).getStory_title()));
+        story_name = storyDetails.get(position).getStory_title();
         link_name.setText((storyDetails.get(position).getStory_link()));
+        share_link = storyDetails.get(position).getStory_link();
         if(storyDetails.get(position).getStory_link() != null && !storyDetails.get(position).getStory_link().equals(""))
         {
             swipe_up.setVisibility(View.VISIBLE);
@@ -212,7 +272,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
             swipe_up.setVisibility(View.GONE);
         }
         day.setText(storyDetails.get(position).getStory_date());
-        story_like_ids = storyDetails.get(position).getStory_id();
+        story_like_share_ids = storyDetails.get(position).getStory_id();
 
         if(storyDetails.get(position).getStory_img() != null && !storyDetails.get(position).getStory_img().equals(""))
         {
@@ -244,38 +304,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
             like = true;
         }
     }
-    public void getStoryLike(String type){
-        dialog.show("");
-        dialog.dismiss("");
-
-        StoryLikeAuthModel model = new StoryLikeAuthModel();
-        model.setUser_id(spManager.getUserId());
-        model.setStory_id(story_like_ids);
-        model.setType(type);
-
-        WebServiceModel.getRestApi().getStoryLike(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<StoryLikeResponse>() {
-                    @Override
-                    public void onNext(StoryLikeResponse storyLikeResponse) {
-                        String msg = storyLikeResponse.getMsg();
-                        if (msg.equals("success")){
-
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     @Override
     public void onClick(View view) {
@@ -294,7 +322,11 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         } else if (id == skip.getId()) {
             story_progress_bar.skip();
 
-        } else if (id == like_img.getId()) {
+        }
+        else if (id == share_img.getId()){
+            sharevalue();
+        }
+        else if (id == like_img.getId()) {
             if (like) {
                 like_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
                 getStoryLike("like");
@@ -310,6 +342,17 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         }
 
 
+    }
+
+    public void sharevalue() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Too Shy Too Ask App");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, story_name +
+                "\n\n" + share_link);
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+        getStoryShare();
     }
 
     @Override

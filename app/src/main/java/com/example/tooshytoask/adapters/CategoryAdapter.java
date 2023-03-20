@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -68,8 +69,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
             if (informationStorehouseList.isSelected){
                 cate_img.setBackgroundResource(R.drawable.circle_active_background);
+                category_title.setTextColor(ContextCompat.getColor(context, R.color.purple));
             }else {
                 cate_img.setBackgroundResource(R.drawable.circle_inactive_background);
+                category_title.setTextColor(ContextCompat.getColor(context, R.color.category_inactive));
             }
 
             cate_img.setOnClickListener(new View.OnClickListener() {

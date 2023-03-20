@@ -8,6 +8,7 @@
         android:id="@+id/imageSlide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingEnd="@dimen/margin_7"
         android:src="@drawable/banner2"
         app:shapeAppearanceOverlay="@style/radiusimage"/>
 

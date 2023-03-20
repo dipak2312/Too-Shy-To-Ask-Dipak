@@ -24,8 +24,9 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
     InfoCardAdapter adapter;
     ViewPager viewPager;
     RelativeLayout rel_back;
-    TextView skip_btn;
+    TextView skip_btn, title_info_card;
     ClickListener clickListener;
+
 
 
     @Override
@@ -37,6 +38,7 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         spManager = new SPManager(context);
         progressbar_completed = findViewById(R.id.progressbar_completed);
 
+        title_info_card = findViewById(R.id.title_info_card);
         skip_btn = findViewById(R.id.skip_btn);
         skip_btn.setOnClickListener(this);
         viewPager = findViewById(R.id.viewPager);
@@ -63,19 +65,23 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
 
                 if (getitem(0) < 1) {
 
-
+                    title_info_card.setText(R.string.info_card1);
+                    rel_back.setVisibility(View.GONE);
 
                 } else if (getitem(0) < 2) {
 
-
+                    title_info_card.setText(R.string.info_card2);
+                    rel_back.setVisibility(View.VISIBLE);
 
                 } else if (getitem(0) < 3) {
 
-
+                    title_info_card.setText(R.string.info_card3);
+                    rel_back.setVisibility(View.VISIBLE);
 
                 } else if (getitem(0) < 4) {
 
-
+                    title_info_card.setText(R.string.info_card4);
+                    rel_back.setVisibility(View.VISIBLE);
                 }
 
             }

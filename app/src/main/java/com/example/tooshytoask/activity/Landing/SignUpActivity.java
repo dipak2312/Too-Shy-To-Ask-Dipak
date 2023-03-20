@@ -173,10 +173,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             } else if (edit_surname.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Last Name is required", Toast.LENGTH_SHORT).show();
 
-            } else if (edit_email_enter.getText().toString().trim().equals("")) {
-                Toast.makeText(context, "Email is required", Toast.LENGTH_SHORT).show();
-
-            } else if (!MyValidator.isValidEmail(edit_email_enter.getText().toString().trim())) {
+            }  else if (!MyValidator.isValidEmail(edit_email_enter.getText().toString().trim())) {
                 Toast.makeText(context, "Please enter valid email id", Toast.LENGTH_SHORT).show();
 
             } else if (edit_mobile_number.getText().toString().trim().equals("")) {

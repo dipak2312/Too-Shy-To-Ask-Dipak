@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_150"
                 android:layout_centerHorizontal="true"
-                android:paddingEnd="@dimen/margin_20"
+                android:paddingEnd="@dimen/margin_15"
                 android:paddingStart="@dimen/margin_20"
                 android:layout_marginTop="@dimen/margin_20">
 

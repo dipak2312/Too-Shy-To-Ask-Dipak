@@ -171,8 +171,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                         String msg = userProfileResponse.getMsg();
 
                         if (msg.equals("success")){
-                            //Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
-                            Glide.with(context).load(userProfileResponse.getProfile_pic()).into(profile_image);
+                            Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
                         }
                         dialog.dismiss("");
                     }

@@ -210,7 +210,9 @@ public class PersonalInfoFragment extends Fragment implements View.OnClickListen
 
         String[] countries = new String[]{"Select Your Blood Group", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout,
+                R.id.spinnerTarget, countries);
+
         spinner_blood.setAdapter(countryAdapter);
 
     }

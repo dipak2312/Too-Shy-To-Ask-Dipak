@@ -1,5 +1,6 @@
 package com.example.tooshytoask.activity.VideoGallery;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -18,6 +19,8 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.regex.Matcher;
@@ -51,29 +54,14 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
         getLifecycle().addObserver(youTubePlayerView);
         video_link = getIntent().getStringExtra("video_link");
 
-
-        /*youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-            @Override
-            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                //video_link = video_link.replace("https://","http://");
-
-                String url = getVideoId();
-                youTubePlayer.loadVideo(url,100);
-            }
-        });
-        youTubePlayerView.enterFullScreen();
-        youTubePlayerView.exitFullScreen();
-        youTubePlayerView.isFullScreen();
-        youTubePlayerView.toggleFullScreen();*/
-
-
         //videoPlay();
-        getYouTubeId("");
+        getYouTubeId();
 
     }
 
     public static String getVideoId(String video_url) {
         String url = video_link;
+        video_link = video_link.replace("https://","http://");
         Pattern pattern = Pattern.compile(
                 "http(?:s)?:\\/\\/(?:m.)?(?:www\\.)?youtu(?:\\.be\\/|(?:be-nocookie|be)\\.com\\/(?:watch|[\\w]+\\?(?:feature=[\\w]+.[\\w]+\\&)?v=|v\\/|e\\/|embed\\/|live\\/|user\\/(?:[\\w#]+\\/)+))([^&#?\\n]+)",
                 Pattern.CASE_INSENSITIVE);
@@ -84,15 +72,15 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
         return url;
     }
 
-    private String getYouTubeId (String youTubeUrl) {
-        String pattern = "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
-        Pattern compiledPattern = Pattern.compile(pattern);
-        Matcher matcher = compiledPattern.matcher(youTubeUrl);
-        if(matcher.find()){
-            return matcher.group();
-        } else {
-            return "error";
-        }
+    private String getYouTubeId () {
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = "S0Q4gqBUs7c";
+                youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
+        return null;
     }
 
     public void videoPlay(){

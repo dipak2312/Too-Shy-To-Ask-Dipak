@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,6 +48,7 @@ public class HealthCategoryFragment extends Fragment implements View.OnClickList
     ClickListener clickListener;
     String healthcategory = "";
     String healthId="";
+    String user_id="25641";
     ArrayList<String>helthIds=new ArrayList<>();
 
     @Override
@@ -144,6 +146,7 @@ public class HealthCategoryFragment extends Fragment implements View.OnClickList
         SaveHealthCateAuthModel model = new SaveHealthCateAuthModel();
         model.setUserId(spManager.getUserId());
         model.setHealth_id(helthIds);
+
         WebServiceModel.getRestApi().saveHealthCategory(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -229,7 +232,7 @@ public class HealthCategoryFragment extends Fragment implements View.OnClickList
         {
             helthIds.remove(healthId);
         }
-        //Log.d("saggi",helthIds.toString());
+        Log.d("saggi",helthIds.toString());
 
       ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 

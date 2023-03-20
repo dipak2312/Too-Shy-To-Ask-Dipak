@@ -79,7 +79,8 @@ public class HomeActivity extends AppCompatActivity {
                 else {
                     item.setChecked(false);
                     GuestLoginPopup.LogOut(context, spManager);
-                    bottom_view.setItemIconTintList(null);
+                    item.setIcon(R.drawable.ask_expert);
+                    bottom_view.setActivated(false);
 
                 }
                 break;
@@ -100,7 +101,8 @@ public class HomeActivity extends AppCompatActivity {
                 else {
                     item.setChecked(false);
                     GuestLoginPopup.LogOut(context, spManager);
-
+                    item.setIcon(R.drawable.setting);
+                    bottom_view.setActivated(false);
                 }
                 break;
 
