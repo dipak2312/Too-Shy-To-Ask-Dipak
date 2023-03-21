@@ -21,6 +21,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.activity.FAQ.FAQActivity;
+import com.example.tooshytoask.activity.Game.GameHomeActivity;
+import com.example.tooshytoask.activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
+import com.example.tooshytoask.activity.Quiz.QuizActivity;
+import com.example.tooshytoask.activity.Setting.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.activity.VideoGallery.VideoGallerySingleActivity;
+import com.example.tooshytoask.activity.story.StoryActivity;
 import com.example.tooshytoask.adapters.NotificationAdapter;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.NotificationAuthModel;
@@ -49,7 +58,7 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     RecyclerView rec_show_notification;
     NotificationAdapter adapter;
     NotificationAdapter.ClearNotification ClearNotification;
-    String action = "clear", notification_id = "";
+    String action = "clear", notification_id = "", notification_read_status = "";
     ArrayList<NotificationList> notificationLists;
 
     @Override
@@ -72,15 +81,6 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         setTitle("");
-        /*clear_all_notification = findViewById(R.id.clear_all_notification);
-        clear_all_notification.setOnClickListener(this);*/
-
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel =
-                    new NotificationChannel("MyNotification", "PushNotification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }*/
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         rec_show_notification.setLayoutManager(linearLayoutManager);
@@ -230,9 +230,6 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
             startActivity(intent);
             finish();
         }
-        /*else if (id == clear_all_notification.getId()){
-            //onCreateOptionsMenu();
-        }*/
 
     }
 
@@ -298,9 +295,106 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
     }
 
     @Override
-    public void ClearNotificationClick(int position, String id) {
+    public void ClearNotificationClick(int position, String id, String status) {
         notification_id = id;
+        notification_read_status =status;
         SingleClearNotificationPopup();
 
+    }
+
+    public void BlogRedirection(int position){
+
+        if (notificationLists.get(position).getType().equals("blog")){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("blog_id",notificationLists.get(position).getId());
+            Intent intent = new Intent(context, DetailBlogActivity.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        } else  if (notificationLists.get(position).getType().equals("storehouse")){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("article_id", notificationLists.get(position).getId());
+            Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("game")){
+            Intent intent = new Intent(context, GameMainPageActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("quiz")){
+            Intent intent = new Intent(context, QuizActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("event")){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("blog_id",notificationLists.get(position).getId());
+            Intent intent = new Intent(context, DetailBlogActivity.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("courses")){
+
+
+        }
+        else  if (notificationLists.get(position).getType().equals("faq")){
+            Intent intent = new Intent(context, FAQActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("story")){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("story_id", notificationLists.get(position).getId());
+            Intent intent = new Intent(context, StoryActivity.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("video")){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("video_link",notificationLists.get(position).getId());
+           // bundle.putString("video_type",notificationLists.get(position).getId());
+            //bundle.putString("video_type",insightvideo.get(getAdapterPosition()).getVideo_type());
+            Intent intent = new Intent(context, VideoGallerySingleActivity.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals("update_profile")){
+            Intent intent = new Intent(context, UpdateProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else  if (notificationLists.get(position).getType().equals(null)){
+
+
+        }
     }
 }

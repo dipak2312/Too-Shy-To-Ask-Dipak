@@ -163,12 +163,13 @@
     <string name="see_all">See All</string>
     <string name="video_gallery">Video Gallery</string>
     <string name="courses">Courses</string>
-    <string name="event">Event</string>
+    <string name="event">Events</string>
     <string name="highlights">Highlights</string>
     <string name="blogs">Blogs</string>
-    <string name="information_storehouse">Information Storehouse</string>
+    <string name="information_storehouse">Information storehouse</string>
     <string name="frequently_asked_question_s">Frequently Asked Question\'s</string>
     <string name="all_categories">All Categories</string>
+    <string name="all">All</string>
     <string name="please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition">Please check out the Information Storehouse section to know more about Diet and Nutrition</string>
     <string name="oops_no_products_found">Oops ! No products found.</string>
 

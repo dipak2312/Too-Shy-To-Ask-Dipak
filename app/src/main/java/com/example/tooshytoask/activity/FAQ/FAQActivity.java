@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Models.faqcontent;
 import com.example.tooshytoask.adapters.FAQAdapter;
 import com.example.tooshytoask.AuthModels.FAQContentAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -39,8 +41,11 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     RecyclerView faq_category_rv;
     ArrayList<faqcategory>faqcategory;
     ArrayList<com.example.tooshytoask.Models.faqcontent>faqcontent;
-    String[] listItems ;
     FAQAdapter faqAdapter;
+    int selectedPosition=0;
+    String[] listItems ;
+    boolean[] checkedItems;
+    Spinner spinner_blogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +64,13 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
 
+        faqcontent = new ArrayList<>();
+
         faq_category_rv = findViewById(R.id.faq_category_rv);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         faq_category_rv.setLayoutManager(linearLayoutManager1);
 
+        getFAQContent("");
         getFAQCategory();
     }
 
@@ -116,6 +124,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
 
                         if (msg.equals("success")){
                             faqcategory = faqCategoryResponse.getFaqcategory();
+
                         }
 
                     }
@@ -135,24 +144,25 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     private void selectCategoryMethod() {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FAQActivity.this);
-        mBuilder.setTitle("All Category");
+        mBuilder.setTitle("All");
 
         String [] categoryListForSingleItem = new String[faqcategory.size()];
-        for (int i = 0; i<faqcategory.size(); i++){
+        categoryListForSingleItem[0]="All";
+        for (int i = 1; i<faqcategory.size(); i++){
 
-            //categoryListForSingleItem[i]=responseAllCategory.getCategories().get(i).getName() ;
+            categoryListForSingleItem[i]=faqcategory.get(i).getTitle() ;
 
         }
 
         if (!faqcategory.isEmpty()){
-            mBuilder.setSingleChoiceItems(categoryListForSingleItem, -1, new DialogInterface.OnClickListener() {
+            mBuilder.setSingleChoiceItems(categoryListForSingleItem, selectedPosition, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int which) {
+                    selectedPosition=which;
 
-
-                    getFAQContent(categoryListForSingleItem[which]);
+                    getFAQContent(which==0?"":faqcategory.get(which-1).getId()+"");
                     if (which==0){
-                        tv_category_selection.setText(categoryListForSingleItem[which]+"Categories");
+                        tv_category_selection.setText(categoryListForSingleItem[which]);
                     }else{
                         tv_category_selection.setText(categoryListForSingleItem[which]);
                     }

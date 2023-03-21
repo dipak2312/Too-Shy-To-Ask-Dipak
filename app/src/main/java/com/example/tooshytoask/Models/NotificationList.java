@@ -6,6 +6,8 @@ public class NotificationList {
     private String message;
     private String image;
     private String datetime;
+    private String read_status;
+    private String type;
 
     public String getId() {
         return id;
@@ -45,5 +47,21 @@ public class NotificationList {
 
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+
+    public String getRead_status() {
+        return read_status;
+    }
+
+    public void setRead_status(String read_status) {
+        this.read_status = read_status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

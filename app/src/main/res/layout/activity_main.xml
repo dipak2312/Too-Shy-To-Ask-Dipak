@@ -54,13 +54,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rel_top_bar">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/caed_view_faq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/margin_3"
+            app:cardCornerRadius="@dimen/margin_7"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_15"
+            android:layout_marginEnd="@dimen/margin_20">
+
                 <RelativeLayout
                     android:id="@+id/selection_button_rl"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40"
-                    android:layout_marginStart="@dimen/margin_20"
-                    android:layout_marginTop="@dimen/margin_15"
-                    android:layout_marginEnd="@dimen/margin_20">
+                    android:layout_height="@dimen/margin_45"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10">
 
 
                     <TextView
@@ -73,7 +82,7 @@
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/all_categories"
+                        android:text="@string/all"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -83,18 +92,20 @@
                         android:layout_height="@dimen/margin_15"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/dropdown_aarow" />
+                        android:src="@drawable/update_arrow" />
                 </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/faq_category_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/selection_button_rl"
+        android:layout_below="@id/caed_view_faq"
         android:layout_marginTop="@dimen/margin_15"
-        android:layout_marginStart="@dimen/margin_15"
-        android:layout_marginEnd="@dimen/margin_15"/>
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"/>
 
 </RelativeLayout>
 </RelativeLayout>

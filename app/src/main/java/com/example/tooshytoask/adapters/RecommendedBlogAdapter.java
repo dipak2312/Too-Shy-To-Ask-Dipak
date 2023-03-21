@@ -1,13 +1,22 @@
 package com.example.tooshytoask.adapters;
 
+import static android.view.View.LAYER_TYPE_SOFTWARE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Paint;
+import android.graphics.RenderEffect;
+import android.graphics.Shader;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +37,8 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
 
-    public RecommendedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.RecommendedBlogs> recommendedBlogs, OnBookmarkClicked onBookmarkClicked) {
+    public RecommendedBlogAdapter(Context context, ArrayList<RecommendedBlogs> recommendedBlogs,
+                                  OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         RecommendedBlogs = recommendedBlogs;
         this.onBookmarkClicked = onBookmarkClicked;
@@ -43,9 +53,10 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendedBlogAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position ) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position ) {
         holder.blog_title.setText(RecommendedBlogs.get(position).getBlog_title());
         Glide.with(context).load(RecommendedBlogs.get(position).getBlog_img()).into(holder.blog_img);
+
 
         if (RecommendedBlogs.get(position).getBlog_boomarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
@@ -85,6 +96,7 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView blog_img, save_img;
         TextView blog_title;
+        RelativeLayout blur_rel_lay;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,6 +104,7 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
+            blur_rel_lay = itemView.findViewById(R.id.blur_rel_lay);
 
 
             blog_img.setOnClickListener(new View.OnClickListener() {

@@ -65,8 +65,8 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     public void onBindViewHolder(@NonNull ChattingAdapter.ViewHolder holder, int position) {
         if(chats.get(position).getType().equals("reply"))
         {
-            holder.reply_que.setText(Html.fromHtml(chats.get(position).getReply()));
-            holder.reply_msg.setText(Html.fromHtml(chats.get(position).getQuestion()));
+            holder.reply_que.setText(Html.fromHtml(chats.get(position).getQuestion()));
+            holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
             holder.txt_expert_chat_date.setText(Html.fromHtml(chats.get(position).getCreated_at()));
         }
         else if(chats.get(position).getType().equals("question"))

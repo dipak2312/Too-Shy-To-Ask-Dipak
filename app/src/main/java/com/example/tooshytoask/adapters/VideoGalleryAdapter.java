@@ -118,6 +118,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
                         Bundle bundle = new Bundle();
 
                         bundle.putString("video_link", link);
+                        bundle.putString("video_type", link);
                         Intent intent = new Intent(context, VideoGallerySingleActivity.class);
                         intent.putExtras(bundle);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

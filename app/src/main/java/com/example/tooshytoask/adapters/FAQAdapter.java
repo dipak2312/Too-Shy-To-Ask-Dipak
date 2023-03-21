@@ -2,6 +2,7 @@ package com.example.tooshytoask.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tooshytoask.Models.faqcontent;
 import com.example.tooshytoask.R;
 
 import java.util.ArrayList;
 
 public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ViewHolder> {
     Context context;
-    ArrayList<com.example.tooshytoask.Models.faqcontent> faqcontent;
+    ArrayList<faqcontent> faqcontent;
 
-    public FAQAdapter(Context context, ArrayList<com.example.tooshytoask.Models.faqcontent> faqcontent) {
+    public FAQAdapter(Context context, ArrayList<faqcontent> faqcontent) {
         this.context = context;
         this.faqcontent = faqcontent;
     }
@@ -37,8 +39,8 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FAQAdapter.ViewHolder holder, int position) {
-        holder.qsnView.setText(faqcontent.get(position).getTitle());
-        holder.ansView.setText(faqcontent.get(position).getContent());
+        holder.qsnView.setText(Html.fromHtml(faqcontent.get(position).getTitle()));
+        holder.ansView.setText(Html.fromHtml(faqcontent.get(position).getContent()));
 
 
         boolean isExpandable = faqcontent.get(position).isExpandable();
@@ -49,19 +51,19 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ViewHolder> {
         Typeface tf_regular = Typeface.createFromAsset(context.getAssets(), "font/worksansmedium.ttf");
         if (faqcontent.get(position).isExpandable()){
             holder.qsnView.setTypeface(tf_regular,Typeface.NORMAL);
-            holder.ansView.setTypeface(tf_regular);
-            //holder.showAnswer.setImageResource(R.drawable.ic_back);
+            //holder.ansView.setTypeface(tf_regular);
+            holder.showAnswer.setImageResource(R.drawable.down_arrow);
 
-            //holder.cardViewMain.setBackground(context.getResources().getDrawable(R.drawable.rectangle_pink_border));
-            //holder.qsnView.setTextColor(context.getResources().getColor(R.color.colorAccentMy));
+           // holder.cardViewMain.setBackground(context.getResources().getDrawable(R.drawable.rectangle_pink_border));
+            //holder.qsnView.setTextColor(context.getResources().getColor(R.color.purple));
             holder.qsnView.setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
         }else {
             holder.qsnView.setTypeface(tf_regular,Typeface.NORMAL);
-            holder.ansView.setTypeface(tf_regular);
-            holder.showAnswer.setImageResource(R.drawable.add);
-            //holder.cardViewMain.setBackground(context.getResources().getDrawable(R.drawable.reactangle_with_corner_radius_8_white));
+            //holder.ansView.setTypeface(tf_regular);
+            holder.showAnswer.setImageResource(R.drawable.update_arrow);
+           // holder.cardViewMain.setBackground(context.getResources().getDrawable(R.drawable.reactangle_with_corner_radius_8_white));
 
-            holder.qsnView.setTextColor(context.getResources().getColor(R.color.black));
+           // holder.qsnView.setTextColor(context.getResources().getColor(R.color.black));
 
             holder.qsnView.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
         }
@@ -93,8 +95,8 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ViewHolder> {
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Question model = questionList.get(getAdapterPosition());
-                    //model.setExpandable(!model.isExpandable());
+                   faqcontent model = faqcontent.get(getAdapterPosition());
+                    model.setExpandable(!model.isExpandable());
 
 
 

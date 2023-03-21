@@ -6,6 +6,7 @@ public class insightvideo {
     private String link;
     private String coverimage;
     private String bookmarked;
+    private String video_type;
 
     public String getId() {
         return id;
@@ -45,5 +46,13 @@ public class insightvideo {
 
     public void setBookmarked(String bookmarked) {
         this.bookmarked = bookmarked;
+    }
+
+    public String getVideo_type() {
+        return video_type;
+    }
+
+    public void setVideo_type(String video_type) {
+        this.video_type = video_type;
     }
 }

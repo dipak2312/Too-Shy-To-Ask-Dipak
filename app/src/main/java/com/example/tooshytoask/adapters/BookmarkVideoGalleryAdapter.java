@@ -66,6 +66,7 @@ public class BookmarkVideoGalleryAdapter extends RecyclerView.Adapter<BookmarkVi
                     Bundle bundle = new Bundle();
 
                     bundle.putString("video_link",videobookmarks.get(getAdapterPosition()).getLink());
+                    //bundle.putString("video_type",videobookmarks.get(getAdapterPosition()).getVideo_type());
                     Intent intent = new Intent(context, VideoGallerySingleActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

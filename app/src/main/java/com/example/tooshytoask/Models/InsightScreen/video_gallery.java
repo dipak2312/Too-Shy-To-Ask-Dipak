@@ -6,6 +6,7 @@ public class video_gallery {
     private String link;
     private String bookmarked;
     private String coverimage;
+    private String video_type;
 
     public String getId() {
         return id;
@@ -45,5 +46,13 @@ public class video_gallery {
 
     public void setCoverimage(String coverimage) {
         this.coverimage = coverimage;
+    }
+
+    public String getVideo_type() {
+        return video_type;
+    }
+
+    public void setVideo_type(String video_type) {
+        this.video_type = video_type;
     }
 }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.InsightScreen.video_gallery;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.google.android.exoplayer2.MediaItem;
@@ -23,6 +24,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,12 +32,13 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    static String video_link ="";
+    static String video_link ="", video_type = "";
     String url;
     PlayerView styledPlayerView;
     SimpleExoPlayer player;
     YouTubePlayerView youTubePlayerView;
     ConcatenatingMediaSource concatenatingMediaSource;
+    ArrayList<video_gallery> video_gallery;
 
 
     @Override
@@ -52,31 +55,36 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
 
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         getLifecycle().addObserver(youTubePlayerView);
-        video_link = getIntent().getStringExtra("video_link");
 
-        //videoPlay();
-        getYouTubeId();
+        video_gallery = new ArrayList<>();
+
+        video_link = getIntent().getStringExtra("video_link");
+        video_type = getIntent().getStringExtra("video_type");
+
+        VideoPlayerSet();
+
 
     }
 
-    public static String getVideoId(String video_url) {
-        String url = video_link;
-        video_link = video_link.replace("https://","http://");
-        Pattern pattern = Pattern.compile(
-                "http(?:s)?:\\/\\/(?:m.)?(?:www\\.)?youtu(?:\\.be\\/|(?:be-nocookie|be)\\.com\\/(?:watch|[\\w]+\\?(?:feature=[\\w]+.[\\w]+\\&)?v=|v\\/|e\\/|embed\\/|live\\/|user\\/(?:[\\w#]+\\/)+))([^&#?\\n]+)",
-                Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(video_url);
-        if (matcher.matches()){
-            url = matcher.group(1);
+    public void VideoPlayerSet(){
+            if (video_type.equals("Youtube")){
+                youTubePlayerView.setVisibility(View.VISIBLE);
+                styledPlayerView.setVisibility(View.GONE);
+                getYouTubeId();
+            }
+            else if (video_type.equals("Media")){
+                youTubePlayerView.setVisibility(View.GONE);
+                styledPlayerView.setVisibility(View.VISIBLE);
+                videoPlay();
+
         }
-        return url;
     }
 
     private String getYouTubeId () {
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                String videoId = "S0Q4gqBUs7c";
+                String videoId = "Cm2vzY728L0";
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });

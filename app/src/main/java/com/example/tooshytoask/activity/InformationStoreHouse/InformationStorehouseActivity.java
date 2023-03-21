@@ -2,6 +2,7 @@ package com.example.tooshytoask.activity.InformationStoreHouse;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +41,8 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     CustomProgressDialog dialog;
     TextView storehouse_title, tv_category_selection;
     ImageView bookmark_blog, selection_category;
-    RelativeLayout categories, rel_back;
+    RelativeLayout rel_back;
+    CardView categories;
     RecyclerView storehouse_recy;
     StoreHouseListingAdapter adapter;
     ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>dataList;

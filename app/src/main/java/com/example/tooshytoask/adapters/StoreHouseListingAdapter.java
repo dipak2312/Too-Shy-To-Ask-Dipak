@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,14 +40,14 @@ public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseLis
     @NonNull
     @Override
     public StoreHouseListingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bookmark_storehouse_item_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recently_blog_items,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoreHouseListingAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(data.get(position).getArticle_image()).into(holder.storehouse_items_img);
-        holder.storehouse_item_txt.setText(data.get(position).getArticle_name());
+        Glide.with(context).load(data.get(position).getArticle_image()).into(holder.blog_img);
+        holder.blog_title.setText(data.get(position).getArticle_name());
 
         if (data.get(position).getBookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
@@ -82,20 +83,20 @@ public class StoreHouseListingAdapter extends RecyclerView.Adapter<StoreHouseLis
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ShapeableImageView storehouse_items_img;
-        TextView storehouse_item_txt;
+        ShapeableImageView blog_img;
+        TextView blog_title;
         ImageView save_img;
-        LinearLayout storehouse_lay;
+        CardView card_view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            storehouse_items_img = itemView.findViewById(R.id.storehouse_items_img);
-            storehouse_item_txt = itemView.findViewById(R.id.storehouse_item_txt);
+            blog_img = itemView.findViewById(R.id.blog_img);
+            blog_title = itemView.findViewById(R.id.blog_title);
             save_img = itemView.findViewById(R.id.save_img);
-            storehouse_lay = itemView.findViewById(R.id.storehouse_lay);
+            card_view = itemView.findViewById(R.id.card_view);
 
-            storehouse_lay.setOnClickListener(new View.OnClickListener() {
+            card_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();

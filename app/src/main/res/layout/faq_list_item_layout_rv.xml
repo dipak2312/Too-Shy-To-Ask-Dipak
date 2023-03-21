@@ -6,11 +6,9 @@
     android:orientation="vertical"
     android:background="#F3F3FA"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
+    app:cardElevation="0dp"
     android:id="@+id/main_card_at_faq_item"
-    android:layout_marginLeft="@dimen/margin_5"
     android:layout_marginTop="3dp"
-    android:layout_marginRight="@dimen/margin_5"
     android:layout_marginBottom="4dp">
 
     <LinearLayout
@@ -27,9 +25,7 @@
             android:id="@+id/rel_question_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_15"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="@dimen/margin_15"
             android:layout_marginBottom="8dp"
           >
 
@@ -55,7 +51,7 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
                 android:padding="2dp"
-                android:src="@drawable/add" />
+                android:src="@drawable/update_arrow" />
 
 
 
@@ -65,9 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/expandable"
-            android:layout_marginLeft="@dimen/margin_15"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="@dimen/margin_15"
             android:layout_marginBottom="8dp">
 
             <TextView
@@ -75,12 +69,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/worksansmedium"
+                android:fontFamily="@font/worksansregular"
                 android:text="Answer 1"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
             </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:alpha="0.5"
+            android:background="@color/line_color"/>
 
         </LinearLayout>
 

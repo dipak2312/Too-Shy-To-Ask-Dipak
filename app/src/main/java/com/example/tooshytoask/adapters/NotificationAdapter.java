@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -46,9 +47,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.single_notification_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClearNotification.ClearNotificationClick(position,notificationLists.get(position).getId());
+                ClearNotification.ClearNotificationClick(position,notificationLists.get(position).getId(),
+                        notificationLists.get(position).getRead_status());
             }
         });
+
+        if (notificationLists.get(position).getRead_status().equals("read")){
+            holder.notification_lay.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
+
+        } else  if (notificationLists.get(position).getRead_status().equals("unread")){
+
+            holder.notification_lay.setBackgroundColor(ContextCompat.getColor(context,R.color.notification_unread));
+        }
 
     }
 
@@ -80,7 +90,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public interface ClearNotification{
-        public void ClearNotificationClick(int position, String id);
+        public void ClearNotificationClick(int position, String id, String status);
 
     }
 }
