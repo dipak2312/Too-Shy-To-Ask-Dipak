@@ -192,4 +192,8 @@
     <string name="correct_answer_is">The correct answer is:</string>
     <string name="comments">Comments</string>
 
+    //courses
+    <string name="completed">Completed</string>
+    <string name="now_playing">Now Playing</string>
+
 </resources>

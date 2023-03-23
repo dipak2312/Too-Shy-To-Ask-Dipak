@@ -380,7 +380,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                 startActivity(intent);
 
             }
-        } else {
+        }
+        else {
             if (id == game_banner.getId()) {
                 Intent intent = new Intent(context, GameMainPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -391,6 +392,19 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+            else if (id == see_all.getId()) {
+                Intent intent = new Intent(context, AllBlogsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            } else if (id == see_all2.getId()) {
+                Intent intent = new Intent(context, AllEventActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
             }
 
         }

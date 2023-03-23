@@ -3,7 +3,6 @@ package com.example.tooshytoask.API;
 import com.example.tooshytoask.AuthModels.AllBlogAuthModel;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
 import com.example.tooshytoask.AuthModels.AllEventAuthModel;
-import com.example.tooshytoask.AuthModels.AllHighlightAuthModel;
 import com.example.tooshytoask.AuthModels.AllStoreHouseAuthModel;
 import com.example.tooshytoask.AuthModels.AllVideoGalleryAuthModel;
 import com.example.tooshytoask.AuthModels.AskIssuesAuthModel;
@@ -15,6 +14,8 @@ import com.example.tooshytoask.AuthModels.BlogLikeAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
+import com.example.tooshytoask.AuthModels.CoursesDetailAuthModel;
+import com.example.tooshytoask.AuthModels.CoursesEnrollAuthModel;
 import com.example.tooshytoask.AuthModels.ExpertReplyAuthModel;
 import com.example.tooshytoask.AuthModels.FAQContentAuthModel;
 import com.example.tooshytoask.AuthModels.FeedbackAuthModel;
@@ -55,12 +56,13 @@ import com.example.tooshytoask.AuthModels.UserProfileAuthModel;
 import com.example.tooshytoask.Models.AllBlogResponse;
 import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.AllEventResponse;
-import com.example.tooshytoask.Models.AllHighlightResponse;
 import com.example.tooshytoask.AuthModels.BookmarkAuthModel;
 import com.example.tooshytoask.Models.AskExpert.AskIssuesResponse;
 import com.example.tooshytoask.Models.AskIssuesFeedbackResponse;
 import com.example.tooshytoask.Models.AskQuestionsResponse;
 import com.example.tooshytoask.Models.BookmarkResponse;
+import com.example.tooshytoask.Models.Courses.CoursesDetailResponse;
+import com.example.tooshytoask.Models.Courses.CoursesEnrollResponse;
 import com.example.tooshytoask.Models.ExpertReplyResponse;
 import com.example.tooshytoask.Models.GameScoreResponse;
 import com.example.tooshytoask.Models.GameTimeAuthModel;
@@ -204,10 +206,6 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/insightevents")
     Observable<AllEventResponse> getEventBlogs(@Body AllEventAuthModel model);
-
-    @Headers("Content-Type: application/json")
-    @POST("api/insightcourses")
-    Observable<AllCoursesResponse> getCoursesBlogs(@Body AllCoursesAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/insightvideogallery")
@@ -355,5 +353,16 @@ public interface WebServices {
     @POST("api/infostorehouse_titles")
     Observable<AskIssuesResponse> getAskIssues(@Body AskIssuesAuthModel model);
 
+    @Headers("Content-Type: application/json")
+    @POST("api/insightcourses")
+    Observable<AllCoursesResponse> getCoursesBlogs(@Body AllCoursesAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/enrollcourse")
+    Observable<CoursesEnrollResponse> getCoursesEnroll(@Body CoursesEnrollAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/coursebyid")
+    Observable<CoursesDetailResponse> getCoursesDetail(@Body CoursesDetailAuthModel model);
 
 }

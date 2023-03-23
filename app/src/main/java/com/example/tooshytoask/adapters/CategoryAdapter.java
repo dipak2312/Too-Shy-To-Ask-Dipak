@@ -39,15 +39,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-       //holder.category_title.setText(informationStorehouseList.get(position).getTitle());
-       //Glide.with(context).load(informationStorehouseList.get(position).getImg()).into(holder.cate_img);
        holder.InformationStorehouseList(informationStorehouseList.get(position),position);
     }
 
     @Override
     public int getItemCount() {
         return informationStorehouseList.size();
-        /*informationStorehouseLists == null ? 0 :*/
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -43,12 +43,9 @@ public class HealthCategoryFragment extends Fragment implements View.OnClickList
     CategoryAdapter adapter;
     ArrayList<InformationStorehouseList>informationStorehouseList;
     TextView skip_btn;
-    OnClickListner onclicklistener;
     ImageButton next_btn;
     ClickListener clickListener;
-    String healthcategory = "";
     String healthId="";
-    String user_id="25641";
     ArrayList<String>helthIds=new ArrayList<>();
 
     @Override

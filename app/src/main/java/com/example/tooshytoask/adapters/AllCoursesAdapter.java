@@ -1,6 +1,8 @@
 package com.example.tooshytoask.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +19,8 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.insightcourses;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
+import com.example.tooshytoask.activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
 
 import java.util.ArrayList;
 
@@ -34,11 +39,10 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
         this.spManager = spManager;
     }
 
-
     @NonNull
     @Override
     public AllCoursesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_courses_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.courses_listing_item,parent,false);
         return new ViewHolder(view);
     }
 
@@ -88,8 +92,9 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView blog_img, save_img, lock_img;
+        ImageView blog_img, save_img, lock_img, courses_status;
         TextView courses_title, course_time, lessons;
+        CardView card_view_courses;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +105,22 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
             course_time = itemView.findViewById(R.id.course_time);
             lessons = itemView.findViewById(R.id.lessons);
             lock_img = itemView.findViewById(R.id.lock_img);
+            courses_status = itemView.findViewById(R.id.courses_status);
+            card_view_courses = itemView.findViewById(R.id.card_view_courses);
+
+            card_view_courses.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("courses_id",insightcourses.get(getAdapterPosition()).getId());
+                    Intent intent = new Intent(context, CoursesDetailActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

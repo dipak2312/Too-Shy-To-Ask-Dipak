@@ -1,6 +1,8 @@
 package com.example.tooshytoask.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -62,6 +65,21 @@ public class BookmarkCoursesAdapter extends RecyclerView.Adapter<BookmarkCourses
             courses_title = itemView.findViewById(R.id.courses_title);
             course_time = itemView.findViewById(R.id.course_time);
             lessons = itemView.findViewById(R.id.lessons);
+            card_view_courses = itemView.findViewById(R.id.card_view_courses);
+
+            card_view_courses.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("courses_id",courses.get(getAdapterPosition()).getBookmark_postid());
+                    Intent intent = new Intent(context, CoursesDetailActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

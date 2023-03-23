@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_courses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/margin_7"
+        android:elevation="@dimen/margin_2"
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_5"
+        android:layout_marginEnd="@dimen/margin_5">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_10">
+
+        <TextView
+            android:id="@+id/sr_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/worksansmedium"
+            android:textSize="@dimen/text_size25"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/lesson_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Introduction to the class"
+            android:layout_toEndOf="@id/sr_no"
+            android:layout_marginStart="@dimen/margin_15"
+            android:fontFamily="@font/worksansmedium"
+            android:textSize="@dimen/text_size15"
+            android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:id="@+id/time_lin_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/lesson_title"
+                android:layout_toEndOf="@id/sr_no"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginStart="@dimen/margin_15">
+
+                <TextView
+                    android:id="@+id/lesson_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15m"
+                    android:textColor="@color/line_color"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size12"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="●"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:textColor="@color/purple"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size8"/>
+
+
+
+                <TextView
+                    android:id="@+id/quiz_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:textColor="@color/line_color"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size12"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Tests"
+                    android:textColor="@color/line_color"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size12"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lesson_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_below="@id/lesson_title"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_toEndOf="@id/sr_no"
+                android:layout_marginStart="@dimen/margin_15"
+                android:fontFamily="@font/worksansmedium"
+                android:textSize="@dimen/text_size15"
+                android:textColor="@color/line_color"/>
+
+            <ImageView
+                android:id="@+id/lesson_status_img"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/lesson_lock"
+                android:layout_marginEnd="@dimen/margin_10"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

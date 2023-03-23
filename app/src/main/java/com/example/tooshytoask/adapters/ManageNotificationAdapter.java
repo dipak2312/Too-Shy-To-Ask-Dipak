@@ -80,14 +80,13 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
 
                     if (dataNotification.status){
                         dataNotification.setStatus(true);
-                        on_off_status.setText(R.string.off);
+                        on_off_status.setText(R.string.on);
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
                     }
                      else {
                         dataNotification.setStatus(false);
-                        on_off_status.setText(R.string.on);
+                        on_off_status.setText(R.string.off);
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
-
                     }
 
                 }

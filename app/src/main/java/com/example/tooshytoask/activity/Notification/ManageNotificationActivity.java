@@ -172,32 +172,16 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
         if(dataNotification.get(position).status)
         {
             module_ids.add(module_id);
-
+            getManageNotificationUpdate();
         }
         else
         {
             module_ids.remove(module_id);
-
+            getManageNotificationUpdate();
         }
         Log.d("saggi",module_ids.toString());
 
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 
-        for(int i=0;i<dataNotification.size();i++)
-        {
-            myvalue.add(dataNotification.get(i).getStatus());
-        }
 
-        boolean ans = myvalue.contains(true);
-
-        if(ans)
-        {
-
-            getManageNotificationUpdate();
-
-        }else
-        {
-            getManageNotificationUpdate();
-        }
     }
 }

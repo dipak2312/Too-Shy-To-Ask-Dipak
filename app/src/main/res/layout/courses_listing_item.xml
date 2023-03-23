@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_courses"
-        android:layout_width="@dimen/margin_210"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/infocard_shadow"
@@ -17,11 +17,10 @@
         app:cardCornerRadius="@dimen/margin_7">
 
         <LinearLayout
-            android:layout_width="@dimen/margin_210"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/help_background"
-            android:layout_marginEnd="@dimen/margin_10">
+            android:background="@drawable/help_background">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -29,7 +28,7 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/blog_img"
-                    android:layout_width="@dimen/margin_210"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_160"
                     android:background="@drawable/status_background"
                     android:scaleType="centerCrop"
@@ -75,10 +74,9 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_10"/>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_below="@+id/courses_title"
                     android:layout_marginStart="@dimen/margin_5"
                     android:layout_marginEnd="@dimen/margin_5"
@@ -95,14 +93,16 @@
                         android:textSize="@dimen/text_size12"/>
 
                     <TextView
+                        android:id="@+id/dot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="●"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/course_time"
                         android:layout_marginStart="@dimen/margin_10"
                         android:textColor="@color/purple"
                         android:fontFamily="@font/worksansregular"
-                        android:textSize="@dimen/margin_10"/>
-
+                        android:textSize="@dimen/text_size8"/>
 
 
                     <TextView
@@ -110,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7"
+                        android:layout_toEndOf="@id/dot"
                         android:layout_marginStart="@dimen/margin_10"
                         android:textColor="@color/line_color"
                         android:fontFamily="@font/worksansregular"
@@ -119,12 +120,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Lessons"
+                        android:layout_toEndOf="@id/lessons"
                         android:textColor="@color/line_color"
                         android:fontFamily="@font/worksansregular"
                         android:textSize="@dimen/text_size12"/>
 
+                    <ImageView
+                        android:id="@+id/courses_status"
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:src="@drawable/lesson_uncomplete"
+                        android:layout_alignParentEnd="true"/>
 
-                </LinearLayout>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 

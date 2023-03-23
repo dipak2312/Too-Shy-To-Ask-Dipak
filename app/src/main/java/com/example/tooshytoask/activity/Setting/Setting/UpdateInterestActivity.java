@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -202,5 +203,6 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         {
             helthIds.remove(healthId);
         }
+        Log.d("dipak",helthIds.toString());
     }
 }

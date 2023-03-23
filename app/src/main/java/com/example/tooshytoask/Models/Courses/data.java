@@ -1,15 +1,17 @@
-package com.example.tooshytoask.Models;
+package com.example.tooshytoask.Models.Courses;
 
-public class insightcourses {
+import java.util.ArrayList;
+
+public class data {
     private String id;
     private String title;
     private String description;
     private String image;
     private String videolink;
     private String timing;
+    private String currentcourse;
     private String total_lesson;
-    private String enrolled;
-    private String bookmarked;
+    ArrayList<lesson>lesson;
 
     public String getId() {
         return id;
@@ -59,6 +61,14 @@ public class insightcourses {
         this.timing = timing;
     }
 
+    public String getCurrentcourse() {
+        return currentcourse;
+    }
+
+    public void setCurrentcourse(String currentcourse) {
+        this.currentcourse = currentcourse;
+    }
+
     public String getTotal_lesson() {
         return total_lesson;
     }
@@ -67,18 +77,11 @@ public class insightcourses {
         this.total_lesson = total_lesson;
     }
 
-    public String getBookmarked() {
-        return bookmarked;
+    public ArrayList<com.example.tooshytoask.Models.Courses.lesson> getLesson() {
+        return lesson;
     }
 
-    public void setBookmarked(String bookmarked) {
-        this.bookmarked = bookmarked;
-    }
-    public String getEnrolled() {
-        return enrolled;
-    }
-
-    public void setEnrolled(String enrolled) {
-        this.enrolled = enrolled;
+    public void setLesson(ArrayList<com.example.tooshytoask.Models.Courses.lesson> lesson) {
+        this.lesson = lesson;
     }
 }

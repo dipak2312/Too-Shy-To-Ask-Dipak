@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.AuthModels.CoursesEnrollAuthModel;
+import com.example.tooshytoask.Models.Courses.CoursesEnrollResponse;
 import com.example.tooshytoask.activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.adapters.AllCoursesAdapter;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;
@@ -40,7 +42,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
     ImageView bookmark_blog;
     ArrayList<insightcourses> insightcourses;
     AllCoursesAdapter adapter;
-    String blog_id = "", type = "blog",actions = "";
+    String courses_id = "", type = "blog",actions = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,10 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
         courses_recy = findViewById(R.id.courses_recy);
         courses_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
 
+
+
         getCoursesBlogs();
+        getCoursesEnroll();
     }
 
     public void getCoursesBlogs(){
@@ -103,7 +108,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
 
         BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
         model.setUser_id(spManager.getUserId());
-        model.setPost_id(blog_id);
+        model.setPost_id(courses_id);
         model.setType(type);
         model.setAction(action);
 
@@ -137,6 +142,40 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                 });
     }
 
+    public void getCoursesEnroll(){
+
+        CoursesEnrollAuthModel model = new CoursesEnrollAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setCourse_id(courses_id);
+
+        WebServiceModel.getRestApi().getCoursesEnroll(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<CoursesEnrollResponse>() {
+                    @Override
+                    public void onNext(CoursesEnrollResponse coursesEnrollResponse) {
+                        String msg = coursesEnrollResponse.getMsg();
+
+                        if (msg.equals("Course Enrolled")){
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -155,7 +194,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onBookmarkButtonClick(int position, String Blog_id, String action) {
-        blog_id = Blog_id;
+        courses_id = Blog_id;
         actions = action;
         getBookmarkBlogs(action);
     }
