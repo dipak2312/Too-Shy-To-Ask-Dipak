@@ -8,6 +8,7 @@ public class NotificationList {
     private String datetime;
     private String read_status;
     private String type;
+    private String typeid;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class NotificationList {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTypeid() {
+        return typeid;
+    }
+
+    public void setTypeid(String typeid) {
+        this.typeid = typeid;
     }
 }

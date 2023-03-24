@@ -13,58 +13,57 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.tooshytoask.Helper.SPManager;
+import com.example.tooshytoask.Models.Courses.Lesson.data;
+import com.example.tooshytoask.Models.Courses.Lesson.upcominglesson;
 import com.example.tooshytoask.Models.Courses.lesson;
-import com.example.tooshytoask.Models.insightcourses;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
 import com.example.tooshytoask.activity.Courses.LessonDetailActivity;
 
 import java.util.ArrayList;
 
-public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
+public class UpcomingLessonAdapter extends RecyclerView.Adapter<UpcomingLessonAdapter.ViewHolder> {
     Context context;
-    ArrayList<lesson>lesson;
+    ArrayList<upcominglesson>upcominglesson;
+    ArrayList<data> data;
 
-    public LessonAdapter(Context context, ArrayList<lesson> lesson) {
+    public UpcomingLessonAdapter(Context context, ArrayList<upcominglesson> upcominglesson, ArrayList<data> data) {
         this.context = context;
-        this.lesson = lesson;
+        this.upcominglesson = upcominglesson;
+        this.data = data;
     }
 
 
     @NonNull
     @Override
-    public LessonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UpcomingLessonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lessons_item_views,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LessonAdapter.ViewHolder holder, int position) {
-        holder.lesson_title.setText(Html.fromHtml(lesson.get(position).getTitle()));
-        holder.sr_no.setText(Html.fromHtml(lesson.get(position).getSno()));
-        holder.lesson_time.setText(Html.fromHtml(lesson.get(position).getTiming()));
-        holder.quiz_count.setText(Html.fromHtml(lesson.get(position).getQuiz()));
+    public void onBindViewHolder(@NonNull UpcomingLessonAdapter.ViewHolder holder, int position) {
+        holder.lesson_title.setText(Html.fromHtml(upcominglesson.get(position).getTitle()));
+        holder.sr_no.setText(Html.fromHtml(upcominglesson.get(position).getSno()));
+        holder.lesson_time.setText(Html.fromHtml(upcominglesson.get(position).getTiming()));
+        holder.quiz_count.setText(Html.fromHtml(upcominglesson.get(position).getQuiz()));
 
-        if (lesson.get(position).getLesson_status().equals("completed")){
+        if (upcominglesson.get(position).getLesson_status().equals("completed")){
             holder.lesson_status.setText(R.string.completed);
             holder.lesson_status_img.setImageResource(R.drawable.lesson_complete);
             holder.lesson_status.setVisibility(View.VISIBLE);
             holder.time_lin_lay.setVisibility(View.GONE);
         }
-        else if (lesson.get(position).getLesson_status().equals("pending")){
+        else if (upcominglesson.get(position).getLesson_status().equals("pending")){
             holder.lesson_status.setText(R.string.now_playing);
             holder.lesson_status_img.setImageResource(R.drawable.lesson_inprogress);
             holder.lesson_status.setVisibility(View.VISIBLE);
             holder.time_lin_lay.setVisibility(View.GONE);
         }
 
-        else if (lesson.get(position).getLesson_status().equals("")){
+        else if (upcominglesson.get(position).getLesson_status().equals("")){
             holder.time_lin_lay.setVisibility(View.VISIBLE);
             holder.lesson_status.setVisibility(View.GONE);
             holder.lesson_status_img.setImageResource(R.drawable.lesson_lock);
@@ -74,7 +73,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return lesson.size();
+        return upcominglesson.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -101,8 +100,8 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("lesson_id",lesson.get(getAdapterPosition()).getId());
-                    bundle.putString("courses_id",lesson.get(getAdapterPosition()).getCourse_id());
+                    bundle.putString("lesson_id",upcominglesson.get(getAdapterPosition()).getId());
+                    bundle.putString("courses_id",data.get(getAdapterPosition()).getCourseid());
                     Intent intent = new Intent(context, LessonDetailActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

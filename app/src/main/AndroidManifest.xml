@@ -21,6 +21,9 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".activity.Courses.LessonDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.Courses.CoursesDetailActivity"
             android:exported="true" />
         <activity
@@ -39,7 +42,9 @@
         </activity>
         <activity
             android:name=".activity.Courses.AllCoursesActivity"
-            android:exported="true" />
+            android:exported="true" >
+
+        </activity>
         <activity
             android:name=".activity.Blogs.AllEventActivity"
             android:exported="true" />
@@ -63,7 +68,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.VideoGallery.VideoGallerySingleActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.InformationStoreHouse.InformationStoreHouseDetailActivity"
             android:exported="true" />
@@ -132,7 +137,7 @@
         </activity>
         <activity
             android:name=".activity.story.StoryInfoActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.Blogs.AllBlogsActivity"
             android:exported="true">
@@ -223,6 +228,7 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
@@ -253,12 +259,12 @@
         <activity
             android:name=".activity.Landing.SplashScreenActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

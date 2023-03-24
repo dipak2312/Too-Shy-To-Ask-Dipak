@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".activity.Courses.CoursesDetailActivity">
+    tools:context=".activity.Courses.LessonDetailActivity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"
@@ -70,10 +69,12 @@
                     android:id="@+id/styled_player_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:touchscreenBlocksFocus="true"
                     app:resize_mode="fit"
                     app:show_timeout="0"
-                    app:use_controller="true"
-                    app:surface_type="surface_view"/>
+                    app:use_artwork="false"
+                    app:use_controller="false"
+                    app:surface_type="texture_view"/>
 
                 <ImageView
                     android:id="@+id/courses_img"
@@ -105,49 +106,6 @@
                     android:textSize="@dimen/text_size18"
                     android:text="Dipak"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/courses_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/worksansregular"
-                    android:text=""
-                    android:textColor="@color/line_color"
-                    android:textSize="@dimen/text_size14"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="●"
-                        android:layout_marginStart="@dimen/margin_10"
-                        android:textColor="@color/purple"
-                        android:fontFamily="@font/worksansregular"
-                        android:textSize="@dimen/margin_10"/>
-
-                    <TextView
-                        android:id="@+id/lessions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/worksansregular"
-                        android:layout_marginStart="@dimen/margin_10"
-                        android:text=""
-                        android:textColor="@color/line_color"
-                        android:textSize="@dimen/text_size14"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/worksansregular"
-                        android:text=" Lessons"
-                        android:textColor="@color/line_color"
-                        android:textSize="@dimen/text_size14"/>
-
-                </LinearLayout>
-
                 <TextView
                     android:id="@+id/courses_description"
                     android:layout_width="wrap_content"
@@ -162,6 +120,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/upcoming_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lin_description"
@@ -169,12 +128,58 @@
                 android:layout_marginStart="@dimen/margin_15"
                 android:layout_marginEnd="@dimen/margin_15">
 
+                <TextView
+                    android:id="@+id/lession_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming Lessons"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:textSize="@dimen/text_size18"
+                    android:fontFamily="@font/worksansregular"/>
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/all_lessons"
+                    android:id="@+id/upcoming_lessons"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_below="@+id/lession_title"/>
 
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/complete_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:includeFontPadding="false"
+                android:text="@string/complete"
+                android:layout_below="@id/upcoming_lay"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginBottom="@dimen/margin_30"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansbold"
+                android:background="@drawable/active_con_btn"
+                android:layout_alignParentEnd="true"/>
+
+            <Button
+                android:id="@+id/quiz_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:includeFontPadding="false"
+                android:text="@string/take_a_test"
+                android:layout_below="@id/upcoming_lay"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_30"
+                android:layout_marginBottom="@dimen/margin_30"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansbold"
+                android:background="@drawable/active_con_btn"
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 

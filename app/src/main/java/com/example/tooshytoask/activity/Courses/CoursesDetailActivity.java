@@ -1,7 +1,6 @@
 package com.example.tooshytoask.activity.Courses;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.AuthModels.CoursesDetailAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
-import com.example.tooshytoask.Models.AllCoursesResponse;
 import com.example.tooshytoask.Models.Courses.CoursesDetailResponse;
 import com.example.tooshytoask.Models.Courses.data;
 import com.example.tooshytoask.Models.Courses.lesson;
@@ -107,20 +105,24 @@ public class CoursesDetailActivity extends AppCompatActivity {
                                 lessions.setText(Html.fromHtml(data.get(0).getCurrentcourse()));
                                 video_link = data.get(0).getVideolink();
 
+
                                 if (data.get(0).getImage() != null) {
                                     courses_img.setVisibility(View.VISIBLE);
+                                    styledPlayerView.setVisibility(View.GONE);
                                     Glide.with(context).load(data.get(0).getImage()).into(courses_img);
 
                                 }
-                                if (data.get(0).getImage() == null) {
-                                    courses_img.setVisibility(View.GONE);
-                                }
+
                                 if (data.get(0).getVideolink() != null) {
                                     styledPlayerView.setVisibility(View.VISIBLE);
+                                    courses_img.setVisibility(View.GONE);
                                     videoPlay();
                                 }
-                                if (data.get(0).getVideolink() == null) {
-                                    styledPlayerView.setVisibility(View.GONE);
+
+                                if (data.get(0).getVideolink() != null && data.get(0).getImage() != null) {
+                                    styledPlayerView.setVisibility(View.VISIBLE);
+                                    courses_img.setVisibility(View.GONE);
+
                                 }
                             }
                             if (lesson != null){

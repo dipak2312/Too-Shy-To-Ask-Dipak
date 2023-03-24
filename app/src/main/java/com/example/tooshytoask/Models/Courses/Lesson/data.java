@@ -1,22 +1,18 @@
-package com.example.tooshytoask.Models.Courses;
+package com.example.tooshytoask.Models.Courses.Lesson;
 
-public class lesson {
-    private String sno;
+import java.util.ArrayList;
+
+public class data {
     private String id;
+    private String courseid;
     private String title;
+    private String description;
     private String image;
+    private String video;
     private String timing;
     private String quiz;
     private String lesson_status;
-    private String course_id;
-
-    public String getSno() {
-        return sno;
-    }
-
-    public void setSno(String sno) {
-        this.sno = sno;
-    }
+    ArrayList<upcominglesson>upcominglesson;
 
     public String getId() {
         return id;
@@ -24,6 +20,14 @@ public class lesson {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCourseid() {
+        return courseid;
+    }
+
+    public void setCourseid(String courseid) {
+        this.courseid = courseid;
     }
 
     public String getTitle() {
@@ -34,12 +38,28 @@ public class lesson {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
     }
 
     public String getTiming() {
@@ -66,11 +86,11 @@ public class lesson {
         this.lesson_status = lesson_status;
     }
 
-    public String getCourse_id() {
-        return course_id;
+    public ArrayList<com.example.tooshytoask.Models.Courses.Lesson.upcominglesson> getUpcominglesson() {
+        return upcominglesson;
     }
 
-    public void setCourse_id(String course_id) {
-        this.course_id = course_id;
+    public void setUpcominglesson(ArrayList<com.example.tooshytoask.Models.Courses.Lesson.upcominglesson> upcominglesson) {
+        this.upcominglesson = upcominglesson;
     }
 }

@@ -49,7 +49,7 @@ public class HealthIssuesFragment extends Fragment implements View.OnClickListen
     TextView skip_btn;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
-    String healthissueId="";
+    String healthissueId="", no_health_issues ="";
     ArrayList<String>healthissueIds=new ArrayList<>();
 
     @Override
@@ -161,7 +161,6 @@ public class HealthIssuesFragment extends Fragment implements View.OnClickListen
                         String msg = saveHealthIssueResponse.getMsg();
 
                         if (msg.equals("Health Issues updated to profile.")) {
-                            clickListener.onClick(true);
 
                         } else {
 
@@ -196,7 +195,14 @@ public class HealthIssuesFragment extends Fragment implements View.OnClickListen
             clickListener.onClick(true);
         }
         else if (id == btnYesNo.getId()){
-            saveHealthIssue();
+            if (no_health_issues.equals("no")){
+                clickListener.onClick(true);
+
+            }
+            else {
+                saveHealthIssue();
+            }
+
         }
 
         if (id == yes_btn.getId()){
@@ -217,13 +223,14 @@ public class HealthIssuesFragment extends Fragment implements View.OnClickListen
 
         else if (id == no_btn.getId()){
 
-                health_issues_title.setVisibility(View.GONE);
-                adapter.notifyDataSetChanged();
-                btnYesNo.setBackgroundResource(R.drawable.circle_button_active);
-                no_btn.setBackgroundResource(R.drawable.gender_border_active);
-                no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
-                yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
-                yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
+            health_issues_title.setVisibility(View.GONE);
+            no_health_issues ="no";
+            adapter.notifyDataSetChanged();
+            btnYesNo.setBackgroundResource(R.drawable.circle_button_active);
+            no_btn.setBackgroundResource(R.drawable.gender_border_active);
+            no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
+            yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
+            yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
             }
 
         else {

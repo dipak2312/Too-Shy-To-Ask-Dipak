@@ -53,7 +53,17 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
         holder.course_time.setText(insightcourses.get(position).getTiming());
         holder.lessons.setText(insightcourses.get(position).getTotal_lesson());
 
-        if (spManager.getTstaguestLoginStatus().equals("false")) {
+        if (insightcourses.get(position).getStatus().equals("completed")){
+            holder.courses_status.setImageResource(R.drawable.lesson_complete);
+        }
+        else if (insightcourses.get(position).getStatus().equals("pending")){
+            holder.courses_status.setImageResource(R.drawable.lesson_inprogress);
+        }
+
+        else if (insightcourses.get(position).getStatus().equals("")){
+            holder.courses_status.setImageResource(R.drawable.lesson_lock);
+        }
+
         if (insightcourses.get(position).getBookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
             like = false;
@@ -63,10 +73,7 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
             like = true;
 
         }
-        }
-        else {
-            holder.lock_img.setVisibility(View.VISIBLE);
-        }
+
         holder.save_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

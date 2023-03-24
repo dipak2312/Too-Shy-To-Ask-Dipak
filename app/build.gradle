@@ -101,9 +101,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation 'androidx.palette:palette:1.0.0'
     implementation 'com.google.android.exoplayer:exoplayer:2.18.4'
-    implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.19'
+    implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:3.0.8'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.26'
-    implementation 'com.google.android.exoplayer:exoplayer:2.10.0'
+    //implementation 'androidx.media3:media3-exoplayer:1.0.0'
+    //implementation 'androidx.media3:media3-exoplayer-dash:1.0.0'
+    //implementation 'androidx.media3:media3-ui:1.0.0'
 
 }

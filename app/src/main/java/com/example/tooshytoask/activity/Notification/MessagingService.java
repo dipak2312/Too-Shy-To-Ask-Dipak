@@ -12,12 +12,25 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.activity.Blogs.DetailEventActivity;
+import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
+import com.example.tooshytoask.activity.Courses.LessonDetailActivity;
+import com.example.tooshytoask.activity.FAQ.FAQActivity;
+import com.example.tooshytoask.activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.activity.Home.HomeActivity;
+import com.example.tooshytoask.activity.InformationStoreHouse.InformationStorehouseActivity;
+import com.example.tooshytoask.activity.Quiz.QuizActivity;
+import com.example.tooshytoask.activity.Setting.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.activity.VideoGallery.AllVideoActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class MessagingService extends FirebaseMessagingService {
 
     Intent intent;
+    String condition ;
+    String type_id;
 
 
     @Override
@@ -51,7 +64,56 @@ public class MessagingService extends FirebaseMessagingService {
         Intent intent = new Intent(this, NotificationsActivity.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pi = PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        switch(condition) {
+            case "blog":
+                intent = new Intent(this, DetailBlogActivity.class);
+                intent.putExtra("blog",type_id);
+                break;
+            case "storehouse":
+                intent = new Intent(this, InformationStorehouseActivity.class);
+                intent.putExtra("storehouse",type_id);
+                break;
+            case "game":
+                intent = new Intent(this, GameMainPageActivity.class);
+                intent.putExtra("game",type_id);
+                break;
+            case "quiz":
+                intent = new Intent(this, QuizActivity.class);
+                intent.putExtra("quiz",type_id);
+                break;
+            case "event":
+                intent = new Intent(this, DetailEventActivity.class);
+                intent.putExtra("event",type_id);
+                break;
+            case "courses":
+                intent = new Intent(this, CoursesDetailActivity.class);
+                intent.putExtra("courses",type_id);
+                break;
+            case "courses_lession":
+                intent = new Intent(this, LessonDetailActivity.class);
+                intent.putExtra("courses_lession",type_id);
+                break;
+            case "faq":
+                intent = new Intent(this, FAQActivity.class);
+                intent.putExtra("faq",type_id);
+                break;
+            case "story":
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("story",type_id);
+                break;
+            case "video":
+                intent = new Intent(this, AllVideoActivity.class);
+                intent.putExtra("video",type_id);
+                break;
+            case "update_profile":
+                intent = new Intent(this, UpdateProfileActivity.class);
+                intent.putExtra("update_profile",type_id);
+                break;
+
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Custom Channel";
@@ -69,7 +131,7 @@ public class MessagingService extends FirebaseMessagingService {
 
                 notification = new Notification.Builder(this)
                         .setSmallIcon(R.drawable.tsta_icon)
-                        .setContentIntent(pi)
+                        .setContentIntent(pendingIntent)
                         .setContentTitle(title)
                         .setSubText(Msg)
                         .setAutoCancel(true)
@@ -79,7 +141,7 @@ public class MessagingService extends FirebaseMessagingService {
             else {
                 notification = new Notification.Builder(this)
                         .setSmallIcon(R.drawable.tsta_icon)
-                        .setContentIntent(pi)
+                        .setContentIntent(pendingIntent)
                         .setContentTitle(title)
                         .setSubText(Msg)
                         .setAutoCancel(true)
@@ -93,122 +155,3 @@ public class MessagingService extends FirebaseMessagingService {
         }
     }
 }
-
-    /*@Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
-        super.onMessageReceived(remoteMessage);
-        if (remoteMessage.getData().size() > 0) {
-            img_url = remoteMessage.getData().get("icon");
-
-            if (!img_url.equals("")) {
-                getBitmapfromUrl(img_url);
-            }
-
-            createNotification(remoteMessage, bitmap);
-        }
-
-    }
-
-    public Bitmap getBitmapfromUrl(String imageUrl) {
-        try {
-            URL url = new URL(imageUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            bitmap = BitmapFactory.decodeStream(input);
-            return bitmap;
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-
-        }
-    }
-
-    private void createNotification(RemoteMessage remoteMessage, Bitmap bitmap) {
-
-
-        if (bitmap != null) {
-            int notifyID = 1;
-            String CHANNEL_ID = "my_channel_01";// The id of the channel.
-            String name = "TooShyToAsk";// The user-visible name of the channel.
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-            }
-
-            intent = new Intent(this, NotificationsActivity.class);
-            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("imageString", img_url);
-
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            PendingIntent resultIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-            NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.notification)
-                    .setContentTitle(remoteMessage.getData().get("title"))
-                    .setContentText(remoteMessage.getData().get("body"))
-                    //.setContentTitle(remoteMessage.getNotification().getTitle())
-                    //.setContentText(remoteMessage.getNotification().getBody())
-                    .setChannelId(CHANNEL_ID)
-                    .setStyle(new NotificationCompat.BigPictureStyle()
-                            .bigPicture(bitmap))
-                    .setColor(getResources().getColor(R.color.purple))
-                    .setSound(defaultSoundUri)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getData().get("body")))
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setAutoCancel(true)
-                    .setContentIntent(resultIntent);
-
-
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationManager.createNotificationChannel(mChannel);
-            }
-
-            notificationManager.notify(0, mNotificationBuilder.build());
-
-
-        } else {
-            int notifyID = 1;
-            String CHANNEL_ID = "my_channel_01";// The id of the channel.
-            String name = "TooShyToAsk";// The user-visible name of the channel.
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-            }
-
-            intent = new Intent(this, NotificationsActivity.class);
-            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //intent.putExtra("imageString", img_url);
-
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            PendingIntent resultIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-            NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.notification)
-                    .setContentTitle(remoteMessage.getData().get("title"))
-                    .setContentText(remoteMessage.getData().get("body"))
-                    //.setContentTitle(remoteMessage.getNotification().getTitle())
-                    //.setContentText(remoteMessage.getNotification().getBody())
-                    .setChannelId(CHANNEL_ID)
-                    .setSound(defaultSoundUri)
-                    .setColor(getResources().getColor(R.color.purple))
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setAutoCancel(true)
-                    .setContentIntent(resultIntent);
-
-
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationManager.createNotificationChannel(mChannel);
-            }
-
-            notificationManager.notify(0, mNotificationBuilder.build());
-
-        }
-    }
-}*/

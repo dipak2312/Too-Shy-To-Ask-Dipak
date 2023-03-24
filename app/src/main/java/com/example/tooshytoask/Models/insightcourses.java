@@ -10,6 +10,7 @@ public class insightcourses {
     private String total_lesson;
     private String enrolled;
     private String bookmarked;
+    private String status;
 
     public String getId() {
         return id;
@@ -80,5 +81,13 @@ public class insightcourses {
 
     public void setEnrolled(String enrolled) {
         this.enrolled = enrolled;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

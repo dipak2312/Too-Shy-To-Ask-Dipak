@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.adapters.StoreHouseListingAdapter;
 import com.example.tooshytoask.AuthModels.AllStoreHouseAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
@@ -48,7 +50,6 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
     ArrayList<com.example.tooshytoask.Models.StoreHouse.CategoryData.data>dataList;
     ArrayList<com.example.tooshytoask.Models.StoreHouse.InfoStoreCategory>InfoStoreCategory;
     String title_id = "", type = "storehouse", actions = "";
-    OnBookmarkClicked onBookmarkClicked;
     int selectedPosition=0;
     String[] listItems ;
     boolean[] checkedItems;
@@ -297,6 +298,12 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
         }
         else if (id == rel_back.getId()){
             finish();
+        }
+        else if (id == bookmark_blog.getId()){
+            Intent intent = new Intent(context, BookmarkActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
     }

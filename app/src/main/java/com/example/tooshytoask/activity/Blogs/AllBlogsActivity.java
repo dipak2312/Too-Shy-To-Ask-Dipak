@@ -55,7 +55,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
     ArrayList<com.example.tooshytoask.Models.insightblogcategories>insightblogcategories;
     int selectedPosition=0;
     String[] listItems ;
-    String blog_id = "", type = "blog",actions = "";
+    String blog_id = "", type = "blog",actions = "", category ="";
     boolean[] checkedItems;
     Spinner spinner_blogs;
 
@@ -87,27 +87,10 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         checkedItems = new boolean[listItems.length];
 
         blog_id = getIntent().getStringExtra("blog_id");
+        category = getIntent().getStringExtra("category");
 
-        spinner_blogs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedPosition = position;
-                getAllBlogs(position == 0 ? "" : insightblogcategories.get(position - 1).getCategory_id() + "");
-                if (spinner_blogs.getSelectedItem().toString().equals("")) {
-
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         getAllBlogs("");
-        //OpenBlogSpinner();
 
     }
 
@@ -237,29 +220,8 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         }
         else if (id == selection_button_rl.getId()){
             selectCategoryMethod();
-            //OpenBlogSpinner();
-        }
-        else if (id == spinner_blogs.getId()){
-            OpenBlogSpinner();
-        }
-    }
-
-    public void OpenBlogSpinner() {
-
-
-        String[] categoryListForSingleItem = new String[insightblogcategories.size() + 1];
-        categoryListForSingleItem[0] = "All Categories";
-        for (int i = 0; i < insightblogcategories.size(); i++) {
-            categoryListForSingleItem[i + 1] = insightblogcategories.get(i).getCategory_title();
         }
 
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, categoryListForSingleItem);
-        spinner_blogs.setAdapter(countryAdapter);
-
-        if (!insightblogcategories.isEmpty()) {
-
-
-        }
     }
 
     private void selectCategoryMethod() {

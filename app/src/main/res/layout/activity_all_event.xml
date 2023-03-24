@@ -45,12 +45,12 @@
 
             <ImageView
                 android:id="@+id/bookmark_blog"
-                android:layout_width="@dimen/margin_30"
-                android:layout_height="@dimen/margin_30"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/margin_20"
-                android:src="@drawable/bookmark_img"/>
+                android:src="@drawable/icon_bookmark"/>
 
         </RelativeLayout>
     </RelativeLayout>

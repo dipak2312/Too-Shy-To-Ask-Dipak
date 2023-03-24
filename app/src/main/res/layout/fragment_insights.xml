@@ -265,6 +265,7 @@
                 android:id="@+id/just_added_blog"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_25"
+                android:visibility="gone"
                 android:layout_below="@id/game_banner"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
@@ -296,6 +297,7 @@
                 android:id="@+id/recy_just_blog_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@id/just_added_blog"
                 android:layout_marginTop="@dimen/margin_10">
 

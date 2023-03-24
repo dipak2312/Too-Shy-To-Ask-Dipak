@@ -1,6 +1,8 @@
 package com.example.tooshytoask.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +11,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.NotificationList;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.activity.Blogs.DetailBlogActivity;
+import com.example.tooshytoask.activity.Courses.AllCoursesActivity;
+import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
+import com.example.tooshytoask.activity.Courses.LessonDetailActivity;
+import com.example.tooshytoask.activity.FAQ.FAQActivity;
+import com.example.tooshytoask.activity.Game.GameMainPageActivity;
+import com.example.tooshytoask.activity.Home.HomeActivity;
+import com.example.tooshytoask.activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
+import com.example.tooshytoask.activity.Quiz.QuizActivity;
+import com.example.tooshytoask.activity.Setting.Setting.UpdateProfileActivity;
+import com.example.tooshytoask.activity.VideoGallery.AllVideoActivity;
+import com.example.tooshytoask.activity.VideoGallery.VideoGallerySingleActivity;
+import com.example.tooshytoask.activity.story.StoryActivity;
 
 import java.util.ArrayList;
 
@@ -44,6 +60,113 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.notification_desc.setText(notificationLists.get(position).getMessage());
         Glide.with(context).load(notificationLists.get(position).getImage()).into(holder.notification_img);
 
+        holder.notification_card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (notificationLists.get(position).getType().equals("blog")){
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("blog_id",notificationLists.get(position).getTypeid());
+                    Intent intent = new Intent(context, DetailBlogActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                } else  if (notificationLists.get(position).getType().equals("storehouse")){
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("article_id", notificationLists.get(position).getTypeid());
+                    Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("game")){
+                    Intent intent = new Intent(context, GameMainPageActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("quiz")){
+                    Intent intent = new Intent(context, QuizActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("event")){
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("blog_id",notificationLists.get(position).getTypeid());
+                    Intent intent = new Intent(context, DetailBlogActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("courses")){
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("blog_id",notificationLists.get(position).getTypeid());
+                    Intent intent = new Intent(context, CoursesDetailActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("faq")){
+                    Intent intent = new Intent(context, FAQActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("story")){
+
+                    Intent intent = new Intent(context, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("video")){
+
+                    Intent intent = new Intent(context, AllVideoActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("update_profile")){
+                    Intent intent = new Intent(context, UpdateProfileActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else  if (notificationLists.get(position).getType().equals("courses_lession")){
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("blog_id",notificationLists.get(position).getTypeid());
+                    Intent intent = new Intent(context, LessonDetailActivity.class);
+                    intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                }
+                else {
+
+                }
+            }
+        });
+
         holder.single_notification_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +195,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         TextView notification_title,notification_date,notification_desc;
         ImageView single_notification_clear, notification_img;
         RelativeLayout notification_lay;
+        CardView notification_card_view;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -82,6 +206,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             notification_desc = itemView.findViewById(R.id.notification_desc);
             single_notification_clear = itemView.findViewById(R.id.single_notification_clear);
             notification_img = itemView.findViewById(R.id.notification_img);
+            notification_card_view = itemView.findViewById(R.id.notification_card_view);
 
             notification_lay = itemView.findViewById(R.id.notification_lay);
 

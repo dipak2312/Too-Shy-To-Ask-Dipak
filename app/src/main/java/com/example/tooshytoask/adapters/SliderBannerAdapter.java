@@ -60,7 +60,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
                 else if (Bannerist.get(position).getBanner_screen().equals("blog")){
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("blog_id",Bannerist.get(position).getBanner_blogid());
+                    bundle.putString("category",Bannerist.get(position).getBanner_blogid());
                     Intent intent = new Intent(context, DetailBlogActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

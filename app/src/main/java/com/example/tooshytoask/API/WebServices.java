@@ -28,6 +28,8 @@ import com.example.tooshytoask.AuthModels.HelpFeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
+import com.example.tooshytoask.AuthModels.LessonDetailAuthModel;
+import com.example.tooshytoask.AuthModels.LessonEnrollAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationListUpdateAuthModel;
 import com.example.tooshytoask.AuthModels.NotificationAuthModel;
@@ -63,10 +65,12 @@ import com.example.tooshytoask.Models.AskQuestionsResponse;
 import com.example.tooshytoask.Models.BookmarkResponse;
 import com.example.tooshytoask.Models.Courses.CoursesDetailResponse;
 import com.example.tooshytoask.Models.Courses.CoursesEnrollResponse;
+import com.example.tooshytoask.Models.Courses.Lesson.LessonDetailResponse;
 import com.example.tooshytoask.Models.ExpertReplyResponse;
 import com.example.tooshytoask.Models.GameScoreResponse;
 import com.example.tooshytoask.Models.GameTimeAuthModel;
 import com.example.tooshytoask.Models.LeaderboardResponse;
+import com.example.tooshytoask.Models.Courses.Lesson.LessonEnrollResponse;
 import com.example.tooshytoask.Models.StoreHouse.AllStoreHouseResponse;
 import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
@@ -364,5 +368,13 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/coursebyid")
     Observable<CoursesDetailResponse> getCoursesDetail(@Body CoursesDetailAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/enrolllesson")
+    Observable<LessonEnrollResponse> getLessonEnroll(@Body LessonEnrollAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/lessonbyid")
+    Observable<LessonDetailResponse> getLessonDetail(@Body LessonDetailAuthModel model);
 
 }
