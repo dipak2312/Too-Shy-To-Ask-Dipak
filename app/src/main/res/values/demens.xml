@@ -110,6 +110,7 @@
     <dimen name="margin_62">62.0dp</dimen>
     <dimen name="margin_70">70.0dp</dimen>
     <dimen name="margin_75">75.0dp</dimen>
+    <dimen name="margin_77">77.0dp</dimen>
     <dimen name="margin_85">85.0dp</dimen>
     <dimen name="cir_tv">45.0dp</dimen>
     <dimen name="wel_button">150.0dp</dimen>

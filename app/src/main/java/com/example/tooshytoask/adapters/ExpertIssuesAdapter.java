@@ -21,6 +21,7 @@ public class ExpertIssuesAdapter extends RecyclerView.Adapter<ExpertIssuesAdapte
     Context context;
     ArrayList<data>data;
     onStoreHouseClick onStoreHouseClick;
+    String text;
 
     public ExpertIssuesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.AskExpert.data> data, com.example.tooshytoask.Utils.onStoreHouseClick onStoreHouseClick) {
         this.context = context;
@@ -38,8 +39,8 @@ public class ExpertIssuesAdapter extends RecyclerView.Adapter<ExpertIssuesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ExpertIssuesAdapter.ViewHolder holder, int position) {
-        holder.issues_txt.setText(Html.fromHtml(data.get(position).getTitle()));
-
+        text = data.get(position).getTitle();
+        holder.issues_txt.setText(Html.fromHtml("I have questions related to " + text));
         holder.rel_lay_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

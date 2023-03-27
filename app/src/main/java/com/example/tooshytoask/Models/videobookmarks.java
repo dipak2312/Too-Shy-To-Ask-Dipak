@@ -1,20 +1,13 @@
 package com.example.tooshytoask.Models;
 
 public class videobookmarks {
-    private String link;
     private String bookmark_postid;
     private String bookmark_posttitle;
-    private String bookmark_postdesc;
+    private String bookmark_img;
     private String bookmark_imgvid;
     private String bookmark_type;
+    private String bookmark_videotype;
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
 
     public String getBookmark_postid() {
         return bookmark_postid;
@@ -32,12 +25,12 @@ public class videobookmarks {
         this.bookmark_posttitle = bookmark_posttitle;
     }
 
-    public String getBookmark_postdesc() {
-        return bookmark_postdesc;
+    public String getBookmark_img() {
+        return bookmark_img;
     }
 
-    public void setBookmark_postdesc(String bookmark_postdesc) {
-        this.bookmark_postdesc = bookmark_postdesc;
+    public void setBookmark_img(String bookmark_img) {
+        this.bookmark_img = bookmark_img;
     }
 
     public String getBookmark_imgvid() {
@@ -54,5 +47,13 @@ public class videobookmarks {
 
     public void setBookmark_type(String bookmark_type) {
         this.bookmark_type = bookmark_type;
+    }
+
+    public String getBookmark_videotype() {
+        return bookmark_videotype;
+    }
+
+    public void setBookmark_videotype(String bookmark_videotype) {
+        this.bookmark_videotype = bookmark_videotype;
     }
 }

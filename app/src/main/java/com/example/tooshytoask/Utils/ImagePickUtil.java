@@ -29,7 +29,9 @@ public class ImagePickUtil {
 
     public static void selectImage(final Context context) {
 
-       AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        CameraIntent(context);
+
+       /*AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         final View dialogView = inflater.inflate(R.layout.image_dialog_layout, null);
         dialogBuilder.setView(dialogView);
@@ -69,7 +71,7 @@ public class ImagePickUtil {
             public void onClick(View v) {
                 b.dismiss();
             }
-        });
+        });*/
 
 
     }

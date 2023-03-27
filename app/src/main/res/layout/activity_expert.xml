@@ -75,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/text_msg"
+        android:layout_above="@+id/rel_bottom_tab"
         android:layout_marginTop="@dimen/margin_20">
 
         <RelativeLayout
@@ -84,7 +85,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/rel_bottom_tab"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -97,14 +97,18 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rel_bottom_tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_30"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20">
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_bottom_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
 
         <EditText
             android:id="@+id/ask_questions"
@@ -135,10 +139,6 @@
 
         </RelativeLayout>
 
-        </RelativeLayout>
-
-        </RelativeLayout>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

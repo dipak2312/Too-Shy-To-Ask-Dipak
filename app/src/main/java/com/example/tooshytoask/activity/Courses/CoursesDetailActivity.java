@@ -11,12 +11,15 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.AuthModels.CoursesDetailAuthModel;
+import com.example.tooshytoask.AuthModels.CoursesEnrollAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Courses.CoursesDetailResponse;
+import com.example.tooshytoask.Models.Courses.CoursesEnrollResponse;
 import com.example.tooshytoask.Models.Courses.data;
 import com.example.tooshytoask.Models.Courses.lesson;
 import com.example.tooshytoask.R;
@@ -76,6 +79,41 @@ public class CoursesDetailActivity extends AppCompatActivity {
         all_lessons.setLayoutManager(linearLayoutManager);
 
         getCoursesDetail();
+        getCoursesEnroll();
+    }
+
+    public void getCoursesEnroll(){
+
+        CoursesEnrollAuthModel model = new CoursesEnrollAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setCourse_id(courses_id);
+
+        WebServiceModel.getRestApi().getCoursesEnroll(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<CoursesEnrollResponse>() {
+                    @Override
+                    public void onNext(CoursesEnrollResponse coursesEnrollResponse) {
+                        String msg = coursesEnrollResponse.getMsg();
+
+                        if (msg.equals("Course Enrolled")){
+
+                        }
+                        else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getCoursesDetail(){

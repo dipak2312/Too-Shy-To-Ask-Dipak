@@ -139,7 +139,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                         String msg = updateProfileResponse.getMsg();
 
                         if (msg.equals("Profile Updated")){
-                           spManager.setUserPhoto(avtarImage);
+
 
                         }
                         else {

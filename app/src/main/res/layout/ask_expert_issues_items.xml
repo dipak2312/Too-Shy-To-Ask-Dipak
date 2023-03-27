@@ -19,6 +19,8 @@
             android:text="I have questions related Acne"
             android:fontFamily="@font/worksansmedium"
             android:padding="@dimen/padding_10"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/purple"
             android:textSize="@dimen/text_size14"/>
 

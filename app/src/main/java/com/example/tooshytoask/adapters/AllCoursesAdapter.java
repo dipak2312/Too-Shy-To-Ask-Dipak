@@ -30,6 +30,8 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     OnBookmarkClicked onBookmarkClicked;
     boolean like;
     SPManager spManager;
+    String time, part1, part2;
+    int position =0;
 
     public AllCoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.insightcourses> insightcourses,
                              OnBookmarkClicked onBookmarkClicked, SPManager spManager) {
@@ -47,11 +49,18 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AllCoursesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Glide.with(context).load(insightcourses.get(position).getImage()).into(holder.blog_img);
         holder.courses_title.setText(insightcourses.get(position).getTitle());
-        holder.course_time.setText(insightcourses.get(position).getTiming());
+        time = insightcourses.get(position).getTiming();
+        String[] parts = time.split(":");
+        part1 = parts[0];
+        part2 = parts[1];
+        holder.course_time_hr.setText(part1 + "h ");
+        holder.course_time_min.setText(part2 + "m");
         holder.lessons.setText(insightcourses.get(position).getTotal_lesson());
+
+
 
         if (insightcourses.get(position).getStatus().equals("completed")){
             holder.courses_status.setImageResource(R.drawable.lesson_complete);
@@ -100,7 +109,7 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView blog_img, save_img, lock_img, courses_status;
-        TextView courses_title, course_time, lessons;
+        TextView courses_title, course_time_hr, lessons, course_time_min;
         CardView card_view_courses;
 
         public ViewHolder(@NonNull View itemView) {
@@ -109,7 +118,8 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             courses_title = itemView.findViewById(R.id.courses_title);
-            course_time = itemView.findViewById(R.id.course_time);
+            course_time_hr = itemView.findViewById(R.id.course_time_hr);
+            course_time_min = itemView.findViewById(R.id.course_time_min);
             lessons = itemView.findViewById(R.id.lessons);
             lock_img = itemView.findViewById(R.id.lock_img);
             courses_status = itemView.findViewById(R.id.courses_status);
@@ -129,5 +139,12 @@ public class AllCoursesAdapter extends RecyclerView.Adapter<AllCoursesAdapter.Vi
                 }
             });
         }
+
+        public void main(String[] args){
+
+
+        }
     }
+
+
 }

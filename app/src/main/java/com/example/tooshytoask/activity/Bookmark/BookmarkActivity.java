@@ -167,6 +167,11 @@ public class BookmarkActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == rel_back.getId()){
+            finish();
+        }
 
     }
 }

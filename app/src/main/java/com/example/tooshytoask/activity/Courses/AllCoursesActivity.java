@@ -64,7 +64,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
 
 
         getCoursesBlogs();
-        getCoursesEnroll();
+
     }
 
     public void getCoursesBlogs(){
@@ -142,39 +142,7 @@ public class AllCoursesActivity extends AppCompatActivity implements View.OnClic
                 });
     }
 
-    public void getCoursesEnroll(){
 
-        CoursesEnrollAuthModel model = new CoursesEnrollAuthModel();
-        model.setUser_id(spManager.getUserId());
-        model.setCourse_id(courses_id);
-
-        WebServiceModel.getRestApi().getCoursesEnroll(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<CoursesEnrollResponse>() {
-                    @Override
-                    public void onNext(CoursesEnrollResponse coursesEnrollResponse) {
-                        String msg = coursesEnrollResponse.getMsg();
-
-                        if (msg.equals("Course Enrolled")){
-
-                        }
-                        else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     @Override
     public void onClick(View view) {

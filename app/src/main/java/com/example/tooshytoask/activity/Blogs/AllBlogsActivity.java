@@ -90,7 +90,7 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
         category = getIntent().getStringExtra("category");
 
 
-        getAllBlogs("");
+        getAllBlogs(category);
 
     }
 

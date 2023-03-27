@@ -62,12 +62,10 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
     RecyclerView profile_recy;
     ImageView camera, file;
     ProfileAdapter adapter;
-
-    OnClickListner onclicklistener;
     CustomProgressDialog dialog;
     ArrayList<avatarList>avatarList;
     String avtarImage="";
-    private static final int IMAGE_CAPTURE = 1;
+    private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
 
@@ -217,22 +215,16 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             adapter.singleitem_selection_position=-1;
             adapter.notifyDataSetChanged();
             avtarImage="";
-            checkPermissions();
-            Activity activity = (Activity) context;
-
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            activity.startActivityForResult(intent, IMAGE_CAPTURE);
-
-           /* boolean status=checkPermissions();
+            boolean status=checkPermissions();
             if(status)
             {
-                ImagePickUtils.selectImage(context);
+                ImagePickUtil.selectImage(context);
             }
             else
             {
                 checkPermissions();
-            }*/
+            }
+
 
 
         } else if (id == file.getId()) {
@@ -290,7 +282,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
 
             }
 
-        } else if (requestCode==IMAGE_CAPTURE) {
+        } else if (requestCode==TAKE_PICTURE) {
 
             if (resultCode == RESULT_OK) {
                 Bitmap bp = (Bitmap) data.getExtras().get("data");
@@ -299,7 +291,6 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] imageInByte = stream.toByteArray();
                 avtarImage = android.util.Base64.encodeToString(imageInByte, android.util.Base64.DEFAULT);
-
 
 
             } else if (resultCode == RESULT_CANCELED) {

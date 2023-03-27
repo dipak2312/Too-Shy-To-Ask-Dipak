@@ -50,7 +50,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
     TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description, helpful;
     ImageView blog_img, like_courses, save_courses, share_courses,like_count_img;
     LinearLayout previous, next, helpful_yes, helpful_no, related_blog_lay;
-    RelativeLayout rel_back;
+    RelativeLayout rel_back, next_back;
     RelatedStoreHouseAdapter adapter;
     ArrayList<com.example.tooshytoask.Models.storehousedata> storehousedata;
     ArrayList<com.example.tooshytoask.Models.relatedstorehouse>relatedstorehouse;
@@ -67,6 +67,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        next_back = findViewById(R.id.next_back);
         storehouse_scroll_view = findViewById(R.id.storehouse_scroll_view);
         related_blog_lay = findViewById(R.id.related_blog_lay);
         rel_back = findViewById(R.id.rel_back);
@@ -155,6 +156,9 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                             }
                             if (previous_id.equals("0")){
                                 previous.setVisibility(View.GONE);
+                            }
+                            if (next_id.equals("") && previous_id.equals("")){
+                                next_back.setVisibility(View.GONE);
                             }
 
                         }
@@ -322,8 +326,6 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
 
                         if (msg.equals("success")){
                             relatedstorehouse = storeHouseRelatedResponse.getRelatedstorehouse();
-
-
 
                             if (relatedstorehouse.size() != 0) {
                                 related_blog_lay.setVisibility(View.VISIBLE);

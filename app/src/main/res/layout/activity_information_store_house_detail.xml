@@ -340,6 +340,7 @@
                     android:id="@+id/related_blog_lay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_below="@+id/next_back"
                     android:layout_marginTop="@dimen/margin_30">
 
@@ -355,7 +356,6 @@
                         android:id="@+id/related_blog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/view2"
                         android:textColor="@color/black"
                         android:fontFamily="@font/worksansregular"
                         android:layout_marginStart="@dimen/margin_20"
@@ -366,9 +366,9 @@
                         android:id="@+id/recy_blog_lay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/related_blog"
-                        android:layout_marginStart="@dimen/margin_20"
-                        android:layout_marginEnd="@dimen/margin_20"
+                        android:layout_marginStart="@dimen/margin_15"
+                        android:layout_marginEnd="@dimen/margin_15"
+                        android:layout_marginBottom="@dimen/margin_15"
                         android:layout_marginTop="@dimen/margin_10">
 
                         <androidx.recyclerview.widget.RecyclerView

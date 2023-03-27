@@ -28,7 +28,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     ArrayList<courses>courses;
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
-    String type = "courses";
+    String type,time, part1, part2;;
     SPManager spManager;
 
     public CoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.courses> courses,
@@ -52,7 +52,12 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     public void onBindViewHolder(@NonNull CoursesAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(courses.get(position).getImage()).into(holder.blog_img);
         holder.courses_title.setText(courses.get(position).getTitle());
-        holder.course_time.setText(courses.get(position).getTiming());
+        time = courses.get(position).getTiming();
+        String[] parts = time.split(":");
+        part1 = parts[0];
+        part2 = parts[1];
+        holder.course_time_hr.setText(part1 + "h ");
+        holder.course_time_min.setText(part2 + "m");
         holder.lessons.setText(courses.get(position).getTotal_lesson());
 
         if (spManager.getTstaguestLoginStatus().equals("false")) {
@@ -96,8 +101,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView blog_img, save_img, lock_img;
-        TextView courses_title, course_time, lessons;
+        TextView courses_title, course_time_min,course_time_hr, lessons;
         CardView card_view_courses;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -105,7 +111,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             courses_title = itemView.findViewById(R.id.courses_title);
-            course_time = itemView.findViewById(R.id.course_time);
+            course_time_hr = itemView.findViewById(R.id.course_time_hr);
+            course_time_min = itemView.findViewById(R.id.course_time_min);
             lessons = itemView.findViewById(R.id.lessons);
             lock_img = itemView.findViewById(R.id.lock_img);
             card_view_courses = itemView.findViewById(R.id.card_view_courses);

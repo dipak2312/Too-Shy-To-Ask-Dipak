@@ -18,22 +18,15 @@
             android:src="@drawable/education_inactive"/>
 
 
-    <!--<de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/cate_img"
-        android:layout_width="@dimen/margin_80"
-        android:layout_height="@dimen/margin_80"
-        android:src="@drawable/create_account">
-
-    </de.hdodenhof.circleimageview.CircleImageView>-->
-
     <TextView
         android:id="@+id/category_title"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/margin_90"
         android:layout_height="wrap_content"
         android:text="Relationship"
+        android:gravity="center_horizontal"
         android:textColor="@color/black"
         android:fontFamily="@font/worksansregular"
-        android:textSize="@dimen/text_size12"
+        android:textSize="@dimen/text_size11"
         android:layout_marginTop="@dimen/margin_5"
         android:layout_marginBottom="@dimen/margin_15" />
 

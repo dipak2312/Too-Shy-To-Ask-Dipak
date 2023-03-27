@@ -6,9 +6,17 @@ import java.util.ArrayList;
 public class AllStoreHouseResponse {
     private String code;
     private String msg;
+    private String titlename;
     ArrayList<data>data;
     ArrayList<InfoStoreCategory>InfoStoreCategory;
 
+    public String getTitlename() {
+        return titlename;
+    }
+
+    public void setTitlename(String titlename) {
+        this.titlename = titlename;
+    }
     public String getCode() {
         return code;
     }

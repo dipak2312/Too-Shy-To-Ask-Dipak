@@ -60,7 +60,8 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String story_id, story_like_share_ids, islike, share_link, story_name;
+    String story_id, story_like_share_ids, islike, share_link, story_name, story_video_time = "";
+    String progrss_value;
     ArrayList<StoryDetails>storyDetails;
     StoryViewPagerAdapter adapter;
     boolean like = true;
@@ -265,6 +266,8 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         story_name = storyDetails.get(position).getStory_title();
         link_name.setText((storyDetails.get(position).getStory_link()));
         share_link = storyDetails.get(position).getStory_link();
+        progrss_value = storyDetails.get(position).getStory_video_time();
+
         if(storyDetails.get(position).getStory_link() != null && !storyDetails.get(position).getStory_link().equals(""))
         {
             swipe_up.setVisibility(View.VISIBLE);
@@ -274,19 +277,24 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         day.setText(storyDetails.get(position).getStory_date());
         story_like_share_ids = storyDetails.get(position).getStory_id();
 
-        if(storyDetails.get(position).getStory_img() != null && !storyDetails.get(position).getStory_img().equals(""))
-        {
-            story_img.setVisibility(View.VISIBLE);
-            videoPlayer.setVisibility(View.GONE);
-            Glide.with(context).load(storyDetails.get(position).getStory_img()).into(story_img);
-        }
-        else if(storyDetails.get(position).getStory_video() != null && !storyDetails.get(position).getStory_video().equals(""))
-        {
+        if (progrss_value == null){
+            if(storyDetails.get(position).getStory_img() != null && !storyDetails.get(position).getStory_img().equals(""))
+            {
+                story_img.setVisibility(View.VISIBLE);
+                story_progress_bar.setStoryDuration(10000L);
+                videoPlayer.setVisibility(View.GONE);
+                Glide.with(context).load(storyDetails.get(position).getStory_img()).into(story_img);
+            }
+        } else if (progrss_value != null) {
 
-            story_img.setVisibility(View.GONE);
-            videoPlayer.setVisibility(View.VISIBLE);
-            videoPlay(storyDetails.get(position).getStory_video());
+          if (storyDetails.get(position).getStory_video() != null && !storyDetails.get(position).getStory_video().equals("")) {
 
+                story_img.setVisibility(View.GONE);
+                videoPlayer.setVisibility(View.VISIBLE);
+                story_progress_bar.setStoryDuration(Long.parseLong(progrss_value));
+                videoPlay(storyDetails.get(position).getStory_video());
+
+            }
         }
 
         islike = storyDetails.get(position).getLiked();

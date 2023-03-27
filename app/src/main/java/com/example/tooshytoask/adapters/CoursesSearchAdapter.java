@@ -27,7 +27,7 @@ public class CoursesSearchAdapter extends RecyclerView.Adapter<CoursesSearchAdap
     ArrayList<course_search>Allcourse_search;
     OnBookmarkClicked onBookmarkClicked;
     boolean like;
-    String type ;
+    String type, time, part1, part2;
 
     public CoursesSearchAdapter(Context context, ArrayList<course_search> allcourse_search, OnBookmarkClicked onBookmarkClicked, String type) {
         this.context = context;
@@ -48,7 +48,12 @@ public class CoursesSearchAdapter extends RecyclerView.Adapter<CoursesSearchAdap
     public void onBindViewHolder(@NonNull CoursesSearchAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(Allcourse_search.get(position).getImage()).into(holder.blog_img);
         holder.courses_title.setText(Allcourse_search.get(position).getTitle());
-        holder.course_time.setText(Allcourse_search.get(position).getTiming());
+        time = Allcourse_search.get(position).getTiming();
+        String[] parts = time.split(":");
+        part1 = parts[0];
+        part2 = parts[1];
+        holder.course_time_hr.setText(part1 + "h ");
+        holder.course_time_min.setText(part2 + "m");
         holder.lessons.setText(Allcourse_search.get(position).getTotal_lesson());
 
         if (Allcourse_search.get(position).getBookmarked().equals("1")){
@@ -87,7 +92,7 @@ public class CoursesSearchAdapter extends RecyclerView.Adapter<CoursesSearchAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView blog_img, save_img;
-        TextView courses_title, course_time, lessons;
+        TextView courses_title, course_time_hr, course_time_min, lessons;
         CardView card_view_courses;
 
         public ViewHolder(@NonNull View itemView) {
@@ -96,7 +101,8 @@ public class CoursesSearchAdapter extends RecyclerView.Adapter<CoursesSearchAdap
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             courses_title = itemView.findViewById(R.id.courses_title);
-            course_time = itemView.findViewById(R.id.course_time);
+            course_time_hr = itemView.findViewById(R.id.course_time_hr);
+            course_time_min = itemView.findViewById(R.id.course_time_min);
             lessons = itemView.findViewById(R.id.lessons);
             card_view_courses = itemView.findViewById(R.id.card_view_courses);
 

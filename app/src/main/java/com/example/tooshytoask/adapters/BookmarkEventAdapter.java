@@ -3,6 +3,7 @@ package com.example.tooshytoask.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventAdap
     @Override
     public void onBindViewHolder(@NonNull BookmarkEventAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(events.get(position).getBookmark_imgvid()).into(holder.blog_img);
-        holder.blog_title.setText(events.get(position).getBookmark_posttitle());
+        holder.blog_title.setText(Html.fromHtml(events.get(position).getBookmark_posttitle()));
     }
 
     @Override

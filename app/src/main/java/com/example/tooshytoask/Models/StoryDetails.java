@@ -10,6 +10,7 @@ public class StoryDetails {
     private String like_cnt;
     private String share_cnt;
     private String liked;
+    private String story_video_time;
 
     public String getStory_link() {
         return story_link;
@@ -83,5 +84,13 @@ public class StoryDetails {
 
     public void setLiked(String liked) {
         this.liked = liked;
+    }
+
+    public String getStory_video_time() {
+        return story_video_time;
+    }
+
+    public void setStory_video_time(String story_video_time) {
+        this.story_video_time = story_video_time;
     }
 }

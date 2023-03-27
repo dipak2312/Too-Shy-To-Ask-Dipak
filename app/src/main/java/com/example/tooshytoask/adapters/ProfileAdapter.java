@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.avatarList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnClickListner;
@@ -42,21 +43,13 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
-        String img=avatarList.get(position).getEncimg();
+        /*String img=avatarList.get(position).getEncimg();
         byte[] imageByteArray = Base64.decode(avatarList.get(position).getEncimg(), Base64.DEFAULT);
-       // Bitmap decodedByte = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
         InputStream is = new ByteArrayInputStream(imageByteArray);
         Bitmap bmp = BitmapFactory.decodeStream(is);
-        holder.img.setImageBitmap(bmp);
-//
-//        if(avatarList.get(position).isSelected)
-//        {
-//            holder.img.setBackgroundResource(R.drawable.circle_active_background);
-//        }else
-//        {
-//            holder.img.setBackgroundResource(R.drawable.circle_inactive_background);
-//        }
-       //holder.ProfileItems(avatarList.get(position),position);
+        holder.img.setImageBitmap(bmp);*/
+        Glide.with(context).load(avatarList.get(position).getUrl()).into(holder.img);
+
 
         if (singleitem_selection_position == position){
 

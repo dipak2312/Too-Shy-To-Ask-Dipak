@@ -37,7 +37,7 @@ public class BookmarkVideoGalleryAdapter extends RecyclerView.Adapter<BookmarkVi
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkVideoGalleryAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(videobookmarks.get(position).getBookmark_imgvid()).into(holder.blog_img);
+        Glide.with(context).load(videobookmarks.get(position).getBookmark_img()).into(holder.blog_img);
         holder.blog_title.setText(videobookmarks.get(position).getBookmark_posttitle());
     }
 
@@ -65,8 +65,8 @@ public class BookmarkVideoGalleryAdapter extends RecyclerView.Adapter<BookmarkVi
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("video_link",videobookmarks.get(getAdapterPosition()).getLink());
-                    //bundle.putString("video_type",videobookmarks.get(getAdapterPosition()).getVideo_type());
+                    bundle.putString("video_link",videobookmarks.get(getAdapterPosition()).getBookmark_imgvid());
+                    bundle.putString("video_type",videobookmarks.get(getAdapterPosition()).getBookmark_videotype());
                     Intent intent = new Intent(context, VideoGallerySingleActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

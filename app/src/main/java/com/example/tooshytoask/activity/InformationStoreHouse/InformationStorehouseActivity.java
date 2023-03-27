@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -105,6 +106,8 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
                         if (msg.equals("success")){
 
                             InfoStoreCategory = allStoreHouseResponse.getInfoStoreCategory();
+
+                            storehouse_title.setText(Html.fromHtml(allStoreHouseResponse.getTitlename()));
 
                         }
                     }
