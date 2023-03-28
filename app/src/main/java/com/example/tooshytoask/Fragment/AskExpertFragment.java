@@ -248,7 +248,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
 
     public void StorehouseMessage(int position){
         title = data.get(position).getTitle();
-        category_msg.setText(title);
+        category_msg.setText("I have questions related to " + title);
         chatt_lin_lay.setVisibility(View.VISIBLE);
         faq_lin_lay.setVisibility(View.VISIBLE);
         rel_issues_recy.setVisibility(View.GONE);

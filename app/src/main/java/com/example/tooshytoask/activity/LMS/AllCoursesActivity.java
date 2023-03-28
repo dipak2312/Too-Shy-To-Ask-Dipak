@@ -1,4 +1,4 @@
-package com.example.tooshytoask.activity.Courses;
+package com.example.tooshytoask.activity.LMS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,8 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.AuthModels.CoursesEnrollAuthModel;
-import com.example.tooshytoask.Models.Courses.CoursesEnrollResponse;
 import com.example.tooshytoask.activity.Bookmark.BookmarkActivity;
 import com.example.tooshytoask.adapters.AllCoursesAdapter;
 import com.example.tooshytoask.AuthModels.AllCoursesAuthModel;

@@ -1,4 +1,4 @@
-package com.example.tooshytoask.Models;
+package com.example.tooshytoask.Models.Courses.LMSQuiz;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,20 +8,23 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 public class Question implements Parcelable {
-     String quizId;
-     String questionId;
-     String question;
-     String description;
-     String answerId;
-     String questionImageUrl;
+    String questionId;
+    String courseId;
+    String lessonId;
+    String question;
+    String description;
+    String answerId;
+    String questionImageUrl;
     ArrayList<Option>Option;
 
     protected Question(Parcel in) {
-        quizId = in.readString();
         questionId = in.readString();
+        courseId = in.readString();
+        lessonId = in.readString();
         question = in.readString();
         description = in.readString();
         answerId = in.readString();
+        questionImageUrl = in.readString();
     }
 
     public static final Creator<Question> CREATOR = new Creator<Question>() {
@@ -36,20 +39,35 @@ public class Question implements Parcelable {
         }
     };
 
-    public String getQuizId() {
-        return quizId;
+    public ArrayList<com.example.tooshytoask.Models.Courses.LMSQuiz.Option> getOption() {
+        return Option;
     }
 
-    public void setQuizId(String quizId) {
-        this.quizId = quizId;
+    public void setOption(ArrayList<com.example.tooshytoask.Models.Courses.LMSQuiz.Option> option) {
+        Option = option;
     }
-
     public String getQuestionId() {
         return questionId;
     }
 
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getLessonId() {
+        return lessonId;
+    }
+
+    public void setLessonId(String lessonId) {
+        this.lessonId = lessonId;
     }
 
     public String getQuestion() {
@@ -76,12 +94,12 @@ public class Question implements Parcelable {
         this.answerId = answerId;
     }
 
-    public ArrayList<com.example.tooshytoask.Models.Option> getOption() {
-        return Option;
+    public String getQuestionImageUrl() {
+        return questionImageUrl;
     }
 
-    public void setOption(ArrayList<com.example.tooshytoask.Models.Option> option) {
-        Option = option;
+    public void setQuestionImageUrl(String questionImageUrl) {
+        this.questionImageUrl = questionImageUrl;
     }
 
     @Override
@@ -90,20 +108,14 @@ public class Question implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
+    public void writeToParcel(@NonNull Parcel parcel, int flags) {
         parcel.writeString(questionId);
         parcel.writeString(question);
         parcel.writeString(questionImageUrl);
         parcel.writeString(answerId);
         parcel.writeString(description);
-        parcel.writeString(quizId);
-    }
+        parcel.writeString(lessonId);
+        parcel.writeString(courseId);
 
-    public String getQuestionImageUrl() {
-        return questionImageUrl;
-    }
-
-    public void setQuestionImageUrl(String questionImageUrl) {
-        this.questionImageUrl = questionImageUrl;
     }
 }

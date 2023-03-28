@@ -44,26 +44,4 @@
 
     </RelativeLayout>
 
-    <!--<RadioGroup
-        android:id="@+id/radioGrp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_10"
-            android:buttonTint="@color/purple"
-            android:checked="false"
-            android:textColor="@color/black"
-            android:layout_marginStart="@dimen/margin_10"
-            android:textSize="@dimen/text_size15"
-            android:fontFamily="@font/worksansregular"
-            android:text="Nightmare and trouble sleepig"
-            android:onClick="radioButtobClickEvent"/>
-
-    </RadioGroup>-->
-
 </RelativeLayout>

@@ -4,7 +4,6 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
-import com.example.tooshytoask.Utils.ImagePickUtils;
 import com.example.tooshytoask.adapters.ProfileAdapter;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -47,6 +46,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -215,15 +215,10 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             adapter.singleitem_selection_position=-1;
             adapter.notifyDataSetChanged();
             avtarImage="";
-            boolean status=checkPermissions();
-            if(status)
-            {
-                ImagePickUtil.selectImage(context);
-            }
-            else
-            {
-                checkPermissions();
-            }
+            checkPermissions();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                startActivityForResult(intent, TAKE_PICTURE);
 
 
 
@@ -232,17 +227,15 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             adapter.notifyDataSetChanged();
             avtarImage="";
 
-            Activity activity = (Activity) context;
+                Intent galleryIntent = new Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            Intent galleryIntent = new Intent(
-                    Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, SELECT_FILE);
 
-            activity.startActivityForResult(galleryIntent, SELECT_FILE);
+                checkPermissions();
 
-            checkPermissions();
         }
-
 
     }
 
@@ -294,12 +287,17 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
 
 
             } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Picture NOt taken", Toast.LENGTH_LONG);
+                 /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getActivity().getPackageName()));
+                    startActivity(i);
+                    return;
+                }*/
             }
+            super.onActivityResult(requestCode, resultCode, data);
 
         }
     }
-
 
     private boolean checkPermissions() {
         int result;
@@ -313,6 +311,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(requireActivity(), listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
             return false;
+
         }
         return true;
     }

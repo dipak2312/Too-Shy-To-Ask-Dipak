@@ -82,8 +82,8 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
 
         title_id = getIntent().getStringExtra("title_id");
 
-        listItems = getResources().getStringArray(R.array.category_list);
-        checkedItems = new boolean[listItems.length];
+        //listItems = getResources().getStringArray(R.array.category_list);
+        //checkedItems = new boolean[listItems.length];
 
         getStoreHouseCategory("");
     }

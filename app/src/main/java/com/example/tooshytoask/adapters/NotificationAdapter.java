@@ -19,9 +19,8 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.NotificationList;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.activity.Blogs.DetailBlogActivity;
-import com.example.tooshytoask.activity.Courses.AllCoursesActivity;
-import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
-import com.example.tooshytoask.activity.Courses.LessonDetailActivity;
+import com.example.tooshytoask.activity.LMS.CoursesDetailActivity;
+import com.example.tooshytoask.activity.LMS.LessonDetailActivity;
 import com.example.tooshytoask.activity.FAQ.FAQActivity;
 import com.example.tooshytoask.activity.Game.GameMainPageActivity;
 import com.example.tooshytoask.activity.Home.HomeActivity;
@@ -29,8 +28,6 @@ import com.example.tooshytoask.activity.InformationStoreHouse.InformationStoreHo
 import com.example.tooshytoask.activity.Quiz.QuizActivity;
 import com.example.tooshytoask.activity.Setting.Setting.UpdateProfileActivity;
 import com.example.tooshytoask.activity.VideoGallery.AllVideoActivity;
-import com.example.tooshytoask.activity.VideoGallery.VideoGallerySingleActivity;
-import com.example.tooshytoask.activity.story.StoryActivity;
 
 import java.util.ArrayList;
 

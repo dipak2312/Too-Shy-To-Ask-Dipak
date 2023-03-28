@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.activity.Blogs.DetailBlogActivity;
 import com.example.tooshytoask.Models.relatedblogs;
 import com.example.tooshytoask.R;
@@ -22,11 +24,15 @@ import java.util.ArrayList;
 public class RelatedBlogAdapter extends RecyclerView.Adapter<RelatedBlogAdapter.ViewHolder> {
     Context context;
     ArrayList<relatedblogs> relatedblogs;
+    OnBookmarkClicked onBookmarkClicked;
+    boolean like = true;
 
-    public RelatedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.relatedblogs> relatedblogs) {
+    public RelatedBlogAdapter(Context context, ArrayList<com.example.tooshytoask.Models.relatedblogs> relatedblogs, OnBookmarkClicked onBookmarkClicked) {
         this.context = context;
         this.relatedblogs = relatedblogs;
+        this.onBookmarkClicked = onBookmarkClicked;
     }
+
 
     @NonNull
     @Override
@@ -39,6 +45,34 @@ public class RelatedBlogAdapter extends RecyclerView.Adapter<RelatedBlogAdapter.
     public void onBindViewHolder(@NonNull RelatedBlogAdapter.ViewHolder holder, int position) {
         holder.blog_title.setText(relatedblogs.get(position).getBlog_title());
         Glide.with(context).load(relatedblogs.get(position).getBlog_img()).into(holder.blog_img);
+
+        if (relatedblogs.get(position).getBlog_bookmarked().equals("1")){
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+            like = false;
+        }
+        else  {
+            holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+            like = true;
+
+        }
+
+        holder.save_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (like) {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));
+                    onBookmarkClicked.onBookmarkButtonClick(position,relatedblogs.get(position).getBlog_id(), "save");
+                    like = false;
+
+                } else  {
+                    holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.save));
+                    onBookmarkClicked.onBookmarkButtonClick(position,relatedblogs.get(position).getBlog_id(), "remove");
+                    like = true;
+
+                }
+
+            }
+        });
     }
 
     @Override

@@ -17,10 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Models.Courses.Lesson.data;
 import com.example.tooshytoask.Models.Courses.Lesson.upcominglesson;
-import com.example.tooshytoask.Models.Courses.lesson;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
-import com.example.tooshytoask.activity.Courses.LessonDetailActivity;
+import com.example.tooshytoask.activity.LMS.LessonDetailActivity;
 
 import java.util.ArrayList;
 

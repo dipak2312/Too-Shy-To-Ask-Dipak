@@ -208,7 +208,7 @@
                 android:id="@+id/event_blog"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_25"
-                android:layout_below="@id/recy_highlight_blog_lay"
+                android:layout_below="@id/game_banner"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
@@ -255,7 +255,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/game_banner"
-                android:layout_below="@id/recy_event_blog_lay"
+                android:layout_below="@id/recy_highlight_blog_lay"
                 app:shapeAppearanceOverlay="@style/radiusimage"
                 android:layout_marginEnd="@dimen/margin_20"
                 android:layout_marginStart="@dimen/margin_20"
@@ -266,7 +266,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_25"
                 android:visibility="gone"
-                android:layout_below="@id/game_banner"
+                android:layout_below="@id/recy_event_blog_lay"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
 

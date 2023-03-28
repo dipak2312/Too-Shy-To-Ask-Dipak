@@ -22,7 +22,7 @@ import com.example.tooshytoask.API.WebServiceModel;
 import com.example.tooshytoask.activity.Blogs.AllBlogsActivity;
 import com.example.tooshytoask.activity.Blogs.AllEventActivity;
 import com.example.tooshytoask.activity.Bookmark.BookmarkActivity;
-import com.example.tooshytoask.activity.Courses.AllCoursesActivity;
+import com.example.tooshytoask.activity.LMS.AllCoursesActivity;
 import com.example.tooshytoask.activity.Game.GameMainPageActivity;
 import com.example.tooshytoask.activity.Notification.NotificationsActivity;
 import com.example.tooshytoask.activity.Quiz.QuizActivity;

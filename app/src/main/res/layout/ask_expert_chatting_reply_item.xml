@@ -12,9 +12,7 @@
         android:orientation="vertical"
         android:background="@drawable/expert_background"
         android:layout_marginTop="@dimen/margin_15"
-        android:layout_marginEnd="@dimen/margin_80"
-        android:minHeight="50dp"
-        android:minWidth="100dp">
+        android:layout_marginEnd="@dimen/margin_80">
 
         <TextView
             android:id="@+id/title"
@@ -57,15 +55,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hi Thomas, Welcome to TSTA Chat Support."
-            android:paddingTop="@dimen/padding_10"
             android:layout_below="@+id/reply_que_lay"
+            android:paddingTop="@dimen/padding_10"
             android:paddingEnd="@dimen/padding_10"
-            android:layout_centerVertical="true"
-            android:paddingBottom="@dimen/padding_10"
-            android:layout_marginStart="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_10"
+            android:paddingStart="@dimen/padding_10"
             android:fontFamily="@font/worksansregular"
-            android:layout_marginBottom="@dimen/margin_15"
             android:textSize="@dimen/text_size14"
             android:textColor="@color/black"/>
 

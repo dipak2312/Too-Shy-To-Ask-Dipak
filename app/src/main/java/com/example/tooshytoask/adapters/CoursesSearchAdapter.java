@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Models.course_search;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
-import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
+import com.example.tooshytoask.activity.LMS.CoursesDetailActivity;
 
 import java.util.ArrayList;
 

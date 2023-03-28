@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Courses.LessonDetailActivity">
+    tools:context=".activity.LMS.LessonDetailActivity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"

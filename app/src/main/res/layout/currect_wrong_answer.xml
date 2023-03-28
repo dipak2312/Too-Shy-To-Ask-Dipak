@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rel_check_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:visibility="visible">
+
+
+        <ImageView
+            android:id="@+id/img_answer"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/correct_answer" />
+
+        <TextView
+            android:id="@+id/txt_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_answer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/worksansmedium"
+            android:text="@string/correct_answer"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size18" />
+
+        <TextView
+            android:id="@+id/txt_question_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_answer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_25"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_25"
+            android:fontFamily="@font/worksansmedium"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size16" />
+
+        <TextView
+            android:id="@+id/txt_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_question_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:fontFamily="@font/worksansmedium"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14" />
+
+        <TextView
+            android:id="@+id/txt_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_hint"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:fontFamily="@font/worksansmedium"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size16" />
+
+
+        <TextView
+            android:id="@+id/txt_full_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_desc"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:fontFamily="@font/worksansregular"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14">
+
+        </TextView>
+
+
+    </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:layout_marginTop="@dimen/margin_60"
+            android:includeFontPadding="false"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:fontFamily="@font/worksansbold"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginStart="@dimen/margin_20"
+            android:background="@drawable/active_con_btn"
+            android:layout_marginBottom="@dimen/margin_30"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size14"/>
+
+    </RelativeLayout>

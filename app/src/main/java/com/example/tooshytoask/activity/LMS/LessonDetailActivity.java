@@ -1,4 +1,4 @@
-package com.example.tooshytoask.activity.Courses;
+package com.example.tooshytoask.activity.LMS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +26,7 @@ import com.example.tooshytoask.Models.Courses.Lesson.data;
 import com.example.tooshytoask.Models.Courses.Lesson.upcominglesson;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
-import com.example.tooshytoask.adapters.LessonAdapter;
+import com.example.tooshytoask.activity.Quiz.LMSQuizMainActivity;
 import com.example.tooshytoask.adapters.UpcomingLessonAdapter;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -53,7 +53,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
     PlayerView styledPlayerView;
     SimpleExoPlayer player;
     ConcatenatingMediaSource concatenatingMediaSource;
-    String lesson_id = "", video_link = "", courses_id ="", quiz = "";
+    String lesson_id = "", video_link = "", courses_id ="", quiz = "", less_id="" , course_id="";
     RecyclerView upcoming_lessons;
     RelativeLayout upcoming_lay;
     ArrayList<data> data;
@@ -239,7 +239,12 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
 
         }
         else if (id == quiz_btn.getId()){
-
+            Intent intent = new Intent(context, LMSQuizMainActivity.class);
+            intent.putExtra("lesson_id", lesson_id);
+            intent.putExtra("courses_id", courses_id);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
     }

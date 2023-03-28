@@ -13,17 +13,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.Courses.lesson;
-import com.example.tooshytoask.Models.insightcourses;
 import com.example.tooshytoask.R;
-import com.example.tooshytoask.Utils.OnBookmarkClicked;
-import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
-import com.example.tooshytoask.activity.Courses.LessonDetailActivity;
+import com.example.tooshytoask.activity.LMS.LessonDetailActivity;
 
 import java.util.ArrayList;
 

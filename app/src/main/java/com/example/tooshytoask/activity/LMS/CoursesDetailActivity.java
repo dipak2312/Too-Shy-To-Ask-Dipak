@@ -1,4 +1,4 @@
-package com.example.tooshytoask.activity.Courses;
+package com.example.tooshytoask.activity.LMS;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

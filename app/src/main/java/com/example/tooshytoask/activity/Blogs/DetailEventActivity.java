@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.activity.Home.HomeActivity;
 import com.example.tooshytoask.adapters.RelatedBlogAdapter;
 import com.example.tooshytoask.AuthModels.BlogLikeAuthModel;
@@ -37,15 +38,18 @@ import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-
-public class DetailEventActivity extends AppCompatActivity implements View.OnClickListener {
+//blog_id = Blog_id;
+//        actions = action;
+//        getBookmarkBlogs(action);
+public class DetailEventActivity extends AppCompatActivity implements View.OnClickListener, OnBookmarkClicked {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
     RelativeLayout rel_back;
     ImageView blog_img, like_courses, save_courses, share_courses, like_count_img;
     TextView txt_title, like_count, duration_time, blog_headline, blog_description;
-    String event_id, type = "event", helpful ="", commentId ="", next_id ="", previous_id ="", islike, isBookmark;
+    String event_id, type = "event", helpful ="", commentId ="", next_id ="",
+            previous_id ="", islike, isBookmark, blog_id = "", actions = "";
     RecyclerView recy_blogs;
     LinearLayout previous, next, related_blog_lay;
     NestedScrollView event_scroll_view;
@@ -218,7 +222,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
 
                             if (relatedblogs.size() != 0) {
                                 related_blog_lay.setVisibility(View.VISIBLE);
-                                adapter = new RelatedBlogAdapter(context, relatedblogs);
+                                adapter = new RelatedBlogAdapter(context, relatedblogs, DetailEventActivity.this);
                                 recy_blogs.setAdapter(adapter);
                             }
 
@@ -369,5 +373,12 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Too Shy Too Ask App");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, singleblog.get(0).getBlog_title() + "\n\n" + singleblog.get(0).getBlog_link());
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
+        blog_id = Blog_id;
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

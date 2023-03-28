@@ -19,7 +19,7 @@ import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.InsightScreen.courses;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
-import com.example.tooshytoask.activity.Courses.CoursesDetailActivity;
+import com.example.tooshytoask.activity.LMS.CoursesDetailActivity;
 
 import java.util.ArrayList;
 

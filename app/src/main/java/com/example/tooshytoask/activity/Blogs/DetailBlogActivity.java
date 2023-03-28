@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.activity.Home.HomeActivity;
 import com.example.tooshytoask.adapters.BlogCommentsAdapter;
 import com.example.tooshytoask.adapters.RelatedBlogAdapter;
@@ -51,11 +52,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailBlogActivity extends AppCompatActivity implements View.OnClickListener, BlogCommentsAdapter.onReplyClicked {
+public class DetailBlogActivity extends AppCompatActivity implements View.OnClickListener, BlogCommentsAdapter.onReplyClicked, OnBookmarkClicked {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String blog_id, type = "blog", helpful ="", commentId ="", next_id ="", previous_id ="", islike, isBookmark;
+    String blog_id, type = "blog", helpful ="", commentId ="", next_id ="", previous_id ="",
+            islike, isBookmark, actions = "";
     ArrayList<singleblog> singleblog;
     private SingleBlogResponse singleBlogResponse;
     ArrayList<relatedblogs> relatedblogs;
@@ -332,7 +334,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
                             if (relatedblogs.size() != 0) {
                                 related_blog_lay.setVisibility(View.VISIBLE);
-                                adapter = new RelatedBlogAdapter(context, relatedblogs);
+                                adapter = new RelatedBlogAdapter(context, relatedblogs, DetailBlogActivity.this);
                                 recy_blogs.setAdapter(adapter);
                             }
 
@@ -563,5 +565,12 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         commentId = comment_id;
 
         openReplyPopup();
+    }
+
+    @Override
+    public void onBookmarkButtonClick(int position, String Blog_id, String action) {
+        blog_id = Blog_id;
+        actions = action;
+        getBookmarkBlogs(action);
     }
 }

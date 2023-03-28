@@ -94,15 +94,16 @@ public class ImagePickUtilsCamera {
 
     private static void CameraIntent(Context context) {
 
+        try {
         Activity activity = (Activity) context;
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         activity.startActivityForResult(intent, TAKE_PICTURE);
-
-
-//        UpdateProfileActivity activity=new UpdateProfileActivity();
-//        activity.openCamera();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
