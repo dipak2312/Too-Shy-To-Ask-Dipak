@@ -99,9 +99,7 @@ public class CoursesDetailActivity extends AppCompatActivity {
                         if (msg.equals("Course Enrolled")){
 
                         }
-                        else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }
+
                     }
 
                     @Override

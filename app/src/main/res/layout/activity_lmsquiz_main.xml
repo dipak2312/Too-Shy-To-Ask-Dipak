@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Quiz.LMSQuizMainActivity">
+    android:background="@color/white"
+    tools:context=".activity.LMS.LMSQuiz.LMSQuizMainActivity">
 
     <ImageView
         android:layout_width="@dimen/margin_300"

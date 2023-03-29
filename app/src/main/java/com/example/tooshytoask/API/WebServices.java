@@ -12,6 +12,7 @@ import com.example.tooshytoask.AuthModels.BlogCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.BlogCommentsAuthModel;
 import com.example.tooshytoask.AuthModels.BlogLikeAuthModel;
 import com.example.tooshytoask.AuthModels.BookmarkBlogAuthModel;
+import com.example.tooshytoask.AuthModels.ClearLMSQuizAuthModel;
 import com.example.tooshytoask.AuthModels.ClearNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ContactFormAuthModel;
 import com.example.tooshytoask.AuthModels.CoursesDetailAuthModel;
@@ -28,9 +29,11 @@ import com.example.tooshytoask.AuthModels.HelpFeedbackAuthModel;
 import com.example.tooshytoask.AuthModels.HelpSubCategoryAuthModel;
 import com.example.tooshytoask.AuthModels.HomeScreenAuthModel;
 import com.example.tooshytoask.AuthModels.InsightScreenAuthModel;
+import com.example.tooshytoask.AuthModels.LMSQuizAttemptAuthModel;
 import com.example.tooshytoask.AuthModels.LMSQuizAuthModel;
 import com.example.tooshytoask.AuthModels.LessonDetailAuthModel;
 import com.example.tooshytoask.AuthModels.LessonEnrollAuthModel;
+import com.example.tooshytoask.AuthModels.LessonUpdateAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationAuthModel;
 import com.example.tooshytoask.AuthModels.ManageNotificationListUpdateAuthModel;
 import com.example.tooshytoask.AuthModels.NotificationAuthModel;
@@ -66,6 +69,8 @@ import com.example.tooshytoask.Models.AskQuestionsResponse;
 import com.example.tooshytoask.Models.BookmarkResponse;
 import com.example.tooshytoask.Models.Courses.CoursesDetailResponse;
 import com.example.tooshytoask.Models.Courses.CoursesEnrollResponse;
+import com.example.tooshytoask.Models.Courses.LMSQuiz.ClearLMSQuizesponse;
+import com.example.tooshytoask.Models.Courses.LMSQuiz.LMSQuizAttemptesponse;
 import com.example.tooshytoask.Models.Courses.LMSQuiz.LMSQuizesponse;
 import com.example.tooshytoask.Models.Courses.Lesson.LessonDetailResponse;
 import com.example.tooshytoask.Models.ExpertReplyResponse;
@@ -73,6 +78,7 @@ import com.example.tooshytoask.Models.GameScoreResponse;
 import com.example.tooshytoask.Models.GameTimeAuthModel;
 import com.example.tooshytoask.Models.LeaderboardResponse;
 import com.example.tooshytoask.Models.Courses.Lesson.LessonEnrollResponse;
+import com.example.tooshytoask.Models.Courses.LMSQuiz.LessonUpdateResponse;
 import com.example.tooshytoask.Models.StoreHouse.AllStoreHouseResponse;
 import com.example.tooshytoask.Models.AllVideoGalleryResponse;
 import com.example.tooshytoask.Models.AvatarResponse;
@@ -382,5 +388,17 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/lmsquiz")
     Observable<LMSQuizesponse> getLMSQuiz(@Body LMSQuizAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/quizattempt")
+    Observable<LMSQuizAttemptesponse> getLMSQuizAttempt(@Body LMSQuizAttemptAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/clearquizattempt")
+    Observable<ClearLMSQuizesponse> getClearLMSQuiz(@Body ClearLMSQuizAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/update_lesson_status")
+    Observable<LessonUpdateResponse> getLessonUpdate(@Body LessonUpdateAuthModel model);
 
 }

@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.tooshytoask.Fragment.LMSQuiz.LMSQuestionFragment;
-import com.example.tooshytoask.Fragment.Quiz.QuestionFragment;
+import com.example.tooshytoask.activity.LMS.LMSQuiz.LMSQuestionFragment;
 import com.example.tooshytoask.Models.Courses.LMSQuiz.Question;
 
 import java.util.ArrayList;

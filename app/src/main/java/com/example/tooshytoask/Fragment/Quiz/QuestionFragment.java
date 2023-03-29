@@ -1,5 +1,6 @@
 package com.example.tooshytoask.Fragment.Quiz;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -19,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.tooshytoask.Models.Courses.LMSQuiz.LMSQuizData;
+import com.example.tooshytoask.activity.LMS.LMSQuiz.LMSQuizActivity;
 import com.example.tooshytoask.activity.Quiz.QuizActivity;
 import com.example.tooshytoask.adapters.OptionAdapter;
 import com.example.tooshytoask.Models.Option;
@@ -108,8 +111,17 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         int id=view.getId();
 
-
         if(id==btn_submit.getId())
+        {
+            if (btn_submit.getText().equals("SUBMIT")) {
+                chekAnsPopup();
+            }
+            else {
+
+                ((QuizActivity) getActivity()).nextQuestion();
+
+            }
+        /*if(id==btn_submit.getId())
         {
 
             if (btn_submit.getText().equals("SUBMIT")) {
@@ -125,7 +137,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
 
                 ((QuizActivity) getActivity()).nextQuestion();
 
-            }
+            }*/
 
 
         }
@@ -150,6 +162,63 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
         recy_question.setLayoutManager(layoutManager);
         recy_question.setAdapter(adapter);
         btn_submit.setEnabled(false);
+    }
+
+    public void chekAnsPopup(){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.currect_wrong_answer);
+        dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
+
+        TextView txt_answer = dialog.findViewById(R.id.txt_answer);
+        TextView txt_full_desc = dialog.findViewById(R.id.txt_full_desc);
+        TextView txt_hint = dialog.findViewById(R.id.txt_hint);
+        TextView txt_question_name = dialog.findViewById(R.id.txt_question_name);
+        ImageView img_answer = dialog.findViewById(R.id.img_answer);
+        Button btn_submit = dialog.findViewById(R.id.btn_submit);
+
+        quizdata.add(new QuizData(question.getQuestionId(),selectedOption.getOption()));
+        quiz_id=question.getQuizId();
+        txt_question_name.setText(question.getQuestion());
+
+        for(int i=0;i<optlinlist.size();i++)
+        {
+            if(optlinlist.get(i).getOption().equals(question.getAnswerId()))
+            {
+                quiz_answer=optlinlist.get(i).getOption_serial();
+            }
+        }
+
+        if (selectedOption.getOption().equals(question.getAnswerId())) {
+            txt_answer.setText(R.string.correct_answer_title);
+            img_answer.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.correct_answer));
+            txt_answer.setTextColor(ContextCompat.getColor(context, R.color.tsta_green_color));
+            txt_answer.setTextColor(context.getResources().getColor(R.color.tsta_green_color));
+            txt_full_desc.setText(Html.fromHtml(question.getDescription()));
+            txt_hint.setText(getString(R.string.correct_answer));
+            txt_question_name.setVisibility(View.GONE);
+            answer++;
+
+        } else {
+            txt_answer.setText(R.string.incorrect_answer_title);
+            img_answer.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.wrong_answer));
+            txt_answer.setTextColor(ContextCompat.getColor(context, R.color.red));
+            txt_answer.setTextColor(context.getResources().getColor(R.color.red));
+            txt_full_desc.setText(Html.fromHtml(question.getDescription()));
+            String hint="<font color='black'>"+getString(R.string.correct_answer_is)+"</font>"+" "+question.getAnswerId()+"."+" "+quiz_answer;
+            txt_hint.setText(Html.fromHtml(hint));
+            incorect_answer++;
+
+        }
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((QuizActivity) getActivity()).nextQuestion();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     public void checkAnswerState()

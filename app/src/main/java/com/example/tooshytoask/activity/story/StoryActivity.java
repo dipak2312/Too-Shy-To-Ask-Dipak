@@ -1,5 +1,6 @@
 package com.example.tooshytoask.activity.story;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -9,7 +10,9 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Html;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,6 +47,8 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -51,29 +56,27 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import jp.shts.android.storiesprogressview.StoriesProgressView;
 
-public class StoryActivity extends AppCompatActivity implements View.OnClickListener, StoriesProgressView.StoriesListener {
+public class StoryActivity extends AppCompatActivity implements View.OnClickListener, StoriesProgressView.StoriesListener{
     StoriesProgressView story_progress_bar;
     View previous, skip;
     ImageView story_img, like_img, share_img;
-    RelativeLayout back_img;
+    RelativeLayout back_img, story_layout;
     TextView day, link_name, story_title;
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String story_id, story_like_share_ids, islike, share_link, story_name, story_video_time = "";
+    String story_id, story_like_share_ids, islike, share_link, story_name, story_image = "";
     String progrss_value;
     ArrayList<StoryDetails>storyDetails;
-    StoryViewPagerAdapter adapter;
     boolean like = true;
-    int counter = 0;
     long pressTime = 0L;
     long limit = 500L;
     int position=0;
     PlayerView videoPlayer;
     SimpleExoPlayer player;
     ConcatenatingMediaSource concatenatingMediaSource;
-    LinearLayout swipe_up;
-
+    LinearLayout swipe_up, swipe_up_lay;
+    //SwipeListener swipeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         context = StoryActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-
+        story_layout = findViewById(R.id.story_layout);
         story_progress_bar = findViewById(R.id.story_progress_bar);
         story_progress_bar.setStoriesListener(this);
         previous = findViewById(R.id.previous);
@@ -100,21 +103,14 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         share_img = findViewById(R.id.share_img);
         share_img.setOnClickListener(this);
         swipe_up=findViewById(R.id.swipe_up);
-
+        swipe_up.setOnClickListener(this);
         videoPlayer=findViewById(R.id.videoPlayer);
-
-
         back_img = findViewById(R.id.back_img);
         back_img.setOnClickListener(this);
 
-        Intent intent = getIntent();
-        if (intent != null) {
+        //swipeListener = new SwipeListener(swipe_up_lay);
 
-            story_id = intent.getStringExtra("story_id");
-
-        }
-
-
+        story_id = getIntent().getStringExtra("story_id");
         getStory();
         onTouch();
 
@@ -124,7 +120,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
 
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:
@@ -144,11 +139,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                         }
                         story_progress_bar.resume();
                         return limit < now - pressTime;
-
-
-
                 }
-
                 return false;
             }
 
@@ -159,6 +150,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
     public void getStory(){
         dialog.show("");
+        story_layout.setVisibility(View.GONE);
 
         StoryAuthModel model = new StoryAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -172,6 +164,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                     public void onNext(StoryResponse storyResponse) {
                         String msg = storyResponse.getMsg();
                         dialog.dismiss("");
+                        story_layout.setVisibility(View.VISIBLE);
                         if (msg.equals("success")) {
                            storyDetails = storyResponse.getStoryDetails();
 
@@ -183,12 +176,8 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                             {
                                 setStoryValue(storyDetails);
                             }
-
-
                         }
-
                         }
-
                     @Override
                     public void onError(Throwable e) {
 
@@ -219,12 +208,10 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
                         }
                     }
-
                     @Override
                     public void onError(Throwable e) {
 
                     }
-
                     @Override
                     public void onComplete() {
 
@@ -246,12 +233,10 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                         String msg = storyShareResponse.getCode();
                         //if (msg.equals(""))
                     }
-
                     @Override
                     public void onError(Throwable e) {
 
                     }
-
                     @Override
                     public void onComplete() {
 
@@ -261,12 +246,12 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
     private void setStoryValue(ArrayList<StoryDetails>storyDetails) {
 
-
         story_title.setText(Html.fromHtml(storyDetails.get(position).getStory_title()));
         story_name = storyDetails.get(position).getStory_title();
-        link_name.setText((storyDetails.get(position).getStory_link()));
+        //link_name.setText((storyDetails.get(position).getStory_link()));
         share_link = storyDetails.get(position).getStory_link();
         progrss_value = storyDetails.get(position).getStory_video_time();
+        story_image = storyDetails.get(position).getStory_img();
 
         if(storyDetails.get(position).getStory_link() != null && !storyDetails.get(position).getStory_link().equals(""))
         {
@@ -277,25 +262,20 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         day.setText(storyDetails.get(position).getStory_date());
         story_like_share_ids = storyDetails.get(position).getStory_id();
 
-        if (progrss_value == null){
-            if(storyDetails.get(position).getStory_img() != null && !storyDetails.get(position).getStory_img().equals(""))
-            {
+            if(storyDetails.get(position).getStory_img() != null && !storyDetails.get(position).getStory_img().equals("")) {
                 story_img.setVisibility(View.VISIBLE);
                 story_progress_bar.setStoryDuration(10000L);
                 videoPlayer.setVisibility(View.GONE);
                 Glide.with(context).load(storyDetails.get(position).getStory_img()).into(story_img);
-            }
-        } else if (progrss_value != null) {
 
+            }
           if (storyDetails.get(position).getStory_video() != null && !storyDetails.get(position).getStory_video().equals("")) {
 
                 story_img.setVisibility(View.GONE);
                 videoPlayer.setVisibility(View.VISIBLE);
                 story_progress_bar.setStoryDuration(Long.parseLong(progrss_value));
                 videoPlay(storyDetails.get(position).getStory_video());
-
             }
-        }
 
         islike = storyDetails.get(position).getLiked();
         setIslike();
@@ -306,8 +286,8 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         if (islike.equals("1")) {
             like_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
             like = false;
-
-        } else {
+        }
+        else {
             like_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
             like = true;
         }
@@ -324,35 +304,36 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                 player.stop();
             }
             finish();
-        } else if (id == previous.getId()) {
+        }
+        else if (id == previous.getId()) {
             story_progress_bar.reverse();
-
-        } else if (id == skip.getId()) {
+        }
+        else if (id == skip.getId()) {
             story_progress_bar.skip();
-
         }
         else if (id == share_img.getId()){
             sharevalue();
+        }
+        else if (id == link_name.getId()){
+            Uri uri = Uri.parse(share_link);
+            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(intent);
+
         }
         else if (id == like_img.getId()) {
             if (like) {
                 like_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_active));
                 getStoryLike("like");
                 like = false;
-
             } else    {
                 like_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like));
                 getStoryLike("unlike");
                 like = true;
-
             }
-
         }
-
-
     }
-
     public void sharevalue() {
+
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Too Shy Too Ask App");
@@ -362,7 +343,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
         getStoryShare();
     }
-
     @Override
     public void onNext() {
       position=position+1;
@@ -370,9 +350,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
       {
           setStoryValue(storyDetails);
       }
-
     }
-
     @Override
     public void onPrev() {
       position=position-1;
@@ -380,9 +358,10 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         {
             setStoryValue(storyDetails);
         }
-
+        if (position != 0) {
+            finish();
+        }
     }
-
     @Override
     public void onComplete() {
         if(player != null)
@@ -392,8 +371,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         }
         finish();
     }
-
-
     public void videoPlay(String videoPlayLink){
 
         String videoPath = videoPlayLink;
@@ -411,14 +388,10 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         concatenatingMediaSource.addMediaSource(mediaSource);
         videoPlayer.setPlayer(player);
         videoPlayer.setKeepScreenOn(true);
-
         player.setMediaItem(mediaItem);
-
         player.prepare(concatenatingMediaSource);
         player.play();
-
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -426,9 +399,67 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         {
             player.release();
         }
-
-        //styledPlayerView.setPlayer(null);
-        //player.release();
-
     }
+
+    /*private class SwipeListener implements View.OnTouchListener{
+
+        GestureDetector gestureDetector;
+
+        SwipeListener(View view){
+            int threshold = 100;
+            int velocity = 100;
+
+            GestureDetector.SimpleOnGestureListener listener =
+                    new GestureDetector.SimpleOnGestureListener(){
+                        @Override
+                        public boolean onDown(@NonNull MotionEvent e) {
+                            return true;
+                        }
+
+                        @Override
+                        public boolean onFling(@NonNull MotionEvent e1, @NonNull MotionEvent e2, float velocityX, float velocityY) {
+
+                            float xDiff = e2.getX() - e1.getX();
+                            float yDiff = e2.getY() - e1.getY();
+
+                            try {
+                                if (Math.abs(xDiff)>Math.abs(yDiff)){
+                                    if (Math.abs(yDiff)>threshold && Math.abs(velocityY)> velocity){
+                                        if (yDiff > 0){
+                                            Toast.makeText(context, "swiped down", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            Toast.makeText(context, "swiped up", Toast.LENGTH_SHORT).show();
+                                        }
+                                        return true;
+                                    }
+                                    else {
+                                        if (Math.abs(xDiff)>threshold && Math.abs(velocityX)> velocity){
+
+                                            if (xDiff > 0){
+                                                Toast.makeText(context, "swiped right", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else {
+                                                Toast.makeText(context, "swiped left", Toast.LENGTH_SHORT).show();
+                                            }
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            return false;
+                        }
+                    };
+            gestureDetector =  new GestureDetector(listener);
+
+            view.setOnTouchListener(this);
+        }
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
+        }
+    }*/
 }

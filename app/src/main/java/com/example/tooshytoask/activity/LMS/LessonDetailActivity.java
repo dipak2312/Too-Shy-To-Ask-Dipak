@@ -26,7 +26,7 @@ import com.example.tooshytoask.Models.Courses.Lesson.data;
 import com.example.tooshytoask.Models.Courses.Lesson.upcominglesson;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
-import com.example.tooshytoask.activity.Quiz.LMSQuizMainActivity;
+import com.example.tooshytoask.activity.LMS.LMSQuiz.LMSQuizMainActivity;
 import com.example.tooshytoask.adapters.UpcomingLessonAdapter;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;

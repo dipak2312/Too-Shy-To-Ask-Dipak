@@ -6,8 +6,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/story_layout"
     android:background="@color/black"
     tools:context=".activity.story.StoryInfoActivity">
+
+    <jp.shts.android.storiesprogressview.StoriesProgressView
+        android:id="@+id/story_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_1"
+        android:backgroundTint="@color/purple"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20">
+
+        <TextView
+            android:id="@+id/story_title"
+            android:layout_width="@dimen/margin_250"
+            android:layout_height="@dimen/margin_30"
+            android:text=" "
+            android:fontFamily="@font/worksansmedium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size16"
+            android:singleLine="true"/>
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="@dimen/margin_250"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:fontFamily="@font/worksansmedium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size12"
+            android:layout_below="@id/story_title"
+            android:singleLine="true"/>
+    </RelativeLayout>
 
 
     <RelativeLayout
@@ -26,14 +66,6 @@
 
     </RelativeLayout>
 
-    <jp.shts.android.storiesprogressview.StoriesProgressView
-        android:id="@+id/story_progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_1"
-        android:backgroundTint="@color/purple"
-        android:layout_marginStart="@dimen/margin_10"
-        android:layout_marginEnd="@dimen/margin_10"
-        android:layout_marginTop="@dimen/margin_10"/>
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/videoPlayer"
@@ -41,6 +73,7 @@
         android:layout_height="match_parent"
         app:resize_mode="fit"
         app:show_timeout="0"
+        android:visibility="gone"
         app:use_artwork="false"
         app:use_controller="false"
         app:surface_type="texture_view"/>
@@ -48,6 +81,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_50"
+        android:layout_marginBottom="@dimen/margin_70"
         android:orientation="horizontal">
 
         <View
@@ -69,39 +104,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="@drawable/gradient_background"
-        android:scaleType="fitCenter"/>
+        android:scaleType="centerInside"/>
 
-
-
-    <RelativeLayout
-        android:id="@+id/rel_top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_20"
-        android:layout_marginEnd="@dimen/margin_20"
-        android:layout_marginTop="@dimen/margin_20">
-
-        <TextView
-            android:id="@+id/story_title"
-            android:layout_width="@dimen/margin_250"
-            android:layout_height="@dimen/margin_30"
-            android:text="Dipak Yadav"
-            android:fontFamily="@font/worksansmedium"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size16"
-            android:singleLine="true"/>
-
-        <TextView
-            android:id="@+id/day"
-            android:layout_width="@dimen/margin_250"
-            android:layout_height="wrap_content"
-            android:text="23 Feb 1995"
-            android:fontFamily="@font/worksansmedium"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size12"
-            android:layout_below="@id/story_title"
-            android:singleLine="true"/>
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -114,7 +118,7 @@
             android:layout_height="@dimen/margin_90"
             android:layout_marginEnd="@dimen/margin_20"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/margin_40"
+            android:layout_marginBottom="@dimen/margin_20"
             android:layout_alignParentEnd="true">
 
             <ImageView
@@ -134,40 +138,27 @@
 
         <LinearLayout
             android:id="@+id/swipe_up"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/sare_like_lay"
-            android:background="@color/white">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_20">
-
-                <ImageView
-                    android:id="@+id/arrow_up"
-                    android:layout_width="@dimen/margin_15"
-                    android:layout_height="@dimen/margin_15"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:src="@drawable/arrow_up" />
+            android:layout_below="@id/sare_like_lay">
 
                 <TextView
                     android:id="@+id/link_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/margin_20"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/worksansregular"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:layout_marginBottom="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingTop="@dimen/padding_10"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
                     android:singleLine="true"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:background="@drawable/story_link_background"
                     android:text="@string/swipe_up_to_know_more"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size15"/>
-
-            </LinearLayout>
 
         </LinearLayout>
 

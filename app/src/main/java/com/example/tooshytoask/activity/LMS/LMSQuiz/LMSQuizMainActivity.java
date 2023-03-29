@@ -1,4 +1,4 @@
-package com.example.tooshytoask.activity.Quiz;
+package com.example.tooshytoask.activity.LMS.LMSQuiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
-import com.example.tooshytoask.activity.LMS.LMSQuiz.LMSQuizActivity;
 
 public class LMSQuizMainActivity extends AppCompatActivity {
     Context context;

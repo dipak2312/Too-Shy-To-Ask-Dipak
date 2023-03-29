@@ -1,19 +1,29 @@
 package com.example.tooshytoask.activity.Quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.AuthModels.QuizAnswerAuthModel;
+import com.example.tooshytoask.Fragment.Quiz.QuestionFragment;
+import com.example.tooshytoask.Models.QuizAnswerResponse;
+import com.example.tooshytoask.Models.QuizData;
+import com.example.tooshytoask.activity.Home.HomeActivity;
+import com.example.tooshytoask.activity.LMS.CoursesDetailActivity;
+import com.example.tooshytoask.activity.LMS.LMSQuiz.LMSQuestionFragment;
 import com.example.tooshytoask.adapters.OptionAdapter;
 import com.example.tooshytoask.adapters.QuestionPagerAdapter;
 import com.example.tooshytoask.AuthModels.QuizQueAuthModel;
@@ -38,13 +48,14 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<Question> quetions;
     ProgressBar progressbar_completed;
     double progrss_value;
-
+    String quiz_id;
     ViewPager viewPager;
     TextView txt_count;
     CustomProgressDialog dialog;
     TextView txt_quiz_title;
     private QuestionPagerAdapter pagerAdapter;
     SPManager spManager;
+    ArrayList<QuizData> quizdata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +66,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         spManager=new SPManager(context);
 
         quetions=new ArrayList<>();
+        quizdata=new ArrayList<>();
+        quiz_id=LMSQuestionFragment.quiz_id;
+        LMSQuestionFragment.quiz_id="";
+
         dialog=new CustomProgressDialog(context);
 
         rel_progress_bar = (RelativeLayout) findViewById(R.id.rel_progress_bar);
@@ -146,17 +161,124 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+    }
 
+    public void resultPopup(){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.quiz_result);
+        dialog.setCancelable(false);
+        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
+
+        TextView percentage_txt = dialog.findViewById(R.id.percentage_txt);
+        TextView title_txt = dialog.findViewById(R.id.title_txt);
+        Button home_button = dialog.findViewById(R.id.home_button);
+        Button btn_completed = dialog.findViewById(R.id.btn_completed);
+        double percentage;
+        int anwer,incorrect_answer,total;
+
+        anwer = LMSQuestionFragment.answer;
+        incorrect_answer= LMSQuestionFragment.incorect_answer;
+        LMSQuestionFragment.answer=0;
+        LMSQuestionFragment.incorect_answer=0;
+        total=anwer+incorrect_answer;
+
+        percentage=anwer * 100 / total;
+
+        percentage_txt.setText(percentage +"%"+" "+"Score");
+        title_txt.setText("You answerd"+" "+anwer+" "+"out of"+" "+total+" "+"question correctly.\n To continue click on next quiz or click on home to go back");
+
+        if (percentage < 25){
+            percentage_txt.setTextColor(ContextCompat.getColor(context, R.color.red));
+        }
+        else if (percentage < 60){
+            percentage_txt.setTextColor(ContextCompat.getColor(context, R.color.tsta_green_color));
+        }
+        else {
+
+        }
+
+        sendReply();
+
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+
+        btn_completed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, QuizActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public void sendReply()
+    {
+        dialog.show("");
+
+        QuizAnswerAuthModel model=new QuizAnswerAuthModel();
+        model.setQuiz_id(quiz_id);
+        model.setUser_id(spManager.getUserId());
+        model.setQuizData(quizdata);
+
+        WebServiceModel.getRestApi().getQuizAns(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<QuizAnswerResponse>() {
+                    @Override
+                    public void onNext(QuizAnswerResponse quizAnswerResponse) {
+                        dialog.dismiss("");
+                        String msg = quizAnswerResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+
+                            Toast.makeText(context,"Data saved successfully",Toast.LENGTH_SHORT).show();
+                            QuestionFragment.quizdata.clear();
+
+                        } else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        QuestionFragment.quizdata.clear();
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void nextQuestion() {
         if (viewPager.getCurrentItem() == pagerAdapter.getCount() - 1) {
 
-            Intent intent = new Intent(this, ResultQuizActivity.class);
+            /*Intent intent = new Intent(this, ResultQuizActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
+            finish();*/
+
+            resultPopup();
         }
         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
 

@@ -3,21 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/answer_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <RelativeLayout
         android:id="@+id/rel_check_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="60dp"
         android:visibility="visible">
-
 
         <ImageView
             android:id="@+id/img_answer"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="@dimen/margin_100"
+            android:layout_height="@dimen/margin_100"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="@dimen/margin_30"
             android:src="@drawable/correct_answer" />
 
         <TextView
@@ -62,18 +64,26 @@
             android:textColor="@color/black"
             android:textSize="@dimen/text_size14" />
 
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_1"
+            android:layout_below="@id/txt_hint"
+            android:background="@color/line_color"
+            android:layout_marginTop="@dimen/margin_20"/>
+
         <TextView
             android:id="@+id/txt_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_hint"
+            android:layout_below="@+id/line"
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginTop="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"
             android:fontFamily="@font/worksansmedium"
             android:text="@string/description"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size16" />
+            android:textSize="@dimen/text_size14" />
 
 
         <TextView
@@ -81,33 +91,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_desc"
+            android:layout_marginTop="@dimen/margin_5"
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"
             android:fontFamily="@font/worksansregular"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size14">
+            android:textSize="@dimen/text_size12">
 
         </TextView>
-
-
-    </RelativeLayout>
 
         <Button
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_50"
-            android:layout_marginTop="@dimen/margin_60"
+            android:layout_marginTop="@dimen/margin_40"
             android:includeFontPadding="false"
-            android:layout_alignParentBottom="true"
             android:gravity="center"
+            android:layout_below="@id/txt_full_desc"
             android:fontFamily="@font/worksansbold"
             android:layout_marginEnd="@dimen/margin_20"
             android:layout_marginStart="@dimen/margin_20"
             android:background="@drawable/active_con_btn"
             android:layout_marginBottom="@dimen/margin_30"
-            android:text="@string/submit"
+            android:text="NEXT QUESTION"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size14"/>
+
+    </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>

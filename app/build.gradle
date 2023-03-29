@@ -75,10 +75,10 @@ dependencies {
     //Circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //otp
-    implementation 'com.github.aabhasr1:OtpView:1.1.2'
+    //implementation 'com.github.aabhasr1:OtpView:1.1.2'
 
     implementation 'io.github.chaosleung:pinview:1.4.4'
-    implementation 'com.github.dhaval2404:imagepicker:2.1'
+    //implementation 'com.github.dhaval2404:imagepicker:2.1'
 
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
@@ -92,20 +92,17 @@ dependencies {
     implementation "com.google.android.play:app-update:2.0.1"
 
     implementation 'com.github.shts:StoriesProgressView:3.0.0'
-    implementation 'com.github.TOrnelas:SegmentedProgressBar:0.0.1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //implementation 'com.github.TOrnelas:SegmentedProgressBar:0.0.1'
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-core:21.1.1'
-    implementation 'androidx.palette:palette:1.0.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.18.4'
-    implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:3.0.8'
+    //implementation 'androidx.palette:palette:1.0.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
+    //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:3.0.8'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
-    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.26'
-    //implementation 'androidx.media3:media3-exoplayer:1.0.0'
-    //implementation 'androidx.media3:media3-exoplayer-dash:1.0.0'
-    //implementation 'androidx.media3:media3-ui:1.0.0'
+    //implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.26'
 
 }
