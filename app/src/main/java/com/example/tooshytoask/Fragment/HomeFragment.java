@@ -184,9 +184,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                         if (msg.equals("Article Bookmarked")) {
 
                         }
-                        else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }
+
 
                     }
 
@@ -589,9 +587,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
 
                         }
-                        else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }
+
                     }
 
                     @Override

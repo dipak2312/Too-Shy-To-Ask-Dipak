@@ -8,8 +8,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +42,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class CoursesDetailActivity extends AppCompatActivity {
+public class CoursesDetailActivity extends AppCompatActivity implements View.OnClickListener {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -54,6 +56,7 @@ public class CoursesDetailActivity extends AppCompatActivity {
     ConcatenatingMediaSource concatenatingMediaSource;
     String courses_id = "", video_link = "";
     RecyclerView all_lessons;
+    RelativeLayout rel_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class CoursesDetailActivity extends AppCompatActivity {
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        rel_back = findViewById(R.id.rel_back);
+        rel_back.setOnClickListener(this);
         txt_title = findViewById(R.id.txt_title);
         blog_headline = findViewById(R.id.blog_headline);
         courses_time = findViewById(R.id.courses_time);
@@ -137,6 +142,7 @@ public class CoursesDetailActivity extends AppCompatActivity {
                                 txt_title.setText(Html.fromHtml(data.get(0).getTitle()));
                                 blog_headline.setText(Html.fromHtml(data.get(0).getTitle()));
                                 courses_description.setText(Html.fromHtml(data.get(0).getDescription()));
+                                courses_description.setMovementMethod(LinkMovementMethod.getInstance());
                                 courses_time.setText(Html.fromHtml(data.get(0).getTiming()));
                                 lessions.setText(Html.fromHtml(data.get(0).getCurrentcourse()));
                                 video_link = data.get(0).getVideolink();
@@ -148,18 +154,16 @@ public class CoursesDetailActivity extends AppCompatActivity {
                                     Glide.with(context).load(data.get(0).getImage()).into(courses_img);
 
                                 }
-
                                 if (data.get(0).getVideolink() != null) {
                                     styledPlayerView.setVisibility(View.VISIBLE);
                                     courses_img.setVisibility(View.GONE);
                                     videoPlay();
                                 }
 
-                                if (data.get(0).getVideolink() != null && data.get(0).getImage() != null) {
+                                /*if (data.get(0).getVideolink() != null && data.get(0).getImage() != null) {
                                     styledPlayerView.setVisibility(View.VISIBLE);
                                     courses_img.setVisibility(View.GONE);
-
-                                }
+                                }*/
                             }
                             if (lesson != null){
                                 adapter = new LessonAdapter(context, lesson);
@@ -204,5 +208,14 @@ public class CoursesDetailActivity extends AppCompatActivity {
         player.prepare(concatenatingMediaSource);
         player.play();
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == rel_back.getId()){
+            finish();
+        }
     }
 }

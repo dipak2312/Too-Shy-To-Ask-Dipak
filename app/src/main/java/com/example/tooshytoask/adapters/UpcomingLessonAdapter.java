@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tooshytoask.Models.Courses.Lesson.data;
@@ -26,6 +28,7 @@ public class UpcomingLessonAdapter extends RecyclerView.Adapter<UpcomingLessonAd
     Context context;
     ArrayList<upcominglesson>upcominglesson;
     ArrayList<data> data;
+    String position_status;
 
     public UpcomingLessonAdapter(Context context, ArrayList<upcominglesson> upcominglesson, ArrayList<data> data) {
         this.context = context;
@@ -47,16 +50,19 @@ public class UpcomingLessonAdapter extends RecyclerView.Adapter<UpcomingLessonAd
         holder.sr_no.setText(Html.fromHtml(upcominglesson.get(position).getSno()));
         holder.lesson_time.setText(Html.fromHtml(upcominglesson.get(position).getTiming()));
         holder.quiz_count.setText(Html.fromHtml(upcominglesson.get(position).getQuiz()));
+        position_status = upcominglesson.get(position).getId();
 
         if (upcominglesson.get(position).getLesson_status().equals("completed")){
             holder.lesson_status.setText(R.string.completed);
             holder.lesson_status_img.setImageResource(R.drawable.lesson_complete);
+            holder.lesson_title.setTextColor(ContextCompat.getColor(context, R.color.black));
             holder.lesson_status.setVisibility(View.VISIBLE);
             holder.time_lin_lay.setVisibility(View.GONE);
         }
         else if (upcominglesson.get(position).getLesson_status().equals("pending")){
             holder.lesson_status.setText(R.string.now_playing);
             holder.lesson_status_img.setImageResource(R.drawable.lesson_inprogress);
+            holder.lesson_title.setTextColor(ContextCompat.getColor(context, R.color.purple));
             holder.lesson_status.setVisibility(View.VISIBLE);
             holder.time_lin_lay.setVisibility(View.GONE);
         }
@@ -64,7 +70,12 @@ public class UpcomingLessonAdapter extends RecyclerView.Adapter<UpcomingLessonAd
         else if (upcominglesson.get(position).getLesson_status().equals("")){
             holder.time_lin_lay.setVisibility(View.VISIBLE);
             holder.lesson_status.setVisibility(View.GONE);
+            holder.lesson_title.setTextColor(ContextCompat.getColor(context, R.color.black));
+            holder.lession_rel_layout.setAlpha(0.5f);
             holder.lesson_status_img.setImageResource(R.drawable.lesson_lock);
+        }
+        else if (position_status.equals("completed")){
+
         }
 
     }
@@ -79,10 +90,12 @@ public class UpcomingLessonAdapter extends RecyclerView.Adapter<UpcomingLessonAd
         TextView lesson_title, sr_no, lesson_status, lesson_time, quiz_count;
         CardView card_view_courses;
         LinearLayout time_lin_lay;
+        RelativeLayout lession_rel_layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            lession_rel_layout = itemView.findViewById(R.id.lession_rel_layout);
             lesson_status_img = itemView.findViewById(R.id.lesson_status_img);
             lesson_status = itemView.findViewById(R.id.lesson_status);
             lesson_title = itemView.findViewById(R.id.lesson_title);

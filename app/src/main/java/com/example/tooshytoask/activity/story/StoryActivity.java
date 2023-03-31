@@ -67,6 +67,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     CustomProgressDialog dialog;
     String story_id, story_like_share_ids, islike, share_link, story_name, story_image = "";
     String progrss_value;
+    long progress_time;
     ArrayList<StoryDetails>storyDetails;
     boolean like = true;
     long pressTime = 0L;
@@ -169,12 +170,11 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                            storyDetails = storyResponse.getStoryDetails();
 
                             story_progress_bar.setStoriesCount(storyDetails.size());
-                            story_progress_bar.setStoryDuration(10000L);
-                            story_progress_bar.startStories();
 
                             if(storyDetails !=null)
                             {
                                 setStoryValue(storyDetails);
+                                story_progress_bar.startStories();
                             }
                         }
                         }
@@ -250,7 +250,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         story_name = storyDetails.get(position).getStory_title();
         //link_name.setText((storyDetails.get(position).getStory_link()));
         share_link = storyDetails.get(position).getStory_link();
-        progrss_value = storyDetails.get(position).getStory_video_time();
+
         story_image = storyDetails.get(position).getStory_img();
 
         if(storyDetails.get(position).getStory_link() != null && !storyDetails.get(position).getStory_link().equals(""))
@@ -270,12 +270,14 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
             }
           if (storyDetails.get(position).getStory_video() != null && !storyDetails.get(position).getStory_video().equals("")) {
-
+              progrss_value = storyDetails.get(position).getStory_video_time()+"000";
+              progress_time = Long.parseLong(progrss_value);
                 story_img.setVisibility(View.GONE);
                 videoPlayer.setVisibility(View.VISIBLE);
-                story_progress_bar.setStoryDuration(Long.parseLong(progrss_value));
+                story_progress_bar.setStoryDuration(progress_time);
                 videoPlay(storyDetails.get(position).getStory_video());
             }
+
 
         islike = storyDetails.get(position).getLiked();
         setIslike();
@@ -345,22 +347,21 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void onNext() {
-      position=position+1;
-      if(storyDetails !=null)
-      {
-          setStoryValue(storyDetails);
-      }
+            position = position + 1;
+            if (storyDetails != null) {
+                setStoryValue(storyDetails);
+            }
+
     }
     @Override
     public void onPrev() {
-      position=position-1;
-        if(storyDetails !=null)
-        {
-            setStoryValue(storyDetails);
+        if(position !=0) {
+            position = position - 1;
+            if (storyDetails != null) {
+                setStoryValue(storyDetails);
+            }
         }
-        if (position != 0) {
-            finish();
-        }
+
     }
     @Override
     public void onComplete() {

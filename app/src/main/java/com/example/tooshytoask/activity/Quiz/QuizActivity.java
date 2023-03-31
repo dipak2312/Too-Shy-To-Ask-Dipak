@@ -65,11 +65,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         context = QuizActivity.this;
         spManager=new SPManager(context);
 
-        quetions=new ArrayList<>();
-        quizdata=new ArrayList<>();
-        quiz_id=LMSQuestionFragment.quiz_id;
-        LMSQuestionFragment.quiz_id="";
-
         dialog=new CustomProgressDialog(context);
 
         rel_progress_bar = (RelativeLayout) findViewById(R.id.rel_progress_bar);
@@ -176,11 +171,15 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         double percentage;
         int anwer,incorrect_answer,total;
 
-        anwer = LMSQuestionFragment.answer;
-        incorrect_answer= LMSQuestionFragment.incorect_answer;
-        LMSQuestionFragment.answer=0;
-        LMSQuestionFragment.incorect_answer=0;
+        anwer = QuestionFragment.answer;
+        incorrect_answer= QuestionFragment.incorect_answer;
+        QuestionFragment.answer=0;
+        QuestionFragment.incorect_answer=0;
         total=anwer+incorrect_answer;
+
+        quizdata=QuestionFragment.quizdata;
+        quiz_id=QuestionFragment.quiz_id;
+        QuestionFragment.quiz_id="";
 
         percentage=anwer * 100 / total;
 
@@ -247,9 +246,9 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(context,"Data saved successfully",Toast.LENGTH_SHORT).show();
                             QuestionFragment.quizdata.clear();
 
-                        } else {
+                        }
+                        else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-
                         }
 
                     }

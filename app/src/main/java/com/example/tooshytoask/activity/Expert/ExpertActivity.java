@@ -135,7 +135,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                                 recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
                             }
                             if (chats.size() == 0){
-                                swipe_refresh.setVisibility(View.GONE);
+                                recy_user_msg.setVisibility(View.GONE);
                             }
 
                             if (chatSize != select_chat_size) {
@@ -254,15 +254,21 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
     public void sendMessage() {
 
-        if (ask_questions.getText().toString().trim().equals("")) {
+        /*if (ask_questions.getText().toString().trim().equals("")) {
             Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         if (!ask_questions.getText().toString().trim().equals("")) {
             String message = ask_questions.getText().toString().trim();
 
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
                 recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
+                getAskQuestions(message);
+                chat_ref_status="yes";
+                ask_questions.setText("");
+            }
+            else  if (adapter == null) {
+
                 getAskQuestions(message);
                 chat_ref_status="yes";
                 ask_questions.setText("");

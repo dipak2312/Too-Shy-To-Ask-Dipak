@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import com.example.tooshytoask.Models.UpdateProfile.UpdateProfileResponse;
 import com.example.tooshytoask.Models.UserProfileResponse;
 import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
+import com.example.tooshytoask.Utils.MyValidator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
@@ -45,7 +47,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     int year, month, day;
     private DatePickerPopup datePickerPopup;
     CustomProgressDialog dialog;
-    String yearnew = "", profile_pic, gender ="", action = "profile";
+    String yearnew = "", profile_pic, gender ="", action = "profile", emailPattern, emailPattern1;
     CircleImageView profile_image;
 
     @Override
@@ -73,7 +75,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         edit_state_enter.setText(spManager.getState());
         edit_email_enter = findViewById(R.id.edit_email_enter);
         edit_email_enter.setText(spManager.getEmail());
-
+        emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        emailPattern1 = "";
         update_interest = findViewById(R.id.update_interest);
         update_interest.setOnClickListener(this);
         update_personal_info = findViewById(R.id.update_personal_info);
@@ -312,31 +315,42 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
         else if (id == update_pro.getId()) {
             if (edit_name.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "First Name is required", Toast.LENGTH_SHORT).show();
-
-            } else if (edit_surname.getText().toString().trim().equals("")) {
+            }
+            else if (!MyValidator.isValidName(edit_name.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid name", Toast.LENGTH_SHORT).show();
+            }
+            else if (edit_surname.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Last Name is required", Toast.LENGTH_SHORT).show();
-
-            } /*else if (edit_email_enter.getText().toString().trim().equals("")) {
-                Toast.makeText(context, "Email is required", Toast.LENGTH_SHORT).show();
-
-            } else if (!MyValidator.isValidEmail(edit_email_enter.getText().toString().trim())) {
+            }
+            else if (!MyValidator.isValidName(edit_surname.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid surname", Toast.LENGTH_SHORT).show();
+            }
+            else if (!MyValidator.isValidEmail(edit_email_enter.getText().toString().trim())) {
                 Toast.makeText(context, "Please enter valid email id", Toast.LENGTH_SHORT).show();
-
-            }*/ else if (etMobile.getText().toString().trim().equals("")) {
+            }
+            else if (etMobile.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Mobile Number is required", Toast.LENGTH_SHORT).show();
 
             }   else if (edit_age.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Please select your Date Of Birth", Toast.LENGTH_SHORT).show();
-
+            }
+            else if (edit_country_enter.getText().toString().trim().equals("")) {
+                Toast.makeText(context, "Please enter your Country", Toast.LENGTH_SHORT).show();
+            }
+            else if (!MyValidator.isValidName(edit_country_enter.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid Country", Toast.LENGTH_SHORT).show();
             }
             else if (edit_state_enter.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Please enter your State", Toast.LENGTH_SHORT).show();
             }
+            else if (!MyValidator.isValidName(edit_state_enter.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid sate", Toast.LENGTH_SHORT).show();
+            }
             else if (edit_city_enter.getText().toString().trim().equals("")) {
                 Toast.makeText(context, "Please enter your City", Toast.LENGTH_SHORT).show();
             }
-            else if (edit_country_enter.getText().toString().trim().equals("")) {
-                Toast.makeText(context, "Please enter your Country", Toast.LENGTH_SHORT).show();
+            else if (!MyValidator.isValidName(edit_city_enter.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid city", Toast.LENGTH_SHORT).show();
             }
             else if (gender.equals("")){
                 Toast.makeText(context, "Please select your Gender", Toast.LENGTH_SHORT).show();

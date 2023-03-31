@@ -46,9 +46,9 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String article_id, next_id ="", previous_id ="", type = "storehouse", islike, isBookmark;
+    String article_id, next_id ="", previous_id ="", type = "storehouse", islike, isBookmark, helpfull_status;
     TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description, helpful;
-    ImageView blog_img, like_courses, save_courses, share_courses,like_count_img;
+    ImageView blog_img, like_courses, save_courses, share_courses,like_thumb, dislike_thumb;
     LinearLayout previous, next, helpful_yes, helpful_no, related_blog_lay;
     RelativeLayout rel_back, next_back;
     RelatedStoreHouseAdapter adapter;
@@ -68,6 +68,8 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         dialog = new CustomProgressDialog(context);
 
         next_back = findViewById(R.id.next_back);
+        like_thumb = findViewById(R.id.like_thumb);
+        dislike_thumb = findViewById(R.id.dislike_thumb);
         storehouse_scroll_view = findViewById(R.id.storehouse_scroll_view);
         related_blog_lay = findViewById(R.id.related_blog_lay);
         rel_back = findViewById(R.id.rel_back);
@@ -139,6 +141,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
 
                             islike = storehousedata.get(0).getLiked();
                             isBookmark = storehousedata.get(0).getBookmarked();
+                            helpfull_status = storehousedata.get(0).getHelpfull_status();
 
                             setIslike();
 
@@ -196,6 +199,16 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
             save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved));
             like = true;
         }
+        if (helpfull_status.equals("Yes")){
+            like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up_active));
+            dislike_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_down));
+            like = false;
+        }
+        if (helpfull_status.equals("No")){
+            dislike_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_down_active));
+            like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up));
+            like = true;
+        }
     }
 
     public void getSinglePage(){
@@ -217,7 +230,11 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                             like_count.setText(Html.fromHtml(storehousedata.get(0).getLikeCnt()));
                             yes_count.setText(Html.fromHtml(storehousedata.get(0).getHelpfull()));
                             no_count.setText(Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
+                            islike = storehousedata.get(0).getLiked();
+                            isBookmark = storehousedata.get(0).getBookmarked();
+                            helpfull_status = storehousedata.get(0).getHelpfull_status();
 
+                            setIslike();
 
                         }
 

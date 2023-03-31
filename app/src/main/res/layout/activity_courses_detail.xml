@@ -70,7 +70,7 @@
                     android:id="@+id/styled_player_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:resize_mode="fit"
+                    app:resize_mode="fixed_height"
                     app:show_timeout="0"
                     app:use_controller="true"
                     app:surface_type="surface_view"/>

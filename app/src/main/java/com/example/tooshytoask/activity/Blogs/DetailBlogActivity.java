@@ -57,13 +57,14 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
     SPManager spManager;
     CustomProgressDialog dialog;
     String blog_id, type = "blog", helpful ="", commentId ="", next_id ="", previous_id ="",
-            islike, isBookmark, actions = "";
+            islike, isBookmark, actions = "", blog_helpfull_status;
     ArrayList<singleblog> singleblog;
     private SingleBlogResponse singleBlogResponse;
     ArrayList<relatedblogs> relatedblogs;
     ArrayList<comments> comments;
-    TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description;
-    ImageView blog_img, like_courses, save_courses, share_courses;
+    TextView yes_count, no_count, txt_title, like_count, duration_time, blog_headline, blog_description,
+            helpful_yes_txt, helful_no;
+    ImageView blog_img, like_courses, save_courses, share_courses, like_thumb, dislike_thumb;
     TextInputEditText edit_comment;
     LinearLayout previous, next, helpful_yes, helpful_no, comment_lin_lay, related_blog_lay;
     RecyclerView recy_blogs, recy_all_comments;
@@ -84,6 +85,10 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        like_thumb = findViewById(R.id.like_thumb);
+        dislike_thumb = findViewById(R.id.dislike_thumb);
+        helpful_yes_txt = findViewById(R.id.helpful_yes_txt);
+        helful_no = findViewById(R.id.helful_no);
         all_data = findViewById(R.id.all_data);
         edit_comment = findViewById(R.id.edit_comment);
         related_blog_lay = findViewById(R.id.related_blog_lay);
@@ -310,10 +315,9 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             no_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
                             next_id = singleBlogResponse.getNextblog();
                             previous_id = singleBlogResponse.getPreviousblog();
-
+                            blog_helpfull_status = singleblog.get(0).getBlog_helpfull_status();
                             islike = singleblog.get(0).getBlog_liked();
                             isBookmark = singleblog.get(0).getBlog_bookmarked();
-
                             setIslike();
 
                             if (next_id.equals(next_id)) {
@@ -389,6 +393,17 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
             save_courses.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved));
             like = true;
         }
+
+        if (blog_helpfull_status.equals("Yes")){
+            like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up_active));
+            dislike_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_down));
+            like = false;
+        }
+        if (blog_helpfull_status.equals("No")){
+            dislike_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_down_active));
+            like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up));
+            like = true;
+        }
     }
     public void singleBlog() {
 
@@ -410,6 +425,11 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             like_count.setText(Html.fromHtml(singleblog.get(0).getBlog_like()));
                             yes_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
                             no_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
+                            blog_helpfull_status = singleblog.get(0).getBlog_helpfull_status();
+                            islike = singleblog.get(0).getBlog_liked();
+                            isBookmark = singleblog.get(0).getBlog_bookmarked();
+
+                            setIslike();
 
                             if (comments != null){
                                 comment_lin_lay.setVisibility(View.VISIBLE);

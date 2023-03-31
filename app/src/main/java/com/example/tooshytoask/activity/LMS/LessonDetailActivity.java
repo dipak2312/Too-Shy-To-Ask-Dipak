@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,7 +56,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
     ConcatenatingMediaSource concatenatingMediaSource;
     String lesson_id = "", video_link = "", courses_id ="", quiz = "", less_id="" , course_id="";
     RecyclerView upcoming_lessons;
-    RelativeLayout upcoming_lay;
+    RelativeLayout upcoming_lay, rel_back;
     ArrayList<data> data;
     UpcomingLessonAdapter adapter;
     ArrayList<upcominglesson>upcominglesson;
@@ -68,6 +69,8 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        rel_back = findViewById(R.id.rel_back);
+        rel_back.setOnClickListener(this);
         complete_btn = findViewById(R.id.complete_btn);
         complete_btn.setOnClickListener(this);
         quiz_btn = findViewById(R.id.quiz_btn);
@@ -147,6 +150,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
                                 txt_title.setText(Html.fromHtml(data.get(0).getTitle()));
                                 blog_headline.setText(Html.fromHtml(data.get(0).getTitle()));
                                 courses_description.setText(Html.fromHtml(data.get(0).getDescription()));
+                                courses_description.setMovementMethod(LinkMovementMethod.getInstance());
                                 video_link = data.get(0).getVideo();
                                 quiz = data.get(0).getQuiz();
 
@@ -245,6 +249,9 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+        }
+        else  if (id == rel_back.getId()){
+            finish();
         }
 
     }

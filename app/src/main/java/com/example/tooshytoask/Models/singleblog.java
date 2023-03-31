@@ -16,7 +16,17 @@ public class singleblog {
     private String blog_bookmarked;
     private String blog_liked;
     private String blog_readTime;
+    private String blog_helpfull_status;
     ArrayList<comments>comments;
+
+    public String getBlog_helpfull_status() {
+        return blog_helpfull_status;
+    }
+
+    public void setBlog_helpfull_status(String blog_helpfull_status) {
+        this.blog_helpfull_status = blog_helpfull_status;
+    }
+
 
     public String getBlog_id() {
         return blog_id;

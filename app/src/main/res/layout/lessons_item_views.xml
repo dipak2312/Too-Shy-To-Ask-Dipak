@@ -16,6 +16,7 @@
         android:layout_marginEnd="@dimen/margin_5">
 
         <RelativeLayout
+            android:id="@+id/lession_rel_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_10">

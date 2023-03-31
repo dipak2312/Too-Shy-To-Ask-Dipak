@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.tooshytoask.Helper.SPManager;
 import com.example.tooshytoask.Models.InsightScreen.courses;
 import com.example.tooshytoask.R;
+import com.example.tooshytoask.Utils.GuestLoginPopup;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
 import com.example.tooshytoask.activity.LMS.CoursesDetailActivity;
 
@@ -120,17 +121,21 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
             card_view_courses.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
+                    if (spManager.getTstaguestLoginStatus().equals("false")) {
+                        Bundle bundle = new Bundle();
 
-                    bundle.putString("courses_id",courses.get(getAdapterPosition()).getId());
-                    Intent intent = new Intent(context, CoursesDetailActivity.class);
-                    intent.putExtras(bundle);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                        bundle.putString("courses_id", courses.get(getAdapterPosition()).getId());
+                        Intent intent = new Intent(context, CoursesDetailActivity.class);
+                        intent.putExtras(bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    } else {
+                        GuestLoginPopup.LogOut(context, spManager);
+                    }
                 }
             });
-        }
 
+        }
     }
 }

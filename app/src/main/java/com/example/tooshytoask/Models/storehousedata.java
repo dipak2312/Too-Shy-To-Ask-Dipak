@@ -15,6 +15,14 @@ public class storehousedata {
     private String Nothelpfull_cnt;
     private String bookmarked;
     private String liked;
+    private String helpfull_status;
+    public String getHelpfull_status() {
+        return helpfull_status;
+    }
+
+    public void setHelpfull_status(String helpfull_status) {
+        this.helpfull_status = helpfull_status;
+    }
 
     public String getArticle_name() {
         return article_name;
