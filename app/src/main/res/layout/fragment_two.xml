@@ -66,6 +66,12 @@
 
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/profile_img_see"
+            android:layout_width="@dimen/margin_100"
+            android:layout_height="@dimen/margin_100"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
     <RelativeLayout

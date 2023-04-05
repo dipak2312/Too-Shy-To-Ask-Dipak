@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/margin_25"
+    android:layout_marginEnd="@dimen/margin_25">
+
+    <TextView
+        android:id="@+id/are_you"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allow Camera Permission"
+        android:fontFamily="@font/worksansmedium"
+        android:textSize="@dimen/text_size18"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/user_parent_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/margin_30"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_40"
+        android:layout_below="@+id/are_you">
+
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not now"
+            android:textColor="#707070"
+            android:textSize="@dimen/text_size15"
+            android:fontFamily="@font/worksansmedium"/>
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to setting"
+            android:layout_marginStart="@dimen/margin_30"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:textColor="@color/purple"
+            android:textSize="@dimen/text_size16"
+            android:fontFamily="@font/worksansmedium"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

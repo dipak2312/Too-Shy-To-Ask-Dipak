@@ -7,6 +7,7 @@ public class HealthIssueResponse {
 
     private String code;
     private String msg;
+    private String IsHealthIssue;
     private ArrayList<HealthIssuseList>HealthIssuseList;
 
     public String getCode() {
@@ -31,5 +32,13 @@ public class HealthIssueResponse {
 
     public void setHealthIssuseList(ArrayList<com.example.tooshytoask.Models.HealthIssuseList> healthIssuseList) {
         HealthIssuseList = healthIssuseList;
+    }
+
+    public String getIsHealthIssue() {
+        return IsHealthIssue;
+    }
+
+    public void setIsHealthIssue(String isHealthIssue) {
+        IsHealthIssue = isHealthIssue;
     }
 }

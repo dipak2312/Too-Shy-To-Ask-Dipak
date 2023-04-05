@@ -80,7 +80,7 @@
                 android:gravity="top"
                 android:hint="@string/email"
                 android:paddingStart="@dimen/padding_15"
-                android:paddingTop="@dimen/margin_5"
+                android:paddingTop="@dimen/margin_3"
                 android:paddingEnd="@dimen/padding_15"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
                 app:hintTextColor="@color/purple">
@@ -94,7 +94,7 @@
                     android:fontFamily="@font/worksansmedium"
                     android:gravity="top"
                     android:inputType="textEmailAddress"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size16" />
 
@@ -110,7 +110,7 @@
                 android:gravity="top"
                 android:hint="@string/subject"
                 android:paddingStart="@dimen/padding_15"
-                android:paddingTop="@dimen/margin_5"
+                android:paddingTop="@dimen/margin_3"
                 android:paddingEnd="@dimen/padding_15"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
                 app:hintTextColor="@color/purple">
@@ -124,7 +124,7 @@
                     android:fontFamily="@font/worksansmedium"
                     android:gravity="top"
                     android:inputType="textCapSentences"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size16" />
 
@@ -140,7 +140,7 @@
                 android:gravity="top"
                 android:hint="@string/description"
                 android:paddingStart="@dimen/padding_15"
-                android:paddingTop="@dimen/margin_5"
+                android:paddingTop="@dimen/margin_3"
                 android:paddingEnd="@dimen/padding_15"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
                 app:hintTextColor="@color/purple">
@@ -154,7 +154,7 @@
                     android:fontFamily="@font/worksansmedium"
                     android:gravity="top"
                     android:inputType="textPostalAddress|textMultiLine|textCapSentences"
-                    android:paddingTop="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_3"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size16" />
 

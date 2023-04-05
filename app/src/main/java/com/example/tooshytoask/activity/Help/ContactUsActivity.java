@@ -211,7 +211,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
             remove_img.setVisibility(View.GONE);
             image = "";
             img_name.setText("");
-            profile_img.setImageBitmap(null);
+            profile_img.setImageBitmap(null);//
         }
         else if (id == add_file.getId()) {
             Activity activity = (Activity) context;
@@ -223,7 +223,19 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
             activity.startActivityForResult(galleryIntent, SELECT_FILE);
 
 
-        } else if (id == submit_req.getId()) {
+        }
+        else if (id == img_name.getId()) {
+            Activity activity = (Activity) context;
+
+            Intent galleryIntent = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            activity.startActivityForResult(galleryIntent, SELECT_FILE);
+
+
+        }
+        else if (id == submit_req.getId()) {
 
             if (edit_email_enter.getText().toString().trim().equals("")) {
                 edit_email_enter.requestFocus();
@@ -235,7 +247,11 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
             } else if (edit_sub_enter.getText().toString().trim().equals("")) {
                 edit_sub_enter.requestFocus();
                 edit_sub_enter.setError("Enter your subject");
-            } else if (description.getText().toString().trim().equals("")) {
+            }
+            else if (!MyValidator.isValidName(edit_sub_enter.getText().toString().trim())) {
+                Toast.makeText(context, "Please enter valid name", Toast.LENGTH_SHORT).show();
+            }
+            else if (description.getText().toString().trim().equals("")) {
                 description.requestFocus();
                 description.setError("Enter your description");
             } else {

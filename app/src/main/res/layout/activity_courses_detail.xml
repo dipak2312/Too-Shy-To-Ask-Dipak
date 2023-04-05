@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/courses_inner_screen"
     android:background="@color/white"
     tools:context=".activity.LMS.CoursesDetailActivity">
 
@@ -66,15 +67,6 @@
                 android:layout_height="300dp">
 
 
-                <com.google.android.exoplayer2.ui.PlayerView
-                    android:id="@+id/styled_player_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:resize_mode="fixed_height"
-                    app:show_timeout="0"
-                    app:use_controller="true"
-                    app:surface_type="surface_view"/>
-
                 <ImageView
                     android:id="@+id/courses_img"
                     android:layout_width="match_parent"
@@ -82,6 +74,16 @@
                     android:src="@drawable/blog1"
                     android:foreground="@drawable/gradient_background"
                     android:scaleType="centerCrop"/>
+
+                <com.google.android.exoplayer2.ui.PlayerView
+                    android:id="@+id/styled_player_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:resize_mode="fixed_height"
+                    app:show_timeout="0"
+                    android:visibility="gone"
+                    app:use_controller="true"
+                    app:surface_type="surface_view"/>
 
 
             </RelativeLayout>

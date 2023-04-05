@@ -300,7 +300,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/expert_issues_background">
+        android:background="@drawable/expert_static_issues_background">
 
         <TextView
             android:id="@+id/no_txt"

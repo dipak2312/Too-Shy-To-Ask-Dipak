@@ -56,7 +56,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
     ConcatenatingMediaSource concatenatingMediaSource;
     String lesson_id = "", video_link = "", courses_id ="", quiz = "", less_id="" , course_id="";
     RecyclerView upcoming_lessons;
-    RelativeLayout upcoming_lay, rel_back;
+    RelativeLayout upcoming_lay, rel_back, lesson_inner_screen;
     ArrayList<data> data;
     UpcomingLessonAdapter adapter;
     ArrayList<upcominglesson>upcominglesson;
@@ -69,6 +69,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        lesson_inner_screen = findViewById(R.id.lesson_inner_screen);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         complete_btn = findViewById(R.id.complete_btn);
@@ -128,6 +129,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
 
     public void getLessonDetail(){
         dialog.show("");
+        lesson_inner_screen.setVisibility(View.GONE);
 
         LessonDetailAuthModel model = new LessonDetailAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -141,6 +143,7 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
                     public void onNext(LessonDetailResponse lessonDetailResponse) {
                         String msg = lessonDetailResponse.getMsg();
                         dialog.dismiss("");
+                        lesson_inner_screen.setVisibility(View.VISIBLE);
 
                         if (msg.equals("success")){
                             data = lessonDetailResponse.getData();
@@ -163,25 +166,16 @@ public class LessonDetailActivity extends AppCompatActivity implements View.OnCl
                                     complete_btn.setVisibility(View.GONE);
                                 }
 
-                                if (data.get(0).getImage() != null) {
+                                if (data.get(0).getVideo().equals("")) {
                                     courses_img.setVisibility(View.VISIBLE);
+                                    styledPlayerView.setVisibility(View.GONE);
                                     Glide.with(context).load(data.get(0).getImage()).into(courses_img);
 
                                 }
-                                if (data.get(0).getImage() == null) {
-                                    courses_img.setVisibility(View.GONE);
-                                }
-                                if (data.get(0).getVideo() != null) {
+                                else if (data.get(0).getVideo() != null) {
                                     styledPlayerView.setVisibility(View.VISIBLE);
+                                    courses_img.setVisibility(View.GONE);
                                     videoPlay();
-                                }
-                                if (data.get(0).getVideo() == null) {
-                                    styledPlayerView.setVisibility(View.GONE);
-                                }
-                                if (data.get(0).getVideo() != null && data.get(0).getImage() != null) {
-                                    styledPlayerView.setVisibility(View.VISIBLE);
-                                    courses_img.setVisibility(View.GONE);
-
                                 }
                             }
                             if (upcominglesson != null){

@@ -56,7 +56,7 @@ public class CoursesDetailActivity extends AppCompatActivity implements View.OnC
     ConcatenatingMediaSource concatenatingMediaSource;
     String courses_id = "", video_link = "";
     RecyclerView all_lessons;
-    RelativeLayout rel_back;
+    RelativeLayout rel_back, courses_inner_screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class CoursesDetailActivity extends AppCompatActivity implements View.OnC
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        courses_inner_screen = findViewById(R.id.courses_inner_screen);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         txt_title = findViewById(R.id.txt_title);
@@ -121,6 +122,7 @@ public class CoursesDetailActivity extends AppCompatActivity implements View.OnC
 
     public void getCoursesDetail(){
         dialog.show("");
+        courses_inner_screen.setVisibility(View.GONE);
 
         CoursesDetailAuthModel model = new CoursesDetailAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -134,6 +136,8 @@ public class CoursesDetailActivity extends AppCompatActivity implements View.OnC
                     public void onNext(CoursesDetailResponse coursesDetailResponse) {
                         String msg = coursesDetailResponse.getMsg();
                         dialog.dismiss("");
+                        courses_inner_screen.setVisibility(View.VISIBLE);
+
                         if (msg.equals("success")) {
                             data = coursesDetailResponse.getData();
                             lesson = coursesDetailResponse.getData().get(0).getLesson();
@@ -148,22 +152,18 @@ public class CoursesDetailActivity extends AppCompatActivity implements View.OnC
                                 video_link = data.get(0).getVideolink();
 
 
-                                if (data.get(0).getImage() != null) {
+                                if (data.get(0).getVideolink().equals("")) {
                                     courses_img.setVisibility(View.VISIBLE);
                                     styledPlayerView.setVisibility(View.GONE);
                                     Glide.with(context).load(data.get(0).getImage()).into(courses_img);
 
                                 }
-                                if (data.get(0).getVideolink() != null) {
+                               else if (data.get(0).getVideolink() != null) {
                                     styledPlayerView.setVisibility(View.VISIBLE);
                                     courses_img.setVisibility(View.GONE);
                                     videoPlay();
                                 }
 
-                                /*if (data.get(0).getVideolink() != null && data.get(0).getImage() != null) {
-                                    styledPlayerView.setVisibility(View.VISIBLE);
-                                    courses_img.setVisibility(View.GONE);
-                                }*/
                             }
                             if (lesson != null){
                                 adapter = new LessonAdapter(context, lesson);

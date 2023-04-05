@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/cate_img"
             android:layout_width="@dimen/margin_90"
             android:layout_height="@dimen/margin_90"
@@ -23,7 +23,7 @@
         android:layout_width="@dimen/margin_90"
         android:layout_height="wrap_content"
         android:text="Relationship"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:textColor="@color/black"
         android:fontFamily="@font/worksansregular"
         android:textSize="@dimen/text_size11"

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Models.Comments.CommentDataItem;
 import com.example.tooshytoask.adapters.HealthAdapter;
 import com.example.tooshytoask.AuthModels.HealthIssueModel;
 import com.example.tooshytoask.AuthModels.UpdateProfileAuthModel;
@@ -43,7 +44,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
     Button yes_btn, no_btn, update_btn2;
     OnClickListner onclicklistener;
     CustomProgressDialog dialog;
-    String action = "healthissue", healthissueId="";
+    String action = "healthissue", healthissueId="", health_status="";
     ArrayList<String>healthissueIds=new ArrayList<>();
 
     @Override
@@ -89,6 +90,23 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
                         if (msg.equals("success")) {
 
                             healthIssuseList = healthIssueResponse.getHealthIssuseList();
+                            health_status = healthIssueResponse.getIsHealthIssue();
+
+                            if (health_status == null){
+                                yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
+                                yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
+                                no_btn.setBackgroundResource(R.drawable.gender_border_inactive);
+                                no_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
+                            }
+
+                            else if (health_status.equals("Yes")){
+                                yes_btn.setBackgroundResource(R.drawable.gender_border_active);
+                                yes_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
+                            }
+                            else if (health_status.equals("No")){
+                                no_btn.setBackgroundResource(R.drawable.gender_border_active);
+                                no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
+                            }
 
                             if (healthIssuseList != null) {
                                 CallAdapter();
@@ -125,6 +143,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
     public void CallAdapter(){
         adapter = new HealthAdapter(healthIssuseList,this, context);
         health_recy.setAdapter(adapter);
+
     }
 
     public void getUserProfileUpdate(){
@@ -146,7 +165,6 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
                         if (msg.equals("Profile Updated")){
 
-                            //spManager.setFirstName(edit_name.getText().toString().trim());
 
                         }
                     }

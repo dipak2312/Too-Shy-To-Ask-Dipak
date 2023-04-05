@@ -4,8 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
+    android:id="@+id/rootLay"
     tools:context=".activity.Help.HelpActivity">
 
     <RelativeLayout
@@ -51,7 +52,7 @@
         android:id="@+id/help_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select category"
+        android:text="@string/select_category"
         android:layout_below="@id/rel_top_bar"
         android:layout_marginTop="@dimen/margin_20"
         android:fontFamily="@font/worksansregular"
@@ -90,6 +91,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ask_the_expert_lay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_65"
             android:orientation="horizontal"

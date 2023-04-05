@@ -4,13 +4,17 @@ import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Utils.CameraPermissionPopup;
 import com.example.tooshytoask.adapters.ProfileAdapter;
 import com.example.tooshytoask.AuthModels.SaveProfilePicAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -40,6 +45,7 @@ import com.example.tooshytoask.Utils.ClickListener;
 import com.example.tooshytoask.Utils.CustomProgressDialog;
 import com.example.tooshytoask.Utils.ImagePickUtil;
 import com.example.tooshytoask.Utils.OnClickListner;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -60,12 +66,12 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
     TextView skip_btn2;
     ImageButton next_btn2;
     RecyclerView profile_recy;
-    ImageView camera, file;
+    ImageView camera, file, profile_img_see;
     ProfileAdapter adapter;
     CustomProgressDialog dialog;
     ArrayList<avatarList>avatarList;
-    String avtarImage="";
-    private static final int TAKE_PICTURE = 1;
+    String avtarImage="", status ="";
+    private static final int TAKE_PICTURE = 100;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
 
@@ -84,6 +90,7 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
         context = getActivity();
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
+        profile_img_see = view.findViewById(R.id.profile_img_see);
         camera = view.findViewById(R.id.camera);
         camera.setOnClickListener(this);
         file = view.findViewById(R.id.file);
@@ -216,13 +223,26 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
             adapter.notifyDataSetChanged();
             avtarImage="";
             checkPermissions();
+
+            Activity activity = (Activity) context;
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            activity.startActivityForResult(intent, TAKE_PICTURE);
+
+            //boolean status=checkPermissions();
+            /*if(status.equals("no"))
+            {
+                checkPermissions();
+                //CameraPermission(context);
+            }
+            if(status.equals("yes")) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                requireActivity().startActivityForResult(intent, 100);
+            }*/
 
-                startActivityForResult(intent, TAKE_PICTURE);
-
-
-
-        } else if (id == file.getId()) {
+        }
+        else if (id == file.getId()) {
             adapter.singleitem_selection_position=-1;
             adapter.notifyDataSetChanged();
             avtarImage="";
@@ -233,10 +253,62 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
 
                 startActivityForResult(galleryIntent, SELECT_FILE);
 
-                checkPermissions();
-
         }
 
+    }
+
+    public static void CameraPermission(Context context) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.camera_permission_popup);
+        dialog.setCancelable(true);
+        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
+
+        TextView login = dialog.findViewById(R.id.login);
+        TextView cancel = dialog.findViewById(R.id.cancel);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + context.getPackageName()));
+                    context.startActivity(i);
+                    dialog.dismiss();
+                    return;
+                }
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == TAKE_PICTURE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                status = "yes";
+                Toast.makeText(context, "Permission accepted", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                status = "no";
+                Toast.makeText(context, "Permission cancel", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
     @Override
@@ -259,8 +331,8 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
 
                     //File compressedImageFile = new Compressor(this).compressToFile(choosedFile);
 
-                    file.setImageBitmap(null);
-                    file.setImageBitmap(compressedImageBitmap);
+                    profile_img_see.setImageBitmap(null);
+                    profile_img_see.setImageBitmap(compressedImageBitmap);
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -298,6 +370,17 @@ public class AvtarFragment extends Fragment implements View.OnClickListener, OnC
 
         }
     }
+
+    /*private boolean checkPermissions() {
+
+        if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+
+        }
+        else {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, TAKE_PICTURE);
+        }
+        return true;
+    }*/
 
     private boolean checkPermissions() {
         int result;

@@ -1,5 +1,6 @@
 package com.example.tooshytoask.activity.Setting.Setting;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -55,9 +57,10 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     CustomProgressDialog dialog;
     RecyclerView profile_recy;
     CircleImageView profile_img;
+    ImageView profile_img_see;
     ProfileAdapter adapter;
     OnClickListner onclicklistener;
-    String action = "avtarchange", avtarImage = "";
+    String action = "avtarchange", avtarImage = "", status ="";
     ArrayList<com.example.tooshytoask.Models.avatarList>avatarList;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
@@ -79,6 +82,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         dialog = new CustomProgressDialog(context);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
+        profile_img_see = findViewById(R.id.profile_img_see);
         next_btn = findViewById(R.id.next_btn);
         next_btn.setOnClickListener(this);
         profile_img = findViewById(R.id.profile_img);
@@ -290,6 +294,23 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == TAKE_PICTURE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                status = "yes";
+                Toast.makeText(context, "Permission accepted", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                status = "no";
+                Toast.makeText(context, "Permission cancel", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -307,8 +328,8 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
                     Bitmap compressedImageBitmap = new Compressor(this).compressToBitmap(choosedFile);
 
-                    profile_img.setImageBitmap(null);
-                    profile_img.setImageBitmap(compressedImageBitmap);
+                    profile_img_see.setImageBitmap(null);
+                    profile_img_see.setImageBitmap(compressedImageBitmap);
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     compressedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

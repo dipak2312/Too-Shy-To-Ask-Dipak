@@ -151,7 +151,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
     public void getStory(){
         dialog.show("");
-        story_layout.setVisibility(View.GONE);
 
         StoryAuthModel model = new StoryAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -165,7 +164,6 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
                     public void onNext(StoryResponse storyResponse) {
                         String msg = storyResponse.getMsg();
                         dialog.dismiss("");
-                        story_layout.setVisibility(View.VISIBLE);
                         if (msg.equals("success")) {
                            storyDetails = storyResponse.getStoryDetails();
 
@@ -315,11 +313,17 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         }
         else if (id == share_img.getId()){
             sharevalue();
+
         }
         else if (id == link_name.getId()){
             Uri uri = Uri.parse(share_link);
             Intent intent= new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
+            if(player != null)
+            {
+                player.pause();
+               // player.stop();
+            }
 
         }
         else if (id == like_img.getId()) {
@@ -347,22 +351,43 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void onNext() {
-            position = position + 1;
-            if (storyDetails != null) {
-                setStoryValue(storyDetails);
-            }
+        position = position + 1;
+        if(player != null)
+        {
+            player.release();
+            player.stop();
+        }
+        if (storyDetails != null) {
+            setStoryValue(storyDetails);
+        }
 
     }
     @Override
     public void onPrev() {
         if(position !=0) {
             position = position - 1;
+            if(player != null)
+            {
+                player.release();
+                player.stop();
+            }
             if (storyDetails != null) {
                 setStoryValue(storyDetails);
             }
         }
 
     }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(player != null)
+        {
+            player.play();
+        }
+
+    }
+
     @Override
     public void onComplete() {
         if(player != null)
@@ -399,6 +424,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         if(player != null)
         {
             player.release();
+            player.stop();
         }
     }
 

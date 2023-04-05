@@ -18,6 +18,8 @@ import com.example.tooshytoask.Utils.OnClickListner;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     ArrayList<InformationStorehouseList>informationStorehouseList ;
     OnClickListner onclicklistener;
@@ -48,7 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView cate_img;
+        CircleImageView cate_img;
         TextView category_title;
 
         public ViewHolder(@NonNull View itemView) {

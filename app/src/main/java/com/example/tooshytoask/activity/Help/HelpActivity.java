@@ -1,16 +1,22 @@
 package com.example.tooshytoask.activity.Help;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.tooshytoask.API.WebServiceModel;
+import com.example.tooshytoask.Fragment.AskExpertFragment;
+import com.example.tooshytoask.activity.Expert.ExpertActivity;
 import com.example.tooshytoask.adapters.HelpCategoryAdapter;
 import com.example.tooshytoask.AuthModels.HelpCategoryAuthModel;
 import com.example.tooshytoask.Helper.SPManager;
@@ -29,8 +35,8 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView help_category_recy, recyclerView;
     SPManager spManager;
     Context context;
-    ArrayList<HelpCategory>helpCategories;
     ArrayList<com.example.tooshytoask.Models.Help.data> data;
+    LinearLayout ask_the_expert_lay;
     HelpCategoryAdapter adapter;
     RelativeLayout rel_back;
     CustomProgressDialog dialog;
@@ -43,6 +49,8 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
         context = HelpActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
+        ask_the_expert_lay = findViewById(R.id.ask_the_expert_lay);
+        ask_the_expert_lay.setOnClickListener(this);
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         help_category_recy = findViewById(R.id.help_category_recy);
@@ -104,6 +112,12 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
 
         if (id == rel_back.getId()){
             finish();
+        }
+        else if (id == ask_the_expert_lay.getId()){
+            Intent intent = new Intent(context, ExpertActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 }
