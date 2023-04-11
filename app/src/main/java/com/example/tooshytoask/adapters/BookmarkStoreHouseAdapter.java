@@ -62,6 +62,8 @@ public class BookmarkStoreHouseAdapter extends RecyclerView.Adapter<BookmarkStor
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
 
+            save_img.setVisibility(View.GONE);
+
             card_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

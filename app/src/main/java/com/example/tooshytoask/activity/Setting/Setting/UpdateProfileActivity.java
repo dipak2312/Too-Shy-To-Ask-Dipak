@@ -37,9 +37,9 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class UpdateProfileActivity extends AppCompatActivity implements View.OnClickListener{
-    RelativeLayout update_interest, update_personal_info, update_health, rel_back;
+    RelativeLayout update_interest, update_personal_info, update_health, rel_back, change_avatar;
     SPManager spManager;
-    TextView edit_age, change_avatar;
+    TextView edit_age;
     Button update_pro, male, female, other;
     TextInputEditText edit_name, edit_surname, etMobile, edit_email_enter,edit_country_enter,
             edit_state_enter, edit_city_enter;
@@ -283,7 +283,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
 
         }
         else if (id == update_personal_info.getId()) {
@@ -291,8 +290,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
-
 
         }
         else if (id == update_health.getId()) {
@@ -300,14 +297,13 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
 
         } else if (id == change_avatar.getId()){
             Intent intent = new Intent(context, UpdateAvatarActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
+
         }
         else if (id == edit_age.getId()) {
             openDatePicker();

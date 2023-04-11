@@ -257,7 +257,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
     }
 
     public void TextClickable(int position){
-        SpannableString ss = new SpannableString(getString(R.string.please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition));
+        SpannableString ss = new SpannableString("Please check out the Information Storehouse section to know more about " + title);
 
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
@@ -275,7 +275,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
             @Override
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
-                ds.setUnderlineText(true);
+                ds.setUnderlineText(false);
             }
         };
 

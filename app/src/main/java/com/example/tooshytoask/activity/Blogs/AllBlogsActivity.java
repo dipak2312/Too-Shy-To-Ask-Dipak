@@ -113,9 +113,6 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
                         if (msg.equals("Article Bookmarked")) {
 
                         }
-                        else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }
 
                     }
 
@@ -216,7 +213,6 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
         }
         else if (id == selection_button_rl.getId()){
             selectCategoryMethod();

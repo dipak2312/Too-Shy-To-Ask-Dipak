@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansregular"
-                android:text="Update your Interests"
+                android:text="@string/update_your_interests"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 

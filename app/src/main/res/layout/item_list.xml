@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/text_size24"
+        android:layout_marginStart="@dimen/margin_40"
         android:layout_marginTop="@dimen/margin_12"
         android:layout_marginBottom="@dimen/margin_8"
         android:weightSum="1">
@@ -28,14 +28,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_pic"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:src="@drawable/avatar5"
+                android:layout_marginTop="@dimen/margin_3"/>
+
             <TextView
                 android:id="@+id/txt_name"
                 style="@style/TextStyleItalic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sagar Kokare"
+                android:layout_toEndOf="@id/avatar_pic"
+                android:layout_marginStart="@dimen/margin_10"
+                android:text="Dipak Yadav"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size13"
+                android:textSize="@dimen/text_size15"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,9 +52,10 @@
                 style="@style/TextStyleItalic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_16"
-                android:layout_toRightOf="@+id/txt_name"
-                android:text="01 Apr 2021 "
+                android:layout_below="@id/txt_name"
+                android:layout_toEndOf="@id/avatar_pic"
+                android:layout_marginStart="@dimen/margin_10"
+                android:text="01 Apr 2023 "
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size12" />
 
@@ -54,8 +64,9 @@
                 style="@style/TextStyleRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="@dimen/margin_16"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_26"
+                android:layout_toEndOf="@id/avatar_pic"
                 android:text="Reply"
                 android:textColor="@color/blue"
                 android:visibility="gone"
@@ -73,7 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lin_name_date"
         android:layout_marginTop="1dp"
-        android:layout_marginLeft="@dimen/text_size24"
+        android:text="Testing reply message"
+        android:layout_marginStart="@dimen/margin_80"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size13" />
 </RelativeLayout>

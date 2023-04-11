@@ -344,10 +344,10 @@
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-                android:layout_height="0.2dp"
+                android:layout_height="0.7dp"
                 android:layout_below="@+id/next_back"
                 android:layout_marginTop="@dimen/margin_30"
-                android:background="@color/purple">
+                android:background="@color/line_color">
 
             </View>
 
@@ -369,20 +369,11 @@
                     android:fontFamily="@font/worksansregular"
                     android:textColor="@color/black"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comment"
-                    android:textSize="@dimen/text_size12"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:fontFamily="@font/worksansmedium"
-                    android:textColor="@color/black"/>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/description_enter"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_90"
-                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:background="@drawable/background"
                     android:fontFamily="@font/worksansregular"
                     android:gravity="top"
@@ -444,9 +435,9 @@
                 <View
                     android:id="@+id/view3"
                     android:layout_width="match_parent"
-                    android:layout_height="0.2dp"
+                    android:layout_height="0.7dp"
                     android:layout_marginTop="@dimen/margin_10"
-                    android:background="@color/purple">
+                    android:background="@color/line_color">
 
                 </View>
 
@@ -481,8 +472,8 @@
                 <View
                     android:id="@+id/view"
                     android:layout_width="match_parent"
-                    android:layout_height="0.2dp"
-                    android:background="@color/purple">
+                    android:layout_height="0.7dp"
+                    android:background="@color/line_color">
 
                 </View>
 

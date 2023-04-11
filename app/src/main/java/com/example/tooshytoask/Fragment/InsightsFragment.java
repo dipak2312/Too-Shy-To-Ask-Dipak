@@ -161,46 +161,6 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
         return view;
     }
 
-    public void getBookmarkBlogs(String action){
-        dialog.show("");
-        dialog.dismiss("");
-
-        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
-        model.setUser_id(spManager.getUserId());
-        model.setPost_id(blog_id);
-        model.setType(type);
-        model.setAction(action);
-
-        WebServiceModel.getRestApi().getBookmarkBlogs(model)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
-                    @Override
-                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
-                        String msg = bookmarkBlogResponse.getMsg();
-                        dialog.dismiss("");
-
-                        if (msg.equals("Article Bookmarked")) {
-
-                        }
-                        else {
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
     public void getInsightScreenResponse() {
         dialog.show("");
         insight_scroll.setVisibility(View.GONE);
@@ -302,6 +262,43 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
                     @Override
                     public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void getBookmarkBlogs(String action){
+
+        BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setPost_id(blog_id);
+        model.setType(type);
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().getBookmarkBlogs(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<BookmarkBlogResponse>() {
+                    @Override
+                    public void onNext(BookmarkBlogResponse bookmarkBlogResponse) {
+                        String msg = bookmarkBlogResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("Article Bookmarked")) {
+
+                        }
+                        else {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

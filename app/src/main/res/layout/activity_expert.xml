@@ -97,50 +97,49 @@
 
         </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rel_bottom_tab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="@dimen/margin_10"
-                android:layout_marginBottom="@dimen/margin_30"
-                android:layout_marginStart="@dimen/margin_20"
-                android:layout_marginEnd="@dimen/margin_20">
-
-                <EditText
-                    android:id="@+id/ask_questions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Type here.."
-                    android:textColorHint="@color/skip"
-                    android:background="@drawable/chatting_field_background"
-                    android:padding="@dimen/padding_10"
-                    android:inputType="textPostalAddress|textMultiLine|textCapSentences"
-                    android:fontFamily="@font/worksansmedium"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size14"/>
-
-                <RelativeLayout
-                    android:id="@+id/send_msg"
-                    android:layout_width="@dimen/margin_30"
-                    android:layout_height="@dimen/margin_30"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/margin_10">
-
-                    <ImageView
-                        android:layout_width="@dimen/margin_25"
-                        android:layout_height="@dimen/margin_25"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/send_msg"/>
-
-                </RelativeLayout>
-
-            </RelativeLayout>
-
         </RelativeLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <RelativeLayout
+        android:id="@+id/rel_bottom_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <EditText
+            android:id="@+id/ask_questions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type here.."
+            android:textColorHint="@color/skip"
+            android:background="@drawable/chatting_field_background"
+            android:padding="@dimen/padding_10"
+            android:inputType="textPostalAddress|textMultiLine|textCapSentences"
+            android:fontFamily="@font/worksansmedium"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14"/>
+
+        <RelativeLayout
+            android:id="@+id/send_msg"
+            android:layout_width="@dimen/margin_30"
+            android:layout_height="@dimen/margin_30"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_10">
+
+            <ImageView
+                android:layout_width="@dimen/margin_25"
+                android:layout_height="@dimen/margin_25"
+                android:layout_centerVertical="true"
+                android:src="@drawable/send_msg"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

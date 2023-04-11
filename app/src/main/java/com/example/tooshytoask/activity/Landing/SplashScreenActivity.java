@@ -50,7 +50,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         getWindow().setStatusBarColor(getResources().getColor(R.color.tsta_splash));
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         context = SplashScreenActivity.this;
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);

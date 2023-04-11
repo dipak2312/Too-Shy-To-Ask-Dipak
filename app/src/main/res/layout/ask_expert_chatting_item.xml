@@ -42,7 +42,7 @@
             android:id="@+id/txt_my_chat_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/purple"
+            android:textColor="@color/line_color"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size12"
             android:text="01 Mar 2021 02:14 PM "/>

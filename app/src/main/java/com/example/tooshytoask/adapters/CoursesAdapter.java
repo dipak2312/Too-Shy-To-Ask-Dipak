@@ -29,7 +29,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     ArrayList<courses>courses;
     OnBookmarkClicked onBookmarkClicked;
     boolean like = true;
-    String type,time, part1, part2;;
+    String type,time, part1, part2;
     SPManager spManager;
 
     public CoursesAdapter(Context context, ArrayList<com.example.tooshytoask.Models.InsightScreen.courses> courses,

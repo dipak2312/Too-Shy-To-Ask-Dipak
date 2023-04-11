@@ -1,20 +1,15 @@
 package com.example.tooshytoask.adapters;
 
-import static android.view.View.LAYER_TYPE_SOFTWARE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.RenderEffect;
-import android.graphics.Shader;
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +25,7 @@ import com.example.tooshytoask.R;
 import com.example.tooshytoask.Utils.OnBookmarkClicked;
 
 import java.util.ArrayList;
+
 
 public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlogAdapter.ViewHolder>{
     Context context;
@@ -122,4 +118,5 @@ public class RecommendedBlogAdapter extends RecyclerView.Adapter<RecommendedBlog
             });
         }
     }
+
 }

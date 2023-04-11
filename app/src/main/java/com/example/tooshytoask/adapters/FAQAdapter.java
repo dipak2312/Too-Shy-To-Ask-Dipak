@@ -51,7 +51,7 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ViewHolder> {
         Typeface tf_regular = Typeface.createFromAsset(context.getAssets(), "font/worksansmedium.ttf");
         if (faqcontent.get(position).isExpandable()){
             holder.qsnView.setTypeface(tf_regular,Typeface.NORMAL);
-            //holder.ansView.setTypeface(tf_regular);
+            holder.ansView.setTypeface(tf_regular);
             holder.showAnswer.setImageResource(R.drawable.down_arrow);
 
            // holder.cardViewMain.setBackground(context.getResources().getDrawable(R.drawable.rectangle_pink_border));

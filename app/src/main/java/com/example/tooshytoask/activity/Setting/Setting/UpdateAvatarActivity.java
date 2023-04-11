@@ -56,8 +56,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
     Button next_btn;
     CustomProgressDialog dialog;
     RecyclerView profile_recy;
-    CircleImageView profile_img;
-    ImageView profile_img_see;
+    CircleImageView profile_img, profile_img_see;
     ProfileAdapter adapter;
     OnClickListner onclicklistener;
     String action = "avtarchange", avtarImage = "", status ="";
@@ -348,6 +347,9 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
             if (resultCode == RESULT_OK) {
                 Bitmap bp = (Bitmap) data.getExtras().get("data");
+
+                profile_img_see.setImageBitmap(null);
+                profile_img_see.setImageBitmap(bp);
 
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bp.compress(Bitmap.CompressFormat.JPEG, 100, stream);

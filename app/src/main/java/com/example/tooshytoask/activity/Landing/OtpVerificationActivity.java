@@ -76,11 +76,11 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         mobile_no.setText(str);
 
         progress_circular = findViewById(R.id.progress_circular);
-        progressBar();
+
         otp_view = findViewById(R.id.otp_view);
 
         pinView();
-
+        progressBar();
         countDownTimer();
     }
 
@@ -153,7 +153,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
     private void countDownTimer() {
 
-
         new CountDownTimer(60000, 1000) {
 
             @Override
@@ -163,11 +162,11 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     btn_resend_otp.setText("RESEND IN "+ millisUntilFinished / 1000);
                     btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.resend_color));
                     progress_text.setText(value);
-                    //progress_text.setVisibility(View.VISIBLE);
-                   // progress_circular.setVisibility(View.VISIBLE);
-                //progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
-                //progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
-                    //otp_img.setVisibility(View.GONE);
+                    progress_text.setVisibility(View.VISIBLE);
+                    progress_circular.setVisibility(View.VISIBLE);
+                    progress_circular.setProgressBarColor(ContextCompat.getColor(context, R.color.progressbar_color));
+                    progress_circular.setBackgroundProgressBarColor(ContextCompat.getColor(context, R.color.resend_color));
+                    otp_img.setVisibility(View.GONE);
 
                 }
             @Override
@@ -182,6 +181,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                 otp_img.setVisibility(View.VISIBLE);
                 user_otp = "";
 
+
             }
         }.start();
     }
@@ -195,14 +195,15 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
             verifyOTP();
         }
         else if (id == rel_back.getId()) {
-                Intent intent1 = new Intent(context, SignInActivity.class);
-                intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent1);
+                Intent intent = new Intent(context, SignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             } else if (id == btn_resend_otp.getId()) {
+
                 sendOtpApi();
-                //progressBar();
+                progressBar();
             }
             else {
                 verifyOTP();

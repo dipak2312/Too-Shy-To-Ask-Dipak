@@ -128,7 +128,7 @@
     <string name="this_article_didn_t_answer_my_questions_or_solve_my_problem">This article didn\'t answer my questions or solve my problem</string>
     <string name="i_found_this_article_confusing_or_difficult_to_read">I found this article confusing or difficult to read</string>
     <string name="i_don_t_like_how_the_feature_works">I don\'t like how the feature works</string>
-    <string name="change_avtar">Change Avtar</string>
+    <string name="change_avtar">Change Avatar</string>
     <string name="update_your_avatar">Update your Avatar</string>
     <string name="profile_photo">Profile Photo</string>
     <string name="remove_profile">Remove Profile</string>
@@ -145,7 +145,7 @@
     <string name="are_you_sure_you_want_to_clear_notification">Are you sure you want to clear notification?</string>
     <string name="are_you_sure_you_want_to_clear_all_notification">Are you sure you want to clear all notification?</string>
     <string name="swipe_up_to_know_more">Click here to know more</string>
-    <string name="related_blogs">Related Blogs</string>
+    <string name="related_blogs">Related Articles</string>
     <string name="submit_feedback">SUBMIT FEEDBACK</string>
     <string name="let_s_start">LET\'S START</string>
     <string name="welcome">Welcome</string>
@@ -170,7 +170,7 @@
     <string name="frequently_asked_question_s">Frequently Asked Question\'s</string>
     <string name="all_categories">All Categories</string>
     <string name="all">All</string>
-    <string name="please_check_out_the_faq_section_to_know_more_about_diet_and_nutrition">Please check out the Information Storehouse section to know more about Diet and Nutrition</string>
+    <string name="please_check_out_the_faq_section_to_know_more_about">Please check out the Information Storehouse section to know more about </string>
     <string name="oops_no_products_found">Oops ! No products found.</string>
 
     <string-array name="category_list">
@@ -198,5 +198,9 @@
     <string name="complete">Complete</string>
     <string name="take_a_test">Take A Test</string>
     <string name="select_category">Select category</string>
+    <string name="update_your_interests">Update Your Interests</string>
+    <string name="update_your_health_issues">Update Your Health Issues</string>
+    <string name="update_your_personal_info">Update Your Personal Info</string>
+    <string name="update">Update</string>
 
 </resources>

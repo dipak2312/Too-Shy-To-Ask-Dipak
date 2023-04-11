@@ -63,19 +63,6 @@
         android:layout_height="@dimen/margin_55"
         android:background="@drawable/background">
 
-        <!--<TextView
-            android:id="@+id/blood_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Blood Group"
-            android:layout_marginStart="@dimen/margin_3"
-            android:fontFamily="@font/worksansmedium"
-            android:textColor="@color/purple"
-            android:paddingStart="@dimen/margin_15"
-            android:textSize="@dimen/text_size12"
-            android:paddingEnd="@dimen/margin_10"
-            android:layout_marginTop="@dimen/margin_5"/>-->
-
         <Spinner
             android:id="@+id/spinner_blood"
             android:layout_width="match_parent"
@@ -86,18 +73,13 @@
             android:background="@drawable/border"
             android:textSize="@dimen/text_size16"/>
 
-
-        <!--<EditText
-            android:id="@+id/etBlood_group"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_48"
-            android:layout_below="@+id/blood_group"
-            android:paddingStart="@dimen/margin_15"
-            android:fontFamily="@font/worksansregular"
-            android:paddingEnd="@dimen/margin_10"
-            android:background="@android:color/transparent"
-            android:textSize="@dimen/text_size15"
-            android:inputType="text"/>-->
+        <ImageView
+            android:layout_width="@dimen/margin_10"
+            android:layout_height="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/down_arrow"/>
 
     </RelativeLayout>
 

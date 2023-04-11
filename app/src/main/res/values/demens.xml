@@ -96,6 +96,7 @@
     <dimen name="margin_35">35.0dp</dimen>
     <dimen name="margin_37">37.0dp</dimen>
     <dimen name="margin_15">15.0dp</dimen>
+    <dimen name="margin_26">26.0dp</dimen>
     <dimen name="margin_10">10.0dp</dimen>
     <dimen name="margin_12">12.0dp</dimen>
     <dimen name="margin_14">14.0dp</dimen>

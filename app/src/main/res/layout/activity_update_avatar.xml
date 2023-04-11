@@ -77,18 +77,20 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_img"
-            android:layout_width="@dimen/margin_77"
-            android:layout_height="@dimen/margin_77"
+            android:layout_width="@dimen/margin_80"
+            android:layout_height="@dimen/margin_80"
             android:padding="@dimen/margin_5"
             android:src="@drawable/profile_popup"/>
 
-    </RelativeLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_img_see"
+            android:layout_width="@dimen/margin_80"
+            android:layout_height="@dimen/margin_80"
+            android:padding="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_toEndOf="@id/profile_img"/>
 
-    <ImageView
-        android:id="@+id/profile_img_see"
-        android:layout_width="@dimen/margin_100"
-        android:layout_height="@dimen/margin_100"
-        android:visibility="gone"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

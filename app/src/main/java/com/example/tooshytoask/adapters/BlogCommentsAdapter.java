@@ -47,7 +47,6 @@ public class BlogCommentsAdapter extends RecyclerView.Adapter<BlogCommentsAdapte
         holder.txt_name.setText(comments.get(position).getParent_comment().getComment_author());
         holder.txt_date.setText(new DateUtil().getStringDateInDisplayFormat(comments.get(position).getParent_comment().getComment_date(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY));
 
-
         holder.txt_reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,11 +77,11 @@ public class BlogCommentsAdapter extends RecyclerView.Adapter<BlogCommentsAdapte
         RecyclerView commentReply;
         public allcommentViewHolder(@NonNull View itemView) {
             super(itemView);
-            txt_name=(TextView)itemView.findViewById(R.id.txt_name);
-            txt_reply=(TextView)itemView.findViewById(R.id.txt_reply);
-            txt_date=(TextView)itemView.findViewById(R.id.txt_date);
-            txt_comment=(TextView)itemView.findViewById(R.id.txt_comment);
-            commentReply=(RecyclerView) itemView.findViewById(R.id.commentReply);
+            txt_name=itemView.findViewById(R.id.txt_name);
+            txt_reply=itemView.findViewById(R.id.txt_reply);
+            txt_date=itemView.findViewById(R.id.txt_date);
+            txt_comment=itemView.findViewById(R.id.txt_comment);
+            commentReply= itemView.findViewById(R.id.commentReply);
 
         }
     }

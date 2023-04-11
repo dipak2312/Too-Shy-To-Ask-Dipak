@@ -60,6 +60,7 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventAdap
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
+            save_img.setVisibility(View.GONE);
 
             blog_img.setOnClickListener(new View.OnClickListener() {
                 @Override

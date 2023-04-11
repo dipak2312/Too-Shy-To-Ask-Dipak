@@ -39,7 +39,7 @@
 
     <style name="TextStyleItalic" parent="android:Widget.TextView">
         <item name="android:textColor">@color/black</item>
-        <item name="fontFamily">@font/worksansitalic</item>
+        <item name="fontFamily">@font/worksansregular</item>
     </style>
 
     <style name="TextStyleRegular" parent="android:Widget.TextView">
