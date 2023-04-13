@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "469554007321",
-    "project_id": "dipakproject-131e9",
-    "storage_bucket": "dipakproject-131e9.appspot.com"
+    "project_number": "192470492971",
+    "project_id": "too-shy-to-ask",
+    "storage_bucket": "too-shy-to-ask.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:469554007321:android:6c7915e62bcec7565c8988",
+        "mobilesdk_app_id": "1:192470492971:android:c1e351eaf5fae43ccc076e",
         "android_client_info": {
-          "package_name": "com.example.tooshytoask"
+          "package_name": "com.neuronimbus.metropolis"
         }
       },
       "oauth_client": [
         {
-          "client_id": "469554007321-ti2d50gqtm05kn3hjfu1srt0b7qn91fq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.tooshytoask",
-            "certificate_hash": "b9a7de923424fef75c57b03899ba710189a8e30c"
-          }
-        },
-        {
-          "client_id": "469554007321-8vp51dcfuv69au339vbga7q2r62spsap.apps.googleusercontent.com",
+          "client_id": "192470492971-452oijid08nred0ptkuk5ircolmfedhe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDmUThRfcOg30Bf4gkgI1_ZLYm-Y2-XhNo"
+          "current_key": "AIzaSyBk4MKjGeVMr9zuupLC2Zr50ToDqFv1w-g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "469554007321-8vp51dcfuv69au339vbga7q2r62spsap.apps.googleusercontent.com",
+              "client_id": "192470492971-452oijid08nred0ptkuk5ircolmfedhe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

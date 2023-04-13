@@ -113,13 +113,22 @@
                     android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/courses_time"
+                    android:id="@+id/course_time_hr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/worksansregular"
                     android:text=""
                     android:textColor="@color/line_color"
                     android:textSize="@dimen/text_size14"/>
+
+                    <TextView
+                        android:id="@+id/course_time_min"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/worksansregular"
+                        android:text=""
+                        android:textColor="@color/line_color"
+                        android:textSize="@dimen/text_size14"/>
 
                     <TextView
                         android:layout_width="wrap_content"

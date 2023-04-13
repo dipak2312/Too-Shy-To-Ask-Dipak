@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.tooshytoask'
+    namespace 'com.neuronimbus.metropolis'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.tooshytoask"
+        applicationId "com.neuronimbus.metropolis"
         minSdk 24
         targetSdk 33
         versionCode 203012

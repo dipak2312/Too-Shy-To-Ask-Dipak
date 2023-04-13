@@ -42,7 +42,7 @@
                 android:fontFamily="@font/worksansmedium"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size18" />
+                android:textSize="@dimen/text_size20" />
 
         </RelativeLayout>
     </RelativeLayout>

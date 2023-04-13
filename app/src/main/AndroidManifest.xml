@@ -21,6 +21,9 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.LMS.LMSQuiz.LMSQuizMainActivity"
             android:exported="true" />
         <activity
@@ -49,9 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.LMS.AllCoursesActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activity.Blogs.AllEventActivity"
             android:exported="true" />
@@ -211,7 +212,6 @@
         <activity
             android:name=".activity.Landing.InfoCardCategoryActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -268,7 +268,6 @@
         <activity
             android:name=".activity.Landing.SplashScreenActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

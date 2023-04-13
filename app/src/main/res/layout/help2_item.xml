@@ -16,7 +16,7 @@
             android:text="Suspendisse condimentum nisl vitae tellus?"
             android:layout_centerVertical="true"
             android:fontFamily="@font/worksansmedium"
-            android:textSize="@dimen/text_size12"
+            android:textSize="@dimen/text_size14"
             android:textColor="@color/black"/>
 
 
