@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
+import com.neuronimbus.metropolis.activity.Expert.ExpertActivity;
 import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
 import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
@@ -38,6 +39,7 @@ import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+import com.neuronimbus.metropolis.activity.WebViewActivity;
 
 import java.util.Locale;
 
@@ -57,7 +59,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     Button btn_select;
     RelativeLayout back_arrow;
     CustomProgressDialog dialog;
-    TextView profile_status,txt_name, app_version;
+    TextView profile_status,txt_name, app_version, terms_conditions, privacy_policy;
     CircularProgressBar progress_circular;
     double progrss_value;
     String action = "language", profile_pic;
@@ -83,6 +85,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         }
         String ver = pkgInfo.versionName;
         app_version.setText("" +ver);
+
+        privacy_policy = view.findViewById(R.id.privacy_policy);
+        privacy_policy.setOnClickListener(this);
+        terms_conditions = view.findViewById(R.id.terms_conditions);
+        terms_conditions.setOnClickListener(this);
         profile_status = view.findViewById(R.id.profile_status);
         txt_name = view.findViewById(R.id.txt_name);
         profile_image = view.findViewById(R.id.profile_image);
@@ -154,6 +161,22 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else if(id==terms_conditions.getId())
+        {
+            Intent intent = new Intent(context, WebViewActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("link1", "https://tsta.hodemoserver.in/terms-and-conditions/");
+            intent.putExtra("title", "Terms & Conditions");
+            startActivity(intent);
+
+        }
+        else if (id == privacy_policy.getId()) {
+            Intent intent = new Intent(context, WebViewActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("link1", "https://tsta.hodemoserver.in/privacy-policy");
+            intent.putExtra("title", "privacy policy");
             startActivity(intent);
         }
         else if (id == notification_setting.getId()) {
@@ -433,11 +456,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         super.onResume();
 
         getUserData();
-        profile_pic = spManager.getUserPhoto();
-        if (!profile_pic.equals("")) {
 
-            Glide.with(context).load(profile_pic).placeholder(R.drawable.demo).into(profile_image);
-        }
     }
 
     }

@@ -27,6 +27,8 @@ import com.neuronimbus.metropolis.AuthModels.StoryLikeAuthModel;
 import com.neuronimbus.metropolis.AuthModels.StoryShareAuthModel;
 import com.neuronimbus.metropolis.Models.StoryLikeResponse;
 import com.neuronimbus.metropolis.Models.StoryShareResponse;
+import com.neuronimbus.metropolis.activity.Blogs.AllBlogsActivity;
+import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 
 
@@ -65,7 +67,8 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
-    String story_id, story_like_share_ids, islike, share_link, story_name, story_image = "";
+    String story_id, story_like_share_ids, islike, share_link, story_name, story_image = "",
+            story_redirection_status, story_redirection_id;
     String progrss_value;
     long progress_time;
     ArrayList<StoryDetails>storyDetails;
@@ -246,8 +249,10 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
         story_title.setText(Html.fromHtml(storyDetails.get(position).getStory_title()));
         story_name = storyDetails.get(position).getStory_title();
-        //link_name.setText((storyDetails.get(position).getStory_link()));
+        link_name.setText((storyDetails.get(position).getStory_link()));
         share_link = storyDetails.get(position).getStory_link();
+        story_redirection_status = storyDetails.get(position).getRedirect_screen();
+        story_redirection_id = storyDetails.get(position).getRedirect_blogid();
 
         story_image = storyDetails.get(position).getStory_img();
 
@@ -316,13 +321,35 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
         }
         else if (id == link_name.getId()){
-            Uri uri = Uri.parse(share_link);
-            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
-            startActivity(intent);
-            if(player != null)
-            {
-                player.pause();
-               // player.stop();
+
+            if (story_redirection_status == null){
+                Uri uri = Uri.parse(storyDetails.get(position).getStory_link());
+                Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
+                if(player != null)
+                {
+                    player.pause();
+                }
+            }
+
+            else if(story_redirection_status.equals("blog")){
+                Bundle bundle = new Bundle();
+
+                bundle.putString("blog_id",story_redirection_id);
+                Intent intent = new Intent(context, DetailBlogActivity.class);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+            else if (story_redirection_status.equals("category")){
+                Bundle bundle = new Bundle();
+                bundle.putString("category",story_redirection_id);
+                Intent intent = new Intent(context, AllBlogsActivity.class);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
 
         }

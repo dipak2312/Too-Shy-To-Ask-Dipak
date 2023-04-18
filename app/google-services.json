@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "192470492971",
-    "project_id": "too-shy-to-ask",
-    "storage_bucket": "too-shy-to-ask.appspot.com"
+    "project_number": "652750145212",
+    "project_id": "too-shy-to-ask-59a67",
+    "storage_bucket": "too-shy-to-ask-59a67.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:192470492971:android:c1e351eaf5fae43ccc076e",
+        "mobilesdk_app_id": "1:652750145212:android:533248a711568b49bcf2b9",
         "android_client_info": {
           "package_name": "com.neuronimbus.metropolis"
         }
       },
       "oauth_client": [
         {
-          "client_id": "192470492971-452oijid08nred0ptkuk5ircolmfedhe.apps.googleusercontent.com",
+          "client_id": "652750145212-hup3jboou48mbk47rrjjf9904tsnav8l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neuronimbus.metropolis",
+            "certificate_hash": "b9a7de923424fef75c57b03899ba710189a8e30c"
+          }
+        },
+        {
+          "client_id": "652750145212-2uvdio7ev8r9gaphb28r2vkt6r7761ef.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBk4MKjGeVMr9zuupLC2Zr50ToDqFv1w-g"
+          "current_key": "AIzaSyBRQKiVA432J_QRaVcZdxFP1uWC5HSUIuA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "192470492971-452oijid08nred0ptkuk5ircolmfedhe.apps.googleusercontent.com",
+              "client_id": "652750145212-2uvdio7ev8r9gaphb28r2vkt6r7761ef.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

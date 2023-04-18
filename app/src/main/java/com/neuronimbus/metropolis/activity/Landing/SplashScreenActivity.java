@@ -55,11 +55,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);
         //openFingerPrint();
-        checkUpdate();
         checkPreviousActivityStatus();
-
-
-
 
     }
 
@@ -187,6 +183,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                        checkUpdate();
                         finish();
                     }
                     else if (spManager.getTstaguestLoginStatus().equals("true")) {
@@ -194,6 +191,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                        checkUpdate();
                         finish();
                     }
                         else {
@@ -201,6 +199,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                        checkUpdate();
                         finish();
                     }
 

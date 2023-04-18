@@ -2,6 +2,7 @@ package com.neuronimbus.metropolis.adapters;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     ArrayList<chats> chats;
     private static final int VIEW_TYPE_MESSAGE_ADMIN = 1;
     private static final int VIEW_TYPE_MESSAGE_USER = 2;
+    String time, part1, part2;
 
     public ChattingAdapter(Context context, ArrayList<com.neuronimbus.metropolis.Models.chats> chats) {
         this.context = context;
@@ -66,13 +68,27 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
         if(chats.get(position).getType().equals("reply"))
         {
             holder.reply_que.setText(Html.fromHtml(chats.get(position).getQuestion()));
+            holder.reply_que.setMovementMethod(LinkMovementMethod.getInstance());
             holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
-            holder.txt_expert_chat_date.setText(Html.fromHtml(chats.get(position).getCreated_at()));
+            holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
+            //holder.txt_expert_chat_date.setText(Html.fromHtml(chats.get(position).getCreated_at()));
+            time = chats.get(position).getCreated_at();
+            String[] parts = time.split(":");
+            part1 = parts[0];
+            part2 = parts[1];
+            holder.txt_expert_chat_date.setText(part1 + ":" + part2);
+            //holder.course_time_min.setText(part2 + "m");
         }
         else if(chats.get(position).getType().equals("question"))
         {
             holder.user_msg.setText(Html.fromHtml(chats.get(position).getQuestion()));
-            holder.txt_my_chat_date.setText(Html.fromHtml(chats.get(position).getCreated_at()));
+            holder.user_msg.setMovementMethod(LinkMovementMethod.getInstance());
+            //holder.txt_my_chat_date.setText(Html.fromHtml(chats.get(position).getCreated_at()));
+            time = chats.get(position).getCreated_at();
+            String[] parts = time.split(":");
+            part1 = parts[0];
+            part2 = parts[1];
+            holder.txt_my_chat_date.setText(part1 + ":" + part2);
         }
     }
 

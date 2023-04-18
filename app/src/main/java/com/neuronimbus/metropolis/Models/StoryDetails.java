@@ -11,6 +11,8 @@ public class StoryDetails {
     private String share_cnt;
     private String liked;
     private String story_video_time;
+    private String redirect_screen;
+    private String redirect_blogid;
 
     public String getStory_link() {
         return story_link;
@@ -92,5 +94,21 @@ public class StoryDetails {
 
     public void setStory_video_time(String story_video_time) {
         this.story_video_time = story_video_time;
+    }
+
+    public String getRedirect_screen() {
+        return redirect_screen;
+    }
+
+    public void setRedirect_screen(String redirect_screen) {
+        this.redirect_screen = redirect_screen;
+    }
+
+    public String getRedirect_blogid() {
+        return redirect_blogid;
+    }
+
+    public void setRedirect_blogid(String redirect_blogid) {
+        this.redirect_blogid = redirect_blogid;
     }
 }

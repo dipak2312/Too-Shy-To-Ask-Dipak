@@ -174,11 +174,11 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
             module_ids.add(module_id);
 
         }
-        else
+        /*else
         {
             module_ids.remove(module_id);
 
-        }
+        }*/
         Log.d("saggi",module_ids.toString());
         getManageNotificationUpdate();
 

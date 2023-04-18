@@ -7,6 +7,7 @@ public class child_comment {
     private String comment_date;
     private String comment_content;
     private String comment_parent;
+    private String profile_pic;
 
     public String getComment_ID() {
         return comment_ID;
@@ -54,5 +55,13 @@ public class child_comment {
 
     public void setComment_parent(String comment_parent) {
         this.comment_parent = comment_parent;
+    }
+
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
     }
 }

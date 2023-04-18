@@ -10,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.Helper.DateUtil;
 import com.neuronimbus.metropolis.Helper.IDateTimeFormat;
 import com.neuronimbus.metropolis.R;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BlogCommentsReplyAdapter extends RecyclerView.Adapter<BlogCommentsReplyAdapter.allcommentViewHolder> {
 
@@ -41,7 +44,7 @@ public class BlogCommentsReplyAdapter extends RecyclerView.Adapter<BlogCommentsR
         holder.txt_comment.setText(Html.fromHtml(child_comment.get(position).getComment_content()).toString());
         holder.txt_name.setText(child_comment.get(position).getComment_author());
         holder.txt_date.setText(new DateUtil().getStringDateInDisplayFormat(child_comment.get(position).getComment_date(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY));
-
+        Glide.with(context).load(child_comment.get(position).getProfile_pic()).placeholder(R.drawable.demo).into(holder.avatar_pic);
     }
 
     @Override
@@ -57,11 +60,14 @@ public class BlogCommentsReplyAdapter extends RecyclerView.Adapter<BlogCommentsR
     public class  allcommentViewHolder extends RecyclerView.ViewHolder
     {
         TextView txt_name,txt_date,txt_comment;
+        CircleImageView avatar_pic;
+
         public allcommentViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_name=(TextView)itemView.findViewById(R.id.txt_name);
             txt_date=(TextView)itemView.findViewById(R.id.txt_date);
             txt_comment=(TextView)itemView.findViewById(R.id.txt_comment);
+            avatar_pic= itemView.findViewById(R.id.avatar_pic);
 
         }
     }

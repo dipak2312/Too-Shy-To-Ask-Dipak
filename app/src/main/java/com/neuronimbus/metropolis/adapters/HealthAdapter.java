@@ -70,7 +70,6 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
                 public void onClick(View view) {
                     if (healthIssuseList.isSelected) {
                         health_btn.setBackgroundResource(R.drawable.health_inactive);
-                        //health_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
                         healthIssuseList.setSelected(false);
                         notifyDataSetChanged();
                         onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
@@ -78,7 +77,6 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.ViewHolder
 
                     }else {
                         health_btn.setBackgroundResource(R.drawable.health_active);
-                        //health_btn.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         healthIssuseList.setSelected(true);
                         notifyDataSetChanged();
                         onclicklistener.onClickData(position,healthIssuseList.getHealth_id());

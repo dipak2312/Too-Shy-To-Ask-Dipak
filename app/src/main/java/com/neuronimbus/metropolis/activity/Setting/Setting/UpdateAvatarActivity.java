@@ -90,6 +90,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
         profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
         getProfile();
+        checkPermissions();
     }
 
     public void RemoveProfile(){
@@ -233,6 +234,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         camera1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkPermissions();
 
                 Activity activity = (Activity) context;
 
@@ -247,6 +249,8 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                checkPermissions();
+
                 Activity activity = (Activity) context;
 
                 Intent galleryIntent = new Intent(

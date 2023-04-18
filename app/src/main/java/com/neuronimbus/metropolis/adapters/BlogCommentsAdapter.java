@@ -12,11 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.Helper.DateUtil;
 import com.neuronimbus.metropolis.Helper.IDateTimeFormat;
+import com.neuronimbus.metropolis.Models.comments;
 import com.neuronimbus.metropolis.R;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BlogCommentsAdapter extends RecyclerView.Adapter<BlogCommentsAdapter.allcommentViewHolder> {
 
@@ -46,6 +50,7 @@ public class BlogCommentsAdapter extends RecyclerView.Adapter<BlogCommentsAdapte
         holder.txt_comment.setText(Html.fromHtml(comments.get(position).getParent_comment().getComment_content()).toString());
         holder.txt_name.setText(comments.get(position).getParent_comment().getComment_author());
         holder.txt_date.setText(new DateUtil().getStringDateInDisplayFormat(comments.get(position).getParent_comment().getComment_date(), IDateTimeFormat.DATE_FORMAT_YYYY_MM_DD, IDateTimeFormat.DATE_FORMAT_MMM_DD_YYYY));
+        Glide.with(context).load(comments.get(position).getParent_comment().getProfile_pic()).placeholder(R.drawable.demo).into(holder.avatar_pic);
 
         holder.txt_reply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,15 +71,11 @@ public class BlogCommentsAdapter extends RecyclerView.Adapter<BlogCommentsAdapte
         return comments!=null?comments.size():0;
     }
 
-   /* public void setData(List<CommentsItem> commentlist){
-        this.commentData=commentlist;
-        notifyDataSetChanged();
-    }*/
-
     public class  allcommentViewHolder extends RecyclerView.ViewHolder
     {
         TextView txt_name,txt_date,txt_comment,txt_reply;
         RecyclerView commentReply;
+        CircleImageView avatar_pic;
         public allcommentViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_name=itemView.findViewById(R.id.txt_name);
@@ -82,6 +83,7 @@ public class BlogCommentsAdapter extends RecyclerView.Adapter<BlogCommentsAdapte
             txt_date=itemView.findViewById(R.id.txt_date);
             txt_comment=itemView.findViewById(R.id.txt_comment);
             commentReply= itemView.findViewById(R.id.commentReply);
+            avatar_pic= itemView.findViewById(R.id.avatar_pic);
 
         }
     }

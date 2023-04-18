@@ -126,19 +126,17 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     }
                 })
                 .build();
-        getUserData();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
+        getUserData();
         edit_age.setText(spManager.getDob());
         if (spManager.getDob().equals(yearnew)){
 
         }
-
-
         gender = spManager.getGender();
 
         if (spManager.getGender().equals("Male")){
@@ -161,7 +159,6 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
     }
 
     public void getUserData(){
-        dialog.show("");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());

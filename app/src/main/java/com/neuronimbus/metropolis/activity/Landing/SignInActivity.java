@@ -20,6 +20,7 @@ import com.neuronimbus.metropolis.Models.SignInResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.google.android.material.textfield.TextInputEditText;
+import com.neuronimbus.metropolis.activity.WebViewActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -31,7 +32,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     Context context;
     Button btn_signin;
     CustomProgressDialog dialog;
-    TextView guest_login;
+    TextView guest_login, terms_conditions, privacy_policy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = SignInActivity.this;
 
+        privacy_policy = findViewById(R.id.privacy_policy);
+        privacy_policy.setOnClickListener(this);
+        terms_conditions = findViewById(R.id.terms_conditions);
+        terms_conditions.setOnClickListener(this);
         btn_signin = findViewById(R.id.btn_signin);
         btn_signin.setOnClickListener(this);
         guest_login = findViewById(R.id.guest_login);
@@ -58,11 +63,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         int id = view.getId();
 
         if (id == btn_signin.getId()) {
-            /*Intent intent = new Intent(context, OtpVerificationActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();*/
+
                 loginWithOTP();
         } else if (id == guest_login.getId()) {
             if (spManager.getTstaLoginStatus().equals("false")) {
@@ -76,6 +77,22 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             else {
                 guest_login.setClickable(false);
             }
+        }
+        else if(id==terms_conditions.getId())
+        {
+            Intent intent = new Intent(context, WebViewActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("link1", "https://tsta.hodemoserver.in/terms-and-conditions/");
+            intent.putExtra("title", "Terms & Conditions");
+            startActivity(intent);
+
+        }
+        else if (id == privacy_policy.getId()) {
+            Intent intent = new Intent(context, WebViewActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("link1", "https://tsta.hodemoserver.in/privacy-policy");
+            intent.putExtra("title", "privacy policy");
+            startActivity(intent);
         }
     }
 

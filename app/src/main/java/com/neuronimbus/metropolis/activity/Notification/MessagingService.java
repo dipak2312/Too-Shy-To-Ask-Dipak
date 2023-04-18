@@ -31,6 +31,7 @@ public class MessagingService extends FirebaseMessagingService {
     Intent intent;
     String condition ;
     String type_id;
+    Context context;
 
 
     @Override
@@ -45,6 +46,20 @@ public class MessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         if (remoteMessage.getNotification()!= null) {
+
+            type_id = remoteMessage.getMessageId();
+            condition = remoteMessage.getMessageType();
+
+            if (!condition.equals("")) {
+                Intent intent = new Intent(this, NotificationsActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }
+
+            if (!type_id.equals("")) {
+                Intent intent = new Intent(this, NotificationsActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }
+
            pushNotification(
                    remoteMessage.getNotification().getTitle(),
                    remoteMessage.getNotification().getBody()
@@ -59,13 +74,14 @@ public class MessagingService extends FirebaseMessagingService {
 
         Notification notification;
 
-        final String CHANNEL_ID = "push_notification";
+        final String CHANNEL_ID = "TSTA";
 
         Intent intent = new Intent(this, NotificationsActivity.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 100, intent,
+                PendingIntent.FLAG_MUTABLE);
 
         switch(condition) {
             case "blog":
@@ -115,35 +131,34 @@ public class MessagingService extends FirebaseMessagingService {
 
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             CharSequence name = "Custom Channel";
             String description = "Channel for Push notification";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
 
-            NotificationChannel channel = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            }
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
 
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);
 
-                notification = new Notification.Builder(this)
+                notification = new Notification.Builder(this,CHANNEL_ID)
                         .setSmallIcon(R.drawable.tsta_icon)
                         .setContentIntent(pendingIntent)
                         .setContentTitle(title)
                         .setSubText(Msg)
+                        .addAction(R.drawable.tsta_icon,title, pendingIntent)
                         .setAutoCancel(true)
                         .setChannelId(CHANNEL_ID)
                         .build();
             }
             else {
-                notification = new Notification.Builder(this)
+                notification = new Notification.Builder(this,CHANNEL_ID)
                         .setSmallIcon(R.drawable.tsta_icon)
                         .setContentIntent(pendingIntent)
                         .setContentTitle(title)
                         .setSubText(Msg)
+                        .addAction(R.drawable.tsta_icon,title, pendingIntent)
                         .setAutoCancel(true)
                         .build();
             }

@@ -79,13 +79,15 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                     if (dataNotification.status){
-                        dataNotification.setStatus(true);
                         on_off_status.setText(R.string.on);
+                        dataNotification.setStatus(true);
+                        //notifyDataSetChanged();
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
                     }
                      else {
-                        dataNotification.setStatus(false);
                         on_off_status.setText(R.string.off);
+                        dataNotification.setStatus(false);
+                       // notifyDataSetChanged();
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
                     }
 

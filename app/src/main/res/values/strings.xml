@@ -50,7 +50,7 @@
     <string name="get_started">Get Started</string>
 
     //setting
-    <string name="terms_conditions_support"><![CDATA[Terms & Conditions | Support]]></string>
+    <string name="support"> | Support></string>
     <string name="_2022_all_right_reserved_powered_by_hats_off">© 2023 All Right Reserved Powered by Hats-Off</string>
     <string name="version_10_01">Version 10.01</string>
     <string name="too_shy_to_ask">Too Shy To Ask</string>
@@ -179,5 +179,6 @@
     <string name="update_your_health_issues">Update Your Health Issues</string>
     <string name="update_your_personal_info">Update Your Personal Info</string>
     <string name="update">Update</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions ]]></string>
 
 </resources>

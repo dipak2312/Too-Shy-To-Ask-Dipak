@@ -1,11 +1,14 @@
 package com.neuronimbus.metropolis.Fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -62,7 +65,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -95,6 +100,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
     String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken";
+
+    String[] permissions = new String[]{
+
+            Manifest.permission.POST_NOTIFICATIONS
+
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,11 +169,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
         getFcmToken();
         getHomePageResponse();
-        getUserData();
-
+        checkPermissions();
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserData();
+    }
 
     public void getBookmarkBlogs(String action){
         dialog.show("");
@@ -202,7 +217,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                 });
     }
     public void getUserData(){
-        //dialog.show("");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -638,4 +652,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
             getBookmarkBlogs(action);
 
     }
+    private boolean checkPermissions() {
+        int result;
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        for (String p : permissions) {
+            result = ContextCompat.checkSelfPermission(context, p);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p);
+            }
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(requireActivity(), listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
+            return false;
+        }
+        return true;
+    }
+
     }

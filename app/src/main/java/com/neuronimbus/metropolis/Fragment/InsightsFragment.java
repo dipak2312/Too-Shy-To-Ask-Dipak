@@ -167,8 +167,14 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
 
 
         getInsightScreenResponse();
-        getUserData();
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUserData();
     }
 
     public void getInsightScreenResponse() {
@@ -283,7 +289,6 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     }
 
     public void getUserData(){
-        //dialog.show("");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());

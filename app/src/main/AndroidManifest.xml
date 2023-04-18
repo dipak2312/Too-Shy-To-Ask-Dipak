@@ -14,15 +14,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/tsta_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/tsta_icon"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".activity.WebViewActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".activity.LMS.LMSQuiz.LMSQuizMainActivity"
             android:exported="true" />
@@ -52,9 +55,12 @@
             android:exported="true" />
         <activity
             android:name=".activity.LMS.AllCoursesActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.Blogs.AllEventActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.Blogs.AllBlogsActivity"
             android:exported="true" />
         <activity
             android:name=".activity.Game.LeaderBoardActivity"
@@ -143,16 +149,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".activity.story.StoryInfoActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activity.Blogs.AllBlogsActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".activity.Setting.Setting.UpdateAvatarActivity"
             android:exported="true">
@@ -234,6 +231,10 @@
         <service
             android:name=".activity.Notification.MessagingService"
             android:exported="false">
+
+            <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/tsta_icon" />
+
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 

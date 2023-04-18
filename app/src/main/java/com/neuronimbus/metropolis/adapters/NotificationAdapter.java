@@ -164,7 +164,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
         });
 
-        holder.single_notification_clear.setOnClickListener(new View.OnClickListener() {
+        holder.single_notification_clear_lay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ClearNotification.ClearNotificationClick(position,notificationLists.get(position).getId(),
@@ -191,7 +191,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView notification_title,notification_date,notification_desc;
         ImageView single_notification_clear, notification_img;
-        RelativeLayout notification_lay;
+        RelativeLayout notification_lay, single_notification_clear_lay;
         CardView notification_card_view;
 
 
@@ -204,6 +204,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             single_notification_clear = itemView.findViewById(R.id.single_notification_clear);
             notification_img = itemView.findViewById(R.id.notification_img);
             notification_card_view = itemView.findViewById(R.id.notification_card_view);
+            single_notification_clear_lay = itemView.findViewById(R.id.single_notification_clear_lay);
 
             notification_lay = itemView.findViewById(R.id.notification_lay);
 
