@@ -249,7 +249,7 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
 
         story_title.setText(Html.fromHtml(storyDetails.get(position).getStory_title()));
         story_name = storyDetails.get(position).getStory_title();
-        link_name.setText((storyDetails.get(position).getStory_link()));
+        //link_name.setText((storyDetails.get(position).getStory_link()));
         share_link = storyDetails.get(position).getStory_link();
         story_redirection_status = storyDetails.get(position).getRedirect_screen();
         story_redirection_id = storyDetails.get(position).getRedirect_blogid();

@@ -113,7 +113,7 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
 
     }
 
-    public void getManageNotificationUpdate(){
+    public void getManageNotificationUpdate(String id){
 
         ManageNotificationListUpdateAuthModel model = new ManageNotificationListUpdateAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -129,7 +129,7 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
                         String msg = manageNotificationListUpdateResponse.getMsg();
 
                         if (msg.equals("success")){
-
+                            getManageNotification();
                         }
                         else {
 
@@ -167,20 +167,13 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onClickData(int position, String id) {
-        module_id = id;
+          module_ids.clear();
+          module_id = id;
+          module_ids.add(module_id);
 
-        if(dataNotification.get(position).status)
-        {
-            module_ids.add(module_id);
 
-        }
-        /*else
-        {
-            module_ids.remove(module_id);
-
-        }*/
         Log.d("saggi",module_ids.toString());
-        getManageNotificationUpdate();
+        getManageNotificationUpdate(id);
 
 
 

@@ -45,20 +45,20 @@ public class MessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
+        if (!condition.equals("")) {
+            Intent intent = new Intent(this, NotificationsActivity.class);
+            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+
+        if (!type_id.equals("")) {
+            Intent intent = new Intent(this, NotificationsActivity.class);
+            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+
         if (remoteMessage.getNotification()!= null) {
 
             type_id = remoteMessage.getMessageId();
             condition = remoteMessage.getMessageType();
-
-            if (!condition.equals("")) {
-                Intent intent = new Intent(this, NotificationsActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-            }
-
-            if (!type_id.equals("")) {
-                Intent intent = new Intent(this, NotificationsActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-            }
 
            pushNotification(
                    remoteMessage.getNotification().getTitle(),
@@ -81,7 +81,7 @@ public class MessagingService extends FirebaseMessagingService {
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 100, intent,
-                PendingIntent.FLAG_MUTABLE);
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         switch(condition) {
             case "blog":
@@ -131,7 +131,7 @@ public class MessagingService extends FirebaseMessagingService {
 
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Custom Channel";
             String description = "Channel for Push notification";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;

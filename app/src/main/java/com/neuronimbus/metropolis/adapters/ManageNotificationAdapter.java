@@ -1,11 +1,13 @@
 package com.neuronimbus.metropolis.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
@@ -78,18 +80,32 @@ public class ManageNotificationAdapter extends RecyclerView.Adapter<ManageNotifi
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-                    if (dataNotification.status){
+                    if(isChecked)
+                    {
+                        Log.d("saggi1", dataNotification.getManage_id());
                         on_off_status.setText(R.string.on);
-                        dataNotification.setStatus(true);
-                        //notifyDataSetChanged();
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
-                    }
-                     else {
+                    }else
+                    {
+                        Log.d("saggi2", dataNotification.getManage_id());
                         on_off_status.setText(R.string.off);
-                        dataNotification.setStatus(false);
-                       // notifyDataSetChanged();
                         onclicklistener.onClickData(position, dataNotification.getManage_id());
+
                     }
+
+//                    Log.d("saggi", String.valueOf(isChecked));
+//                    if (dataNotification.status){
+//                        on_off_status.setText(R.string.on);
+//                       // dataNotification.setStatus(true);
+//                        //notifyDataSetChanged();
+//                        onclicklistener.onClickData(position, dataNotification.getManage_id());
+//                    }
+//                     else {
+//                        on_off_status.setText(R.string.off);
+//                      //  dataNotification.setStatus(false);
+//                       // notifyDataSetChanged();
+//                        onclicklistener.onClickData(position, dataNotification.getManage_id());
+//                    }
 
                 }
             });
