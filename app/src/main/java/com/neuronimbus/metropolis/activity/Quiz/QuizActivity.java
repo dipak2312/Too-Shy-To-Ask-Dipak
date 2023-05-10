@@ -99,6 +99,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
                         if (msg.equals("success")){
                             quetions=quizQueResponse.getQuestion();
+
+                            if (quetions.size() == 0){
+                                progressbar_completed.setVisibility(View.GONE);
+                                txt_count.setVisibility(View.GONE);
+                            }
                             init();
 
                         } else {

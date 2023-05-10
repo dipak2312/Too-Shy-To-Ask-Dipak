@@ -531,10 +531,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
 
         }
         else if (id == rel_back.getId()){
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            finish();
         }
     }
 

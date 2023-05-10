@@ -44,6 +44,7 @@
                     android:layout_marginLeft="@dimen/margin_20"
                     android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginRight="@dimen/margin_20"
+                    android:gravity="center"
                     android:fontFamily="@font/worksansmedium"
                     android:text=" "
                     android:textColor="@color/black"

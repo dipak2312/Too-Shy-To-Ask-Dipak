@@ -414,8 +414,8 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         }
         else if (id == previous.getId()){
 
-            Intent intent = new Intent(context, DetailBlogActivity.class);
-            intent.putExtra("blog_id", previous_id);
+            Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
+            intent.putExtra("article_id", previous_id);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -423,18 +423,15 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         }
         else if (id == next.getId()){
 
-            Intent intent = new Intent(context, DetailBlogActivity.class);
-            intent.putExtra("blog_id", next_id);
+            Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
+            intent.putExtra("article_id", next_id);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
 
         }
         else if (id == rel_back.getId()){
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            finish();
         }
     }
 

@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.Models.video_search;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.OnBookmarkClicked;
@@ -46,6 +47,7 @@ public class VideoGallerySearchAdapter extends RecyclerView.Adapter<VideoGallery
     @Override
     public void onBindViewHolder(@NonNull VideoGallerySearchAdapter.ViewHolder holder, int position) {
         holder.blog_title.setText(Allvideo_search.get(position).getTitle());
+        Glide.with(context).load(Allvideo_search.get(position).getCoverimage()).into(holder.blog_img);
 
         if (Allvideo_search.get(position).getBookmarked().equals("1")){
             holder.save_img.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.saved_bookmark));

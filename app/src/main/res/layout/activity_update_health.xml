@@ -110,7 +110,7 @@
             android:id="@+id/issue_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Do you have any health issues"
+            android:text="@string/please_select_your_issues"
             android:textSize="@dimen/text_size14"
             android:fontFamily="@font/worksansregular"
             android:textColor="@color/black"/>

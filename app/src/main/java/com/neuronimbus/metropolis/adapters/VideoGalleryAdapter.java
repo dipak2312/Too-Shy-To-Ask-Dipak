@@ -53,7 +53,7 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
     public void onBindViewHolder(@NonNull VideoGalleryAdapter.ViewHolder holder, int position) {
         Glide.with(context).load(video_gallery.get(position).getCoverimage()).into(holder.blog_img);
         holder.blog_title.setText(video_gallery.get(position).getTitle());
-        link = video_gallery.get(position).getLink();
+        //link = video_gallery.get(position).getLink();
 
 
 
@@ -116,8 +116,8 @@ public class VideoGalleryAdapter extends RecyclerView.Adapter<VideoGalleryAdapte
                     if (spManager.getTstaguestLoginStatus().equals("false")) {
                         Bundle bundle = new Bundle();
 
-                        bundle.putString("video_link", link);
-                        bundle.putString("video_type", link);
+                        bundle.putString("video_link", video_gallery.get(getAdapterPosition()).getLink());
+                        bundle.putString("video_type", video_gallery.get(getAdapterPosition()).getVideo_type());
                         Intent intent = new Intent(context, VideoGallerySingleActivity.class);
                         intent.putExtras(bundle);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

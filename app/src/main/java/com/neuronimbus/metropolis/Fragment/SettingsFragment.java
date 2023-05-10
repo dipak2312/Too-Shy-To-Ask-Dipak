@@ -176,7 +176,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             Intent intent = new Intent(context, WebViewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.putExtra("link1", "https://tsta.hodemoserver.in/privacy-policy");
-            intent.putExtra("title", "privacy policy");
+            intent.putExtra("title", "Privacy Policy");
             startActivity(intent);
         }
         else if (id == notification_setting.getId()) {

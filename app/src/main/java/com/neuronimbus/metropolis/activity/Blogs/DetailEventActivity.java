@@ -342,7 +342,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
         }
         else if (id == previous.getId()){
 
-            Intent intent = new Intent(context, DetailBlogActivity.class);
+            Intent intent = new Intent(context, DetailEventActivity.class);
             intent.putExtra("blog_id", previous_id);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -351,7 +351,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
         }
         else if (id == next.getId()){
 
-            Intent intent = new Intent(context, DetailBlogActivity.class);
+            Intent intent = new Intent(context, DetailEventActivity.class);
             intent.putExtra("blog_id", next_id);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -359,10 +359,7 @@ public class DetailEventActivity extends AppCompatActivity implements View.OnCli
 
         }
         else if (id == rel_back.getId()){
-            Intent intent = new Intent(context, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            finish();
         }
 
     }

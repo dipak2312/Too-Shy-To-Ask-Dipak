@@ -314,7 +314,7 @@
                 android:layout_height="@dimen/margin_25"
                 android:layout_below="@id/take_a_quiz_banner"
                 android:gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
 
@@ -344,7 +344,7 @@
                 android:id="@+id/courses_rel_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_below="@id/courses_lay"
                 android:layout_marginTop="@dimen/margin_10">
 

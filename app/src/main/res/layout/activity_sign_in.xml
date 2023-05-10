@@ -169,7 +169,7 @@
                     android:textSize="@dimen/text_size13"
                     android:fontFamily="@font/worksansregular"
                     android:textColor="@color/text_red"
-                    android:text="@string/by_singing_in_you_agree_to_tsta_s"
+                    android:text="@string/by_signing_in_you_agree_to_tsta_s"
                     android:layout_centerHorizontal="true"/>
 
                 <LinearLayout
