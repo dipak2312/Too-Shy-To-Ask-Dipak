@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -28,6 +29,7 @@ import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
 import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.activity.Help.HelpActivity;
+import com.neuronimbus.metropolis.activity.Notification.ManageNotificationActivity;
 import com.neuronimbus.metropolis.activity.Notification.NotificationsActivity;
 import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateProfileActivity;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
@@ -165,22 +167,30 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         }
         else if(id==terms_conditions.getId())
         {
-            Intent intent = new Intent(context, WebViewActivity.class);
+            Uri uri = Uri.parse("https://tsta.hodemoserver.in/terms-and-conditions/");
+            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(intent);
+
+           /* Intent intent = new Intent(context, WebViewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.putExtra("link1", "https://tsta.hodemoserver.in/terms-and-conditions/");
             intent.putExtra("title", "Terms & Conditions");
-            startActivity(intent);
+            startActivity(intent);*/
 
         }
         else if (id == privacy_policy.getId()) {
-            Intent intent = new Intent(context, WebViewActivity.class);
+            Uri uri = Uri.parse("https://tsta.hodemoserver.in/privacy-policy");
+            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(intent);
+
+            /*Intent intent = new Intent(context, WebViewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.putExtra("link1", "https://tsta.hodemoserver.in/privacy-policy");
             intent.putExtra("title", "Privacy Policy");
-            startActivity(intent);
+            startActivity(intent);*/
         }
         else if (id == notification_setting.getId()) {
-            Intent intent = new Intent(context, NotificationsActivity.class);
+            Intent intent = new Intent(context, ManageNotificationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

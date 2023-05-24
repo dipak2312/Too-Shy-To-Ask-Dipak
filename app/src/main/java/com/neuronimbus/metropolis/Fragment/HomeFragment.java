@@ -100,6 +100,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
     String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken";
+    int banner_size;
 
     String[] permissions = new String[]{
 
@@ -267,6 +268,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
                             StoryCategory = homeScreenResponse.getStoryCategory();
                             Bannerist = homeScreenResponse.getBannerist();
+                            banner_size = Bannerist.size();
                             Blogs = homeScreenResponse.getBlogs();
                             RecommendedBlogs = homeScreenResponse.getRecommendedBlogs();
 

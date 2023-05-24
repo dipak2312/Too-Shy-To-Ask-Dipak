@@ -62,7 +62,7 @@
                 android:text="A Teenagers Guide To Building Self Confidence"
                 android:textColor="@color/black"
                 android:ellipsize="end"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:textSize="@dimen/text_size14"
                 android:layout_marginStart="@dimen/margin_10"
                 android:layout_marginEnd="@dimen/margin_10"

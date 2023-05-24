@@ -66,7 +66,7 @@ public class InfoStoreHouseSearchAdapter extends RecyclerView.Adapter<InfoStoreH
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id",Allstorehouse_search.get(getAdapterPosition()).getArticle_id());
+                    bundle.putString("article_id",Allstorehouse_search.get(getAdapterPosition()).getArticle_id());
                     Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

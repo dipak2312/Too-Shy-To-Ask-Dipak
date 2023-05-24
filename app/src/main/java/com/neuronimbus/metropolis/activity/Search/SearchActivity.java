@@ -496,7 +496,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             else {
                 coursesSearchAdapter = new CoursesSearchAdapter(context, Allcourse_search, SearchActivity.this, type = "courses");
                 recy_courses_search.setAdapter(coursesSearchAdapter);
-                courses.setVisibility(View.VISIBLE);
+                //courses.setVisibility(View.VISIBLE);
             }
         }
 

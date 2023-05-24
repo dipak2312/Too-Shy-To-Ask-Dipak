@@ -155,10 +155,6 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
         int id = view.getId();
 
         if (id == rel_back.getId()){
-            Intent intent = new Intent(context, NotificationsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
             finish();
         }
 

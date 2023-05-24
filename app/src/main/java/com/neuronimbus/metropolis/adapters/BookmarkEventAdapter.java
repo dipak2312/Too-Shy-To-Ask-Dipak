@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
 import com.neuronimbus.metropolis.R;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.neuronimbus.metropolis.activity.Blogs.DetailEventActivity;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class BookmarkEventAdapter extends RecyclerView.Adapter<BookmarkEventAdap
                     Bundle bundle = new Bundle();
 
                     bundle.putString("blog_id",events.get(getAdapterPosition()).getBookmark_postid());
-                    Intent intent = new Intent(context, DetailBlogActivity.class);
+                    Intent intent = new Intent(context, DetailEventActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

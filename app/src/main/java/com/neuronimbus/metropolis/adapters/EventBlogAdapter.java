@@ -11,16 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Utils.BookmarkClicked;
+import com.neuronimbus.metropolis.Utils.GuestLoginPopup;
 import com.neuronimbus.metropolis.activity.Blogs.DetailEventActivity;
 import com.neuronimbus.metropolis.Models.InsightScreen.events;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.OnBookmarkClicked;
+import com.neuronimbus.metropolis.activity.InformationStoreHouse.InformationStorehouseActivity;
 
 import java.util.ArrayList;
 
@@ -94,6 +97,7 @@ public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView blog_img, save_img, lock_img;
         TextView blog_title;
+        CardView blog_card_view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,18 +106,25 @@ public class EventBlogAdapter extends RecyclerView.Adapter<EventBlogAdapter.View
             blog_img = itemView.findViewById(R.id.blog_img);
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
+            blog_card_view = itemView.findViewById(R.id.blog_card_view);
 
-            blog_img.setOnClickListener(new View.OnClickListener() {
+            blog_card_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id",events.get(getAdapterPosition()).getEvent_id());
-                    Intent intent = new Intent(context, DetailEventActivity.class);
-                    intent.putExtras(bundle);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    if (spManager.getTstaguestLoginStatus().equals("false")) {
+                        Bundle bundle = new Bundle();
+
+                        bundle.putString("blog_id",events.get(getAdapterPosition()).getEvent_id());
+                        Intent intent = new Intent(context, DetailEventActivity.class);
+                        intent.putExtras(bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                    else {
+                        GuestLoginPopup.LogOut(context, spManager);
+                    }
                 }
             });
         }

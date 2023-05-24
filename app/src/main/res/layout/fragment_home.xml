@@ -140,6 +140,7 @@
                 app:dotsColor="@color/home_banner_inactive"
                 app:dotsCornerRadius="8dp"
                 app:dotsSize="@dimen/margin_6"
+                android:visibility="gone"
                 android:layout_below="@+id/rel_view_pager"
                 app:dotsSpacing="3dp"
                 app:dotsWidthFactor="1"

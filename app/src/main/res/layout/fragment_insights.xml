@@ -305,6 +305,7 @@
                 android:layout_below="@id/recy_just_blog_lay"
                 app:shapeAppearanceOverlay="@style/radiusimage"
                 android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20"
                 android:layout_marginTop="@dimen/margin_15"/>
 
@@ -314,8 +315,8 @@
                 android:layout_height="@dimen/margin_25"
                 android:layout_below="@id/take_a_quiz_banner"
                 android:gravity="center"
-                android:visibility="visible"
-                android:layout_marginTop="@dimen/margin_15"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
 
                 <TextView
@@ -344,7 +345,7 @@
                 android:id="@+id/courses_rel_lay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_below="@id/courses_lay"
                 android:layout_marginTop="@dimen/margin_10">
 
@@ -362,7 +363,6 @@
                 android:layout_height="@dimen/margin_25"
                 android:layout_below="@id/courses_rel_lay"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20">
 
                 <TextView

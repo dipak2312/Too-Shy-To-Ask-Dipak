@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -95,6 +96,7 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView blog_img, save_img, lock_img;
         TextView blog_title;
+        CardView blog_card_view;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,19 +105,20 @@ public class HighlightBlogAdapter extends RecyclerView.Adapter<HighlightBlogAdap
             save_img = itemView.findViewById(R.id.save_img);
             blog_title = itemView.findViewById(R.id.blog_title);
             lock_img = itemView.findViewById(R.id.lock_img);
+            blog_card_view = itemView.findViewById(R.id.blog_card_view);
 
-            blog_img.setOnClickListener(new View.OnClickListener() {
+            blog_card_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (spManager.getTstaguestLoginStatus().equals("false")) {
-                    Bundle bundle = new Bundle();
+                        Bundle bundle = new Bundle();
 
-                    bundle.putString("blog_id",higlights.get(getAdapterPosition()).getBlog_id());
-                    Intent intent = new Intent(context, DetailBlogActivity.class);
-                    intent.putExtras(bundle);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                        bundle.putString("blog_id",higlights.get(getAdapterPosition()).getBlog_id());
+                        Intent intent = new Intent(context, DetailBlogActivity.class);
+                        intent.putExtras(bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
                     }
                     else {
                         GuestLoginPopup.LogOut(context, spManager);

@@ -179,7 +179,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/worksansregular"
                     android:layout_marginTop="@dimen/margin_10"
-                    android:textSize="@dimen/text_size12"
+                    android:textSize="@dimen/text_size14"
                     android:text=""/>
 
 

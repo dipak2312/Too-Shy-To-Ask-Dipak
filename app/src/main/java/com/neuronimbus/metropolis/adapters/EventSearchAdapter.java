@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.neuronimbus.metropolis.activity.Blogs.DetailEventActivity;
 import com.neuronimbus.metropolis.activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
 import com.neuronimbus.metropolis.Models.event_search;
 import com.neuronimbus.metropolis.R;
@@ -66,7 +67,7 @@ public class EventSearchAdapter extends RecyclerView.Adapter<EventSearchAdapter.
                     Bundle bundle = new Bundle();
 
                     bundle.putString("blog_id",Allevent_search.get(getAdapterPosition()).getBlog_id());
-                    Intent intent = new Intent(context, InformationStoreHouseDetailActivity.class);
+                    Intent intent = new Intent(context, DetailEventActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

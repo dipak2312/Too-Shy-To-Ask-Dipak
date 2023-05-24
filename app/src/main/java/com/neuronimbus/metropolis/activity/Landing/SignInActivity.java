@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,19 +81,27 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if(id==terms_conditions.getId())
         {
-            Intent intent = new Intent(context, WebViewActivity.class);
+            Uri uri = Uri.parse("https://tsta.hodemoserver.in/terms-and-conditions/");
+            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(intent);
+
+            /*Intent intent = new Intent(context, WebViewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.putExtra("link1", "https://tsta.hodemoserver.in/terms-and-conditions/");
             intent.putExtra("title", "Terms & Conditions");
-            startActivity(intent);
+            startActivity(intent);*/
 
         }
         else if (id == privacy_policy.getId()) {
-            Intent intent = new Intent(context, WebViewActivity.class);
+            Uri uri = Uri.parse("https://tsta.hodemoserver.in/privacy-policy");
+            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(intent);
+
+            /*Intent intent = new Intent(context, WebViewActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.putExtra("link1", "https://tsta.hodemoserver.in/privacy-policy");
             intent.putExtra("title", "privacy policy");
-            startActivity(intent);
+            startActivity(intent);*/
         }
     }
 

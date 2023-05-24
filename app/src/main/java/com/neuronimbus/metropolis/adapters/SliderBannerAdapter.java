@@ -40,7 +40,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         holder.setImage(Bannerist.get(position));
-        if (position == Bannerist.size()){
+        if (position == Bannerist.size() - 2){
             viewPager2.post(sliderRunnable);
         }
 
