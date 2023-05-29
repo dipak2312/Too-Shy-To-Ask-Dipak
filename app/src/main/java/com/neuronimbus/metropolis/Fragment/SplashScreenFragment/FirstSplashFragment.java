@@ -53,14 +53,6 @@ public class FirstSplashFragment extends Fragment {
             Glide.with(context).load(onboardingLists.get(0).getImg()).into(img1);
         }
 
-
-
-
-
-
-
-
-
         return view;
     }
 }

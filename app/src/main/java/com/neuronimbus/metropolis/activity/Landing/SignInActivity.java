@@ -81,7 +81,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if(id==terms_conditions.getId())
         {
-            Uri uri = Uri.parse("https://tsta.hodemoserver.in/terms-and-conditions/");
+            Uri uri = Uri.parse("https://tooshytoask.org/terms-and-conditions/");
             Intent intent= new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
 
@@ -93,7 +93,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         }
         else if (id == privacy_policy.getId()) {
-            Uri uri = Uri.parse("https://tsta.hodemoserver.in/privacy-policy");
+            Uri uri = Uri.parse("https://tooshytoask.org/privacy-policy/");
             Intent intent= new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
 

@@ -404,6 +404,10 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
             like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up));
             like = true;
         }
+        if (blog_helpfull_status.equals(" ")){
+            like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up));
+            dislike_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_down));
+        }
     }
     public void singleBlog() {
 

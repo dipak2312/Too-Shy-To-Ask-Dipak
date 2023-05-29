@@ -93,6 +93,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
                             health_status = healthIssueResponse.getIsHealthIssue();
 
                             if (health_status == null){
+                                health.setVisibility(View.GONE);
                                 yes_btn.setBackgroundResource(R.drawable.gender_border_inactive);
                                 yes_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
                                 no_btn.setBackgroundResource(R.drawable.gender_border_inactive);
@@ -100,10 +101,12 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
                             }
 
                             else if (health_status.equals("Yes")){
+                                health.setVisibility(View.VISIBLE);
                                 yes_btn.setBackgroundResource(R.drawable.gender_border_active);
                                 yes_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
                             }
                             else if (health_status.equals("No")){
+                                health.setVisibility(View.GONE);
                                 no_btn.setBackgroundResource(R.drawable.gender_border_active);
                                 no_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
                             }
@@ -187,7 +190,11 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         int id = view.getId();
 
          if (id == rel_back.getId()){
-            finish();
+             Intent intent = new Intent(context, UpdateProfileActivity.class);
+             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             startActivity(intent);
+             finish();
         }
          else if (id == update_btn2.getId()){
              getUserProfileUpdate();
@@ -226,7 +233,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
             healthissueIds.add(healthissueId);
         }else
         {
-            healthissueIds.remove(healthissueId);
+            healthissueIds.add(healthissueId);
         }
     }
 }

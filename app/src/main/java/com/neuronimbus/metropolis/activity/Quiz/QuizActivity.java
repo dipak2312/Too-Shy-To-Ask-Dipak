@@ -50,7 +50,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     double progrss_value;
     String quiz_id;
     ViewPager viewPager;
-    TextView txt_count;
+    TextView txt_count, quiz_attempt_txt;
     CustomProgressDialog dialog;
     TextView txt_quiz_title;
     private QuestionPagerAdapter pagerAdapter;
@@ -71,6 +71,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         rel_back = (RelativeLayout) findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         txt_count = (TextView) findViewById(R.id.txt_count);
+        quiz_attempt_txt = (TextView) findViewById(R.id.quiz_attempt_txt);
         txt_quiz_title=(TextView) findViewById(R.id.txt_quiz_title);
 
         progressbar_completed=(ProgressBar)findViewById(R.id.progressbar_completed);
@@ -102,6 +103,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
                             if (quetions.size() == 0){
                                 progressbar_completed.setVisibility(View.GONE);
+                                quiz_attempt_txt.setVisibility(View.VISIBLE);
                                 txt_count.setVisibility(View.GONE);
                             }
                             init();

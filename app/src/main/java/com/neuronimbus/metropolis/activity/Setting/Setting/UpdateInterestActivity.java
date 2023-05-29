@@ -195,13 +195,19 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClickData(int position, String id) {
+
+        //helthIds.clear();
         healthId = id;
+        //helthIds.add(healthId);
+
+        //healthId = id;
         if(informationStorehouseList.get(position).isSelected)
         {
             helthIds.add(healthId);
-        }else
+        }
+        else
         {
-            helthIds.remove(healthId);
+            helthIds.add(healthId);
         }
         Log.d("dipak",helthIds.toString());
     }

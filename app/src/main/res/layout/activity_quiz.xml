@@ -8,6 +8,20 @@
     android:background="@color/white"
     tools:context=".activity.Quiz.QuizActivity">
 
+    <TextView
+        android:id="@+id/quiz_attempt_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/congratulations_you_have_attempted_all_quiz_stay_tuned_we_will_be_back_with_more_quiz"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:textSize="@dimen/text_size18"
+        android:fontFamily="@font/worksansmedium"/>
+
     <RelativeLayout
         android:id="@+id/rel_top_bar"
         android:layout_width="match_parent"

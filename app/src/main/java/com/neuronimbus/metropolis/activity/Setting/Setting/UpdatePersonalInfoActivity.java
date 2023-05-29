@@ -111,7 +111,11 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
          if (id == spinner_blood.getId()){
             OpenBloodGrp();
         } else if (id == rel_back.getId()){
-            finish();
+             Intent intent = new Intent(context, UpdateProfileActivity.class);
+             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             startActivity(intent);
+             finish();
         }
          else if (id == next_btn.getId()) {
 

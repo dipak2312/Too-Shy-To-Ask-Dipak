@@ -209,6 +209,10 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
             like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up));
             like = true;
         }
+        if (helpfull_status.equals(" ")){
+            dislike_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_down));
+            like_thumb.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.thumbs_up));
+        }
     }
 
     public void getSinglePage(){

@@ -46,12 +46,12 @@ public class MessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         if (!condition.equals("")) {
-            Intent intent = new Intent(this, NotificationsActivity.class);
+             intent = new Intent(this, NotificationsActivity.class);
             intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
 
         if (!type_id.equals("")) {
-            Intent intent = new Intent(this, NotificationsActivity.class);
+             intent = new Intent(this, NotificationsActivity.class);
             intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
 
@@ -76,7 +76,7 @@ public class MessagingService extends FirebaseMessagingService {
 
         final String CHANNEL_ID = "TSTA";
 
-        Intent intent = new Intent(this, NotificationsActivity.class);
+        intent = new Intent(this, NotificationsActivity.class);
         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 
