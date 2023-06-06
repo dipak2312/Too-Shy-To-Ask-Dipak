@@ -1,4 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <string name="app_name">Too Shy To Ask</string>
     <string name="page_count_total">Question %d of %d</string>
     <string name="app_images_folderName">TSTA</string>
@@ -165,7 +166,7 @@
     //my_answer
 
     <string name="answered_by">Answered by</string>
-    <string name="correct_answer" tools:ignore="DuplicateDefinition">You have answered the question correctly</string>
+    <string name="correct_answer">You have answered the question correctly</string>
     <string name="correct_answer_is">The correct answer is:</string>
     <string name="comments">Comments</string>
 
@@ -182,5 +183,26 @@
     <string name="terms_conditions"><![CDATA[Terms & Conditions ]]></string>
     <string name="please_select_your_issues">Please select your issues</string>
     <string name="congratulations_you_have_attempted_all_quiz_stay_tuned_we_will_be_back_with_more_quiz">Congratulations you have attempted all quiz Stay tuned we will be back with more quiz</string>
+
+    // new
+
+    <string name="was_this_article_helpful">Was this article helpful?</string>
+    <string name="previous_article">Previous Article</string>
+    <string name="next_article">Next article</string>
+    <string name="leave_a_comment">Leave A Comment</string>
+    <string name="enter_comment">Enter Comment</string>
+    <string name="post_comment">POST COMMENT</string>
+    <string name="resend_in">RESEND IN</string>
+    <string name="search_for_blogs_courses_etc">Search for blogs, courses etc...</string>
+    <string name="welcome_to_tsta_chat_support">Welcome to TSTA Chat Support</string>
+    <string name="i_have_que_related_to">I have questions related to</string>
+    <string name="please_type_your_question_our_expert_we_ll_get_back_to_you_within_24_hours">Please type your question our Expert We\'ll get back to you within 24 hours</string>
+    <string name="chat_with_expert">Chat With Expert</string>
+    <string name="my_query_is_not_listed">My query is not listed</string>
+    <string name="please_select_the_issue_for_which_you_seek_support">Please select the issue for which you seek support</string>
+    <string name="was_this_helpful">Was this helpful?</string>
+    <string name="thank_you_for_reaching_out_to_tsta_support">Thank you for reaching out to TSTA Support.</string>
+    <string name="were_we_able_to_win_you_over">Were we able to win you over?</string>
+    <string name="ask_an_expert">Ask an Expert?</string>
 
 </resources>

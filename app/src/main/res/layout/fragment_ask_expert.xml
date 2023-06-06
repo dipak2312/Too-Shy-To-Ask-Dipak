@@ -85,7 +85,7 @@
                 android:id="@+id/hi_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hi Thomas, Welcome to TSTA Chat Support"
+                android:text="@string/welcome_to_tsta_chat_support"
                 android:layout_marginStart="@dimen/margin_10"
                 android:layout_marginEnd="@dimen/margin_10"
                 android:fontFamily="@font/worksansregular"
@@ -121,7 +121,7 @@
                 android:id="@+id/select_issue_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please select the issue for which you seek support"
+                android:text="@string/please_select_the_issue_for_which_you_seek_support"
                 android:layout_marginStart="@dimen/margin_10"
                 android:layout_marginEnd="@dimen/margin_10"
                 android:fontFamily="@font/worksansregular"
@@ -156,7 +156,7 @@
             android:layout_marginStart="@dimen/margin_5"
             android:layout_marginEnd="@dimen/margin_5"
             android:background="@drawable/expert_static_issues_background"
-            android:text="My query is not listed"
+            android:text="@string/my_query_is_not_listed"
             android:fontFamily="@font/worksansmedium"
             android:textSize="@dimen/text_size14"
             android:textColor="@color/purple"/>
@@ -264,7 +264,7 @@
             android:id="@+id/helpful_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Was this helpful?"
+            android:text="@string/was_this_helpful"
             android:layout_marginStart="@dimen/margin_10"
             android:layout_marginEnd="@dimen/margin_10"
             android:fontFamily="@font/worksansregular"
@@ -286,7 +286,7 @@
             android:id="@+id/yes_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes"
             android:fontFamily="@font/worksansmedium"
             android:layout_marginTop="@dimen/margin_5"
             android:layout_marginEnd="@dimen/margin_5"
@@ -306,7 +306,7 @@
             android:id="@+id/no_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No"
+            android:text="@string/no"
             android:fontFamily="@font/worksansmedium"
             android:layout_marginTop="@dimen/margin_5"
             android:layout_marginEnd="@dimen/margin_5"
@@ -339,7 +339,7 @@
                     android:textSize="@dimen/text_size14"
                     android:textColor="@color/black"
                     android:padding="@dimen/padding_10"
-                    android:text="Yes"/>
+                    android:text="@string/yes"/>
 
             </RelativeLayout>
 
@@ -371,7 +371,7 @@
                     android:id="@+id/thank_you_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thank you for reaching out to TSTA Support."
+                    android:text="@string/thank_you_for_reaching_out_to_tsta_support"
                     android:layout_marginStart="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_10"
                     android:fontFamily="@font/worksansregular"
@@ -400,7 +400,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Were we able to win you over?"
+            android:text="@string/were_we_able_to_win_you_over"
             android:padding="@dimen/padding_10"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size14"
@@ -442,7 +442,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Didn't find the Answer.?"
+                android:text="@string/didn_t_find_the_answer"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_10"
                 android:textSize="@dimen/text_size14"
@@ -452,7 +452,7 @@
                 android:id="@+id/ask_expert_activity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ask an Expert?"
+                android:text="@string/ask_an_expert"
                 android:padding="@dimen/padding_10"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/text_size14"

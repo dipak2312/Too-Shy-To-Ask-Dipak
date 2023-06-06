@@ -211,10 +211,10 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
 
     private void selectCategoryMethod() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(InformationStorehouseActivity.this);
-        mBuilder.setTitle("All Category");
+        mBuilder.setTitle(R.string.all_categories);
 
         String [] categoryListForSingleItem = new String[InfoStoreCategory.size()+1];
-        categoryListForSingleItem[0]="All Categories";
+        categoryListForSingleItem[0]= getResources().getString(R.string.all_categories);
         for (int i = 0; i<InfoStoreCategory.size(); i++){
             categoryListForSingleItem[i+1]=InfoStoreCategory.get(i).getCategory_name() ;
         }

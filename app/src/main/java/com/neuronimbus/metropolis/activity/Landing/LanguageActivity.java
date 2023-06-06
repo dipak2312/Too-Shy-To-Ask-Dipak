@@ -32,7 +32,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
     Context context;
     SPManager spManager;
     Button btn_next;
-    RadioButton eng_lang, hindi_lang, marathi_lang;
+    RadioButton eng_lang, hindi_lang, marathi_lang, gujarati_lang, Tamil_lang;
     ArrayList<data>data;
     RecyclerView recy_language;
     LanguageAdapter adapter;
@@ -49,6 +49,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         eng_lang = findViewById(R.id.eng_lang);
         hindi_lang = findViewById(R.id.hindi_lang);
         marathi_lang = findViewById(R.id.marathi_lang);
+        gujarati_lang = findViewById(R.id.gujarati_lang);
+        Tamil_lang = findViewById(R.id.Tamil_lang);
         recy_language = findViewById(R.id.recy_language);
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
@@ -129,7 +131,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    public void radioButtobClickEvent(View view){
+    public void radioButtonClickEvent(View view){
         boolean isChecked = ((RadioButton) view).isChecked();
         switch (view.getId()){
             case R.id.eng_lang:
@@ -140,6 +142,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     selectLanguage();
                 }
                 break;
@@ -151,6 +155,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     selectLanguage();
                 }
                 break;
@@ -160,6 +166,34 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
                     setLocale("mr");
                     btn_next.setText(R.string.निवडा);
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.gujarati_lang:
+                if(isChecked){
+
+                    setLocale("gr");
+                    btn_next.setText(R.string.select);
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.Tamil_lang:
+                if(isChecked){
+
+                    setLocale("tm");
+                    btn_next.setText(R.string.select);
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     selectLanguage();
@@ -176,20 +210,44 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         {
             eng_lang.setChecked(true);
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("hi"))
         {
             hindi_lang.setChecked(true);
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("mr"))
         {
             marathi_lang.setChecked(true);
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+        else if(selectValue.equals("gr"))
+        {
+            gujarati_lang.setChecked(true);
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+        else if(selectValue.equals("tm"))
+        {
+            Tamil_lang.setChecked(true);
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }

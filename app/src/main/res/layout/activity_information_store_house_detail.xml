@@ -187,7 +187,7 @@
                         android:id="@+id/helpful"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Was this article helpful?"
+                        android:text="@string/was_this_article_helpful"
                         android:textSize="@dimen/text_size15"
                         android:layout_marginTop="@dimen/margin_25"
                         android:textColor="@color/black"
@@ -222,7 +222,7 @@
                                 android:layout_marginStart="@dimen/margin_15"
                                 android:textSize="@dimen/text_size12"
                                 android:textColor="@color/black"
-                                android:text="Yes "/>
+                                android:text="@string/yes"/>
 
                             <TextView
                                 android:id="@+id/yes_count"
@@ -232,7 +232,7 @@
                                 android:fontFamily="@font/worksansregular"
                                 android:textSize="@dimen/text_size12"
                                 android:textColor="@color/black"
-                                android:text="118"/>
+                                android:text=" 118"/>
 
                         </LinearLayout>
 
@@ -260,7 +260,7 @@
                                 android:fontFamily="@font/worksansregular"
                                 android:textSize="@dimen/text_size12"
                                 android:textColor="@color/black"
-                                android:text="No "/>
+                                android:text="@string/no"/>
 
                             <TextView
                                 android:id="@+id/no_count"
@@ -303,7 +303,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Previous Article"
+                            android:text="@string/previous_article"
                             android:textColor="@color/purple"
                             android:textSize="@dimen/text_size12"
                             android:fontFamily="@font/worksansmedium"
@@ -321,7 +321,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Next article"
+                            android:text="@string/next_article"
                             android:textColor="@color/purple"
                             android:textSize="@dimen/text_size12"
                             android:fontFamily="@font/worksansmedium" />

@@ -144,7 +144,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     private void selectCategoryMethod() {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FAQActivity.this);
-        mBuilder.setTitle("All");
+        mBuilder.setTitle(R.string.all);
         //mBuilder.setCustomTitle(tv_category_selection);
 
         String [] categoryListForSingleItem = new String[faqcategory.size()];

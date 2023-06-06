@@ -59,7 +59,7 @@
             android:buttonTint="@color/purple"
             android:checked="false"
             android:fontFamily="@font/worksanssemibold"
-            android:onClick="radioButtobClickEvent"
+            android:onClick="radioButtonClickEvent"
             android:paddingStart="@dimen/margin_10"
             android:text="@string/english"
             android:textColor="@color/black"
@@ -72,7 +72,7 @@
             android:buttonTint="@color/purple"
             android:checked="false"
             android:visibility="visible"
-            android:onClick="radioButtobClickEvent"
+            android:onClick="radioButtonClickEvent"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size15"
             android:paddingStart="@dimen/margin_10"
@@ -99,8 +99,46 @@
             android:layout_marginBottom="@dimen/margin_10"
             android:textSize="@dimen/text_size15"
             android:fontFamily="@font/worksanssemibold"
-            android:onClick="radioButtobClickEvent"
+            android:onClick="radioButtonClickEvent"
             android:text="मराठी"/>
+
+        <RadioButton
+            android:id="@+id/gujarati_lang"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_60"
+            android:buttonTint="@color/purple"
+            android:checked="false"
+            android:visibility="visible"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_10"
+            android:paddingStart="@dimen/margin_10"
+            android:background="@drawable/language_background"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:textSize="@dimen/text_size15"
+            android:fontFamily="@font/worksanssemibold"
+            android:onClick="radioButtonClickEvent"
+            android:text="ગુજરાતી"/>
+
+        <RadioButton
+            android:id="@+id/Tamil_lang"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_60"
+            android:buttonTint="@color/purple"
+            android:checked="false"
+            android:visibility="visible"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/margin_10"
+            android:paddingStart="@dimen/margin_10"
+            android:background="@drawable/language_background"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:textSize="@dimen/text_size15"
+            android:fontFamily="@font/worksanssemibold"
+            android:onClick="radioButtonClickEvent"
+            android:text="தமிழ்"/>
 
     </RadioGroup>
 

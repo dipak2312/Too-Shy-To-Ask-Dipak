@@ -56,7 +56,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             feedback, select_Language, refer_friends, logout;
     Context context;
     SPManager spManager;
-    RadioButton eng_lang, hindi_lang, marathi_lang;
+    RadioButton eng_lang, hindi_lang, marathi_lang, gujarati_lang, Tamil_lang;
     BottomSheetDialog bottomSheetDialog;
     Button btn_select;
     RelativeLayout back_arrow;
@@ -64,7 +64,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     TextView profile_status,txt_name, app_version, terms_conditions, privacy_policy;
     CircularProgressBar progress_circular;
     double progrss_value;
-    String action = "language", profile_pic;
+    String action = "language", profile_pic, selectValue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -235,6 +235,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             eng_lang.setBackgroundResource(R.drawable.language_background_active);
             hindi_lang.setBackgroundResource(R.drawable.language_background);
             marathi_lang.setBackgroundResource(R.drawable.language_background);
+            gujarati_lang.setBackgroundResource(R.drawable.language_background);
+            Tamil_lang.setBackgroundResource(R.drawable.language_background);
         }
         else if(id==hindi_lang.getId())
         {
@@ -243,6 +245,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             hindi_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setBackgroundResource(R.drawable.language_background);
             marathi_lang.setBackgroundResource(R.drawable.language_background);
+            gujarati_lang.setBackgroundResource(R.drawable.language_background);
+            Tamil_lang.setBackgroundResource(R.drawable.language_background);
         }
         else if(id==marathi_lang.getId())
         {
@@ -251,9 +255,32 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             marathi_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setBackgroundResource(R.drawable.language_background);
             hindi_lang.setBackgroundResource(R.drawable.language_background);
+            gujarati_lang.setBackgroundResource(R.drawable.language_background);
+            Tamil_lang.setBackgroundResource(R.drawable.language_background);
+        }
+        else if(id==gujarati_lang.getId())
+        {
+            setLocale("gr");
+            btn_select.setText(R.string.select);
+            gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
+            eng_lang.setBackgroundResource(R.drawable.language_background);
+            hindi_lang.setBackgroundResource(R.drawable.language_background);
+            marathi_lang.setBackgroundResource(R.drawable.language_background);
+            Tamil_lang.setBackgroundResource(R.drawable.language_background);
+        }
+        else if(id==Tamil_lang.getId())
+        {
+            setLocale("tm");
+            btn_select.setText(R.string.select);
+            Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
+            eng_lang.setBackgroundResource(R.drawable.language_background);
+            hindi_lang.setBackgroundResource(R.drawable.language_background);
+            gujarati_lang.setBackgroundResource(R.drawable.language_background);
+            marathi_lang.setBackgroundResource(R.drawable.language_background);
         }
         else if(id==btn_select.getId())
         {
+            selectLanguage();
             getUserProfileUpdate();
             bottomSheetDialog.dismiss();
             refreshFragment();
@@ -326,6 +353,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         hindi_lang.setOnClickListener(this);
         marathi_lang=bottomSheetDialog.findViewById(R.id.marathi_lang);
         marathi_lang.setOnClickListener(this);
+        gujarati_lang=bottomSheetDialog.findViewById(R.id.gujarati_lang);
+        gujarati_lang.setOnClickListener(this);
+        Tamil_lang=bottomSheetDialog.findViewById(R.id.Tamil_lang);
+        Tamil_lang.setOnClickListener(this);
         back_arrow = bottomSheetDialog.findViewById(R.id.back_arrow);
         back_arrow.setOnClickListener(this);
         btn_select = bottomSheetDialog.findViewById(R.id.btn_select);
@@ -373,35 +404,62 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
     public void selectLanguage(){
 
-        String selectValue=spManager.getLanguage();
+        selectValue=spManager.getLanguage();
 
         if(selectValue.equals("en"))
         {
             eng_lang.setChecked(true);
             eng_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("hi"))
         {
             hindi_lang.setChecked(true);
             hindi_lang.setBackgroundResource(R.drawable.language_background_active);
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
         else if(selectValue.equals("mr"))
         {
             marathi_lang.setChecked(true);
             marathi_lang.setBackgroundResource(R.drawable.language_background_active);
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
+        else if(selectValue.equals("gr"))
+        {
+            gujarati_lang.setChecked(true);
+            gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+        else if(selectValue.equals("tm"))
+        {
+            Tamil_lang.setChecked(true);
+            Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
+            Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+            gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+            eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+        }
+
     }
 
-    public void radioButtonClickEvent(View view){
+    public void radioButtonClick(View view){
         boolean isChecked = ((RadioButton) view).isChecked();
         switch (view.getId()){
             case R.id.eng_lang:
@@ -412,6 +470,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     selectLanguage();
                 }
                 break;
@@ -423,6 +483,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     selectLanguage();
                 }
                 break;
@@ -432,6 +494,34 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                     setLocale("mr");
                     btn_select.setText(R.string.निवडा);
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.gujarati_lang:
+                if(isChecked){
+
+                    setLocale("gr");
+                    btn_select.setText(R.string.select);
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    selectLanguage();
+                }
+                break;
+            case R.id.Tamil_lang:
+                if(isChecked){
+
+                    setLocale("tm");
+                    btn_select.setText(R.string.select);
+                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
+                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     selectLanguage();

@@ -40,7 +40,7 @@ public class ExpertIssuesAdapter extends RecyclerView.Adapter<ExpertIssuesAdapte
     @Override
     public void onBindViewHolder(@NonNull ExpertIssuesAdapter.ViewHolder holder, int position) {
         text = data.get(position).getTitle();
-        holder.issues_txt.setText(Html.fromHtml("I have questions related to " + text));
+        holder.issues_txt.setText(Html.fromHtml(context.getResources().getString(R.string.i_have_que_related_to) + text));
         holder.rel_lay_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

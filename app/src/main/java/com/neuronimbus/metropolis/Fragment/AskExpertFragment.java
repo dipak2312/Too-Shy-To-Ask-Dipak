@@ -103,7 +103,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
         data = new ArrayList<>();
 
         hi_msg = view.findViewById(R.id.hi_msg);
-        hi_msg.setText("Hi "+ spManager.getFirstName() +","+" Welcome to TSTA Chat Support");
+        hi_msg.setText("Hi "+ spManager.getFirstName() +","+ getString(R.string.welcome_to_tsta_chat_support));
 
         issues_recy = view.findViewById(R.id.issues_recy);
         LinearLayoutManager lm = new LinearLayoutManager(context);
@@ -195,7 +195,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
         else if (id == yes_txt.getId()){
             yes_no = "Yes";
             yes_no_reply_msg.setVisibility(View.VISIBLE);
-            yes_no_text.setText("Yes");
+            yes_no_text.setText(getString(R.string.yes));
             ask_expert_no_lay.setVisibility(View.GONE);
             thanku_lay.setVisibility(View.VISIBLE);
             getAskIssuesFeedback();
@@ -203,7 +203,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
         else if (id == no_txt.getId()){
             yes_no = "No";
             yes_no_reply_msg.setVisibility(View.VISIBLE);
-            yes_no_text.setText("No");
+            yes_no_text.setText(getString(R.string.no));
             thanku_lay.setVisibility(View.GONE);
             ask_expert_no_lay.setVisibility(View.VISIBLE);
             getAskIssuesFeedback();
@@ -248,7 +248,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
 
     public void StorehouseMessage(int position){
         title = data.get(position).getTitle();
-        category_msg.setText("I have questions related to " + title);
+        category_msg.setText(getString(R.string.i_have_que_related_to) + title);
         chatt_lin_lay.setVisibility(View.VISIBLE);
         faq_lin_lay.setVisibility(View.VISIBLE);
         rel_issues_recy.setVisibility(View.GONE);

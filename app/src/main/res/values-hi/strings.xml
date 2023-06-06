@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Too Shy To Ask</string>
+    <string name="page_count_total">Question %d of %d</string>
+    <string name="app_images_folderName">TSTA</string>
+
+
+    //Landing
+    <string name="resend_otp">ओटीपी पुनः भेजें </string>
+    <string name="todo">TODO</string>
+    <string name="create_your_account">अपना खाता बनाएं</string>
+    <string name="login_text">अपने खाते तक पहुँचने के लिए कृपया लॉगिन करें</string>
+    <string name="_10_digit_mobile_number">10 अंकों का मोबाइल नंबर</string>
+    <string name="by_signing_in_you_agree_to_tsta_s">साइन इन करके, आप TSTA\'s से सहमत होते हैं</string>
+    <string name="terms_and_conditions">नियम और शर्तें</string>
+    <string name="and"> और </string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="or">या</string>
+    <string name="continue_as_guest">अतिथि के रूप में जारी रखें</string>
+    <string name="continue_btn">जारी रखना</string>
+    <string name="enter_otp">ओटीपी दर्ज करें</string>
+    <string name="_4_digit_otp_sent_to">4 अंकों का ओटीपी भेजा गया</string>
+    <string name="_9096503372">9096503372</string>
+    <string name="next">अगला</string>
+    <string name="didn_t_receive_thr_otp">ओटीपी प्राप्त नहीं हुआ?</string>
+    <string name="resend_code">पुन: कोड भेजे</string>
+    <string name="are_you">क्या आप?</string>
+    <string name="user">उपयोगकर्ता</string>
+    <string name="parent">माता-पिता</string>
+
+    //Headings
+    <string name="heading_one">Nunc at elementum</string>
+    <string name="heading_two">Empowering our girls, our responsibility!</string>
+    <string name="heading_three">“The Too Shy to Ask” App a boon for the young teenager !</string>
+
+    //Description
+    <string name="desc_one">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</string>
+    <string name="desc_two">Today there are many new developments in the management of fibroids. </string>
+    <string name="desc_three">India has the largest number of young people as compared to anywhere else in the world.</string>
+
+    //Language
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_your_preferred_language">अपनी पसंदीदा भाषा चुनें</string>
+    <string name="your_feeds_will_be_served_basis_on_your_selection">आपके चयन के आधार पर आपका फ़ीड पेश किया जाएगा</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="hindi">हिंदी</string>
+    <string name="marathi">मराठी</string>
+
+    //SliderActivity
+    <string name="skip">छोडना</string>
+    <string name="get_started">शुरू हो जाओ</string>
+
+    //setting
+    <string name="support"> | सहायता></string>
+    <string name="_2022_all_right_reserved_powered_by_hats_off">© 2023 All Right Reserved Powered by Hats-Off</string>
+    <string name="version_10_01">संस्करण</string>
+    <string name="too_shy_to_ask">Too Shy To Ask</string>
+    <string name="log_out">लॉग आउट</string>
+    <string name="refer_friends">मित्र को सुझाए</string>
+    <string name="select_language">भाषा चुने</string>
+    <string name="feedback">प्रतिक्रिया</string>
+    <string name="help">मदद</string>
+    <string name="faq">अक्सर पूछे जाने वाले प्रश्नों</string>
+    <string name="bookmarks">बुकमार्क</string>
+    <string name="notification_settings">अधिसूचना सेटिंग्स</string>
+    <string name="update_profile">प्रोफ़ाइल अपडेट करें</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="notifications">सूचनाएं</string>
+
+    //language button name
+    <string name="चुनें">चुनें</string>
+    <string name="निवडा">निवडा</string>
+    <string name="select">चुनना</string>
+    <string name="manage_notifications">सूचनाएं प्रबंधित करें</string>
+
+    //SignUpActivity
+    <string name="info_card">जानकारी कार्ड</string>
+    <string name="first_name">पहला नाम</string>
+    <string name="last_name">उपनाम</string>
+    <string name="date_of_birth">जन्म की तारीख</string>
+    <string name="select_your_dob">अपना DOB चुनें</string>
+    <string name="gender">लिंग</string>
+    <string name="male">पुरुष</string>
+    <string name="female">महिला</string>
+    <string name="other">अन्य</string>
+    <string name="country">देश</string>
+    <string name="state">राज्य</string>
+    <string name="city">शहर</string>
+
+    //contact
+    <string name="email">ईमेल</string>
+    <string name="subject">विषय</string>
+    <string name="description">विवरण</string>
+    <string name="phone_number">फ़ोन नंबर</string>
+    <string name="height">ऊंचाई</string>
+    <string name="weight">वज़न</string>
+    <string name="do_you_have_any_health_issues">क्या आपको कोई स्वास्थ्य समस्या है</string>
+    <string name="other_topics_in_this_section">इस खंड में अन्य विषय।</string>
+    <string name="didn_t_find_the_answer">जवाब नहीं मिला?</string>
+    <string name="contact_us">संपर्क करें</string>
+    <string name="thank_you_got_it">आपकी प्रतिक्रिया के लिए धन्यवाद</string>
+    <string name="no">नहीं</string>
+    <string name="yes">हाँ</string>
+    <string name="was_this_topic_helpful">क्या यह विषय मददगार था?</string>
+    <string name="sorry_about_that_what_did_you_find_most_unhelpful">इसके बारे में खेद! आपको सबसे अधिक अनुपयोगी क्या लगा</string>
+    <string name="this_article_didn_t_answer_my_questions_or_solve_my_problem">इस लेख ने मेरे सवालों का जवाब नहीं दिया या मेरी समस्या का समाधान नहीं किया</string>
+    <string name="i_found_this_article_confusing_or_difficult_to_read">मुझे यह लेख भ्रामक या पढ़ने में कठिन लगा</string>
+    <string name="i_don_t_like_how_the_feature_works">मुझे यह पसंद नहीं है कि सुविधा कैसे काम करती है</string>
+    <string name="change_avtar">परिवर्तन अवतार</string>
+    <string name="update_your_avatar">अपना अवतार अपडेट करें</string>
+    <string name="profile_photo">खाते की फोटो</string>
+    <string name="remove_profile">प्रोफ़ाइल हटाएं</string>
+    <string name="gallery">गेलरी</string>
+    <string name="camera">कैमरा</string>
+    <string name="add_screenshot">मीडिया जोड़ो</string>
+    <string name="attachment_optional">अनुलग्नक (वैकल्पिक)</string>
+    <string name="on">चालू</string>
+    <string name="off">बंद</string>
+    <string name="info_card1">श्रेणियाँ चुनें</string>
+    <string name="info_card2">अवतार का चयन करें</string>
+    <string name="info_card3">स्वास्थ्य समस्याओं का चयन करें</string>
+    <string name="info_card4">माहिती कार्ड</string>
+    <string name="are_you_sure_you_want_to_clear_notification">क्या आप वाकई अधिसूचना साफ़ करना चाहते हैं?</string>
+    <string name="are_you_sure_you_want_to_clear_all_notification">क्या आप वाकई सभी अधिसूचना साफ़ करना चाहते हैं?</string>
+    <string name="swipe_up_to_know_more">अधिक जानकारी के लिए यहां क्लिक करें</string>
+    <string name="related_blogs">संबंधित आलेख</string>
+    <string name="submit_feedback">प्रतिपुष्टि दें</string>
+    <string name="let_s_start">चलो शुरू करो</string>
+    <string name="welcome">स्वागत</string>
+    <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">आरोग्याची काळजी घ्या. आमची प्रश्नमंजुषा घेऊन पौगंडावस्थेतील आरोग्याविषयी तुमच्या ज्ञानाची चाचणी घ्या.</string>
+    <string name="submit">जमा करना</string>
+
+    <string name="next_question">अगला सवाल</string>
+    <string name="back_to_home">घर वापिस जा रहा हूँ</string>
+    <string name="next_quiz">अगली प्रश्नोत्तरी</string>
+    <string name="highlight">प्रमुख बात</string>
+    <string name="events">आयोजन</string>
+    <string name="recentlyadded">हाल ही में जोड़ा</string>
+    <string name="recommended">अनुशंसित</string>
+    <string name="your_daily_insights">आपकी दैनिक अंतर्दृष्टि</string>
+    <string name="see_all">सभी देखें</string>
+    <string name="video_gallery">वीडियो गैलरी</string>
+    <string name="courses">पाठ्यक्रम</string>
+    <string name="event">कार्यक्रम</string>
+    <string name="highlights">प्रमुख मुद्दे</string>
+    <string name="blogs">ब्लॉग</string>
+    <string name="information_storehouse">सूचना भंडार</string>
+    <string name="frequently_asked_question_s">अक्सर पूछे जाने वाले प्रश्नों</string>
+    <string name="all_categories">सब वर्ग</string>
+    <string name="all">सभी</string>
+    <string name="please_check_out_the_faq_section_to_know_more_about">अधिक जानने के लिए कृपया सूचना भंडार अनुभाग देखें </string>
+    <string name="oops_no_products_found">उफ़! कोई नहीं मिला।</string>
+
+    <string-array name="category_list">
+        <item>Category 1</item>
+        <item>Category 2</item>
+        <item>Category 3</item>
+        <item>Category 4</item>
+        <item>Category 5</item>
+
+    </string-array>
+
+    <string name="correct_answer_title">सही जवाब</string>
+    <string name="incorrect_answer_title">ग़लत उत्तर</string>
+
+    //my_answer
+
+    <string name="answered_by">द्वारा उत्तर दिया गया</string>
+    <string name="correct_answer">आपने प्रश्न का सही उत्तर दिया है</string>
+    <string name="correct_answer_is">सही उत्तर है:</string>
+    <string name="comments">टिप्पणियाँ</string>
+
+    //courses
+    <string name="completed">पुरा होना।</string>
+    <string name="now_playing">अब खेल रहे हैं</string>
+    <string name="complete">पूरा</string>
+    <string name="take_a_test">एक परीक्षा ले</string>
+    <string name="select_category">श्रेणी चुनना</string>
+    <string name="update_your_interests">अपनी रुचियों को अपडेट करें</string>
+    <string name="update_your_health_issues">अपने स्वास्थ्य के मुद्दों को अपडेट करें</string>
+    <string name="update_your_personal_info">अपनी व्यक्तिगत जानकारी अपडेट करें</string>
+    <string name="update">अद्यतन</string>
+    <string name="terms_conditions">नियम एवं शर्तें</string>
+    <string name="please_select_your_issues">कृपया अपनी समस्याएं चुनें</string>
+    <string name="congratulations_you_have_attempted_all_quiz_stay_tuned_we_will_be_back_with_more_quiz">बधाई हो आपने सभी क्विज़ का प्रयास किया है देखते रहें हम और क्विज़ के साथ वापस आएंगे</string>
+
+    // new
+
+    <string name="was_this_article_helpful">क्या ये लेख फायदेमंद था?</string>
+    <string name="previous_article">पिछला लेख</string>
+    <string name="next_article">अगला लेख</string>
+    <string name="leave_a_comment">एक कॉमेंट छोडे</string>
+    <string name="enter_comment">कॉमेंट दर्ज करें</string>
+    <string name="post_comment">पहले के कॉमेंट्स</string>
+    <string name="resend_in">फिर से भेजें</string>
+    <string name="search_for_blogs_courses_etc">ब्लॉग,कोर्सेस आदि खोजें...</string>
+    <string name="welcome_to_tsta_chat_support">TSTA चैट सपोर्ट में आपका स्वागत है</string>
+    <string name="i_have_que_related_to">मेरे पास संबंधित प्रश्न हैं</string>
+    <string name="please_type_your_question_our_expert_we_ll_get_back_to_you_within_24_hours">कृपया अपना प्रश्न टाइप करें हमारे विशेषज्ञ 24 घंटे के भीतर आपसे संपर्क करेंगे</string>
+    <string name="chat_with_expert">विशेषज्ञ के साथ चैट करें</string>
+    <string name="my_query_is_not_listed">मेरी शंका सूची में नही है</string>
+    <string name="please_select_the_issue_for_which_you_seek_support">कृपया उस मुद्दे को चूने जिसके लिए आप सहायता चाहते हैं</string>
+    <string name="was_this_helpful">क्या यह मददगार था?</string>
+    <string name="thank_you_for_reaching_out_to_tsta_support">TSTA सहायता से संपर्क करने के लिए धन्यवाद।</string>
+    <string name="were_we_able_to_win_you_over">क्या हम आपको जीतने में सक्षम थे?</string>
+    <string name="ask_an_expert">एक विशेषज्ञ से पूछो?</string>
+
+</resources>

@@ -48,7 +48,7 @@
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:imeOptions="actionSearch"
-                android:hint="Search for blogs, courses etc..."
+                android:hint="@string/search_for_blogs_courses_etc"
                 android:textColorHint="#A2A2A2"
                 android:textSize="@dimen/text_size15" />
 
@@ -106,7 +106,7 @@
                 android:id="@+id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Information Storehouse"
+                android:text="@string/information_storehouse"
                 android:paddingTop="@dimen/margin_15"
                 android:layout_marginStart="@dimen/margin_20"
                 android:textSize="@dimen/text_size18"

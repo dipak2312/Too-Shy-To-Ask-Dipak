@@ -222,10 +222,10 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 
     private void selectCategoryMethod() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(AllBlogsActivity.this);
-        mBuilder.setTitle("All Category");
+        mBuilder.setTitle(R.string.all_categories);
 
         String [] categoryListForSingleItem = new String[insightblogcategories.size()+1];
-        categoryListForSingleItem[0]="All Categories";
+        categoryListForSingleItem[0]=getResources().getString(R.string.all_categories);
         for (int i = 0; i<insightblogcategories.size(); i++){
             categoryListForSingleItem[i+1]=insightblogcategories.get(i).getCategory_title() ;
         }

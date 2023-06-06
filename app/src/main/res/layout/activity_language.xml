@@ -73,7 +73,7 @@
                 android:fontFamily="@font/worksanssemibold"
                 android:layoutDirection="rtl"
                 android:text="@string/english"
-                android:onClick="radioButtobClickEvent"/>
+                android:onClick="radioButtonClickEvent"/>
 
             <RadioButton
                 android:id="@+id/hindi_lang"
@@ -86,7 +86,7 @@
                 android:textSize="@dimen/text_size15"
                 android:fontFamily="@font/worksanssemibold"
                 android:layoutDirection="rtl"
-                android:onClick="radioButtobClickEvent"
+                android:onClick="radioButtonClickEvent"
                 android:text="हिंदी"/>
 
             <RadioButton
@@ -100,8 +100,37 @@
                 android:textSize="@dimen/text_size15"
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/worksanssemibold"
-                android:onClick="radioButtobClickEvent"
+                android:onClick="radioButtonClickEvent"
                 android:text="मराठी"/>
+
+            <RadioButton
+                android:id="@+id/gujarati_lang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:buttonTint="@color/purple"
+                android:checked="false"
+                android:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size15"
+                android:layoutDirection="rtl"
+                android:fontFamily="@font/worksanssemibold"
+                android:onClick="radioButtonClickEvent"
+                android:text="ગુજરાતી"/>
+
+            <RadioButton
+                android:id="@+id/Tamil_lang"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:buttonTint="@color/purple"
+                android:checked="false"
+                android:visibility="visible"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size15"
+                android:layoutDirection="rtl"
+                android:fontFamily="@font/worksanssemibold"
+                android:onClick="radioButtonClickEvent"
+                android:text="தமிழ்"/>
+
 
         </RadioGroup>
 

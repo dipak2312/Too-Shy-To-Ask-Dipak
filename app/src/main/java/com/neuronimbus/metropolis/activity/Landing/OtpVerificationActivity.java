@@ -159,7 +159,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
             public void onTick(long millisUntilFinished) {
                 String value = " " + millisUntilFinished / 1000;
                     btn_resend_otp.setClickable(false);
-                    btn_resend_otp.setText("RESEND IN "+ millisUntilFinished / 1000);
+                    btn_resend_otp.setText(getResources().getString(R.string.resend_in) + millisUntilFinished / 1000);
                     btn_resend_otp.setTextColor(ContextCompat.getColor(context, R.color.resend_color));
                     progress_text.setText(value);
                     progress_text.setVisibility(View.VISIBLE);

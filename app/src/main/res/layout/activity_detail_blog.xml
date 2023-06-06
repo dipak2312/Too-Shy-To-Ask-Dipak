@@ -187,7 +187,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Was this article helpful?"
+                    android:text="@string/was_this_article_helpful"
                     android:textSize="@dimen/text_size15"
                     android:layout_marginTop="@dimen/margin_25"
                     android:textColor="@color/black"
@@ -223,7 +223,7 @@
                             android:layout_marginStart="@dimen/margin_15"
                             android:textSize="@dimen/text_size12"
                             android:textColor="@color/black"
-                            android:text="Yes "/>
+                            android:text="@string/yes"/>
 
                         <TextView
                             android:id="@+id/yes_count"
@@ -233,7 +233,7 @@
                             android:fontFamily="@font/worksansregular"
                             android:textSize="@dimen/text_size12"
                             android:textColor="@color/black"
-                            android:text="118"/>
+                            android:text=" 118"/>
 
                     </LinearLayout>
 
@@ -262,7 +262,7 @@
                             android:fontFamily="@font/worksansregular"
                             android:textSize="@dimen/text_size12"
                             android:textColor="@color/black"
-                            android:text="No "/>
+                            android:text="@string/no"/>
 
                         <TextView
                             android:id="@+id/no_count"
@@ -272,7 +272,7 @@
                             android:fontFamily="@font/worksansregular"
                             android:textSize="@dimen/text_size12"
                             android:textColor="@color/black"
-                            android:text="15"/>
+                            android:text=" 15"/>
 
                     </LinearLayout>
 
@@ -305,7 +305,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Previous Article"
+                        android:text="@string/previous_article"
                         android:textColor="@color/purple"
                         android:textSize="@dimen/text_size12"
                         android:fontFamily="@font/worksansmedium"
@@ -324,7 +324,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Next article"
+                        android:text="@string/next_article"
                         android:textColor="@color/purple"
                         android:textSize="@dimen/text_size12"
                         android:fontFamily="@font/worksansmedium" />
@@ -364,7 +364,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Leave A Comment"
+                    android:text="@string/leave_a_comment"
                     android:textSize="@dimen/text_size15"
                     android:fontFamily="@font/worksansregular"
                     android:textColor="@color/black"/>
@@ -390,7 +390,7 @@
                         android:background="@drawable/border"
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
-                        android:hint="Enter Comment"
+                        android:hint="@string/enter_comment"
                         android:inputType="textPostalAddress|textMultiLine|textCapSentences"
                         android:paddingTop="@dimen/margin_5"
                         android:textColor="@color/black"
@@ -408,7 +408,7 @@
                     android:fontFamily="@font/worksansbold"
                     android:background="@drawable/active_con_btn"
                     android:layout_marginBottom="@dimen/margin_30"
-                    android:text="POST COMMENT"
+                    android:text="@string/post_comment"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size14" />
 
