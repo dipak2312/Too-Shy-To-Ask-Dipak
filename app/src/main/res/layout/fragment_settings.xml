@@ -93,7 +93,7 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/worksansregular"
                 android:textSize="@dimen/text_size12"
-                android:text=" % Complete"/>
+                android:text="@string/percent_complete"/>
 
             </RelativeLayout>
 

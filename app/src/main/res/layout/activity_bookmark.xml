@@ -37,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bookmarked"
+                android:text="@string/bookmarked"
                 android:textColor="@color/black"
                 android:fontFamily="@font/worksansmedium"
                 android:layout_centerInParent="true"

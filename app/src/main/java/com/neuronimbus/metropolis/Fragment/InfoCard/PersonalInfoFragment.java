@@ -208,7 +208,7 @@ public class PersonalInfoFragment extends Fragment implements View.OnClickListen
     public void OpenBloodGrp() {
 
 
-        String[] countries = new String[]{"Select Your Blood Group", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
+        String[] countries = new String[]{getResources().getString(R.string.select_blood_grp), "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout,
                 R.id.spinnerTarget, countries);

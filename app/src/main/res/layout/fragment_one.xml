@@ -16,7 +16,7 @@
             android:id="@+id/cate_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose your categories that represent what you want to see"
+            android:text="@string/choose_your_categories_that_represent_what_you_want_to_see"
             android:textColor="@color/black"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size14"/>

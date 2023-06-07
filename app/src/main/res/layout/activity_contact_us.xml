@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact Support"
+                android:text="@string/contact_support"
                 android:textColor="@color/black"
                 android:fontFamily="@font/worksansmedium"
                 android:layout_centerInParent="true"
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/worksansmedium"
-            android:text="Submit a request"
+            android:text="@string/submit_a_request"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size15" />
 
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
                 android:fontFamily="@font/worksanslight"
-                android:text="Please enter the details of your request. A member of our support staff will respond as soon as possible."
+                android:text="@string/please_enter_the_details_of_your_request_a_member_of_our_support_staff_will_respond_as_soon_as_possible"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size12" />
 

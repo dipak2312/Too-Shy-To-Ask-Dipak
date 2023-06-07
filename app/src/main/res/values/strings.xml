@@ -205,5 +205,30 @@
     <string name="were_we_able_to_win_you_over">Were we able to win you over?</string>
     <string name="ask_an_expert">Ask an Expert?</string>
     <string name="check_info_storehouse">Please check out the Information Storehouse section to know more about</string>
+    <string name="tsta_expert">TSTA Expert</string>
+    <string name="percent_complete">% Complete</string>
+    <string name="submit_a_request">Submit a request</string>
+    <string name="please_enter_the_details_of_your_request_a_member_of_our_support_staff_will_respond_as_soon_as_possible">Please enter the details of your request. A member of our support staff will respond as soon as possible.</string>
+    <string name="contact_support">Contact Support</string>
+    <string name="need_help_from_the_expert">Need help from the expert?</string>
+    <string name="get_instant_help_from_our_customer_support_team">Get instant help from our customer support team</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="tell_us_what_you_love_about_the_app_or_what_we_could_be_doing_better">Tell us what you love about the app, or what we could be doing better.</string>
+    <string name="enter_feedback">Enter Feedback</string>
+    <string name="bookmarked">Bookmarked</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="clear_all_notification">Clear All Notification</string>
+    <string name="home">Home</string>
+    <string name="ask_expert">Ask Expert</string>
+    <string name="insights">Insights</string>
+    <string name="quiz">Quiz</string>
+    <string name="setting">Setting</string>
+    <string name="please_login_to_access_this_feature">Please login to access this feature</string>
+    <string name="not_now">Not now</string>
+    <string name="login">Login</string>
+    <string name="choose_your_categories_that_represent_what_you_want_to_see">Choose your categories that represent what you want to see</string>
+    <string name="choose_your_avatar">Choose your Avatar</string>
+    <string name="or_choose_from_your_phone_gallery">Or choose from your phone gallery</string>
+    <string name="select_blood_grp">Select Blood Group</string>
 
 </resources>

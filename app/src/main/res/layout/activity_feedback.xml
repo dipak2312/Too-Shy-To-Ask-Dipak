@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansmedium"
-                android:text="Send Feedback"
+                android:text="@string/send_feedback"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tell us what you love about the app, or what we could be doing better."
+            android:text="@string/tell_us_what_you_love_about_the_app_or_what_we_could_be_doing_better"
             android:textColor="@color/black"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size12"/>
@@ -86,7 +86,7 @@
                 android:background="@drawable/border"
                 android:fontFamily="@font/worksansmedium"
                 android:gravity="top"
-                android:hint="Enter Feedback"
+                android:hint="@string/enter_feedback"
                 android:inputType="textPostalAddress|textMultiLine|textCapSentences"
                 android:paddingTop="@dimen/margin_3"
                 android:textColor="@color/black"

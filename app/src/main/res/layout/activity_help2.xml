@@ -132,7 +132,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Didn't find the answer?"
+                android:text="@string/didn_t_find_the_answer"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size16"
                 android:fontFamily="@font/worksansregular"/>
@@ -145,7 +145,7 @@
                 android:background="@drawable/active_con_btn"
                 android:fontFamily="@font/worksansbold"
                 android:includeFontPadding="false"
-                android:text="CONTACT US"
+                android:text="@string/contact_us"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size14" />
 

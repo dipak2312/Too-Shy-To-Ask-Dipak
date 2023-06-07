@@ -15,7 +15,7 @@
             android:id="@+id/avatar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose your Avatar"
+            android:text="@string/choose_your_avatar"
             android:textColor="@color/black"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size14"/>
@@ -34,7 +34,7 @@
             android:id="@+id/gallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Or choose from your phone gallery"
+            android:text="@string/or_choose_from_your_phone_gallery"
             android:layout_below="@id/profile_recy"
             android:layout_marginTop="@dimen/margin_40"
             android:layout_centerHorizontal="true"

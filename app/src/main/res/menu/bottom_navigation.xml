@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_home"
-        android:title="Home"
+        android:title="@string/home"
         android:icon="@drawable/homeselector" />
     <item
         android:id="@+id/action_ask_expert"
-        android:title="Ask Expert"
+        android:title="@string/ask_expert"
         android:icon="@drawable/ask_expert_selector"
       />
     <item
         android:id="@+id/action_insights"
         android:icon="@drawable/insight_selector"
-        android:title="Insights"
+        android:title="@string/insights"
        />
     <item
         android:id="@+id/action_quiz"
-        android:title="Quiz"
+        android:title="@string/quiz"
         android:icon="@drawable/quiz_selector"
        />
     <item
         android:id="@+id/action_setting"
-        android:title="Setting"
+        android:title="@string/setting"
         android:icon="@drawable/setting_selector"
         />
 </menu>
