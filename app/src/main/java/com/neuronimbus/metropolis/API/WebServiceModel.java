@@ -26,13 +26,15 @@ public class WebServiceModel {
                         BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE))
                 .build();
 
-        //https://app.tooshytoask.org/app/ https://tsta.hodemoserver.in/
+        //https://app.tooshytoask.org/app/
+        // https://tsta.hodemoserver.in/
 
         //test  https://tsta.hodemoserver.in/tstadashboard/
+        //live  https://tooshytoask.org/tstadashboard/
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://tooshytoask.org/tstadashboard/")
+                .baseUrl("https://tsta.hodemoserver.in/tstadashboard/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

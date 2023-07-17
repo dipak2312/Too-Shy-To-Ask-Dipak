@@ -84,7 +84,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
-                Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Authentication succeeded!", Toast.LENGTH_SHORT).show();
                 checkPreviousActivityStatus();
             }
 
@@ -174,7 +174,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void checkPreviousActivityStatus() {
         Completable.complete()
-                .delay(2, TimeUnit.SECONDS)
+                .delay(0, TimeUnit.SECONDS)
                 .doOnComplete(() -> {
                     //Do your stuff here
 
