@@ -9,7 +9,7 @@
     <string name="resend_otp">ओटीपी पुनः भेजें </string>
     <string name="todo">TODO</string>
     <string name="create_your_account">अपना खाता बनाएं</string>
-    <string name="login_text">अपने खाते तक पहुँचने के लिए कृपया लॉगिन करें</string>
+    <string name="login_text">कृपया अपने खाते तक पहुँचने के लिए लॉगिन करें</string>
     <string name="_10_digit_mobile_number">10 अंकों का मोबाइल नंबर</string>
     <string name="by_signing_in_you_agree_to_tsta_s">साइन इन करके, आप TSTA\'s से सहमत होते हैं</string>
     <string name="terms_and_conditions">नियम और शर्तें</string>
@@ -45,6 +45,8 @@
     <string name="english">अंग्रेज़ी</string>
     <string name="hindi">हिंदी</string>
     <string name="marathi">मराठी</string>
+    <string name="gujarati">Gujarati</string>
+    <string name="tamil">Tamil</string>
 
     //SliderActivity
     <string name="skip">छोडना</string>
@@ -68,8 +70,6 @@
     <string name="notifications">सूचनाएं</string>
 
     //language button name
-    <string name="चुनें">चुनें</string>
-    <string name="निवडा">निवडा</string>
     <string name="select">चुनना</string>
     <string name="manage_notifications">सूचनाएं प्रबंधित करें</string>
 
@@ -126,8 +126,8 @@
     <string name="related_blogs">संबंधित आलेख</string>
     <string name="submit_feedback">प्रतिपुष्टि दें</string>
     <string name="let_s_start">चलो शुरू करो</string>
-    <string name="welcome">स्वागत</string>
-    <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">आरोग्याची काळजी घ्या. आमची प्रश्नमंजुषा घेऊन पौगंडावस्थेतील आरोग्याविषयी तुमच्या ज्ञानाची चाचणी घ्या.</string>
+    <string name="welcome">स्वागत है</string>
+    <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">अपनी सेहत का ख्याल रखना। हमारी प्रश्नोत्तरी में भाग लेकर किशोरावस्था स्वास्थ्य के बारे में अपने ज्ञान का परीक्षण करें</string>
     <string name="submit">जमा करना</string>
 
     <string name="next_question">अगला सवाल</string>
@@ -220,7 +220,7 @@
     <string name="clear_all_notification">सभी अधिसूचना साफ़ करें</string>
     <string name="home">होम</string>
     <string name="ask_expert">विशेषज्ञ से पूछें</string>
-    <string name="insights">Insights</string>
+    <string name="insights">इनसाइट्स</string>
     <string name="quiz">प्रश्नोत्तरी</string>
     <string name="setting">सेटिंग</string>
     <string name="please_login_to_access_this_feature">इस सुविधा का उपयोग करने के लिए कृपया लॉगिन करें</string>
@@ -230,5 +230,9 @@
     <string name="choose_your_avatar">अपना अवतार चुनें</string>
     <string name="or_choose_from_your_phone_gallery">या अपने फोन गैलरी से चुनें</string>
     <string name="select_blood_grp">ब्लड ग्रुप का चयन करें</string>
+    <string name="select_your_blood_grp">अपना ब्लड ग्रुप चुनें</string>
+    <string name="cms">से.मी</string>
+    <string name="kgs">कि.ग्रा</string>
+    <string name="wohoo_great">वाह..बहुत बढ़िया!</string>
 
 </resources>

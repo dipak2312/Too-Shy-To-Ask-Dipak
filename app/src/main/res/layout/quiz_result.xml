@@ -30,7 +30,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_40"
                 android:fontFamily="@font/worksansmedium"
-                android:text="WOHOO..GREAT!"
+                android:text="@string/wohoo_great"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/text_size18" />
 

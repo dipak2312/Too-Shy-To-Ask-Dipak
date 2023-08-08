@@ -45,6 +45,8 @@
     <string name="english">इंग्रजी</string>
     <string name="hindi">हिंदी</string>
     <string name="marathi">मराठी</string>
+    <string name="gujarati">Gujarati</string>
+    <string name="tamil">Tamil</string>
 
     //SliderActivity
     <string name="skip">वगळा</string>
@@ -68,8 +70,6 @@
     <string name="notifications">अधिसूचना</string>
 
     //language button name
-    <string name="चुनें">चुनें</string>
-    <string name="निवडा">निवडा</string>
     <string name="select">निवडा</string>
     <string name="manage_notifications">सूचना व्यवस्थापित करा</string>
 
@@ -126,8 +126,8 @@
     <string name="related_blogs">संबंधित लेख</string>
     <string name="submit_feedback">फीडबॅक सबमिट करा</string>
     <string name="let_s_start">आपण सुरु करू</string>
-    <string name="welcome">स्वागत आहे</string>
-    <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">अपनी सेहत का ख्याल रखना। हमारे प्रश्नोत्तरी में भाग लेकर किशोरावस्था स्वास्थ्य के बारे में अपने ज्ञान का परीक्षण करें।</string>
+    <string name="welcome">नमस्कार स्वागत आहे</string>
+    <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">आपल्या आरोग्याची काळजी घ्या. आमची क्विझ घेऊन किशोरावस्थेतील आरोग्याविषयी तुमच्या ज्ञानाची चाचणी घ्या</string>
     <string name="submit">जमा करा</string>
 
     <string name="next_question">पुढचा प्रश्न</string>
@@ -220,7 +220,7 @@
     <string name="clear_all_notification">सर्व सूचना साफ करा</string>
     <string name="home">होम</string>
     <string name="ask_expert">तज्ञांना विचारा</string>
-    <string name="insights">Insights</string>
+    <string name="insights">इनसाइट्स</string>
     <string name="quiz">प्रश्नमंजुषा</string>
     <string name="setting">सेटिंग</string>
     <string name="please_login_to_access_this_feature">कृपया ही सुविधा वापरण्यासाठी लॉगिन करा</string>
@@ -230,5 +230,9 @@
     <string name="choose_your_avatar">तुमचा अवतार निवडा</string>
     <string name="or_choose_from_your_phone_gallery">किंवा तुमच्या फोन गॅलरीमधून निवडा</string>
     <string name="select_blood_grp">रक्त गट निवडा</string>
+    <string name="select_your_blood_grp">तुमचा रक्तगट निवडा</string>
+    <string name="cms">सेमी</string>
+    <string name="kgs">किलो</string>
+    <string name="wohoo_great">व्वा..अप्रतिम!</string>
 
 </resources>

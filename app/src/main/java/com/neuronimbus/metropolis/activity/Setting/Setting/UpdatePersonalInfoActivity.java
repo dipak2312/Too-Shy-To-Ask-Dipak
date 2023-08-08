@@ -53,7 +53,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
         etWeight = findViewById(R.id.etWeight);
         etWeight.setText(spManager.getWeight());
 
-        String[] countries = new String[]{"Select Your Blood Group", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
+        String[] countries = new String[]{getString(R.string.select_your_blood_grp), "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
         spinner_blood.setAdapter(countryAdapter);
@@ -146,7 +146,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
     {
 
 
-        String[] countries = new String[]{"Select Your Blood Group", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
+        String[] countries = new String[]{getString(R.string.select_your_blood_grp), "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"};
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
         spinner_blood.setAdapter(countryAdapter);

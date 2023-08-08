@@ -72,8 +72,7 @@
                 android:textSize="@dimen/text_size15"
                 android:fontFamily="@font/worksanssemibold"
                 android:layoutDirection="rtl"
-                android:text="@string/english"
-                android:onClick="radioButtonClickEvent"/>
+                android:text="English"/>
 
             <RadioButton
                 android:id="@+id/hindi_lang"
@@ -86,7 +85,6 @@
                 android:textSize="@dimen/text_size15"
                 android:fontFamily="@font/worksanssemibold"
                 android:layoutDirection="rtl"
-                android:onClick="radioButtonClickEvent"
                 android:text="हिंदी"/>
 
             <RadioButton
@@ -100,7 +98,6 @@
                 android:textSize="@dimen/text_size15"
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/worksanssemibold"
-                android:onClick="radioButtonClickEvent"
                 android:text="मराठी"/>
 
             <RadioButton
@@ -114,7 +111,6 @@
                 android:textSize="@dimen/text_size15"
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/worksanssemibold"
-                android:onClick="radioButtonClickEvent"
                 android:text="ગુજરાતી"/>
 
             <RadioButton
@@ -128,7 +124,6 @@
                 android:textSize="@dimen/text_size15"
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/worksanssemibold"
-                android:onClick="radioButtonClickEvent"
                 android:text="தமிழ்"/>
 
 

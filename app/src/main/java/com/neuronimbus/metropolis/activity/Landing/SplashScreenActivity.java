@@ -6,6 +6,7 @@ import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 
+import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
@@ -54,8 +56,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         context = SplashScreenActivity.this;
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);
-        //openFingerPrint();
-        checkPreviousActivityStatus();
+        openFingerPrint();
+        //checkPreviousActivityStatus();
 
     }
 
@@ -153,6 +155,23 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
         snackbar.setTextColor(Color.parseColor("#FF0000"));
         snackbar.show();
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLocale(spManager.getLanguage());
+    }
+
+    private void setLocale(String lang) {
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        spManager.setLanguage(lang);
 
     }
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,8 @@ import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.GuestLoginPopup;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottom_view;
@@ -119,8 +122,23 @@ public class HomeActivity extends AppCompatActivity {
             ft.commit();
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLocale(spManager.getLanguage());
+    }
 
+    private void setLocale(String lang) {
 
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        spManager.setLanguage(lang);
+
+    }
 
     @Override
     public void onBackPressed() {
