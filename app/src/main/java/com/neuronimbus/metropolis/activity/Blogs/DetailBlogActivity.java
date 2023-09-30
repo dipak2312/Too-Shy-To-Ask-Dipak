@@ -311,8 +311,8 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             blog_description.setText(Html.fromHtml(singleblog.get(0).getBlog_content()));
                             blog_description.setMovementMethod(LinkMovementMethod.getInstance());
                             like_count.setText(Html.fromHtml(singleblog.get(0).getBlog_like()));
-                            yes_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
-                            no_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
+                            yes_count.setText(" " + Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
+                            no_count.setText(" " + Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
                             next_id = singleBlogResponse.getNextblog();
                             previous_id = singleBlogResponse.getPreviousblog();
                             blog_helpfull_status = singleblog.get(0).getBlog_helpfull_status();
@@ -427,8 +427,8 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             comments = singleBlogResponse.getSingleblog().get(0).getComments();
 
                             like_count.setText(Html.fromHtml(singleblog.get(0).getBlog_like()));
-                            yes_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
-                            no_count.setText(Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
+                            yes_count.setText(" " + Html.fromHtml(singleblog.get(0).getBlog_helpfull_yes()));
+                            no_count.setText(" " + Html.fromHtml(singleblog.get(0).getBlog_helpfull_no()));
                             blog_helpfull_status = singleblog.get(0).getBlog_helpfull_status();
                             islike = singleblog.get(0).getBlog_liked();
                             isBookmark = singleblog.get(0).getBlog_bookmarked();

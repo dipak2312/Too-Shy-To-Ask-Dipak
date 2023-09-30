@@ -402,7 +402,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
             } else if (id == eng_lang.getId()) {
                 setLocale("en");
-                btn_select.setText(R.string.select);
+                btn_select.setText(R.string.select_language);
                 eng_lang.setBackgroundResource(R.drawable.language_background_active);
                 hindi_lang.setBackgroundResource(R.drawable.language_background);
                 marathi_lang.setBackgroundResource(R.drawable.language_background);
@@ -411,7 +411,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
             } else if (id == hindi_lang.getId()) {
                 setLocale("hi");
-                btn_select.setText(R.string.select);
+                btn_select.setText(R.string.select_language);
                 hindi_lang.setBackgroundResource(R.drawable.language_background_active);
                 eng_lang.setBackgroundResource(R.drawable.language_background);
                 marathi_lang.setBackgroundResource(R.drawable.language_background);
@@ -420,7 +420,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
             } else if (id == marathi_lang.getId()) {
                 setLocale("mr");
-                btn_select.setText(R.string.select);
+                btn_select.setText(R.string.select_language);
                 marathi_lang.setBackgroundResource(R.drawable.language_background_active);
                 eng_lang.setBackgroundResource(R.drawable.language_background);
                 hindi_lang.setBackgroundResource(R.drawable.language_background);
@@ -430,7 +430,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
             }else if(id==gujarati_lang.getId())
             {
                 setLocale("gu");
-                btn_select.setText(R.string.select);
+                btn_select.setText(R.string.select_language);
                 gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
                 eng_lang.setBackgroundResource(R.drawable.language_background);
                 hindi_lang.setBackgroundResource(R.drawable.language_background);
@@ -441,7 +441,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
             else if(id==Tamil_lang.getId())
             {
                 setLocale("ta");
-                btn_select.setText(R.string.select);
+                btn_select.setText(R.string.select_language);
                 Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
                 eng_lang.setBackgroundResource(R.drawable.language_background);
                 hindi_lang.setBackgroundResource(R.drawable.language_background);
@@ -525,7 +525,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
-        else if(selectValue.equals("gr"))
+        else if(selectValue.equals("gu"))
         {
             gujarati_lang.setChecked(true);
             gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -535,7 +535,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
-        else if(selectValue.equals("tm"))
+        else if(selectValue.equals("ta"))
         {
             Tamil_lang.setChecked(true);
             Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -610,7 +610,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                     case R.id.eng_lang:
 
                         setLocale("en");
-                        btn_select.setText(R.string.select);
+                        btn_select.setText(R.string.select_language);
                         eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                         marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -622,7 +622,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                     case R.id.hindi_lang:
 
                         setLocale("hi");
-                        btn_select.setText(R.string.select);
+                        btn_select.setText(R.string.select_language);
                         hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                         marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -634,7 +634,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                     case R.id.marathi_lang:
 
                         setLocale("mr");
-                        btn_select.setText(R.string.select);
+                        btn_select.setText(R.string.select_language);
                         marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                         eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -646,7 +646,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                     case R.id.gujarati_lang:
 
                         setLocale("gu");
-                        btn_select.setText(R.string.select);
+                        btn_select.setText(R.string.select_language);
                         gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                         marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -658,7 +658,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
                     case R.id.Tamil_lang:
 
                         setLocale("ta");
-                        btn_select.setText(R.string.select);
+                        btn_select.setText(R.string.select_language);
                         Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                         gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                         marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));

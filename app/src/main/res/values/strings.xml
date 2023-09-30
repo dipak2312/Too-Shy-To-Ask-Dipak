@@ -54,7 +54,7 @@
     //setting
     <string name="support"> | Support></string>
     <string name="_2022_all_right_reserved_powered_by_hats_off">© 2023 All Right Reserved Powered by Hats-Off</string>
-    <string name="version_10_01">Version 10.01</string>
+    <string name="version_10_01">Version </string>
     <string name="too_shy_to_ask">Too Shy To Ask</string>
     <string name="log_out">Log Out</string>
     <string name="refer_friends">Refer Friends</string>
@@ -99,7 +99,7 @@
     <string name="contact_us">CONTACT US</string>
     <string name="thank_you_got_it">Thank you for your response</string>
     <string name="no">No</string>
-    <string name="yes">Yes</string>
+    <string name="yes">Yes </string>
     <string name="was_this_topic_helpful">Was this topic helpful?</string>
     <string name="sorry_about_that_what_did_you_find_most_unhelpful">Sorry about that! What did you find most unhelpful</string>
     <string name="this_article_didn_t_answer_my_questions_or_solve_my_problem">This article didn\'t answer my questions or solve my problem</string>
@@ -233,7 +233,31 @@
     <string name="select_your_blood_grp">Select your blood group</string>
     <string name="cms">Cms</string>
     <string name="kgs">Kgs</string>
+    <string name="score">Score</string>
+    <string name="you_ans">You answered</string>
+    <string name="out_of">out of</string>
+    <string name="que_correct">question correctly.To continue click on next quiz or click on home to go back</string>
     <string name="wohoo_great">WOHOO..GREAT!</string>
+    <string name="complaint">Complaint</string>
+    <string name="make_a_complaint">Make a Complaint</string>
+    <string name="see_your_previous_complaints">See your Previous Complaints</string>
+    <string name="select_topic">Select Topic</string>
+    <string name="select_type">Select Type</string>
+    <string name="ui_feedback">UI Feedback</string>
+    <string name="content">Content</string>
+    <string name="bugs">Bugs</string>
+    <string name="game">Game</string>
+    <string name="please_check_out_the_information_storehouse_section_to_know_more_about">Please check out the Information Storehouse section to know more about</string>
+    <string name="recent_feedbacks">Recent Feedbacks</string>
+    <string name="see_older_feedbacks">See older feedbacks</string>
+    <string name="new_feedback">NEW FEEDBACK</string>
+    <string name="enter_your_description">Enter your description</string>
+    <string name="resolved">Resolved</string>
+    <string name="topic">Topic</string>
+    <string name="reply_by_expert">Reply by Expert</string>
+    <string name="we_have_marked_our_issue_as_resolved_you_can_contact_us_in_case_you_have_any_queries">We have marked our issue as resolved. You can contact us in case you have any queries.</string>
+    <string name="reply">Reply</string>
+    <string name="user_reply">User Reply</string>
 
 
 </resources>

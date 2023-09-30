@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
+import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.adapters.RelatedStoreHouseAdapter;
 import com.neuronimbus.metropolis.AuthModels.BookmarkBlogAuthModel;
@@ -134,8 +135,8 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                             blog_description.setMovementMethod(LinkMovementMethod.getInstance());
                             duration_time.setText(Html.fromHtml(storehousedata.get(0).getReadTime()));
                             like_count.setText(Html.fromHtml(storehousedata.get(0).getLikeCnt()));
-                            yes_count.setText(Html.fromHtml(storehousedata.get(0).getHelpfull()));
-                            no_count.setText(Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
+                            yes_count.setText(" " + Html.fromHtml(storehousedata.get(0).getHelpfull()));
+                            no_count.setText(" " + Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
                             next_id = storehousedata.get(0).getNextarticleId();
                             previous_id = storehousedata.get(0).getPreviousarticleId();
 
@@ -232,8 +233,8 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
                             storehousedata = storeHouseSinglePageResponse.getStorehousedata();
 
                             like_count.setText(Html.fromHtml(storehousedata.get(0).getLikeCnt()));
-                            yes_count.setText(Html.fromHtml(storehousedata.get(0).getHelpfull()));
-                            no_count.setText(Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
+                            yes_count.setText(" " + Html.fromHtml(storehousedata.get(0).getHelpfull()));
+                            no_count.setText(" " + Html.fromHtml(storehousedata.get(0).getNothelpfull_cnt()));
                             islike = storehousedata.get(0).getLiked();
                             isBookmark = storehousedata.get(0).getBookmarked();
                             helpfull_status = storehousedata.get(0).getHelpfull_status();
@@ -410,6 +411,14 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
             getSinglePage();
         }
         else if (id  == helpful_no.getId()){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("title_id",storehousedata.get(0).getArticle_name());
+            Intent intent = new Intent(context, FeedbackActivity.class);
+            intent.putExtras(bundle);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             getStoreHouseLike("nothelpfull");
             getSinglePage();
         }

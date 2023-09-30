@@ -1,5 +1,9 @@
 package com.neuronimbus.metropolis.API;
 
+import com.neuronimbus.metropolis.AuthModels.AddComplaintAuthModel;
+import com.neuronimbus.metropolis.AuthModels.AskFeedbackAuthModel;
+import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
+import com.neuronimbus.metropolis.Models.AddComplaintResponse;
 import com.neuronimbus.metropolis.AuthModels.AllBlogAuthModel;
 import com.neuronimbus.metropolis.AuthModels.AllCoursesAuthModel;
 import com.neuronimbus.metropolis.AuthModels.AllEventAuthModel;
@@ -20,6 +24,7 @@ import com.neuronimbus.metropolis.AuthModels.CoursesEnrollAuthModel;
 import com.neuronimbus.metropolis.AuthModels.ExpertReplyAuthModel;
 import com.neuronimbus.metropolis.AuthModels.FAQContentAuthModel;
 import com.neuronimbus.metropolis.AuthModels.FeedbackAuthModel;
+import com.neuronimbus.metropolis.AuthModels.FeedbackListAuthModel;
 import com.neuronimbus.metropolis.AuthModels.GameScoreAuthModel;
 import com.neuronimbus.metropolis.AuthModels.HealthCateModel;
 import com.neuronimbus.metropolis.AuthModels.HealthIssueModel;
@@ -38,6 +43,7 @@ import com.neuronimbus.metropolis.AuthModels.ManageNotificationAuthModel;
 import com.neuronimbus.metropolis.AuthModels.ManageNotificationListUpdateAuthModel;
 import com.neuronimbus.metropolis.AuthModels.NotificationAuthModel;
 import com.neuronimbus.metropolis.AuthModels.OtpAuthModel;
+import com.neuronimbus.metropolis.AuthModels.ProcessingFeedbackChatAuthModel;
 import com.neuronimbus.metropolis.AuthModels.QuizAnswerAuthModel;
 import com.neuronimbus.metropolis.AuthModels.QuizQueAuthModel;
 import com.neuronimbus.metropolis.AuthModels.RemoveProfileAuthModel;
@@ -67,6 +73,8 @@ import com.neuronimbus.metropolis.Models.AskExpert.AskIssuesResponse;
 import com.neuronimbus.metropolis.Models.AskIssuesFeedbackResponse;
 import com.neuronimbus.metropolis.Models.AskQuestionsResponse;
 import com.neuronimbus.metropolis.Models.BookmarkResponse;
+import com.neuronimbus.metropolis.Models.CommonResponse;
+import com.neuronimbus.metropolis.Models.ComplaintListResponse;
 import com.neuronimbus.metropolis.Models.Courses.CoursesDetailResponse;
 import com.neuronimbus.metropolis.Models.Courses.CoursesEnrollResponse;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.ClearLMSQuizesponse;
@@ -74,11 +82,14 @@ import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LMSQuizAttemptesponse;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LMSQuizesponse;
 import com.neuronimbus.metropolis.Models.Courses.Lesson.LessonDetailResponse;
 import com.neuronimbus.metropolis.Models.ExpertReplyResponse;
+import com.neuronimbus.metropolis.Models.FeedbackListResponse;
 import com.neuronimbus.metropolis.Models.GameScoreResponse;
 import com.neuronimbus.metropolis.Models.GameTimeAuthModel;
 import com.neuronimbus.metropolis.Models.LeaderboardResponse;
 import com.neuronimbus.metropolis.Models.Courses.Lesson.LessonEnrollResponse;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LessonUpdateResponse;
+import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
+import com.neuronimbus.metropolis.Models.ProcessingFeedbackChatResponse;
 import com.neuronimbus.metropolis.Models.StoreHouse.AllStoreHouseResponse;
 import com.neuronimbus.metropolis.Models.AllVideoGalleryResponse;
 import com.neuronimbus.metropolis.Models.AvatarResponse;
@@ -401,4 +412,27 @@ public interface WebServices {
     @POST("api/update_lesson_status")
     Observable<LessonUpdateResponse> getLessonUpdate(@Body LessonUpdateAuthModel model);
 
+    @Headers("Content-Type: application/json")
+    @POST("api/feedbackhistorychats")
+    Observable<FeedbackListResponse> getFeedbackList(@Body FeedbackListAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/processingfeedbackchat")
+    Observable<ProcessingFeedbackChatResponse> getProcessingFeedback(@Body ProcessingFeedbackChatAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/addcomplaints")
+    Observable<AddComplaintResponse> getAddComplaint(@Body AddComplaintAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/complainthistorychats")
+    Observable<ComplaintListResponse> getComplaintList(@Body CommonAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/resolvedfeedbackchat")
+    Observable<OldFeedbackChattingResponse> getOldFeedback(@Body ProcessingFeedbackChatAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/askfeedback")
+    Observable<CommonResponse> askFeedback(@Body AskFeedbackAuthModel model);
 }

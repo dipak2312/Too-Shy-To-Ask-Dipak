@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansregular"
-                android:text="Update your Personal Info"
+                android:text="@string/update_your_personal_info"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -375,7 +375,7 @@
             android:background="@drawable/active_con_btn"
             android:fontFamily="@font/worksansbold"
             android:includeFontPadding="false"
-            android:text="UPDATE"
+            android:text="@string/update"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size14" />
 

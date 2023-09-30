@@ -114,7 +114,7 @@
             android:layout_marginStart="@dimen/margin_20"
             android:background="@drawable/active_con_btn"
             android:layout_marginBottom="@dimen/margin_30"
-            android:text="NEXT QUESTION"
+            android:text="@string/next_question"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size14"/>
 

@@ -277,7 +277,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
-        else if(selectValue.equals("gr"))
+        else if(selectValue.equals("gu"))
         {
             gujarati_lang.setChecked(true);
             gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
@@ -286,7 +286,7 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
         }
-        else if(selectValue.equals("tm"))
+        else if(selectValue.equals("ta"))
         {
             Tamil_lang.setChecked(true);
             Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));

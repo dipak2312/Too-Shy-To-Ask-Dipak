@@ -24,9 +24,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
+import com.neuronimbus.metropolis.activity.Complaint.ComplaintActivity;
 import com.neuronimbus.metropolis.activity.Expert.ExpertActivity;
 import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
 import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
+import com.neuronimbus.metropolis.activity.Feedback.FeedbackListActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.activity.Help.HelpActivity;
@@ -54,7 +56,7 @@ import io.reactivex.schedulers.Schedulers;
 public class SettingsFragment extends Fragment implements View.OnClickListener{
     CircleImageView profile_image;
     RelativeLayout update_profile, notification_setting, bookmarks, faq, help,
-            feedback, select_Language, refer_friends, logout;
+            feedback, select_Language, refer_friends, logout, complaint;
     Context context;
     SPManager spManager;
     RadioButton eng_lang, hindi_lang, marathi_lang, gujarati_lang, Tamil_lang;
@@ -65,7 +67,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     TextView profile_status,txt_name, app_version, terms_conditions, privacy_policy;
     CircularProgressBar progress_circular;
     double progrss_value;
-    String action = "language", profile_pic, selectValue;
+    String action = "language", profile_pic, selectValue, settingActivity = "settingActivity";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,6 +91,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         String ver = pkgInfo.versionName;
         app_version.setText("" +ver);
 
+        complaint = view.findViewById(R.id.complaint);
+        complaint.setOnClickListener(this);
         privacy_policy = view.findViewById(R.id.privacy_policy);
         privacy_policy.setOnClickListener(this);
         terms_conditions = view.findViewById(R.id.terms_conditions);
@@ -203,7 +207,12 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             startActivity(intent);
         }
         else if (id == feedback.getId()) {
-            Intent intent = new Intent(context, FeedbackActivity.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("settingActivity","settingActivity");
+            Intent intent = new Intent(context, FeedbackListActivity.class);
+            intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -229,10 +238,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+        else if (id == complaint.getId()) {
+            Intent intent = new Intent(context, ComplaintActivity.class);
+            startActivity(intent);
+        }
         else if(id==eng_lang.getId())
         {
             setLocale("en");
-            btn_select.setText(R.string.select);
+            btn_select.setText(R.string.select_language);
             eng_lang.setBackgroundResource(R.drawable.language_background_active);
             hindi_lang.setBackgroundResource(R.drawable.language_background);
             marathi_lang.setBackgroundResource(R.drawable.language_background);
@@ -242,7 +255,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         else if(id==hindi_lang.getId())
         {
             setLocale("hi");
-            btn_select.setText(R.string.select);
+            btn_select.setText(R.string.select_language);
             hindi_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setBackgroundResource(R.drawable.language_background);
             marathi_lang.setBackgroundResource(R.drawable.language_background);
@@ -252,7 +265,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         else if(id==marathi_lang.getId())
         {
             setLocale("mr");
-            btn_select.setText(R.string.select);
+            btn_select.setText(R.string.select_language);
             marathi_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setBackgroundResource(R.drawable.language_background);
             hindi_lang.setBackgroundResource(R.drawable.language_background);
@@ -262,7 +275,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         else if(id==gujarati_lang.getId())
         {
             setLocale("gu");
-            btn_select.setText(R.string.select);
+            btn_select.setText(R.string.select_language);
             gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setBackgroundResource(R.drawable.language_background);
             hindi_lang.setBackgroundResource(R.drawable.language_background);
@@ -272,7 +285,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         else if(id==Tamil_lang.getId())
         {
             setLocale("ta");
-            btn_select.setText(R.string.select);
+            btn_select.setText(R.string.select_language);
             Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setBackgroundResource(R.drawable.language_background);
             hindi_lang.setBackgroundResource(R.drawable.language_background);
@@ -467,7 +480,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 if(isChecked){
 
                     setLocale("en");
-                    btn_select.setText(R.string.select);
+                    btn_select.setText(R.string.select_language);
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -480,7 +493,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 if(isChecked){
 
                     setLocale("hi");
-                    btn_select.setText(R.string.select);
+                    btn_select.setText(R.string.select_language);
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -493,7 +506,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 if(isChecked){
 
                     setLocale("mr");
-                    btn_select.setText(R.string.select);
+                    btn_select.setText(R.string.select_language);
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -506,7 +519,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 if(isChecked){
 
                     setLocale("gu");
-                    btn_select.setText(R.string.select);
+                    btn_select.setText(R.string.select_language);
                     gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -519,7 +532,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 if(isChecked){
 
                     setLocale("ta");
-                    btn_select.setText(R.string.select);
+                    btn_select.setText(R.string.select_language);
                     Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
                     gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
                     marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));

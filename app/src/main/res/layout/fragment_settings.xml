@@ -323,6 +323,45 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/complaint"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_50"
+                android:layout_marginTop="@dimen/margin_10"
+                android:visibility="visible"
+                android:background="@drawable/transparent_background">
+
+                <ImageView
+                    android:id="@+id/complaint_logo"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:src="@drawable/faq"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complaint"
+                    android:textColor="@color/black"
+                    android:layout_toEndOf="@id/complaint_logo"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size14"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/complaint_arrow"
+                    android:layout_width="@dimen/margin_12"
+                    android:layout_height="@dimen/margin_12"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:src="@drawable/update_arrow"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/margin_15"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/feedback"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_50"
@@ -501,7 +540,7 @@
                     android:id="@+id/version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Version "
+                    android:text="@string/version_10_01"
                     android:textSize="@dimen/text_size12"
                     android:layout_marginTop="@dimen/margin_5"
                     android:textColor="@color/black"

@@ -35,7 +35,7 @@ public class WebServiceModel {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://tooshytoask.org/tstadashboard/")
+                .baseUrl("https://tsta.hodemoserver.in/tstadashboard/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

@@ -17,7 +17,7 @@
         android:maxLines="2"
         android:text=""
         android:paddingStart="@dimen/padding_15"
-        android:fontFamily="@font/worksansmedium"
-        android:textSize="@dimen/text_size16" />
+        android:fontFamily="@font/worksansregular"
+        android:textSize="@dimen/text_size15" />
 
 </RelativeLayout>

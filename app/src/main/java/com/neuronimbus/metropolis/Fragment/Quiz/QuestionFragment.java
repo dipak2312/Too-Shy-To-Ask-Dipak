@@ -113,7 +113,7 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
 
         if(id==btn_submit.getId())
         {
-            if (btn_submit.getText().equals("SUBMIT")) {
+            if (btn_submit.getText().equals(getString(R.string.submit))) {
                 chekAnsPopup();
             }
             else {

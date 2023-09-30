@@ -69,8 +69,33 @@ public class ResultQuizActivity extends AppCompatActivity implements View.OnClic
         percentage=anwer * 100 / total;
 
 
-        txt_percentage.setText(Double.toString(percentage)+"%"+" "+"Score");
-        txt_title.setText("You answerd"+" "+anwer+" "+"out of"+" "+total+" "+"question correctly.\n To continue click on next quiz or click on home to go back");
+        txt_percentage.setText(Double.toString(percentage)+"%"+" "+ getString(R.string.score));
+        //txt_title.setText(getString(R.string.you_ans)+" "+anwer+" "+getString(R.string.out_of)+" "+total+" "+getString(R.string.que_correct));
+
+
+        String lang = spManager.getLanguage();
+
+        if (lang.equals("en")){
+            //txt_title.setText("You answered"+" "+anwer+" "+"out of"+" "+total+" "+"question correctly.To continue click on next quiz or click on home to go back");
+
+        }
+         if (lang.equals("hi")){
+            //txt_title.setText("आपने उत्तर दिया"+" "+anwer+" "+"में से"+" "+total+" "+"सही प्रश्न करो. जारी रखने के लिए अगले क्विज़ पर क्लिक करें या वापस जाने के लिए होम पर क्लिक करें");
+
+        }
+         if (lang.equals("mr")){
+            //txt_title.setText("तुम्ही उत्तर दिले"+" "+anwer+" "+"पैकी"+" "+total+" "+"योग्य प्रश्न. सुरू ठेवण्यासाठी पुढील क्विझवर क्लिक करा किंवा परत जाण्यासाठी होम वर क्लिक करा");
+
+        }
+         if (lang.equals("gu")){
+            //txt_title.setText("તમે જવાબ આપ્યો"+" "+anwer+" "+"માંથી"+" "+total+" "+"યોગ્ય રીતે પ્રશ્ન કરો. ચાલુ રાખવા માટે આગલી ક્વિઝ પર ક્લિક કરો અથવા પાછા જવા માટે હોમ પર ક્લિક કરો");
+
+        }
+         if (lang.equals("ta")){
+            //txt_title.setText("நீங்கள் பதிலளித்தீர்கள்"+" "+anwer+" "+"இல்"+" "+total+" "+"சரியாக கேள்வி. தொடர, அடுத்த வினாடி வினாவைக் கிளிக் செய்யவும் அல்லது திரும்பிச் செல்ல முகப்பு என்பதைக் கிளிக் செய்யவும்");
+
+        }
+
 
         quizdata=QuestionFragment.quizdata;
 

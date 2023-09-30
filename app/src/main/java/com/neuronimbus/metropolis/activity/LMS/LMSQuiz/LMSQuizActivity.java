@@ -190,8 +190,9 @@ public class LMSQuizActivity extends AppCompatActivity implements View.OnClickLi
 
         percentage=anwer * 100 / total;
 
-        percentage_txt.setText(percentage +"%"+" "+"Score");
-        title_txt.setText("You answerd"+" "+anwer+" "+"out of"+" "+total+" "+"question correctly.\n To continue click on next quiz or click on home to go back");
+        percentage_txt.setText(percentage +"%"+" "+getString(R.string.score));
+        title_txt.setText(getString(R.string.you_ans)+" "+anwer+" "+getString(R.string.out_of)+" "+total+" "+getString(R.string.que_correct));
+
 
         quiz_id=LMSQuestionFragment.quiz_id;
         LMSQuestionFragment.quiz_id="";

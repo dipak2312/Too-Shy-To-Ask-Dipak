@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -128,6 +129,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @SuppressLint("StringFormatInvalid")
     public void init() {
         pagerAdapter = new QuestionPagerAdapter(getSupportFragmentManager(), quetions);
         txt_count.setText(getResources().getString(R.string.page_count_total, 0 + 1, pagerAdapter.getCount()));
@@ -190,8 +192,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         percentage=anwer * 100 / total;
 
-        percentage_txt.setText(percentage +"%"+" "+"Score");
-        title_txt.setText("You answerd"+" "+anwer+" "+"out of"+" "+total+" "+"question correctly.\n To continue click on next quiz or click on home to go back");
+        percentage_txt.setText(percentage +"%"+" "+getString(R.string.score));
+        //title_txt.setText("You answerd"+" "+anwer+" "+"out of"+" "+total+" "+"question correctly.\n To continue click on next quiz or click on home to go back");
+        title_txt.setText(getString(R.string.you_ans)+" "+anwer+" "+getString(R.string.out_of)+" "+total+" "+getString(R.string.que_correct));
+
 
         if (percentage < 25){
             percentage_txt.setTextColor(ContextCompat.getColor(context, R.color.red));

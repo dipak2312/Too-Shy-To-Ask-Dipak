@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rel_language_en"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_reply"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/worksansregular"
+            android:textSize="@dimen/text_size18"
+            android:textColor="@color/black"/>
+
+        <RelativeLayout
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/margin_30"
+            android:layout_height="@dimen/margin_30"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:layout_width="@dimen/margin_15"
+                android:layout_height="@dimen/margin_15"
+                android:src="@drawable/back_arrow_lang"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userReplyEnter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_115"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_below="@+id/rel_language_en"
+        android:background="@drawable/background"
+        android:fontFamily="@font/worksanslight"
+        android:gravity="top"
+        android:hint="@string/reply"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:paddingStart="@dimen/padding_15"
+        android:paddingTop="@dimen/margin_3"
+        android:paddingEnd="@dimen/padding_15"
+        app:hintTextAppearance="@style/TextInputLayoutHintText"
+        app:hintTextColor="@color/purple">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/userReply"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_100"
+        android:background="@drawable/border"
+        android:fontFamily="@font/worksansmedium"
+        android:gravity="top"
+        android:inputType="textPostalAddress|textMultiLine|textCapSentences"
+        android:paddingTop="@dimen/margin_3"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size16" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:includeFontPadding="false"
+        android:layout_below="@+id/userReplyEnter"
+        android:gravity="center"
+        android:fontFamily="@font/worksansbold"
+        android:background="@drawable/active_con_btn"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size14" />
+
+</RelativeLayout>

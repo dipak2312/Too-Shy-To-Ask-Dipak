@@ -65,11 +65,101 @@
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size12"/>
 
+        <RelativeLayout
+            android:id="@+id/spinnerLay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_55"
+            android:layout_marginTop="@dimen/margin_20"
+            android:visibility="visible"
+            android:background="@drawable/background">
+
+            <Spinner
+                android:id="@+id/spinner_feedback_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:layout_centerVertical="true"
+                android:spinnerMode="dropdown"
+                android:fontFamily="@font/worksansmedium"
+                android:background="@drawable/border"
+                android:textSize="@dimen/text_size16"/>
+
+            <ImageView
+                android:layout_width="@dimen/margin_10"
+                android:layout_height="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/down_arrow"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/add_file"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_60"
+            android:layout_marginTop="@dimen/margin_15"
+            android:visibility="gone"
+            android:background="@drawable/background">
+
+            <TextView
+                android:id="@+id/email_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_8"
+                android:fontFamily="@font/worksansmedium"
+                android:text="@string/attachment_optional"
+                android:textColor="@color/purple"
+                android:textSize="@dimen/text_size12" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/email_txt"
+                android:layout_marginTop="@dimen/margin_3"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/img_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginEnd="@dimen/margin_40"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:fontFamily="@font/worksansmedium"
+                    android:text="@string/add_screenshot"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size12" />
+
+                <ImageView
+                    android:id="@+id/remove_img"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:visibility="gone"
+                    android:src="@drawable/back_arrow_lang"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center_vertical"/>
+
+                <ImageView
+                    android:id="@+id/profile_img"
+                    android:layout_width="@dimen/margin_100"
+                    android:layout_height="@dimen/margin_100"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/description_lay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_90"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_15"
             android:background="@drawable/background"
             android:fontFamily="@font/worksanslight"
             android:gravity="top"

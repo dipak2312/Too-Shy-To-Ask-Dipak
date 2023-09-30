@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Too Shy To Ask</string>
-    <string name="page_count_total">Question %d of %d</string>
+    <string name="page_count_total">પ્રશ્ન %d માંથી %d</string>
     <string name="app_images_folderName">TSTA</string>
 
 
@@ -220,7 +220,7 @@
     <string name="clear_all_notification">સૂચના સાફ કરો</string>
     <string name="home">ઘર</string>
     <string name="ask_expert">નિષ્ણાતોને પૂછો</string>
-    <string name="insights">इनसाइट्स</string>
+    <string name="insights">આંતરદૃષ્ટિ</string>
     <string name="quiz">ક્વિઝ</string>
     <string name="setting">સેટિંગ્સ</string>
     <string name="please_login_to_access_this_feature">કૃપા કરીને આ સુવિધાને ઍક્સેસ કરવા માટે લૉગિન કરો</string>
@@ -234,5 +234,24 @@
     <string name="cms">સેમી</string>
     <string name="kgs">કિલો ગ્રામ</string>
     <string name="wohoo_great">અરે અદ્ભુત!</string>
+    <string name="score">સ્કોર</string>
+    <string name="you_ans">તમે જવાબ આપ્યો</string>
+    <string name="out_of">માંથી</string>
+    <string name="que_correct">યોગ્ય રીતે પ્રશ્ન કરો. ચાલુ રાખવા માટે આગલી ક્વિઝ પર ક્લિક કરો અથવા પાછા જવા માટે હોમ પર ક્લિક કરો</string>
+    <string name="complaint">Complaint</string>
+    <string name="make_a_complaint">Make a Complaint</string>
+    <string name="see_your_previous_complaints">See your Previous Complaints</string>
+    <string name="select_topic">Select Topic</string>
+    <string name="please_check_out_the_information_storehouse_section_to_know_more_about">વિશે વધુ જાણવા માટે કૃપા કરીને માહિતી સ્ટોરહાઉસ વિભાગ તપાસો</string>
+    <string name="recent_feedbacks">Recent Feedbacks</string>
+    <string name="see_older_feedbacks">See older feedbacks</string>
+    <string name="new_feedback">NEW FEEDBACK</string>
+    <string name="enter_your_description">તમારું વર્ણન દાખલ કરો</string>
+    <string name="resolved">Resolved</string>
+    <string name="topic">Topic</string>
+    <string name="reply_by_expert">Reply by Expert</string>
+    <string name="we_have_marked_our_issue_as_resolved_you_can_contact_us_in_case_you_have_any_queries">We have marked our issue as resolved. You can contact us in case you have any queries.</string>
+    <string name="reply">Reply</string>
+    <string name="user_reply">User Reply</string>
 
 </resources>

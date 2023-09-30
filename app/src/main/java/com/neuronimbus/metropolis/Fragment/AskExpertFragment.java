@@ -58,6 +58,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
     NestedScrollView expert_scroll_view;
     String yes_no ="", title_id = "", title ="";
     ArrayList<data>data;
+    int positions = 0;
     ExpertIssuesAdapter expertIssuesAdapter;
 
     @Override
@@ -222,7 +223,11 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
         }
 
         else if (id == like_yes.getId()){
+            Bundle bundle = new Bundle();
+
+            bundle.putString("title_id",title);
             Intent intent = new Intent(context, FeedbackActivity.class);
+            intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -242,13 +247,43 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
         title_id = id;
         title = text;
 
+        faq_msg.setText(getString(R.string.please_check_out_the_information_storehouse_section_to_know_more_about)+ " " + title);
         StorehouseMessage(position);
-        TextClickable(position);
+
+        faq_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+
+                bundle.putString("title_id",data.get(position).getTitle_id());
+                Intent intent = new Intent(context, InformationStorehouseActivity.class);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                yes_no_lay.setVisibility(View.VISIBLE);
+            }
+        });
+        faq_lin_lay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+
+                bundle.putString("title_id",data.get(position).getTitle_id());
+                Intent intent = new Intent(context, InformationStorehouseActivity.class);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                yes_no_lay.setVisibility(View.VISIBLE);
+            }
+        });
+        //TextClickable(position);
     }
 
     public void StorehouseMessage(int position){
         title = data.get(position).getTitle();
-        category_msg.setText(getString(R.string.i_have_que_related_to) + title);
+        category_msg.setText(getString(R.string.i_have_que_related_to)+ " " + title);
         chatt_lin_lay.setVisibility(View.VISIBLE);
         faq_lin_lay.setVisibility(View.VISIBLE);
         rel_issues_recy.setVisibility(View.GONE);
@@ -257,7 +292,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
     }
 
     public void TextClickable(int position){
-        SpannableString ss = new SpannableString("Please check out the Information Storehouse section to know more about " + title);
+        SpannableString ss = new SpannableString(getString(R.string.please_check_out_the_information_storehouse_section_to_know_more_about)+ " " + title);
 
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override

@@ -129,17 +129,17 @@
                 android:fontFamily="@font/worksansregular"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/see_all"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_25"
-                android:layout_alignParentEnd="true"
-                android:text="@string/see_all"
-                android:gravity="center"
-                android:fontFamily="@font/worksansitalic"
-                android:textSize="@dimen/text_size12"
-                android:layout_marginEnd="@dimen/margin_20"
-                android:textColor="@color/purple"/>
+                <TextView
+                    android:id="@+id/see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:fontFamily="@font/worksansregular"
+                    android:gravity="center"
+                    android:text="@string/see_all"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size12" />
 
             </RelativeLayout>
 
@@ -227,7 +227,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/see_all"
                     android:gravity="center"
-                    android:fontFamily="@font/worksansitalic"
+                    android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size12"
                     android:layout_marginEnd="@dimen/margin_20"
                     android:textColor="@color/purple"/>
@@ -380,7 +380,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/see_all"
                     android:gravity="center"
-                    android:fontFamily="@font/worksansitalic"
+                    android:fontFamily="@font/worksansregular"
                     android:textSize="@dimen/text_size12"
                     android:layout_marginEnd="@dimen/margin_20"
                     android:textColor="@color/purple"/>

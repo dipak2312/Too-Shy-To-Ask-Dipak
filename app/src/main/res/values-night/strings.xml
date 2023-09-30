@@ -3,4 +3,6 @@
     <string name="cms">Cms</string>
     <string name="kgs">Kgs</string>
     <string name="wohoo_great">WOHOO..GREAT!</string>
+    <string name="reply">Reply</string>
+    <string name="user_reply">User Reply</string>
 </resources>

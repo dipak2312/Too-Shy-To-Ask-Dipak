@@ -27,15 +27,7 @@
                 android:text="@string/tsta_expert"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
-            
-            <ImageView
-                android:id="@+id/expert_img"
-                android:layout_width="@dimen/margin_30"
-                android:layout_height="@dimen/margin_30"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/margin_20"
-                android:src="@drawable/expert_icon"/>
+
 
         </RelativeLayout>
 
@@ -180,7 +172,7 @@
                     android:id="@+id/category_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I have questions related Acne"
+                    android:text="@string/i_have_que_related_to"
                     android:layout_marginStart="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_10"
                     android:padding="@dimen/padding_10"
@@ -460,5 +452,16 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/expert_img"
+        android:layout_width="@dimen/margin_40"
+        android:layout_height="@dimen/margin_40"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:src="@drawable/ask_an_expert_new"/>
 
 </RelativeLayout>

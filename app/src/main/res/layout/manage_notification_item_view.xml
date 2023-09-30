@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/off"
                 android:layout_marginTop="@dimen/margin_2"
-                android:fontFamily="@font/worksansmedium"
+                android:fontFamily="@font/worksansregular"
                 android:textColor="@color/line_color"
                 android:layout_below="@id/push_notification"/>
         </RelativeLayout>

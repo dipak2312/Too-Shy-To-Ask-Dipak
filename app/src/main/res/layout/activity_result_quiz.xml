@@ -57,7 +57,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_40"
                 android:fontFamily="@font/worksansmedium"
-                android:text="WOHOO..GREAT!"
+                android:text="@string/wohoo_great"
                 android:textColor="@color/purple"
                 android:textSize="@dimen/text_size18" />
 
@@ -69,7 +69,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_10"
                 android:fontFamily="@font/worksansregular"
-                android:text="90% Score"
+                android:text="@string/score"
                 android:textColor="@color/tsta_green_color"
                 android:textSize="@dimen/text_size15" />
 

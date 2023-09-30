@@ -232,7 +232,7 @@
                     android:layout_below="@id/or"
                     android:layout_centerHorizontal="true"
                     android:textSize="@dimen/text_size13"
-                    android:fontFamily="@font/worksanssemibolditalic"
+                    android:fontFamily="@font/worksansregular"
                     android:layout_marginBottom="@dimen/margin_20"
                     android:layout_marginTop="@dimen/margin_30"
                     android:textColor="@color/purple"

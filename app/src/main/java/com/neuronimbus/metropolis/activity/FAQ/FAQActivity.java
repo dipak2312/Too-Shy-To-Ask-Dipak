@@ -76,7 +76,6 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
 
     public void getFAQContent(String selectedCategory){
         dialog.show("");
-        dialog.dismiss("");
 
         FAQContentAuthModel model = new FAQContentAuthModel();
         model.setCategory_id(selectedCategory);
@@ -88,7 +87,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onNext(FAQContentResponse faqContentResponse) {
                         String msg = faqContentResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("success")){
                             faqcontent = faqContentResponse.getFaqcontent();
 

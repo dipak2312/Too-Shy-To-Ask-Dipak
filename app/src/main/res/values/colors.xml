@@ -20,12 +20,14 @@
     <color name="bag_color">#FBFBFB</color>
     <color name="progressbar_color">#AC1479</color>
     <color name="grey">#DCD9D9</color>
+    <color name="process">#F29423</color>
     <color name="tsta_splash">#5928AA</color>
     <color name="line_color">#707070</color>
     <color name="red">#FF0000</color>
     <color name="tsta_green_color">#49C00F</color>
     <color name="tsta_leaderboard">#050505</color>
     <color name="category_inactive">#777777</color>
+    <color name="resolved_text_color">#09F700</color>
 
     <color name="tsta_setting_fent">#16bac2</color>
 

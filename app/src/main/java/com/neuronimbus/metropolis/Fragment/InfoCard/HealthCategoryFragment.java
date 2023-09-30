@@ -229,7 +229,6 @@ public class HealthCategoryFragment extends Fragment implements View.OnClickList
         {
             helthIds.remove(healthId);
         }
-        Log.d("saggi",helthIds.toString());
 
       ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
 

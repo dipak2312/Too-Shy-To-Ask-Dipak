@@ -41,8 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansmedium"
-                android:singleLine="true"
                 android:gravity="center_horizontal"
+                android:singleLine="true"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />

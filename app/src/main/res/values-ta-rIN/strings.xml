@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Too Shy To Ask</string>
-    <string name="page_count_total">Question %d of %d</string>
+    <string name="page_count_total">கேள்வி %d இன் %d</string>
     <string name="app_images_folderName">TSTA</string>
 
 
@@ -234,5 +234,24 @@
     <string name="cms">செ.மீ</string>
     <string name="kgs">கிலோ</string>
     <string name="wohoo_great">என்ன ஆச்சர்யம்!</string>
+    <string name="score">மதிப்பெண்</string>
+    <string name="you_ans">நீங்கள் பதிலளித்தீர்கள்</string>
+    <string name="out_of"> இல்</string>
+    <string name="que_correct">சரியாக கேள்வி. தொடர, அடுத்த வினாடி வினாவைக் கிளிக் செய்யவும் அல்லது திரும்பிச் செல்ல முகப்பு என்பதைக் கிளிக் செய்யவும்</string>
+    <string name="complaint">Complaint</string>
+    <string name="make_a_complaint">Make a Complaint</string>
+    <string name="see_your_previous_complaints">See your Previous Complaints</string>
+    <string name="select_topic">Select Topic</string>
+    <string name="please_check_out_the_information_storehouse_section_to_know_more_about">વિશે વધુ જાણવા માટે કૃપા કરીને માહિતી સ્ટોરહાઉસ વિભાગ તપાસો</string>
+    <string name="recent_feedbacks">Recent Feedbacks</string>
+    <string name="see_older_feedbacks">See older feedbacks</string>
+    <string name="new_feedback">NEW FEEDBACK</string>
+    <string name="enter_your_description">உங்கள் விளக்கத்தை உள்ளிடவும்</string>
+    <string name="resolved">Resolved</string>
+    <string name="topic">Topic</string>
+    <string name="reply_by_expert">Reply by Expert</string>
+    <string name="we_have_marked_our_issue_as_resolved_you_can_contact_us_in_case_you_have_any_queries">We have marked our issue as resolved. You can contact us in case you have any queries.</string>
+    <string name="reply">Reply</string>
+    <string name="user_reply">User Reply</string>
 
 </resources>

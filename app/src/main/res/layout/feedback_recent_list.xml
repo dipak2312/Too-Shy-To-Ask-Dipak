@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/recentRelLay"
+    android:layout_marginBottom="@dimen/margin_10"
+    android:background="@drawable/infocard_shadow"
+    android:elevation="@dimen/margin_5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/help_background"
+        android:padding="@dimen/padding_10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unhealthy Relationships"
+            android:textSize="@dimen/text_size15"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansregular"/>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What makes unhealthy relationships?"
+            android:textSize="@dimen/text_size12"
+            android:layout_marginTop="@dimen/margin_5"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansmedium"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5">
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Processing"
+                android:textSize="@dimen/text_size12"
+                android:textColor="@color/process"
+                android:fontFamily="@font/worksanslight"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/status"
+                android:layout_marginStart="@dimen/margin_10"
+                android:text="on 15 July"
+                android:textSize="@dimen/text_size12"
+                android:textColor="@color/black"
+                android:fontFamily="@font/worksanslight"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

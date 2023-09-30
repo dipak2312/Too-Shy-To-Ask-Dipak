@@ -12,14 +12,20 @@ android {
         applicationId "com.neuronimbus.metropolis"
         minSdk 24
         targetSdk 33
-        versionCode 203013
-        versionName "2.4.1"
+        versionCode 203015
+        versionName "2.4.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //keyStorePassword = Neuro@123
         //key-alias = metropolis_alias
         //KeyPassword = Neuro@123
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
 
     buildTypes {
