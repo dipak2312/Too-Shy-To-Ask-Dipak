@@ -28,9 +28,10 @@ public class FeedbackChattingAdapter extends RecyclerView.Adapter<FeedbackChatti
     private static final int VIEW_TYPE_MESSAGE_USER = 2;
     RecyclerViewOnClickListner onclicklistener;
 
-    public FeedbackChattingAdapter(Context context, ArrayList<ProcessingFeedback> processingFeedback) {
+    public FeedbackChattingAdapter(Context context, ArrayList<ProcessingFeedback> processingFeedback, RecyclerViewOnClickListner onclicklistener) {
         this.context = context;
         this.processingFeedback = processingFeedback;
+        this.onclicklistener = onclicklistener;
     }
 
 
@@ -73,6 +74,7 @@ public class FeedbackChattingAdapter extends RecyclerView.Adapter<FeedbackChatti
     public void onBindViewHolder(@NonNull FeedbackChattingAdapter.ViewHolder holder, int position) {
             if(processingFeedback.get(position).getType().equals("reply"))
             {
+                holder.replyButtonHide(processingFeedback.get(position),position);
                 holder.reply_que.setText(Html.fromHtml(processingFeedback.get(position).getAssistance_type()));
                 holder.reply_msg.setText(Html.fromHtml(processingFeedback.get(position).getFeedback_desc()));
                 holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
@@ -81,7 +83,7 @@ public class FeedbackChattingAdapter extends RecyclerView.Adapter<FeedbackChatti
             }
             else if(processingFeedback.get(position).getType().equals("question"))
             {
-                holder.replyButtonHide(processingFeedback.get(position),position);
+
                 holder.assistantType.setText(processingFeedback.get(position).getAssistance_type());
                 holder.UserMsg.setText(processingFeedback.get(position).getFeedback_desc());
                 holder.UserMsg.setMovementMethod(LinkMovementMethod.getInstance());
@@ -89,6 +91,17 @@ public class FeedbackChattingAdapter extends RecyclerView.Adapter<FeedbackChatti
                 Glide.with(context).load(processingFeedback.get(position).getFeedback_img()).into(holder.feedback_img);
 
             }
+
+        if (holder.btnReply != null){
+            holder.btnReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onclicklistener.onClickData(position, processingFeedback.get(position).getMainFeedbackId()
+                            , processingFeedback.get(position).getAssistance_type(), processingFeedback.get(position).getFeedbackReplyIdMain()
+                            , processingFeedback.get(position).getFeedbackIdType());
+                }
+            });
+        }
 
 
     }
@@ -113,24 +126,19 @@ public class FeedbackChattingAdapter extends RecyclerView.Adapter<FeedbackChatti
             reply_que = itemView.findViewById(R.id.reply_que);
             reply_msg = itemView.findViewById(R.id.reply_msg);
             txt_expert_chat_date = itemView.findViewById(R.id.txt_expert_chat_date);
-            btnReply = itemView.findViewById(R.id.btnReply);
+            btnReply = itemView.findViewById(R.id.btn_Reply);
+
 
         }
 
         public void replyButtonHide(final ProcessingFeedback processingFeedback, int position){
-            if (processingFeedback.isReply){
-                btnReply.setVisibility(View.GONE);
-            }
-            else {
-                btnReply.setVisibility(View.VISIBLE);
-                btnReply.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onclicklistener.onClickData(position,processingFeedback.getMainFeedbackId()
-                                ,processingFeedback.getAssistance_type(),processingFeedback.getFeedbackReplyIdMain()
-                                ,processingFeedback.getFeedbackIdType());
-                    }
-                });
+            if (processingFeedback.isReply != null) {
+
+                if (processingFeedback.isReply) {
+                    btnReply.setVisibility(View.GONE);
+                } else {
+                    btnReply.setVisibility(View.VISIBLE);
+                }
             }
         }
     }

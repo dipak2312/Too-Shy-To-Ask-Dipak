@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.Models.ComplaintHistoryChat;
 import com.neuronimbus.metropolis.Models.ComplaintListResponse;
 import com.neuronimbus.metropolis.Models.faqcontent;
@@ -59,6 +60,13 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
                 holder.replyTitle.setVisibility(View.GONE);
                 holder.adminReply.setVisibility(View.GONE);
             }
+            if (complaintHistoryChat.get(position).getComplaintform_img() != null && !complaintHistoryChat.get(position).getComplaintform_img().isEmpty()){
+                holder.complaintImage.setVisibility(View.VISIBLE);
+                Glide.with(context).load(complaintHistoryChat.get(position).getComplaintform_img()).into(holder.complaintImage);
+            }
+            if (complaintHistoryChat.get(position).getComplaintform_img() == null && complaintHistoryChat.get(position).getComplaintform_img().isEmpty()){
+                holder.complaintImage.setVisibility(View.GONE);
+            }
 
         }
 
@@ -98,7 +106,7 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView qsnView, ansView, adminReply, fullDescription, replyTitle;
-        ImageView showAnswer;
+        ImageView showAnswer, complaintImage;
         OnQuestionClickListener onQuestionClickListener;
         LinearLayout linearLayout;
         RelativeLayout expandableLayout;
@@ -116,6 +124,7 @@ public class ComplaintListAdapter extends RecyclerView.Adapter<ComplaintListAdap
             linearLayout = itemView.findViewById(R.id.linearLayout);
             expandableLayout =itemView.findViewById(R.id.expandable);
             cardViewMain = itemView.findViewById(R.id.main_card_at_faq_item);
+            complaintImage = itemView.findViewById(R.id.complaintImage);
 
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

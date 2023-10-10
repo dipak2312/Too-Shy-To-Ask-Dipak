@@ -63,7 +63,7 @@ public class FeedbackListActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
 
                     bundle.putString("settingActivity","settingActivity");
-                    Intent intent = new Intent(context, FeedbackActivity.class);
+                    Intent intent = new Intent(context, NewFeedbackActivity.class);
                     intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -109,7 +109,7 @@ public class FeedbackListActivity extends AppCompatActivity {
                                 Bundle bundle = new Bundle();
 
                                 bundle.putString("settingActivity","settingActivity");
-                                Intent intent = new Intent(context, FeedbackActivity.class);
+                                Intent intent = new Intent(context, NewFeedbackActivity.class);
                                 intent.putExtras(bundle);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

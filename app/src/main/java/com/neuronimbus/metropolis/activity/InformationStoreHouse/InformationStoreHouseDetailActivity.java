@@ -20,9 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
-import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
-import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
-import com.neuronimbus.metropolis.activity.Home.HomeActivity;
+import com.neuronimbus.metropolis.activity.Feedback.NewFeedbackActivity;
 import com.neuronimbus.metropolis.adapters.RelatedStoreHouseAdapter;
 import com.neuronimbus.metropolis.AuthModels.BookmarkBlogAuthModel;
 import com.neuronimbus.metropolis.AuthModels.StoreHouseLikeAuthModel;
@@ -414,7 +412,7 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
             Bundle bundle = new Bundle();
 
             bundle.putString("title_id",storehousedata.get(0).getArticle_name());
-            Intent intent = new Intent(context, FeedbackActivity.class);
+            Intent intent = new Intent(context, NewFeedbackActivity.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

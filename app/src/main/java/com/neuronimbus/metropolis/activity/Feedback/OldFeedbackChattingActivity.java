@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import com.neuronimbus.metropolis.Models.FeedbackChating;
 import com.neuronimbus.metropolis.Models.HelpArticleFeedbackChating;
 import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.activity.Help.ContactUsActivity;
 import com.neuronimbus.metropolis.adapters.OldChattingFeedbackAdapter;
 import com.neuronimbus.metropolis.adapters.OldChattingFeedbackAdapterSecond;
 import com.neuronimbus.metropolis.adapters.StatusAdapter;
@@ -69,6 +71,15 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
                 finish();
             }
         });
+        binding.contactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ContactUsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getOldFeedback(){
@@ -98,15 +109,28 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
                                 binding.feedbackType.setText(oldFeedbackChattingResponse.getResolvedFeedback().getAssistanceType());
                                 binding.feedbackDate.setText(oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackDate());
                                 binding.feedbackMsg.setText(oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackDesc());
-                                Glide.with(context).load(oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackImg()).into(binding.feedbackImage);
-
-                                if (feedbackChating.size() != 0 || feedbackChating != null) {
-                                    adapter = new OldChattingFeedbackAdapter(context, feedbackChating);
-                                    binding.feedbackExpertChattingRecy.setAdapter(adapter);
+                                if (oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackImg() == null
+                                        || oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackImg().isEmpty()){
+                                    binding.feedbackImage.setVisibility(View.GONE);
                                 }
-                                if (helpArticleFeedbackChating.size() != 0 || helpArticleFeedbackChating != null) {
-                                    adapterSecond = new OldChattingFeedbackAdapterSecond(context, helpArticleFeedbackChating);
-                                    binding.feedbackChattingRecy.setAdapter(adapterSecond);
+                                else {
+                                    binding.feedbackImage.setVisibility(View.VISIBLE);
+                                    Glide.with(context).load(oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackImg()).into(binding.feedbackImage);
+
+                                }
+
+                                if (feedbackChating != null ) {
+                                    if (feedbackChating.size() != 0){
+                                        adapter = new OldChattingFeedbackAdapter(context, feedbackChating);
+                                        binding.feedbackExpertChattingRecy.setAdapter(adapter);
+                                    }
+
+                                }
+                                if (helpArticleFeedbackChating != null) {
+                                    if (helpArticleFeedbackChating.size() != 0){
+                                        adapterSecond = new OldChattingFeedbackAdapterSecond(context, helpArticleFeedbackChating);
+                                        binding.feedbackChattingRecy.setAdapter(adapterSecond);
+                                    }
                                 }
                             }
                         }

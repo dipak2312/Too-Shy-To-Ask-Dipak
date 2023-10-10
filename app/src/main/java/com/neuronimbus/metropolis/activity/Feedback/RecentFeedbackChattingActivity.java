@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -128,7 +129,7 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
 
                             if (processingFeedback.size() != 0 || !processingFeedback.isEmpty()){
                                 binding.swipeRefresh.setVisibility(View.VISIBLE);
-                                adapter = new FeedbackChattingAdapter(context, processingFeedback);
+                                adapter = new FeedbackChattingAdapter(context, processingFeedback, RecentFeedbackChattingActivity.this);
                                 binding.feedbackChattingRecy.setAdapter(adapter);
                                 binding.feedbackChattingRecy.getLayoutManager().smoothScrollToPosition(binding.feedbackChattingRecy, null, adapter.getItemCount() - 1);
                             }
@@ -142,7 +143,7 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
 
 
                                 if(chat_ref_status.equals("no")) {
-                                    adapter = new FeedbackChattingAdapter(context, processingFeedback);
+                                    adapter = new FeedbackChattingAdapter(context, processingFeedback, RecentFeedbackChattingActivity.this);
                                     binding.feedbackChattingRecy.setAdapter(adapter);
                                     binding.feedbackChattingRecy.getLayoutManager().smoothScrollToPosition(binding.feedbackChattingRecy, null, adapter.getItemCount() - 1);
                                 }
@@ -214,7 +215,7 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
                         String msg = commonResponse.getMsg();
                         dialog.dismiss("");
                         if (msg.equals("success")){
-
+                            getChatting("swipe");
                         }
                     }
 
@@ -241,11 +242,10 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
         Button btnSubmit = dialog.findViewById(R.id.btnSubmit);
         RelativeLayout back_arrow = dialog.findViewById(R.id.back_arrow);
 
-        reply = userReply.getText().toString().trim();
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reply = userReply.getText().toString().trim();
                 askFeedback();
                 dialog.dismiss();
 
@@ -267,10 +267,10 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
     @Override
     public void onClickData(int position, String mainfeedbackId, String assistance_type, String feedback_reply_id_main,
                             String feedbackid_type) {
+        userReplyPopup();
         mainFeedback_Id = mainfeedbackId;
         assistanceType = assistance_type;
         feedbackReplyIdMain = feedback_reply_id_main;
         feedbackIdType = feedbackid_type;
-        userReplyPopup();
     }
 }

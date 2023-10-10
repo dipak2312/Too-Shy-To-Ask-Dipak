@@ -47,13 +47,19 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/rel_top_bar"
+        android:layout_above="@id/see_previous_lay"
+        android:layout_marginBottom="@dimen/margin_20"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:layout_marginTop="@dimen/margin_15">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,6 +170,171 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/add_file"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_60"
+                android:layout_marginTop="@dimen/margin_15"
+                android:background="@drawable/background">
+
+                <TextView
+                    android:id="@+id/email_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:fontFamily="@font/worksansmedium"
+                    android:text="@string/attachment_optional"
+                    android:textColor="@color/purple"
+                    android:textSize="@dimen/text_size12" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/email_txt"
+                    android:layout_marginTop="@dimen/margin_3"
+                    android:layout_marginBottom="@dimen/margin_8"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/img_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_30"
+                        android:layout_marginStart="@dimen/margin_15"
+                        android:layout_marginEnd="@dimen/margin_40"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:fontFamily="@font/worksansmedium"
+                        android:text="@string/add_screenshot"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_size12" />
+
+                    <ImageView
+                        android:id="@+id/remove_img"
+                        android:layout_width="@dimen/margin_25"
+                        android:layout_height="@dimen/margin_30"
+                        android:layout_marginEnd="@dimen/margin_15"
+                        android:paddingEnd="@dimen/padding_15"
+                        android:visibility="gone"
+                        android:src="@drawable/back_arrow_lang"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical"/>
+
+                    <ImageView
+                        android:id="@+id/profile_img"
+                        android:layout_width="@dimen/margin_100"
+                        android:layout_height="@dimen/margin_100"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/attachmentImageLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/attachmentImageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/uploaded_file"
+                    android:textSize="@dimen/text_size15"
+                    android:fontFamily="@font/worksansregular"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/margin_10"/>
+
+                <ImageView
+                    android:id="@+id/attachmentImage"
+                    android:layout_width="@dimen/margin_80"
+                    android:layout_height="@dimen/margin_80"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:scaleType="centerCrop"
+                    android:layout_below="@id/attachmentImageTitle"/>
+
+                <RelativeLayout
+                    android:id="@+id/relLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/attachmentImageTitle"
+                    android:layout_toEndOf="@id/attachmentImage"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_20">
+
+                    <TextView
+                        android:id="@+id/attachmentImageName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:layout_toStartOf="@id/deleteImage"
+                        android:maxLines="1"
+                        android:text=""
+                        android:singleLine="true"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size12" />
+
+                    <TextView
+                        android:id="@+id/attachmentImageDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text=""
+                        android:layout_below="@id/attachmentImageName"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size12" />
+
+                    <TextView
+                        android:id="@+id/imageDot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_7"
+                        android:text="•"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size20"
+                        android:layout_below="@id/attachmentImageName"
+                        android:layout_toEndOf="@id/attachmentImageDate"/>
+
+                    <TextView
+                        android:id="@+id/attachmentImageSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:textSize="@dimen/text_size12"
+                        android:fontFamily="@font/worksansregular"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:layout_below="@id/attachmentImageName"
+                        android:layout_toEndOf="@id/imageDot"/>
+
+                    <ImageView
+                        android:id="@+id/deleteImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:src="@drawable/delete"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/description_enter"
                 android:layout_width="match_parent"
@@ -205,51 +376,57 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/see_previous_lay"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_50"
-            android:layout_above="@+id/submit_req"
-            android:orientation="horizontal"
-            android:elevation="@dimen/margin_3"
-            android:background="@drawable/help_background">
-
-            <ImageView
-                android:id="@+id/help_img"
-                android:layout_width="@dimen/margin_35"
-                android:layout_height="@dimen/margin_35"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/margin_10"
-                android:src="@drawable/need_help"/>
-
-            <TextView
-                android:id="@+id/previousChat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/worksansregular"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/margin_10"
-                android:text="@string/see_your_previous_complaints"
-                android:textSize="@dimen/text_size14"
-                android:textColor="@color/black"/>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/submit_req"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_50"
-            android:layout_marginTop="@dimen/margin_20"
-            android:includeFontPadding="false"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:fontFamily="@font/worksansbold"
-            android:background="@drawable/active_con_btn"
-            android:layout_marginBottom="@dimen/margin_30"
-            android:text="@string/next"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size14" />
-
     </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/see_previous_lay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_above="@+id/submit_req"
+        android:orientation="horizontal"
+        android:elevation="@dimen/margin_3"
+        android:background="@drawable/help_background">
+
+        <ImageView
+            android:id="@+id/help_img"
+            android:layout_width="@dimen/margin_35"
+            android:layout_height="@dimen/margin_35"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_10"
+            android:src="@drawable/need_help"/>
+
+        <TextView
+            android:id="@+id/previousChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/worksansregular"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_10"
+            android:text="@string/see_your_previous_complaints"
+            android:textSize="@dimen/text_size14"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit_req"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20"
+        android:includeFontPadding="false"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:fontFamily="@font/worksansbold"
+        android:background="@drawable/active_con_btn"
+        android:layout_marginBottom="@dimen/margin_30"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size14" />
 
 </RelativeLayout>

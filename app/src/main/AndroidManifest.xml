@@ -21,6 +21,9 @@
         android:theme="@style/Theme.TooShyToAsk"
         tools:targetApi="32">
         <activity
+            android:name=".activity.Feedback.NewFeedbackActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.Feedback.OldFeedbackChattingActivity"
             android:exported="false" />
         <activity
@@ -101,13 +104,6 @@
         <activity
             android:name=".activity.InformationStoreHouse.InformationStoreHouseDetailActivity"
             android:exported="true" />
-        <activity
-            android:name=".activity.Feedback.FeedbackActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".activity.Blogs.DetailBlogActivity"
             android:exported="true">

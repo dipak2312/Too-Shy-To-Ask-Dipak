@@ -84,7 +84,7 @@
             android:text="01 Mar 2021 02:14 PM "/>
 
         <TextView
-            android:id="@+id/btnReply"
+            android:id="@+id/btn_Reply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple"

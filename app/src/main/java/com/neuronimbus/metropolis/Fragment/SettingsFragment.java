@@ -25,15 +25,12 @@ import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.activity.Complaint.ComplaintActivity;
-import com.neuronimbus.metropolis.activity.Expert.ExpertActivity;
 import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
-import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
 import com.neuronimbus.metropolis.activity.Feedback.FeedbackListActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.activity.Help.HelpActivity;
 import com.neuronimbus.metropolis.activity.Notification.ManageNotificationActivity;
-import com.neuronimbus.metropolis.activity.Notification.NotificationsActivity;
 import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateProfileActivity;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
 import com.neuronimbus.metropolis.AuthModels.UserProfileAuthModel;
@@ -44,7 +41,6 @@ import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
-import com.neuronimbus.metropolis.activity.WebViewActivity;
 
 import java.util.Locale;
 

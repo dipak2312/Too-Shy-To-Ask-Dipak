@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Expert.ExpertActivity;
 import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
-import com.neuronimbus.metropolis.activity.Feedback.FeedbackActivity;
+import com.neuronimbus.metropolis.activity.Feedback.NewFeedbackActivity;
 import com.neuronimbus.metropolis.activity.InformationStoreHouse.InformationStorehouseActivity;
 import com.neuronimbus.metropolis.adapters.ExpertIssuesAdapter;
 import com.neuronimbus.metropolis.AuthModels.AskIssuesAuthModel;
@@ -226,7 +226,7 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
             Bundle bundle = new Bundle();
 
             bundle.putString("title_id",title);
-            Intent intent = new Intent(context, FeedbackActivity.class);
+            Intent intent = new Intent(context, NewFeedbackActivity.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -234,7 +234,11 @@ public class AskExpertFragment extends Fragment implements View.OnClickListener,
         }
 
         else if (id == like_no.getId()){
-            Intent intent = new Intent(context, FeedbackActivity.class);
+            Bundle bundle = new Bundle();
+
+            bundle.putString("title_id",title);
+            Intent intent = new Intent(context, NewFeedbackActivity.class);
+            intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
