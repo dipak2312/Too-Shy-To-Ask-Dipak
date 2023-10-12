@@ -58,8 +58,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/expandable">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/complaintImage"
+                app:shapeAppearanceOverlay="@style/radiusimage"
                 android:layout_width="@dimen/margin_200"
                 android:layout_height="@dimen/margin_250"
                 android:scaleType="centerCrop"

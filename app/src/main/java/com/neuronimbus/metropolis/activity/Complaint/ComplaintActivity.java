@@ -188,6 +188,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getAddComplaint(){
+        dialog.show();
 
         AddComplaintAuthModel model = new AddComplaintAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -196,7 +197,6 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
         model.setDescription(binding.description.getText().toString());
         model.setSubject(binding.editSubEnter.getText().toString());
         model.setImg(image);
-        Log.d("dipak",image);
 
         WebServiceModel.getRestApi().getAddComplaint(model)
                 .subscribeOn(Schedulers.io())
@@ -205,9 +205,12 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onNext(AddComplaintResponse addComplaintResponse) {
                         String msg = addComplaintResponse.getMsg();
-
                         if (msg.equals("success")){
-                            finish();
+                            dialog.dismiss();
+                            Intent intent = new Intent(context, ComplaintListActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
 
                         }
 
@@ -215,7 +218,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -264,7 +267,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
 
                     double filesize= getFileSizeInMB(convertContentUriToFileUri(uri));
 
-                    if (filesize >= 5.0){
+                    if (filesize >= 3.0){
                         binding.attachmentImageLay.setVisibility(View.GONE);
                         userReplyPopup();
                     }

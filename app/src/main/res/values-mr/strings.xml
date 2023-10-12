@@ -244,7 +244,7 @@
     <string name="select_topic">Select Topic</string>
     <string name="please_check_out_the_information_storehouse_section_to_know_more_about">अधिक जाणून घेण्यासाठी कृपया माहिती स्टोअरहाउस विभाग पहा</string>
     <string name="recent_feedbacks">Recent Feedbacks</string>
-    <string name="see_older_feedbacks">See older feedbacks</string>
+    <string name="see_older_feedbacks">See Older Feedbacks</string>
     <string name="new_feedback">NEW FEEDBACK</string>
     <string name="enter_your_description">तुमचे वर्णन एंटर करा</string>
     <string name="resolved">Resolved</string>
@@ -254,7 +254,7 @@
     <string name="reply">Reply</string>
     <string name="user_reply">User Reply</string>
     <string name="uploaded_file">Uploaded File</string>
-    <string name="please_select_an_image_that_is_less_than_5_mb_in_size">Please select an image that is less than 5 MB in size.</string>
+    <string name="please_select_an_image_that_is_less_than_5_mb_in_size">Please select an image that is less than 3 MB in size.</string>
     <string name="ok">Ok</string>
 
 </resources>

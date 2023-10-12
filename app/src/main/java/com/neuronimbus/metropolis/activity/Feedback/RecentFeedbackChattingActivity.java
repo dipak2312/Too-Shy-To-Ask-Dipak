@@ -162,7 +162,7 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -221,7 +221,7 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss();
                     }
 
                     @Override

@@ -88,7 +88,14 @@ public class FeedbackChattingAdapter extends RecyclerView.Adapter<FeedbackChatti
                 holder.UserMsg.setText(processingFeedback.get(position).getFeedback_desc());
                 holder.UserMsg.setMovementMethod(LinkMovementMethod.getInstance());
                 holder.chat_date.setText(processingFeedback.get(position).getFeedback_datetime());
-                Glide.with(context).load(processingFeedback.get(position).getFeedback_img()).into(holder.feedback_img);
+                if (processingFeedback.get(position).getFeedback_img() != null && !processingFeedback.get(position).getFeedback_img().isEmpty()){
+                    holder.feedback_img.setVisibility(View.VISIBLE);
+                    Glide.with(context).load(processingFeedback.get(position).getFeedback_img()).into(holder.feedback_img);
+                }
+                else {
+                    holder.feedback_img.setVisibility(View.GONE);
+                }
+
 
             }
 

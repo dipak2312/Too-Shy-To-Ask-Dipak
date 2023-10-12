@@ -245,7 +245,7 @@ public class NewFeedbackActivity extends AppCompatActivity implements View.OnCli
 
                     double filesize= getFileSizeInMB(convertContentUriToFileUri(uri));
 
-                    if (filesize >= 5.0){
+                    if (filesize >= 3.0){
                         binding.attachmentImageLay.setVisibility(View.GONE);
                         userReplyPopup();
                     }

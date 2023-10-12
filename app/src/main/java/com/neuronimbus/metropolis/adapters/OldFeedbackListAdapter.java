@@ -42,6 +42,7 @@ public class OldFeedbackListAdapter extends RecyclerView.Adapter<OldFeedbackList
         holder.question.setText(oldestFeedback.get(position).getFeedback_desc());
         holder.date.setText("on " + oldestFeedback.get(position).getCreated_at());
         holder.status.setText(R.string.resolved);
+        holder.status.setTextColor(context.getResources().getColor(R.color.resolved_text_color));
 
         holder.recentRelLay.setOnClickListener(new View.OnClickListener() {
             @Override

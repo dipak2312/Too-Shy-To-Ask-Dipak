@@ -152,7 +152,7 @@ public class FeedbackListActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss();
                     }
 
                     @Override

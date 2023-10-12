@@ -90,7 +90,7 @@ public class ComplaintListActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss();
                     }
 
                     @Override

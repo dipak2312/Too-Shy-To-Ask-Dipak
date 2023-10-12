@@ -139,7 +139,7 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss();
                     }
 
                     @Override
