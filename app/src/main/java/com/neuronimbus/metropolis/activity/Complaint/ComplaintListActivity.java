@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -53,7 +54,10 @@ public class ComplaintListActivity extends AppCompatActivity {
         binding.relBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(context, ComplaintActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
@@ -90,7 +94,7 @@ public class ComplaintListActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        dialog.dismiss();
+                        dialog.dismiss("");
                     }
 
                     @Override

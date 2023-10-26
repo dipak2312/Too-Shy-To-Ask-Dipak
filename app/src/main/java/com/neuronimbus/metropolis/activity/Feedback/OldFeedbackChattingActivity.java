@@ -83,7 +83,7 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
     }
 
     private void getOldFeedback(){
-        dialog.show();
+        dialog.show("");
         binding.oldFeedbackLay.setVisibility(View.GONE);
 
         ProcessingFeedbackChatAuthModel model = new ProcessingFeedbackChatAuthModel();
@@ -99,7 +99,7 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
                     @Override
                     public void onNext(OldFeedbackChattingResponse oldFeedbackChattingResponse) {
                         String msg = oldFeedbackChattingResponse.getMsg();
-                        dialog.dismiss();
+                        dialog.dismiss("");
                         binding.oldFeedbackLay.setVisibility(View.VISIBLE);
                         if (msg.equals("success")){
                             if (oldFeedbackChattingResponse != null) {
@@ -107,7 +107,7 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
                                 helpArticleFeedbackChating = oldFeedbackChattingResponse.getResolvedFeedback().getHelpArticleFeedbackChating();
 
                                 binding.feedbackType.setText(oldFeedbackChattingResponse.getResolvedFeedback().getAssistanceType());
-                                binding.feedbackDate.setText(oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackDate());
+                                binding.feedbackDate.setText("on " + oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackDate());
                                 binding.feedbackMsg.setText(oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackDesc());
                                 if (oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackImg() == null
                                         || oldFeedbackChattingResponse.getResolvedFeedback().getFeedbackImg().isEmpty()){
@@ -139,7 +139,7 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        dialog.dismiss();
+                        dialog.dismiss("");
                     }
 
                     @Override

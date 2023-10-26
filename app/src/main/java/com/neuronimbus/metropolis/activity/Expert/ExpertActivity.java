@@ -9,6 +9,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -33,7 +34,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     SPManager spManager;
     Context context;
     CustomProgressDialog dialog;
-    RelativeLayout rel_back, send_msg;
+    RelativeLayout rel_back;
+    LinearLayout send_msg;
     RecyclerView recy_user_msg;
     EditText ask_questions;
     ChattingAdapter adapter;

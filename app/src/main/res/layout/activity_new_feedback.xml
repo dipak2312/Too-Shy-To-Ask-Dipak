@@ -118,7 +118,7 @@
                 android:inputType="textPostalAddress|textMultiLine|textCapSentences"
                 android:paddingTop="@dimen/margin_3"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size12" />
+                android:textSize="@dimen/text_size16" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -252,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_7"
+                    android:layout_marginTop="@dimen/margin_4"
                     android:text="•"
                     android:fontFamily="@font/worksansregular"
                     android:textColor="@color/black"
@@ -269,7 +269,6 @@
                     android:textSize="@dimen/text_size12"
                     android:fontFamily="@font/worksansregular"
                     android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_30"
                     android:layout_below="@id/attachmentImageName"
                     android:layout_toEndOf="@id/imageDot"/>

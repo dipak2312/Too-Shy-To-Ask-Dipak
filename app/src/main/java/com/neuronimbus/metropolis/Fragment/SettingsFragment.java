@@ -236,6 +236,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         }
         else if (id == complaint.getId()) {
             Intent intent = new Intent(context, ComplaintActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
         else if(id==eng_lang.getId())

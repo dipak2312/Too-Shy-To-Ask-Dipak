@@ -256,5 +256,7 @@
     <string name="uploaded_file">Uploaded File</string>
     <string name="please_select_an_image_that_is_less_than_5_mb_in_size">Please select an image that is less than 3 MB in size.</string>
     <string name="ok">Ok</string>
+    <string name="your_complaint">Your Complaint</string>
+    <string name="slide_to_cancel">Slide to cancel</string>
 
 </resources>

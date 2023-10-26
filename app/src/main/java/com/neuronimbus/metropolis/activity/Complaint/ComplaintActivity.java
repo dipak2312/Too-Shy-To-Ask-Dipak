@@ -121,9 +121,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
                     binding.editSubEnter.requestFocus();
                     binding.editSubEnter.setError("Enter your subject");
                 }
-                else if (!MyValidator.isValidName(binding.editSubEnter.getText().toString().trim())) {
-                    Toast.makeText(context, "Please enter valid Subject", Toast.LENGTH_SHORT).show();
-                }
+                
                 else if (binding.description.getText().toString().trim().equals("")) {
                     binding.description.requestFocus();
                     binding.description.setError(getString(R.string.enter_your_description));
@@ -188,7 +186,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getAddComplaint(){
-        dialog.show();
+        dialog.show("");
 
         AddComplaintAuthModel model = new AddComplaintAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -205,20 +203,19 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onNext(AddComplaintResponse addComplaintResponse) {
                         String msg = addComplaintResponse.getMsg();
+                        dialog.dismiss("");
                         if (msg.equals("success")){
-                            dialog.dismiss();
                             Intent intent = new Intent(context, ComplaintListActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-
                         }
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        dialog.dismiss();
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -309,19 +306,19 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
 
     public void userReplyPopup() {
 
-        Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.image_size_popup);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
+        Dialog alertDialog = new Dialog(context);
+        alertDialog.setContentView(R.layout.image_size_popup);
+        alertDialog.setCancelable(false);
+        alertDialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
 
-        Button btnSubmit = dialog.findViewById(R.id.btnSubmit);
-        RelativeLayout back_arrow = dialog.findViewById(R.id.back_arrow);
+        Button btnSubmit = alertDialog.findViewById(R.id.btnSubmit);
+        RelativeLayout back_arrow = alertDialog.findViewById(R.id.back_arrow);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                dialog.dismiss();
+                alertDialog.dismiss();
 
             }
         });
@@ -330,11 +327,11 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View view) {
 
-                dialog.dismiss();
+                alertDialog.dismiss();
             }
         });
 
-        dialog.show();
+        alertDialog.show();
 
     }
 

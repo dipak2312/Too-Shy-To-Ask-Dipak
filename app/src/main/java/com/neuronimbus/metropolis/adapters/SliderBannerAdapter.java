@@ -17,6 +17,8 @@ import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.activity.Blogs.AllBlogsActivity;
 import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.neuronimbus.metropolis.activity.Expert.ExpertActivity;
+import com.neuronimbus.metropolis.activity.Quiz.QuizActivity;
 
 import java.util.ArrayList;
 
@@ -63,6 +65,20 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
                     bundle.putString("blog_id",Bannerist.get(position).getBanner_blogid());
                     Intent intent = new Intent(context, DetailBlogActivity.class);
                     intent.putExtras(bundle);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                else if (Bannerist.get(position).getBanner_screen().equals("ask-the-expert")){
+
+                    Intent intent = new Intent(context, ExpertActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                else if (Bannerist.get(position).getBanner_screen().equals("quiz")){
+
+                    Intent intent = new Intent(context, QuizActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

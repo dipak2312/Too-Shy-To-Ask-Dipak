@@ -78,6 +78,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
         dialog.show("");
 
         FAQContentAuthModel model = new FAQContentAuthModel();
+        model.setUser_id(spManager.getUserId());
         model.setCategory_id(selectedCategory);
 
         WebServiceModel.getRestApi().getFAQContent(model)
@@ -110,8 +111,6 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     public void getFAQCategory(){
-        dialog.show("");
-        dialog.dismiss("");
 
         WebServiceModel.getRestApi().getFAQCategory()
                 .subscribeOn(Schedulers.io())

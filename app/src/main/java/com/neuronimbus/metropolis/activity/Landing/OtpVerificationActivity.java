@@ -21,6 +21,8 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.chaos.view.PinView;
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
+import com.neuronimbus.metropolis.Models.UpdateProfile.UpdateProfileResponse;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.AuthModels.OtpAuthModel;
 import com.neuronimbus.metropolis.AuthModels.SignInAuthModel;
@@ -292,11 +294,14 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setHeight(otpInResponse.getData().getHeight());
                            spManager.setWeight(otpInResponse.getData().getWeight());
 
+                           getUserProfileUpdate();
+
                            Intent intent = new Intent(context, HomeActivity.class);
                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                            startActivity(intent);
                            finish();
+
 
                        }
 
@@ -329,6 +334,40 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     public void onError(Throwable e) {
 
                         Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getUserProfileUpdate(){
+        dialog.show("");
+
+        UpdateProfileAuthModel model = new UpdateProfileAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setAction("language");
+        model.setLanguage(spManager.getLanguage());
+
+        WebServiceModel.getRestApi().getUserProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<UpdateProfileResponse>() {
+                    @Override
+                    public void onNext(UpdateProfileResponse updateProfileResponse) {
+                        String msg = updateProfileResponse.getMsg();
+                        dialog.dismiss("");
+                        if (msg.equals("Profile Updated")){
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
                     }
 
                     @Override

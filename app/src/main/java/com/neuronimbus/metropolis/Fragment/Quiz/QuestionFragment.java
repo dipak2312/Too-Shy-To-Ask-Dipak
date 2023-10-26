@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LMSQuizData;
 import com.neuronimbus.metropolis.activity.LMS.LMSQuiz.LMSQuizActivity;
 import com.neuronimbus.metropolis.activity.Quiz.QuizActivity;
@@ -156,7 +158,8 @@ public class QuestionFragment extends Fragment implements View.OnClickListener, 
 
         txt_question.setText(question.getQuestion());
 
-        //Glide.with(context).load(question.getQuestionImageUrl()).placeholder(R.drawable.default_img).into(img_question);
+        //Log.d("dipaks",question.getQuestionImageUrl().toString());
+        Glide.with(context).load(question.getQuestionImageUrl()).placeholder(R.drawable.sexual_violence).into(img_question);
         OptionAdapter adapter = new OptionAdapter(context,question.getOption(),this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recy_question.setLayoutManager(layoutManager);

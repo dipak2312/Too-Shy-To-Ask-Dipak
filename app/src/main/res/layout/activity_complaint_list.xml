@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/worksansmedium"
-        android:text="@string/make_a_complaint"
+        android:text="@string/your_complaint"
         android:textColor="@color/black"
         android:layout_below="@id/rel_top_bar"
         android:layout_marginStart="@dimen/margin_20"
