@@ -263,6 +263,8 @@
     <string name="ok">Ok</string>
     <string name="your_complaint">Your Complaint</string>
     <string name="slide_to_cancel">Slide to cancel</string>
+    <string name="type_here">Type here..</string>
+    <string name="processing">Processing</string>
 
 
 </resources>

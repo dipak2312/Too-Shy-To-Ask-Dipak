@@ -19,15 +19,15 @@
             android:id="@+id/user_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hi this testing message for ask and expert"
-            android:layout_marginStart="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_10"
             android:layout_centerInParent="true"
-            android:fontFamily="@font/worksansregular"
+            android:layout_marginStart="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_5"
+            android:layout_marginEnd="@dimen/margin_10"
             android:layout_marginBottom="@dimen/margin_15"
-            android:textSize="@dimen/text_size14"
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/worksansregular"
+            android:text="Hi this testing message for ask and expert"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14" />
 
     </RelativeLayout>
 

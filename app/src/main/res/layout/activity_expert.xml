@@ -107,6 +107,7 @@
         android:layout_height="@dimen/margin_40"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/margin_10"
+        android:visibility="visible"
         android:layout_marginBottom="@dimen/margin_30"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20">
@@ -120,8 +121,7 @@
                 android:id="@+id/ask_questions"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_40"
-                android:hint="Type here.."
-                android:layout_toStartOf="@+id/relVoice"
+                android:hint="@string/type_here"
                 android:layout_alignParentBottom="true"
                 android:textColorHint="@color/skip"
                 android:background="@drawable/chatting_field_background"
@@ -252,6 +252,71 @@
             android:textStyle="normal"
             android:translationZ="10dp"
             android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/voiceRecordingRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_120"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/recordingRelLay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_40"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:background="@drawable/recording_background"
+            android:layout_marginTop="@dimen/margin_20"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="@dimen/margin_25"
+                android:layout_height="@dimen/margin_25"
+                android:layout_marginStart="@dimen/margin_10"
+                android:src="@drawable/mic"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="0.10"
+                android:textSize="@dimen/text_size14"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:textColor="@color/black"
+                android:fontFamily="@font/worksansmedium"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_25"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_20">
+
+            <ImageView
+                android:layout_width="@dimen/margin_25"
+                android:layout_height="@dimen/margin_25"
+                android:src="@drawable/delete"/>
+
+            <ImageView
+                android:layout_width="@dimen/margin_25"
+                android:layout_height="@dimen/margin_25"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/microphone"/>
+
+            <ImageView
+                android:layout_width="@dimen/margin_25"
+                android:layout_height="@dimen/margin_25"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/send_msg"/>
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -104,6 +104,7 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -205,10 +206,12 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
                         String msg = addComplaintResponse.getMsg();
                         dialog.dismiss("");
                         if (msg.equals("success")){
+
                             Intent intent = new Intent(context, ComplaintListActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+                            finish();
                         }
 
                     }

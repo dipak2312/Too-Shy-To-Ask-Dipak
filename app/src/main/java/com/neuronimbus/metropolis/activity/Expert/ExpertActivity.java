@@ -23,6 +23,8 @@ import com.neuronimbus.metropolis.Models.ExpertReplyResponse;
 import com.neuronimbus.metropolis.Models.chats;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.databinding.ActivityComplaintBinding;
+import com.neuronimbus.metropolis.databinding.ActivityExpertBinding;
 
 import java.util.ArrayList;
 
@@ -44,11 +46,14 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     SwipeRefreshLayout swipe_refresh;
     String refresh_status = "open", chat_ref_status = "no";
     int chatSize, select_chat_size = 0;
+    ActivityExpertBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expert);
+        binding = ActivityExpertBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         context = ExpertActivity.this;
         spManager = new SPManager(context);
