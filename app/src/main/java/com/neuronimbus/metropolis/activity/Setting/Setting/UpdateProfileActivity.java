@@ -154,12 +154,24 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialog.dismiss("");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss("");
+    }
+
     private void openDatePicker() {
         datePickerPopup.show();
     }
 
     public void getUserData(){
-
+        dialog.show("");
         UserProfileAuthModel model = new UserProfileAuthModel();
         model.setUser_id(spManager.getUserId());
 
@@ -170,17 +182,17 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onNext(UserProfileResponse userProfileResponse) {
                         String msg = userProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("success")){
                             Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
 
                         }
-                        dialog.dismiss("");
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -213,7 +225,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
 
                             spManager.setFirstName(edit_name.getText().toString().trim());
@@ -228,12 +240,12 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                             spManager.setUserPhoto(profile_pic);
 
                         }
-                        dialog.dismiss("");
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss("");
                     }
 
                     @Override

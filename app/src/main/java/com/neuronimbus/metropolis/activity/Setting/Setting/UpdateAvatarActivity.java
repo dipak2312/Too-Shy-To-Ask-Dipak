@@ -92,7 +92,17 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         getProfile();
         checkPermissions();
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialog.dismiss("");
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss("");
+    }
     public void RemoveProfile(){
         dialog.show("");
 
@@ -127,7 +137,6 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
     public void getUserProfileUpdate(){
         dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -141,9 +150,8 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
-
 
                         }
                         else {
@@ -153,7 +161,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -200,7 +208,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                     public void onError(Throwable e) {
 
                         Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
-
+                        dialog.dismiss("");
 
                     }
 
@@ -381,17 +389,14 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-            dialog.show("");
         }
         else if (id == next_btn.getId()){
-
             getUserProfileUpdate();
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-            dialog.show("");
         }
         else if (id == profile_img.getId()){
             profilePopup();

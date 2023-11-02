@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.RenderEffect;
 import android.graphics.Shader;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,9 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         }
         else {
             Glide.with(context).load(StoryCategory.get(position).getCategory_img()).into(holder.status_img);
-            holder.status_img.setRenderEffect(RenderEffect.createBlurEffect(20,20, Shader.TileMode.MIRROR));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                holder.status_img.setRenderEffect(RenderEffect.createBlurEffect(20,20, Shader.TileMode.MIRROR));
+            }
             holder.lock_fent_img.setVisibility(View.VISIBLE);
         }
     }

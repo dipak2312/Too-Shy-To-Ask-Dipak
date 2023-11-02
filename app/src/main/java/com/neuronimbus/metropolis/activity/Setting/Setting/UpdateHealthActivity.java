@@ -72,7 +72,17 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         health_recy.setLayoutManager(linearLayoutManager1);
         healthIssues();
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialog.dismiss("");
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss("");
+    }
     public void healthIssues() {
         dialog.show("");
 
@@ -151,7 +161,6 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
 
     public void getUserProfileUpdate(){
         dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -165,16 +174,15 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
-
 
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -202,6 +210,7 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
              startActivity(intent);
+             finish();
          }
          else if (id == yes_btn.getId()){
              health.setVisibility(View.VISIBLE);

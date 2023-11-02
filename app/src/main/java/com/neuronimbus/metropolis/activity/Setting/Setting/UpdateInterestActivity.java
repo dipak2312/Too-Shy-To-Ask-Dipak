@@ -69,7 +69,17 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         healthcategory();
 
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialog.dismiss("");
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss("");
+    }
     public void healthcategory() {
         dialog.show("");
 
@@ -149,14 +159,12 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
                         dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
 
-
-
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -179,7 +187,6 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
             finish();
         }
         if (id == update_btn.getId()){
-
             getUserProfileUpdate();
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             Toast.makeText(context, "Update Your Interests", Toast.LENGTH_SHORT).show();
@@ -187,8 +194,6 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
-            dialog.show("");
-            dialog.dismiss("");
         }
 
     }
@@ -209,6 +214,6 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
         {
             helthIds.add(healthId);
         }
-        Log.d("dipak",helthIds.toString());
+
     }
 }

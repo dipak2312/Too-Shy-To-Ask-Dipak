@@ -60,9 +60,19 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
 
         spinner_blood.setSelection(((ArrayAdapter<String>)spinner_blood.getAdapter()).getPosition(spManager.getBloodgroup()));
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dialog.dismiss("");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss("");
+    }
     public void getUserProfileUpdate(){
         dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setBloodgroup(spinner_blood.getSelectedItem().toString());
@@ -78,7 +88,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
                     @Override
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
 
                             spManager.setBloodgroup(spinner_blood.getSelectedItem().toString());
@@ -94,7 +104,7 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
 
                     @Override
                     public void onError(Throwable e) {
-
+                        dialog.dismiss("");
                     }
 
                     @Override
@@ -118,24 +128,12 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
              finish();
         }
          else if (id == next_btn.getId()) {
-
-             /*if (spinner_blood.getSelectedItem().toString().equals("Select Your Blood Group")){
-                 Toast.makeText(context, "Select Blood Group", Toast.LENGTH_SHORT).show();
-             }
-             else if (etHeight.getText().toString().trim().equals("")){
-                 Toast.makeText(context, "Height is required", Toast.LENGTH_SHORT).show();
-                 //etHeight.requestFocus();
-                 //etHeight.setError("Height is required");
-             }
-             else if (etWeight.getText().toString().trim().equals("")){
-                 Toast.makeText(context, "Weight is required", Toast.LENGTH_SHORT).show();
-             }
-             else {*/
              getUserProfileUpdate();
              Intent intent = new Intent(context, UpdateProfileActivity.class);
+             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
              startActivity(intent);
              finish();
-
 
          } else if (id == spinner_blood.getId()) {
              OpenBloodGrp();
