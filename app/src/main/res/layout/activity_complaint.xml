@@ -144,6 +144,7 @@
                 android:background="@drawable/background"
                 android:fontFamily="@font/worksanslight"
                 android:gravity="top"
+                android:visibility="gone"
                 android:hint="@string/subject"
                 android:paddingTop="@dimen/margin_3"
                 android:paddingEnd="@dimen/padding_15"

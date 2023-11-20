@@ -146,7 +146,7 @@ public class SliderImagesActivity extends AppCompatActivity implements View.OnCl
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "msg", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

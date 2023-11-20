@@ -69,7 +69,7 @@ public class SliderBannerAdapter extends RecyclerView.Adapter<SliderBannerAdapte
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
-                else if (Bannerist.get(position).getBanner_screen().equals("ask-the-expert")){
+                else if (Bannerist.get(position).getBanner_screen().equals("ask-an-expert")){
 
                     Intent intent = new Intent(context, ExpertActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

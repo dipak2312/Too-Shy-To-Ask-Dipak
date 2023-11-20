@@ -192,7 +192,6 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
         AddComplaintAuthModel model = new AddComplaintAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setEmail(binding.editEmailEnter.getText().toString());
-        model.setAssistance_type(binding.spinnerSelectTopic.getSelectedItem().toString());
         model.setDescription(binding.description.getText().toString());
         model.setSubject(binding.editSubEnter.getText().toString());
         model.setImg(image);

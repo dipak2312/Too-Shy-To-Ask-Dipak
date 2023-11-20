@@ -210,7 +210,8 @@ public class NewFeedbackActivity extends AppCompatActivity implements View.OnCli
     public void feedbackType()
     {
 
-        String[] countries = new String[]{getString(R.string.select_type),getString(R.string.ui_feedback) , getString(R.string.content) , getString(R.string.bugs) , getString(R.string.game) , getString(R.string.quiz) , getString(R.string.other) };
+        String[] countries = new String[]{getString(R.string.select_type),getString(R.string.ui_feedback) , getString(R.string.content) , getString(R.string.bugs) , getString(R.string.game) ,
+                getString(R.string.quiz) , getString(R.string.faq) , getString(R.string.other)};
 
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(context, R.layout.spinner_layout, R.id.spinnerTarget, countries);
         binding.spinnerFeedbackType.setAdapter(countryAdapter);
