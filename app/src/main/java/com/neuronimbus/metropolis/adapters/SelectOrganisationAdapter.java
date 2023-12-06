@@ -1,0 +1,90 @@
+package com.neuronimbus.metropolis.adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.neuronimbus.metropolis.Models.HealthIssuseList;
+import com.neuronimbus.metropolis.R;
+import com.neuronimbus.metropolis.Utils.OnClickListner;
+
+import java.util.ArrayList;
+
+public class SelectOrganisationAdapter extends RecyclerView.Adapter<SelectOrganisationAdapter.ViewHolder> {
+    Context context;
+    OnClickListner onclicklistener;
+    ArrayList<HealthIssuseList>healthIssuseList;
+
+    public SelectOrganisationAdapter(ArrayList<HealthIssuseList> healthIssuseList, OnClickListner onclicklistener, Context context){
+        this.healthIssuseList = healthIssuseList;
+        this.onclicklistener = onclicklistener;
+        this.context = context;
+    }
+    @NonNull
+    @Override
+    public SelectOrganisationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.health_issues,parent,false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull SelectOrganisationAdapter.ViewHolder holder, int position) {
+        //holder.health_btn.setText(healthIssues.get(position).getHealth_btn());
+        holder.HealthIssues(healthIssuseList.get(position),position);
+        //holder.health_btn.setText(healthIssuseList.get(position).getHealth_title());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return healthIssuseList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView health_btn;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            health_btn = itemView.findViewById(R.id.health_btn);
+        }
+
+        public void HealthIssues(final HealthIssuseList healthIssuseList, int position){
+            health_btn.setText(healthIssuseList.getHealth_title());
+
+            if (healthIssuseList.isSelected){
+                health_btn.setBackgroundResource(R.drawable.health_active);
+                health_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
+            }else {
+                health_btn.setBackgroundResource(R.drawable.health_inactive);
+                health_btn.setTextColor(ContextCompat.getColor(context, R.color.black));
+            }
+
+            health_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (healthIssuseList.isSelected) {
+                        health_btn.setBackgroundResource(R.drawable.health_inactive);
+                        healthIssuseList.setSelected(false);
+                        notifyDataSetChanged();
+                        onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
+
+
+                    }else {
+                        health_btn.setBackgroundResource(R.drawable.health_active);
+                        healthIssuseList.setSelected(true);
+                        notifyDataSetChanged();
+                        onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
+
+                    }
+
+                }
+            });
+        }
+    }
+}

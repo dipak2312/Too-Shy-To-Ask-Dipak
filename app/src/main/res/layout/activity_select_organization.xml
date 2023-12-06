@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.NGOLanding.SelectOrganizationActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansregular"
+                android:text="@string/select_organization"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_health"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15">
+
+        <TextView
+            android:id="@+id/health_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_a_partner_with_metropolis"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/health_issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/health_title"
+            android:layout_marginTop="@dimen/margin_15">
+
+            <Button
+                android:id="@+id/yes_btn"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_45"
+                android:text="@string/yes"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14"
+                android:background="@drawable/gender_border_inactive"/>
+
+            <Button
+                android:id="@+id/no_btn"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_45"
+                android:layout_marginStart="@dimen/margin_15"
+                android:background="@drawable/gender_border_inactive"
+                android:text="@string/no"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/selectOrgRelLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/health_issue"
+            android:layout_marginTop="@dimen/margin_20">
+
+            <TextView
+                android:id="@+id/issue_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/in_which_project_are_you_involved"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recySelectOrganization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/issue_title"
+                android:layout_marginTop="@dimen/margin_20">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_30">
+
+        <Button
+            android:id="@+id/update_btn2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:includeFontPadding="false"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansbold"
+            android:background="@drawable/active_con_btn"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

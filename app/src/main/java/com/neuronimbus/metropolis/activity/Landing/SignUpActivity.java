@@ -25,13 +25,12 @@ import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.MyValidator;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
+import com.neuronimbus.metropolis.activity.NGOLanding.NgoSignUpActivity;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
 
 import java.util.Calendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -233,12 +232,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         LinearLayout user = bottomSheetDialog.findViewById(R.id.user);
         LinearLayout parent = bottomSheetDialog.findViewById(R.id.parent);
+        LinearLayout ngo = bottomSheetDialog.findViewById(R.id.ngo);
         btn_submit = bottomSheetDialog.findViewById(R.id.btn_submit);
         btn_submit.setOnClickListener(this);
         ImageView user_icon = bottomSheetDialog.findViewById(R.id.user_icon);
         ImageView parent_icon = bottomSheetDialog.findViewById(R.id.parent_icon);
+        ImageView ngoIcon = bottomSheetDialog.findViewById(R.id.ngoIcon);
         TextView user_text = bottomSheetDialog.findViewById(R.id.user_text);
         TextView parent_text = bottomSheetDialog.findViewById(R.id.parent_text);
+        TextView ngoText = bottomSheetDialog.findViewById(R.id.ngoText);
 
 
         user.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +254,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 parent.setBackgroundResource(R.drawable.gender_border_inactive);
                 parent_icon.setImageResource(R.drawable.family_inactive);
                 parent_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                ngo.setBackgroundResource(R.drawable.gender_border_inactive);
+                ngoIcon.setImageResource(R.drawable.ngo_icon_black);
+                ngoText.setTextColor(ContextCompat.getColor(context, R.color.black));
                 btn_submit.setBackgroundResource(R.drawable.active_con_btn);
                 btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
@@ -269,6 +274,30 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 user.setBackgroundResource(R.drawable.gender_border_inactive);
                 user_icon.setImageResource(R.drawable.account_active);
                 user_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                ngo.setBackgroundResource(R.drawable.gender_border_inactive);
+                ngoIcon.setImageResource(R.drawable.ngo_icon_black);
+                ngoText.setTextColor(ContextCompat.getColor(context, R.color.black));
+                btn_submit.setBackgroundResource(R.drawable.active_con_btn);
+                btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
+                clickListener.onClick(true);
+
+            }
+        });
+
+        ngo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                selectValue ="ngo";
+                ngo.setBackgroundResource(R.drawable.gender_border_active);
+                ngoIcon.setImageResource(R.drawable.ngo_icon_light);
+                ngoText.setTextColor(ContextCompat.getColor(context, R.color.white));
+                user.setBackgroundResource(R.drawable.gender_border_inactive);
+                user_icon.setImageResource(R.drawable.account_active);
+                user_text.setTextColor(ContextCompat.getColor(context, R.color.black));
+                parent.setBackgroundResource(R.drawable.gender_border_inactive);
+                parent_icon.setImageResource(R.drawable.family_inactive);
+                parent_text.setTextColor(ContextCompat.getColor(context, R.color.black));
                 btn_submit.setBackgroundResource(R.drawable.active_con_btn);
                 btn_submit.setTextColor(ContextCompat.getColor(context, R.color.white));
                 clickListener.onClick(true);
@@ -360,7 +389,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             btn_submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {//user, parent
-                    bottomSheetDialog.dismiss();
+                    if (selectValue =="ngo"){
+                        Intent intent = new Intent(context, NgoSignUpActivity.class);
+                        intent.putExtra("userType", selectValue);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                        bottomSheetDialog.dismiss();
+                    }
+                    else {
+                        bottomSheetDialog.dismiss();
+                    }
 
                 }
             });

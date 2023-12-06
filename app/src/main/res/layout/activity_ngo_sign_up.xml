@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.NGOLanding.NgoSignUpActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text="@string/create_your_account"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollIndicators="end"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginTop="@dimen/margin_15"
+        android:scrollbarSize="@dimen/margin_3"
+        android:scrollbarThumbVertical="@color/purple"
+        android:layout_marginEnd="@dimen/margin_2"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_20">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/first_name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingTop="@dimen/margin_3"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="start|top"
+                        android:hint="@string/ngo_name"
+                        android:paddingStart="@dimen/padding_15"
+                        android:paddingEnd="@dimen/padding_15"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/last_name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_surname"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/registration_number"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_email_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/email_mandatory"
+                        android:inputType="textEmailAddress"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mobile_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/mobile"
+                        android:inputType="number"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/majorActivityLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/majorActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/major_activities_of_the_organization"
+                        android:inputType="number"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/workExpLay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksanslight"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/workExp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_37"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/duration_of_work_experience"
+                        android:inputType="number"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/country_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_country_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/country"
+                        android:inputType="textCapSentences"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/state_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_state_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:hint="@string/state"
+                        android:inputType="textCapSentences"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/city_enter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_city_enter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="textCapSentences"
+                        android:hint="@string/city"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:layout_marginTop="@dimen/margin_40"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/worksansbold"
+                    android:gravity="center"
+                    android:background="@drawable/active_con_btn"
+                    android:layout_marginBottom="@dimen/margin_30"
+                    android:text="@string/next"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size14" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

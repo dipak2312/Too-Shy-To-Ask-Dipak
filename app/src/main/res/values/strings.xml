@@ -266,6 +266,16 @@
     <string name="type_here">Type here..</string>
     <string name="processing">Processing</string>
     <string name="dropdown_faq">FAQ</string>
+    <string name="ngo">NGO</string>
+    <string name="ngo_name">NGO Name*</string>
+    <string name="registration_number">Registration Number</string>
+    <string name="mobile">Mobile*</string>
+    <string name="major_activities_of_the_organization">Major Activities of the Organization*</string>
+    <string name="duration_of_work_experience">Duration of Work Experience*</string>
+    <string name="email_mandatory">Email*</string>
+    <string name="select_organization">Select Organization</string>
+    <string name="are_you_a_partner_with_metropolis">Are you a Partner with Metropolis?</string>
+    <string name="in_which_project_are_you_involved">In which project are you involved?</string>
 
 
 </resources>
