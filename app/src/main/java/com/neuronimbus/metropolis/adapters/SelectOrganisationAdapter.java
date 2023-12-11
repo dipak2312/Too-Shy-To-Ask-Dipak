@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.neuronimbus.metropolis.Models.HealthIssuseList;
+import com.neuronimbus.metropolis.Models.ProjectList;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
 
@@ -19,13 +20,14 @@ import java.util.ArrayList;
 public class SelectOrganisationAdapter extends RecyclerView.Adapter<SelectOrganisationAdapter.ViewHolder> {
     Context context;
     OnClickListner onclicklistener;
-    ArrayList<HealthIssuseList>healthIssuseList;
+    ArrayList<com.neuronimbus.metropolis.Models.ProjectList> projectList;
 
-    public SelectOrganisationAdapter(ArrayList<HealthIssuseList> healthIssuseList, OnClickListner onclicklistener, Context context){
-        this.healthIssuseList = healthIssuseList;
-        this.onclicklistener = onclicklistener;
+    public SelectOrganisationAdapter(Context context, OnClickListner onclicklistener, ArrayList<ProjectList> projectList) {
         this.context = context;
+        this.onclicklistener = onclicklistener;
+        this.projectList = projectList;
     }
+
     @NonNull
     @Override
     public SelectOrganisationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,14 +38,15 @@ public class SelectOrganisationAdapter extends RecyclerView.Adapter<SelectOrgani
     @Override
     public void onBindViewHolder(@NonNull SelectOrganisationAdapter.ViewHolder holder, int position) {
         //holder.health_btn.setText(healthIssues.get(position).getHealth_btn());
-        holder.HealthIssues(healthIssuseList.get(position),position);
+        holder.HealthIssues(projectList.get(position),position);
         //holder.health_btn.setText(healthIssuseList.get(position).getHealth_title());
+        //holder.health_btn.setText(projectList.get(position).getProjectName());
 
     }
 
     @Override
     public int getItemCount() {
-        return healthIssuseList.size();
+        return projectList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -54,10 +57,10 @@ public class SelectOrganisationAdapter extends RecyclerView.Adapter<SelectOrgani
             health_btn = itemView.findViewById(R.id.health_btn);
         }
 
-        public void HealthIssues(final HealthIssuseList healthIssuseList, int position){
-            health_btn.setText(healthIssuseList.getHealth_title());
+        public void HealthIssues(final ProjectList projectList, int position){
+            health_btn.setText(projectList.getProjectName());
 
-            if (healthIssuseList.isSelected){
+            if (projectList.isSelected){
                 health_btn.setBackgroundResource(R.drawable.health_active);
                 health_btn.setTextColor(ContextCompat.getColor(context, R.color.white));
             }else {
@@ -68,18 +71,18 @@ public class SelectOrganisationAdapter extends RecyclerView.Adapter<SelectOrgani
             health_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (healthIssuseList.isSelected) {
+                    if (projectList.isSelected) {
                         health_btn.setBackgroundResource(R.drawable.health_inactive);
-                        healthIssuseList.setSelected(false);
+                        projectList.setSelected(false);
                         notifyDataSetChanged();
-                        onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
+                        onclicklistener.onClickData(position,projectList.getProjectId());
 
 
                     }else {
                         health_btn.setBackgroundResource(R.drawable.health_active);
-                        healthIssuseList.setSelected(true);
+                        projectList.setSelected(true);
                         notifyDataSetChanged();
-                        onclicklistener.onClickData(position,healthIssuseList.getHealth_id());
+                        onclicklistener.onClickData(position,projectList.getProjectId());
 
                     }
 

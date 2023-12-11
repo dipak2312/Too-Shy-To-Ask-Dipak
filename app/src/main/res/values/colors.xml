@@ -43,4 +43,5 @@
     //story
     <color name="story_progress_background">#12AC9D</color>
     <color name="story_progress">#D3E1E3</color>
+    <color name="light_white">#F2F2F2</color>
 </resources>

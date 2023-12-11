@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.NGO.QRCodeActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansmedium"
+                android:text="@string/my_qr_code"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rel_top_bar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/qrLinLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@color/light_white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size16"
+                android:layout_marginTop="@dimen/margin_20"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:text="NGO Name"/>
+            
+            <ImageView
+                android:id="@+id/qrCodeImage"
+                android:layout_width="@dimen/margin_200"
+                android:layout_height="@dimen/margin_200"
+                android:layout_marginTop="@dimen/margin_20"
+                android:src="@drawable/qr_code_img"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_30"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <LinearLayout
+                    android:id="@+id/referFriendsLay"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_40"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:padding="@dimen/padding_5"
+                    android:background="@drawable/help_background"
+                    android:orientation="horizontal">
+                    
+                    <ImageView
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:src="@drawable/refer_qr"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/refer_friends"
+                        android:textAllCaps="true"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_size14"
+                        android:fontFamily="@font/worksansmedium"/>
+                    
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/downloadQRLay"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/margin_40"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:padding="@dimen/padding_5"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:background="@drawable/help_background"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:src="@drawable/download"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/download_qr"
+                        android:textAllCaps="true"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:textColor="@color/purple"
+                        android:textSize="@dimen/text_size14"
+                        android:fontFamily="@font/worksansmedium"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyQrCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/qrLinLay"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="2"
+                android:nestedScrollingEnabled="true"
+                tools:listitem="@layout/faq_list_item_layout_rv"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"/>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

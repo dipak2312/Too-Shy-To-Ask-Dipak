@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activity.NGOLanding.SelectOrganizationActivity">
+    tools:context=".activity.NGO.SelectOrganizationActivity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"
@@ -119,10 +119,31 @@
                 android:id="@+id/recySelectOrganization"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                android:nestedScrollingEnabled="true"
+                tools:listitem="@layout/health_issues"
                 android:layout_below="@id/issue_title"
                 android:layout_marginTop="@dimen/margin_20">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/otherBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_30"
+                android:layout_below="@id/recySelectOrganization"
+                android:text="@string/other"
+                android:textAllCaps="false"
+                android:singleLine="true"
+                android:fontFamily="@font/worksansregular"
+                android:textSize="@dimen/text_size14"
+                android:paddingEnd="@dimen/margin_15"
+                android:paddingStart="@dimen/margin_15"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@drawable/health_inactive"/>
+
 
         </RelativeLayout>
     </RelativeLayout>

@@ -3,6 +3,7 @@ package com.neuronimbus.metropolis.API;
 import com.neuronimbus.metropolis.AuthModels.AddComplaintAuthModel;
 import com.neuronimbus.metropolis.AuthModels.AskFeedbackAuthModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
+import com.neuronimbus.metropolis.AuthModels.NGOSignupAuthModel;
 import com.neuronimbus.metropolis.Models.AddComplaintResponse;
 import com.neuronimbus.metropolis.AuthModels.AllBlogAuthModel;
 import com.neuronimbus.metropolis.AuthModels.AllCoursesAuthModel;
@@ -90,6 +91,7 @@ import com.neuronimbus.metropolis.Models.Courses.Lesson.LessonEnrollResponse;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LessonUpdateResponse;
 import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
 import com.neuronimbus.metropolis.Models.ProcessingFeedbackChatResponse;
+import com.neuronimbus.metropolis.Models.SelectOrganisationResponse;
 import com.neuronimbus.metropolis.Models.StoreHouse.AllStoreHouseResponse;
 import com.neuronimbus.metropolis.Models.AllVideoGalleryResponse;
 import com.neuronimbus.metropolis.Models.AvatarResponse;
@@ -435,4 +437,14 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/askfeedback")
     Observable<CommonResponse> askFeedback(@Body AskFeedbackAuthModel model);
+
+    //NGO API
+
+    @Headers("Content-Type: application/json")
+    @POST("api/register_ngo")
+    Observable<CommonResponse> ngoRegister(@Body NGOSignupAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/ngo_projects")
+    Observable<SelectOrganisationResponse> ngoRegister(@Body CommonAuthModel model);
 }

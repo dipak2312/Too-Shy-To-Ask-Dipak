@@ -56,8 +56,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         context = SplashScreenActivity.this;
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);
-        openFingerPrint();
-        //checkPreviousActivityStatus();
+        //openFingerPrint();
+        checkPreviousActivityStatus();
 
     }
 

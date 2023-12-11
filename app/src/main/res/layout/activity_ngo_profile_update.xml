@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activity.NGO.NgoSignUpActivity">
+    tools:context=".activity.NGO.NgoProfileUpdateActivity">
 
     <RelativeLayout
         android:id="@+id/rel_top_bar"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansmedium"
-                android:text="@string/create_your_account"
+                android:text="@string/update_your_profile"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -64,10 +64,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <RelativeLayout
+                android:id="@+id/profile_image_lay"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_100"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_30">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="@dimen/margin_90"
+                    android:layout_height="@dimen/margin_90"
+                    android:layout_centerInParent="true"
+                    android:padding="@dimen/margin_3"
+                    android:src="@drawable/demo" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/change_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_image_lay"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_5">
+
+                <TextView
+                    android:id="@+id/change_avatar_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/purple"
+                    android:fontFamily="@font/worksansregular"
+                    android:textSize="@dimen/text_size18"
+                    android:text="@string/change_avtar"/>
+
+                <ImageView
+                    android:layout_width="@dimen/margin_15"
+                    android:layout_height="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:src="@drawable/icon_pencil"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/change_avatar_txt"/>
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_below="@id/change_avatar"
+                android:layout_marginTop="@dimen/margin_20"
                 android:layout_marginLeft="@dimen/margin_20"
                 android:layout_marginRight="@dimen/margin_20">
 
@@ -116,7 +163,7 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/registrationNumber"
+                        android:id="@+id/edit_surname"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_37"
                         android:background="@drawable/border"
@@ -340,6 +387,42 @@
                         android:textSize="@dimen/text_size16" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <RelativeLayout
+                    android:id="@+id/update_interest"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_50"
+                    android:layout_marginTop="@dimen/margin_40"
+                    android:background="@drawable/update_shadow"
+                    android:elevation="@dimen/margin_3">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_50"
+                        android:background="@drawable/help_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/update_your_interests"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/worksansregular"
+                            android:textSize="@dimen/text_size14"
+                            android:layout_marginStart="@dimen/margin_15"
+                            android:layout_centerVertical="true"/>
+
+                        <ImageView
+                            android:id="@+id/update_arrow"
+                            android:layout_width="@dimen/margin_15"
+                            android:layout_height="@dimen/margin_15"
+                            android:layout_marginStart="@dimen/margin_20"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/update_arrow"
+                            android:layout_marginEnd="@dimen/margin_15"/>
+
+                    </RelativeLayout>
+                </RelativeLayout>
 
                 <Button
                     android:id="@+id/btn_next"

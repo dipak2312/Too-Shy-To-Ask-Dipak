@@ -25,7 +25,7 @@ import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.MyValidator;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
-import com.neuronimbus.metropolis.activity.NGOLanding.NgoSignUpActivity;
+import com.neuronimbus.metropolis.activity.NGO.NgoSignUpActivity;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
@@ -369,7 +369,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,e.toString(), Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
 

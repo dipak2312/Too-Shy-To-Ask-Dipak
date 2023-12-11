@@ -3,6 +3,8 @@ package com.neuronimbus.metropolis.AuthModels;
 public class AskQuestionsAuthModel {
     private String user_id;
     private String reply;
+    private String questionType;
+    private String language;
 
     public String getUser_id() {
         return user_id;
@@ -18,5 +20,21 @@ public class AskQuestionsAuthModel {
 
     public void setReply(String reply) {
         this.reply = reply;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

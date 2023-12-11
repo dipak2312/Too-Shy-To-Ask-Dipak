@@ -32,6 +32,10 @@ public class SPManager {
     public static final String BLOODGROUP="bloodgroup";
     public static final String HEIGHT="height";
     public static final String WEIGHT="weight";
+    public static final String NGONAME = "ngoname";
+    public static final String NGOREGISTRATIONNO = "ngoreginumber";
+    public static final String MAJORACTIVITIES = "majoractivities";
+    public static final String WORKEXP = "workexp";
 
 
     String firstName;
@@ -54,8 +58,50 @@ public class SPManager {
     String bloodgroup;
     String height;
     String weight;
+    String ngoName;
+    String ngoRegistrationNumber;
+    String workExp;
+    String majorActivities;
 
+    public String getNgoName() {
+        ngoName = pref.getString(NGONAME, "");
+        return ngoName;
+    }
 
+    public void setNgoName(String ngoName) {
+        editor.putString(NGONAME, ngoName);
+        editor.commit();
+    }
+
+    public String getNgoRegistrationNumber() {
+        ngoRegistrationNumber = pref.getString(NGOREGISTRATIONNO, "");
+        return ngoRegistrationNumber;
+    }
+
+    public void setNgoRegistrationNumber(String ngoRegistrationNumber) {
+        editor.putString(NGOREGISTRATIONNO, ngoRegistrationNumber);
+        editor.commit();
+    }
+
+    public String getWorkExp() {
+        workExp = pref.getString(WORKEXP, "");
+        return workExp;
+    }
+
+    public void setWorkExp(String workExp) {
+        editor.putString(WORKEXP, workExp);
+        editor.commit();
+    }
+
+    public String getMajorActivities() {
+        majorActivities = pref.getString(MAJORACTIVITIES, "");
+        return majorActivities;
+    }
+
+    public void setMajorActivities(String majorActivities) {
+        editor.putString(MAJORACTIVITIES, majorActivities);
+        editor.commit();
+    }
 
     public String getUser() {
         user = pref.getString(USER, "");

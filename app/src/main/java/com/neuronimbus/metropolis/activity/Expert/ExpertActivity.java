@@ -233,6 +233,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         AskQuestionsAuthModel model = new AskQuestionsAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setReply(message);
+        model.setQuestionType("text");
+        model.setLanguage("en");
 
         WebServiceModel.getRestApi().getAskQuestions(model)
                 .subscribeOn(Schedulers.io())
@@ -241,7 +243,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onNext(AskQuestionsResponse askQuestionsResponse) {
                         String msg = askQuestionsResponse.getMsg();
-
                         if (msg.equals("success")){
                             getuserReply();
                         }
@@ -249,6 +250,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
                     @Override
                     public void onError(Throwable e) {
+                        Toast.makeText(context,e.toString(), Toast.LENGTH_SHORT).show();
 
                     }
 

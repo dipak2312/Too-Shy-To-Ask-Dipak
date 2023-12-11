@@ -19,12 +19,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TooShyToAsk"
-        tools:targetApi="32" >
+        tools:targetApi="32">
         <activity
-            android:name=".activity.NGOLanding.SelectOrganizationActivity"
+            android:name=".activity.NGO.NgoProfileUpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.NGOLanding.NgoSignUpActivity"
+            android:name=".activity.NGO.QRCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NGO.AdminApprovalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NGO.NgoAvatarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NGO.SelectOrganizationActivity"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+        </activity>
+        <activity
+            android:name=".activity.NGO.NgoSignUpActivity"
             android:exported="false" />
         <activity
             android:name=".activity.Feedback.NewFeedbackActivity"

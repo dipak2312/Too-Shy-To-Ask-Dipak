@@ -276,6 +276,13 @@
     <string name="select_organization">Select Organization</string>
     <string name="are_you_a_partner_with_metropolis">Are you a Partner with Metropolis?</string>
     <string name="in_which_project_are_you_involved">In which project are you involved?</string>
+    <string name="avatar">Avatar</string>
+    <string name="thank_you_for_registering_with_us">Thank you for Registering with us.</string>
+    <string name="pending_text">Kindly wait for 72 hours as your account is under review we will notify you when it gets approved by Admin.\n\nTill then Explore our other features of To Shy Too Ask.</string>
+    <string name="explore_tsta">EXPLORE TSTA</string>
+    <string name="my_qr_code">My QR Code</string>
+    <string name="download_qr">Download QR</string>
+    <string name="update_your_profile">Update your Profile</string>
 
 
 </resources>

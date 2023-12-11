@@ -30,6 +30,7 @@ import com.neuronimbus.metropolis.activity.Feedback.FeedbackListActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.activity.Help.HelpActivity;
+import com.neuronimbus.metropolis.activity.NGO.QRCodeActivity;
 import com.neuronimbus.metropolis.activity.Notification.ManageNotificationActivity;
 import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateProfileActivity;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
@@ -52,7 +53,7 @@ import io.reactivex.schedulers.Schedulers;
 public class SettingsFragment extends Fragment implements View.OnClickListener{
     CircleImageView profile_image;
     RelativeLayout update_profile, notification_setting, bookmarks, faq, help,
-            feedback, select_Language, refer_friends, logout, complaint;
+            feedback, select_Language, refer_friends, logout, complaint, qrLay;
     Context context;
     SPManager spManager;
     RadioButton eng_lang, hindi_lang, marathi_lang, gujarati_lang, Tamil_lang;
@@ -87,6 +88,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         String ver = pkgInfo.versionName;
         app_version.setText("" +ver);
 
+        qrLay = view.findViewById(R.id.qrLay);
+        qrLay.setOnClickListener(this);
         complaint = view.findViewById(R.id.complaint);
         complaint.setOnClickListener(this);
         privacy_policy = view.findViewById(R.id.privacy_policy);
@@ -160,7 +163,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         int id = view.getId();
 
-        if (id == update_profile.getId()) {
+        if (id == qrLay.getId()) {
+            Intent intent = new Intent(context, QRCodeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+        else if (id == update_profile.getId()) {
             Intent intent = new Intent(context, UpdateProfileActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -172,23 +182,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             Intent intent= new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
 
-           /* Intent intent = new Intent(context, WebViewActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.putExtra("link1", "https://tsta.hodemoserver.in/terms-and-conditions/");
-            intent.putExtra("title", "Terms & Conditions");
-            startActivity(intent);*/
-
         }
         else if (id == privacy_policy.getId()) {
             Uri uri = Uri.parse("https://tooshytoask.org/privacy-policy/");
             Intent intent= new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
-
-            /*Intent intent = new Intent(context, WebViewActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.putExtra("link1", "https://tsta.hodemoserver.in/privacy-policy");
-            intent.putExtra("title", "Privacy Policy");
-            startActivity(intent);*/
         }
         else if (id == notification_setting.getId()) {
             Intent intent = new Intent(context, ManageNotificationActivity.class);
