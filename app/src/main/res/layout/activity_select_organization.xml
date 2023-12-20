@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansregular"
-                android:text="@string/select_organization"
+                android:text="@string/update_organization"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -143,6 +143,38 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:background="@drawable/health_inactive"/>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/otherProjectName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:background="@drawable/background"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="top"
+                android:layout_below="@id/otherBtn"
+                android:layout_marginTop="@dimen/margin_20"
+                android:paddingTop="@dimen/margin_3"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                app:hintTextColor="@color/purple">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editProjectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_37"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="start|top"
+                    android:hint="@string/enter_project_name"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:paddingTop="@dimen/margin_3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </RelativeLayout>

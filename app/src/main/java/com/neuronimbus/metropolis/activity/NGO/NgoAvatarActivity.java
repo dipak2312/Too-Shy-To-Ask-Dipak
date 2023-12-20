@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,11 +20,20 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
+import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.AuthModels.SaveProfilePicAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
+import com.neuronimbus.metropolis.Models.AvatarResponse;
+import com.neuronimbus.metropolis.Models.SaveProfilePicResponse;
+import com.neuronimbus.metropolis.Models.avatarList;
+import com.neuronimbus.metropolis.R;
+import com.neuronimbus.metropolis.Utils.ClickListener;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.ImagePickUtil;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
+import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.adapters.NGOProfileAdapter;
+import com.neuronimbus.metropolis.adapters.ProfileAdapter;
 import com.neuronimbus.metropolis.databinding.ActivityNgoAvatarBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -33,15 +43,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
-public class NgoAvatarActivity extends AppCompatActivity implements OnClickListner {
+public class NgoAvatarActivity extends AppCompatActivity implements OnClickListner,ClickListener {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
     ActivityNgoAvatarBinding binding;
-    ArrayList<String> ngoAvatarList;
+    ArrayList<avatarList> ngoAvatarList;
     NGOProfileAdapter adapter;
     String avtarImage="";
+    ClickListener clickListener;
     private static final int TAKE_PICTURE = 1;
     public static final int SELECT_FILE = 2754;
     String[] permissions = new String[]{
@@ -61,6 +75,7 @@ public class NgoAvatarActivity extends AppCompatActivity implements OnClickListn
         setContentView(view);
         onClick();
         getController();
+        checkPermissions();
     }
 
     private void onClick() {
@@ -94,28 +109,131 @@ public class NgoAvatarActivity extends AppCompatActivity implements OnClickListn
                 startActivityForResult(galleryIntent, SELECT_FILE);
             }
         });
+
+        binding.updateBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (avtarImage.equals("")) {
+                    Toast.makeText(context, "Please select your profile", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    saveProfilePic();
+                    clickListener.onClick(true);
+                }
+            }
+        });
     }
 
     private void getController() {
         context = NgoAvatarActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
+        clickListener=(ClickListener)context;
+        clickListener.onClick(false);
+        binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
+        binding.recyNgoProfile.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
 
-        ngoAvatarList = new  ArrayList<>();
 
-        ngoAvatarList.add("test");
-        ngoAvatarList.add("check");
-        ngoAvatarList.add("jhvjhsvhjb");
-        ngoAvatarList.add("jhvjhsvhjb");
-
-        adapter = new NGOProfileAdapter(ngoAvatarList,this, context);
-        binding.recyNgoProfile.setAdapter(adapter);
+        getProfile();
 
     }
 
-    @Override
-    public void onClickData(int position, String id) {
+    public void getProfile() {
+        dialog.show("");
 
+        WebServiceModel.getRestApi().getProfile()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<AvatarResponse>() {
+                    @Override
+                    public void onNext(AvatarResponse avatarResponse) {
+
+                        String msg = avatarResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            ngoAvatarList = avatarResponse.getAvatarList();
+                            for(int i=0;i<ngoAvatarList.size();i++)
+                            {
+                                ngoAvatarList.get(i).isSelected=false;
+                            }
+
+                            if (ngoAvatarList != null) {
+                                CallAdapter();
+
+                            }
+                        } else {
+
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                        dialog.dismiss("");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public void CallAdapter()
+
+    {
+        adapter = new NGOProfileAdapter(context,ngoAvatarList, this);
+        binding.recyNgoProfile.setAdapter(adapter);
+    }
+
+    public void saveProfilePic(){
+        dialog.show("");
+
+        SaveProfilePicAuthModel model = new SaveProfilePicAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setImage(avtarImage);
+
+        WebServiceModel.getRestApi().saveProfilePic(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SaveProfilePicResponse>() {
+                    @Override
+                    public void onNext(SaveProfilePicResponse saveProfilePicResponse) {
+                        String msg = saveProfilePicResponse.getMsg();
+
+                        if (msg.equals("Profile Image Updated Successfully")){
+                            Intent intent = new Intent(context, AdminApprovalActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                        dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    @Override
+    public void onClickData(int position, String base64Image) {
+
+        avtarImage=base64Image;
+        binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
     }
 
     private boolean checkPermissions() {
@@ -207,5 +325,10 @@ public class NgoAvatarActivity extends AppCompatActivity implements OnClickListn
             super.onActivityResult(requestCode, resultCode, data);
 
         }
+    }
+
+    @Override
+    public void onClick(Boolean status) {
+
     }
 }

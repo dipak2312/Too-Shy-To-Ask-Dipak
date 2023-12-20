@@ -1,7 +1,5 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,24 +8,31 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.CommonResponse;
 import com.neuronimbus.metropolis.Models.SelectOrganisationAuthModel;
 import com.neuronimbus.metropolis.Models.SelectOrganisationResponse;
+import com.neuronimbus.metropolis.Models.UpdateNGOProfile;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.ClickListener;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
 import com.neuronimbus.metropolis.adapters.SelectOrganisationAdapter;
 import com.neuronimbus.metropolis.databinding.ActivitySelectOrganizationBinding;
+
 import java.util.ArrayList;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class SelectOrganizationActivity extends AppCompatActivity implements OnClickListner, ClickListener {
+public class UpdateOrganizationActivity extends AppCompatActivity implements OnClickListner, ClickListener {
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
@@ -37,7 +42,7 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
     ArrayList<String> selectedOrgIds=new ArrayList<>();
     ArrayList<com.neuronimbus.metropolis.Models.ProjectList> projectList;
     String projectStatus="", projectId="", no_health_issues="";
-    Boolean isSelected= true;
+    boolean isSelected= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,13 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
         getController();
     }
     private void onClick() {
+
+        binding.relBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         binding.yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +72,6 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                     projectList.get(i).isSelected=false;
                     adapter.notifyDataSetChanged();
                 }
-                binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
                 binding.yesBtn.setBackgroundResource(R.drawable.gender_border_active);
                 binding.yesBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
                 binding.noBtn.setBackgroundResource(R.drawable.gender_border_inactive);
@@ -74,7 +85,6 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                 no_health_issues ="no";
                 binding.selectOrgRelLay.setVisibility(View.GONE);
                // adapter.notifyDataSetChanged();
-                binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
                 binding.noBtn.setBackgroundResource(R.drawable.gender_border_active);
                 binding.noBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
                 binding.yesBtn.setBackgroundResource(R.drawable.gender_border_inactive);
@@ -85,67 +95,24 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
         binding.updateBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (no_health_issues.equals("no")){
-                    clickListener.onClick(true);
-                    Intent intent = new Intent(context, NgoAvatarActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
-                else {
-                    ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
+                updateNGOProfile();
 
-                    for(int i=0;i<projectList.size();i++)
-                    {
-                        myvalue.add(projectList.get(i).getSelected());
-                    }
-                    boolean ans = myvalue.contains(true);
-
-                    if(ans)
-                    {
-                        if (!isSelected) {
-                            if(!binding.editProjectName.getText().toString().trim().equals("")){
-                                clickListener.onClick(true);
-                                saveSelectOrganisation();
-                            }
-                        }
-                        else {
-                            clickListener.onClick(true);
-                            saveSelectOrganisation();
-                        }
-
-
-                    }else
-                    {
-                        if (!isSelected) {
-                            if(!binding.editProjectName.getText().toString().trim().equals("")){
-                                clickListener.onClick(true);
-                                saveSelectOrganisation();
-                            }
-                        }
-                        else {
-                            clickListener.onClick(false);
-                        }
-                    }
-
-                }
             }
         });
         binding.otherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isSelected) {
-                    binding.otherBtn.setBackgroundResource(R.drawable.health_inactive);
-                    binding.otherBtn.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    isSelected = false;
-                    binding.otherProjectName.setVisibility(View.GONE);
-
-                }else {
                     binding.otherBtn.setBackgroundResource(R.drawable.health_active);
                     binding.otherBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
-                    isSelected = true;
+                    isSelected = false;
                     binding.otherProjectName.setVisibility(View.VISIBLE);
 
+                }else {
+                    binding.otherBtn.setBackgroundResource(R.drawable.health_inactive);
+                    binding.otherBtn.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    isSelected = true;
+                    binding.otherProjectName.setVisibility(View.GONE);
                 }
 
             }
@@ -153,13 +120,12 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
     }
     private void getController() {
         binding.otherProjectName.setVisibility(View.GONE);
-        context = SelectOrganizationActivity.this;
+        context = UpdateOrganizationActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
         binding.selectOrgRelLay.setVisibility(View.GONE);
-        binding.relBack.setVisibility(View.GONE);
 
         binding.editProjectName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -175,16 +141,6 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
             @Override
             public void afterTextChanged(Editable editable) {
                 String newText = editable.toString();
-                if (newText.isEmpty()){
-                    binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
-                    binding.updateBtn2.setTextColor(ContextCompat.getColor(context, R.color.white));
-
-                }
-                else {
-                    binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
-                    binding.updateBtn2.setTextColor(ContextCompat.getColor(context, R.color.white));
-                }
-
 
             }
         });
@@ -222,11 +178,15 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                             }
 
                             else if (projectStatus.equals("Yes")){
+                                clickListener.onClick(true);
+                                no_health_issues ="yes";
                                 binding.selectOrgRelLay.setVisibility(View.VISIBLE);
                                 binding.yesBtn.setBackgroundResource(R.drawable.gender_border_active);
                                 binding.yesBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
                             }
                             else if (projectStatus.equals("No")){
+                                clickListener.onClick(true);
+                                no_health_issues ="no";
                                 binding.selectOrgRelLay.setVisibility(View.GONE);
                                 binding.noBtn.setBackgroundResource(R.drawable.gender_border_active);
                                 binding.noBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -265,15 +225,15 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
 
     }
 
-    public void saveSelectOrganisation() {
+    public void updateNGOProfile(){
         dialog.show("");
 
-        SelectOrganisationAuthModel model = new SelectOrganisationAuthModel();
+        UpdateNGOProfile model = new UpdateNGOProfile();
         model.setUser_id(spManager.getUserId());
-        model.setNgoproject_id(selectedOrgIds);
-        model.setOthers_desc(binding.editProjectName.getText().toString().trim());
+        model.setNgo_project_name(selectedOrgIds);
+        model.setAction("ngoproject");
 
-        WebServiceModel.getRestApi().saveSelectOrganisation(model)
+        WebServiceModel.getRestApi().updateNGOProfile(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<CommonResponse>() {
@@ -281,24 +241,17 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                     public void onNext(CommonResponse commonResponse) {
                         String msg = commonResponse.getMsg();
                         dialog.dismiss("");
-                        if (msg.equals("Organization updated to profile.")) {
+                        if (msg.equals("Profile Updated")){
 
-                            Intent intent = new Intent(context, NgoAvatarActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-
-                        } else {
-
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-
+                            finish();
                         }
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss("");
+                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -316,23 +269,6 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
         }else
         {
             selectedOrgIds.add(projectId);
-        }
-        ArrayList<Boolean> myvalue=new ArrayList<Boolean>();
-
-        for(int i=0;i<projectList.size();i++)
-        {
-            myvalue.add(projectList.get(i).getSelected());
-        }
-
-        boolean ans = myvalue.contains(true);
-
-        if(ans)
-        {
-            binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
-
-        }else
-        {
-            binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
         }
     }
 

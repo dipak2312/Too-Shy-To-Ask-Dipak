@@ -123,7 +123,7 @@ public class HealthIssuesFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onError(Throwable e) {
 
-                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
 
                     }
 

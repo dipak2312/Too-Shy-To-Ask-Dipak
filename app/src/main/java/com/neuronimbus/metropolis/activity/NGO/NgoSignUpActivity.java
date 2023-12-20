@@ -29,7 +29,7 @@ public class NgoSignUpActivity extends AppCompatActivity {
     SPManager spManager;
     CustomProgressDialog dialog;
     ActivityNgoSignUpBinding binding;
-    String selectValue = "";
+    String phone = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,11 @@ public class NgoSignUpActivity extends AppCompatActivity {
         context = NgoSignUpActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-
         Intent intent = getIntent();
-        String str = intent.getStringExtra("userType");
+        phone = intent.getStringExtra("phone");
+        binding.editMobileNumber.setText(phone);
+        binding.editMobileNumber.setClickable(false);
+        binding.editMobileNumber.setFocusable(false);
 
     }
 
@@ -126,7 +128,7 @@ public class NgoSignUpActivity extends AppCompatActivity {
         signupmodel.setPhone(binding.editMobileNumber.getText().toString().trim());
         signupmodel.setOrganization_activities(binding.majorActivity.getText().toString().trim());
         signupmodel.setLanguage(spManager.getLanguage());
-        signupmodel.setUsertype(selectValue);
+        signupmodel.setUsertype("ngo");
         signupmodel.setWork_experience(binding.workExp.getText().toString().trim());
         signupmodel.setCountry(binding.editCountryEnter.getText().toString().trim());
         signupmodel.setState(binding.editStateEnter.getText().toString().trim());
@@ -135,30 +137,26 @@ public class NgoSignUpActivity extends AppCompatActivity {
         WebServiceModel.getRestApi().ngoRegister(signupmodel)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<CommonResponse>() {
+                .subscribe(new DisposableObserver<SignupResponse>() {
                     @Override
-                    public void onNext(CommonResponse commonResponse) {
-                        String msg = commonResponse.getMsg();
+                    public void onNext(SignupResponse signupResponse) {
+                        String msg = signupResponse.getMsg();
 
-                        /*if (signupResponse!=null && signupResponse.getUser_id()!=null && signupResponse.getUser_id().length() == 1) {
-                            Toast.makeText(context, signupResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                        }*/
-
-                        if (msg.equals("Ngo Registered Successfully")) {
+                        if (msg.equals("NGO Registered Successfully")) {
 
                             spManager.setNgoName(binding.editName.getText().toString().trim());
                             spManager.setNgoRegistrationNumber(binding.registrationNumber.getText().toString().trim());
                             spManager.setEmail(binding.editEmailEnter.getText().toString().trim());
                             spManager.setWorkExp(binding.workExp.getText().toString().trim());
                             spManager.setPhone(binding.editMobileNumber.getText().toString().trim());
-                            //spManager.setUserId(signupResponse.getUser_id());
+                            spManager.setUserId(signupResponse.getUser_id());
                             spManager.setCountry(binding.editCountryEnter.getText().toString().trim());
                             spManager.setState(binding.editStateEnter.getText().toString().trim());
                             spManager.setCity(binding.editCityEnter.getText().toString().trim());
                             spManager.setTstaLoginStatus("true");
                             spManager.setMajorActivities(binding.majorActivity.getText().toString().trim());
                             spManager.setLanguage(spManager.getLanguage());
-                            spManager.setUser(selectValue);
+                            spManager.setUser("ngo");
 
 
                             Intent intent = new Intent(context, SelectOrganizationActivity.class);

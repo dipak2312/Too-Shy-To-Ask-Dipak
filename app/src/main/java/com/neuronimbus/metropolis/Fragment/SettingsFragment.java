@@ -20,9 +20,12 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
+import com.neuronimbus.metropolis.Models.NGOProfileResponse;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.activity.Complaint.ComplaintActivity;
 import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
@@ -30,6 +33,7 @@ import com.neuronimbus.metropolis.activity.Feedback.FeedbackListActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.activity.Help.HelpActivity;
+import com.neuronimbus.metropolis.activity.NGO.NgoProfileUpdateActivity;
 import com.neuronimbus.metropolis.activity.NGO.QRCodeActivity;
 import com.neuronimbus.metropolis.activity.Notification.ManageNotificationActivity;
 import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateProfileActivity;
@@ -61,10 +65,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     Button btn_select;
     RelativeLayout back_arrow;
     CustomProgressDialog dialog;
-    TextView profile_status,txt_name, app_version, terms_conditions, privacy_policy;
+    TextView profile_status,txt_name, app_version, terms_conditions, privacy_policy, rel_percentage;
     CircularProgressBar progress_circular;
     double progrss_value;
-    String action = "language", profile_pic, selectValue, settingActivity = "settingActivity";
+    String action = "language", profile_pic, selectValue, settingActivity = "settingActivity", userType = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +96,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         qrLay.setOnClickListener(this);
         complaint = view.findViewById(R.id.complaint);
         complaint.setOnClickListener(this);
+        rel_percentage = view.findViewById(R.id.percentStatus);
         privacy_policy = view.findViewById(R.id.privacy_policy);
         privacy_policy.setOnClickListener(this);
         terms_conditions = view.findViewById(R.id.terms_conditions);
@@ -117,11 +122,67 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         refer_friends.setOnClickListener(this);
         logout = view.findViewById(R.id.logout);
         logout.setOnClickListener(this);
+        getControl();
 
         //getUserData();
 
         return view;
     }
+    private void getControl(){
+        userType = spManager.getUser();
+        if (userType.equals("ngo")){
+            qrLay.setVisibility(View.VISIBLE);
+            progress_circular.setVisibility(View.GONE);
+            rel_percentage.setVisibility(View.GONE);
+            profile_status.setVisibility(View.GONE);
+        }
+        else {
+            qrLay.setVisibility(View.GONE);
+            progress_circular.setVisibility(View.VISIBLE);
+            rel_percentage.setVisibility(View.VISIBLE);
+            profile_status.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void getNGOProfile(){
+        dialog.show("");
+
+        CommonAuthModel model = new CommonAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+        WebServiceModel.getRestApi().getNGOProfile(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<NGOProfileResponse>() {
+                    @Override
+                    public void onNext(NGOProfileResponse ngoProfileResponse) {
+                        String msg = ngoProfileResponse.getMsg();
+                        dialog.dismiss("");
+
+                        if (msg.equals("success")){
+                            if (ngoProfileResponse != null){
+                                Glide.with(context).load(ngoProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
+                                txt_name.setText(ngoProfileResponse.getProfiledetails().getProfile().getNgo_name());
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dialog.dismiss("");
+                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
 
     public void getUserData(){
         dialog.show("");
@@ -171,10 +232,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         }
 
         else if (id == update_profile.getId()) {
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            if (userType.equals("ngo")){
+                Intent intent = new Intent(context, NgoProfileUpdateActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(context, UpdateProfileActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
         }
         else if(id==terms_conditions.getId())
         {
@@ -568,7 +637,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         setLocale(spManager.getLanguage());
-        getUserData();
+        if (userType.equals("ngo")){
+            getNGOProfile();
+        }else  {
+            getUserData();
+        }
+
+
 
     }
 

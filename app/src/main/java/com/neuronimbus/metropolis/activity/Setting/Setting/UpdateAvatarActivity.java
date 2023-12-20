@@ -152,7 +152,7 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
                         String msg = updateProfileResponse.getMsg();
                         dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
-
+                            finish();
                         }
                         else {
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -383,20 +383,10 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         int id = view.getId();
 
         if (id == rel_back.getId()){
-
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
             finish();
         }
         else if (id == next_btn.getId()){
             getUserProfileUpdate();
-            Intent intent = new Intent(context, UpdateProfileActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
         }
         else if (id == profile_img.getId()){
             profilePopup();

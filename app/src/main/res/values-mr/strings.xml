@@ -283,5 +283,7 @@
     <string name="my_qr_code">My QR Code</string>
     <string name="download_qr">Download QR</string>
     <string name="update_your_profile">Update your Profile</string>
+    <string name="enter_project_name">Enter project name</string>
+    <string name="update_organization">Update Organization</string>
 
 </resources>

@@ -41,10 +41,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     RelativeLayout rel_back;
     CustomProgressDialog dialog;
     Button btn_next, male, female, other;
-
-    String gender ="";
-    String selectValue = "";
-    String yearnew = "";
+    String selectValue = "",phone = "",yearnew = "",gender ="";
     Context context;
     SPManager spManager;
     TextInputEditText edit_name, edit_surname, edit_email_enter, edit_mobile_number,edit_country_enter,
@@ -91,8 +88,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         edit_mobile_number = findViewById(R.id.edit_mobile_number);
         edit_mobile_number.setOnClickListener(this);
         Intent intent = getIntent();
-        String str = intent.getStringExtra("phone");
-        edit_mobile_number.setText(str);
+        phone = intent.getStringExtra("phone");
+        edit_mobile_number.setText(phone);
         edit_mobile_number.setClickable(false);
         edit_mobile_number.setFocusable(false);
 
@@ -391,7 +388,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 public void onClick(View view) {//user, parent
                     if (selectValue =="ngo"){
                         Intent intent = new Intent(context, NgoSignUpActivity.class);
-                        intent.putExtra("userType", selectValue);
+                        intent.putExtra("phone", phone);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

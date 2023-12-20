@@ -37,6 +37,7 @@ import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Game.GameMainPageActivity;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
+import com.neuronimbus.metropolis.activity.NGO.NgoProfileUpdateActivity;
 import com.neuronimbus.metropolis.activity.Search.SearchActivity;
 import com.neuronimbus.metropolis.activity.Notification.NotificationsActivity;
 import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateProfileActivity;
@@ -103,7 +104,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     DotsIndicator mBarLayout;
     BottomSheetDialog bottomSheetDialog;
     CustomProgressDialog dialog;
-    String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken", selectValue;
+    String action = "language", blog_id = "", type = "blog", actions = "",  tokenaction = "devicetoken",
+            selectValue, userType = "";
     int banner_size;
 
     String[] permissions = new String[]{
@@ -156,7 +158,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
         viewPager2 = view.findViewById(R.id.view_pager_img);
         viewPager2.setOnClickListener(this);
         mBarLayout = view.findViewById(R.id.indicator_layout);
-
+        userType = spManager.getUser();
 
         getFcmToken();
         getHomePageResponse();
@@ -377,10 +379,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
         if (spManager.getTstaguestLoginStatus().equals("false")) {
             if (id == update_profile.getId()) {
-                Intent intent = new Intent(context, UpdateProfileActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if (userType.equals("ngo")) {
+                    Intent intent = new Intent(context, NgoProfileUpdateActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else  {
+                    Intent intent = new Intent(context, UpdateProfileActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+
             } else if (id == game_banner.getId()) {
                 Intent intent = new Intent(context, GameMainPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

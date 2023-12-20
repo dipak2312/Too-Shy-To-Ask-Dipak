@@ -89,9 +89,13 @@ import com.neuronimbus.metropolis.Models.GameTimeAuthModel;
 import com.neuronimbus.metropolis.Models.LeaderboardResponse;
 import com.neuronimbus.metropolis.Models.Courses.Lesson.LessonEnrollResponse;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LessonUpdateResponse;
+import com.neuronimbus.metropolis.Models.NGOProfileResponse;
 import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
 import com.neuronimbus.metropolis.Models.ProcessingFeedbackChatResponse;
+import com.neuronimbus.metropolis.Models.QRCodeResponse;
+import com.neuronimbus.metropolis.Models.SelectOrganisationAuthModel;
 import com.neuronimbus.metropolis.Models.SelectOrganisationResponse;
+import com.neuronimbus.metropolis.Models.SplashScreenResponse;
 import com.neuronimbus.metropolis.Models.StoreHouse.AllStoreHouseResponse;
 import com.neuronimbus.metropolis.Models.AllVideoGalleryResponse;
 import com.neuronimbus.metropolis.Models.AvatarResponse;
@@ -137,6 +141,7 @@ import com.neuronimbus.metropolis.Models.StoryLikeResponse;
 import com.neuronimbus.metropolis.Models.StoryResponse;
 import com.neuronimbus.metropolis.Models.StoryShareResponse;
 import com.neuronimbus.metropolis.Models.SuccessResponse;
+import com.neuronimbus.metropolis.Models.UpdateNGOProfile;
 import com.neuronimbus.metropolis.Models.UpdateProfile.UpdateProfileResponse;
 import com.neuronimbus.metropolis.Models.UserDetailResponse;
 import com.neuronimbus.metropolis.Models.UserProfileResponse;
@@ -442,9 +447,29 @@ public interface WebServices {
 
     @Headers("Content-Type: application/json")
     @POST("api/register_ngo")
-    Observable<CommonResponse> ngoRegister(@Body NGOSignupAuthModel model);
+    Observable<SignupResponse> ngoRegister(@Body NGOSignupAuthModel model);
 
     @Headers("Content-Type: application/json")
     @POST("api/ngo_projects")
     Observable<SelectOrganisationResponse> ngoRegister(@Body CommonAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/save_organizations")
+    Observable<CommonResponse> saveSelectOrganisation(@Body SelectOrganisationAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/splashscreen")
+    Observable<SplashScreenResponse> splashScreen(@Body CommonAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/ngoprofile")
+    Observable<NGOProfileResponse> getNGOProfile(@Body CommonAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/updatengoprofile")
+    Observable<CommonResponse> updateNGOProfile(@Body UpdateNGOProfile model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/myqrcode")
+    Observable<QRCodeResponse> qrCodeInfo(@Body CommonAuthModel model);
 }

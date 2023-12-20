@@ -25,6 +25,7 @@ import com.neuronimbus.metropolis.activity.Blogs.AllEventActivity;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.activity.LMS.AllCoursesActivity;
 import com.neuronimbus.metropolis.activity.Game.GameMainPageActivity;
+import com.neuronimbus.metropolis.activity.NGO.NgoProfileUpdateActivity;
 import com.neuronimbus.metropolis.activity.Notification.NotificationsActivity;
 import com.neuronimbus.metropolis.activity.Quiz.QuizActivity;
 import com.neuronimbus.metropolis.activity.Search.SearchActivity;
@@ -88,7 +89,7 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
     RelativeLayout insight_lay, recy_layout, blog, recy_blog_lay, highlight_blog, event_blog, recy_event_blog_lay, courses_lay,
             courses_rel_lay, video_lay, video_rel_lay;
     NestedScrollView insight_scroll;
-    String blog_id = "", type = "", actions = "", isBookmark;
+    String blog_id = "", type = "", actions = "", isBookmark, userType = "";
     ImageView search, bookmark, notification_img;
 
     @Override
@@ -137,6 +138,8 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
         see_all4.setOnClickListener(this);
         see_all5 = view.findViewById(R.id.see_all5);
         see_all5.setOnClickListener(this);
+
+        userType = spManager.getUser();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recy_storehouse.setLayoutManager(linearLayoutManager);
@@ -398,10 +401,18 @@ public class InsightsFragment extends Fragment implements View.OnClickListener, 
             }
 
             if (id == update_profile.getId()) {
-                Intent intent = new Intent(context, UpdateProfileActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if (userType.equals("ngo")) {
+                    Intent intent = new Intent(context, NgoProfileUpdateActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else  {
+                    Intent intent = new Intent(context, UpdateProfileActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
             } else if (id == game_banner.getId()) {
                 Intent intent = new Intent(context, GameMainPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

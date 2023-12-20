@@ -19,6 +19,12 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
+import com.neuronimbus.metropolis.AuthModels.SignupAuthModel;
+import com.neuronimbus.metropolis.Models.SignupResponse;
+import com.neuronimbus.metropolis.Models.SplashScreenResponse;
+import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.R;
@@ -30,18 +36,23 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.neuronimbus.metropolis.activity.NGO.AdminApprovalActivity;
 
 import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
     BiometricPrompt biometricPrompt;
     BiometricPrompt.PromptInfo promptInfo;
     SPManager spManager;
+    CustomProgressDialog dialog;
     Context context;
     BiometricManager biometricManager;
     private final int UPDATE_CODE = 22;
@@ -56,6 +67,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         context = SplashScreenActivity.this;
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);
+        dialog = new CustomProgressDialog(context);
         //openFingerPrint();
         checkPreviousActivityStatus();
 
@@ -198,21 +210,16 @@ public class SplashScreenActivity extends AppCompatActivity {
                     //Do your stuff here
 
                     if (spManager.getTstaLoginStatus().equals("true")) {
-                        Intent intent = new Intent(this, HomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        checkUpdate();
-                        finish();
+                        adminApproval();
                     }
-                    else if (spManager.getTstaguestLoginStatus().equals("true")) {
-                        Intent intent = new Intent(this, SignInActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        checkUpdate();
-                        finish();
-                    }
+//                    else if (spManager.getTstaguestLoginStatus().equals("true")) {
+//                        Intent intent = new Intent(this, SignInActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                        checkUpdate();
+//                        finish();
+//                    }
                         else {
                         Intent intent = new Intent(this, SliderImagesActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -224,5 +231,67 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 })
                 .subscribe();
+    }
+
+    public void adminApproval() {
+//        dialog.show("");
+
+        CommonAuthModel model = new CommonAuthModel();
+        model.setUser_id(spManager.getUserId());
+
+
+        WebServiceModel.getRestApi().splashScreen(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SplashScreenResponse>() {
+                    @Override
+                    public void onNext(SplashScreenResponse splashScreenResponse) {
+                        String msg = splashScreenResponse.getMsg();
+
+                        if (msg.equals("success")) {
+
+                            if (splashScreenResponse != null){
+                                spManager.setUser(splashScreenResponse.getUsertype().toString());
+
+                                if (splashScreenResponse.getAdmin_approval()){
+                                    Intent intent = new Intent(context, HomeActivity.class);
+                                    spManager.setTstaLoginStatus("true");
+                                    spManager.setTstaguestLoginStatus("false");
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    checkUpdate();
+                                    finish();
+
+                                }
+                                else {
+                                    Intent intent = new Intent(context, AdminApprovalActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+
+                        } else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                       // dialog.dismiss("");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context,e.toString(), Toast.LENGTH_SHORT).show();
+                        //dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 }

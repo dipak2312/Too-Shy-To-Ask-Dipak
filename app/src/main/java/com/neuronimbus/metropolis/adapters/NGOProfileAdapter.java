@@ -18,15 +18,15 @@ import java.util.ArrayList;
 
 public class NGOProfileAdapter extends RecyclerView.Adapter<NGOProfileAdapter.ViewHolder> {
     Context context;
-    ArrayList<String>avatarList;
+    ArrayList<avatarList>avatarList;
     OnClickListner onclicklistener;
 
    public int singleitem_selection_position = -1;
 
-    public NGOProfileAdapter(ArrayList<String>avatarList, OnClickListner onclicklistener, Context context) {
+    public NGOProfileAdapter(Context context, ArrayList<com.neuronimbus.metropolis.Models.avatarList> avatarList, OnClickListner onclicklistener) {
+        this.context = context;
         this.avatarList = avatarList;
         this.onclicklistener = onclicklistener;
-        this.context = context;
     }
 
     @NonNull
@@ -43,7 +43,7 @@ public class NGOProfileAdapter extends RecyclerView.Adapter<NGOProfileAdapter.Vi
         InputStream is = new ByteArrayInputStream(imageByteArray);
         Bitmap bmp = BitmapFactory.decodeStream(is);
         holder.img.setImageBitmap(bmp);*/
-        //Glide.with(context).load(avatarList.get(position).getUrl()).into(holder.img);
+        Glide.with(context).load(avatarList.get(position).getUrl()).into(holder.img);
 
 
         if (singleitem_selection_position == position){
@@ -74,7 +74,7 @@ public class NGOProfileAdapter extends RecyclerView.Adapter<NGOProfileAdapter.Vi
                 @Override
                 public void onClick(View view) {
 
-                    //onclicklistener.onClickData(getAdapterPosition(),avatarList.get(getAbsoluteAdapterPosition()).getEncimg());
+                    onclicklistener.onClickData(getAdapterPosition(),avatarList.get(getAbsoluteAdapterPosition()).getEncimg());
 
 
                     setSingleSelection(getAbsoluteAdapterPosition());
