@@ -1,23 +1,27 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
+import com.neuronimbus.metropolis.AuthModels.QRCodeCountAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
+import com.neuronimbus.metropolis.Models.CommonResponse;
 import com.neuronimbus.metropolis.Models.QRCodeResponse;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.databinding.ActivityQrcodeBinding;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -27,7 +31,7 @@ public class QRCodeActivity extends AppCompatActivity {
     SPManager spManager;
     CustomProgressDialog dialog;
     ActivityQrcodeBinding binding;
-    String downloadUrl = "";
+    String downloadUrl = "", action = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,26 @@ public class QRCodeActivity extends AppCompatActivity {
         binding.downloadQRLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                action= "download";
                 downloadFile(downloadUrl);
+
+            }
+        });
+        binding.referFriendsLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                action= "refer";
+
+                Drawable mDrawable = binding.qrCodeImage.getDrawable();
+                Bitmap mBitmap = ((BitmapDrawable)mDrawable).getBitmap();
+                String path = MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap, "Image I want to share", null);
+                Uri uri = Uri.parse(path);
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.setType("image/*");
+                startActivity(Intent.createChooser(shareIntent, "Share Image"));
+                qrCodeCount();
 
             }
         });
@@ -72,11 +95,12 @@ public class QRCodeActivity extends AppCompatActivity {
 
         // Set the local destination for the downloaded file to a path within the application's external files directory
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName + ".png");
-
         request.setMimeType("*/*");
 
         // Enqueue the download request
         downloadManager.enqueue(request);
+
+        qrCodeCount();
     }
 
     public static String getName(String filename) {
@@ -113,6 +137,41 @@ public class QRCodeActivity extends AppCompatActivity {
                         if (msg.equals("success")){
                             downloadUrl = qrCodeResponse.getAndroid_qrcode_img();
                             Glide.with(context).load(qrCodeResponse.getAndroid_qrcode_img()).into(binding.qrCodeImage);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void qrCodeCount(){
+        dialog.show("");
+
+        QRCodeCountAuthModel model = new QRCodeCountAuthModel();
+        model.setUser_id(spManager.getUserId());
+        model.setAction(action);
+
+        WebServiceModel.getRestApi().qrCodeCount(model)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<CommonResponse>() {
+                    @Override
+                    public void onNext(CommonResponse commonResponse) {
+                        String msg = commonResponse.getMsg();
+                        dialog.dismiss("");
+                        if (msg.equals("success")){
+
 
                         }
 

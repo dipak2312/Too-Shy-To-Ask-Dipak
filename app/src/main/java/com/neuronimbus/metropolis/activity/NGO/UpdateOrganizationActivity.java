@@ -25,6 +25,7 @@ import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
 import com.neuronimbus.metropolis.adapters.SelectOrganisationAdapter;
 import com.neuronimbus.metropolis.databinding.ActivitySelectOrganizationBinding;
+import com.neuronimbus.metropolis.databinding.ActivityUpdateOrganizationBinding;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ public class UpdateOrganizationActivity extends AppCompatActivity implements OnC
     SPManager spManager;
     CustomProgressDialog dialog;
     ClickListener clickListener;
-    ActivitySelectOrganizationBinding binding;
+    ActivityUpdateOrganizationBinding binding;
     SelectOrganisationAdapter adapter;
     ArrayList<String> selectedOrgIds=new ArrayList<>();
     ArrayList<com.neuronimbus.metropolis.Models.ProjectList> projectList;
@@ -48,7 +49,7 @@ public class UpdateOrganizationActivity extends AppCompatActivity implements OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        binding = ActivitySelectOrganizationBinding.inflate(getLayoutInflater());
+        binding = ActivityUpdateOrganizationBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
         onClick();

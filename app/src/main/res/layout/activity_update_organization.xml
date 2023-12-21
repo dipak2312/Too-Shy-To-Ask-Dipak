@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.NGO.UpdateOrganizationActivity">
+
+    <RelativeLayout
+        android:id="@+id/rel_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_50"
+        android:background="@drawable/infocard_shadow"
+        android:elevation="@dimen/margin_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rel_back"
+                android:layout_width="@dimen/margin_30"
+                android:layout_height="@dimen/margin_30"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_20">
+
+                <ImageView
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/back" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/worksansregular"
+                android:text="@string/update_organization"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size18" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_health"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top_bar"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15">
+
+        <TextView
+            android:id="@+id/health_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_a_partner_with_metropolis"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansregular"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/health_issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/health_title"
+            android:layout_marginTop="@dimen/margin_15">
+
+            <Button
+                android:id="@+id/yes_btn"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_45"
+                android:text="@string/yes"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14"
+                android:background="@drawable/gender_border_inactive"/>
+
+            <Button
+                android:id="@+id/no_btn"
+                android:layout_width="@dimen/margin_100"
+                android:layout_height="@dimen/margin_45"
+                android:layout_marginStart="@dimen/margin_15"
+                android:background="@drawable/gender_border_inactive"
+                android:text="@string/no"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size14"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/selectOrgRelLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/health_issue"
+            android:layout_marginTop="@dimen/margin_20">
+
+            <TextView
+                android:id="@+id/issue_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/in_which_project_are_you_involved"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansregular"
+                android:textColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recySelectOrganization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                android:nestedScrollingEnabled="true"
+                tools:listitem="@layout/health_issues"
+                android:layout_below="@id/issue_title"
+                android:layout_marginTop="@dimen/margin_20">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/otherBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_30"
+                android:layout_below="@id/recySelectOrganization"
+                android:text="@string/other"
+                android:textAllCaps="false"
+                android:singleLine="true"
+                android:fontFamily="@font/worksansregular"
+                android:textSize="@dimen/text_size14"
+                android:paddingEnd="@dimen/margin_15"
+                android:paddingStart="@dimen/margin_15"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@drawable/health_inactive"/>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/otherProjectName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:background="@drawable/background"
+                android:fontFamily="@font/worksansmedium"
+                android:gravity="top"
+                android:layout_below="@id/otherBtn"
+                android:layout_marginTop="@dimen/margin_20"
+                android:paddingTop="@dimen/margin_3"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                app:hintTextColor="@color/purple">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editProjectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_37"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="start|top"
+                    android:hint="@string/enter_project_name"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:paddingTop="@dimen/margin_3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:layout_marginBottom="@dimen/margin_30">
+
+        <Button
+            android:id="@+id/update_btn2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:includeFontPadding="false"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size14"
+            android:fontFamily="@font/worksansbold"
+            android:background="@drawable/active_con_btn"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

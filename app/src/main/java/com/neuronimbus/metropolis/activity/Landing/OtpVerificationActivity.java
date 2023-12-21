@@ -32,6 +32,7 @@ import com.neuronimbus.metropolis.Models.SignInResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+import com.neuronimbus.metropolis.activity.NGO.AdminApprovalActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -293,14 +294,24 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setBloodgroup(otpInResponse.getData().getBloodgrp());
                            spManager.setHeight(otpInResponse.getData().getHeight());
                            spManager.setWeight(otpInResponse.getData().getWeight());
+                           spManager.setUser(otpInResponse.getUsertype());
 
                            getUserProfileUpdate();
+                           if (otpInResponse.getAdmin_approval()){
+                               Intent intent = new Intent(context, HomeActivity.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                               startActivity(intent);
+                               finish();
 
-                           Intent intent = new Intent(context, HomeActivity.class);
-                           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                           startActivity(intent);
-                           finish();
+                           }
+                           else {
+                               Intent intent = new Intent(context, AdminApprovalActivity.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                               startActivity(intent);
+                               finish();
+                           }
 
 
                        }

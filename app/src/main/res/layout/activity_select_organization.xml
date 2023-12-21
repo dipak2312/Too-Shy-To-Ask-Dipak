@@ -36,11 +36,12 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansregular"
-                android:text="@string/update_organization"
+                android:text="@string/select_organization"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
 
@@ -197,7 +198,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size14"
             android:fontFamily="@font/worksansbold"
-            android:background="@drawable/active_con_btn"
+            android:background="@drawable/inactive_con_btn"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>

@@ -4,6 +4,7 @@ import com.neuronimbus.metropolis.AuthModels.AddComplaintAuthModel;
 import com.neuronimbus.metropolis.AuthModels.AskFeedbackAuthModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
 import com.neuronimbus.metropolis.AuthModels.NGOSignupAuthModel;
+import com.neuronimbus.metropolis.AuthModels.QRCodeCountAuthModel;
 import com.neuronimbus.metropolis.Models.AddComplaintResponse;
 import com.neuronimbus.metropolis.AuthModels.AllBlogAuthModel;
 import com.neuronimbus.metropolis.AuthModels.AllCoursesAuthModel;
@@ -472,4 +473,8 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/myqrcode")
     Observable<QRCodeResponse> qrCodeInfo(@Body CommonAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/qrcodecount")
+    Observable<CommonResponse> qrCodeCount(@Body QRCodeCountAuthModel model);
 }
