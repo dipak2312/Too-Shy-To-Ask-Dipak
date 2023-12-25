@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/margin_7"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -17,6 +18,7 @@
         android:layout_marginStart="@dimen/margin_30"
         android:layout_marginEnd="@dimen/margin_30"
         android:textSize="@dimen/text_size18"
+        android:gravity="center"
         android:fontFamily="@font/worksansmedium"
         android:layout_marginTop="@dimen/margin_20"
         android:layout_gravity="center_horizontal"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size14"
+        android:gravity="center"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:fontFamily="@font/worksansregular"

@@ -73,7 +73,10 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
             public void onClick(View v) {
                 no_health_issues ="no";
                 binding.selectOrgRelLay.setVisibility(View.GONE);
-               // adapter.notifyDataSetChanged();
+                binding.otherBtn.setBackgroundResource(R.drawable.health_inactive);
+                binding.otherProjectName.setVisibility(View.GONE);
+                binding.otherBtn.setTextColor(ContextCompat.getColor(context, R.color.black));
+                isSelected = false;
                 binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
                 binding.noBtn.setBackgroundResource(R.drawable.gender_border_active);
                 binding.noBtn.setTextColor(ContextCompat.getColor(context, R.color.white));

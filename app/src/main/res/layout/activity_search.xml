@@ -64,7 +64,7 @@
                 android:id="@+id/img_lesson"
                 android:layout_width="@dimen/margin_15"
                 android:layout_height="@dimen/margin_15"
-                android:src="@drawable/microphone"
+                android:src="@drawable/mic_red"
                 />
 
         </RelativeLayout>

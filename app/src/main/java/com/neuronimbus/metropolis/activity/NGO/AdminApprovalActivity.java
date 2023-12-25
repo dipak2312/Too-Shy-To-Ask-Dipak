@@ -1,6 +1,7 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -45,7 +46,7 @@ public class AdminApprovalActivity extends AppCompatActivity {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.admin_approval_popup);
         dialog.setCancelable(false);
-
+        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
         RelativeLayout exploreTstaLay = dialog.findViewById(R.id.exploreTstaLay);
 
 

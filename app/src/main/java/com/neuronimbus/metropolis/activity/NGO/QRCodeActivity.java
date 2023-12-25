@@ -1,6 +1,8 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +21,15 @@ import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
 import com.neuronimbus.metropolis.AuthModels.QRCodeCountAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.CommonResponse;
-import com.neuronimbus.metropolis.Models.QRCodeResponse;
+import com.neuronimbus.metropolis.Models.QRCode.QRCodeResponse;
+import com.neuronimbus.metropolis.Models.QRCode.question;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.adapters.FAQAdapter;
+import com.neuronimbus.metropolis.adapters.QRCodeAdapter;
 import com.neuronimbus.metropolis.databinding.ActivityQrcodeBinding;
+
+import java.util.ArrayList;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -32,6 +40,8 @@ public class QRCodeActivity extends AppCompatActivity {
     CustomProgressDialog dialog;
     ActivityQrcodeBinding binding;
     String downloadUrl = "", action = "";
+    ArrayList<com.neuronimbus.metropolis.Models.QRCode.question> question;
+    QRCodeAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,12 @@ public class QRCodeActivity extends AppCompatActivity {
     }
 
     private void onClick() {
+        binding.relBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         binding.downloadQRLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +132,9 @@ public class QRCodeActivity extends AppCompatActivity {
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        binding.recyQrCode.setLayoutManager(linearLayoutManager);
+
         qrCodeInfo();
 
     }
@@ -135,8 +154,15 @@ public class QRCodeActivity extends AppCompatActivity {
                         String msg = qrCodeResponse.getMsg();
                         dialog.dismiss("");
                         if (msg.equals("success")){
+                            question = qrCodeResponse.getQuestion();
                             downloadUrl = qrCodeResponse.getAndroid_qrcode_img();
+                            binding.ngoName.setText(qrCodeResponse.getNgo_name());
                             Glide.with(context).load(qrCodeResponse.getAndroid_qrcode_img()).into(binding.qrCodeImage);
+
+                            if (question != null){
+                                adapter = new QRCodeAdapter(context, question);
+                                binding.recyQrCode.setAdapter(adapter);
+                            }
 
                         }
 

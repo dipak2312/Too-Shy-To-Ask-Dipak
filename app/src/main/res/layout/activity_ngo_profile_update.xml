@@ -170,7 +170,7 @@
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
                         android:hint="@string/registration_number"
-                        android:inputType="textPersonName|textCapSentences"
+                        android:inputType="number"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size16" />
@@ -260,7 +260,7 @@
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
                         android:hint="@string/major_activities_of_the_organization"
-                        android:inputType="number"
+                        android:inputType="textPersonName|textCapSentences"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size16" />
@@ -290,7 +290,7 @@
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
                         android:hint="@string/duration_of_work_experience"
-                        android:inputType="number"
+                        android:inputType="textPersonName|textCapSentences"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size16" />

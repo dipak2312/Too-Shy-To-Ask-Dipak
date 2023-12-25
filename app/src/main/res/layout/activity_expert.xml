@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/text_msg"
-        android:layout_above="@+id/rel_bottom_tab"
+        android:layout_above="@+id/voiceBottomLay"
         android:layout_marginTop="@dimen/margin_20">
 
         <RelativeLayout
@@ -102,10 +102,15 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <RelativeLayout
+        android:id="@+id/voiceBottomLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+    <RelativeLayout
         android:id="@+id/rel_bottom_tab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_40"
-        android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/margin_10"
         android:visibility="visible"
         android:layout_marginBottom="@dimen/margin_30"
@@ -166,123 +171,55 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutSlideCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_40"
-            android:layout_toStartOf="@+id/relVoice"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/margin_10"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:rotation="-90"
-                android:src="@drawable/arrow" />
-
-            <TextView
-                android:id="@+id/textViewSlide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/worksansregular"
-                android:text="@string/slide_to_cancel"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="normal" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/layoutEffect1"
-            android:layout_width="70dp"
-            android:layout_height="@dimen/margin_35"
-            android:layout_marginTop="@dimen/margin_2"
-            android:layout_marginStart="@dimen/margin_2"
-            android:layout_gravity="center_vertical"
-            android:background="#ffffff"
-            android:visibility="gone" />
-
-        <View
-            android:id="@+id/layoutEffect2"
-            android:layout_width="20dp"
-            android:layout_height="@dimen/margin_35"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_2"
-            android:layout_marginStart="90dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shadow"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/layoutDustin"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_35"
-            android:layout_gravity="center_vertical"
-            android:elevation="2dp"
-            android:layout_marginTop="@dimen/margin_3"
-            android:gravity="center_vertical"
-            android:translationZ="10dp">
-
-            <ImageView
-                android:id="@+id/dustin"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/margin_35"
-                android:layout_marginStart="@dimen/margin_5"
-                android:src="@drawable/icon_mic"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textViewTime"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/margin_35"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="@dimen/margin_20"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:fontFamily="@font/worksansregular"
-            android:textColor="@color/black"
-            android:padding="8dp"
-            android:text="0:00"
-            android:textSize="@dimen/text_size16"
-            android:textStyle="normal"
-            android:translationZ="10dp"
-            android:visibility="gone" />
-
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/voiceRecordingRelLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/margin_120"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true">
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/recordingRelLay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/margin_40"
+            android:layout_height="@dimen/margin_45"
             android:layout_marginStart="@dimen/margin_20"
             android:layout_marginEnd="@dimen/margin_20"
             android:background="@drawable/recording_background"
-            android:layout_marginTop="@dimen/margin_20"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
             <ImageView
+                android:id="@+id/recordingPause"
                 android:layout_width="@dimen/margin_25"
                 android:layout_height="@dimen/margin_25"
                 android:layout_marginStart="@dimen/margin_10"
-                android:src="@drawable/mic"/>
+                android:visibility="gone"
+                android:src="@drawable/pause"/>
+
+            <ImageView
+                android:id="@+id/recordingPlay"
+                android:layout_width="@dimen/margin_25"
+                android:layout_height="@dimen/margin_25"
+                android:layout_marginStart="@dimen/margin_10"
+                android:visibility="gone"
+                android:src="@drawable/play"/>
+
+            <TextView
+                android:id="@+id/recordingLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/worksansregular"
+                android:textSize="@dimen/text_size14"
+                android:textColor="@color/black"
+                android:text="Recording in English"/>
             
             <TextView
+                android:id="@+id/recordingTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="0.10"
+                android:text="00.00"
                 android:textSize="@dimen/text_size14"
                 android:layout_marginEnd="@dimen/margin_10"
                 android:textColor="@color/black"
@@ -299,24 +236,29 @@
             android:layout_marginBottom="@dimen/margin_20">
 
             <ImageView
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
+                android:id="@+id/deleteVoice"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
                 android:src="@drawable/delete"/>
 
             <ImageView
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
+                android:id="@+id/pauseResumeVoice"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/microphone"/>
+                android:src="@drawable/mic_red"/>
 
             <ImageView
+                android:id="@+id/sendVoice"
                 android:layout_width="@dimen/margin_25"
                 android:layout_height="@dimen/margin_25"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/send_msg"/>
+                android:src="@drawable/send"/>
 
 
         </RelativeLayout>
+
+    </RelativeLayout>
 
     </RelativeLayout>
 

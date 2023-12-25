@@ -93,7 +93,7 @@ import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LessonUpdateResponse;
 import com.neuronimbus.metropolis.Models.NGOProfileResponse;
 import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
 import com.neuronimbus.metropolis.Models.ProcessingFeedbackChatResponse;
-import com.neuronimbus.metropolis.Models.QRCodeResponse;
+import com.neuronimbus.metropolis.Models.QRCode.QRCodeResponse;
 import com.neuronimbus.metropolis.Models.SelectOrganisationAuthModel;
 import com.neuronimbus.metropolis.Models.SelectOrganisationResponse;
 import com.neuronimbus.metropolis.Models.SplashScreenResponse;
