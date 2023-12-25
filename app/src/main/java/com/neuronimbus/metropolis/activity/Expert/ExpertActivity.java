@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.databinding.ActivityExpertBinding;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +107,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 binding.voiceRecordingRelLayout.setVisibility(View.GONE);
                 binding.relBottomTab.setVisibility(View.VISIBLE);
+                binding.recordingPlay.setVisibility(View.GONE);
+                binding.recordingPause.setVisibility(View.GONE);
                 deleteRecording();
             }
         });
@@ -141,8 +145,34 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+        binding.sendVoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                convertAudioToBase64(getRecordingFilePath());
+            }
+        });
     }
+    public String convertAudioToBase64(String filePath) {
+        File audioFile = new File(filePath);
 
+        try {
+            // Step 1: Read the Audio File
+            byte[] audioData = new byte[(int) audioFile.length()];
+            FileInputStream fileInputStream = new FileInputStream(audioFile);
+            fileInputStream.read(audioData);
+            fileInputStream.close();
+
+            // Step 2: Convert to Base64
+            String base64Audio = Base64.encodeToString(audioData, Base64.DEFAULT);
+            //Log.d("dipakss", base64Audio);
+            getAskQuestions(base64Audio, "audio");
+
+            return base64Audio;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private void getControl() {
         context = ExpertActivity.this;
         spManager = new SPManager(context);
@@ -257,6 +287,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         if (file.exists()) {
             if (file.delete()) {
                 recordingTimeInSeconds = 0;
+                handler.removeCallbacks(timerRunnable);
                 Toast.makeText(this, "Recording deleted", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Failed to delete recording", Toast.LENGTH_SHORT).show();
@@ -414,12 +445,12 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void getAskQuestions(String message) {
+    public void getAskQuestions(String message, String quetype) {
 
         AskQuestionsAuthModel model = new AskQuestionsAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setReply(message);
-        model.setQuestionType("text");
+        model.setQuestionType(quetype);
         model.setLanguage("en");
 
         WebServiceModel.getRestApi().getAskQuestions(model)
@@ -458,12 +489,12 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
                 recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
-                getAskQuestions(message);
+                getAskQuestions(message, "text");
                 chat_ref_status = "yes";
                 ask_questions.setText("");
             } else if (adapter == null) {
 
-                getAskQuestions(message);
+                getAskQuestions(message, "text");
                 chat_ref_status = "yes";
                 ask_questions.setText("");
             } else {
