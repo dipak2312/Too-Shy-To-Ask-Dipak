@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/worksansmedium"
+                android:textAllCaps="false"
                 android:text="@string/update_your_profile"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size18" />
@@ -49,6 +50,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/updateProScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollIndicators="end"
@@ -170,7 +172,7 @@
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
                         android:hint="@string/registration_number"
-                        android:inputType="number"
+                        android:inputType="textPersonName|textCapSentences"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size16" />
@@ -434,7 +436,7 @@
                     android:gravity="center"
                     android:background="@drawable/active_con_btn"
                     android:layout_marginBottom="@dimen/margin_30"
-                    android:text="@string/next"
+                    android:text="@string/update"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size14" />
 

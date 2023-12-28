@@ -297,16 +297,27 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setUser(otpInResponse.getUsertype());
 
                            getUserProfileUpdate();
-                           if (otpInResponse.getAdmin_approval()){
+                           if (otpInResponse.getAdmin_approval().equals("approved")){
                                Intent intent = new Intent(context, HomeActivity.class);
+                               spManager.setTstaLoginStatus("true");
+                               spManager.setTstaguestLoginStatus("false");
                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                startActivity(intent);
                                finish();
 
                            }
-                           else {
+                           else if (otpInResponse.getAdmin_approval().equals("pending")){
                                Intent intent = new Intent(context, AdminApprovalActivity.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                               startActivity(intent);
+                               finish();
+                           }
+                           else {
+                               Intent intent = new Intent(context, SignInActivity.class);
+                               spManager.setTstaLoginStatus("false");
+                               spManager.setTstaguestLoginStatus("false");
                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                startActivity(intent);

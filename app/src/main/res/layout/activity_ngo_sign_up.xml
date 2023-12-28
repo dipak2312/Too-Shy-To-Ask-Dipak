@@ -123,7 +123,7 @@
                         android:fontFamily="@font/worksansmedium"
                         android:gravity="top"
                         android:hint="@string/registration_number"
-                        android:inputType="number"
+                        android:inputType="textPersonName|textCapSentences"
                         android:paddingTop="@dimen/margin_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size16" />

@@ -19,9 +19,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -72,6 +74,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     Boolean isRecording = false;
     private int recordingTimeInSeconds = 0;
     private Handler handler = new Handler();
+    Chronometer chronometer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +170,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             String base64Audio = Base64.encodeToString(audioData, Base64.DEFAULT);
             //Log.d("dipakss", base64Audio);
             getAskQuestions(base64Audio, "audio");
+            ask_questions.setText("");
 
             return base64Audio;
         } catch (IOException e) {
@@ -231,7 +236,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             mediaPlayer.setDataSource(getRecordingFilePath());
             mediaPlayer.prepare();
             mediaPlayer.start();
-            handler.postDelayed(timerRunnable, 1000);
+            //handler.postDelayed(timerRunnable, 1000);
             Toast.makeText(context, "Recording Play", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,8 +254,17 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             mediaRecorder.prepare();
             mediaRecorder.start();
-            handler.postDelayed(timerRunnable, 1000);
+            //handler.postDelayed(timerRunnable, 1000);
 
+            chronometer.setBase(SystemClock.elapsedRealtime() - recordingTimeInSeconds * 1000);
+            chronometer.start();
+            binding.recordingTime.setText(recordingTimeInSeconds);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    stopRecording();
+                }
+            }, 180000);
             Toast.makeText(context, "Recording Started", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -260,13 +274,13 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     public Runnable timerRunnable = new Runnable() {
         @Override
         public void run() {
-            recordingTimeInSeconds++;
+            //recordingTimeInSeconds++;
             int minutes = recordingTimeInSeconds / 60;
             int seconds = recordingTimeInSeconds % 60;
             time = String.format("%02d:%02d", minutes, seconds);
             binding.recordingTime.setText(time);
             binding.recordingTime.setText(time);
-            handler.postDelayed(this, 1000); // Update every 1 second
+            //handler.postDelayed(this, 1000); // Update every 1 second
         }
     };
 
@@ -277,7 +291,12 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             mediaRecorder.release();
             mediaRecorder = null;
             recordingTimeInSeconds = 0;
-            handler.removeCallbacks(timerRunnable);
+            //handler.removeCallbacks(timerRunnable);
+
+            chronometer.stop();
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            recordingTimeInSeconds = (int) (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000;
+
             Toast.makeText(context, "Recording Stop", Toast.LENGTH_SHORT).show();
         }
 
@@ -286,8 +305,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         File file = new File(getRecordingFilePath());
         if (file.exists()) {
             if (file.delete()) {
-                recordingTimeInSeconds = 0;
-                handler.removeCallbacks(timerRunnable);
+                //recordingTimeInSeconds = 0;
+                //handler.removeCallbacks(timerRunnable);
                 Toast.makeText(this, "Recording deleted", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Failed to delete recording", Toast.LENGTH_SHORT).show();

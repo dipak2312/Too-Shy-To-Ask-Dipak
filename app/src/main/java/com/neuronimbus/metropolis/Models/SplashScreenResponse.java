@@ -5,7 +5,7 @@ public class SplashScreenResponse {
     private String msg;
     private String user_id;
     private String usertype;
-    private Boolean admin_approval;
+    private String admin_approval;
 
     public String getCode() {
         return code;
@@ -39,11 +39,11 @@ public class SplashScreenResponse {
         this.usertype = usertype;
     }
 
-    public Boolean getAdmin_approval() {
+    public String getAdmin_approval() {
         return admin_approval;
     }
 
-    public void setAdmin_approval(Boolean admin_approval) {
+    public void setAdmin_approval(String admin_approval) {
         this.admin_approval = admin_approval;
     }
 }

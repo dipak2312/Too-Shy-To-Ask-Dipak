@@ -60,6 +60,7 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                     projectList.get(i).isSelected=false;
                     adapter.notifyDataSetChanged();
                 }
+                isSelected = true;
                 binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
                 binding.yesBtn.setBackgroundResource(R.drawable.gender_border_active);
                 binding.yesBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -225,13 +226,19 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                             }
 
                             else if (projectStatus.equals("Yes")){
+                                clickListener.onClick(true);
+                                no_health_issues ="yes";
                                 binding.selectOrgRelLay.setVisibility(View.VISIBLE);
                                 binding.yesBtn.setBackgroundResource(R.drawable.gender_border_active);
+                                binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
                                 binding.yesBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
                             }
                             else if (projectStatus.equals("No")){
+                                clickListener.onClick(true);
+                                no_health_issues ="no";
                                 binding.selectOrgRelLay.setVisibility(View.GONE);
                                 binding.noBtn.setBackgroundResource(R.drawable.gender_border_active);
+                                binding.updateBtn2.setBackgroundResource(R.drawable.active_con_btn);
                                 binding.noBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
                             }
 

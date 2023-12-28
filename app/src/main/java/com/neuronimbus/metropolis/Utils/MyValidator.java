@@ -27,4 +27,10 @@ public class MyValidator {
         return matcher.matches();
 
     }
+    public static boolean isValidAlphaNumber( String target) {
+
+        String pattern = "^[a-zA-Z0-9]+$";
+        return target.matches(pattern);
+
+    }
 }

@@ -91,6 +91,7 @@ import com.neuronimbus.metropolis.Models.LeaderboardResponse;
 import com.neuronimbus.metropolis.Models.Courses.Lesson.LessonEnrollResponse;
 import com.neuronimbus.metropolis.Models.Courses.LMSQuiz.LessonUpdateResponse;
 import com.neuronimbus.metropolis.Models.NGOProfileResponse;
+import com.neuronimbus.metropolis.Models.NgoPopupResponse;
 import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
 import com.neuronimbus.metropolis.Models.ProcessingFeedbackChatResponse;
 import com.neuronimbus.metropolis.Models.QRCode.QRCodeResponse;
@@ -477,4 +478,8 @@ public interface WebServices {
     @Headers("Content-Type: application/json")
     @POST("api/qrcodecount")
     Observable<CommonResponse> qrCodeCount(@Body QRCodeCountAuthModel model);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/ngo_popup")
+    Observable<NgoPopupResponse> ngoPopupMessage(@Body CommonAuthModel model);
 }

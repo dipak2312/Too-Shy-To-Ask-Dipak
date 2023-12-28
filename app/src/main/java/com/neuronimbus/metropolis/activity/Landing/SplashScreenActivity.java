@@ -253,7 +253,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             if (splashScreenResponse != null){
                                 spManager.setUser(splashScreenResponse.getUsertype().toString());
 
-                                if (splashScreenResponse.getAdmin_approval()){
+                                if (splashScreenResponse.getAdmin_approval().equals("approved")){
                                     Intent intent = new Intent(context, HomeActivity.class);
                                     spManager.setTstaLoginStatus("true");
                                     spManager.setTstaguestLoginStatus("false");
@@ -264,8 +264,15 @@ public class SplashScreenActivity extends AppCompatActivity {
                                     finish();
 
                                 }
-                                else {
+                                else if (splashScreenResponse.getAdmin_approval().equals("pending")){
                                     Intent intent = new Intent(context, AdminApprovalActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else {
+                                    Intent intent = new Intent(context, SignInActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);

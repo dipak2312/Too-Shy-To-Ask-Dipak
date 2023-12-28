@@ -66,7 +66,7 @@ public class QRCodeAdapter extends RecyclerView.Adapter<QRCodeAdapter.ViewHolder
 
            // holder.qsnView.setTextColor(context.getResources().getColor(R.color.black));
 
-            holder.qsnView.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
+            holder.qsnView.setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
         }
     }
 

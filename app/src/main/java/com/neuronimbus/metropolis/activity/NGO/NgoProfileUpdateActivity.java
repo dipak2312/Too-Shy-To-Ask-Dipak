@@ -85,6 +85,9 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
                 else if (binding.registrationNumber.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Registration Number is required", Toast.LENGTH_SHORT).show();
                 }
+                else if (!MyValidator.isValidAlphaNumber(binding.registrationNumber.getText().toString().trim())) {
+                    Toast.makeText(context, "Please enter valid Registration Number", Toast.LENGTH_SHORT).show();
+                }
                 else if (binding.editEmailEnter.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Email id is required", Toast.LENGTH_SHORT).show();
                 }
@@ -97,8 +100,14 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
                 else if (binding.majorActivity.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Please enter major activities", Toast.LENGTH_SHORT).show();
                 }
+                else if (!MyValidator.isValidAlphaNumber(binding.majorActivity.getText().toString().trim())) {
+                    Toast.makeText(context, "Please enter valid major activities", Toast.LENGTH_SHORT).show();
+                }
                 else if (binding.workExp.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Please enter work experience", Toast.LENGTH_SHORT).show();
+                }
+                else if (!MyValidator.isValidAlphaNumber(binding.workExp.getText().toString().trim())) {
+                    Toast.makeText(context, "Please enter valid work experience", Toast.LENGTH_SHORT).show();
                 }
                 else if (binding.editCountryEnter.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Please enter your Country", Toast.LENGTH_SHORT).show();
@@ -188,6 +197,7 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
 
     private void getNGOProfile(){
         dialog.show("");
+        binding.updateProScrollView.setVisibility(View.GONE);
 
         CommonAuthModel model = new CommonAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -215,6 +225,7 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
                                     binding.editCountryEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getCountry());
                                     binding.editStateEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getState());
                                     binding.editCityEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getCity());
+                                    binding.updateProScrollView.setVisibility(View.VISIBLE);
                                 }
 
                             }

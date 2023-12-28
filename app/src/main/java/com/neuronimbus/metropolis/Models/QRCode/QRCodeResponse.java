@@ -8,6 +8,7 @@ public class QRCodeResponse {
     private String user_id;
     private String ngo_name;
     private String android_qrcode_img;
+    private String android_referral_url;
     ArrayList<question>question;
 
     public String getCode() {
@@ -48,6 +49,14 @@ public class QRCodeResponse {
 
     public void setAndroid_qrcode_img(String android_qrcode_img) {
         this.android_qrcode_img = android_qrcode_img;
+    }
+
+    public String getAndroid_referral_url() {
+        return android_referral_url;
+    }
+
+    public void setAndroid_referral_url(String android_referral_url) {
+        this.android_referral_url = android_referral_url;
     }
 
     public ArrayList<question> getQuestion() {

@@ -39,7 +39,7 @@ public class QRCodeActivity extends AppCompatActivity {
     SPManager spManager;
     CustomProgressDialog dialog;
     ActivityQrcodeBinding binding;
-    String downloadUrl = "", action = "";
+    String downloadUrl = "", action = "", referralUrl = "";
     ArrayList<com.neuronimbus.metropolis.Models.QRCode.question> question;
     QRCodeAdapter adapter;
 
@@ -81,6 +81,7 @@ public class QRCodeActivity extends AppCompatActivity {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, referralUrl);
                 shareIntent.setType("image/*");
                 startActivity(Intent.createChooser(shareIntent, "Share Image"));
                 qrCodeCount();
@@ -156,6 +157,7 @@ public class QRCodeActivity extends AppCompatActivity {
                         if (msg.equals("success")){
                             question = qrCodeResponse.getQuestion();
                             downloadUrl = qrCodeResponse.getAndroid_qrcode_img();
+                            referralUrl = qrCodeResponse.getAndroid_referral_url();
                             binding.ngoName.setText(qrCodeResponse.getNgo_name());
                             Glide.with(context).load(qrCodeResponse.getAndroid_qrcode_img()).into(binding.qrCodeImage);
 
