@@ -112,7 +112,7 @@ public class NgoSignUpActivity extends AppCompatActivity {
                     Toast.makeText(context, "Please enter your State", Toast.LENGTH_SHORT).show();
                 }
                 else if (!MyValidator.isValidName(binding.editStateEnter.getText().toString().trim())) {
-                    Toast.makeText(context, "Please enter valid sate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Please enter valid state", Toast.LENGTH_SHORT).show();
                 }
                 else if (binding.editCityEnter.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Please enter your City", Toast.LENGTH_SHORT).show();

@@ -119,7 +119,7 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
                     Toast.makeText(context, "Please enter your State", Toast.LENGTH_SHORT).show();
                 }
                 else if (!MyValidator.isValidName(binding.editStateEnter.getText().toString().trim())) {
-                    Toast.makeText(context, "Please enter valid sate", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Please enter valid state", Toast.LENGTH_SHORT).show();
                 }
                 else if (binding.editCityEnter.getText().toString().trim().equals("")) {
                     Toast.makeText(context, "Please enter your City", Toast.LENGTH_SHORT).show();
@@ -146,7 +146,15 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
         dialog = new CustomProgressDialog(context);
         binding.editMobileNumber.setClickable(false);
         binding.editMobileNumber.setFocusable(false);
-
+        binding.editName.setText(spManager.getNgoName());
+        binding.registrationNumber.setText(spManager.getNgoRegistrationNumber());
+        binding.editEmailEnter.setText(spManager.getEmail());
+        binding.editMobileNumber.setText(spManager.getPhone());
+        binding.majorActivity.setText(spManager.getMajorActivities());
+        binding.workExp.setText(spManager.getWorkExp());
+        binding.editCountryEnter.setText(spManager.getCountry());
+        binding.editStateEnter.setText(spManager.getState());
+        binding.editCityEnter.setText(spManager.getCity());
 
 
     }
@@ -176,7 +184,16 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
                         String msg = commonResponse.getMsg();
                         dialog.dismiss("");
                         if (msg.equals("Profile Updated")){
-
+                            spManager.setNgoName(binding.editName.getText().toString().trim());
+                            spManager.setNgoRegistrationNumber(binding.registrationNumber.getText().toString().trim());
+                            spManager.setEmail(binding.editEmailEnter.getText().toString().trim());
+                            spManager.setWorkExp(binding.workExp.getText().toString().trim());
+                            spManager.setPhone(binding.editMobileNumber.getText().toString().trim());
+                            spManager.setCountry(binding.editCountryEnter.getText().toString().trim());
+                            spManager.setState(binding.editStateEnter.getText().toString().trim());
+                            spManager.setCity(binding.editCityEnter.getText().toString().trim());
+                            spManager.setMajorActivities(binding.majorActivity.getText().toString().trim());
+                            spManager.setUser("ngo");
                             finish();
                         }
 
@@ -197,7 +214,7 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
 
     private void getNGOProfile(){
         dialog.show("");
-        binding.updateProScrollView.setVisibility(View.GONE);
+        //binding.updateProScrollView.setVisibility(View.GONE);
 
         CommonAuthModel model = new CommonAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -215,18 +232,18 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
                             if (ngoProfileResponse != null){
                                 Glide.with(context).load(ngoProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(binding.profileImage);
 
-                                if (ngoProfileResponse.getProfiledetails() != null && ngoProfileResponse.getProfiledetails().getProfile() != null){
-                                    binding.editName.setText(ngoProfileResponse.getProfiledetails().getProfile().getNgo_name());
-                                    binding.registrationNumber.setText(ngoProfileResponse.getProfiledetails().getProfile().getNgo_registration_no());
-                                    binding.editEmailEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getEmail());
-                                    binding.editMobileNumber.setText(ngoProfileResponse.getProfiledetails().getProfile().getPhone());
-                                    binding.majorActivity.setText(ngoProfileResponse.getProfiledetails().getProfile().getOrganization_activities());
-                                    binding.workExp.setText(ngoProfileResponse.getProfiledetails().getProfile().getWork_experience());
-                                    binding.editCountryEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getCountry());
-                                    binding.editStateEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getState());
-                                    binding.editCityEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getCity());
-                                    binding.updateProScrollView.setVisibility(View.VISIBLE);
-                                }
+//                                if (ngoProfileResponse.getProfiledetails() != null && ngoProfileResponse.getProfiledetails().getProfile() != null){
+//                                    binding.editName.setText(ngoProfileResponse.getProfiledetails().getProfile().getNgo_name());
+//                                    binding.registrationNumber.setText(ngoProfileResponse.getProfiledetails().getProfile().getNgo_registration_no());
+//                                    binding.editEmailEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getEmail());
+//                                    binding.editMobileNumber.setText(ngoProfileResponse.getProfiledetails().getProfile().getPhone());
+//                                    binding.majorActivity.setText(ngoProfileResponse.getProfiledetails().getProfile().getOrganization_activities());
+//                                    binding.workExp.setText(ngoProfileResponse.getProfiledetails().getProfile().getWork_experience());
+//                                    binding.editCountryEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getCountry());
+//                                    binding.editStateEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getState());
+//                                    binding.editCityEnter.setText(ngoProfileResponse.getProfiledetails().getProfile().getCity());
+//                                    binding.updateProScrollView.setVisibility(View.VISIBLE);
+//                                }
 
                             }
 

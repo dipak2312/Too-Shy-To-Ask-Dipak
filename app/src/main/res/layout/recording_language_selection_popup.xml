@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/margin_7"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/margin_30"
+            android:layout_marginEnd="@dimen/margin_30"
+            android:textSize="@dimen/text_size18"
+            android:gravity="center"
+            android:fontFamily="@font/worksansmedium"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/choose_your_language"/>
+
+        <TextView
+            android:id="@+id/approvalMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size14"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:fontFamily="@font/worksansregular"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/recording_msg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/englishRelLay"
+                android:layout_width="@dimen/margin_150"
+                android:layout_height="wrap_content"
+                android:background="@drawable/health_inactive">
+
+                <TextView
+                    android:id="@+id/englishText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size15"
+                    android:padding="@dimen/padding_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:fontFamily="@font/worksansregular"
+                    android:text="@string/english"/>
+
+            <RelativeLayout
+                android:id="@+id/englishCheckLay"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_centerVertical="true"
+                android:background="@drawable/health_inactive">
+
+                <TextView
+                    android:id="@+id/englishTick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="✓"
+                    android:textColor="@color/purple"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/hindiRelLay"
+                android:layout_width="@dimen/margin_150"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_15"
+                android:background="@drawable/health_inactive">
+
+                <TextView
+                    android:id="@+id/hindiText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size15"
+                    android:padding="@dimen/padding_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:fontFamily="@font/worksansregular"
+                    android:text="हिंदी"/>
+
+                <RelativeLayout
+                    android:id="@+id/hindiActiveCheckLay"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/health_inactive">
+
+                    <TextView
+                        android:id="@+id/hindiTick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        android:textColor="@color/purple"
+                        android:text="✓"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/marathiRelLay"
+                android:layout_width="@dimen/margin_150"
+                android:layout_height="wrap_content"
+                android:background="@drawable/health_inactive"
+                android:layout_marginTop="@dimen/margin_15">
+
+                <TextView
+                    android:id="@+id/marathiText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size15"
+                    android:padding="@dimen/padding_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:fontFamily="@font/worksansregular"
+                    android:text="मराठी"/>
+
+                <RelativeLayout
+                    android:id="@+id/marathiCheckLay"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/health_inactive">
+
+                    <TextView
+                        android:id="@+id/marathiTick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        android:textColor="@color/purple"
+                        android:text="✓"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/exploreTstaLay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_50"
+            android:layout_marginTop="@dimen/margin_20"
+            android:gravity="center"
+            android:background="@color/purple">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size14"
+                android:fontFamily="@font/worksansbold"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

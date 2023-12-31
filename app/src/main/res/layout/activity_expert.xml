@@ -219,7 +219,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="00.00"
+                android:text="@string/_00_00"
                 android:textSize="@dimen/text_size14"
                 android:layout_marginEnd="@dimen/margin_10"
                 android:textColor="@color/black"

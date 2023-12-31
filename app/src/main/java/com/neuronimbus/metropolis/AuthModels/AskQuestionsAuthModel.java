@@ -5,6 +5,7 @@ public class AskQuestionsAuthModel {
     private String reply;
     private String questionType;
     private String language;
+    private String recordingDuration;
 
     public String getUser_id() {
         return user_id;
@@ -36,5 +37,13 @@ public class AskQuestionsAuthModel {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getRecordingDuration() {
+        return recordingDuration;
+    }
+
+    public void setRecordingDuration(String recordingDuration) {
+        this.recordingDuration = recordingDuration;
     }
 }

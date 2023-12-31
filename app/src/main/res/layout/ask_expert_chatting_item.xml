@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userRelLay"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -32,6 +33,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/dateTimeLay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -46,6 +48,111 @@
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size12"
             android:text="01 Mar 2021 02:14 PM "/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/audioChattingDesign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dateTimeLay"
+        android:paddingBottom="@dimen/margin_5"
+        android:paddingTop="@dimen/margin_15"
+        android:paddingStart="@dimen/padding_5"
+        android:paddingEnd="@dimen/padding_5"
+        android:layout_marginTop="@dimen/margin_15"
+        android:background="@drawable/expert_reply_que_background"
+        android:layout_marginStart="@dimen/margin_80">
+
+    <LinearLayout
+        android:id="@+id/audioChattingLay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userProfilePic"
+            android:layout_width="@dimen/margin_40"
+            android:layout_height="@dimen/margin_40"
+            android:src="@drawable/profile"/>
+
+        <ImageView
+            android:id="@+id/playButton"
+            android:layout_width="@dimen/margin_25"
+            android:layout_height="@dimen/margin_25"
+            android:layout_marginStart="@dimen/margin_10"
+            android:src="@drawable/pause"/>
+
+        <ImageView
+            android:id="@+id/pauseButton"
+            android:layout_width="@dimen/margin_25"
+            android:layout_height="@dimen/margin_25"
+            android:layout_marginStart="@dimen/margin_10"
+            android:visibility="gone"
+            android:src="@drawable/play"/>
+
+<!--        <com.github.ybq.android.spinkit.SpinKitView-->
+<!--            xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--            android:id="@+id/spin_kit"-->
+<!--            style="@style/SpinKitView.Wave"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="@dimen/margin_5"-->
+<!--            android:layout_marginEnd="@dimen/margin_5"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:SpinKit_Color="@color/purple" />-->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ProgressBar
+                android:id="@+id/progressbar_completed"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_4"
+                android:visibility="visible"
+                android:layout_marginStart="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_5"
+                android:progressDrawable="@drawable/progress_bar_missed" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/audioFileTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:fontFamily="@font/worksansmedium"
+            android:layout_marginStart="@dimen/margin_50"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_below="@+id/audioChattingLay"
+            android:textSize="@dimen/text_size12"
+            android:text="0.35"/>
+
+        <RelativeLayout
+            android:id="@+id/AudioDateTimeLay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_5"
+            android:layout_below="@+id/audioChattingLay"
+            android:layout_marginEnd="@dimen/margin_5">
+
+            <TextView
+                android:id="@+id/audioChatDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/line_color"
+                android:fontFamily="@font/worksansregular"
+                android:textSize="@dimen/text_size12"
+                android:text="01 Mar 2021 02:14 PM "/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

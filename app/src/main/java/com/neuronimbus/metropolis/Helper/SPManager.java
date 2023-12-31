@@ -36,6 +36,7 @@ public class SPManager {
     public static final String NGOREGISTRATIONNO = "ngoreginumber";
     public static final String MAJORACTIVITIES = "majoractivities";
     public static final String WORKEXP = "workexp";
+    public static final String RECORDINGLANG = "recordingLang";
 
 
     String firstName;
@@ -62,6 +63,17 @@ public class SPManager {
     String ngoRegistrationNumber;
     String workExp;
     String majorActivities;
+    String recordingLang;
+
+    public String getRecordingLang() {
+        recordingLang = pref.getString(RECORDINGLANG, "");
+        return recordingLang;
+    }
+
+    public void setRecordingLang(String recordingLang) {
+        editor.putString(RECORDINGLANG, recordingLang);
+        editor.commit();
+    }
 
     public String getNgoName() {
         ngoName = pref.getString(NGONAME, "");

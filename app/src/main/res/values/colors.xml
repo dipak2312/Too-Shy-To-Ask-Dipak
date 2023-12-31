@@ -28,8 +28,8 @@
     <color name="tsta_leaderboard">#050505</color>
     <color name="category_inactive">#777777</color>
     <color name="resolved_text_color">#09F700</color>
-
     <color name="tsta_setting_fent">#16bac2</color>
+    <color name="lang_bg_color">#2680EB</color>
 
     /indicator color
     <color name="inactive">#767676</color>

@@ -285,6 +285,9 @@
     <string name="update_your_profile">Update Your Profile</string>
     <string name="enter_project_name">Enter project name</string>
     <string name="update_organization">Update Organization</string>
+    <string name="_00_00">00:00</string>
+    <string name="choose_your_language">Choose Your Language</string>
+    <string name="recording_msg">You now have the option to record your inquiries in English, Hindi, or Marathi, facilitating seamless communication.</string>
 
 
 </resources>
