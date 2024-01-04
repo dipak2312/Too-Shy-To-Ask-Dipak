@@ -15,6 +15,10 @@ package com.neuronimbus.metropolis.Models;
         private String bloodgrp;
         private String height;
         private String weight;
+        private String ngo_name;
+        private String ngo_registration_no;
+        private String work_experience;
+        private String organization_activities;
 
 
         public String getUser_id() {
@@ -127,6 +131,38 @@ package com.neuronimbus.metropolis.Models;
 
         public void setWeight(String weight) {
             this.weight = weight;
+        }
+
+        public String getNgo_name() {
+            return ngo_name;
+        }
+
+        public void setNgo_name(String ngo_name) {
+            this.ngo_name = ngo_name;
+        }
+
+        public String getNgo_registration_no() {
+            return ngo_registration_no;
+        }
+
+        public void setNgo_registration_no(String ngo_registration_no) {
+            this.ngo_registration_no = ngo_registration_no;
+        }
+
+        public String getWork_experience() {
+            return work_experience;
+        }
+
+        public void setWork_experience(String work_experience) {
+            this.work_experience = work_experience;
+        }
+
+        public String getOrganization_activities() {
+            return organization_activities;
+        }
+
+        public void setOrganization_activities(String organization_activities) {
+            this.organization_activities = organization_activities;
         }
     }
 

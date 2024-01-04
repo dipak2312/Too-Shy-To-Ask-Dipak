@@ -9,10 +9,10 @@ public class chats {
     private String question_type;
     private String recordingDuration;
     private String profile_pic;
-    public Boolean isPlay;
+    public Boolean status;
 
     public chats(String question, String created_at, String date, String reply, String type,
-                 String question_type, String recordingDuration, String profile_pic, Boolean isPlay) {
+                 String question_type, String recordingDuration, String profile_pic, Boolean status) {
         this.question = question;
         this.created_at = created_at;
         this.date = date;
@@ -21,7 +21,7 @@ public class chats {
         this.question_type = question_type;
         this.recordingDuration = recordingDuration;
         this.profile_pic = profile_pic;
-        this.isPlay = isPlay;
+        this.status = status;
     }
 
     public String getQuestion() {
@@ -88,11 +88,11 @@ public class chats {
         this.profile_pic = profile_pic;
     }
 
-    public Boolean getPlay() {
-        return isPlay;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setPlay(Boolean play) {
-        isPlay = play;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

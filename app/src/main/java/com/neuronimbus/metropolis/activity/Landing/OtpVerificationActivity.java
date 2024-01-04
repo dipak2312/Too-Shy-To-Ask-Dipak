@@ -295,6 +295,10 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setHeight(otpInResponse.getData().getHeight());
                            spManager.setWeight(otpInResponse.getData().getWeight());
                            spManager.setUser(otpInResponse.getUsertype());
+                           spManager.setNgoName(otpInResponse.getData().getNgo_name());
+                           spManager.setNgoRegistrationNumber(otpInResponse.getData().getNgo_registration_no());
+                           spManager.setWorkExp(otpInResponse.getData().getWork_experience());
+                           spManager.setMajorActivities(otpInResponse.getData().getOrganization_activities());
 
                            getUserProfileUpdate();
                            if (otpInResponse.getAdmin_approval().equals("approved")){
@@ -307,22 +311,29 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                                finish();
 
                            }
-                           else if (otpInResponse.getAdmin_approval().equals("pending")){
+                           else{
                                Intent intent = new Intent(context, AdminApprovalActivity.class);
                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                startActivity(intent);
                                finish();
                            }
-                           else {
-                               Intent intent = new Intent(context, SignInActivity.class);
-                               spManager.setTstaLoginStatus("false");
-                               spManager.setTstaguestLoginStatus("false");
-                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                               startActivity(intent);
-                               finish();
-                           }
+//                           else if (otpInResponse.getAdmin_approval().equals("pending")){
+//                               Intent intent = new Intent(context, AdminApprovalActivity.class);
+//                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                               startActivity(intent);
+//                               finish();
+//                           }
+//                           else {
+//                               Intent intent = new Intent(context, SignInActivity.class);
+//                               spManager.setTstaLoginStatus("false");
+//                               spManager.setTstaguestLoginStatus("false");
+//                               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                               startActivity(intent);
+//                               finish();
+//                           }
 
 
                        }

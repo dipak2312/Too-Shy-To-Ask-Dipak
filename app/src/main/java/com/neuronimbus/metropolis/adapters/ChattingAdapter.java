@@ -39,7 +39,6 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     private Handler handler = new Handler();
     MediaPlayer mediaPlayer = new MediaPlayer();
     boolean isRecording = true;
-    boolean isSelected = false;
 
     public ChattingAdapter(Context context, ArrayList<com.neuronimbus.metropolis.Models.chats> chats) {
         this.context = context;
@@ -85,21 +84,32 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     public void onBindViewHolder(@NonNull ChattingAdapter.ViewHolder holder, int position) {
         if(chats.get(position).getType().equals("reply"))
         {
-            holder.reply_que.setText(Html.fromHtml(chats.get(position).getQuestion()));
-            holder.reply_que.setMovementMethod(LinkMovementMethod.getInstance());
-            holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
-            holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
-            time = chats.get(position).getCreated_at();
-            String[] parts = time.split(":");
-            part1 = parts[0];
-            part2 = parts[1];
-            holder.txt_expert_chat_date.setText(part1 + ":" + part2);
+            if (chats.get(position).getQuestion_type().equals("audio")) {
+                holder.microPhoneIcon.setVisibility(View.VISIBLE);
+                int audioTime = Integer.parseInt(chats.get(position).getRecordingDuration());
+                int minutes = audioTime / 60;
+                int seconds = audioTime % 60;
+                audioRecordingTime = String.format("%02d:%02d", minutes, seconds);
+                holder.reply_que.setText("Voice message " + "("+ audioRecordingTime + ")");
+            }
+            else {
+                holder.microPhoneIcon.setVisibility(View.GONE);
+                holder.reply_que.setText(Html.fromHtml(chats.get(position).getQuestion()));
+                holder.reply_que.setMovementMethod(LinkMovementMethod.getInstance());
+                holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
+                holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
+                time = chats.get(position).getCreated_at();
+                String[] parts = time.split(":");
+                part1 = parts[0];
+                part2 = parts[1];
+                holder.txt_expert_chat_date.setText(part1 + ":" + part2);
+            }
+
         }
         if(chats.get(position).getType().equals("question"))
         {
 
             if (chats.get(position).getQuestion_type().equals("audio")) {
-                chats.get(position).setPlay(false);
                 holder.audioChattingDesign.setVisibility(View.VISIBLE);
                 holder.chatt_lin_lay.setVisibility(View.GONE);
                 holder.dateTimeLay.setVisibility(View.GONE);
@@ -110,16 +120,21 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                 holder.audioChatDate.setText(part1 + ":" + part2);
                 Glide.with(context).load(chats.get(position).getProfile_pic()).into(holder.userProfilePic);
 
-                int audioTime = Integer.parseInt(chats.get(position).getRecordingDuration());
-                int minutes = audioTime / 60;
-                int seconds = audioTime % 60;
-                audioRecordingTime = String.format("%02d:%02d", minutes, seconds);
+                if (chats.get(position).getRecordingDuration() != null && !chats.get(position).getRecordingDuration().isEmpty()){
+                    int audioTime = Integer.parseInt(chats.get(position).getRecordingDuration());
+                    int minutes = audioTime / 60;
+                    int seconds = audioTime % 60;
+                    audioRecordingTime = String.format("%02d:%02d", minutes, seconds);
+                }
+
                 holder.audioFileTime.setText(audioRecordingTime);
 
                 holder.playButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.startRecording(position);
+                        if (chats.get(position).getRecordingDuration() != null && !chats.get(position).getRecordingDuration().isEmpty()) {
+                            holder.adapterRefresh(chats,position);
+                        }
                     }
                 });
                 holder.pauseButton.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +171,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
         TextView reply_que, reply_msg, txt_expert_chat_date;
         RelativeLayout chatt_lin_lay, dateTimeLay, audioChattingDesign;
         CircleImageView userProfilePic;
-        ImageView playButton, pauseButton;
+        ImageView playButton, pauseButton, microPhoneIcon;
         ProgressBar progressbar_completed;
 
 
@@ -177,29 +192,21 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
             pauseButton = itemView.findViewById(R.id.pauseButton);
             progressbar_completed = itemView.findViewById(R.id.progressbar_completed);
             audioFileTime = itemView.findViewById(R.id.audioFileTime);
+            microPhoneIcon = itemView.findViewById(R.id.microPhoneIcon);
         }
         public void adapterRefresh(ArrayList<chats> chat, int position){
-            if (chat.get(position).isPlay != null){
-                if (chat.get(position).isPlay){
-                    Log.d("dipakpostion", "true");
-                    chat.get(position).setPlay(false);
+                if (chat.get(position).status){
+                    startRecording(position);
+                    chat.get(position).setStatus(false);
                     notifyDataSetChanged();
                     pauseButton.setVisibility(View.GONE);
                     playButton.setVisibility(View.VISIBLE);
                 }
             else {
-                    chat.get(position).setPlay(true);
-                    Log.d("dipakpostion", "false");
-                    notifyDataSetChanged();
+                    chat.get(position).setStatus(true);
                     pauseButton.setVisibility(View.VISIBLE);
                     playButton.setVisibility(View.GONE);
                 }
-            }
-            else {
-                Log.d("dipakpostion", "null");
-                chat.get(position).setPlay(false);
-
-            }
         }
         public void  startRecording(int position){
             stopRecording();

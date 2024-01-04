@@ -78,6 +78,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     private MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     Boolean isRecording = false;
+    Boolean isRecordingStop = false;
     Boolean recordingPopup = false;
     private int recordingTimeInSeconds = 0;
     private int dummyInSeconds = 0;
@@ -174,8 +175,13 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         binding.sendVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                convertAudioToBase64(getRecordingFilePath());
-                //stopRecordingSend();
+                if (isRecordingStop){
+                    convertAudioToBase64(getRecordingFilePath());
+                }
+                else {
+                    stopRecordingSend();
+                }
+
             }
         });
     }
@@ -269,6 +275,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     private void startRecording() {
         try {
             isRecording = true;
+            isRecordingStop = false;
 //            audioFilePath1 = Environment.getExternalStorageDirectory().getAbsolutePath() + getRecordingFilePath();
 //            audioFilePath2 = Environment.getExternalStorageDirectory().getAbsolutePath() + getRecordingFilePath();
             binding.pauseResumeVoice.setVisibility(View.VISIBLE);
@@ -300,14 +307,16 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     private void stopRecordingSend() {
         if (mediaRecorder != null){
             isRecording = false;
+            isRecordingStop = true;
             mediaRecorder.stop();
             mediaRecorder.release();
             mediaRecorder = null;
+            binding.pauseResumeVoice.setVisibility(View.GONE);
+            binding.recordingPause.setVisibility(View.VISIBLE);
             playableSeconds = recordingTimeInSeconds;
-            //dummyInSeconds = recordingTimeInSeconds;
-            recordingTimeInSeconds = 0;
 
             handler.removeCallbacks(timerRunnable);
+            convertAudioToBase64(getRecordingFilePath());
 
             //Toast.makeText(context, "Recording Stop and Send", Toast.LENGTH_SHORT).show();
         }
@@ -316,6 +325,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     private void stopRecording() {
         if (mediaRecorder != null){
             isRecording = false;
+            isRecordingStop = true;
             mediaRecorder.stop();
             mediaRecorder.release();
             mediaRecorder = null;

@@ -264,20 +264,27 @@ public class SplashScreenActivity extends AppCompatActivity {
                                     finish();
 
                                 }
-                                else if (splashScreenResponse.getAdmin_approval().equals("pending")){
+                                else {
                                     Intent intent = new Intent(context, AdminApprovalActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                     finish();
                                 }
-                                else {
-                                    Intent intent = new Intent(context, SignInActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                }
+//                                else if (splashScreenResponse.getAdmin_approval().equals("pending")){
+//                                    Intent intent = new Intent(context, AdminApprovalActivity.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+//                                else {
+//                                    Intent intent = new Intent(context, SignInActivity.class);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
                             }
 
 

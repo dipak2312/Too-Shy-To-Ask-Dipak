@@ -35,10 +35,20 @@
             android:layout_below="@id/title"
             android:background="@drawable/expert_reply_que_background">
 
+            <ImageView
+                android:id="@+id/microPhoneIcon"
+                android:layout_width="@dimen/margin_22"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:paddingStart="@dimen/padding_10"
+                android:layout_centerVertical="true"
+                android:src="@drawable/mic_red"/>
+
         <TextView
             android:id="@+id/reply_que"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/microPhoneIcon"
             android:text="How can find difference about love or attraction?"
             android:paddingStart="@dimen/padding_10"
             android:paddingBottom="@dimen/padding_5"
