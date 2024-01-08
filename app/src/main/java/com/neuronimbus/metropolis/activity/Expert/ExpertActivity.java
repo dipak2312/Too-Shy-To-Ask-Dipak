@@ -1,33 +1,24 @@
 package com.neuronimbus.metropolis.activity.Expert;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.SystemClock;
-import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -35,9 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
-import com.neuronimbus.metropolis.Fragment.SettingsFragment;
-import com.neuronimbus.metropolis.Utils.AudioRecorder;
-import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.adapters.ChattingAdapter;
 import com.neuronimbus.metropolis.AuthModels.AskQuestionsAuthModel;
 import com.neuronimbus.metropolis.AuthModels.ExpertReplyAuthModel;
@@ -53,7 +41,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -84,8 +71,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     private int dummyInSeconds = 0;
     private int playableSeconds = 0;
     private Handler handler = new Handler();
-    //private String audioFilePath1, audioFilePath2, mergedAudioFilePath;
-
 
 
     @Override
@@ -161,15 +146,13 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         binding.pauseResumeVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopRecording();
-//                if (isRecording){
-//                    binding.recordingPause.setVisibility(View.VISIBLE);
-//                    stopRecording();
-//                }
-//                else {
-//                    binding.recordingPause.setVisibility(View.GONE);
-//                    mergeAudio();
-//                }
+                if (isRecording){
+                    stopRecording();
+                }
+                else {
+
+                }
+
             }
         });
         binding.sendVoice.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +160,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (isRecordingStop){
                     convertAudioToBase64(getRecordingFilePath());
+
                 }
                 else {
                     stopRecordingSend();
@@ -229,12 +213,10 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
         }
     }
-
     private void pauseRecording() {
-
         mediaPlayer.pause();
+        dummyInSeconds = 0;
         handler.removeCallbacks(audioRunnable);
-        //Toast.makeText(context, "Recording Pause", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -246,7 +228,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             mediaPlayer.start();
             //playableSeconds = dummyInSeconds;
             handler.postDelayed(audioRunnable, 1000);
-            //Toast.makeText(context, "Recording Play", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -276,8 +257,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         try {
             isRecording = true;
             isRecordingStop = false;
-//            audioFilePath1 = Environment.getExternalStorageDirectory().getAbsolutePath() + getRecordingFilePath();
-//            audioFilePath2 = Environment.getExternalStorageDirectory().getAbsolutePath() + getRecordingFilePath();
+            recordingTimeInSeconds = 0;
             binding.pauseResumeVoice.setVisibility(View.VISIBLE);
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -314,11 +294,9 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             binding.pauseResumeVoice.setVisibility(View.GONE);
             binding.recordingPause.setVisibility(View.VISIBLE);
             playableSeconds = recordingTimeInSeconds;
-
             handler.removeCallbacks(timerRunnable);
             convertAudioToBase64(getRecordingFilePath());
 
-            //Toast.makeText(context, "Recording Stop and Send", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -340,6 +318,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+
     public String convertAudioToBase64(String filePath) {
         File audioFile = new File(filePath);
 
@@ -351,8 +330,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             fileInputStream.close();
 
             // Step 2: Convert to Base64
-            String base64Audio = Base64.encodeToString(audioData, Base64.DEFAULT);
-            Log.d("dipakss", base64Audio);
+            String base64Audio = android.util.Base64.encodeToString(audioData, Base64.NO_WRAP);
+
             binding.voiceRecordingRelLayout.setVisibility(View.GONE);
             binding.relBottomTab.setVisibility(View.VISIBLE);
             binding.recordingPlay.setVisibility(View.GONE);
@@ -360,7 +339,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             binding.recordingTime.setText(getString(R.string._00_00));
             getAskQuestions(base64Audio, "audio", String.valueOf(playableSeconds));
             ask_questions.setText("");
-
             return base64Audio;
         } catch (IOException e) {
             e.printStackTrace();
@@ -368,59 +346,13 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-//    private void mergeAudio() {
-//        // Use a unique file name for the merged audio
-//        mergedAudioFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() +getRecordingFilePath();
-//
-//        try {
-//            // Create a MediaPlayer for each recorded audio file
-//            MediaPlayer mediaPlayer1 = new MediaPlayer();
-//            MediaPlayer mediaPlayer2 = new MediaPlayer();
-//
-//            mediaPlayer1.setDataSource(audioFilePath1);
-//            mediaPlayer2.setDataSource(audioFilePath2);
-//
-//            mediaPlayer1.prepare();
-//            mediaPlayer2.prepare();
-//
-//            // Create a new MediaRecorder for the merged audio
-//            MediaRecorder merger = new MediaRecorder();
-//            merger.setAudioSource(MediaRecorder.AudioSource.MIC);
-//            merger.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//            merger.setOutputFile(mergedAudioFilePath);
-//            merger.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//
-//            // Start the MediaPlayers
-//            mediaPlayer1.start();
-//            mediaPlayer2.start();
-//
-//            // Start the merger (recording) after a delay (adjust as needed)
-//            Thread.sleep(1000);
-//
-//            merger.prepare();
-//            merger.start();
-//
-//            // Wait for both recordings to finish
-//            while (mediaPlayer1.isPlaying() || mediaPlayer2.isPlaying()) {
-//                Thread.sleep(500);
-//            }
-//
-//            // Stop and release everything
-//            merger.stop();
-//            merger.release();
-//            mediaPlayer1.release();
-//            mediaPlayer2.release();
-//
-//            //Toast.makeText(this, "Audio files merged", Toast.LENGTH_SHORT).show();
-//        } catch (IOException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
     private void deleteRecording() {
         File file = new File(getRecordingFilePath());
         if (file.exists()) {
             if (file.delete()) {
                 recordingTimeInSeconds = 0;
+                pauseRecording();
+                binding.recordingTime.setText(getString(R.string._00_00));
                 handler.removeCallbacks(timerRunnable);
                 //Toast.makeText(this, "Recording deleted", Toast.LENGTH_SHORT).show();
             } else {
@@ -443,9 +375,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
     private String getRecordingFilePath() {
-        ContextWrapper contextWrapper = new ContextWrapper(context);
-        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File file = new File(musicDirectory, "Test Recording File" + ".mp3");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "audio.mpeg");
+
         return file.getPath();
 
     }
@@ -462,6 +393,17 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         refresh_status = "close";
+        handler.removeCallbacks(timerRunnable);
+        handler.removeCallbacks(audioRunnable);
+        if (mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
+        if (mediaRecorder != null){
+            mediaRecorder.stop();
+            mediaRecorder.release();
+        }
+
     }
 
     @Override
@@ -790,7 +732,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                 chat_ref_status = "yes";
                 ask_questions.setText("");
             } else if (adapter == null) {
-
                 getAskQuestions(message, "text","");
                 chat_ref_status = "yes";
                 ask_questions.setText("");

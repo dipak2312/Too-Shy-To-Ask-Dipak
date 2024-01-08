@@ -60,7 +60,8 @@ public class AdminApprovalActivity extends AppCompatActivity {
 
                         if (msg.equals("success")){
                             String popupMsg = ngoPopupResponse.getPopup_msg();
-                            pendingPopup(popupMsg);
+                            String popupTitle = ngoPopupResponse.getPopup_title();
+                            pendingPopup(popupMsg, popupTitle);
                         }
                     }
 
@@ -75,7 +76,7 @@ public class AdminApprovalActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void pendingPopup(String popupMsg) {
+    public void pendingPopup(String popupMsg, String poPupTitle) {
 
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.admin_approval_popup);
@@ -83,7 +84,9 @@ public class AdminApprovalActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
         RelativeLayout exploreTstaLay = dialog.findViewById(R.id.exploreTstaLay);
         TextView approvalMsg = dialog.findViewById(R.id.approvalMsg);
+        TextView popupTitle = dialog.findViewById(R.id.popupTitle);
         approvalMsg.setText(Html.fromHtml(popupMsg));
+        popupTitle.setText(Html.fromHtml(poPupTitle));
 
         exploreTstaLay.setOnClickListener(new View.OnClickListener() {
             @Override

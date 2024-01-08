@@ -70,6 +70,7 @@
             android:paddingTop="@dimen/padding_2"
             android:paddingEnd="@dimen/padding_10"
             android:paddingStart="@dimen/padding_10"
+            android:paddingBottom="@dimen/margin_5"
             android:fontFamily="@font/worksansregular"
             android:textSize="@dimen/text_size14"
             android:textColor="@color/black"/>

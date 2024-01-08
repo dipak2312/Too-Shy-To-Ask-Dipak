@@ -190,16 +190,16 @@
 
             <ImageView
                 android:id="@+id/recordingPause"
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
                 android:layout_marginStart="@dimen/margin_10"
                 android:visibility="gone"
                 android:src="@drawable/pause"/>
 
             <ImageView
                 android:id="@+id/recordingPlay"
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
                 android:layout_marginStart="@dimen/margin_10"
                 android:visibility="gone"
                 android:src="@drawable/play"/>

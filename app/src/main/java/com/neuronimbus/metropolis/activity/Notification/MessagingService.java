@@ -45,16 +45,6 @@ public class MessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        if (!condition.equals("")) {
-             intent = new Intent(this, NotificationsActivity.class);
-            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
-
-        if (!type_id.equals("")) {
-             intent = new Intent(this, NotificationsActivity.class);
-            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
-
         if (remoteMessage.getNotification()!= null) {
 
             type_id = remoteMessage.getMessageId();
@@ -64,6 +54,16 @@ public class MessagingService extends FirebaseMessagingService {
                    remoteMessage.getNotification().getTitle(),
                    remoteMessage.getNotification().getBody()
            );
+
+            if (condition != null && !condition.equals("")) {
+                intent = new Intent(this, NotificationsActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }
+
+            if (type_id != null && !type_id.equals("")) {
+                intent = new Intent(this, NotificationsActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+            }
         }
 
     }
@@ -81,7 +81,7 @@ public class MessagingService extends FirebaseMessagingService {
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 100, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_IMMUTABLE);
 
         switch(condition) {
             case "blog":

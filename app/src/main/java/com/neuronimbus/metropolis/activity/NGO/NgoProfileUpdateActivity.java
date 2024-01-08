@@ -141,6 +141,7 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
     }
 
     private void getController() {
+        binding.pageTitle.setText(getString(R.string.update_your_profile));
         context = NgoProfileUpdateActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);

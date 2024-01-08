@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -38,7 +39,8 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     double progressBarTime;
     private Handler handler = new Handler();
     MediaPlayer mediaPlayer = new MediaPlayer();
-    boolean isRecording = true;
+    boolean isPlaying = true;
+    int playablePosition = -1;
 
     public ChattingAdapter(Context context, ArrayList<com.neuronimbus.metropolis.Models.chats> chats) {
         this.context = context;
@@ -91,6 +93,8 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                 int seconds = audioTime % 60;
                 audioRecordingTime = String.format("%02d:%02d", minutes, seconds);
                 holder.reply_que.setText("Voice message " + "("+ audioRecordingTime + ")");
+                holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
+                holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
             }
             else {
                 holder.microPhoneIcon.setVisibility(View.GONE);
@@ -129,19 +133,41 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
 
                 holder.audioFileTime.setText(audioRecordingTime);
 
+                if (playablePosition == position){
+                    isPlaying = true;
+                    handler.postDelayed(holder.timerRunnable, 1000);
+                    holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
+                }
+                else {
+                    isPlaying = false;
+                    handler.removeCallbacks(holder.timerRunnable);
+                    holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.pause));
+                }
+
                 holder.playButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (chats.get(position).getRecordingDuration() != null && !chats.get(position).getRecordingDuration().isEmpty()) {
-                            holder.adapterRefresh(chats,position);
-                        }
-                    }
-                });
-                holder.pauseButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        holder.stopRecording();
+                        if (chats.get(position).getRecordingDuration() != null && !chats.get(position).getRecordingDuration().isEmpty()
+                        && !chats.get(position).getRecordingDuration().equals("0")) {
+                            if (playablePosition == position){
+                                if (isPlaying){
+                                    holder.stopRecording();
+                                    holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.pause));
+                                }
+                                else {
+                                    holder.startRecording(position);
+                                    holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
+                                }
+                            }
+                            else {
+                                notifyDataSetChanged();
+                                holder.startRecording(position);
+                                holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
+                                playablePosition = position;
+                            }
 
+
+                        }
                     }
                 });
 
@@ -159,7 +185,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                 holder.txt_my_chat_date.setText(part1 + ":" + part2);
             }
         }
-        }
+    }
 
     @Override
     public int getItemCount() {
@@ -194,25 +220,10 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
             audioFileTime = itemView.findViewById(R.id.audioFileTime);
             microPhoneIcon = itemView.findViewById(R.id.microPhoneIcon);
         }
-        public void adapterRefresh(ArrayList<chats> chat, int position){
-                if (chat.get(position).status){
-                    startRecording(position);
-                    chat.get(position).setStatus(false);
-                    notifyDataSetChanged();
-                    pauseButton.setVisibility(View.GONE);
-                    playButton.setVisibility(View.VISIBLE);
-                }
-            else {
-                    chat.get(position).setStatus(true);
-                    pauseButton.setVisibility(View.VISIBLE);
-                    playButton.setVisibility(View.GONE);
-                }
-        }
         public void  startRecording(int position){
             stopRecording();
-            isRecording = true;
-            pauseButton.setVisibility(View.VISIBLE);
-            playButton.setVisibility(View.GONE);
+            isPlaying = true;
+            playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
             mp3Time = Integer.parseInt(chats.get(position).getRecordingDuration());
             try {
                 handler.postDelayed(timerRunnable, 1000);
@@ -227,13 +238,14 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
             }
         }
         public void stopRecording(){
-            isRecording = false;
+            isPlaying = false;
             recordingTimeInSeconds = 0;
-            pauseButton.setVisibility(View.GONE);
-            playButton.setVisibility(View.VISIBLE);
+            playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.pause));
+//            pauseButton.setVisibility(View.GONE);
+//            playButton.setVisibility(View.VISIBLE);
             mediaPlayer.pause();
             handler.removeCallbacks(timerRunnable);
-           // Toast.makeText(context, "Recording Pause", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(context, "Recording Pause", Toast.LENGTH_SHORT).show();
         }
         Runnable timerRunnable = new Runnable() {
             @Override
@@ -255,4 +267,5 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
             }
         };
     }
+
 }
