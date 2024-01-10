@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
@@ -62,7 +63,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     int chatSize, select_chat_size = 0;
     ActivityExpertBinding binding;
     private static final int REQUEST_PERMISSION_CODE = 100;
-    private MediaRecorder mediaRecorder;
+    public MediaRecorder mediaRecorder;
     private MediaPlayer mediaPlayer;
     Boolean isRecording = false;
     Boolean isRecordingStop = false;
@@ -196,6 +197,18 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                 getExpertReply("swipe");
             }
         });
+
+        if (selectRecordingLanguage != null){
+            if (selectRecordingLanguage.equals("en")){
+                binding.recordingLanguage.setText(getString(R.string.recording_in_english));
+            }
+            if (selectRecordingLanguage.equals("hi")){
+                binding.recordingLanguage.setText(getString(R.string.recording_in_hindi));
+            }
+            if (selectRecordingLanguage.equals("mr")){
+                binding.recordingLanguage.setText(getString(R.string.recording_in_marathi));
+            }
+        }
     }
 
     private boolean isMicroPhonePresent() {
@@ -214,9 +227,9 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
     private void pauseRecording() {
-        mediaPlayer.pause();
-        dummyInSeconds = 0;
-        handler.removeCallbacks(audioRunnable);
+            mediaPlayer.pause();
+            dummyInSeconds = 0;
+            handler.removeCallbacks(audioRunnable);
 
     }
 
@@ -261,9 +274,9 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             binding.pauseResumeVoice.setVisibility(View.VISIBLE);
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             mediaRecorder.setOutputFile(getRecordingFilePath());
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             mediaRecorder.prepare();
             mediaRecorder.start();
             handler.postDelayed(timerRunnable, 1000);
@@ -291,7 +304,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             mediaRecorder.stop();
             mediaRecorder.release();
             mediaRecorder = null;
-            binding.pauseResumeVoice.setVisibility(View.GONE);
+            binding.pauseResumeVoice.setVisibility(View.VISIBLE);
             binding.recordingPause.setVisibility(View.VISIBLE);
             playableSeconds = recordingTimeInSeconds;
             handler.removeCallbacks(timerRunnable);
@@ -307,7 +320,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             mediaRecorder.stop();
             mediaRecorder.release();
             mediaRecorder = null;
-            binding.pauseResumeVoice.setVisibility(View.GONE);
+            binding.pauseResumeVoice.setVisibility(View.VISIBLE);
             binding.recordingPause.setVisibility(View.VISIBLE);
             playableSeconds = recordingTimeInSeconds;
             //dummyInSeconds = recordingTimeInSeconds;
@@ -337,8 +350,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             binding.recordingPlay.setVisibility(View.GONE);
             binding.recordingPause.setVisibility(View.GONE);
             binding.recordingTime.setText(getString(R.string._00_00));
-            getAskQuestions(base64Audio, "audio", String.valueOf(playableSeconds));
             ask_questions.setText("");
+            getAskQuestions(base64Audio, "audio", String.valueOf(playableSeconds));
             return base64Audio;
         } catch (IOException e) {
             e.printStackTrace();
@@ -351,9 +364,14 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         if (file.exists()) {
             if (file.delete()) {
                 recordingTimeInSeconds = 0;
-                pauseRecording();
+                dummyInSeconds = 0;
+                playableSeconds = 0;
+                if (mediaPlayer != null){
+                    mediaPlayer.pause();
+                }
                 binding.recordingTime.setText(getString(R.string._00_00));
                 handler.removeCallbacks(timerRunnable);
+                handler.removeCallbacks(audioRunnable);
                 //Toast.makeText(this, "Recording deleted", Toast.LENGTH_SHORT).show();
             } else {
                 //Toast.makeText(this, "Failed to delete recording", Toast.LENGTH_SHORT).show();
@@ -362,6 +380,17 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             //Toast.makeText(this, "No recording to delete", Toast.LENGTH_SHORT).show();
         }
     }
+    public CountDownTimer countDownTimer = new CountDownTimer(180000, 1000) {
+        public void onTick(long millisUntilFinished) {
+            // Update the TextView with the remaining time
+
+            binding.recordingTime.setText((int) (millisUntilFinished / 1000));
+        }
+        public void onFinish() {
+            // Timer finished, you can perform any actions here
+            binding.recordingTime.setText("Countdown finished!");
+        }
+    };
 
     public Runnable timerRunnable = new Runnable() {
         @Override
@@ -375,7 +404,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
     private String getRecordingFilePath() {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "audio.mpeg");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "audio.mp4");
 
         return file.getPath();
 
@@ -393,16 +422,16 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         refresh_status = "close";
-        handler.removeCallbacks(timerRunnable);
-        handler.removeCallbacks(audioRunnable);
-        if (mediaPlayer != null){
-            mediaPlayer.stop();
-            mediaPlayer.release();
-        }
-        if (mediaRecorder != null){
-            mediaRecorder.stop();
-            mediaRecorder.release();
-        }
+//        handler.removeCallbacks(timerRunnable);
+//        handler.removeCallbacks(audioRunnable);
+//        if (mediaPlayer != null){
+//            mediaPlayer.stop();
+//            mediaPlayer.release();
+//        }
+//        if (mediaRecorder != null){
+//            mediaRecorder.stop();
+//            mediaRecorder.release();
+//        }
 
     }
 
@@ -554,6 +583,17 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
                 recordingPopup = true;
+                if (selectRecordingLanguage != null){
+                    if (selectRecordingLanguage.equals("en")){
+                        binding.recordingLanguage.setText(getString(R.string.recording_in_english));
+                    }
+                    if (selectRecordingLanguage.equals("hi")){
+                        binding.recordingLanguage.setText(getString(R.string.recording_in_hindi));
+                    }
+                    if (selectRecordingLanguage.equals("mr")){
+                        binding.recordingLanguage.setText(getString(R.string.recording_in_marathi));
+                    }
+                }
                 binding.voiceRecordingRelLayout.setVisibility(View.VISIBLE);
                 binding.relBottomTab.setVisibility(View.GONE);
                 startRecording();
@@ -684,6 +724,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void getAskQuestions(String message, String quetype, String recordingDuration) {
+        dialog.show("");
 
         AskQuestionsAuthModel model = new AskQuestionsAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -699,6 +740,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onNext(AskQuestionsResponse askQuestionsResponse) {
                         String msg = askQuestionsResponse.getMsg();
+                        dialog.dismiss("");
                         if (msg.equals("success")) {
                             getuserReply();
                         }
@@ -707,6 +749,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss("");
 
                     }
 

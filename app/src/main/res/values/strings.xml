@@ -288,6 +288,9 @@
     <string name="_00_00">00:00</string>
     <string name="choose_your_language">Choose Your Language</string>
     <string name="recording_msg">You now have the option to record your inquiries in English, Hindi, or Marathi, facilitating seamless communication.</string>
+    <string name="recording_in_english">Recording in English</string>
+    <string name="recording_in_hindi">Recording in Hindi</string>
+    <string name="recording_in_marathi">Recording in Marathi</string>
 
 
 </resources>

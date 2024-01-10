@@ -35,11 +35,11 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     private static final int VIEW_TYPE_MESSAGE_ADMIN = 1;
     private static final int VIEW_TYPE_MESSAGE_USER = 2;
     String time, part1, part2, audioRecordingTime;
-    int recordingTimeInSeconds, mp3Time;
+    int recordingTime, mp3Time;
     double progressBarTime;
     private Handler handler = new Handler();
     MediaPlayer mediaPlayer = new MediaPlayer();
-    boolean isPlaying = true;
+    boolean isPlaying = false;
     int playablePosition = -1;
 
     public ChattingAdapter(Context context, ArrayList<com.neuronimbus.metropolis.Models.chats> chats) {
@@ -112,7 +112,6 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
         }
         if(chats.get(position).getType().equals("question"))
         {
-
             if (chats.get(position).getQuestion_type().equals("audio")) {
                 holder.audioChattingDesign.setVisibility(View.VISIBLE);
                 holder.chatt_lin_lay.setVisibility(View.GONE);
@@ -134,13 +133,14 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                 holder.audioFileTime.setText(audioRecordingTime);
 
                 if (playablePosition == position){
-                    isPlaying = true;
-                    handler.postDelayed(holder.timerRunnable, 1000);
+                    handler.postDelayed(holder.audioTimerRunnable, 1000);
+                    holder.progressbar_completed.setProgress(0);
                     holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
                 }
                 else {
-                    isPlaying = false;
-                    handler.removeCallbacks(holder.timerRunnable);
+                    //isPlaying = false;
+                    handler.removeCallbacks(holder.audioTimerRunnable);
+                    holder.progressbar_completed.setProgress(0);
                     holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.pause));
                 }
 
@@ -156,6 +156,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                                 }
                                 else {
                                     holder.startRecording(position);
+
                                     holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
                                 }
                             }
@@ -165,8 +166,6 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                                 holder.playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
                                 playablePosition = position;
                             }
-
-
                         }
                     }
                 });
@@ -222,41 +221,37 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
         }
         public void  startRecording(int position){
             stopRecording();
-            isPlaying = true;
+
             playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.play));
             mp3Time = Integer.parseInt(chats.get(position).getRecordingDuration());
             try {
-                handler.postDelayed(timerRunnable, 1000);
-
+                //handler.postDelayed(audioTimerRunnable, 1000);
+                isPlaying = true;
                 mediaPlayer = new MediaPlayer();
                 mediaPlayer.setDataSource(chats.get(position).getQuestion());
                 mediaPlayer.prepare();
                 mediaPlayer.start();
-                //Toast.makeText(context, "Recording Play", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         public void stopRecording(){
             isPlaying = false;
-            recordingTimeInSeconds = 0;
+            recordingTime = 0;
             playButton.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.pause));
-//            pauseButton.setVisibility(View.GONE);
-//            playButton.setVisibility(View.VISIBLE);
             mediaPlayer.pause();
-            handler.removeCallbacks(timerRunnable);
-            // Toast.makeText(context, "Recording Pause", Toast.LENGTH_SHORT).show();
+            handler.removeCallbacks(audioTimerRunnable);
         }
-        Runnable timerRunnable = new Runnable() {
+        Runnable audioTimerRunnable = new Runnable() {
             @Override
             public void run() {
-                if (recordingTimeInSeconds != mp3Time) {
-                    recordingTimeInSeconds++;
-                    int minutes = recordingTimeInSeconds / 60;
-                    int seconds = recordingTimeInSeconds % 60;
+                if (recordingTime != mp3Time) {
+                    recordingTime++;
+                    int minutes = recordingTime / 60;
+                    int seconds = recordingTime % 60;
                     time = String.format("%02d:%02d", minutes, seconds);
-                    progressBarTime = (double) 100/mp3Time*recordingTimeInSeconds;
-                    handler.postDelayed(this, 1000); // Update every 1 second
+                    progressBarTime = (double) 100/mp3Time*recordingTime;
+                    handler.postDelayed(this, 1000);
                     progressbar_completed.setProgress((int)progressBarTime);
                     audioFileTime.setText(String.valueOf(time));
 

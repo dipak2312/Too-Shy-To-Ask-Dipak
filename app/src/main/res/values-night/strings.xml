@@ -24,4 +24,6 @@
     <string name="my_qr_code">My QR Code</string>
     <string name="download_qr">Download QR</string>
     <string name="update_your_profile">Update your Profile</string>
+    <string name="recording_in_hindi">Recording in Hindi</string>
+    <string name="recording_in_marathi">Recording in Marathi</string>
 </resources>
