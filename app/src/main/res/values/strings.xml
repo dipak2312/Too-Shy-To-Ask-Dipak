@@ -291,6 +291,7 @@
     <string name="recording_in_english">Recording in English</string>
     <string name="recording_in_hindi">Recording in Hindi</string>
     <string name="recording_in_marathi">Recording in Marathi</string>
+    <string name="voice_message">"Voice message "</string>
 
 
 </resources>

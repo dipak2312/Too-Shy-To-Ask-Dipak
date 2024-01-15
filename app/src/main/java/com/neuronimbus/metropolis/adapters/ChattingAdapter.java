@@ -92,7 +92,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                 int minutes = audioTime / 60;
                 int seconds = audioTime % 60;
                 audioRecordingTime = String.format("%02d:%02d", minutes, seconds);
-                holder.reply_que.setText("Voice message " + "("+ audioRecordingTime + ")");
+                holder.reply_que.setText(context.getString(R.string.voice_message) + " ("+ audioRecordingTime + ")");
                 holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
                 holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
             }
