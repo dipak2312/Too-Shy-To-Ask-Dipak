@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.adapters.AllEventsAdapter;
 import com.neuronimbus.metropolis.AuthModels.AllEventAuthModel;
@@ -57,10 +58,13 @@ public class AllEventActivity extends AppCompatActivity implements View.OnClickL
         events_recy = findViewById(R.id.events_recy);
 
         events_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
-
         getEventBlogs();
-    }
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getBookmarkBlogs(String action){
         dialog.show("");
         dialog.dismiss("");

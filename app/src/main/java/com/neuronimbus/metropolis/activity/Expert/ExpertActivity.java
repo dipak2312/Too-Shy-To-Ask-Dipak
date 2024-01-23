@@ -14,11 +14,9 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -27,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.ChattingAdapter;
 import com.neuronimbus.metropolis.AuthModels.AskQuestionsAuthModel;
 import com.neuronimbus.metropolis.AuthModels.ExpertReplyAuthModel;
@@ -41,7 +40,9 @@ import com.neuronimbus.metropolis.databinding.ActivityExpertBinding;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -59,7 +60,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<chats> chats;
     ArrayList<chats> demochat;
     SwipeRefreshLayout swipe_refresh;
-    String refresh_status = "open", chat_ref_status = "no", time = "", selectRecordingLanguage = "",appLanguage = "";
+    String refresh_status = "open", chat_ref_status = "no", time = "", selectRecordingLanguage = "",
+            selectLanguage = "", audioFilePath="";
     int chatSize, select_chat_size = 0;
     ActivityExpertBinding binding;
     private static final int REQUEST_PERMISSION_CODE = 100;
@@ -160,7 +162,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
                 if (isRecordingStop){
-                    convertAudioToBase64(getRecordingFilePath());
+                    convertAudioToBase64(audioFilePath);
 
                 }
                 else {
@@ -170,7 +172,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        binding.restartVoice.setOnClickListener(new View.OnClickListener() {
+        binding.restartText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startRecording();
@@ -182,11 +184,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         context = ExpertActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-
         chats = new ArrayList<>();
         demochat = new ArrayList<>();
-
-        appLanguage = spManager.getLanguage();
 
         recy_user_msg = findViewById(R.id.recy_user_msg);
         LinearLayoutManager lm = new LinearLayoutManager(context);
@@ -208,28 +207,16 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        if (appLanguage != null){
-            if (appLanguage.equals("en")){
-                binding.restartVoice.setImageResource(R.drawable.restart);
-            }
-            else if (appLanguage.equals("hi")){
-                binding.restartVoice.setImageResource(R.drawable.hindi_restart);
-            }
-            else if (appLanguage.equals("mr")){
-                binding.restartVoice.setImageResource(R.drawable.marathi_restart);
-            }
-            else if (appLanguage.equals("gu")){
-                binding.restartVoice.setImageResource(R.drawable.gujrati_restart);
-            }
-            else if (appLanguage.equals("ta")){
-                binding.restartVoice.setImageResource(R.drawable.tamil_restart);
-            }
-        }
-
+        audioLanguage();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+    public void audioLanguage(){
         if (selectRecordingLanguage != null) {
             if (selectRecordingLanguage.equals("en")) {
                 binding.recordingLanguage.setText(getString(R.string.recording_in_english));
-
             }
             if (selectRecordingLanguage.equals("hi")) {
                 binding.recordingLanguage.setText(getString(R.string.recording_in_hindi));
@@ -251,25 +238,30 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     private void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
 
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
 
         }
     }
+
     private void pauseRecording() {
+        if (mediaPlayer != null){
             mediaPlayer.pause();
             dummyInSeconds = 0;
+            mediaPlayer = null;
             handler.removeCallbacks(audioRunnable);
-
+            binding.recordingLanguage.setText(R.string.playing_completed);
+        }
     }
 
     private void playRecording() {
         try {
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(getRecordingFilePath());
+            mediaPlayer.setDataSource(audioFilePath);
             mediaPlayer.prepare();
             mediaPlayer.start();
             //playableSeconds = dummyInSeconds;
             handler.postDelayed(audioRunnable, 1000);
+            binding.recordingLanguage.setText(R.string.playing_your_audio);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -297,17 +289,21 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
     private void startRecording() {
         try {
+            pauseRecording();
             isRecording = true;
             isRecordingStop = false;
             recordingTimeInSeconds = 0;
+            audioLanguage();
+            binding.recordingPlay.setVisibility(View.GONE);
             binding.pauseResumeVoice.setVisibility(View.VISIBLE);
-            binding.restartVoice.setVisibility(View.GONE);
+            binding.restartText.setVisibility(View.GONE);
             binding.recordingPause.setVisibility(View.GONE);
             mediaRecorder = new MediaRecorder();
-            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mediaRecorder.setOutputFile(getRecordingFilePath());
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            audioFilePath = getRecordingFilePath();
+            mediaRecorder.setOutputFile(audioFilePath);
             mediaRecorder.prepare();
             mediaRecorder.start();
             handler.postDelayed(timerRunnable, 1000);
@@ -322,39 +318,50 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void stopRecordingSend() {
-        if (mediaRecorder != null){
-            isRecording = false;
-            isRecordingStop = true;
-            mediaRecorder.stop();
-            mediaRecorder.release();
-            mediaRecorder = null;
-            binding.pauseResumeVoice.setVisibility(View.GONE);
-            binding.recordingPause.setVisibility(View.VISIBLE);
-            binding.restartVoice.setVisibility(View.VISIBLE);
-            playableSeconds = recordingTimeInSeconds;
-            handler.removeCallbacks(timerRunnable);
-            convertAudioToBase64(getRecordingFilePath());
+        try {
+            if (mediaRecorder != null){
+                binding.recordingLanguage.setText(R.string.recording_complete);
+                isRecording = false;
+                isRecordingStop = true;
+                mediaRecorder.stop();
+                mediaRecorder.release();
+                mediaRecorder = null;
+                binding.pauseResumeVoice.setVisibility(View.GONE);
+                binding.recordingPause.setVisibility(View.VISIBLE);
+                binding.restartText.setVisibility(View.VISIBLE);
+                playableSeconds = recordingTimeInSeconds;
+                handler.removeCallbacks(timerRunnable);
+                convertAudioToBase64(audioFilePath);
 
+            }
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
     private void stopRecording() {
-        if (mediaRecorder != null){
-            isRecording = false;
-            isRecordingStop = true;
-            mediaRecorder.stop();
-            mediaRecorder.release();
-            mediaRecorder = null;
-            binding.pauseResumeVoice.setVisibility(View.GONE);
-            binding.recordingPause.setVisibility(View.VISIBLE);
-            binding.restartVoice.setVisibility(View.VISIBLE);
-            playableSeconds = recordingTimeInSeconds;
-            //dummyInSeconds = recordingTimeInSeconds;
+        try {
+            if (mediaRecorder != null){
+                binding.recordingLanguage.setText(R.string.recording_complete);
+                isRecording = false;
+                isRecordingStop = true;
+                mediaRecorder.stop();
+                mediaRecorder.release();
+                mediaRecorder = null;
+                binding.pauseResumeVoice.setVisibility(View.GONE);
+                binding.recordingPause.setVisibility(View.VISIBLE);
+                binding.restartText.setVisibility(View.VISIBLE);
+                playableSeconds = recordingTimeInSeconds;
 
-            handler.removeCallbacks(timerRunnable);
-
-            //Toast.makeText(context, "Recording Stop", Toast.LENGTH_SHORT).show();
+                handler.removeCallbacks(timerRunnable);
+            }
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -376,8 +383,10 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             binding.recordingPlay.setVisibility(View.GONE);
             binding.recordingPause.setVisibility(View.GONE);
             binding.recordingTime.setText(getString(R.string._00_00));
-            ask_questions.setText("");
+            audioLanguage();
             getAskQuestions(base64Audio, "audio", String.valueOf(playableSeconds));
+            ask_questions.setText("");
+
             return base64Audio;
         } catch (IOException e) {
             e.printStackTrace();
@@ -386,7 +395,8 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void deleteRecording() {
-        File file = new File(getRecordingFilePath());
+        File file = new File(audioFilePath);
+        audioLanguage();
         if (file.exists()) {
             if (file.delete()) {
                 recordingTimeInSeconds = 0;
@@ -424,9 +434,12 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
     private String getRecordingFilePath() {
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "audio.mp4");
+        File file = null;
+        //file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.aac");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TooShyToAsk"+ dateFormat.format(new Date()) +".aac");
 
-        return file.getPath();
+        return file.getAbsolutePath();
 
     }
 
@@ -442,16 +455,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
     protected void onDestroy() {
         super.onDestroy();
         refresh_status = "close";
-//        handler.removeCallbacks(timerRunnable);
-//        handler.removeCallbacks(audioRunnable);
-//        if (mediaPlayer != null){
-//            mediaPlayer.stop();
-//            mediaPlayer.release();
-//        }
-//        if (mediaRecorder != null){
-//            mediaRecorder.stop();
-//            mediaRecorder.release();
-//        }
 
     }
 
@@ -482,61 +485,11 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         RelativeLayout marathiCheckLay = dialog.findViewById(R.id.marathiCheckLay);
         TextView marathiTick = dialog.findViewById(R.id.marathiTick);
 
-        if (selectRecordingLanguage != null){
-            if (selectRecordingLanguage.equals("en")){
-                englishText.setTextColor(ContextCompat.getColor(context, R.color.white));
-                englishCheckLay.setBackgroundResource(R.drawable.lang_check_active);
-                englishRelLay.setBackgroundResource(R.drawable.lang_active);
-                englishTick.setVisibility(View.VISIBLE);
-
-                hindiText.setTextColor(ContextCompat.getColor(context, R.color.black));
-                hindiActiveCheckLay.setBackgroundResource(R.drawable.health_inactive);
-                hindiRelLay.setBackgroundResource(R.drawable.health_inactive);
-                hindiTick.setVisibility(View.GONE);
-
-                marathiText.setTextColor(ContextCompat.getColor(context, R.color.black));
-                marathiCheckLay.setBackgroundResource(R.drawable.health_inactive);
-                marathiRelLay.setBackgroundResource(R.drawable.health_inactive);
-                marathiTick.setVisibility(View.GONE);
-            }
-            else if (selectRecordingLanguage.equals("hi")){
-                hindiText.setTextColor(ContextCompat.getColor(context, R.color.white));
-                hindiActiveCheckLay.setBackgroundResource(R.drawable.lang_check_active);
-                hindiRelLay.setBackgroundResource(R.drawable.lang_active);
-                hindiTick.setVisibility(View.VISIBLE);
-
-                englishText.setTextColor(ContextCompat.getColor(context, R.color.black));
-                englishCheckLay.setBackgroundResource(R.drawable.health_inactive);
-                englishRelLay.setBackgroundResource(R.drawable.health_inactive);
-                englishTick.setVisibility(View.GONE);
-
-                marathiText.setTextColor(ContextCompat.getColor(context, R.color.black));
-                marathiCheckLay.setBackgroundResource(R.drawable.health_inactive);
-                marathiRelLay.setBackgroundResource(R.drawable.health_inactive);
-                marathiTick.setVisibility(View.GONE);
-            }
-            else if (selectRecordingLanguage.equals("mr")){
-                marathiText.setTextColor(ContextCompat.getColor(context, R.color.white));
-                marathiCheckLay.setBackgroundResource(R.drawable.lang_check_active);
-                marathiRelLay.setBackgroundResource(R.drawable.lang_active);
-                marathiTick.setVisibility(View.VISIBLE);
-
-                hindiText.setTextColor(ContextCompat.getColor(context, R.color.black));
-                hindiActiveCheckLay.setBackgroundResource(R.drawable.health_inactive);
-                hindiRelLay.setBackgroundResource(R.drawable.health_inactive);
-                hindiTick.setVisibility(View.GONE);
-
-                englishText.setTextColor(ContextCompat.getColor(context, R.color.black));
-                englishCheckLay.setBackgroundResource(R.drawable.health_inactive);
-                englishRelLay.setBackgroundResource(R.drawable.health_inactive);
-                englishTick.setVisibility(View.GONE);
-            }
-        }
-
         englishRelLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 spManager.setRecordingLang("en");
+                selectLanguage = "en";
                 englishText.setTextColor(ContextCompat.getColor(context, R.color.white));
                 englishCheckLay.setBackgroundResource(R.drawable.lang_check_active);
                 englishRelLay.setBackgroundResource(R.drawable.lang_active);
@@ -559,6 +512,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
                 spManager.setRecordingLang("hi");
+                selectLanguage = "hi";
                 hindiText.setTextColor(ContextCompat.getColor(context, R.color.white));
                 hindiActiveCheckLay.setBackgroundResource(R.drawable.lang_check_active);
                 hindiRelLay.setBackgroundResource(R.drawable.lang_active);
@@ -581,6 +535,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
                 spManager.setRecordingLang("mr");
+                selectLanguage = "mr";
                 marathiText.setTextColor(ContextCompat.getColor(context, R.color.white));
                 marathiCheckLay.setBackgroundResource(R.drawable.lang_check_active);
                 marathiRelLay.setBackgroundResource(R.drawable.lang_active);
@@ -603,14 +558,15 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
                 recordingPopup = true;
-                if (selectRecordingLanguage != null){
-                    if (selectRecordingLanguage.equals("en")){
+
+                if (selectLanguage != null){
+                    if (selectLanguage.equals("en")){
                         binding.recordingLanguage.setText(getString(R.string.recording_in_english));
                     }
-                    if (selectRecordingLanguage.equals("hi")){
+                    if (selectLanguage.equals("hi")){
                         binding.recordingLanguage.setText(getString(R.string.recording_in_hindi));
                     }
-                    if (selectRecordingLanguage.equals("mr")){
+                    if (selectLanguage.equals("mr")){
                         binding.recordingLanguage.setText(getString(R.string.recording_in_marathi));
                     }
                 }
@@ -628,7 +584,6 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
         ExpertReplyAuthModel model = new ExpertReplyAuthModel();
         model.setUser_id(spManager.getUserId());
-        Log.d("dkdkdk",spManager.getUserId().toString());
         if (refresh.equals("w_swipe")) {
             dialog.show("");
         }
@@ -655,9 +610,11 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
                                 swipe_refresh.setVisibility(View.VISIBLE);
                                 adapter = new ChattingAdapter(context, chats);
                                 recy_user_msg.setAdapter(adapter);
+                                recy_user_msg.setVisibility(View.VISIBLE);
                                 recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
+                                adapter.notifyDataSetChanged();
                             }
-                            if (chats.size() == 0) {
+                            else if (chats.size() == 0) {
                                 recy_user_msg.setVisibility(View.GONE);
                             }
 
@@ -719,6 +676,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
 
                             adapter = new ChattingAdapter(context, chats);
                             recy_user_msg.setAdapter(adapter);
+                            recy_user_msg.setVisibility(View.VISIBLE);
                             adapter.notifyDataSetChanged();
                             recy_user_msg.getLayoutManager().smoothScrollToPosition(recy_user_msg, null, adapter.getItemCount() - 1);
 

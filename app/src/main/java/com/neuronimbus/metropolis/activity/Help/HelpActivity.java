@@ -1,8 +1,6 @@
 package com.neuronimbus.metropolis.activity.Help;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,13 +13,12 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
-import com.neuronimbus.metropolis.Fragment.AskExpertFragment;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Expert.ExpertActivity;
 import com.neuronimbus.metropolis.adapters.HelpCategoryAdapter;
 import com.neuronimbus.metropolis.AuthModels.HelpCategoryAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.Help.HelpCategoryResponse;
-import com.neuronimbus.metropolis.Models.HelpCategory;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 
@@ -55,9 +52,12 @@ public class HelpActivity extends AppCompatActivity implements View.OnClickListe
         rel_back.setOnClickListener(this);
         help_category_recy = findViewById(R.id.help_category_recy);
         help_category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
-
         getHelpCategory();
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     public void getHelpCategory() {
         dialog.show("");

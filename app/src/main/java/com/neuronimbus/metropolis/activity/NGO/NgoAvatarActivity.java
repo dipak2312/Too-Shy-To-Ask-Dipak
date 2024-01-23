@@ -30,10 +30,9 @@ import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.ClickListener;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.ImagePickUtil;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
-import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.adapters.NGOProfileAdapter;
-import com.neuronimbus.metropolis.adapters.ProfileAdapter;
 import com.neuronimbus.metropolis.databinding.ActivityNgoAvatarBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -133,11 +132,13 @@ public class NgoAvatarActivity extends AppCompatActivity implements OnClickListn
         binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
         binding.recyNgoProfile.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
 
-
         getProfile();
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getProfile() {
         dialog.show("");
 

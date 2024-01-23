@@ -21,10 +21,9 @@ import androidx.core.content.ContextCompat;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
-import com.neuronimbus.metropolis.AuthModels.SignupAuthModel;
-import com.neuronimbus.metropolis.Models.SignupResponse;
 import com.neuronimbus.metropolis.Models.SplashScreenResponse;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.R;
@@ -68,8 +67,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         spManager=new SPManager(context);
         biometricManager = BiometricManager.from(this);
         dialog = new CustomProgressDialog(context);
-        //openFingerPrint();
-        checkPreviousActivityStatus();
+        openFingerPrint();
+        //checkPreviousActivityStatus();
 
     }
 
@@ -172,9 +171,12 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        setLocale(spManager.getLanguage());
+       // setLocale(spManager.getLanguage());
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void setLocale(String lang) {
 
         Locale locale = new Locale(lang);
@@ -251,7 +253,14 @@ public class SplashScreenActivity extends AppCompatActivity {
                         if (msg.equals("success")) {
 
                             if (splashScreenResponse != null){
-                                spManager.setUser(splashScreenResponse.getUsertype().toString());
+                                if (splashScreenResponse.getUsertype() != null){
+                                    String userType = splashScreenResponse.getUsertype();
+                                    spManager.setUser(userType);
+                                }
+                                else {
+                                    spManager.setUser("user");
+                                }
+
 
                                 if (splashScreenResponse.getAdmin_approval().equals("approved")){
                                     Intent intent = new Intent(context, HomeActivity.class);

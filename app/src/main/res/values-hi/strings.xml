@@ -83,9 +83,9 @@
     <string name="male">पुरुष</string>
     <string name="female">महिला</string>
     <string name="other">अन्य</string>
-    <string name="country">देश</string>
-    <string name="state">राज्य</string>
-    <string name="city">शहर</string>
+    <string name="country">देश*</string>
+    <string name="state">राज्य*</string>
+    <string name="city">शहर*</string>
 
     //contact
     <string name="email">ईमेल</string>
@@ -179,7 +179,7 @@
     <string name="update_your_interests">अपनी रुचियों को अद्यतन करें</string>
     <string name="update_your_health_issues">अपने स्वास्थ्य संबंधी मुद्दों को अपडेट करें</string>
     <string name="update_your_personal_info">अपनी व्यक्तिगत जानकारी अपडेट करें</string>
-    <string name="update">अद्यतनं</string>
+    <string name="update">अपडेट करें</string>
     <string name="terms_conditions">नियम एवं शर्तें</string>
     <string name="please_select_your_issues">कृपया अपने समस्याएँ चुनें</string>
     <string name="congratulations_you_have_attempted_all_quiz_stay_tuned_we_will_be_back_with_more_quiz">बधाई हो आपने सभी प्रश्नोत्तरी का प्रयास कर लिया है, बने रहें हम और अधिक प्रश्नोत्तरी के साथ वापस आएंगे</string>
@@ -267,13 +267,13 @@
     <string name="dropdown_faq">FAQ</string>
     <string name="ngo">एनजीओ</string>
     <string name="ngo_name">एनजीओ नाम*</string>
-    <string name="registration_number">पंजीकरण संख्या</string>
+    <string name="registration_number">एनजीओ पंजीकरण संख्या*</string>
     <string name="mobile">दूरभाष*</string>
     <string name="major_activities_of_the_organization">संगठन की प्रमुख गतिविधियाँ*</string>
     <string name="duration_of_work_experience">कार्य अनुभव की अवधि*</string>
     <string name="email_mandatory">ईमेल*</string>
     <string name="select_organization">संगठन का चयन करें</string>
-    <string name="are_you_a_partner_with_metropolis">क्या आप मेट्रोपोलिस के भागीदार हैं?</string>
+    <string name="are_you_a_partner_with_metropolis">क्या आप मेट्रोपोलिस के साथ भागीदार हैं?</string>
     <string name="in_which_project_are_you_involved">आप किस प्रोजेक्ट में शामिल हैं?</string>
     <string name="avatar">अवतार</string>
     <string name="thank_you_for_registering_with_us">हमारे साथ पंजीकरण करने के लिए धन्यवाद।</string>
@@ -281,9 +281,9 @@
     <string name="explore_tsta">टीएसटीए का अन्वेषण करें</string>
     <string name="my_qr_code">मेरा क्यूआर कोड</string>
     <string name="download_qr">क्यूआर डाउनलोड करें</string>
-    <string name="update_your_profile">अपने प्रालेख का अद्यतन करें</string>
+    <string name="update_your_profile">अपना प्रोफाइल अपडेट करेंं</string>
     <string name="enter_project_name">प्रोजेक्ट का नाम दर्ज करें</string>
-    <string name="update_organization">संगठन अद्यतन करें</string>
+    <string name="update_organization">संगठन अपडेट करें</string>
     <string name="_00_00">00:00</string>
     <string name="choose_your_language">अपनी भाषा चुनें</string>
     <string name="recording_msg">अब आपके पास निर्बाध संचार की सुविधा के लिए अंग्रेजी, हिंदी या मराठी में अपनी पूछताछ रिकॉर्ड करने का विकल्प है।</string>
@@ -291,5 +291,9 @@
     <string name="recording_in_hindi">हिंदी में रिकॉर्डिंग</string>
     <string name="recording_in_marathi">मराठी में रिकॉर्डिंग</string>
     <string name="voice_message">"स्वर संदेश"</string>
+    <string name="playing_your_audio">ऑडियो प्ले हो रही है</string>
+    <string name="playing_completed">ऑडियो प्लेयिंग पूर्ण हुआ</string>
+    <string name="restart">पुनः आरंभ करें</string>
+    <string name="recording_complete">रेकॉर्डिंग पुरा हूआ</string>
 
 </resources>

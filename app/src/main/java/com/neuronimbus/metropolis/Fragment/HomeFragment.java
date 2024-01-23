@@ -169,7 +169,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
     @Override
     public void onResume() {
         super.onResume();
-        setLocale(spManager.getLanguage());
+        //setLocale(spManager.getLanguage());
         getUserData();
     }
 
@@ -690,7 +690,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnBo
 
         Configuration config=new Configuration();
         config.locale=locale;
-        getActivity().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
+        this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
         spManager.setLanguage(lang);
 
     }

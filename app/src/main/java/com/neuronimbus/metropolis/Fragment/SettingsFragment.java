@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
 import com.neuronimbus.metropolis.Models.NGOProfileResponse;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.activity.Complaint.ComplaintActivity;
 import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
@@ -54,7 +56,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class SettingsFragment extends Fragment implements View.OnClickListener{
+public class SettingsFragment extends Fragment implements View.OnClickListener {
     CircleImageView profile_image;
     RelativeLayout update_profile, notification_setting, bookmarks, faq, help,
             feedback, select_Language, refer_friends, logout, complaint, qrLay;
@@ -65,7 +67,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     Button btn_select;
     RelativeLayout back_arrow;
     CustomProgressDialog dialog;
-    TextView profile_status,txt_name, app_version, terms_conditions, privacy_policy, rel_percentage;
+    TextView profile_status, txt_name, app_version, terms_conditions, privacy_policy, rel_percentage;
     CircularProgressBar progress_circular;
     double progrss_value;
     String action = "language", profile_pic, selectValue, settingActivity = "settingActivity", userType = "";
@@ -90,7 +92,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             e.printStackTrace();
         }
         String ver = pkgInfo.versionName;
-        app_version.setText("" +ver);
+        app_version.setText("" + ver);
 
         qrLay = view.findViewById(R.id.qrLay);
         qrLay.setOnClickListener(this);
@@ -128,15 +130,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
         return view;
     }
-    private void getControl(){
+
+    private void getControl() {
         userType = spManager.getUser();
-        if (userType.equals("ngo")){
+        if (userType.equals("ngo")) {
             qrLay.setVisibility(View.VISIBLE);
             progress_circular.setVisibility(View.GONE);
             rel_percentage.setVisibility(View.GONE);
             profile_status.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             qrLay.setVisibility(View.GONE);
             progress_circular.setVisibility(View.VISIBLE);
             rel_percentage.setVisibility(View.VISIBLE);
@@ -144,7 +146,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void getNGOProfile(){
+    private void getNGOProfile() {
         dialog.show("");
 
         CommonAuthModel model = new CommonAuthModel();
@@ -159,8 +161,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                         String msg = ngoProfileResponse.getMsg();
                         dialog.dismiss("");
 
-                        if (msg.equals("success")){
-                            if (ngoProfileResponse != null){
+                        if (msg.equals("success")) {
+                            if (ngoProfileResponse != null) {
                                 Glide.with(context).load(ngoProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
                                 txt_name.setText(ngoProfileResponse.getProfiledetails().getProfile().getNgo_name());
                             }
@@ -171,7 +173,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onError(Throwable e) {
                         dialog.dismiss("");
-                        Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -184,7 +186,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
     }
 
 
-    public void getUserData(){
+    public void getUserData() {
         dialog.show("");
 
         UserProfileAuthModel model = new UserProfileAuthModel();
@@ -198,9 +200,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                     public void onNext(UserProfileResponse userProfileResponse) {
                         String msg = userProfileResponse.getMsg();
 
-                        if (msg.equals("success")){
+                        if (msg.equals("success")) {
                             profile_status.setText(userProfileResponse.getProfile_percent());
-                            progrss_value= Double.parseDouble(userProfileResponse.getProfile_percent());
+                            progrss_value = Double.parseDouble(userProfileResponse.getProfile_percent());
                             progress_circular.setProgress((int) progrss_value);
                             txt_name.setText(userProfileResponse.getUser_name());
                             Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
@@ -229,86 +231,67 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-
-        else if (id == update_profile.getId()) {
-            if (userType.equals("ngo")){
-                Intent intent = new Intent(context, NgoProfileUpdateActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+        } else if (id == update_profile.getId()) {
+            Intent intent;
+            if (userType.equals("ngo")) {
+                intent = new Intent(context, NgoProfileUpdateActivity.class);
+            } else {
+                intent = new Intent(context, UpdateProfileActivity.class);
             }
-            else {
-                Intent intent = new Intent(context, UpdateProfileActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        }
-        else if(id==terms_conditions.getId())
-        {
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else if (id == terms_conditions.getId()) {
             Uri uri = Uri.parse("https://tooshytoask.org/terms-and-conditions/");
-            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
 
-        }
-        else if (id == privacy_policy.getId()) {
+        } else if (id == privacy_policy.getId()) {
             Uri uri = Uri.parse("https://tooshytoask.org/privacy-policy/");
-            Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
-        }
-        else if (id == notification_setting.getId()) {
+        } else if (id == notification_setting.getId()) {
             Intent intent = new Intent(context, ManageNotificationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if (id == bookmarks.getId()) {
+        } else if (id == bookmarks.getId()) {
             Intent intent = new Intent(context, BookmarkActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if (id == feedback.getId()) {
+        } else if (id == feedback.getId()) {
 
             Bundle bundle = new Bundle();
 
-            bundle.putString("settingActivity","settingActivity");
+            bundle.putString("settingActivity", "settingActivity");
             Intent intent = new Intent(context, FeedbackListActivity.class);
             intent.putExtras(bundle);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if (id == faq.getId()) {
+        } else if (id == faq.getId()) {
             Intent intent = new Intent(context, FAQActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if (id == select_Language.getId()) {
+        } else if (id == select_Language.getId()) {
             openLanguagePopup();
-        }
-        else if (id == refer_friends.getId()) {
+        } else if (id == refer_friends.getId()) {
             shareTheApp();
-        }
-        else if (id == logout.getId()) {
+        } else if (id == logout.getId()) {
             LogOut();
-        }
-        else if (id == help.getId()) {
+        } else if (id == help.getId()) {
             Intent intent = new Intent(context, HelpActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if (id == complaint.getId()) {
+        } else if (id == complaint.getId()) {
             Intent intent = new Intent(context, ComplaintActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }
-        else if(id==eng_lang.getId())
-        {
+        } else if (id == eng_lang.getId()) {
             setLocale("en");
             btn_select.setText(R.string.select_language);
             eng_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -316,9 +299,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             marathi_lang.setBackgroundResource(R.drawable.language_background);
             gujarati_lang.setBackgroundResource(R.drawable.language_background);
             Tamil_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==hindi_lang.getId())
-        {
+        } else if (id == hindi_lang.getId()) {
             setLocale("hi");
             btn_select.setText(R.string.select_language);
             hindi_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -326,9 +307,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             marathi_lang.setBackgroundResource(R.drawable.language_background);
             gujarati_lang.setBackgroundResource(R.drawable.language_background);
             Tamil_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==marathi_lang.getId())
-        {
+        } else if (id == marathi_lang.getId()) {
             setLocale("mr");
             btn_select.setText(R.string.select_language);
             marathi_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -336,9 +315,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             hindi_lang.setBackgroundResource(R.drawable.language_background);
             gujarati_lang.setBackgroundResource(R.drawable.language_background);
             Tamil_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==gujarati_lang.getId())
-        {
+        } else if (id == gujarati_lang.getId()) {
             setLocale("gu");
             btn_select.setText(R.string.select_language);
             gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -346,9 +323,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             hindi_lang.setBackgroundResource(R.drawable.language_background);
             marathi_lang.setBackgroundResource(R.drawable.language_background);
             Tamil_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==Tamil_lang.getId())
-        {
+        } else if (id == Tamil_lang.getId()) {
             setLocale("ta");
             btn_select.setText(R.string.select_language);
             Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
@@ -356,23 +331,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             hindi_lang.setBackgroundResource(R.drawable.language_background);
             gujarati_lang.setBackgroundResource(R.drawable.language_background);
             marathi_lang.setBackgroundResource(R.drawable.language_background);
-        }
-        else if(id==btn_select.getId())
-        {
+        } else if (id == btn_select.getId()) {
             selectLanguage();
             getUserProfileUpdate();
             bottomSheetDialog.dismiss();
             refreshFragment();
-        }
-        else if(id==back_arrow.getId())
-        {
+        } else if (id == back_arrow.getId()) {
             bottomSheetDialog.dismiss();
         }
 
     }
 
-    public void shareTheApp()
-    {
+    public void shareTheApp() {
 
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
@@ -399,6 +369,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
                 spManager.setTstaLoginStatus("false");
                 Intent intent = new Intent(context, SignInActivity.class);
+                spManager.setLanguage(spManager.getLanguage());
                 spManager.setUser("");
                 spManager.setRecordingLang("");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -421,22 +392,21 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    public void openLanguagePopup()
-    {
+    public void openLanguagePopup() {
 
         bottomSheetDialog = new BottomSheetDialog(context);
         bottomSheetDialog.setContentView(R.layout.select_language_view);
         bottomSheetDialog.setCancelable(false);
 
-        eng_lang=bottomSheetDialog.findViewById(R.id.eng_lang_bt);
+        eng_lang = bottomSheetDialog.findViewById(R.id.eng_lang_bt);
         eng_lang.setOnClickListener(this);
-        hindi_lang=bottomSheetDialog.findViewById(R.id.hindi_lang_bt);
+        hindi_lang = bottomSheetDialog.findViewById(R.id.hindi_lang_bt);
         hindi_lang.setOnClickListener(this);
-        marathi_lang=bottomSheetDialog.findViewById(R.id.marathi_lang_bt);
+        marathi_lang = bottomSheetDialog.findViewById(R.id.marathi_lang_bt);
         marathi_lang.setOnClickListener(this);
-        gujarati_lang=bottomSheetDialog.findViewById(R.id.gujarati_lang_bt);
+        gujarati_lang = bottomSheetDialog.findViewById(R.id.gujarati_lang_bt);
         gujarati_lang.setOnClickListener(this);
-        Tamil_lang=bottomSheetDialog.findViewById(R.id.Tamil_lang_bt);
+        Tamil_lang = bottomSheetDialog.findViewById(R.id.Tamil_lang_bt);
         Tamil_lang.setOnClickListener(this);
         back_arrow = bottomSheetDialog.findViewById(R.id.back_arrow);
         back_arrow.setOnClickListener(this);
@@ -448,7 +418,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
         selectLanguage();
 
     }
-    public void getUserProfileUpdate(){
+
+    public void getUserProfileUpdate() {
         dialog.show("");
         dialog.dismiss("");
 
@@ -465,7 +436,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                     public void onNext(UpdateProfileResponse updateProfileResponse) {
                         String msg = updateProfileResponse.getMsg();
 
-                        if (msg.equals("Profile Updated")){
+                        if (msg.equals("Profile Updated")) {
 
 
                         }
@@ -483,12 +454,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
-    public void selectLanguage(){
+    public void selectLanguage() {
 
-         selectValue=spManager.getLanguage();
+        selectValue = spManager.getLanguage();
 
-        if(selectValue.equals("en"))
-        {
+        if (selectValue.equals("en")) {
             eng_lang.setChecked(true);
             eng_lang.setBackgroundResource(R.drawable.language_background_active);
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
@@ -496,9 +466,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-        else if(selectValue.equals("hi"))
-        {
+        } else if (selectValue.equals("hi")) {
             hindi_lang.setChecked(true);
             hindi_lang.setBackgroundResource(R.drawable.language_background_active);
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
@@ -506,9 +474,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-        else if(selectValue.equals("mr"))
-        {
+        } else if (selectValue.equals("mr")) {
             marathi_lang.setChecked(true);
             marathi_lang.setBackgroundResource(R.drawable.language_background_active);
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
@@ -516,9 +482,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-        else if(selectValue.equals("gu"))
-        {
+        } else if (selectValue.equals("gu")) {
             gujarati_lang.setChecked(true);
             gujarati_lang.setBackgroundResource(R.drawable.language_background_active);
             gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
@@ -526,9 +490,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
             marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
             eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-        }
-        else if(selectValue.equals("ta"))
-        {
+        } else if (selectValue.equals("ta")) {
             Tamil_lang.setChecked(true);
             Tamil_lang.setBackgroundResource(R.drawable.language_background_active);
             Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
@@ -540,113 +502,43 @@ public class SettingsFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    public void radioButtonClickEvent(View view){
-        boolean isChecked = ((RadioButton) view).isChecked();
-        switch (view.getId()){
-            case R.id.eng_lang:
-                if(isChecked){
-
-                    setLocale("en");
-                    btn_select.setText(R.string.select_language);
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-            case R.id.hindi_lang:
-                if(isChecked){
-
-                    setLocale("hi");
-                    btn_select.setText(R.string.select_language);
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-            case R.id.marathi_lang:
-                if(isChecked){
-
-                    setLocale("mr");
-                    btn_select.setText(R.string.select_language);
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-            case R.id.gujarati_lang:
-                if(isChecked){
-
-                    setLocale("gu");
-                    btn_select.setText(R.string.select_language);
-                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-            case R.id.Tamil_lang:
-                if(isChecked){
-
-                    setLocale("ta");
-                    btn_select.setText(R.string.select_language);
-                    Tamil_lang.setTextColor(ContextCompat.getColor(context, R.color.purple));
-                    gujarati_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    marathi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    hindi_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    eng_lang.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    selectLanguage();
-                }
-                break;
-        }
-    }
-
-    public void refreshFragment()
-    {
-        SettingsFragment fragment1=new SettingsFragment();
-        FragmentTransaction ft=getFragmentManager().beginTransaction();
-        ft.replace(R.id.rootLayout,fragment1);
+    public void refreshFragment() {
+        SettingsFragment fragment1 = new SettingsFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.rootLayout, fragment1);
         ft.commit();
 
         Intent intent = new Intent(context, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        getActivity().finish();
     }
 
     private void setLocale(String lang) {
-
-        Locale locale=new Locale(lang);
+        Locale locale = new Locale(lang);
         Locale.setDefault(locale);
 
-        Configuration config=new Configuration();
-        config.locale=locale;
-        getActivity().getResources().updateConfiguration(config,getActivity().getResources().getDisplayMetrics());
+        Configuration config = new Configuration();
+        config.locale = locale;
+        this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
         spManager.setLanguage(lang);
-
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setLocale(spManager.getLanguage());
-        if (userType.equals("ngo")){
+        if (userType.equals("ngo")) {
             getNGOProfile();
-        }else  {
+        } else {
             getUserData();
         }
 
-
-
     }
-
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LocaleHelper.onAttach(context);
     }
+}

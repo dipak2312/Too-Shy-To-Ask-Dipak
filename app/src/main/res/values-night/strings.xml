@@ -8,8 +8,8 @@
     <string name="uploaded_file">Uploaded File</string>
     <string name="please_select_an_image_that_is_less_than_5_mb_in_size">Please select an image that is less than 3 MB in size.</string>
     <string name="ok">Ok</string>
-    <string name="ngo_name">NGO Name*</string>
-    <string name="registration_number">Registration Number</string>
+    <string name="ngo_name" translatable="false">NGO Name*</string>
+    <string name="registration_number">NGO Registration Number*</string>
     <string name="mobile">Mobile</string>
     <string name="major_activities_of_the_organization">Major Activities of the Organization*</string>
     <string name="duration_of_work_experience">Duration of Work Experience*</string>

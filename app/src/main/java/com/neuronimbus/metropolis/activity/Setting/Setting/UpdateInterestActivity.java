@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.CategoryAdapter;
 import com.neuronimbus.metropolis.AuthModels.HealthCateModel;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
@@ -65,9 +65,12 @@ public class UpdateInterestActivity extends AppCompatActivity implements View.On
 
         category_recy.setLayoutManager(new GridLayoutManager(context,3, GridLayoutManager.VERTICAL, false));
 
-
         healthcategory();
 
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     @Override
     protected void onStop() {

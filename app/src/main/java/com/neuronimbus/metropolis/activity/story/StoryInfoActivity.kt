@@ -77,6 +77,7 @@ class StoryInfoActivity : AppCompatActivity(), PageViewOperator {
 
         storyDetails= ArrayList()
         getStory()
+        SetLocalLanguage.setLocale(context,spManager.getLanguage(),spManager);
     }
 
 

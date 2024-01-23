@@ -25,8 +25,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.OnBookmarkClicked;
-import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.adapters.BlogCommentsAdapter;
 import com.neuronimbus.metropolis.adapters.RelatedBlogAdapter;
 import com.neuronimbus.metropolis.AuthModels.BlogCommentsAuthModel;
@@ -135,7 +135,10 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
         getSingleBlog();
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void blogLike(String type){
         //dialog.show("");
 

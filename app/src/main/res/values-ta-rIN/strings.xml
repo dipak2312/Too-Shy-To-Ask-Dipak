@@ -83,9 +83,9 @@
     <string name="male">ஆண்</string>
     <string name="female">பெண்கள்</string>
     <string name="other">மற்றவை</string>
-    <string name="country">நாடு</string>
-    <string name="state">நிலை</string>
-    <string name="city">செக்ஸ்</string>
+    <string name="country">நாடு*</string>
+    <string name="state">நிலை*</string>
+    <string name="city">செக்ஸ்*</string>
 
     //contact
     <string name="email">மின்னஞ்சல்</string>
@@ -267,7 +267,7 @@
     <string name="dropdown_faq">FAQ</string>
     <string name="ngo">என்.ஜி.ஓ</string>
     <string name="ngo_name">என்.ஜி.ஓ பெயர்*</string>
-    <string name="registration_number">பதிவு எண்</string>
+    <string name="registration_number">என்.ஜி.ஓ பதிவு எண்*</string>
     <string name="mobile">கைபேசி*</string>
     <string name="major_activities_of_the_organization">அமைப்பின் முக்கிய செயல்பாடுகள்*</string>
     <string name="duration_of_work_experience">பணி அனுபவத்தின் காலம்*</string>
@@ -291,5 +291,9 @@
     <string name="recording_in_hindi">இந்தியில் பதிவு</string>
     <string name="recording_in_marathi">மராத்தியில் பதிவு</string>
     <string name="voice_message">"குரல் செய்தி"</string>
+    <string name="playing_your_audio">ஆடியோ பிளேயிங் ஆகிறது</string>
+    <string name="playing_completed">பிளேயிங் நிறைவுசெய்தது</string>
+    <string name="restart">மறுதொடக்கம்</string>
+    <string name="recording_complete">பதிவு முடிந்தது</string>
 
 </resources>

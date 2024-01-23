@@ -20,13 +20,12 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class VideoGallerySingleActivity extends AppCompatActivity implements View.OnClickListener {
     Context context;
@@ -63,9 +62,11 @@ public class VideoGallerySingleActivity extends AppCompatActivity implements Vie
 
         VideoPlayerSet();
 
-
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void VideoPlayerSet(){
             if (video_type.equals("Youtube")){
                 youTubePlayerView.setVisibility(View.VISIBLE);

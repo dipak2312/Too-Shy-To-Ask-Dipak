@@ -86,7 +86,7 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
     public void onBindViewHolder(@NonNull ChattingAdapter.ViewHolder holder, int position) {
         if(chats.get(position).getType().equals("reply"))
         {
-            if (chats.get(position).getQuestion_type().equals("audio")) {
+            if (chats.get(position).getQuestion_type() != null && chats.get(position).getQuestion_type().equals("audio")) {
                 holder.microPhoneIcon.setVisibility(View.VISIBLE);
                 int audioTime = Integer.parseInt(chats.get(position).getRecordingDuration());
                 int minutes = audioTime / 60;
@@ -112,7 +112,8 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
         }
         if(chats.get(position).getType().equals("question"))
         {
-            if (chats.get(position).getQuestion_type().equals("audio")) {
+
+            if (chats.get(position).getQuestion_type() != null && chats.get(position).getQuestion_type().equals("audio")) {
                 holder.audioChattingDesign.setVisibility(View.VISIBLE);
                 holder.chatt_lin_lay.setVisibility(View.GONE);
                 holder.dateTimeLay.setVisibility(View.GONE);

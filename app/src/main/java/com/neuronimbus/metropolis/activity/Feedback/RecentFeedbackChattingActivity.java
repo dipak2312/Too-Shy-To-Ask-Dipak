@@ -8,35 +8,24 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.AskFeedbackAuthModel;
-import com.neuronimbus.metropolis.AuthModels.FeedbackAuthModel;
 import com.neuronimbus.metropolis.AuthModels.ProcessingFeedbackChatAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.CommonResponse;
-import com.neuronimbus.metropolis.Models.ExpertReplyResponse;
-import com.neuronimbus.metropolis.Models.FeedbackResponse;
-import com.neuronimbus.metropolis.Models.ProcessingFeedback;
 import com.neuronimbus.metropolis.Models.ProcessingFeedbackChatResponse;
-import com.neuronimbus.metropolis.Models.chats;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.RecyclerViewOnClickListner;
-import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
-import com.neuronimbus.metropolis.adapters.ChattingAdapter;
 import com.neuronimbus.metropolis.adapters.FeedbackChattingAdapter;
-import com.neuronimbus.metropolis.databinding.ActivityFeedbackListBinding;
 import com.neuronimbus.metropolis.databinding.ActivityRecentFeedbackChattingBinding;
 
 import java.util.ArrayList;
@@ -95,7 +84,10 @@ public class RecentFeedbackChattingActivity extends AppCompatActivity implements
             }
         });
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void getChatting(String refresh){
 
         ProcessingFeedbackChatAuthModel model = new ProcessingFeedbackChatAuthModel();

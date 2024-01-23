@@ -19,6 +19,7 @@ import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.GameScoreResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -56,10 +57,12 @@ public class GameMainPageActivity extends AppCompatActivity implements View.OnCl
 
         btn_play_now=(Button)findViewById(R.id.btn_play_now);
         btn_play_now.setOnClickListener(this);
-
         gameScore();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void gameScore()
     {
 

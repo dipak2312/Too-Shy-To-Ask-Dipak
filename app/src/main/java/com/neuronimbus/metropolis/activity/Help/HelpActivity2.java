@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.Help2Adapter;
 import com.neuronimbus.metropolis.AuthModels.HelpSubCategoryAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
@@ -73,9 +74,11 @@ public class HelpActivity2 extends AppCompatActivity implements View.OnClickList
 
         }
         getHelpSubCategory();
-
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getHelpSubCategory() {
         dialog.show("");
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.BookmarkBlogAdapter;
 import com.neuronimbus.metropolis.adapters.BookmarkCoursesAdapter;
 import com.neuronimbus.metropolis.adapters.BookmarkEventAdapter;
@@ -79,10 +80,12 @@ public class BookmarkActivity extends AppCompatActivity implements View.OnClickL
 
         videos_saved_recy = findViewById(R.id.videos_saved_recy);
         videos_saved_recy.setLayoutManager(new GridLayoutManager(context,2, GridLayoutManager.VERTICAL, false));
-
         getBookmark();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getBookmark(){
         dialog.show("");
         bookmark_scroll_view.setVisibility(View.GONE);

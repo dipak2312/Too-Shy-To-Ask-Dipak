@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.AuthModels.SignInAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
@@ -21,7 +22,6 @@ import com.neuronimbus.metropolis.Models.SignInResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.google.android.material.textfield.TextInputEditText;
-import com.neuronimbus.metropolis.activity.WebViewActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -56,9 +56,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
 
+        //SetLocalLanguage.setLocale(this,spManager.getLanguage(),spManager);
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -125,7 +129,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             Intent intent = new Intent(context, OtpVerificationActivity.class);
                             intent.putExtra("phone", etMobile.getText().toString().trim());
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivityForResult(intent, 1);
+                            startActivity(intent);
                             finish();
                         }
                         else {
@@ -136,7 +140,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context, "The mobile no field is required.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                         dialog.dismiss("");
                     }
 

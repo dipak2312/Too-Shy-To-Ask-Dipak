@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
 import com.neuronimbus.metropolis.adapters.ManageNotificationAdapter;
 import com.neuronimbus.metropolis.AuthModels.ManageNotificationAuthModel;
@@ -57,10 +57,12 @@ public class ManageNotificationActivity extends AppCompatActivity implements Vie
         recy_manage_notification = findViewById(R.id.recy_manage_notification);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         recy_manage_notification.setLayoutManager(linearLayoutManager);
-
         getManageNotification();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getManageNotification(){
         dialog.show("");
 

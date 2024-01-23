@@ -21,15 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
-import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
-import com.neuronimbus.metropolis.activity.FAQ.FAQActivity;
-import com.neuronimbus.metropolis.activity.Game.GameHomeActivity;
-import com.neuronimbus.metropolis.activity.Game.GameMainPageActivity;
-import com.neuronimbus.metropolis.activity.InformationStoreHouse.InformationStoreHouseDetailActivity;
-import com.neuronimbus.metropolis.activity.Quiz.QuizActivity;
-import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateProfileActivity;
-import com.neuronimbus.metropolis.activity.VideoGallery.VideoGallerySingleActivity;
-import com.neuronimbus.metropolis.activity.story.StoryActivity;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.NotificationAdapter;
 import com.neuronimbus.metropolis.AuthModels.ClearNotificationAuthModel;
 import com.neuronimbus.metropolis.AuthModels.NotificationAuthModel;
@@ -84,10 +76,12 @@ public class NotificationsActivity extends AppCompatActivity implements View.OnC
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         rec_show_notification.setLayoutManager(linearLayoutManager);
-
         getNotification();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.notification_menu, menu);

@@ -1,25 +1,19 @@
 package com.neuronimbus.metropolis.activity.story;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Html;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
@@ -27,12 +21,11 @@ import com.neuronimbus.metropolis.AuthModels.StoryLikeAuthModel;
 import com.neuronimbus.metropolis.AuthModels.StoryShareAuthModel;
 import com.neuronimbus.metropolis.Models.StoryLikeResponse;
 import com.neuronimbus.metropolis.Models.StoryShareResponse;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Blogs.AllBlogsActivity;
 import com.neuronimbus.metropolis.activity.Blogs.DetailBlogActivity;
-import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 
 
-import com.neuronimbus.metropolis.adapters.StoryViewPagerAdapter;
 import com.neuronimbus.metropolis.AuthModels.StoryAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.StoryDetails;
@@ -49,8 +42,6 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -113,13 +104,15 @@ public class StoryActivity extends AppCompatActivity implements View.OnClickList
         back_img.setOnClickListener(this);
 
         //swipeListener = new SwipeListener(swipe_up_lay);
-
         story_id = getIntent().getStringExtra("story_id");
         getStory();
         onTouch();
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void onTouch(){
         View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override

@@ -30,6 +30,7 @@ import com.neuronimbus.metropolis.Models.FeedbackResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.ImagePickUtil;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.databinding.ActivityNewFeedbackBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -90,7 +91,10 @@ public class NewFeedbackActivity extends AppCompatActivity implements View.OnCli
         checkPermissions();
         btnClick();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void btnClick() {
 
         binding.addFile.setOnClickListener(new View.OnClickListener() {

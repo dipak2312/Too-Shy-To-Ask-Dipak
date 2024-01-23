@@ -10,8 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -20,6 +18,7 @@ import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.R;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.adapters.AllBlogAdapter;
 import com.neuronimbus.metropolis.AuthModels.AllBlogAuthModel;
@@ -91,9 +90,11 @@ public class AllBlogsActivity extends AppCompatActivity implements View.OnClickL
 
 
         getAllBlogs(category);
-
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getBookmarkBlogs(String action){
 
         BookmarkBlogAuthModel model = new BookmarkBlogAuthModel();

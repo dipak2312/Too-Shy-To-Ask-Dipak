@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.adapters.AllVideoGalleryAdapter;
 import com.neuronimbus.metropolis.AuthModels.AllVideoGalleryAuthModel;
@@ -63,7 +64,10 @@ public class AllVideoActivity extends AppCompatActivity implements View.OnClickL
 
         getVideoGallery();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getVideoGallery(){
         dialog.show("");
 

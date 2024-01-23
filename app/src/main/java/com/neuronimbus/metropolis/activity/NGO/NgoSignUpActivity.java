@@ -10,13 +10,10 @@ import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.NGOSignupAuthModel;
-import com.neuronimbus.metropolis.AuthModels.SignupAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
-import com.neuronimbus.metropolis.Models.CommonResponse;
 import com.neuronimbus.metropolis.Models.SignupResponse;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.MyValidator;
-import com.neuronimbus.metropolis.activity.Landing.InfoCardCategoryActivity;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.databinding.ActivityNgoSignUpBinding;
 
@@ -51,7 +48,6 @@ public class NgoSignUpActivity extends AppCompatActivity {
         binding.editMobileNumber.setText(phone);
         binding.editMobileNumber.setClickable(false);
         binding.editMobileNumber.setFocusable(false);
-
     }
 
     private void onClick() {

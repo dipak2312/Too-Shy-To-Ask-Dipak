@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.chaos.view.PinView;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
 import com.neuronimbus.metropolis.Models.UpdateProfile.UpdateProfileResponse;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.AuthModels.OtpAuthModel;
 import com.neuronimbus.metropolis.AuthModels.SignInAuthModel;
@@ -86,7 +88,10 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
         progressBar();
         countDownTimer();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void pinView() {
 
         otp_view.requestFocus();
@@ -277,7 +282,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                         String msg = otpInResponse.getMsg();
 
                        if (msg.equals("Success")){
-
+                           getUserProfileUpdate();
                            spManager.setFirstName(otpInResponse.getData().getFirst_name());
                            spManager.setLastName(otpInResponse.getData().getLast_name());
                            spManager.setDob(otpInResponse.getData().getDob());
@@ -300,7 +305,6 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                            spManager.setWorkExp(otpInResponse.getData().getWork_experience());
                            spManager.setMajorActivities(otpInResponse.getData().getOrganization_activities());
 
-                           getUserProfileUpdate();
                            if (otpInResponse.getAdmin_approval().equals("approved")){
                                Intent intent = new Intent(context, HomeActivity.class);
                                spManager.setTstaLoginStatus("true");
@@ -366,7 +370,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onError(Throwable e) {
 
-                        Toast.makeText(context, "Please Check Your Network..Unable to Connect Server!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -400,6 +404,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements View.O
 
                     @Override
                     public void onError(Throwable e) {
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
 
                     }
 

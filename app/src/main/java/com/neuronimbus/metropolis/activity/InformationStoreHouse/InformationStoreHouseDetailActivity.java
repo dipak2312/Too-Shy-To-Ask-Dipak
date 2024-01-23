@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Feedback.NewFeedbackActivity;
 import com.neuronimbus.metropolis.adapters.RelatedStoreHouseAdapter;
 import com.neuronimbus.metropolis.AuthModels.BookmarkBlogAuthModel;
@@ -101,11 +102,13 @@ public class InformationStoreHouseDetailActivity extends AppCompatActivity imple
         recy_storehouse.setLayoutManager(linearLayoutManager);
 
         article_id = getIntent().getStringExtra("article_id");
-
         getStoreHouseSinglePage();
         getStoreHouseRelated();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getStoreHouseSinglePage(){
         dialog.show("");
         storehouse_scroll_view.setVisibility(View.GONE);

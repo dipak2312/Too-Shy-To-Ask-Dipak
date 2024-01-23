@@ -10,15 +10,12 @@ import android.view.View;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
-import com.neuronimbus.metropolis.AuthModels.FAQContentAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.ComplaintHistoryChat;
 import com.neuronimbus.metropolis.Models.ComplaintListResponse;
-import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.ComplaintListAdapter;
-import com.neuronimbus.metropolis.adapters.FAQAdapter;
-import com.neuronimbus.metropolis.databinding.ActivityComplaintBinding;
 import com.neuronimbus.metropolis.databinding.ActivityComplaintListBinding;
 
 import java.util.ArrayList;
@@ -77,10 +74,12 @@ public class ComplaintListActivity extends AppCompatActivity {
         complaintHistoryChat = new ArrayList<>();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         binding.recyComplaintList.setLayoutManager(linearLayoutManager);
-
         getComplaintList();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void getComplaintList(){
         dialog.show("");
 

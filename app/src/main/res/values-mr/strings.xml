@@ -83,9 +83,9 @@
     <string name="male">पुरुष</string>
     <string name="female">महिला</string>
     <string name="other">अन्य</string>
-    <string name="country">देश</string>
-    <string name="state">राज्य</string>
-    <string name="city">शहर</string>
+    <string name="country">देश*</string>
+    <string name="state">राज्य*</string>
+    <string name="city">शहर*</string>
 
     //contact
     <string name="email">ईमेल</string>
@@ -128,7 +128,7 @@
     <string name="let_s_start">आपण सुरु करू</string>
     <string name="welcome">नमस्कार स्वागत आहे</string>
     <string name="take_care_of_your_health_test_your_knowledge_of_adolescence_health_by_taking_our_quiz">आपल्या आरोग्याची काळजी घ्या. आमची क्विझ घेऊन किशोरावस्थेतील आरोग्याविषयी तुमच्या ज्ञानाची चाचणी घ्या</string>
-    <string name="submit">सबमिट करा</string>
+    <string name="submit">जमा करा</string>
 
     <string name="next_question">पुढचा प्रश्न</string>
     <string name="back_to_home">मुख्यपृष्ठला परात जा</string>
@@ -267,13 +267,13 @@
     <string name="dropdown_faq">FAQ</string>
     <string name="ngo">एनजीओ</string>
     <string name="ngo_name">एनजीओ नाव*</string>
-    <string name="registration_number">नोंदणी क्रमांक</string>
+    <string name="registration_number">एनजीओ नोंदणी क्रमांक*</string>
     <string name="mobile">मोबाईल*</string>
     <string name="major_activities_of_the_organization">संस्थेचे प्रमुख उपक्रम*</string>
     <string name="duration_of_work_experience">कामाच्या अनुभवाचा कालावधी*</string>
     <string name="email_mandatory">ईमेल*</string>
     <string name="select_organization">संस्था निवडा</string>
-    <string name="are_you_a_partner_with_metropolis">तुम्ही मेट्रोपोलिसचे भागीदार आहात का?</string>
+    <string name="are_you_a_partner_with_metropolis">तुम्ही मेट्रोपोलिस बरोबर भागीदार आहात का?</string>
     <string name="in_which_project_are_you_involved">तुम्ही कोणत्या प्रकल्पात सहभागी आहात?</string>
     <string name="avatar">अवतार</string>
     <string name="thank_you_for_registering_with_us">आमच्यासोबत नोंदणी केल्याबद्दल धन्यवाद.</string>
@@ -283,7 +283,7 @@
     <string name="download_qr">QR डाउनलोड करा</string>
     <string name="update_your_profile">तुमचे प्रोफाइल अपडेट करा</string>
     <string name="enter_project_name">प्रकल्पाचे नाव प्रविष्ट करा</string>
-    <string name="update_organization">संस्था अद्यतनित करा</string>
+    <string name="update_organization">संस्था अपडेट करा</string>
     <string name="_00_00">00:00</string>
     <string name="choose_your_language">तुमची भाषा निवडा</string>
     <string name="recording_msg">तुमच्याकडे आता तुमची चौकशी इंग्रजी, हिंदी किंवा मराठीमध्ये रेकॉर्ड करण्याचा पर्याय आहे, ज्यामुळे अखंड संवाद साधता येईल.</string>
@@ -291,5 +291,9 @@
     <string name="recording_in_hindi">हिंदीमध्ये रेकॉर्डिंग</string>
     <string name="recording_in_marathi">मराठीत रेकॉर्डिंग</string>
     <string name="voice_message">"आवाज संदेश"</string>
+    <string name="playing_your_audio">ऑडियो चालू आहे</string>
+    <string name="playing_completed">ऑडियो प्लेइंग संपले</string>
+    <string name="restart">पुन्हा सुरू करा</string>
+    <string name="recording_complete">रेकॉर्डिंग पूर्ण झाले</string>
 
 </resources>

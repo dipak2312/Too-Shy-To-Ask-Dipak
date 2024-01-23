@@ -17,6 +17,7 @@ import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.NgoPopupResponse;
 import com.neuronimbus.metropolis.R;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.databinding.ActivityAdminApprovalBinding;
 
@@ -43,9 +44,11 @@ public class AdminApprovalActivity extends AppCompatActivity {
         context = AdminApprovalActivity.this;
         spManager = new SPManager(context);
         ngoPopupMessage();
-
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void ngoPopupMessage(){
         CommonAuthModel model = new CommonAuthModel();
         model.setUser_id(spManager.getUserId());

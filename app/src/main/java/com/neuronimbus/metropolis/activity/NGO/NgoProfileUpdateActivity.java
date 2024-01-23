@@ -11,19 +11,16 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
-import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.CommonResponse;
 import com.neuronimbus.metropolis.Models.NGOProfileResponse;
 import com.neuronimbus.metropolis.Models.UpdateNGOProfile;
-import com.neuronimbus.metropolis.Models.UpdateProfile.UpdateProfileResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.MyValidator;
-import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.activity.Setting.Setting.UpdateAvatarActivity;
 import com.neuronimbus.metropolis.databinding.ActivityNgoProfileUpdateBinding;
-import com.neuronimbus.metropolis.databinding.ActivityNgoSignUpBinding;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -38,6 +35,9 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        String savedLanguage = LocaleHelper.getLanguage(this);
+//        LocaleHelper.setLocale(this, savedLanguage);
+
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         binding = ActivityNgoProfileUpdateBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -45,7 +45,10 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
         onClick();
         getController();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void onClick() {
         binding.relBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +147,8 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
         binding.pageTitle.setText(getString(R.string.update_your_profile));
         context = NgoProfileUpdateActivity.this;
         spManager = new SPManager(context);
+
+
         dialog = new CustomProgressDialog(context);
         binding.editMobileNumber.setClickable(false);
         binding.editMobileNumber.setFocusable(false);
@@ -156,7 +161,6 @@ public class NgoProfileUpdateActivity extends AppCompatActivity {
         binding.editCountryEnter.setText(spManager.getCountry());
         binding.editStateEnter.setText(spManager.getState());
         binding.editCityEnter.setText(spManager.getCity());
-
 
     }
 

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.BlogSearchAdapter;
 import com.neuronimbus.metropolis.adapters.CoursesSearchAdapter;
 import com.neuronimbus.metropolis.adapters.EventSearchAdapter;
@@ -137,9 +138,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
         RecyView();
-
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void RecyView(){
 
         recy_storeHouse_search = findViewById(R.id.recy_storeHouse_search);

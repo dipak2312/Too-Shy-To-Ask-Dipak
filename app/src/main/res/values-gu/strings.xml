@@ -83,9 +83,9 @@
     <string name="male">પુરૂષ</string>
     <string name="female">સ્ત્રીઓ</string>
     <string name="other">અન્ય</string>
-    <string name="country">દેશ</string>
-    <string name="state">રાજ્ય</string>
-    <string name="city">શહેર</string>
+    <string name="country">દેશ*</string>
+    <string name="state">રાજ્ય*</string>
+    <string name="city">શહેર*</string>
 
     //contact
     <string name="email">ઇમેઇલ</string>
@@ -267,7 +267,7 @@
     <string name="dropdown_faq">FAQ</string>
     <string name="ngo">એનજીઓ</string>
     <string name="ngo_name">એનજીઓ નામ*</string>
-    <string name="registration_number">નોંધણી નંબર</string>
+    <string name="registration_number">એનજીઓ નોંધણી નંબર*</string>
     <string name="mobile">મોબાઈલ*</string>
     <string name="major_activities_of_the_organization">સંસ્થાની મુખ્ય પ્રવૃત્તિઓ*</string>
     <string name="duration_of_work_experience">કામના અનુભવનો સમયગાળો*</string>
@@ -291,5 +291,9 @@
     <string name="recording_in_hindi">હિન્દીમાં રેકોર્ડિંગ</string>
     <string name="recording_in_marathi">મરાઠીમાં રેકોર્ડિંગ</string>
     <string name="voice_message">"વૉઇસ સંદેશ"</string>
+    <string name="playing_your_audio">ઑડિયો ચાલી રહેલી છે</string>
+    <string name="playing_completed">ઑડિયો ચાલનું પૂર્ણ થયું</string>
+    <string name="restart">પુનઃપ્રારંભ</string>
+    <string name="recording_complete">રેકોર્ડિંગ પૂર્ણ થયું</string>
 
 </resources>

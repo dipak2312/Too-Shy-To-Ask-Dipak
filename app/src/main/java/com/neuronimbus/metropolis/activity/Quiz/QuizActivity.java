@@ -22,9 +22,8 @@ import com.neuronimbus.metropolis.AuthModels.QuizAnswerAuthModel;
 import com.neuronimbus.metropolis.Fragment.Quiz.QuestionFragment;
 import com.neuronimbus.metropolis.Models.QuizAnswerResponse;
 import com.neuronimbus.metropolis.Models.QuizData;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
-import com.neuronimbus.metropolis.activity.LMS.CoursesDetailActivity;
-import com.neuronimbus.metropolis.activity.LMS.LMSQuiz.LMSQuestionFragment;
 import com.neuronimbus.metropolis.adapters.OptionAdapter;
 import com.neuronimbus.metropolis.adapters.QuestionPagerAdapter;
 import com.neuronimbus.metropolis.AuthModels.QuizQueAuthModel;
@@ -78,10 +77,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         progressbar_completed=(ProgressBar)findViewById(R.id.progressbar_completed);
 
         viewPager = findViewById(R.id.view_pager);
-
         getQuizQue();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getQuizQue(){
         dialog.show("");
         rel_progress_bar.setVisibility(View.GONE);

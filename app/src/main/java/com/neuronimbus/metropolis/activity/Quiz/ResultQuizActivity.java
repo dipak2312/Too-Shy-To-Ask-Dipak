@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.AuthModels.QuizAnswerAuthModel;
 import com.neuronimbus.metropolis.Fragment.Quiz.QuestionFragment;
@@ -102,10 +103,12 @@ public class ResultQuizActivity extends AppCompatActivity implements View.OnClic
 
         quiz_id=QuestionFragment.quiz_id;
         QuestionFragment.quiz_id="";
-
         sendReply();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void sendReply()
     {
         dialog.show("");

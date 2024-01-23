@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,13 +23,13 @@ import com.neuronimbus.metropolis.AuthModels.QRCodeCountAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.CommonResponse;
 import com.neuronimbus.metropolis.Models.QRCode.QRCodeResponse;
-import com.neuronimbus.metropolis.Models.QRCode.question;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
-import com.neuronimbus.metropolis.adapters.FAQAdapter;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.QRCodeAdapter;
 import com.neuronimbus.metropolis.databinding.ActivityQrcodeBinding;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -135,11 +136,13 @@ public class QRCodeActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         binding.recyQrCode.setLayoutManager(linearLayoutManager);
-
         qrCodeInfo();
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void qrCodeInfo(){
         dialog.show("");
 
@@ -216,5 +219,22 @@ public class QRCodeActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        setLocale(spManager.getLanguage());
+    }
+
+    private void setLocale(String lang) {
+
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        spManager.setLanguage(lang);
+
     }
 }

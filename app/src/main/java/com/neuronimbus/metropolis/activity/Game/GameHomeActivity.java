@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.SelectTextAdapter;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.AddChar;
@@ -113,8 +114,11 @@ public class GameHomeActivity extends AppCompatActivity implements View.OnClickL
 
 
         showpendingGame(level);
-
         getwordList();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     public void getwordList() {
         custdialog.show("");

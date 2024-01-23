@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.viewbinding.ViewBinding;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,23 +13,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.AddComplaintAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
@@ -38,9 +30,8 @@ import com.neuronimbus.metropolis.Models.AddComplaintResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.ImagePickUtil;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.MyValidator;
-import com.neuronimbus.metropolis.activity.Help.ContactUsActivity;
-import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
 import com.neuronimbus.metropolis.databinding.ActivityComplaintBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -88,7 +79,10 @@ public class ComplaintActivity extends AppCompatActivity implements View.OnClick
         openSelectTopic();
         checkPermissions();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void onClick(){
 
         binding.relBack.setOnClickListener(new View.OnClickListener() {

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Bookmark.BookmarkActivity;
 import com.neuronimbus.metropolis.adapters.StoreHouseListingAdapter;
 import com.neuronimbus.metropolis.AuthModels.AllStoreHouseAuthModel;
@@ -84,10 +85,12 @@ public class InformationStorehouseActivity extends AppCompatActivity implements 
 
         //listItems = getResources().getStringArray(R.array.category_list);
         //checkedItems = new boolean[listItems.length];
-
         getStoreHouseCategory("");
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getAllStoreHouse(){
         dialog.show("");
 

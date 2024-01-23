@@ -6,22 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.FeedbackListAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.FeedbackListResponse;
-import com.neuronimbus.metropolis.Models.OldestFeedback;
-import com.neuronimbus.metropolis.Models.RecentFeedback;
-import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
-import com.neuronimbus.metropolis.activity.Complaint.ComplaintActivity;
-import com.neuronimbus.metropolis.adapters.Help2Adapter;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.OldFeedbackListAdapter;
 import com.neuronimbus.metropolis.adapters.RecentFeedbackListAdapter;
-import com.neuronimbus.metropolis.databinding.ActivityComplaintBinding;
 import com.neuronimbus.metropolis.databinding.ActivityFeedbackListBinding;
 
 import java.util.ArrayList;
@@ -77,7 +71,6 @@ public class FeedbackListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     @Override
@@ -85,7 +78,10 @@ public class FeedbackListActivity extends AppCompatActivity {
         super.onResume();
         getFeedbackList();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void getFeedbackList(){
         dialog.show("");
         binding.rootLay.setVisibility(View.GONE);

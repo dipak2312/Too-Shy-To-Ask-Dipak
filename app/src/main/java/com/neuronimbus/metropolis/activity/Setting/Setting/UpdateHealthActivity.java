@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
-import com.neuronimbus.metropolis.Models.Comments.CommentDataItem;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.HealthAdapter;
 import com.neuronimbus.metropolis.AuthModels.HealthIssueModel;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
@@ -71,6 +71,10 @@ public class UpdateHealthActivity extends AppCompatActivity implements View.OnCl
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         health_recy.setLayoutManager(linearLayoutManager1);
         healthIssues();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     @Override
     protected void onStop() {

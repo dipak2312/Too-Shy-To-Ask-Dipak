@@ -1,6 +1,5 @@
 package com.neuronimbus.metropolis.activity.Landing;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -12,6 +11,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.InfoCardAdapter;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Utils.ClickListener;
@@ -50,9 +51,11 @@ public class InfoCardCategoryActivity extends AppCompatActivity implements View.
         clickListener.onClick(false);
 
         AddView();
-
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void AddView() {
         adapter =new InfoCardAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);

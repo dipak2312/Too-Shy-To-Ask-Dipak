@@ -35,7 +35,6 @@ public class QuizFragment extends Fragment {
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
         btn_start = view.findViewById(R.id.btn_start);
-
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,4 +47,5 @@ public class QuizFragment extends Fragment {
 
         return view;
     }
+
 }

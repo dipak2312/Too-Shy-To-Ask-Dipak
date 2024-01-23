@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.activity.Home.HomeActivity;
 import com.neuronimbus.metropolis.AuthModels.StoryLikeAuthModel;
@@ -79,7 +77,6 @@ public class StoryDisplayFragment extends Fragment implements View.OnClickListen
         like_img.setOnClickListener(this);
         share_img = view.findViewById(R.id.share_img);
         share_img.setOnClickListener(this);
-
 
         onTouch();
         return view;

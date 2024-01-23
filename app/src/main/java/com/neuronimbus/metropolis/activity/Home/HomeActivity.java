@@ -125,7 +125,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        setLocale(spManager.getLanguage());
+        //setLocale(spManager.getLanguage());
     }
 
     private void setLocale(String lang) {
@@ -135,7 +135,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Configuration config = new Configuration();
         config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
         spManager.setLanguage(lang);
 
     }

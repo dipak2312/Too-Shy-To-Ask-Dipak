@@ -33,6 +33,7 @@ public class GuestLoginPopup {
                 Intent intent = new Intent(context, SignInActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                spManager.setLanguage(spManager.getLanguage());
                 context.startActivity(intent);
                 dialog.dismiss();
 

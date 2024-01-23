@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
-import com.neuronimbus.metropolis.Models.faqcontent;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.FAQAdapter;
 import com.neuronimbus.metropolis.AuthModels.FAQContentAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
@@ -69,11 +69,13 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
         faq_category_rv = findViewById(R.id.faq_category_rv);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         faq_category_rv.setLayoutManager(linearLayoutManager1);
-
         getFAQContent("");
         getFAQCategory();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getFAQContent(String selectedCategory){
         dialog.show("");
 

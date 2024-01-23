@@ -1,11 +1,9 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,15 +14,14 @@ import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.CommonAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.CommonResponse;
-import com.neuronimbus.metropolis.Models.SelectOrganisationAuthModel;
 import com.neuronimbus.metropolis.Models.SelectOrganisationResponse;
 import com.neuronimbus.metropolis.Models.UpdateNGOProfile;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.ClickListener;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.OnClickListner;
 import com.neuronimbus.metropolis.adapters.SelectOrganisationAdapter;
-import com.neuronimbus.metropolis.databinding.ActivitySelectOrganizationBinding;
 import com.neuronimbus.metropolis.databinding.ActivityUpdateOrganizationBinding;
 
 import java.util.ArrayList;
@@ -54,6 +51,10 @@ public class UpdateOrganizationActivity extends AppCompatActivity implements OnC
         setContentView(view);
         onClick();
         getController();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     private void onClick() {
 
@@ -130,7 +131,6 @@ public class UpdateOrganizationActivity extends AppCompatActivity implements OnC
         clickListener=(ClickListener)context;
         clickListener.onClick(false);
         binding.selectOrgRelLay.setVisibility(View.GONE);
-
         binding.editProjectName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {

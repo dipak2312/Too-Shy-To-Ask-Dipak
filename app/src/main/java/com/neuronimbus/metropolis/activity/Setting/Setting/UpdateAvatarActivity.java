@@ -19,11 +19,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.ProfileAdapter;
 import com.neuronimbus.metropolis.AuthModels.RemoveProfileAuthModel;
 import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
@@ -91,6 +91,10 @@ public class UpdateAvatarActivity extends AppCompatActivity implements View.OnCl
         profile_recy.setLayoutManager(new GridLayoutManager(context,4, GridLayoutManager.VERTICAL, false));
         getProfile();
         checkPermissions();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     @Override
     protected void onStop() {

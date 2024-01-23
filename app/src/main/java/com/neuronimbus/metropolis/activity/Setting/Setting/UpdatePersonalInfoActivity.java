@@ -19,6 +19,7 @@ import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.UpdateProfile.UpdateProfileResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -42,7 +43,6 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
         context = UpdatePersonalInfoActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-
         rel_back = findViewById(R.id.rel_back);
         rel_back.setOnClickListener(this);
         next_btn = findViewById(R.id.next_btn);
@@ -59,6 +59,10 @@ public class UpdatePersonalInfoActivity extends AppCompatActivity implements Vie
         spinner_blood.setAdapter(countryAdapter);
 
         spinner_blood.setSelection(((ArrayAdapter<String>)spinner_blood.getAdapter()).getPosition(spManager.getBloodgroup()));
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
     @Override
     protected void onStop() {

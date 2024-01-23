@@ -7,7 +7,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -20,10 +19,10 @@ import com.neuronimbus.metropolis.AuthModels.UpdateProfileAuthModel;
 import com.neuronimbus.metropolis.AuthModels.UserProfileAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.UpdateProfile.UpdateProfileResponse;
-import com.neuronimbus.metropolis.Models.UpdateProfile.profiledetails;
 import com.neuronimbus.metropolis.Models.UserProfileResponse;
 import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.Utils.MyValidator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ozcanalasalvar.library.utils.DateUtils;
@@ -128,7 +127,10 @@ public class UpdateProfileActivity extends AppCompatActivity implements View.OnC
                 .build();
 
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     @Override
     public void onResume() {
         super.onResume();

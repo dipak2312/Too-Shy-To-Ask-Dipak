@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.neuronimbus.metropolis.API.WebServiceModel;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.adapters.HelpContentDiscAdapter;
 import com.neuronimbus.metropolis.AuthModels.HelpContentAuthModel;
 import com.neuronimbus.metropolis.AuthModels.HelpFeedbackAuthModel;
@@ -105,7 +106,10 @@ public class Help3Activity extends AppCompatActivity implements View.OnClickList
         recy_help_desc.setLayoutManager(linearLayoutManager);
         getHelpContent();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     public void getHelpContent(){
         dialog.show("");
 

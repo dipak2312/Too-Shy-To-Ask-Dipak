@@ -13,13 +13,12 @@ import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.ProcessingFeedbackChatAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.FeedbackChating;
-import com.neuronimbus.metropolis.Models.HelpArticleFeedbackChating;
 import com.neuronimbus.metropolis.Models.OldFeedbackChattingResponse;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 import com.neuronimbus.metropolis.activity.Help.ContactUsActivity;
 import com.neuronimbus.metropolis.adapters.OldChattingFeedbackAdapter;
 import com.neuronimbus.metropolis.adapters.OldChattingFeedbackAdapterSecond;
-import com.neuronimbus.metropolis.adapters.StatusAdapter;
 import com.neuronimbus.metropolis.databinding.ActivityOldFeedbackChattingBinding;
 
 import java.util.ArrayList;
@@ -63,7 +62,10 @@ public class OldFeedbackChattingActivity extends AppCompatActivity {
         getOldFeedback();
         onClick();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
     private void onClick() {
         binding.relBack.setOnClickListener(new View.OnClickListener() {
             @Override

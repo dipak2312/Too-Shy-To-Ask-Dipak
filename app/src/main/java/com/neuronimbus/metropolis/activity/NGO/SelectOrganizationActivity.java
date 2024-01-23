@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.neuronimbus.metropolis.API.WebServiceModel;
@@ -37,7 +36,7 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
     ArrayList<String> selectedOrgIds=new ArrayList<>();
     ArrayList<com.neuronimbus.metropolis.Models.ProjectList> projectList;
     String projectStatus="", projectId="", no_health_issues="";
-    Boolean isSelected= true;
+    Boolean isSelected= false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,7 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
         onClick();
         getController();
     }
+
     private void onClick() {
         binding.yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,6 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
                     projectList.get(i).isSelected=false;
                     adapter.notifyDataSetChanged();
                 }
-                isSelected = true;
                 binding.updateBtn2.setBackgroundResource(R.drawable.inactive_con_btn);
                 binding.yesBtn.setBackgroundResource(R.drawable.gender_border_active);
                 binding.yesBtn.setTextColor(ContextCompat.getColor(context, R.color.white));
@@ -107,10 +106,13 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
 
                     if(ans)
                     {
-                        if (!isSelected) {
+                        if (isSelected) {
                             if(!binding.editProjectName.getText().toString().trim().equals("")){
                                 clickListener.onClick(true);
                                 saveSelectOrganisation();
+                            }
+                            else {
+                                clickListener.onClick(false);
                             }
                         }
                         else {
@@ -121,10 +123,13 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
 
                     }else
                     {
-                        if (!isSelected) {
+                        if (isSelected) {
                             if(!binding.editProjectName.getText().toString().trim().equals("")){
                                 clickListener.onClick(true);
                                 saveSelectOrganisation();
+                            }
+                            else {
+                                clickListener.onClick(false);
                             }
                         }
                         else {
@@ -164,7 +169,6 @@ public class SelectOrganizationActivity extends AppCompatActivity implements OnC
         clickListener.onClick(false);
         binding.selectOrgRelLay.setVisibility(View.GONE);
         binding.relBack.setVisibility(View.GONE);
-
         binding.editProjectName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
