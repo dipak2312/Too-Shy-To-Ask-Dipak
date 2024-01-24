@@ -95,6 +95,11 @@ public class ChattingAdapter extends RecyclerView.Adapter<ChattingAdapter.ViewHo
                 holder.reply_que.setText(context.getString(R.string.voice_message) + " ("+ audioRecordingTime + ")");
                 holder.reply_msg.setText(Html.fromHtml(chats.get(position).getReply()));
                 holder.reply_msg.setMovementMethod(LinkMovementMethod.getInstance());
+                time = chats.get(position).getCreated_at();
+                String[] parts = time.split(":");
+                part1 = parts[0];
+                part2 = parts[1];
+                holder.txt_expert_chat_date.setText(part1 + ":" + part2);
             }
             else {
                 holder.microPhoneIcon.setVisibility(View.GONE);
