@@ -22,6 +22,7 @@ import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.GuestLoginPopup;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.neuronimbus.metropolis.Utils.LocaleHelper;
 
 import java.util.Locale;
 

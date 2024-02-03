@@ -437,7 +437,7 @@ public class ExpertActivity extends AppCompatActivity implements View.OnClickLis
         File file = null;
         //file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.aac");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TooShyToAsk"+ dateFormat.format(new Date()) +".aac");
+        file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "TooShyToAsk_Audio"+ dateFormat.format(new Date()) +".aac");
 
         return file.getAbsolutePath();
 

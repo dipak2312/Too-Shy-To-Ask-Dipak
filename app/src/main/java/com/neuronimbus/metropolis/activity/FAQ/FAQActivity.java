@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -82,6 +83,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
         FAQContentAuthModel model = new FAQContentAuthModel();
         model.setUser_id(spManager.getUserId());
         model.setCategory_id(selectedCategory);
+        Log.d("dipksas",selectedCategory);
 
         WebServiceModel.getRestApi().getFAQContent(model)
                 .subscribeOn(Schedulers.io())
@@ -144,14 +146,13 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
     private void selectCategoryMethod() {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(FAQActivity.this);
-        mBuilder.setTitle(R.string.all);
+        mBuilder.setTitle(R.string.all_categories);
         //mBuilder.setCustomTitle(tv_category_selection);
 
-        String [] categoryListForSingleItem = new String[faqcategory.size()];
-        categoryListForSingleItem[0]="All";
-        for (int i = 1; i<faqcategory.size(); i++){
-
-            categoryListForSingleItem[i]=faqcategory.get(i).getTitle() ;
+        String [] categoryListForSingleItem = new String[faqcategory.size()+1];
+        categoryListForSingleItem[0]=getString(R.string.all_categories);
+        for (int i = 0; i<faqcategory.size(); i++){
+            categoryListForSingleItem[i+1]=faqcategory.get(i).getTitle() ;
 
         }
 
@@ -162,6 +163,7 @@ public class FAQActivity extends AppCompatActivity implements View.OnClickListen
                     selectedPosition=which;
 
                     getFAQContent(which==0?"":faqcategory.get(which-1).getId()+"");
+
                     if (which==0){
                         tv_category_selection.setText(categoryListForSingleItem[which]);
                     }else{

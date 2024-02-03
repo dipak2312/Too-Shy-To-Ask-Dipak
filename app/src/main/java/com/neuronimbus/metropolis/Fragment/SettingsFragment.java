@@ -199,7 +199,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onNext(UserProfileResponse userProfileResponse) {
                         String msg = userProfileResponse.getMsg();
-
+                        dialog.dismiss("");
                         if (msg.equals("success")) {
                             profile_status.setText(userProfileResponse.getProfile_percent());
                             progrss_value = Double.parseDouble(userProfileResponse.getProfile_percent());
@@ -207,7 +207,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                             txt_name.setText(userProfileResponse.getUser_name());
                             Glide.with(context).load(userProfileResponse.getProfile_pic()).placeholder(R.drawable.demo).into(profile_image);
                         }
-                        dialog.dismiss("");
+
                     }
 
                     @Override
@@ -355,13 +355,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     public void LogOut() {
 
-        Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.logout_popup);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
+        Dialog dialog1 = new Dialog(context);
+        dialog1.setContentView(R.layout.logout_popup);
+        dialog1.setCancelable(false);
+        dialog1.getWindow().setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.logout_popup));
 
-        TextView cancel = dialog.findViewById(R.id.cancel);
-        TextView login = dialog.findViewById(R.id.login);
+        TextView cancel = dialog1.findViewById(R.id.cancel);
+        TextView login = dialog1.findViewById(R.id.login);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -375,7 +375,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                dialog.dismiss();
+                dialog1.dismiss();
 
             }
         });
@@ -384,11 +384,11 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
 
-                dialog.dismiss();
+                dialog1.dismiss();
             }
         });
 
-        dialog.show();
+        dialog1.show();
 
     }
 
@@ -420,8 +420,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getUserProfileUpdate() {
-        dialog.show("");
-        dialog.dismiss("");
 
         UpdateProfileAuthModel model = new UpdateProfileAuthModel();
         model.setUser_id(spManager.getUserId());
@@ -509,10 +507,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         ft.commit();
 
         Intent intent = new Intent(context, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        getActivity().finish();
     }
 
     private void setLocale(String lang) {
@@ -525,7 +520,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         spManager.setLanguage(lang);
 
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -534,8 +528,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         } else {
             getUserData();
         }
-
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
