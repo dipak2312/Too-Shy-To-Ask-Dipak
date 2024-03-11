@@ -21,6 +21,20 @@ android {
         //key-alias = metropolis_alias
         //KeyPassword = Neuro@123
     }
+    signingConfigs {
+
+        release {
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+
+            // Optional, specify signing versions used
+            v1SigningEnabled true
+            v2SigningEnabled true
+//            enableV3Signing
+//            enableV4Signing
+        }
+    }
 
     bundle {
         language {
@@ -30,6 +44,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -76,17 +91,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.10'
-
     implementation "androidx.biometric:biometric:1.1.0"
-
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'id.zelory:compressor:2.1.1'
     //Circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //otp
-
     implementation 'io.github.chaosleung:pinview:1.4.4'
-
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -97,17 +108,14 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation "com.google.android.play:app-update:2.1.0"
-
     implementation 'com.github.shts:StoriesProgressView:3.0.0'
-
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-core:21.1.1'
-
     implementation 'com.google.android.exoplayer:exoplayer:2.18.5'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
     implementation 'com.github.furkankaplan:fk-blur-view-android:1.0.1'
-
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation("com.android.installreferrer:installreferrer:2.2")
 }

@@ -1,13 +1,20 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
+import static java.sql.DriverManager.println;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.NGOSignupAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
@@ -21,12 +28,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class NgoSignUpActivity extends AppCompatActivity {
+public class NgoSignUpActivity extends AppCompatActivity{
     Context context;
     SPManager spManager;
     CustomProgressDialog dialog;
     ActivityNgoSignUpBinding binding;
     String phone = "";
+    InstallReferrerClient mInstallReferrerClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,7 @@ public class NgoSignUpActivity extends AppCompatActivity {
         setContentView(view);
         onClick();
         getController();
+        installReferrer();
     }
 
     private void getController() {
@@ -188,6 +197,57 @@ public class NgoSignUpActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void installReferrer() {
+        mInstallReferrerClient = InstallReferrerClient.newBuilder(context).build();
+        mInstallReferrerClient.startConnection(new InstallReferrerStateListener() {
+            @Override
+            public void onInstallReferrerSetupFinished(int responseCode) {
+                switch (responseCode) {
+                    case InstallReferrerClient.InstallReferrerResponse.OK:
+                        try {
+//                            ReferrerDetails referrerDetails = mInstallReferrerClient.getInstallReferrer();
+//                            String referrerUrl = referrerDetails.getInstallReferrer();
+//                            long referrerClickTime = referrerDetails.getReferrerClickTimestampSeconds();
+//                            long appInstallTime = referrerDetails.getInstallBeginTimestampSeconds();
+
+                            ReferrerDetails response = mInstallReferrerClient.getInstallReferrer();
+                            String referrerUrl = response.getInstallReferrer();
+                            long referrerClickTime = response.getReferrerClickTimestampSeconds();
+                            long appInstallTime = response.getInstallBeginTimestampSeconds();
+                            boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
+
+                            Log.d("dipaksReferell",referrerUrl.toString());
+
+                            mInstallReferrerClient.endConnection();
+                            // Handle referrer information
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                        // API not supported by the current Play Store app
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                        // Play Store service is not available now
+                        break;
+                }
+            }
+
+            @Override
+            public void onInstallReferrerServiceDisconnected() {
+                // Retry to establish connection
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mInstallReferrerClient != null){
+            mInstallReferrerClient.endConnection();
+        }
 
     }
 }

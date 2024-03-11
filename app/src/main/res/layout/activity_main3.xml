@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_40"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:gravity="top"
+                android:paddingTop="@dimen/margin_3"
+                app:hintTextColor="@color/purple_200">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterOldPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_37"
+                    android:gravity="start|top"
+                    android:hint="Old Password"
+                    android:textColorHint="@color/purple_200"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:paddingTop="@dimen/margin_3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:gravity="top"
+                android:layout_marginTop="@dimen/margin_20"
+                android:paddingTop="@dimen/margin_3"
+                app:hintTextColor="@color/purple_200">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterNewPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_37"
+                    android:gravity="start|top"
+                    android:hint="New Password"
+                    android:textColorHint="@color/purple_200"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:paddingTop="@dimen/margin_3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_55"
+                android:gravity="top"
+                android:layout_marginTop="@dimen/margin_20"
+                android:paddingTop="@dimen/margin_3"
+                app:hintTextColor="@color/purple_200">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterConfirmPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_37"
+                    android:gravity="start|top"
+                    android:hint="Confirm Password"
+                    android:textColorHint="@color/purple_200"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingEnd="@dimen/padding_15"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:paddingTop="@dimen/margin_3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size16" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
