@@ -1,7 +1,5 @@
 package com.neuronimbus.metropolis.activity.NGO;
 
-import static java.sql.DriverManager.println;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -19,6 +17,7 @@ import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.NGOSignupAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
 import com.neuronimbus.metropolis.Models.SignupResponse;
+import com.neuronimbus.metropolis.R;
 import com.neuronimbus.metropolis.Utils.CustomProgressDialog;
 import com.neuronimbus.metropolis.Utils.MyValidator;
 import com.neuronimbus.metropolis.activity.Landing.SignInActivity;
@@ -57,6 +56,7 @@ public class NgoSignUpActivity extends AppCompatActivity{
         binding.editMobileNumber.setText(phone);
         binding.editMobileNumber.setClickable(false);
         binding.editMobileNumber.setFocusable(false);
+
     }
 
     private void onClick() {
@@ -125,6 +125,10 @@ public class NgoSignUpActivity extends AppCompatActivity{
                 else if (!MyValidator.isValidName(binding.editCityEnter.getText().toString().trim())) {
                     Toast.makeText(context, "Please enter valid city", Toast.LENGTH_SHORT).show();
                 }
+//                else if (binding.editReferralCodeEnter.getText().toString().trim().equals("")
+//                && binding.editReferralCodeEnter.getText().toString().trim().equals("utm_source=google-play&utm_medium=organic")){
+//                    Toast.makeText(context, getString(R.string.you_have_entered_wrong_referral_code), Toast.LENGTH_SHORT).show();
+//                }
                 else {
                     ngoSignUp();
                 }
@@ -147,6 +151,7 @@ public class NgoSignUpActivity extends AppCompatActivity{
         signupmodel.setCountry(binding.editCountryEnter.getText().toString().trim());
         signupmodel.setState(binding.editStateEnter.getText().toString().trim());
         signupmodel.setCity(binding.editCityEnter.getText().toString().trim());
+        signupmodel.setReferral_code(binding.editReferralCodeEnter.getText().toString().trim());
 
         WebServiceModel.getRestApi().ngoRegister(signupmodel)
                 .subscribeOn(Schedulers.io())
@@ -218,7 +223,16 @@ public class NgoSignUpActivity extends AppCompatActivity{
                             long appInstallTime = response.getInstallBeginTimestampSeconds();
                             boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
 
-                            Log.d("dipaksReferell",referrerUrl.toString());
+                            if (referrerUrl.contains("TSTA")){
+                                binding.editReferralCodeEnter.setText(referrerUrl);
+                            }
+                            else {
+                                binding.editReferralCodeEnter.setText("");
+                            }
+
+                            Log.d("dipaksReferell", "Referrer URL: " + referrerUrl);
+                            Log.d("dipaksReferell", "Referrer Click Time: " + referrerClickTime);
+                            Log.d("dipaksReferell", "App Install Time: " + appInstallTime);
 
                             mInstallReferrerClient.endConnection();
                             // Handle referrer information

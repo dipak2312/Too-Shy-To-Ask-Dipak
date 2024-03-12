@@ -341,6 +341,36 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/referralCodeEnter"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_55"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/background"
+                    android:fontFamily="@font/worksansmedium"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/padding_15"
+                    android:paddingTop="@dimen/margin_3"
+                    android:paddingEnd="@dimen/padding_15"
+                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintTextColor="@color/purple">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editReferralCodeEnter"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_35"
+                        android:layout_marginTop="@dimen/margin_3"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/worksansmedium"
+                        android:gravity="top"
+                        android:inputType="textCapSentences"
+                        android:hint="@string/do_you_have_referral_code"
+                        android:paddingTop="@dimen/margin_3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size16" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <Button
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"

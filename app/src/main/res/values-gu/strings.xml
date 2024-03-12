@@ -295,5 +295,7 @@
     <string name="playing_completed">ઑડિયો ચાલનું પૂર્ણ થયું</string>
     <string name="restart">પુનઃપ્રારંભ</string>
     <string name="recording_complete">રેકોર્ડિંગ પૂર્ણ થયું</string>
+    <string name="do_you_have_referral_code">શું તમારી પાસે રેફરલ કોડ છે?</string>
+    <string name="you_have_entered_wrong_referral_code">શતમે ખોટો રેફરલ કોડ દાખલ કર્યો છે?</string>
 
 </resources>

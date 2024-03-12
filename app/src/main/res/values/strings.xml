@@ -295,6 +295,8 @@
     <string name="playing_completed">Playing Completed</string>
     <string name="restart">RESTART</string>
     <string name="recording_complete">Recording Completed</string>
+    <string name="do_you_have_referral_code">Do you have referral code?</string>
+    <string name="you_have_entered_wrong_referral_code">You have entered wrong referral code?</string>
 
 
 </resources>

@@ -295,5 +295,7 @@
     <string name="playing_completed">பிளேயிங் நிறைவுசெய்தது</string>
     <string name="restart">மறுதொடக்கம்</string>
     <string name="recording_complete">பதிவு முடிந்தது</string>
+    <string name="do_you_have_referral_code">உங்களிடம் பரிந்துரை குறியீடு உள்ளதா?</string>
+    <string name="you_have_entered_wrong_referral_code">தவறான பரிந்துரைக் குறியீட்டை உள்ளிட்டுள்ளீர்களா?</string>
 
 </resources>

@@ -12,7 +12,7 @@ android {
         applicationId "com.neuronimbus.metropolis"
         minSdk 26
         targetSdk 33
-        versionCode 203022
+        versionCode 203027
         versionName "2.4.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
