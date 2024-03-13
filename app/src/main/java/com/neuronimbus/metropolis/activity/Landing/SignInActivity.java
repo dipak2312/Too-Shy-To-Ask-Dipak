@@ -39,7 +39,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     Button btn_signin;
     CustomProgressDialog dialog;
     TextView guest_login, terms_conditions, privacy_policy;
-    InstallReferrerClient mInstallReferrerClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +60,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
-        installReferrer();
-        //SetLocalLanguage.setLocale(this,spManager.getLanguage(),spManager);
 
     }
     @Override
@@ -156,66 +153,5 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
     }
-    private void installReferrer() {
-        mInstallReferrerClient = InstallReferrerClient.newBuilder(context).build();
-        mInstallReferrerClient.startConnection(new InstallReferrerStateListener() {
-            @Override
-            public void onInstallReferrerSetupFinished(int responseCode) {
-                switch (responseCode) {
-                    case InstallReferrerClient.InstallReferrerResponse.OK:
-                        try {
-//                            ReferrerDetails referrerDetails = mInstallReferrerClient.getInstallReferrer();
-//                            String referrerUrl = referrerDetails.getInstallReferrer();
-//                            long referrerClickTime = referrerDetails.getReferrerClickTimestampSeconds();
-//                            long appInstallTime = referrerDetails.getInstallBeginTimestampSeconds();
-
-                            ReferrerDetails response = mInstallReferrerClient.getInstallReferrer();
-                            String referrerUrl = response.getInstallReferrer();
-                            long referrerClickTime = response.getReferrerClickTimestampSeconds();
-                            long appInstallTime = response.getInstallBeginTimestampSeconds();
-                            boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
-
-                            if (referrerUrl.contains("TSTA")){
-                                Log.d("dipaksReferell", "Referrer URL: " + referrerUrl);
-                                Log.d("dipaksReferell", "Referrer Click Time: " + referrerClickTime);
-                                Log.d("dipaksReferell", "App Install Time: " + appInstallTime);
-                            }
-                            else {
-                                Log.d("dipaksReferell", "Referrer URL: " + "Empty");
-                                Log.d("dipaksReferell", "Referrer Click Time: " + "Empty");
-                                Log.d("dipaksReferell", "App Install Time: " + "Empty");
-                            }
-
-
-
-                            mInstallReferrerClient.endConnection();
-                            // Handle referrer information
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
-                        // API not supported by the current Play Store app
-                        break;
-                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
-                        // Play Store service is not available now
-                        break;
-                }
-            }
-
-            @Override
-            public void onInstallReferrerServiceDisconnected() {
-                // Retry to establish connection
-            }
-        });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mInstallReferrerClient != null){
-            mInstallReferrerClient.endConnection();
-        }
 
     }
-}
