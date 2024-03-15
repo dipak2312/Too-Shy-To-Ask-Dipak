@@ -351,7 +351,7 @@ public class DetailBlogActivity extends AppCompatActivity implements View.OnClic
                             }
 
                             if (comments != null){
-                                comment_lin_lay.setVisibility(View.VISIBLE);
+                                //comment_lin_lay.setVisibility(View.VISIBLE);
                                 blogCommentsAdapter = new BlogCommentsAdapter(context, comments, DetailBlogActivity.this);
                                 recy_all_comments.setAdapter(blogCommentsAdapter);
                             }

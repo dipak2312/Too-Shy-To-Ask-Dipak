@@ -225,9 +225,13 @@ public class NgoSignUpActivity extends AppCompatActivity{
 
                             if (referrerUrl.contains("TSTA")){
                                 binding.editReferralCodeEnter.setText(referrerUrl);
+                                binding.editReferralCodeEnter.setClickable(false);
+                                binding.editReferralCodeEnter.setFocusable(false);
                             }
                             else {
                                 binding.editReferralCodeEnter.setText("");
+                                binding.editReferralCodeEnter.setClickable(true);
+                                binding.editReferralCodeEnter.setFocusable(true);
                             }
 
                             Log.d("dipaksReferell", "Referrer URL: " + referrerUrl);

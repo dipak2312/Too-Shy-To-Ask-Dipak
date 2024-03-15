@@ -359,6 +359,7 @@
                 android:layout_marginTop="@dimen/margin_20"
                 android:layout_marginStart="@dimen/margin_20"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:layout_marginEnd="@dimen/margin_20">
 
                 <TextView
