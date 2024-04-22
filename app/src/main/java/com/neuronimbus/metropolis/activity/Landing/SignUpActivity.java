@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +17,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.neuronimbus.metropolis.API.WebServiceModel;
 import com.neuronimbus.metropolis.AuthModels.SignupAuthModel;
 import com.neuronimbus.metropolis.Helper.SPManager;
@@ -26,6 +31,8 @@ import com.neuronimbus.metropolis.Utils.MyValidator;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputEditText;
 import com.neuronimbus.metropolis.activity.NGO.NgoSignUpActivity;
+import com.neuronimbus.metropolis.databinding.ActivityNgoSignUpBinding;
+import com.neuronimbus.metropolis.databinding.ActivitySignUpBinding;
 import com.ozcanalasalvar.library.utils.DateUtils;
 import com.ozcanalasalvar.library.view.datePicker.DatePicker;
 import com.ozcanalasalvar.library.view.popup.DatePickerPopup;
@@ -51,12 +58,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     BottomSheetDialog bottomSheetDialog;
     Button btn_submit;
     ClickListener clickListener;
+    InstallReferrerClient mInstallReferrerClient;
+    ActivitySignUpBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        binding = ActivitySignUpBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
         context = SignUpActivity.this;
         spManager = new SPManager(context);
         dialog = new CustomProgressDialog(context);
@@ -121,6 +132,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 })
                 .build();
+
+        installReferrer();
 
     }
 
@@ -321,6 +334,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         signupmodel.setCountry(edit_country_enter.getText().toString().trim());
         signupmodel.setState(edit_state_enter.getText().toString().trim());
         signupmodel.setCity(edit_city_enter.getText().toString().trim());
+        signupmodel.setReferral_code(binding.editReferralCodeEnter.getText().toString().trim());
 
         WebServiceModel.getRestApi().signup(signupmodel)
                 .subscribeOn(Schedulers.io())
@@ -402,6 +416,70 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
             });
 
+        }
+    }
+
+    private void installReferrer() {
+        mInstallReferrerClient = InstallReferrerClient.newBuilder(context).build();
+        mInstallReferrerClient.startConnection(new InstallReferrerStateListener() {
+            @Override
+            public void onInstallReferrerSetupFinished(int responseCode) {
+                switch (responseCode) {
+                    case InstallReferrerClient.InstallReferrerResponse.OK:
+                        try {
+//                            ReferrerDetails referrerDetails = mInstallReferrerClient.getInstallReferrer();
+//                            String referrerUrl = referrerDetails.getInstallReferrer();
+//                            long referrerClickTime = referrerDetails.getReferrerClickTimestampSeconds();
+//                            long appInstallTime = referrerDetails.getInstallBeginTimestampSeconds();
+
+                            ReferrerDetails response = mInstallReferrerClient.getInstallReferrer();
+                            String referrerUrl = response.getInstallReferrer();
+                            long referrerClickTime = response.getReferrerClickTimestampSeconds();
+                            long appInstallTime = response.getInstallBeginTimestampSeconds();
+                            boolean instantExperienceLaunched = response.getGooglePlayInstantParam();
+
+                            if (referrerUrl.contains("TSTA")){
+                                binding.editReferralCodeEnter.setText(referrerUrl);
+                                binding.editReferralCodeEnter.setClickable(false);
+                                binding.editReferralCodeEnter.setFocusable(false);
+                            }
+                            else {
+                                binding.editReferralCodeEnter.setText("");
+                                binding.editReferralCodeEnter.setClickable(true);
+                                binding.editReferralCodeEnter.setFocusable(true);
+                            }
+
+                            Log.d("dipaksReferell", "Referrer URL: " + referrerUrl);
+                            Log.d("dipaksReferell", "Referrer Click Time: " + referrerClickTime);
+                            Log.d("dipaksReferell", "App Install Time: " + appInstallTime);
+
+                            mInstallReferrerClient.endConnection();
+                            // Handle referrer information
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                        // API not supported by the current Play Store app
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                        // Play Store service is not available now
+                        break;
+                }
+            }
+
+            @Override
+            public void onInstallReferrerServiceDisconnected() {
+                // Retry to establish connection
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mInstallReferrerClient != null){
+            mInstallReferrerClient.endConnection();
         }
 
     }

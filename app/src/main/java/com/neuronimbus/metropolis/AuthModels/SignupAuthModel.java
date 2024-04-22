@@ -13,6 +13,7 @@ public class SignupAuthModel {
     private String country;
     private String state;
     private String city;
+    private String referral_code;
 
     public String getFirst_name() {
         return first_name;
@@ -100,5 +101,13 @@ public class SignupAuthModel {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getReferral_code() {
+        return referral_code;
+    }
+
+    public void setReferral_code(String referral_code) {
+        this.referral_code = referral_code;
     }
 }
