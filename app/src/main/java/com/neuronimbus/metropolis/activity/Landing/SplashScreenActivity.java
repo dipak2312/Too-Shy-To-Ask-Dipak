@@ -82,6 +82,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Toast.makeText(this, "Not working", Toast.LENGTH_SHORT).show();
                 break;
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+                checkPreviousActivityStatus();
                 Toast.makeText(this, "No fingerprint assigned", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -307,6 +308,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(context,e.toString(), Toast.LENGTH_SHORT).show();
+                        Log.d("splashError",e.toString());
                         //dialog.dismiss();
                     }
 
